@@ -8,10 +8,19 @@
     <language>en-us</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Thu, 21 Dec 2017 15:29:40 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 21 Dec 2017 17:01:53 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Imgtest</title>
+      <link>https://glumes.github.io/post/imgtest/</link>
+      <pubDate>Thu, 21 Dec 2017 17:01:53 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/post/imgtest/</guid>
+      <description>测试图片</description>
+    </item>
     
     <item>
       <title>Python、C&#43;&#43;、Android OpenCV 开发环境的配置</title>
