@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on My New Hugo Site</title>
+    <title>Posts on Glumes Blog</title>
     <link>https://glumes.github.io/post/</link>
-    <description>Recent content in Posts on My New Hugo Site</description>
+    <description>Recent content in Posts on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Dec 2017 15:24:41 +0800</lastBuildDate>
+    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
+    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <lastBuildDate>Thu, 21 Dec 2017 15:29:40 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Test</title>
+      <link>https://glumes.github.io/post/test/</link>
+      <pubDate>Thu, 21 Dec 2017 15:29:40 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/post/test/</guid>
+      <description>&lt;h1 id=&#34;python-c-android-opencv-开发环境的配置&#34;&gt;Python、C++、Android OpenCV 开发环境的配置&lt;/h1&gt;
+
+&lt;p&gt;在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>First</title>
       <link>https://glumes.github.io/post/first/</link>
       <pubDate>Wed, 20 Dec 2017 15:24:41 +0800</pubDate>
-      
+      <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.github.io/post/first/</guid>
       <description>this is first page</description>
     </item>
