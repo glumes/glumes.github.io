@@ -15,10 +15,10 @@
     
     <item>
       <title>Test</title>
-      <link>https://glumes.github.io/post/test/</link>
+      <link>https://glumes.github.io/post/setup_opencv_environment/</link>
       <pubDate>Thu, 21 Dec 2017 15:29:40 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/test/</guid>
+      <guid>https://glumes.github.io/post/setup_opencv_environment/</guid>
       <description>&lt;h1 id=&#34;python-c-android-opencv-开发环境的配置&#34;&gt;Python、C++、Android OpenCV 开发环境的配置&lt;/h1&gt;
 
 &lt;p&gt;在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。&lt;/p&gt;
