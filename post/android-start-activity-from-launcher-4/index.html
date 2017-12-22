@@ -186,7 +186,7 @@
                 
                   <span class="post-meta">
   <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
-  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 3 min (528 mots)
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 3 min (522 mots)
   
 </span>
 
@@ -221,13 +221,21 @@
 
 <h2 id="launcher-进程内的操作">Launcher 进程内的操作</h2>
 
-<p>在 Launcher 进程内执行函数：
-*   Launcher . <code>startActivitySafely</code>(View v, Intent intent, Object tag)
-*   Launcher . <code>startActivity</code>(View v, Intent intent, Object tag)
-*   Activity . <code>startActivity</code>(Intent intent, @Nullable Bundle options)
-*   Activity . <code>startActivityForResult</code>(Intent intent, int requestCode, @Nullable Bundle options)
-*   Instrumentation . <code>execStartActivity</code>( Context who, IBinder contextThread, IBinder token, Activity target, Intent intent, int requestCode, Bundle options)
-*   ActivityManagerProxy . <code>startActivity</code>(IApplicationThread caller, String callingPackage, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int startFlags, ProfilerInfo profilerInfo, Bundle options)</p>
+<p>在 Launcher 进程内执行函数：</p>
+
+<ul>
+<li><p>Launcher . <code>startActivitySafely</code>(View v, Intent intent, Object tag)</p></li>
+
+<li><p>Launcher . <code>startActivity</code>(View v, Intent intent, Object tag)</p></li>
+
+<li><p>Activity . <code>startActivity</code>(Intent intent, @Nullable Bundle options)</p></li>
+
+<li><p>Activity . <code>startActivityForResult</code>(Intent intent, int requestCode, @Nullable Bundle options)</p></li>
+
+<li><p>Instrumentation . <code>execStartActivity</code>( Context who, IBinder contextThread, IBinder token, Activity target, Intent intent, int requestCode, Bundle options)</p></li>
+
+<li><p>ActivityManagerProxy . <code>startActivity</code>(IApplicationThread caller, String callingPackage, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int startFlags, ProfilerInfo profilerInfo, Bundle options)</p></li>
+</ul>
 
 <p>Launcher 进程这部分执行的操作主要就是 <code>委托</code>ActivityManagerService 去启动一个 Activity 组件，把这个 Activity 组件的 <code>Intent</code>信息传递过去，把自己的包名信息传递过去，还把自己的本地 Binder 对象 <code>ApplicationThread</code>传递过去，以便 ActivityManagerService 可以通过它来联系到 Launcher 组件。</p>
 
@@ -241,15 +249,24 @@
 
 <ul>
 <li>ActivityManagerService . <code>startActivity</code>(IApplicationThread caller, String callingPackage, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int startFlags, ProfilerInfo profilerInfo, Bundle options)</li>
-<li>ActivityManagerService . <code>startActivityAsUser</code>(IApplicationThread caller, String callingPackage, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int startFlags, ProfilerInfo profilerInfo, Bundle options, int userId)</li>
-<li>ActivityStackSupervisor . <code>startActivityMayWait</code>(&hellip;)</li>
-<li>ActivityStackSupervisor . <code>startActivityLocked</code>( &hellip;)</li>
-<li>ActivityStackSupervisor . <code>startActivityUncheckedLocked</code>( &hellip;)</li>
-<li>ActivityStack . <code>startActivityLocked</code>(ActivityRecord r, boolean newTask, boolean doResume, boolean keepCurTransition, Bundle options)</li>
-<li>ActivityStackSupervisor . <code>resumeTopActivitiesLocked</code>(ActivityStack targetStack, ActivityRecord target, Bundle targetOptions)</li>
-<li>ActivityStack . <code>resumeTopActivityLocked</code>(ActivityRecord prev, Bundle options)</li>
-<li>ActivityStack . <code>resumeTopActivityInnerLocked</code>(ActivityRecord prev, Bundle options)</li>
-<li>ActivityStackSupervisor . <code>startSpecificActivityLocked</code>(ActivityRecord r, boolean andResume, boolean checkConfig)</li>
+
+<li><p>ActivityManagerService . <code>startActivityAsUser</code>(IApplicationThread caller, String callingPackage, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int startFlags, ProfilerInfo profilerInfo, Bundle options, int userId)</p></li>
+
+<li><p>ActivityStackSupervisor . <code>startActivityMayWait</code>(&hellip;)</p></li>
+
+<li><p>ActivityStackSupervisor . <code>startActivityLocked</code>( &hellip;)</p></li>
+
+<li><p>ActivityStackSupervisor . <code>startActivityUncheckedLocked</code>( &hellip;)</p></li>
+
+<li><p>ActivityStack . <code>startActivityLocked</code>(ActivityRecord r, boolean newTask, boolean doResume, boolean keepCurTransition, Bundle options)</p></li>
+
+<li><p>ActivityStackSupervisor . <code>resumeTopActivitiesLocked</code>(ActivityStack targetStack, ActivityRecord target, Bundle targetOptions)</p></li>
+
+<li><p>ActivityStack . <code>resumeTopActivityLocked</code>(ActivityRecord prev, Bundle options)</p></li>
+
+<li><p>ActivityStack . <code>resumeTopActivityInnerLocked</code>(ActivityRecord prev, Bundle options)</p></li>
+
+<li><p>ActivityStackSupervisor . <code>startSpecificActivityLocked</code>(ActivityRecord r, boolean andResume, boolean checkConfig)</p></li>
 </ul>
 
 <p>ActivityManagerService 响应跨进程调用执行<code>startActivity</code>方法，方法内执行<code>startActivityAsUser</code>方法。</p>
@@ -264,9 +281,12 @@
 
 <ul>
 <li>ActivityStackSupervisor . <code>startSpecificActivityLocked</code>(ActivityRecord r, boolean andResume, boolean checkConfig)</li>
-<li>ActivityManagerService . <code>startProcessLocked</code>(&hellip;)</li>
-<li>ActivityManagerService . <code>newProcessRecordLocked</code>(ApplicationInfo info, String customProcess, boolean isolated, int isolatedUid)</li>
-<li>ActivityManagerService . <code>startProcessLocked</code>(&hellip;)</li>
+
+<li><p>ActivityManagerService . <code>startProcessLocked</code>(&hellip;)</p></li>
+
+<li><p>ActivityManagerService . <code>newProcessRecordLocked</code>(ApplicationInfo info, String customProcess, boolean isolated, int isolatedUid)</p></li>
+
+<li><p>ActivityManagerService . <code>startProcessLocked</code>(&hellip;)</p></li>
 </ul>
 
 <p><code>startSpecificActivityLocked</code>方法会创建应用程序进程，在 <code>startProcessLocked</code>方法内部根据进程名称和用户 ID 检查应用程序是否存在，不存在，则调用了<code>newProcessRecordLocked</code>方法创建了一个<code>ProcessRecord</code>对象，它包含了进程的基本信息，根据这个 <code>ProcessRecord</code>对象，在<code>startProcessLocked</code>函数的另一形式中去创建了应用程序进程。</p>
@@ -278,19 +298,31 @@
 <h2 id="activity-应用程序进程启动">Activity 应用程序进程启动</h2>
 
 <ul>
-<li>ActivityThread . <code>main</code>(&hellip;)</li>
-<li>ActivityThread . <code>attach</code>(boolean system)</li>
-<li>ActivityManagerService . <code>attachApplication</code>(IApplicationThread thread)</li>
-<li>ActivityManagerService . <code>attachApplicationLocked</code>(IApplicationThread thread, int pid)</li>
-<li>ApplicationThread . <code>bindApplication</code>(&hellip;)</li>
-<li>ActivityThread . <code>handleBindApplication</code>(AppBindData data)</li>
-<li>StackSupervisor . <code>attachApplicationLocked</code>(ProcessRecord app)</li>
-<li>StackSupervisor .  <code>realStartActivityLocked</code>(ActivityRecord r, ProcessRecord app, boolean andResume, boolean checkConfig)</li>
-<li>ApplicationThread . <code>scheduleLaunchActivity</code>(&hellip;)</li>
-<li>ActivityThread . <code>handleLaunchActivity</code>(ActivityClientRecord r, Intent customIntent)</li>
-<li>ActivityThread . <code>performLaunchActivity</code>(ActivityClientRecord r, Intent customIntent)</li>
-<li>ActivityThread . <code>handleResumeActivity</code>(IBinder token, boolean clearHide, boolean isForward, boolean reallyResume)</li>
-<li>ActivityThread . <code>performResumeActivity</code>(IBinder token, boolean clearHide)</li>
+<li><p>ActivityThread . <code>main</code>(&hellip;)</p></li>
+
+<li><p>ActivityThread . <code>attach</code>(boolean system)</p></li>
+
+<li><p>ActivityManagerService . <code>attachApplication</code>(IApplicationThread thread)</p></li>
+
+<li><p>ActivityManagerService . <code>attachApplicationLocked</code>(IApplicationThread thread, int pid)</p></li>
+
+<li><p>ApplicationThread . <code>bindApplication</code>(&hellip;)</p></li>
+
+<li><p>ActivityThread . <code>handleBindApplication</code>(AppBindData data)</p></li>
+
+<li><p>StackSupervisor . <code>attachApplicationLocked</code>(ProcessRecord app)</p></li>
+
+<li><p>StackSupervisor .  <code>realStartActivityLocked</code>(ActivityRecord r, ProcessRecord app, boolean andResume, boolean checkConfig)</p></li>
+
+<li><p>ApplicationThread . <code>scheduleLaunchActivity</code>(&hellip;)</p></li>
+
+<li><p>ActivityThread . <code>handleLaunchActivity</code>(ActivityClientRecord r, Intent customIntent)</p></li>
+
+<li><p>ActivityThread . <code>performLaunchActivity</code>(ActivityClientRecord r, Intent customIntent)</p></li>
+
+<li><p>ActivityThread . <code>handleResumeActivity</code>(IBinder token, boolean clearHide, boolean isForward, boolean reallyResume)</p></li>
+
+<li><p>ActivityThread . <code>performResumeActivity</code>(IBinder token, boolean clearHide)</p></li>
 </ul>
 
 <p>由于 Process 类的 start 方法指定了 ActivityThread 类的 <code>main</code> 方法作为一个进程的开始点，跟进 main 方法，初始化线程消息循环，并且在 <code>attach</code>方法中向 ActivityManagerService 跨进程发送请求，要求 ActivityManagerService 将当前进程添加 Application ，毕竟这还是个单纯的进程，并不是 Android 进程。</p>
@@ -312,6 +344,10 @@
             <a href="https://glumes.github.io/post/android-start-activity-from-launcher-3/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（三）">&larr; Previous Post</a>
           </li>
         
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/dagger2-in-android/" data-toggle="tooltip" data-placement="top" title="Dagger2 在 Android 中的使用">Next Post &rarr;</a>
+          </li>
         
       </ul>
 

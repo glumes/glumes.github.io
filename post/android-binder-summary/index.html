@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android Binder Summary</title>
+  <meta property="og:title" content="Android Binder Summary" />
+  <meta name="twitter:title" content="Android Binder Summary" />
+  <meta name="description" content="Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。
+
+它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 /dev/binder。
+
+">
+  <meta property="og:description" content="Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。
+
+它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 /dev/binder。
+
+">
+  <meta name="twitter:description" content="Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。
+
+它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 /dev/binder。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/post/android-binder-summary/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/post/android-binder-summary/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Code" href="/">Code</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Android Binder Summary</h1>
+                
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 3 min (442 mots)
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。</p>
+
+<p>它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 <code>/dev/binder</code>。</p>
+
+<p></p>
+
+<h2 id="android-应用层面的-binder">Android 应用层面的 Binder</h2>
+
+<p>从 Android 的应用层面来说，Binder 是客户端和服务端进行通信的媒介，当 bindService 的时候，服务端会返回一个包含服务端业务调用的 Binder 对象，通过这个 Binder 对象，客户端就可以获取服务端提供的服务或者数据。</p>
+
+<p>比如，我们在写一个无须跨进程的本地服务 LocalService 时，需要在 Service 定义一个类继承自 Binder ，然后在 onBind() 方法中返回该 Binder 对象。这样在 <code>ServiceConnection</code> 接口的 onServiceConnection 方法中就会收到该 Binder 对象，通过该 Binder 对象就可以执行 LocalService 中的公共方法。</p>
+
+<pre><code>public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+       mLocalBinder = (LocalService.LocalBinder) iBinder;
+}
+</code></pre>
+
+<p>那么 onServiceConnection 是如何收到该 Binder 对象的呢？这个就是由 ActivityManagerService 来完成的了。AMS 在启动 Service 的过程中，就会回调
+onServiceConnection 方法，其中的 <code>IBinder</code> 参数就是 Service 的 Binder 引用。由于绑定的是无须跨进程的本地服务 LocalService ，那么返回的 Binder 也就是 Service 的 <code>Binder本地对象</code>， 执行的方法也是在主线程中了。</p>
+
+<p>而当 Service 组件是一个跨进程的 RemoteService 时，在 onServiceConnected 方法中再如上代码所示的调用返回的 IBinder 对象，则会报如下的转型错误：</p>
+
+<pre><code>java.lang.ClassCastException: android.os.BinderProxy cannot be cast to com.glumes.ipc_binder.service.LocalService$LocalBinder
+</code></pre>
+
+<p>这是因为 RemoteService 在另外的进程中，而<code>不同的进程内存资源是不能共享</code>的，服务端不能将自己的 Binder 本地对象返回过去，只能返回一个 <code>代理对象 Binder</code> ，客户端 Client 通过这个代理对象 Binder 来调用 RemoteService 的相关方法。这个代理对象的类型就是 <code>BinderProxy</code>。</p>
+
+<p>在 onServiceConnection 方法中通过 <code>asInterface</code> 方法来将 Service 返回的代理对象 Binder 转换成代理对象 Proxy，其中，Proxy 持有 Binder 的引用，其变量名为 <code>mRemote</code>。</p>
+
+<pre><code>public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            // ActivityManagerService 在 bindService 的过程中会回调该方法，将 Service 的 Binder 对象传回来
+            // 再调用 asInterface 方法根据是否在同一进程进行转换。
+            // 如果在同一进程，返回的是本地对象 Binder 
+            // 如果不在同一进程，返回的是代理对象 Binder
+            mService = IBookManager.Stub.asInterface(iBinder);
+}
+</code></pre>
+
+<p>此时，Client 调用 RemoteService 的方法就是通过跨进程的方式了。而两个进程之间的通信就是通过 Binder 驱动来完成的。这是一个类似 <code>U 型</code> 的结构。Client 和 Server 分别在 <code>U 型</code> 的两头，而 Binder 驱动则在 <code>U 型</code> 的底部连接两者。</p>
+
+<p>盗图一张，如下所示：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-binder_ipc.png" alt="binder_ipc" /></p>
+
+<h2 id="binder-框架">Binder 框架</h2>
+
+<p>所以，当进行跨进程通信时，Binder 就可以看作是一种架构，这种架构提供了 <code>服务端接口</code>、<code>Binder 驱动</code>、<code>客户端接口</code> 三个模块，如下图所示：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-binder_kuangjia.png" alt="binder_kuangjia" /></p>
+
+<h3 id="服务端接口">服务端接口</h3>
+
+<p>从 Java 层面来看，一个 Binder 服务端实际上就是一个 Binder 类的对象，该对象一旦创建，内部就启动一个隐藏线程。该线程接下来会接收 Binder 驱动发送的消息，收到消息后，会执行 Binder 对象中的 onTransact 函数，并按照该函数的参数执行不同的服务代码。因此，要实现一个 Binder 服务，就必须重载 onTransact 方法。</p>
+
+<h3 id="binder-驱动">Binder 驱动</h3>
+
+<p>任意一个服务端 Binder 对象被创建时，同时会在 Binder 驱动中创建一个 mRemote 对象，该对象的类型也是 Binder 类。客户端要访问远程服务时，都是通过 mRemote 对象。</p>
+
+<p>mRemote 对象的 transact 方法最终会调用一个 <code>native</code>的 <code>transactNative</code>方法，将数据写入 Binder 驱动，并由驱动去完成底层的通信过程。</p>
+
+<h3 id="客户端接口">客户端接口</h3>
+
+<p>客户端想要访问远程服务，必须获取远程服务在 Binder 驱动中对应的 mRemote 引用。获得该 mRemote 对象后，就可以调用其 transact 方法，而在 Binder 驱动中，mRemote 对象也重载了 transact 方法，重载内容主要包括以下几项：</p>
+
+<ul>
+<li>以线程间通信的模式，向服务端发送客户端传递过来的参数。</li>
+<li>挂起当前线程，当前线程正是客户端线程，并等待服务端线程执行完指定服务函数后通知。</li>
+<li>接收到服务端线程的通知，然后继续执行客户端线程，并返回客户端代码区。</li>
+</ul>
+
+<p>而客户端获取远程服务在 Binder 驱动中对应的 mRemote 引用，也是在 onServiceConnection 方法中得到的。</p>
+
+<p>onServiceConnection 的方法原型如下，由系统回调该方法，其中的参数 iBinder 就是 Service 的 Binder 代理对象。</p>
+
+<pre><code>public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+</code></pre>
+
+<p>而在 onServiceConnection 方法内执行 <code>asInterface</code> 方法，返回的内部代理类 Proxy 。</p>
+
+<pre><code>// asInterface 方法原型为，其实参数 obj 为 onServiceConnected 方法的参数 iBinder 。
+public static IBookManager asInterface(IBinder obj){
+</code></pre>
+
+<p>返回的内部代理类 Proxy 构造方法如下，其函数调用都是通过该 mRemote 对象的 <code>transact</code> 方法来完成的，此 mRemote 对象就是远程服务在 Binder 驱动中对应的 mRemote 引用，它的类型就是 <code>BinderProxy</code>，而 Proxy 类只是对 mRemote 对象组合了一下而已。</p>
+
+<pre><code>   private static class Proxy implements IBookManager{
+        private IBinder mRemote ;
+        public Proxy(IBinder remote) {
+            mRemote = remote;
+        }
+</code></pre>
+
+<p>事实上在跨进程的情况下，我们可以不需要使用 Proxy 对象，直接调用 onServiceConnection 方法中 iBinder 对象的 transact 方法也可以完成跨进程通信。</p>
+
+<h2 id="小结">小结</h2>
+
+<p>对上述内容简单的小结一下：</p>
+
+<ul>
+<li>Android 中的跨进程通信是一个 <code>U 型</code>的过程，由底层的 Binder 驱动来完成双方通信。</li>
+<li>客户端 Client 无法得到 Server 的 Binder 本地对象，onServiceConnected 方法返回的是一个 <code>BinderProxy</code> 类型的 Binder 代理对象。</li>
+<li>客户端 Client 通过 Binder 代理对象的 <code>transact</code> 方法调用 Binder 驱动，驱动再调用服务端 Server 的 Binder 本地对象的 <code>onTransact</code> 方法来执行对应的操作。</li>
+<li>如果服务端 Server 不需要再向客户端 Client 返回数据，则 IPC 调用结束。如需要返回数据，服务端 Server 再调用 Binder 驱动写入数据，客户端 Client 接收到对应数据，IPC 调用结束。</li>
+</ul>
+
+<p>附《Android艺术开发探索》图：
+<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-binder_note_art.png" alt="binder_note_art" /></p>
+
+<h3 id="注意事项">注意事项：</h3>
+
+<ul>
+<li>所有可以在 Binder 中传输的接口都需要继承 IInterface 接口。</li>
+<li>客户端通过 Binder 代理对象发起远程请求时，当前线程会被挂起，所以不应该在 UI 线程中执行。</li>
+<li>另一进程的服务端 Binder 运行在 Binder 线程池中，无需再异步执行，所以 Binder 方法不管是否耗时都应该采用同步的方式去实现。</li>
+<li>AIDL 支持的数据类型：
+
+<ul>
+<li>基本数据类型（int，long，char，boolean，double）</li>
+<li>String 和 CharSequence 。</li>
+<li>List：只支持 ArrayList，里面每个元素都必须能够被 AIDL 支持。</li>
+<li>Map：只支持 HashMap，里面每个元素都必须被 AIDL 支持，包括 key 和 value 。</li>
+<li>Parcelable：所有实现了 Parcelable 接口的对象。</li>
+<li>AIDL ：所有的 AIDL 接口本身也可以在 AIDL 文件中使用。</li>
+</ul></li>
+</ul>
+
+<p>代码地址：
+<a href="https://github.com/glumes/BinderLearn">https://github.com/glumes/BinderLearn</a></p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li>《Android内核剖析》</li>
+<li>《Android开发艺术探索》</li>
+<li><a href="http://www.codeceo.com/article/aidl-android-binder.html">http://www.codeceo.com/article/aidl-android-binder.html</a></li>
+<li><a href="http://weishu.me/2016/01/12/binder-index-for-newer/">http://weishu.me/2016/01/12/binder-index-for-newer/</a></li>
+</ol>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/dagger2-in-android/" data-toggle="tooltip" data-placement="top" title="Dagger2 在 Android 中的使用">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+
