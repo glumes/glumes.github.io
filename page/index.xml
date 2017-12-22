@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Pages on Glumes Blog</title>
-    <link>https://glumes.github.io/page/</link>
-    <description>Recent content in Pages on Glumes Blog</description>
+    <title>Pages on My New Hugo Site</title>
+    <link>http://example.org/page/</link>
+    <description>Recent content in Pages on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
-    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
     <lastBuildDate>Wed, 20 Dec 2017 15:23:52 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.github.io/page/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://example.org/page/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>https://glumes.github.io/page/about/</link>
+      <link>http://example.org/page/about/</link>
       <pubDate>Wed, 20 Dec 2017 15:23:52 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/page/about/</guid>
+      
+      <guid>http://example.org/page/about/</guid>
       <description>this is about page</description>
     </item>
     
