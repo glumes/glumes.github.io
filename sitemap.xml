@@ -3,45 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://glumes.github.io/post/imgtest/</loc>
-    <lastmod>2017-12-21T17:01:53+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.github.io/post/first/</loc>
-    <lastmod>2017-12-20T15:24:41+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.github.io/page/about/</loc>
-    <lastmod>2017-12-20T15:23:52+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.github.io/categories/</loc>
+    <loc>http://example.org/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/</loc>
-    <lastmod>2017-12-21T17:01:53+08:00</lastmod>
+    <loc>http://example.org/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/page/</loc>
-    <lastmod>2017-12-20T15:23:52+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://glumes.github.io/post/</loc>
-    <lastmod>2017-12-21T17:01:53+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://glumes.github.io/tags/</loc>
+    <loc>http://example.org/tags/</loc>
     <priority>0</priority>
   </url>
   

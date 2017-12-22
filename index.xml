@@ -1,44 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Glumes Blog</title>
-    <link>https://glumes.github.io/</link>
-    <description>Recent content on Glumes Blog</description>
+    <title>My New Hugo Site</title>
+    <link>http://example.org/</link>
+    <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
-    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Thu, 21 Dec 2017 17:01:53 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Imgtest</title>
-      <link>https://glumes.github.io/post/imgtest/</link>
-      <pubDate>Thu, 21 Dec 2017 17:01:53 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/imgtest/</guid>
-      <description>测试图片</description>
-    </item>
-    
-    <item>
-      <title>First</title>
-      <link>https://glumes.github.io/post/first/</link>
-      <pubDate>Wed, 20 Dec 2017 15:24:41 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/first/</guid>
-      <description>this is first page</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://glumes.github.io/page/about/</link>
-      <pubDate>Wed, 20 Dec 2017 15:23:52 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/page/about/</guid>
-      <description>this is about page</description>
-    </item>
     
   </channel>
 </rss>
