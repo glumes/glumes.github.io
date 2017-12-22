@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on Glumes Blog</title>
+    <link>https://glumes.github.io/tags/docker/</link>
+    <description>Recent content in Docker on Glumes Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
+    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <lastBuildDate>Fri, 22 Dec 2017 16:24:03 +0800</lastBuildDate>
+    
+	<atom:link href="https://glumes.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker 基础知识</title>
+      <link>https://glumes.github.io/post/docker-summary/</link>
+      <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/post/docker-summary/</guid>
+      <description>&lt;p&gt;可以简单地将 Docker 理解为一种沙盒 Sandbox 。每个容器内运行一个应用，不同的容器相互隔离，容器之间也可以建立通信机制。&lt;/p&gt;
+
+&lt;p&gt;容器的创建和停止都十分快速，容器自身对资源的需求也十分有限，远远低于虚拟机，甚至把容器当做应用本身也没问题。&lt;/p&gt;
+
+&lt;p&gt;Docker 容器在启动速度、硬盘使用、性能、系统支持量、隔离性等方面与传统的虚拟机相比都有明显的优势。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

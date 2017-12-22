@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 22 Dec 2017 10:50:43 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 22 Dec 2017 16:00:05 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,9 +16,27 @@
     <item>
       <title>Android</title>
       <link>https://glumes.github.io/tags/android/</link>
-      <pubDate>Fri, 22 Dec 2017 10:50:43 +0800</pubDate>
+      <pubDate>Fri, 22 Dec 2017 16:00:05 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.github.io/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>https://glumes.github.io/tags/docker/</link>
+      <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ffmpeg</title>
+      <link>https://glumes.github.io/tags/ffmpeg/</link>
+      <pubDate>Fri, 22 Dec 2017 16:05:30 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/tags/ffmpeg/</guid>
       <description></description>
     </item>
     
@@ -28,6 +46,24 @@
       <pubDate>Fri, 22 Dec 2017 09:53:04 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.github.io/tags/opencv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Opengl</title>
+      <link>https://glumes.github.io/tags/opengl/</link>
+      <pubDate>Fri, 22 Dec 2017 16:21:16 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/tags/opengl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://glumes.github.io/tags/python/</link>
+      <pubDate>Fri, 22 Dec 2017 16:10:57 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/tags/python/</guid>
       <description></description>
     </item>
     

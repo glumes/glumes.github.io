@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Python 函数式编程</title>
+  <meta property="og:title" content="Python 函数式编程" />
+  <meta name="twitter:title" content="Python 函数式编程" />
+  <meta name="description" content="函数式编程是一种编程范式，不同于之前的面向对象编程。它是面向数学的抽象，也就是说，这里的函数二字不再是我们编程语言中的函数，而是数学中的函数了。
+
+">
+  <meta property="og:description" content="函数式编程是一种编程范式，不同于之前的面向对象编程。它是面向数学的抽象，也就是说，这里的函数二字不再是我们编程语言中的函数，而是数学中的函数了。
+
+">
+  <meta name="twitter:description" content="函数式编程是一种编程范式，不同于之前的面向对象编程。它是面向数学的抽象，也就是说，这里的函数二字不再是我们编程语言中的函数，而是数学中的函数了。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/post/python-functional-programming/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/post/python-functional-programming/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Code" href="/">Code</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Python 函数式编程</h1>
+                
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 1 min (191 mots)
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>函数式编程是一种编程范式，不同于之前的面向对象编程。它是面向数学的抽象，也就是说，这里的<code>函数</code>二字不再是我们编程语言中的函数，而是数学中的<code>函数</code>了。</p>
+
+<p></p>
+
+<p>在数学中，y = f(x) ，则因变量 y 是自变量 x 的函数，则 f(x) 是 x 的函数。在这里，f() 只是数学中的一个式子，它对应的就是编程语言中的函数。而 f(x) 对应编程语言中函数执行完的结果。</p>
+
+<p>所以，当我们说到函数式编程时，要把这个函数理解成数学中的函数，它就是 f(x) 。而在数学中，f(x) 可不是一个具体的数值，它也是要计算的（不然哪来的数学考试）。</p>
+
+<p>明确了函数的概念后，就很方便理解函数式编程了。</p>
+
+<p>比如，我们有一个函数 y = x + 1 ，就可以编写如下代码：</p>
+
+<pre><code>def func(x):
+	return x + 1 
+</code></pre>
+
+<p>此时，假设要求当 x = 2 时 y 的值，那么 y = func(2) ，这就是一个很简单的函数式编程了。</p>
+
+<h2 id="函数式编程的特点">函数式编程的特点</h2>
+
+<p>在函数式语言中，函数是作为一等公民存在的。函数可以在任何地方定义，在函数内或者函数外；函数可以作为函数的参数和返回值，可以对函数进行组合。</p>
+
+<p>函数式编程具有如下的特点：</p>
+
+<h3 id="变量的不可变性">变量的不可变性</h3>
+
+<p>每个函数的执行都不会改变外部的数据，而是在函数内部返回一个新的值。这个比较好理解，我们的 f(x) 返回的是 y 而不改变 x 的值。</p>
+
+<p>纯粹的函数式编程语言编写的函数没有变量，因此，任意一个函数，只要输入是确定的，输出就是确定的，这种纯函数称之为没有副作用的。</p>
+
+<h3 id="函数也可以当做变量">函数也可以当做变量</h3>
+
+<p>一个函数 f(x) 也可以当做变量来使用。假设 y = f(x) ，那么 y 就是一个变量，并且它还是个函数，想要执行函数的运算操作，调用 y() 即可。这样就可以实现惰性求值。</p>
+
+<p>函数式编程的一个特点就是，允许把函数本身作为参数传入另一个函数，还允许返回一个函数。</p>
+
+<p>在 Python 中，函数也是可以当做变量的。</p>
+
+<h3 id="尾递归优化">尾递归优化</h3>
+
+<p>由于递归调用是非常消耗内存的，尤其是递归深度很深时，容易发生栈溢出。这是因为函数调用会在内存形成一个<code>调用帧</code>，保存调用位置和调用记录等信息。</p>
+
+<p>假如我们在函数 A 的内部调用函数 B，那么在 A 的调用记录上会形成一个 B 的调用记录，如果在 B 的内部还调用了函数 C ，那么还有一个 C 的调用记录。</p>
+
+<p>假如使用<code>尾调用</code>，即：在函数的最后一步调用另一个函数。那么我们就不需要保存外层函数的调用记录了，直接用内层函数的调用记录覆盖外层即可。</p>
+
+<p>如果所有的函数都是尾调用，那么完全可以做到每次执行时，调用记录只有一项，节省了内存。</p>
+
+<p>利用<code>尾调用优化</code>，我们就可以在递归操作时，使用<code>尾递归优化</code>，确保函数的最后一步操作是调用了函数自身。</p>
+
+<h3 id="高阶函数">高阶函数</h3>
+
+<p>函数式编程还有特性就是高阶函数。</p>
+
+<p>高阶函数就是参数为函数或返回值为函数的函数。</p>
+
+<p>在 Python 中也提供了 <code>map</code>，<code>reduce</code>，<code>filter</code>，<code>sorted</code> 高阶函数。</p>
+
+<h4 id="map-用法">map 用法</h4>
+
+<p>map() 函数接收两个参数，一个是函数，一个是 Iterable，map 将传入的函数依次作用到序列的每个元素，并把结果作为新的 Iterable 返回。</p>
+
+<pre><code>def f(x):
+    return x + 1
+data = [1,2,3,4]
+r = map(f,data)
+print(list(r))
+</code></pre>
+
+<p>####reduce 用法</p>
+
+<p>reduce() 把一个函数作用在一个序列上，这个函数必须接收两个参数，reduce 把结果继续和序列的下一个元素做累积计算。</p>
+
+<pre><code>from functools import reduce
+
+def f(x,y):
+    return  x*y
+
+data = [1,2,3,4]
+r = reduce(f,data)
+
+print(r)
+</code></pre>
+
+<h4 id="filter-用法">filter  用法</h4>
+
+<p>filter() 函数用于过滤序列，filter 函数把传入的函数依次作用于每个元素，返回根据返回的是 True 还是 False 决定保留还是丢弃该元素。</p>
+
+<pre><code>def is_odd(n):
+    return n % 2 == 1
+
+result  = filter(is_odd,[1,2,3,4,5])
+
+print(list(result))
+</code></pre>
+
+<h4 id="sorted-用法">sorted 用法</h4>
+
+<p>sorted() 也是一个高阶函数，接收一个函数来实现自定义的排序。</p>
+
+<p>例如按绝对值排序代码：</p>
+
+<pre><code>print(sorted([-34,5,-2,43],key=abs))
+</code></pre>
+
+<h3 id="闭包">闭包</h3>
+
+<p>闭包是那些带着它们被定义时的环境的函数。特别的，一个闭包可以引用它定义时存在的变量。</p>
+
+<pre><code>def func(x):
+    def f():
+        return  x + 1
+    return f
+
+result = func(1)
+
+print(type(result))
+
+print(result())
+</code></pre>
+
+<p>闭包的特点：返回的函数还引用了外层函数的局部变量，所以，要正确的使用闭包，就要确保返回函数不用引用任何循环变量，或者后续会发生变化的变量，否则，闭包所持有的外层函数的局部变量将会是最后一次改变时的值。</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li><a href="http://coolshell.cn/articles/10822.html">http://coolshell.cn/articles/10822.html</a></li>
+<li><a href="https://www.zhihu.com/question/28292740">https://www.zhihu.com/question/28292740</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/04/tail-call.html">http://www.ruanyifeng.com/blog/2015/04/tail-call.html</a></li>
+<li><a href="http://www.liaoxuefeng.com/">http://www.liaoxuefeng.com/</a></li>
+</ol>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/python-docopt/" data-toggle="tooltip" data-placement="top" title="Python 命令行参数解析工具 docopt">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/opengl-tutorial-draw-point/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---点的绘制流程">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

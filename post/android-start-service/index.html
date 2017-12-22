@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android 6.0 Service 启动过程源码分析（一）</title>
+  <meta property="og:title" content="Android 6.0 Service 启动过程源码分析（一）" />
+  <meta name="twitter:title" content="Android 6.0 Service 启动过程源码分析（一）" />
+  <meta name="description" content="Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。
+
+Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。
+
+">
+  <meta property="og:description" content="Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。
+
+Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。
+
+">
+  <meta name="twitter:description" content="Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。
+
+Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在 …">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/post/android-start-service/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/post/android-start-service/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Code" href="/">Code</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Android 6.0 Service 启动过程源码分析（一）</h1>
+                
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 9 min (1910 mots)
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。</p>
+
+<p>Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。</p>
+
+<p></p>
+
+<h2 id="service-组件在新进程中的启动过程">Service 组件在新进程中的启动过程</h2>
+
+<p>不管 Service 组件是在 Activity 组件中启动的还是在 Service 组件中启动的，它们都是继承自<code>ContextWrapper</code>类的，最后调用的还是<code>ContextImpl</code>的<code>startService</code>方法。</p>
+
+<p>所以直接从<code>ContextImpl</code>方法开始分析即可。</p>
+
+<h3 id="contextimpl-类的-startservice-方法">ContextImpl 类的 startService() 方法</h3>
+
+<pre><code>@Override
+    public ComponentName startService(Intent service) {
+        warnIfCallingFromSystemProcess();
+        return startServiceCommon(service, mUser);
+    }
+
+</code></pre>
+
+<p>显然最后还是调用的<code>startServiceCommon</code>方法了。</p>
+
+<h3 id="contextimpl-类的-startservicecommon-方法">ContextImpl 类的 startServiceCommon() 方法</h3>
+
+<pre><code>private ComponentName startServiceCommon(Intent service, UserHandle user) {
+        try {
+            validateServiceIntent(service);
+            service.prepareToLeaveProcess();
+            // 向 ActivityManagerService 发送请求启动 Service 组件
+            ComponentName cn = ActivityManagerNative.getDefault().startService(
+                mMainThread.getApplicationThread(), service, service.resolveTypeIfNeeded(
+                            getContentResolver()), getOpPackageName(), user.getIdentifier());
+            if (cn != null) {
+                if (cn.getPackageName().equals(&quot;!&quot;)) {
+                    throw new SecurityException( &quot;Not allowed to start service &quot; + service
+                            + &quot; without permission &quot; + cn.getClassName());
+                } else if (cn.getPackageName().equals(&quot;!!&quot;)) {
+                    throw new SecurityException( &quot;Unable to start service &quot; + service
+                            + &quot;: &quot; + cn.getClassName());
+                }
+            }
+            return cn;
+        } catch (RemoteException e) {
+            throw new RuntimeException(&quot;Failure from system&quot;, e);
+        }
+    }
+</code></pre>
+
+<p>在<code>startServiceCommon</code>方法内又是 IPC 进程间通信了，通过<code>ActivityManagerProxy</code>向 Binder 驱动发送类型为<code>START_SERVICE_TRANSACTION</code>的消息，在<code>ActivityManagerService</code>响应对应消息。</p>
+
+<h3 id="activitymanagerservice-类的-startservice-方法">ActivityManagerService 类的 startService() 方法</h3>
+
+<pre><code>public ComponentName startService(IApplicationThread caller, Intent service,
+            String resolvedType, String callingPackage, int userId)
+            throws TransactionTooLargeException {
+        enforceNotIsolatedCaller(&quot;startService&quot;);
+        // Refuse possible leaked file descriptors
+        if (service != null &amp;&amp; service.hasFileDescriptors() == true) {
+            throw new IllegalArgumentException(&quot;File descriptors passed in Intent&quot;);
+        }
+
+        if (callingPackage == null) {
+            throw new IllegalArgumentException(&quot;callingPackage cannot be null&quot;);
+        }
+        synchronized(this) {
+            final int callingPid = Binder.getCallingPid();
+            final int callingUid = Binder.getCallingUid();
+            final long origId = Binder.clearCallingIdentity();
+            ComponentName res = mServices.startServiceLocked(caller, service,
+                    resolvedType, callingPid, callingUid, callingPackage, userId);
+            Binder.restoreCallingIdentity(origId);
+            return res;
+        }
+    }
+</code></pre>
+
+<p>在 ActivityManagerService 内又是调用 ActivityServices 类的 <code>startServiceLocked()</code> 方法，将调用者的<code>pid</code>和<code>uid</code>传入。</p>
+
+<h3 id="activeservices-类的-startservicelocked-方法">ActiveServices 类的 startServiceLocked() 方法</h3>
+
+<pre><code>    ComponentName startServiceLocked(IApplicationThread caller, Intent service, String resolvedType,
+            int callingPid, int callingUid, String callingPackage, int userId)
+            throws TransactionTooLargeException {
+        final boolean callerFg;
+        if (caller != null) {
+            final ProcessRecord callerApp = mAm.getRecordForAppLocked(caller);
+            if (callerApp == null) {
+                throw new SecurityException(&quot;&quot;);// 省略字符串内容
+            }
+            callerFg = callerApp.setSchedGroup != Process.THREAD_GROUP_BG_NONINTERACTIVE;
+        } else {
+            callerFg = true;
+        }
+        // 查找是否存在于 service 对应的 ServiceRecord 对象，没有则封装一个
+        ServiceLookupResult res =
+            retrieveServiceLocked(service, resolvedType, callingPackage,
+                    callingPid, callingUid, userId, true, callerFg);
+        if (res == null) {
+            return null;
+        }
+        if (res.record == null) {
+            return new ComponentName(&quot;!&quot;, res.permission != null
+                    ? res.permission : &quot;private to package&quot;);
+        }
+        ServiceRecord r = res.record;
+        if (!mAm.getUserManagerLocked().exists(r.userId)) { // 用户是否存在检查
+            Slog.d(TAG, &quot;Trying to start service with non-existent user! &quot; + r.userId);
+            return null;
+        }
+
+        NeededUriGrants neededGrants = mAm.checkGrantUriPermissionFromIntentLocked(
+                callingUid, r.packageName, service, service.getFlags(), null, r.userId);
+        if (unscheduleServiceRestartLocked(r, callingUid, false)) {
+            if (DEBUG_SERVICE) Slog.v(TAG_SERVICE, &quot;START SERVICE WHILE RESTART PENDING: &quot; + r);
+        }
+        r.lastActivity = SystemClock.uptimeMillis();
+        r.startRequested = true;
+        r.delayedStop = false;
+        r.pendingStarts.add(new ServiceRecord.StartItem(r, false, r.makeNextStartId(),
+                service, neededGrants));
+
+        final ServiceMap smap = getServiceMap(r.userId);
+        boolean addToStarting = false;
+        if (!callerFg &amp;&amp; r.app == null &amp;&amp; mAm.mStartedUsers.get(r.userId) != null) {
+            ProcessRecord proc = mAm.getProcessRecordLocked(r.processName, r.appInfo.uid, false);
+            if (proc == null || proc.curProcState &gt; ActivityManager.PROCESS_STATE_RECEIVER) {
+                if (r.delayed) {
+                    // This service is already scheduled for a delayed start; just leave
+                    // it still waiting.
+                    return r.name;
+                }
+                if (smap.mStartingBackground.size() &gt;= mMaxStartingBackground) {
+                    // Something else is starting, delay!
+                    smap.mDelayedStartList.add(r);
+                    r.delayed = true;
+                    return r.name;
+                }
+                addToStarting = true;
+            } else if (proc.curProcState &gt;= ActivityManager.PROCESS_STATE_SERVICE) {
+                addToStarting = true;
+            } 
+        } 
+
+        return startServiceInnerLocked(smap, service, r, callerFg, addToStarting);
+    }
+</code></pre>
+
+<p>在 <code>startServiceLocked</code> 方法内的调用 <code>retrieveServiceLocked</code>方法在 ActivityManagerService 检查是否存在与参数 <code>service</code>对应的一个<code>ServiceRecord</code>对象。如果不存在，那么 ActivityManagerService 就会到 PackageManagerService 中去获取与参数<code>service</code>对应的一个 Service 组件的信息，然后将这些信息封装成一个<code>ServiceRecord</code>对象，最后将这个<code>ServiceRecord</code>对象封装成一个<code>ServiceLookupResult</code>对象返回给调用者。</p>
+
+<p>接着就是对用户是否存在进行检查，最后调用<code>startServiceInnerLocked</code>方法。</p>
+
+<h3 id="activeservices-类的-startserviceinnerlocked-方法">ActiveServices 类的 startServiceInnerLocked() 方法</h3>
+
+<pre><code> ComponentName startServiceInnerLocked(ServiceMap smap, Intent service, ServiceRecord r,
+            boolean callerFg, boolean addToStarting) throws TransactionTooLargeException {
+        ProcessStats.ServiceState stracker = r.getTracker();
+        if (stracker != null) {
+            stracker.setStarted(true, mAm.mProcessStats.getMemFactorLocked(), r.lastActivity);
+        }
+        r.callStart = false;
+        synchronized (r.stats.getBatteryStats()) {
+            r.stats.startRunningLocked();
+        }
+        String error = bringUpServiceLocked(r, service.getFlags(), callerFg, false);
+        if (error != null) {
+            return new ComponentName(&quot;!!&quot;, error);
+        }
+
+        if (r.startRequested &amp;&amp; addToStarting) {
+            boolean first = smap.mStartingBackground.size() == 0;
+            smap.mStartingBackground.add(r);
+            r.startingBgTimeout = SystemClock.uptimeMillis() + BG_START_TIMEOUT;
+            if (first) {
+                smap.rescheduleDelayedStarts();
+            }
+        } else if (callerFg) {
+            smap.ensureNotStartingBackground(r);
+        }
+        return r.name;
+    }
+</code></pre>
+
+<p>该方法内调用<code>bringUpServiceLocked</code>方法。</p>
+
+<h3 id="activeservices-类的-bringupservicelocked-方法">ActiveServices 类的 bringUpServiceLocked() 方法</h3>
+
+<pre><code>private final String bringUpServiceLocked(ServiceRecord r, int intentFlags, boolean execInFg,
+            boolean whileRestarting) throws TransactionTooLargeException {
+
+        if (r.app != null &amp;&amp; r.app.thread != null) {// 满足条件，执行 service 的 onStartCommand 方法
+            sendServiceArgsLocked(r, execInFg, false);
+            return null;
+        }
+
+        if (!whileRestarting &amp;&amp; r.restartDelay &gt; 0) {
+            // If waiting for a restart, then do nothing.
+            return null;
+        }
+        // We are now bringing the service up, so no longer in the
+        // restarting state.
+        if (mRestartingServices.remove(r)) {
+            r.resetRestartCounter();
+            clearRestartingIfNeededLocked(r);
+        }
+
+        // Make sure this service is no longer considered delayed, we are starting it now.
+        if (r.delayed) {
+            getServiceMap(r.userId).mDelayedStartList.remove(r);
+            r.delayed = false;
+        }
+
+        // Make sure that the user who owns this service is started.  If not,
+        // we don't want to allow it to run.
+        if (mAm.mStartedUsers.get(r.userId) == null) {
+            bringDownServiceLocked(r);
+            return msg;
+        }
+
+        // Service is now being launched, its package can't be stopped.
+        try {
+            AppGlobals.getPackageManager().setPackageStoppedState(
+                    r.packageName, false, r.userId);
+        } catch (RemoteException e) {
+        } catch (IllegalArgumentException e) {
+        }
+
+        final boolean isolated = (r.serviceInfo.flags&amp;ServiceInfo.FLAG_ISOLATED_PROCESS) != 0;
+        final String procName = r.processName;
+        ProcessRecord app;
+
+        if (!isolated) {
+            app = mAm.getProcessRecordLocked(procName, r.appInfo.uid, false);
+            if (app != null &amp;&amp; app.thread != null) {
+                try {
+                    app.addPackage(r.appInfo.packageName, r.appInfo.versionCode, mAm.mProcessStats);
+                    realStartServiceLocked(r, app, execInFg);
+                    return null;
+                } catch (TransactionTooLargeException e) {
+                    throw e;
+                } catch (RemoteException e) {
+                    Slog.w(TAG, &quot;Exception when starting service &quot; + r.shortName, e);
+                }
+            }
+        } else {
+            app = r.isolatedProc;
+        }
+
+        // Not running -- get it started, and enqueue this service record
+        // to be executed when the app comes up.
+        if (app == null) {
+            if ((app=mAm.startProcessLocked(procName, r.appInfo, true, intentFlags,
+                    &quot;service&quot;, r.name, false, isolated, false)) == null) {
+                bringDownServiceLocked(r);
+                return msg;
+            }
+            if (isolated) {
+                r.isolatedProc = app;
+            }
+        }
+
+        if (!mPendingServices.contains(r)) {
+            mPendingServices.add(r);
+        }
+
+        if (r.delayedStop) {
+            // Oh and hey we've already been asked to stop!
+            r.delayedStop = false;
+            if (r.startRequested) {
+                stopServiceLocked(r);
+            }
+        }
+
+        return null;
+    }
+
+</code></pre>
+
+<p>在<code>bringUpServiceLocked</code>方法内先判断<code>ServiceRecord</code>的变量<code>app</code>和<code>thread</code>变量是否为<code>null</code>，也就是检查<code>service</code>对应的进程<code>ProcessRecord</code>和<code>ApplicationThread</code>对象是否存在，若存在，则直接执行<code>service</code>的<code>onStartCommand</code>方法。</p>
+
+<p>若不存在，则将<code>service</code>从重启和延时启动队列中移开，因为它正在启动中了，最后再确保拥有该<code>service</code>的用户已经启动了。</p>
+
+<p>接着 ActivityManagerService 根据进程名<code>procName</code>和<code>uid</code>调用<code>getProcessRecordLocked</code>方法查看对应的进程<code>ProcessRecord</code>是否存在。</p>
+
+<ul>
+<li>若存在，则调用<code>realStartServiceLocked</code>方法。</li>
+<li>若不存在，则调用<code>startProcessLocked</code>方法，先启动进程。</li>
+</ul>
+
+<p>ActivityManagerService 通过<code>startProcessLocked</code>方法启动一个新的进程，在分析<code>Launcher</code>启动 Activity 组件时已经了解过了。</p>
+
+<p>ActivityManagerService 创建一个新的进程，而一个新进程的入口就是<code>ActivityThread</code>类的<code>main</code>方法。在<code>ActivityThread</code>内会创建一个<code>ActivityThread</code>对象和一个<code>ApplicationThread</code>对象，而在<code>main</code>方法内又会调用<code>ActivityThread</code>的<code>attach</code>方法，用来向 ActivityManagerService 发送一个 类型为 <code>ATTACH_APPLICATION_TRANSACTION</code>的进程间通信，把<code>ApplicationThread</code>对象传递给 ActivityManagerService，以便能够 ActivityManagerService 可以和新进程进行 Binder 进程间通信。</p>
+
+<p>ActivityManagerService 响应类型为<code>ATTACH_APPLICATION_TRANSACTION</code>的进程间通信，执行<code>attachApplication</code>方法，进而执行<code>attachApplicationLocked</code>方法。</p>
+
+<p>在<code>attachApplicationLocked</code>方法内，首先会进行 Binder 跨进程调用，执行 <code>ApplicationThread</code>的<code>bindApplication</code>方法，然后再依次调度应用的<code>Activity</code>、<code>Service</code>、<code>Broadcast</code>组件。</p>
+
+<p>其中，调度<code>Service</code>组件的代码如下：</p>
+
+<pre><code>    // Find any services that should be running in this process...
+        if (!badApp) {
+            try {
+	            // mServices 的类型为 ActivityServices
+                didSomething |= mServices.attachApplicationLocked(app, processName);
+            } catch (Exception e) {
+                Slog.wtf(TAG, &quot;Exception thrown starting services in &quot; + app, e);
+                badApp = true;
+            }
+        }
+</code></pre>
+
+<h3 id="activityservices-类的-attachapplicationlocked-方法">ActivityServices 类的 attachApplicationLocked() 方法</h3>
+
+<pre><code>    boolean attachApplicationLocked(ProcessRecord proc, String processName)
+            throws RemoteException {
+        boolean didSomething = false;
+        // Collect any services that are waiting for this process to come up.
+        if (mPendingServices.size() &gt; 0) {
+            ServiceRecord sr = null;
+            try {
+                for (int i=0; i&lt;mPendingServices.size(); i++) {
+                    sr = mPendingServices.get(i);
+                    if (proc != sr.isolatedProc &amp;&amp; (proc.uid != sr.appInfo.uid
+                            || !processName.equals(sr.processName))) {
+                        continue;
+                    }
+                    mPendingServices.remove(i);
+                    i--;
+                    proc.addPackage(sr.appInfo.packageName, sr.appInfo.versionCode,
+                            mAm.mProcessStats);
+                    realStartServiceLocked(sr, proc, sr.createdFromFg);
+                    didSomething = true;
+                    if (!isServiceNeeded(sr, false, false)) {// 不需要的服务就丢弃
+                        bringDownServiceLocked(sr);
+                    }
+                }
+            } catch (RemoteException e) {
+                throw e;
+            }
+        }
+        // Also, if there are any services that are waiting to restart and
+        // would run in this process, now is a good time to start them.  It would
+        // be weird to bring up the process but arbitrarily not let the services
+        // run at this point just because their restart time hasn't come up.
+        if (mRestartingServices.size() &gt; 0) {
+            ServiceRecord sr;
+            for (int i=0; i&lt;mRestartingServices.size(); i++) {
+                sr = mRestartingServices.get(i);
+                if (proc != sr.isolatedProc &amp;&amp; (proc.uid != sr.appInfo.uid
+                        || !processName.equals(sr.processName))) {
+                    continue;
+                }
+                mAm.mHandler.removeCallbacks(sr.restarter);
+                mAm.mHandler.post(sr.restarter);
+            }
+        }
+        return didSomething;
+    }
+</code></pre>
+
+<p><code>attachApplicationLocked</code>方法内启动<code>mPendingServices</code>队列中的服务和<code>mRestartingServices</code>中的服务。</p>
+
+<p>真正启动服务的方法就是<code>realStartServiceLocked</code>。</p>
+
+<h3 id="activityservices-类的-realstartservicelocked-方法">ActivityServices 类的 realStartServiceLocked() 方法</h3>
+
+<pre><code>    private final void realStartServiceLocked(ServiceRecord r,
+            ProcessRecord app, boolean execInFg) throws RemoteException {
+        if (app.thread == null) {
+            throw new RemoteException();
+        }
+        r.app = app;
+        r.restartTime = r.lastActivity = SystemClock.uptimeMillis();
+
+        final boolean newService = app.services.add(r);
+        // 发送一个延时消息 SERVICE_TIMEOUT_MSG，Service 若没有启动超时，则回告诉 AMS 取消该消息
+        bumpServiceExecutingLocked(r, execInFg, &quot;create&quot;);
+        mAm.updateLruProcessLocked(app, false, null);
+        mAm.updateOomAdjLocked();
+
+        boolean created = false;
+        try {
+            if (LOG_SERVICE_START_STOP) {
+                String nameTerm;
+                int lastPeriod = r.shortName.lastIndexOf('.');
+                nameTerm = lastPeriod &gt;= 0 ? r.shortName.substring(lastPeriod) : r.shortName;
+                EventLogTags.writeAmCreateService(
+                        r.userId, System.identityHashCode(r), nameTerm, r.app.uid, r.app.pid);
+            }
+            synchronized (r.stats.getBatteryStats()) {
+                r.stats.startLaunchedLocked();
+            }
+            mAm.ensurePackageDexOpt(r.serviceInfo.packageName);
+            app.forceProcessStateUpTo(ActivityManager.PROCESS_STATE_SERVICE);
+            // 进入 Service 的 onCreate 
+            app.thread.scheduleCreateService(r, r.serviceInfo,
+                    mAm.compatibilityInfoForPackageLocked(r.serviceInfo.applicationInfo),
+                    app.repProcState);
+            r.postNotification();
+            created = true;
+        } catch (DeadObjectException e) {
+            Slog.w(TAG, &quot;Application dead when creating service &quot; + r);
+            mAm.appDiedLocked(app); // 创建服务时，应用挂了
+            throw e;
+        } finally {
+            if (!created) {
+                // Keep the executeNesting count accurate.
+                final boolean inDestroying = mDestroyingServices.contains(r);
+                serviceDoneExecutingLocked(r, inDestroying, inDestroying);
+
+                // Cleanup.
+                if (newService) {
+                    app.services.remove(r);
+                    r.app = null;
+                }
+
+                // Retry.
+                if (!inDestroying) {
+                    scheduleServiceRestartLocked(r, false);
+                }
+            }
+        }
+
+        requestServiceBindingsLocked(r, execInFg);
+        updateServiceClientActivitiesLocked(app, null, true);
+
+        // If the service is in the started state, and there are no
+        // pending arguments, then fake up one so its onStartCommand() will
+        // be called.
+        if (r.startRequested &amp;&amp; r.callStart &amp;&amp; r.pendingStarts.size() == 0) {
+            r.pendingStarts.add(new ServiceRecord.StartItem(r, false, r.makeNextStartId(),
+                    null, null));
+        }
+		// 进入 Service 的 onStartCommand 
+        sendServiceArgsLocked(r, execInFg, true);
+
+        if (r.delayed) {
+            getServiceMap(r.userId).mDelayedStartList.remove(r);
+            r.delayed = false;
+        }
+
+        if (r.delayedStop) {
+            // Oh and hey we've already been asked to stop!
+            r.delayedStop = false;
+            if (r.startRequested) {
+                stopServiceLocked(r);
+            }
+        }
+    }
+</code></pre>
+
+<p>在<code>realStartServiceLocked</code>方法内，首先会通过<code>bumpServiceExecutingLocked</code>方法，然后再调用<code>scheduleServiceTimeoutLocked</code>方法，向 ActivityManagerService 的 <code>MainHandler</code>类型的 <code>mHandler</code> 发送一个消息 <code>SERVICE_TIMEOUT_MSG</code>。若 Service 在启动过程中没有及时向 ActivityManagerService 返回消息，把<code>SERVICE_TIMEOUT_MSG</code>消息给取消掉，那么则认为 Service 启动超时了。</p>
+
+<p>标记完了时间后，就通过<code>scheduleCreateService</code>方法来启动 Service ，让 Service 进去<code>onCreate</code>状态。</p>
+
+<p>新创建的进程把自己的 Binder 本地对象 ApplicationThread 传递给了 ActivityManagerService ，ActivityManagerService 就通过它来与新进程通信了，<code>scheduleCreateService</code>方法向 Binder 驱动发送了一个类型为 <code>SCHEDULE_CREATE_SERVICE_TRANSACTION</code>的消息，而在 <code>ApplicationThread</code>响应了该消息。</p>
+
+<pre><code>public final void scheduleCreateService(IBinder token,
+                ServiceInfo info, CompatibilityInfo compatInfo, int processState) {
+            updateProcessState(processState, false);
+            CreateServiceData s = new CreateServiceData();
+            s.token = token;
+            s.info = info;
+            s.compatInfo = compatInfo;
+
+            sendMessage(H.CREATE_SERVICE, s);
+        }
+</code></pre>
+
+<p>ApplicationThread 的 <code>scheduleCreateService</code>方法向 ActivityThread 的主线程 <code>mH</code>发送了消息<code>CREATE_SERVICE</code>。ActivityThread 最终响应该消息。</p>
+
+<h3 id="activitythread-类的-handlecreateservice-方法">ActivityThread 类的 handleCreateService() 方法</h3>
+
+<pre><code> private void handleCreateService(CreateServiceData data) {
+        // If we are getting ready to gc after going to the background, well
+        // we are back active so skip it.
+        unscheduleGcIdler();
+
+        LoadedApk packageInfo = getPackageInfoNoCheck(
+                data.info.applicationInfo, data.compatInfo);
+        Service service = null;
+        try {
+            java.lang.ClassLoader cl = packageInfo.getClassLoader();
+            // 通过反射创建目标服务对象
+            service = (Service) cl.loadClass(data.info.name).newInstance();
+        } catch (Exception e) {
+        }
+
+        try {
+            // 创建 ContextImpl
+            ContextImpl context = ContextImpl.createAppContext(this, packageInfo);
+            context.setOuterContext(service);
+			// 创建 Application 对象
+            Application app = packageInfo.makeApplication(false, mInstrumentation);
+            service.attach(context, this, data.info.name, data.token, app,
+                    ActivityManagerNative.getDefault());
+            // Service 进入 onCreate 状态
+            service.onCreate();
+            mServices.put(data.token, service);
+            try {
+	            // 向 ActivityManagerService 发送消息取消 Service 启动延时消息
+                ActivityManagerNative.getDefault().serviceDoneExecuting(
+                        data.token, SERVICE_DONE_EXECUTING_ANON, 0, 0);
+            } catch (RemoteException e) {
+                // nothing to do.
+            }
+        } catch (Exception e) {
+        }
+    }
+</code></pre>
+
+<p>ActivityThread 类的<code>handleCreateService</code>主要是创建了 Service 对象，并且创建了<code>ContextImpl</code>对象和<code>Application</code>对象。同时调用了 Service 的<code>onCreate</code>方法。我们继承的 Service 的<code>onCreate</code>方法也是在这里被系统回调的。</p>
+
+<p>随后向 ActivityManagerService 发送消息，取消 Service 延时启动的消息。</p>
+
+<p>Service 进入 <code>onCreate</code>状态后，接下来该进入<code>onStartCommand</code>状态。</p>
+
+<h3 id="activityservices-类的-sendserviceargslocked-方法">ActivityServices 类的 sendServiceArgsLocked() 方法</h3>
+
+<pre><code>    private final void sendServiceArgsLocked(ServiceRecord r, boolean execInFg,
+            boolean oomAdjusted) throws TransactionTooLargeException {
+        final int N = r.pendingStarts.size();
+        if (N == 0) {
+            return;
+        }
+
+        while (r.pendingStarts.size() &gt; 0) {
+            Exception caughtException = null;
+            ServiceRecord.StartItem si;
+            try {
+                si = r.pendingStarts.remove(0);
+                if (si.intent == null &amp;&amp; N &gt; 1) {
+                    // If somehow we got a dummy null intent in the middle,
+                    // then skip it.  DO NOT skip a null intent when it is
+                    // the only one in the list -- this is to support the
+                    // onStartCommand(null) case.
+                    continue;
+                }
+                si.deliveredTime = SystemClock.uptimeMillis();
+                r.deliveredStarts.add(si);
+                si.deliveryCount++;
+                if (si.neededGrants != null) {
+                    mAm.grantUriPermissionUncheckedFromIntentLocked(si.neededGrants,
+                            si.getUriPermissionsLocked());
+                }
+                // 添加延时处理，类似于 onCreate 
+                bumpServiceExecutingLocked(r, execInFg, &quot;start&quot;);
+                if (!oomAdjusted) {
+                    oomAdjusted = true;
+                    mAm.updateOomAdjLocked(r.app);
+                }
+                int flags = 0;
+                if (si.deliveryCount &gt; 1) {
+                    flags |= Service.START_FLAG_RETRY;
+                }
+                if (si.doneExecutingCount &gt; 0) {
+                    flags |= Service.START_FLAG_REDELIVERY;
+                }
+	            // 跨进程 Service 进入 onStartCommand 状态
+                r.app.thread.scheduleServiceArgs(r, si.taskRemoved, si.id, flags, si.intent);
+            } catch (TransactionTooLargeException e) {
+            } catch (RemoteException e) {
+            } catch (Exception e) {
+            }
+        }
+    }
+</code></pre>
+
+<p>在<code>sendServiceArgsLocked</code>方法内通过跨进程<code>scheduleServiceArgs</code>方法，向 ActivityThread 发送消息。</p>
+
+<h3 id="activitythread-类的-handleserviceargs-方法">ActivityThread 类的 handleServiceArgs() 方法</h3>
+
+<pre><code>    private void handleServiceArgs(ServiceArgsData data) {
+        Service s = mServices.get(data.token);
+        if (s != null) {
+            try {
+                if (data.args != null) {
+                    data.args.setExtrasClassLoader(s.getClassLoader());
+                    data.args.prepareToEnterProcess();
+                }
+                int res;
+                if (!data.taskRemoved) {
+	                // Service 进入 onStartCommand 状态
+                    res = s.onStartCommand(data.args, data.flags, data.startId);
+                } else {
+                    s.onTaskRemoved(data.args);
+                    res = Service.START_TASK_REMOVED_COMPLETE;
+                }
+                QueuedWork.waitToFinish();
+                try {
+                // 向 ActivityManagerService 发送消息取消延时
+                    ActivityManagerNative.getDefault().serviceDoneExecuting(
+                            data.token, SERVICE_DONE_EXECUTING_START, data.startId, res);
+                } catch (RemoteException e) {
+                    // nothing to do.
+                }
+                ensureJitEnabled();
+            } catch (Exception e) {
+            }
+        }
+    }
+</code></pre>
+
+<p>ActivityThread 响应 Binder 驱动发送来的消息，仍然通过类型为<code>H</code>的<code>mH</code>处理消息，处理消息的方法就是<code>handleServiceArgs</code>。在方法内，回调了 Service 的<code>onStartCommand</code>方法，并且向 ActivityManagerService 发送消息取消了延时操作。</p>
+
+<p>至此，Service 在新进程中的启动过程就分析结束了，从调用者的<code>startService</code>方法，再到 ActivityManagerService 的处理，再到 Service 进程的<code>onCreate</code>和<code>onStartCommand</code>方法。</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li>Android 6.0 源码</li>
+<li>《Android 系统源代码情景分析》</li>
+<li><a href="http://gityuan.com/2016/03/06/start-service/">http://gityuan.com/2016/03/06/start-service/</a></li>
+</ol>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/android-statemachine/" data-toggle="tooltip" data-placement="top" title="Android StateMachine 状态机分析">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/android-change-skin-by-plugin/" data-toggle="tooltip" data-placement="top" title="Android 插件换肤原理及源码分析">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android LruCache实现分析</title>
+  <meta property="og:title" content="Android LruCache实现分析" />
+  <meta name="twitter:title" content="Android LruCache实现分析" />
+  <meta name="description" content="LruCache 是安卓开发中常用到的缓存技术，LRU 的全名是 Least Recently Used，表示最近最少使用算法，也就是说当内存快到达阈值时，若某个对象最近很少使用的，那么它就会被回收掉以释放内存。
+
+">
+  <meta property="og:description" content="LruCache 是安卓开发中常用到的缓存技术，LRU 的全名是 Least Recently Used，表示最近最少使用算法，也就是说当内存快到达阈值时，若某个对象最近很少使用的，那么它就会被回收掉以释放内存。
+
+">
+  <meta name="twitter:description" content="LruCache 是安卓开发中常用到的缓存技术，LRU 的全名是 Least Recently Used，表示最近最少使用算法，也就是说当内存快到达阈值时，若某个对象最近很少使用的，那么它就会被回收掉以释放内存。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/post/android-lrucache/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/post/android-lrucache/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Code" href="/">Code</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Android LruCache实现分析</h1>
+                
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 2 min (360 mots)
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>LruCache 是安卓开发中常用到的缓存技术，LRU 的全名是 Least Recently Used，表示最近最少使用算法，也就是说当内存快到达阈值时，若某个对象最近很少使用的，那么它就会被回收掉以释放内存。</p>
+
+<p></p>
+
+<h2 id="使用">使用</h2>
+
+<p>LruCache 的使用方法大致如下 ：</p>
+
+<pre><code>// LruCache 的声明初始化
+        int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+        // 指定缓存的内存大小，一般为当前进程可用内存的 1/8 即可
+        int cacheSize = maxMemory / 8 ;
+        LruCache&lt;String,Bitmap&gt; cache = new LruCache&lt;String,Bitmap&gt;(cacheSize){
+
+            // 如何计算缓存的资源的内存大小
+            @Override
+            protected int sizeOf(String key, Bitmap value) {
+                return value.getRowBytes() * value.getHeight() / 1024 ;
+            }
+            // 当缓存对象被回收时执行的回调方法，以便释放一些资源之类的，默认为空
+            @Override
+            protected void entryRemoved(boolean evicted, String key, Bitmap oldValue, Bitmap newValue) {
+                super.entryRemoved(evicted, key, oldValue, newValue);
+            }
+        };
+        // LruCache 添加缓存对象
+        cache.put(key,bitmap) ;
+        // LruCache 获取缓存对象
+        cache.get(key);
+</code></pre>
+
+<p>LruCache 的声明和使用都比较简单，在它的内部就已经帮我们完成了缓存对象的移除和添加，而我们无需过多的考虑对象的释放问题。</p>
+
+<h2 id="原理分析">原理分析</h2>
+
+<p>既然要缓存对象，必然要有个容器，LruCache 使用的是 <code>LinkedHashMap</code>，以强引用方式存储外界的缓存对象。</p>
+
+<p><code>LinkedHashMap</code>是一个双向的环形链表，链表中的每个节点都有指向前一个元素和后一个元素的引用。使用链表的好处就在于它的删除和添加操作更加的方便快捷。</p>
+
+<p>而 LRU 的最近最少使用算法思想就体现在<code>LinkedHashMap</code>的元素顺序中了。</p>
+
+<p><code>LinkedHashMap</code>中的顺序当然是从头到尾的，而一个元素最近的使用情况当然也是从头到尾的一个渐变了。在 LruCache 中，默认是最近最少使用的元素位于链表的头部，而最近使用最多的元素则是位于链表的尾部。这样一来，从头到尾的一个渐变过程也就是一个元素使用最少到多的过程了。</p>
+
+<p>当我们在进行每个<code>get</code>和<code>put</code>操作时，<code>LinkedHashMap</code>中的每个元素使用情况就要发生变化了，毕竟缓存容量是有限的，一些不幸的元素可能就因此而被垃圾回收了，以此来体现 LRU 的最近最少使用算法。</p>
+
+<p>下面就分别介绍其<code>get</code>和<code>put</code>操作。</p>
+
+<h3 id="lrucache-的-get-操作">LruCache 的 get 操作</h3>
+
+<p>从 LruCache 中取出一个元素，显然，这个结果是可能为 null 的。</p>
+
+<p>LruCache 使用<code>get</code>操作很简单，有就取出来，没有就返回个 null 。</p>
+
+<pre><code>		V mapValue;
+        synchronized (this) {
+            mapValue = map.get(key);
+            if (mapValue != null) {
+                hitCount++;
+                return mapValue;
+            }
+            missCount++;
+        }
+</code></pre>
+
+<p>而重点就在于<code>LinkedHashMap</code>的<code>get</code>方法了。</p>
+
+<pre><code>	int hash = Collections.secondaryHash(key); // 计算 key 的 hash 值
+        HashMapEntry&lt;K, V&gt;[] tab = table;
+        for (HashMapEntry&lt;K, V&gt; e = tab[hash &amp; (tab.length - 1)]; e != null; e = e.next) {
+            K eKey = e.key;
+            if (eKey == key || (e.hash == hash &amp;&amp; key.equals(eKey))) {
+                if (accessOrder)
+                    makeTail((LinkedEntry&lt;K, V&gt;) e);
+                return e.value;
+            }
+        }
+</code></pre>
+
+<p><code>LinkedHashMap</code>的节点类是<code>LinkedEntry</code>，它继承自<code>HashMapEntry</code>，在其继承之上多了指向前后元素的引用。</p>
+
+<p>所以，从上述代码可以看出，无非就是一个遍历，找到 <code>key</code>对应的元素就取出来，并且多了一个操作<code>makeTail</code>。</p>
+
+<p><code>makeTail</code>的操作又是干什么的呢？它可谓是实现最近最少算法的精髓了。</p>
+
+<pre><code> private void makeTail(LinkedEntry&lt;K, V&gt; e) {
+        // Unlink e 将节点 e 的前节点和后节点进行连接，而将它自己给释放出来
+        e.prv.nxt = e.nxt;
+        e.nxt.prv = e.prv;
+
+        // Relink e as tail 将节点 e 连接到链表的尾部
+        LinkedEntry&lt;K, V&gt; header = this.header;
+        LinkedEntry&lt;K, V&gt; oldTail = header.prv;
+        e.nxt = header;
+        e.prv = oldTail;
+        oldTail.nxt = header.prv = e;
+        modCount++;
+    }
+</code></pre>
+
+<p><code>makeTail</code>操作，将一个<code>get</code>的节点，从原本它在链表中的位置移到了整个链表中的尾部，使它的前节点是上一任的尾节点，而后节点则是头结点。</p>
+
+<p>而在上面提到过，<code>LinkedHashMap</code>链表中元素的顺序正是完美的体现了最少最近算法的思想。</p>
+
+<p><code>get</code>得到的元素必然是最近使用最多的了，每次 <code>get</code>之后都将它移动到链表的尾部，也正是最近最少算法的体现了。</p>
+
+<h3 id="lrucache-的-put-操作">LruCache 的 put 操作</h3>
+
+<p><code>put</code>操作则是向<code>LinkedHashMap</code>中放入一个元素，而缓存的容量又是有限的，这么一来，在有限的情况下，就会有元素被垃圾回收了。</p>
+
+<pre><code>	  V previous;
+        synchronized (this) {
+            putCount++;
+            size += safeSizeOf(key, value);
+            previous = map.put(key, value); // 若存在 key 相同的元素，则返回之前的，否则返回 null
+            if (previous != null) {    // 存在 key 相同的元素
+                size -= safeSizeOf(key, previous);
+            }
+        }
+        // 移除最近最少使用的元素
+		trimToSize(maxSize);
+</code></pre>
+
+<p>当进行<code>put</code>操作时，若放入一个 key 存在的元素，则返回已经存在的对应的值。</p>
+
+<p>同时，在每次<code>put</code>操作之后，都要进行容量的清除工作。</p>
+
+<pre><code>public void trimToSize(int maxSize) {
+        while (true) { // 死循环
+            K key;
+            V value;
+            synchronized (this) {
+                if (size &lt;= maxSize) {
+                    break;
+                }
+                Map.Entry&lt;K, V&gt; toEvict = map.eldest(); // 取出最老的元素
+                if (toEvict == null) {
+                    break;
+                }
+                key = toEvict.getKey();
+                value = toEvict.getValue();
+                map.remove(key);
+                size -= safeSizeOf(key, value);
+                evictionCount++;
+            }
+            entryRemoved(true, key, value, null);
+        }
+    }
+</code></pre>
+
+<p><code>trimToSize</code>的操作是一个死循环的操作，当<code>size</code>小于<code>maxSize</code>时，直接返回，否则从<code>LinkedHashMap</code>中移除最近最少使用的元素，也就是头节点后的元素。</p>
+
+<p>以上就大致实现了 LRU 的最少最近算法。</p>
+
+<h2 id="同步锁相关操作">同步锁相关操作</h2>
+
+<p>在 LruCache 的<code>get</code>和<code>put</code>操作中，都有用到的<code>synchronized</code>锁操作。</p>
+
+<p>这是保证线程安全，因为在<code>get</code>和<code>put</code>方法中进行的都是复合操作，在并发条件下使用缓存时很容易出现脏数据，加上<code>synchronized</code>标识，则保证了操作的原子性，使得成为线程安全的操作。</p>
+
+<h2 id="参考">参考</h2>
+
+<p>1、<a href="https://github.com/LittleFriendsGroup/AndroidSdkSourceAnalysis/blob/master/article/LruCache%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">https://github.com/LittleFriendsGroup/AndroidSdkSourceAnalysis/blob/master/article/LruCache%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md</a></p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/android-window-and-view/" data-toggle="tooltip" data-placement="top" title="Android Activity 创建 Window 及添加 View 流程分析">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/android-statemachine/" data-toggle="tooltip" data-placement="top" title="Android StateMachine 状态机分析">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

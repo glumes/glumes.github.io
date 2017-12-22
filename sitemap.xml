@@ -3,6 +3,96 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.github.io/post/docker-summary/</loc>
+    <lastmod>2017-12-22T16:24:03+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/opengl-tutorial-draw-basic-shape/</loc>
+    <lastmod>2017-12-22T16:21:16+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/opengl-tutorial-draw-point/</loc>
+    <lastmod>2017-12-22T16:19:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/python-functional-programming/</loc>
+    <lastmod>2017-12-22T16:10:57+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/python-docopt/</loc>
+    <lastmod>2017-12-22T16:08:45+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/ffmpeg-convert-mpeg-to-pcm-2/</loc>
+    <lastmod>2017-12-22T16:05:30+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm-1/</loc>
+    <lastmod>2017-12-22T16:03:10+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/rxjava-wrapper-dialog/</loc>
+    <lastmod>2017-12-22T16:00:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/android-layout-inflater/</loc>
+    <lastmod>2017-12-22T15:55:08+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/android-change-skin-by-plugin/</loc>
+    <lastmod>2017-12-22T15:51:44+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/android-start-service/</loc>
+    <lastmod>2017-12-22T15:40:19+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/android-statemachine/</loc>
+    <lastmod>2017-12-22T15:37:04+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/android-lrucache/</loc>
+    <lastmod>2017-12-22T15:35:23+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/android-window-and-view/</loc>
+    <lastmod>2017-12-22T15:33:22+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/android-system-server/</loc>
+    <lastmod>2017-12-22T15:30:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/android-service-manager/</loc>
+    <lastmod>2017-12-22T15:27:11+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/android-material-design-summary-2/</loc>
+    <lastmod>2017-12-22T15:22:15+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/post/android-material-design-summary-1/</loc>
+    <lastmod>2017-12-22T15:19:03+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.github.io/post/android-binder-summary/</loc>
     <lastmod>2017-12-22T10:50:43+08:00</lastmod>
   </url>
@@ -64,7 +154,7 @@
   
   <url>
     <loc>https://glumes.github.io/tags/android/</loc>
-    <lastmod>2017-12-22T10:50:43+08:00</lastmod>
+    <lastmod>2017-12-22T16:00:05+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -80,14 +170,32 @@
   </url>
   
   <url>
+    <loc>https://glumes.github.io/tags/docker/</loc>
+    <lastmod>2017-12-22T16:24:03+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/tags/ffmpeg/</loc>
+    <lastmod>2017-12-22T16:05:30+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://glumes.github.io/</loc>
-    <lastmod>2017-12-22T10:50:43+08:00</lastmod>
+    <lastmod>2017-12-22T16:24:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.github.io/tags/opencv/</loc>
     <lastmod>2017-12-22T09:53:04+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/tags/opengl/</loc>
+    <lastmod>2017-12-22T16:21:16+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -99,13 +207,19 @@
   
   <url>
     <loc>https://glumes.github.io/post/</loc>
-    <lastmod>2017-12-22T10:50:43+08:00</lastmod>
+    <lastmod>2017-12-22T16:24:03+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/tags/python/</loc>
+    <lastmod>2017-12-22T16:10:57+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.github.io/tags/</loc>
-    <lastmod>2017-12-22T10:50:43+08:00</lastmod>
+    <lastmod>2017-12-22T16:00:05+08:00</lastmod>
     <priority>0</priority>
   </url>
   

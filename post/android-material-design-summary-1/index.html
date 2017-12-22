@@ -5,18 +5,27 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Tags</title>
-  <meta property="og:title" content="Tags" />
-  <meta name="twitter:title" content="Tags" />
+  <title>Android Material Desing 控件小结-1</title>
+  <meta property="og:title" content="Android Material Desing 控件小结-1" />
+  <meta name="twitter:title" content="Android Material Desing 控件小结-1" />
+  <meta name="description" content="总结一下 Material Design 控件使用。
+
+">
+  <meta property="og:description" content="总结一下 Material Design 控件使用。
+
+">
+  <meta name="twitter:description" content="总结一下 Material Design 控件使用。
+
+">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.github.io/tags/" />
+  <meta property="og:url" content="https://glumes.github.io/post/android-material-design-summary-1/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.github.io/tags/" />
-  <link rel="alternate" href="https://glumes.github.io/tags/index.xml" type="application/rss+xml" title="Glumes Blog">
+  <link rel="canonical" href="https://glumes.github.io/post/android-material-design-summary-1/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -145,9 +154,17 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="tags-heading">
-              <h1>Tags</h1>
+            <div class="post-heading">
+              <h1>Android Material Desing 控件小结-1</h1>
                 
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 1 min (160 mots)
+  
+</span>
+
+
                 
             </div>
           </div>
@@ -158,32 +175,136 @@
 
 
     
-  
-  <div class="container" role="main">
-    <article class="post-preview">
-      <div class="list-group col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>总结一下 Material Design 控件使用。</p>
+
+<p></p>
+
+<h2 id="textinputlayout">TextInputLayout</h2>
+
+<p>TextInputLayout 控件是一个容器，只接受一个子元素，而子元素需要是一个 EditText 控件。</p>
+
+<p>TextInputLayout 的作用是当输入文字时，它可以把提示文字 Hint 移至 EditText 上方。</p>
+
+<pre><code>
+    &lt;android.support.design.widget.TextInputLayout
+        android:layout_width=&quot;0dp&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_marginStart=&quot;8dp&quot;
+        app:layout_constraintLeft_toLeftOf=&quot;parent&quot;
+        android:layout_marginEnd=&quot;8dp&quot;
+        app:layout_constraintRight_toRightOf=&quot;parent&quot;
+        android:layout_marginTop=&quot;8dp&quot;
+        app:layout_constraintTop_toBottomOf=&quot;@+id/usernameLayout&quot;
+        android:id=&quot;@+id/passwordLayout&quot;
+        &gt;
+
+        &lt;EditText
+            android:id=&quot;@+id/password&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:hint=&quot;hint&quot;/&gt;
+    &lt;/android.support.design.widget.TextInputLayout&gt;
+</code></pre>
+
+<p>而当 EditText 中输入的内容不正确时，TextInputLayout 还能够进行错误的处理。<code>setError</code> 方法会在 EditText 下方显示红色的错误消息。<code>setErrorEnabled</code>方法开启错误提醒功能，使用代码如下：</p>
+
+<pre><code> String username = mUsernameLayout.getEditText().getText().toString();
+        String password = mPasswordLayout.getEditText().getText().toString();
+
+        if (!username.equals(RIGHT_NAME)){
+            mUsernameLayout.setError(&quot;not right username&quot;);
+            Log.d(TAG,&quot;not right username&quot;);
+        }else if (!password.equals(RIGHT_PASSWORD)){
+            mPasswordLayout.setError(&quot;not right password&quot;);
+            Log.d(TAG,&quot;not right password&quot;);
+        }else {
+            // 取消错误提醒
+            mUsernameLayout.setErrorEnabled(false);
+            mPasswordLayout.setErrorEnabled(false);
+            Toast.makeText(TextInputActivity.this,&quot;Welcome !&quot;,Toast.LENGTH_SHORT).show();
+        }
+</code></pre>
+
+<h2 id="tablayout">TabLayout</h2>
+
+<p>TabLayout 控件是用来和 ViewPager 配合使用的。当滑动 ViewPager 内部的页面时需要让上方的 Tab 也随之移动时就可以考虑使用 TabLayout 了。</p>
+
+<p>使用 ViewPager 还需要对应的 Adapter ，简单使用代码如下：</p>
+
+<pre><code>   mTabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager());
+
+        mViewpager.setAdapter(mTabPagerAdapter);
+
+        // 设置回调
+        mViewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+        // 设置 Tab 模式
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+
+        mTabLayout.setupWithViewPager(mViewpager);
+</code></pre>
+
+<p>初次之后，还可以给 TabLayout 设置各种属性，既可以从 XML 布局中添加，也可以在代码中通过 set 方法来设置，如下图所示：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-tablayout-attribute.png" alt="tablayout-attribute" /></p>
+
+<h2 id="toolbar">Toolbar</h2>
+
+<p>Toolbar 可以用来替换 ActionBar 的，如果要替换 ActionBar ，那么在使用时，需要配置 Activity 的 theme 为<code>Theme.AppCompat.NoActionBar</code>，或者在对应的主题中加入如下：</p>
+
+<pre><code>		&lt;item name=&quot;windowActionBar&quot;&gt;false&lt;/item&gt;
+		&lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;
+</code></pre>
+
+<p>不然会报错<code>This Activity already has an action bar supplied by the window decor.</code></p>
+
+<p>并且在代码中还需要添加 <code>setSupportActionBar(toolbar);</code>。</p>
+
+<p>如果当做单独的控件来使用则不需要对主题进行设置。</p>
+
+<p>Toolbar 也有各种设置选项，包括标题，子标题，Logo，菜单等。</p>
+
+<pre><code>	mToolbar.setTitle(&quot;Title&quot;);
+        mToolbar.setSubtitle(&quot;SubTitle&quot;);
+        mToolbar.setNavigationIcon(R.mipmap.ic_drawer_home);
+        mToolbar.inflateMenu(R.menu.toolbar_menu);
+        mToolbar.setLogo(R.mipmap.ic_launcher);
+</code></pre>
+
+<p>其中，当想给 Toolbar 弹出的菜单设置样式时，可以通过 <code>popupTheme</code>属性来设置样式。popupTheme 的样式可以自定义 style ，也可以使用安卓自带的。</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li><a href="http://blog.csdn.net/qiujuer/article/details/51462471">http://blog.csdn.net/qiujuer/article/details/51462471</a></li>
+<li><a href="http://www.jcodecraeer.com/a/basictutorial/2015/0821/3338.html">http://www.jcodecraeer.com/a/basictutorial/2015/0821/3338.html</a></li>
+<li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html</a></li>
+<li><a href="http://www.jianshu.com/p/79604c3ddcae">http://www.jianshu.com/p/79604c3ddcae</a></li>
+</ol>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/android-binder-summary/" data-toggle="tooltip" data-placement="top" title="Android Binder Summary">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/android-material-design-summary-2/" data-toggle="tooltip" data-placement="top" title="Android Material Desing 控件小结-2">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+
       
-      <a href="https://glumes.github.io/tags/android/" class="list-group-item">
-          android<span class="badge">21</span></a>
-      
-      <a href="https://glumes.github.io/tags/ffmpeg/" class="list-group-item">
-          ffmpeg<span class="badge">2</span></a>
-      
-      <a href="https://glumes.github.io/tags/opengl/" class="list-group-item">
-          opengl<span class="badge">2</span></a>
-      
-      <a href="https://glumes.github.io/tags/python/" class="list-group-item">
-          python<span class="badge">2</span></a>
-      
-      <a href="https://glumes.github.io/tags/docker/" class="list-group-item">
-          docker<span class="badge">1</span></a>
-      
-      <a href="https://glumes.github.io/tags/opencv/" class="list-group-item">
-          opencv<span class="badge">1</span></a>
-      
-      </div>
-    </article>
+
+    </div>
   </div>
+</div>
 
     <footer>
   <div class="container">

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android 系统服务管理 ServiceManager</title>
+  <meta property="og:title" content="Android 系统服务管理 ServiceManager" />
+  <meta name="twitter:title" content="Android 系统服务管理 ServiceManager" />
+  <meta name="description" content="在应用程序编程时，经常使用到 getSystemService(String serviceName) 方法来获得一个系统服务，它的实现也是在 ContextImpl 中的，根据不同的参数返回不同的系统服务，这些系统服务都是由 ServiceManager 管理的。
+
+">
+  <meta property="og:description" content="在应用程序编程时，经常使用到 getSystemService(String serviceName) 方法来获得一个系统服务，它的实现也是在 ContextImpl 中的，根据不同的参数返回不同的系统服务，这些系统服务都是由 ServiceManager 管理的。
+
+">
+  <meta name="twitter:description" content="在应用程序编程时，经常使用到 getSystemService(String serviceName) 方法来获得一个系统服务，它的实现也是在 ContextImpl 中的，根据不同的参数返回不同的系统服务，这些系统服务都是由 ServiceManager 管理的。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/post/android-service-manager/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/post/android-service-manager/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Code" href="/">Code</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Android 系统服务管理 ServiceManager</h1>
+                
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 2 min (371 mots)
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>在应用程序编程时，经常使用到 getSystemService(String serviceName) 方法来获得一个系统服务，它的实现也是在 ContextImpl 中的，根据不同的参数返回不同的系统服务，这些系统服务都是由 ServiceManager 管理的。</p>
+
+<p></p>
+
+<p>在看 ContextImpl 具体实现代码之前，我们有必要了解一下 ServiceManager 这个概念。</p>
+
+<p>ServiceManager 是一个独立的进程，它管理各种系统服务，如下图所示：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-android_service_manager.png" alt="android_service_manager" /></p>
+
+<p>ServiceManager 本身也是一个 Service ，Framework 提供了一个系统函数，可以获取该 Service 对应的 Binder 引用，那就是 <code>BinderInternal.getContextObject()</code> 。该静态函数返回 ServiceManager 后，就可以通过 ServiceManager 提供的方法获取系统其他 Service 的 Binder 引用。</p>
+
+<p>这样的好处就是系统中仅暴露一个全局 Bindre 引用，那就是 ServiceManager ，而其他的系统服务则可以隐藏起来，从而有助于系统服务的拓展，以及调用系统服务的安全检查。其他系统服务在启动时，首先要把自己的 Binder 对象传递给 ServiceManager ，即所谓的注册（addService）。</p>
+
+<p>说白了，ServiceManager 就相当于一个总机，需要其他系统服务时再转接获得其他服务，理解了这样的模型之后，再去看源码就会清楚很多了。</p>
+
+<h2 id="servicemanager-相关源码">ServiceManager 相关源码</h2>
+
+<p>由于我编译的是 Android 6.0 的源码，和书上的基于 Android 4.0 及更早的代码已经有些不一样了，所以还是以 6.0 的源码为主。</p>
+
+<p>首先从 ContextImpl 的 getSystemService 方法入手：</p>
+
+<pre><code>    @Override
+    public Object getSystemService(String name) {
+        return SystemServiceRegistry.getSystemService(this, name);
+    }
+</code></pre>
+
+<p>可以看到 ContextImpl 返回的服务是通过 <code>SystemServiceRegistry</code>类的静态方法返回的。</p>
+
+<p>而 <code>SystemServiceRegistry</code> 的 getSystemService 方法内容如下：</p>
+
+<pre><code>/**
+     * Gets a system service from a given context.
+     */
+    public static Object getSystemService(ContextImpl ctx, String name) {
+        ServiceFetcher&lt;?&gt; fetcher = SYSTEM_SERVICE_FETCHERS.get(name);
+        return fetcher != null ? fetcher.getService(ctx) : null;
+    }
+</code></pre>
+
+<p><code>SYSTEM_SERVICE_FETCHERS</code> 是一个 HashMap 类型，存储的内容为 <code>HashMap&lt;String,ServiceFetcher&lt;?&gt;&gt;</code> 。而在 getSystemService 方法中得到的就是一个 <code>ServiceFetcher</code> 类型。</p>
+
+<p>而 ServiceFetcher 是一个接口类型，定义如下，它的 getService 方法就是返回所需的 Service 。</p>
+
+<pre><code>    /**
+     * Base interface for classes that fetch services.
+     * These objects must only be created during static initialization.
+     */
+    static abstract interface ServiceFetcher&lt;T&gt; {
+        T getService(ContextImpl ctx);
+    }
+</code></pre>
+
+<p>这样，就通过<code>SYSTEM_SERVICE_FETCHERS</code>这个容器得到<code>ServiceFetcher</code>，再调用它的<code>getService</code>方法得到了需要的 Service 。</p>
+
+<p>但只是理清了如何得到 Service 还是不够，还要明白何时注册的 Service 。</p>
+
+<p>在 SystemServiceRegistry 源码里有个 <code>registerService</code> 方法，它就是向<code>SYSTEM_SERVICE_FETCHERS</code>添加 <code>ServiceFetcher</code>。</p>
+
+<pre><code>/**
+     * Statically registers a system service with the context.
+     * This method must be called during static initialization only.
+     */
+    private static &lt;T&gt; void registerService(String serviceName, Class&lt;T&gt; serviceClass,
+            ServiceFetcher&lt;T&gt; serviceFetcher) {
+        SYSTEM_SERVICE_NAMES.put(serviceClass, serviceName);
+        SYSTEM_SERVICE_FETCHERS.put(serviceName, serviceFetcher);
+    }
+</code></pre>
+
+<p>代码的注释里同样提到了该方法只能在静态初始化时调用，而 SystemServiceRegistry 类有个 <code>static 代码块</code>， 按照 Java 代码的执行顺序，静态代码块肯定在静态方法 getSystemService 之前执行，这样就保证了<code>SYSTEM_SERVICE_FETCHERS</code>容器不至于为空了。</p>
+
+<p>而最终通过 <code>ServiceFetcher</code>的 getService 方法返回的 Service 也是在 registerService 方法中传入的，查看其中某个 Service 代码如下：</p>
+
+<pre><code> registerService(Context.ALARM_SERVICE, AlarmManager.class,
+            new CachedServiceFetcher&lt;AlarmManager&gt;() {
+            @Override
+            public AlarmManager createService(ContextImpl ctx) {
+                IBinder b = ServiceManager.getService(Context.ALARM_SERVICE);
+                IAlarmManager service = IAlarmManager.Stub.asInterface(b);
+                return new AlarmManager(service, ctx);
+            }});
+</code></pre>
+
+<p>可以看到，这里通过 ServiceManager 的 getService 方法得到了对应服务的 Binder 对象，再通过 <code>Stub.asInterface(b)</code> 方法得到 Service 的代理对象。这正和前面提到的一样，ServiceManager 总管了所有的服务，然后具体需要返回对应的 Service 。</p>
+
+<p>ServiceManager 返回 Service 的 Binder 对象的代码如下：</p>
+
+<pre><code> /**
+     * Returns a reference to a service with the given name.
+     * 
+     * @param name the name of the service to get
+     * @return a reference to the service, or &lt;code&gt;null&lt;/code&gt; if the service doesn't exist
+     */
+    public static IBinder getService(String name) {
+        try {
+            IBinder service = sCache.get(name);
+            if (service != null) {
+                return service;
+            } else {
+                return getIServiceManager().getService(name);
+            }
+        } catch (RemoteException e) {
+            Log.e(TAG, &quot;error in getService&quot;, e);
+        }
+        return null;
+    }
+</code></pre>
+
+<p>首先是从缓存 mCache 去查看，如果没有的话，再从<code>BinderInternal.getContextObject()</code>返回的 Service 引用中取对应的 Service 。</p>
+
+<p>查看<code>ServiceManagerNative</code>源码，看到这里面 getService 方法就是一个跨进程地请求，向系统发起请求返回所需的 Service 的 Binder 对象。</p>
+
+<p>总结一下上面的源码，画一张 UML 类图如下所示：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-systemServiceRegisty-class.png" alt="systemServiceRegisty-class" /></p>
+
+<p><a href="https://android.googlesource.com/platform/system/core/+/android-6.0.0_r1/rootdir/init.rc">https://android.googlesource.com/platform/system/core/+/android-6.0.0_r1/rootdir/init.rc</a></p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li>《Android内核剖析》</li>
+<li>《深入理解Android》</li>
+</ol>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/android-material-design-summary-2/" data-toggle="tooltip" data-placement="top" title="Android Material Desing 控件小结-2">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/android-system-server/" data-toggle="tooltip" data-placement="top" title="Android 系统服务启动 SystemServer">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+
