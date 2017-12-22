@@ -3,45 +3,45 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://example.org/post/imgtest/</loc>
+    <loc>https://glumes.github.io/post/imgtest/</loc>
     <lastmod>2017-12-21T17:01:53+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/post/first/</loc>
+    <loc>https://glumes.github.io/post/first/</loc>
     <lastmod>2017-12-20T15:24:41+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/page/about/</loc>
+    <loc>https://glumes.github.io/page/about/</loc>
     <lastmod>2017-12-20T15:23:52+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://glumes.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/</loc>
+    <loc>https://glumes.github.io/</loc>
     <lastmod>2017-12-21T17:01:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/page/</loc>
+    <loc>https://glumes.github.io/page/</loc>
     <lastmod>2017-12-20T15:23:52+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/post/</loc>
+    <loc>https://glumes.github.io/post/</loc>
     <lastmod>2017-12-21T17:01:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://glumes.github.io/tags/</loc>
     <priority>0</priority>
   </url>
   
