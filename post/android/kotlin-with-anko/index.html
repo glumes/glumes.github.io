@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Kotlin 使用 Anko 布局那些事</title>
+  <meta property="og:title" content="Kotlin 使用 Anko 布局那些事" />
+  <meta name="twitter:title" content="Kotlin 使用 Anko 布局那些事" />
+  <meta name="description" content="学习 Kotlin 应该都或多或少听过 Anko 这个开源库。
+
+使用 Anko 来构建界面会更加简单、快捷。
+
+">
+  <meta property="og:description" content="学习 Kotlin 应该都或多或少听过 Anko 这个开源库。
+
+使用 Anko 来构建界面会更加简单、快捷。
+
+">
+  <meta name="twitter:description" content="学习 Kotlin 应该都或多或少听过 Anko 这个开源库。
+
+使用 Anko 来构建界面会更加简单、快捷。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/post/android/kotlin-with-anko/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/post/android/kotlin-with-anko/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Code" href="/tags">Code</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Kotlin 使用 Anko 布局那些事</h1>
+                
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 4 min (1956 mots)
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>学习 Kotlin 应该都或多或少听过 Anko 这个开源库。</p>
+
+<p>使用 Anko 来构建界面会更加简单、快捷。</p>
+
+<p></p>
+
+<p>毕竟以往的布局都是要从 XML 中解析出来，然后再到 LayoutInfalter 里面通过 Constructor.newInstance 反射创建出来的。而 Anko 则是直接创建 View，用代码构建布局，省去了解析 XML 的时间。</p>
+
+<h2 id="添加依赖">添加依赖</h2>
+
+<p>Anko 的 Github 仓库是：<code>https://github.com/Kotlin/anko</code>。</p>
+
+<p>在 Github 仓库的 README 上关于如何添加依赖已经写的很详细了，把要添加的选择性复制粘贴就好了。</p>
+
+<p>Anko 包括四个部分内容：</p>
+
+<ul>
+<li>Anko Commons
+
+<ul>
+<li>轻量级的一些帮助类，比如 intent，dialog，logging 等等，其实就是对安卓一些类：Activity、Fragment、Intent 等添加扩展函数。</li>
+</ul></li>
+<li>Anko Layouts
+
+<ul>
+<li>动态布局用的最主要的库，将许多 Android 的控件 View 转换成了 Anko 加载的形式。</li>
+<li>由于 Android 还有其他的控件库，因此 Anko 也对那些库进行了拓展支持，可以选择添加对应的依赖库。</li>
+<li>当然，还可以根据需要对自定义 View 进行改造，让它们也支持 Anko 加载的形式。</li>
+</ul></li>
+<li>Anko SQLite
+
+<ul>
+<li>用于 Android SQLite 数据库的查询的库</li>
+</ul></li>
+<li>Anko Coroutines
+
+<ul>
+<li>基于 <code>kotlinx.coroutines</code> 协程的一个工具库。</li>
+</ul></li>
+</ul>
+
+<h2 id="创建简单布局">创建简单布局</h2>
+
+<p>使用 Anko 创建布局很简单：</p>
+
+<pre><code>class AnkoActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        relativeLayout {
+            button(&quot;button in center&quot;) {
+                textSize = sp(18).toFloat()
+                onClick {
+                   longToast(&quot;you click button&quot;)
+                }
+            }.lparams {
+                centerInParent()
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>效果如下：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_kotlin_anko_simple_ui.png" alt="Anko 创建简单界面" /></p>
+
+<p>在 <code>relativeLayout</code> 代码块里我们构建了当前的界面，并把它应用到了 Activity 中。</p>
+
+<p>在这里，并没有使用熟悉的 setContentView 方法，这是因为 Anko 会自动将布局界面 View 设置到 Activity 中。</p>
+
+<p><code>relativeLayout</code>代码块就是 Anko 的主要使用方法。</p>
+
+<p><code>relativeLayout</code> 作为一个容器，在里面添加了一个 <code>button</code>，<code>button</code> 控件的第一个大括号里设置了它的一些属性和事件，在 <code>lparams</code> 大括号里设置了它在相对于容器的一些参数。</p>
+
+<p>就是这样简单的写法完成了界面布局，如同写 xml 文件一样，只要在父容器里面按照排列写好子控件的参数和位置就好。</p>
+
+<p>多实践几次就可以熟练这种写法，通过 Anko 来创建一个登陆界面：</p>
+
+<pre><code>	verticalLayout {
+            padding = dip(8)
+            val account = textView(&quot;account&quot;) {
+                id = R.id.account_text
+                textSize = sp(12).toFloat()
+                // 设置自己的属性
+            }.lparams() {
+                // 设置布局的参数
+            }
+            var name = editText() // 也可以什么都不设置，使用默认的设置
+            textView(&quot;password&quot;) {
+                id = R.id.password_text
+                onClick {
+                    account.setText(&quot;change account&quot;)
+                }
+            }
+            var pwd = editText {
+                hint = &quot;input&quot;
+            }.lparams(
+                    width = dip(100), 
+                    height = ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            button(&quot;login&quot;) {
+                onClick {
+                    if (name.text.toString().equals(&quot;name&quot;) 
+	                    &amp;&amp; pwd.text.toString().equals(&quot;pwd&quot;)) {
+                        longToast(&quot;login....&quot;)
+                    } else {
+                        longToast(&quot;login failed&quot;)
+                    }
+                }
+            }
+        }
+</code></pre>
+
+<p>效果如下：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_kotlin_anko_login_ui.png" alt="anko_login_ui" /></p>
+
+<h2 id="使用-ankocomponent-接口创建界面">使用 AnkoComponent 接口创建界面</h2>
+
+<p>除了直接在 Activity 里面写布局，还可以使用 AnkoComponent 接口创建布局，这样就可以将界面代码和 Activity 的代码分离了。</p>
+
+<pre><code>class MyActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+        MyActivityUI().setContentView(this)
+    }
+}
+
+class MyActivityUI : AnkoComponent&lt;MyActivity&gt; {
+    override fun createView(ui: AnkoContext&lt;MyActivity&gt;) = with(ui) {
+        verticalLayout {
+            val name = editText()
+            button(&quot;Say Hello&quot;) {
+                onClick { ctx.toast(&quot;Hello, ${name.text}!&quot;) }
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>需要创建我们的界面类，实现 <code>AnkoComponent</code> 接口，在 <code>createView</code>方法中返回我们的界面。</p>
+
+<p>最后在 <code>setContentView</code> 方法中实际调用的也是 <code>createView</code> 方法，返回界面布局，然后再由上面提到的，Anko 会自动把布局填充到 Activity 中。</p>
+
+<p>这里使用到了 Kotlin <code>with</code> 的语法糖，使用 <code>with</code>，则返回的是最后一行的内容，正好 verticalLayout 就是最后一行的内容。</p>
+
+<p>也可以把它转换一下，使用 <code>apply</code> 的语法糖，最后返回的调用该方法的对象，再接着返回该对象的 view 就好了。</p>
+
+<pre><code>class MyActivityUI : AnkoComponent&lt;MyActivity&gt; {
+    override fun createView(ui: AnkoContext&lt;AnkoActivity&gt;) = ui.apply {
+        verticalLayout {
+            val name = editText()
+            button(&quot;Say Hello&quot;) {
+                onClick { ctx.toast(&quot;Hello, ${name.text}!&quot;) }
+            }
+        }
+    }.view
+}
+</code></pre>
+
+<h2 id="fragment-中加载界面">Fragment 中加载界面</h2>
+
+<p>在 Fragment 中添加界面稍有不同。</p>
+
+<p>创建  Activity，将 Fragment 添加上来。</p>
+
+<pre><code>class AnkoFragmentActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        linearLayout {
+            id = R.id.fragment_id
+            supportFragmentManager.beginTransaction().replace(id, AnkoFragment.newInstance()).commit()
+        }
+    }
+}
+</code></pre>
+
+<pre><code>class AnkoFragment : Fragment() {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//        return inflater.inflate(R.layout.fragment_anko, container, false)
+        return UI {
+            verticalLayout {
+                editText()
+                button(&quot;OK&quot;)
+            }
+        }.view
+    }
+
+    companion object {
+        fun newInstance(): AnkoFragment {
+            return AnkoFragment()
+        }
+    }
+}
+</code></pre>
+
+<p>在 Fragment 的 onCreateView 方法中不在使用 inflater 来加载布局，而是直接使用 <code>UI</code> 函数来完成，返回最后的 View 即可。其中 <code>UI</code> 也是对 Fragment 的一个拓展函数。</p>
+
+<h2 id="自定义-view-的加载">自定义 View 的加载</h2>
+
+<p>除了 Anko 自带以及支持的控件之外，还可以让自定义的 View 也支持 Anko 的加载方式，在 Anko 的代码块中去更改自定义 View 的设置属性。</p>
+
+<p>比如，自定义 View ，绘制一个矩形：</p>
+
+<pre><code>public class RectangleView extends View {
+    public int size ;
+    public Paint mPaint;
+    public RectangleView(Context context) {
+        super(context);
+        mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        mPaint.setAntiAlias(true);
+        mPaint.setStrokeWidth(2);
+        mPaint.setStyle(Paint.Style.STROKE);
+    }
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        setBackgroundColor(Color.BLUE);
+        canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() / 2, size, mPaint);
+    }
+}
+</code></pre>
+
+<p>其中，size 变量就是要改变的属性，它控制着圆的半径。</p>
+
+<p>让自定义 View 支持 Anko 的加载方式，还需要添加如下的拓展函数：</p>
+
+<pre><code>inline fun ViewManager.rectangleView(init: RectangleView.() -&gt; Unit): RectangleView {
+    return ankoView({ RectangleView(it) }, theme = 0, init = init)
+}
+</code></pre>
+
+<p>由该拓展函数来返回我们的 Rectangle View ，至于这其中是如何实现的，暂时不做深究，下篇文章再来探讨。</p>
+
+<p>最后就可以像使用其他控件一样来添加到布局中了。</p>
+
+<pre><code>    //加载自定义的 View
+        relativeLayout {
+            var view = rectangleView {
+                id = R.id.custom_view_id
+                size = 300  // 自定义 View 的属性设置
+            }.lparams {
+                width = ViewGroup.LayoutParams.MATCH_PARENT
+                height = dip(200)
+                centerInParent()
+            }
+
+            button(&quot;change size&quot;) {
+                onClick {
+                    view.size = Random().nextInt(200) + 100
+                    view.invalidate()
+                }
+            }.lparams {
+                below(view)
+                centerHorizontally()
+            }
+        }
+</code></pre>
+
+<p>效果如下：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_anko_custom_view.png" alt="anko_custom_view" /></p>
+
+<p>点击按键来更改圆的半径大小。</p>
+
+<h2 id="anko-配合-recyclerview-的使用">Anko 配合 RecyclerView 的使用</h2>
+
+<p>使用 Anko 来构建一个下拉刷新的 RecyclerView 布局。</p>
+
+<p>写法依旧简单：</p>
+
+<pre><code>       swipeRefreshLayout {
+            setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN)
+            onRefresh {
+                mainHandler.postDelayed(Runnable {
+                    isRefreshing = false
+                }, 3000)
+            }
+            recyclerView {
+                layoutManager = LinearLayoutManager(SampleApp.mContext)
+                setHasFixedSize(true)
+                adapter = Adapter(dataList)
+            }
+        }
+</code></pre>
+
+<p>直接在 recyclerView 布局里面设置好相应的 LayoutManager 和 Adapter 就好了。</p>
+
+<p>同时还能够在 swipeRefreshLayout 里面处理刷新的事件，在三秒后更改刷新状态，从而停止刷新就好了。</p>
+
+<p>源码参考 Github 地址：<a href="https://github.com/glumes/AndroidKotlinSample">https://github.com/glumes/AndroidKotlinSample</a></p>
+
+<h2 id="不足">不足</h2>
+
+<p>Anko 好是好，但是依旧不够完美。</p>
+
+<p>在 XML 中能够设置的控件属性更多，更精确的控制布局状态，而 Anko 在构建简单界面的时候才显得快速、便捷。</p>
+
+<p>而且 Anko 支持的控件有限，加载自定义的控件还得添加额外的代码，在更复杂的应用中应该不太会广泛的使用。</p>
+
+<h2 id="参考">参考</h2>
+
+<p>1、<a href="https://github.com/Kotlin/anko/wiki/Anko-Layouts">https://github.com/Kotlin/anko/wiki/Anko-Layouts</a></p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/opencv/setup_opencv_environment/" data-toggle="tooltip" data-placement="top" title="Python、C&#43;&#43;、Android OpenCV 开发环境的配置">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/android/kotlin-functional-programming-whth-anko/" data-toggle="tooltip" data-placement="top" title="Kotlin 函数式编程与 Anko 构建布局实现原理分析">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

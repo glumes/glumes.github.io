@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>FFmpeg 3.0 版本视频解码浅析 MPEG-&gt;PCM （下）</title>
+  <meta property="og:title" content="FFmpeg 3.0 版本视频解码浅析 MPEG-&gt;PCM （下）" />
+  <meta name="twitter:title" content="FFmpeg 3.0 版本视频解码浅析 MPEG-&gt;PCM （下）" />
+  <meta name="description" content="有了上一篇文章基础，这里就只关注 FFmpeg 如何解析的具体实践了。
+
+在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。
+
+在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。
+
+">
+  <meta property="og:description" content="有了上一篇文章基础，这里就只关注 FFmpeg 如何解析的具体实践了。
+
+在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。
+
+在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。
+
+">
+  <meta name="twitter:description" content="有了上一篇文章基础，这里就只关注 FFmpeg 如何解析的具体实践了。
+
+在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。
+
+在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm-2/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm-2/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Code" href="/tags">Code</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>FFmpeg 3.0 版本视频解码浅析 MPEG-&gt;PCM （下）</h1>
+                
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 2 min (974 mots)
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>有了上一篇文章基础，这里就只关注 FFmpeg 如何解析的具体实践了。</p>
+
+<p>在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。</p>
+
+<p>在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。</p>
+
+<p></p>
+
+<p>如果觉得麻烦，也可以直接从网上找一个工程使用现成的东西，也可以参考的我的学习项目：<a href="https://github.com/glumes/FFMPEGLearn">https://github.com/glumes/FFMPEGLearn</a></p>
+
+<h2 id="ffmpeg-3-0-与-2-0-的不同之处">FFmpeg 3.0 与 2.0 的不同之处</h2>
+
+<p>如果是刚开始学习，完全可以参照雷神的博客来写例子，而且还能运行成功。不过，既然 FFmpeg 都出了 3.0 版本了，还是要跟进学习一下。</p>
+
+<p>FFmpeg 2.0 解码流程大致如下：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/ffmpeg.png" alt="ffmpeg" /></p>
+
+<p>而 FFmpeg 3.0 就开始有点变化了。</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/ffmpeg3.0-outline.png" alt="ffmpeg-outline" /></p>
+
+<p>可以看到，在具体解析操作时发生了变化，不再是之前的<code>avcodec_decode_video2</code>函数，而是拆分成了两个函数，<code>avcodec_send_packet</code>和<code>avcodec_receive_frame</code>。</p>
+
+<p><code>avcodec_send_packet</code>负责发送编码压缩后的数据，也就是 Packet 数据，而<code>avcodec_receive_frame</code>负责接收解码后的原始数据，也就是 Frame 数据，这么一来一回的配合，每次从文件中读取一部分内容，直到将整个文件解码完成。</p>
+
+<h2 id="解码流程代码">解码流程代码</h2>
+
+<p>FFmpge 的解码流程大都是相同的，只是在细节地方会有差异，主体流程还是没变，看了好多解码的代码，大多也是这样的，只是在解码成具体的某些格式时，对原始数据 Frame 的操作会有不同。</p>
+
+<pre><code>// 声明一堆待会要用到的变量
+    AVCodecContext *avCodecContext = nullptr;
+    AVCodec *avCodec = nullptr;
+    AVCodecParserContext *parserContext = nullptr;
+    AVPacket *packet;
+    AVFrame *frame;
+
+    // 为上面声明的变量在赋值，并且检查赋值是否成功
+	avcodec_register_all()
+	// 为解码器赋值，并制定解码器类型
+	avCodec = avcodec_find_decoder(AV_CODEC_ID_HEVC);
+	// 为 AVCodecParserContext 和 AVCodecContext 赋值
+	parserContext = av_parser_init(avCodec-&gt;id);
+	avCodecContext = avcodec_alloc_context3(avCodec);
+	// 打开解码器
+	avcodec_open2(avCodecContext, avCodec, nullptr);
+	// 为 Packet 和 Frame 赋值
+    frame = av_frame_alloc();
+    packet = av_packet_alloc();
+
+    while // 开始一点点的解码文件内容，直到文件末尾
+    	// 解码从 while 中一次读取到的内容
+    	av_parser_parse2
+    	// 发送读取到的 packet
+    	avcodec_send_packet
+    	// 接收解析完的 frame
+    	avcodec_receive_frame
+		// 对原生数据进行相关操作，解码成不同数据格式，操作不同。
+		// todo
+	
+	//最后，释放上面声明的变量
+	av_frame_free
+	av_packet_free
+	avcodec_free_context
+	av_parser_close
+
+</code></pre>
+
+<h2 id="mpeg-pcm-的解码">MPEG-&gt;PCM 的解码</h2>
+
+<p>在了解视频文件的相关基础以及 FFmpeg 解码的大致流程后，就可以开始进行 MPEG-&gt;PCM的解码工作了。</p>
+
+<p>不过，在这里还是少了两个重要的概念：</p>
+
+<p>1、FFmpeg 各种类以及变量的含义。
+2、各种音视频文件的格式协议。</p>
+
+<p>前半部分还好，对着雷神的博客一点点的看，还是能看懂的。至于各种音视频文件的协议，那就要靠慢慢积累了。</p>
+
+<p>这里就不贴上全部的代码了，可以参考如下两个地方：
+1. <a href="http://ffmpeg.org/doxygen/trunk/decode_video_8c-example.html">http://ffmpeg.org/doxygen/trunk/decode_video_8c-example.html</a>
+2. <a href="https://github.com/glumes/FFMPEGLearn/blob/master/FFmpegLib/src/main/cpp/ffmpeg_examples/decode_video.cpp">https://github.com/glumes/FFMPEGLearn/blob/master/FFmpegLib/src/main/cpp/ffmpeg_examples/decode_video.cpp</a></p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li><a href="http://www.jianshu.com/p/7e96223ff329">http://www.jianshu.com/p/7e96223ff329</a></li>
+<li><a href="http://blog.csdn.net/leixiaohua1020/article/details/42181271">http://blog.csdn.net/leixiaohua1020/article/details/42181271</a></li>
+</ol>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm-1/" data-toggle="tooltip" data-placement="top" title="FFmpeg 3.0 版本视频解码浅析 MPEG-&gt;PCM （上）">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/python/python-docopt/" data-toggle="tooltip" data-placement="top" title="Python 命令行参数解析工具 docopt">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

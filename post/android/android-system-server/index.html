@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android 系统服务启动 SystemServer</title>
+  <meta property="og:title" content="Android 系统服务启动 SystemServer" />
+  <meta name="twitter:title" content="Android 系统服务启动 SystemServer" />
+  <meta name="description" content="在之前 Android 系统服务管理 ServiceManager 中学习了各种系统服务 Service 都是通过 ServiceManager 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 ContextImpl 类、SystemServiceRegistry 类、ServiceManager 类、ServiceManagerNative 类等等。
+
+那么问题就来了，ServiceManager 所管理的那些 Service 的 Binder 对象引用又是何时注册添加的呢？
+
+事实上这些服务 Service 是 SystemServer 进程中启动的。
+
+">
+  <meta property="og:description" content="在之前 Android 系统服务管理 ServiceManager 中学习了各种系统服务 Service 都是通过 ServiceManager 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 ContextImpl 类、SystemServiceRegistry 类、ServiceManager 类、ServiceManagerNative 类等等。
+
+那么问题就来了，ServiceManager 所管理的那些 Service 的 Binder 对象引用又是何时注册添加的呢？
+
+事实上这些服务 Service 是 SystemServer 进程中启动的。
+
+">
+  <meta name="twitter:description" content="在之前 Android 系统服务管理 ServiceManager 中学习了各种系统服务 Service 都是通过 ServiceManager 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 ContextImpl 类、SystemServiceRegistry 类、ServiceManager 类、ServiceManagerNative …">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/post/android/android-system-server/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/post/android/android-system-server/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Code" href="/tags">Code</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Android 系统服务启动 SystemServer</h1>
+                
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 4 min (1742 mots)
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>在之前 <a href="http://www.glumes.com/android-servicemanager/">Android 系统服务管理 ServiceManager</a> 中学习了各种系统服务 Service 都是通过 <code>ServiceManager</code> 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 <code>ContextImpl</code> 类、<code>SystemServiceRegistry</code> 类、<code>ServiceManager</code> 类、<code>ServiceManagerNative</code> 类等等。</p>
+
+<p>那么问题就来了，ServiceManager 所管理的那些 Service 的 Binder 对象引用又是何时注册添加的呢？</p>
+
+<p>事实上这些服务 Service 是 SystemServer 进程中启动的。</p>
+
+<p></p>
+
+<h2 id="systemserver-系统服务">SystemServer 系统服务</h2>
+
+<p>SystemServer 是由 Zygote 孵化的第一个进程，它和系统服务有着重要关系，通过 ps 命令，可知其进程名为 <code>system_server</code> 。Zygote 的进程名称为<code>app_process</code>。</p>
+
+<p>Android 系统中几乎所有的核心服务都在这个进程中，如 ActivityManagerService，PowerManagerService 和 WindowManagerService 等。</p>
+
+<p>Zygote 为启动 SystemService 提供了专门的函数 <code>forkSystemServer</code>，而不是标准的<code>forkAndSpecialize</code>函数。</p>
+
+<p>而 SystemServer 的执行主要在其 main 方法中，Android 6.0 的源码中不再是以前 Android 4.x 的 init1，init2 方法了。</p>
+
+<pre><code> /**
+     * The main entry point from zygote.
+     */
+    public static void main(String[] args) {
+        new SystemServer().run();
+    }
+</code></pre>
+
+<p>继续跟进 run 方法查看：</p>
+
+<pre><code> private void run() {
+        try {
+           
+	        // 如果当前系统时间比 1970 年更早，就设置当前系统时间为 1970 年
+            if (System.currentTimeMillis() &lt; EARLIEST_SUPPORTED_TIME) {
+                Slog.w(TAG, &quot;System clock is before 1970; setting to 1970.&quot;);
+                SystemClock.setCurrentTimeMillis(EARLIEST_SUPPORTED_TIME);
+            }
+
+        
+            // Here we go!
+            Slog.i(TAG, &quot;Entered the Android system server!&quot;);
+            EventLog.writeEvent(EventLogTags.BOOT_PROGRESS_SYSTEM_RUN, SystemClock.uptimeMillis());
+
+            // Ensure binder calls into the system always run at foreground priority.
+            // 确保当前系统进程的 binder 调用，总是运行在前台优先级
+            BinderInternal.disableBackgroundScheduling(true);
+
+            // Prepare the main looper thread (this thread).
+            android.os.Process.setThreadPriority(
+                android.os.Process.THREAD_PRIORITY_FOREGROUND);
+            android.os.Process.setCanSelfBackground(false);
+            
+            Looper.prepareMainLooper();
+
+            // Initialize native services.加载本地服务
+            System.loadLibrary(&quot;android_servers&quot;);
+
+            // Check whether we failed to shut down last time we tried.
+            // This call may not return.
+            performPendingShutdown();
+
+            // Initialize the system context.初始化系统上下文
+            createSystemContext();
+
+            // Create the system service manager.创建系统服务管理
+            mSystemServiceManager = new SystemServiceManager(mSystemContext);
+            // 将 mSystemServiceManager 添加到本地服务 LocalServices 的成员 sLocalServiceObjects
+            LocalServices.addService(SystemServiceManager.class, mSystemServiceManager);
+        } finally {
+            Trace.traceEnd(Trace.TRACE_TAG_SYSTEM_SERVER);
+        }
+
+        // Start services.
+        try {
+            Trace.traceBegin(Trace.TRACE_TAG_SYSTEM_SERVER, &quot;StartServices&quot;);
+            // 启动服务代码
+            startBootstrapServices();
+            startCoreServices();
+            startOtherServices();
+        } catch (Throwable ex) {
+            Slog.e(&quot;System&quot;, &quot;******************************************&quot;);
+            Slog.e(&quot;System&quot;, &quot;************ Failure starting system services&quot;, ex);
+            throw ex;
+        } finally {
+            Trace.traceEnd(Trace.TRACE_TAG_SYSTEM_SERVER);
+        }
+
+        // Loop forever.
+        Looper.loop();
+        throw new RuntimeException(&quot;Main thread loop unexpectedly exited&quot;);
+    }
+</code></pre>
+
+<p>在 main 方法中删除了一些与虚拟机有关的代码，只关心系统服务的启动就好。</p>
+
+<p>在启动系统服务之前还初始化了系统环境上下文 <code>createSystemContext()</code>，执行了此方法之后<code>mSystemContext</code>变量才不会为 null ，关于如何初始化系统环境的上下文 Context ，必须得在写一篇博客单独学习了。</p>
+
+<p>初始化 mSystemContext 之后，就是启动服务了：</p>
+
+<ul>
+<li>startBootstrapServices();    // 启动引导服务</li>
+<li>startCoreServices();    // 启动核心服务</li>
+<li>startOtherServices();    // 启动其他服务</li>
+</ul>
+
+<h2 id="systemserver-进程启动系统服务方式">SystemServer 进程启动系统服务方式</h2>
+
+<p>SystemServer 进程启动系统服务有两种方式，分别是 SystemServiceManager 的<code>startService</code> 方式和 ServiceManager 的 <code>addService</code> 方式。</p>
+
+<pre><code>       ServiceManager.addService(&quot;scheduling_policy&quot;, new SchedulingPolicyService());
+       Trace.traceEnd(Trace.TRACE_TAG_SYSTEM_SERVER);
+       mSystemServiceManager.startService(TelecomLoaderService.class);
+</code></pre>
+
+<h3 id="startservice-方式">startService 方式</h3>
+
+<p>通过 SystemServiceManager 的<code>startService(Class&lt;T&gt; serviceClass)</code>用于启动继承于<code>SystemService</code>抽象类的服务。</p>
+
+<p>主要功能如下：</p>
+
+<ul>
+<li>通过反射创建对应的 SystemService ，并调用其 <code>onStart</code> 方法。</li>
+<li>同时将创建是 SystemService 添加到 SystemServiceManager 的 <code>mService</code> 集合变量中。</li>
+</ul>
+
+<h3 id="addservice-方式">addService 方式</h3>
+
+<p>通过 ServiceManager 的<code>addService(String name, IBinder service)</code>用于初始化继承于 IBinder 的服务。</p>
+
+<p>主要功能如下：</p>
+
+<ul>
+<li>将对应服务的 Binder 对象添加到 SystemManager 中去。</li>
+</ul>
+
+<p>之前有学习到 ServiceManager 是系统服务的管家，通过它来获得其他服务。然而，在启动系统服务时，有些服务竟然没有 addService 注册到 ServiceManager 中去。</p>
+
+<p>事实上，有些服务即使在启动时没有注册进去，在启动之后也会注册到 ServiceManager 中去。</p>
+
+<p>通过查看 <code>SystemService</code>这个抽象类的源码可知，有如下方法：</p>
+
+<pre><code> /**
+     * Publish the service so it is accessible to other services and apps.
+     */
+    protected final void publishBinderService(String name, IBinder service) {
+        publishBinderService(name, service, false);
+    }
+
+    /**
+     * Publish the service so it is accessible to other services and apps.
+     */
+    protected final void publishBinderService(String name, IBinder service,
+            boolean allowIsolated) {
+        ServiceManager.addService(name, service, allowIsolated);
+    }
+
+</code></pre>
+
+<p>而 ServiceManager 的对应方法为，最后一个变量设置 true 的话，则表示允许隔离的沙盒进程访问该服务。</p>
+
+<pre><code>/**
+     * Place a new @a service called @a name into the service
+     * manager.
+     * 
+     * @param name the name of the new service
+     * @param service the service object
+     * @param allowIsolated set to true to allow isolated sandboxed processes
+     * to access this service
+     */
+    public static void addService(String name, IBinder service, boolean allowIsolated) {
+        try {
+            getIServiceManager().addService(name, service, allowIsolated);
+        } catch (RemoteException e) {
+            Log.e(TAG, &quot;error in addService&quot;, e);
+        }
+    }
+</code></pre>
+
+<h2 id="servicemanager-启动时机">ServiceManager 启动时机</h2>
+
+<p>SystemServer 是一个进程，由 Zygote 孵化的第一个进程，而 ServiceManager 也是一个进程，并且 SystemService 启动系统服务时，可以向 ServiceManager 中注册服务，那么可想而知，ServiceManager 是比 SystemService 先启动的。</p>
+
+<p>ServiceManager 是由 <code>init.rc</code> 进程启动的。</p>
+
+<p>在<code>init.rc</code>中有如下代码启动 ServiceManager 。</p>
+
+<pre><code>service servicemanager /system/bin/servicemanager
+    class core
+    user system
+    group system
+    critical
+    onrestart restart healthd
+    onrestart restart zygote
+    onrestart restart media
+    onrestart restart surfaceflinger
+    onrestart restart drm
+</code></pre>
+
+<p>由于我编的 Android 源码里面竟然死活没找到上面的代码，附上源码链接地址为：
+<a href="https://android.googlesource.com/platform/system/core/+/android-6.0.0_r1/rootdir/init.rc">https://android.googlesource.com/platform/system/core/+/android-6.0.0_r1/rootdir/init.rc</a></p>
+
+<p>就这样，虽然跳过了很多细节的部分，但还是大概的明白了 Android 系统服务管理（ServiceManager）和启动（SystemServer）的流程。</p>
+
+<p>其他的细节部分，每个部分都可在再继续深入学习了。</p>
+
+<p>最后还是附图一张：
+<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-android-SystemServer-function.png" alt="android-SystemServer-function" /></p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li>《Android内核剖析》</li>
+<li>《深入理解Android》</li>
+<li><a href="http://blog.csdn.net/nightduke1/article/details/44201317">http://blog.csdn.net/nightduke1/article/details/44201317</a></li>
+<li><a href="http://ticktick.blog.51cto.com/823160/1659473">http://ticktick.blog.51cto.com/823160/1659473</a></li>
+<li><a href="http://gityuan.com/2016/02/20/android-system-server-2/">http://gityuan.com/2016/02/20/android-system-server-2/</a></li>
+</ol>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/android/android-service-manager/" data-toggle="tooltip" data-placement="top" title="Android 系统服务管理 ServiceManager">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/android/android-window-and-view/" data-toggle="tooltip" data-placement="top" title="Android Activity 创建 Window 及添加 View 流程分析">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

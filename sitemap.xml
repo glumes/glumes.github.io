@@ -3,32 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://glumes.github.io/post/docker-summary/</loc>
+    <loc>https://glumes.github.io/post/docker/docker-summary/</loc>
     <lastmod>2017-12-22T16:24:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/opengl-tutorial-draw-basic-shape/</loc>
+    <loc>https://glumes.github.io/post/opengl/opengl-tutorial-draw-basic-shape/</loc>
     <lastmod>2017-12-22T16:21:16+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/opengl-tutorial-draw-point/</loc>
+    <loc>https://glumes.github.io/post/opengl/opengl-tutorial-draw-point/</loc>
     <lastmod>2017-12-22T16:19:28+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/python-functional-programming/</loc>
+    <loc>https://glumes.github.io/post/python/python-functional-programming/</loc>
     <lastmod>2017-12-22T16:10:57+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/python-docopt/</loc>
+    <loc>https://glumes.github.io/post/python/python-docopt/</loc>
     <lastmod>2017-12-22T16:08:45+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/ffmpeg-convert-mpeg-to-pcm-2/</loc>
+    <loc>https://glumes.github.io/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm-2/</loc>
     <lastmod>2017-12-22T16:05:30+08:00</lastmod>
   </url>
   
@@ -38,112 +38,112 @@
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/rxjava-wrapper-dialog/</loc>
+    <loc>https://glumes.github.io/post/android/rxjava-wrapper-dialog/</loc>
     <lastmod>2017-12-22T16:00:05+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-layout-inflater/</loc>
+    <loc>https://glumes.github.io/post/android/android-layout-inflater/</loc>
     <lastmod>2017-12-22T15:55:08+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-change-skin-by-plugin/</loc>
+    <loc>https://glumes.github.io/post/android/android-change-skin-by-plugin/</loc>
     <lastmod>2017-12-22T15:51:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-start-service/</loc>
+    <loc>https://glumes.github.io/post/android/android-start-service/</loc>
     <lastmod>2017-12-22T15:40:19+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-statemachine/</loc>
+    <loc>https://glumes.github.io/post/android/android-statemachine/</loc>
     <lastmod>2017-12-22T15:37:04+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-lrucache/</loc>
+    <loc>https://glumes.github.io/post/android/android-lrucache/</loc>
     <lastmod>2017-12-22T15:35:23+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-window-and-view/</loc>
+    <loc>https://glumes.github.io/post/android/android-window-and-view/</loc>
     <lastmod>2017-12-22T15:33:22+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-system-server/</loc>
+    <loc>https://glumes.github.io/post/android/android-system-server/</loc>
     <lastmod>2017-12-22T15:30:26+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-service-manager/</loc>
+    <loc>https://glumes.github.io/post/android/android-service-manager/</loc>
     <lastmod>2017-12-22T15:27:11+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-material-design-summary-2/</loc>
+    <loc>https://glumes.github.io/post/android/android-material-design-summary-2/</loc>
     <lastmod>2017-12-22T15:22:15+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-material-design-summary-1/</loc>
+    <loc>https://glumes.github.io/post/android/android-material-design-summary-1/</loc>
     <lastmod>2017-12-22T15:19:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-binder-summary/</loc>
+    <loc>https://glumes.github.io/post/android/android-binder-summary/</loc>
     <lastmod>2017-12-22T10:50:43+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/dagger2-in-android/</loc>
+    <loc>https://glumes.github.io/post/android/android-dagger-use/</loc>
     <lastmod>2017-12-22T10:47:52+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-start-activity-from-launcher-4/</loc>
+    <loc>https://glumes.github.io/post/android/android-start-activity-from-launcher-4/</loc>
     <lastmod>2017-12-22T10:40:49+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-start-activity-from-launcher-3/</loc>
+    <loc>https://glumes.github.io/post/android/android-start-activity-from-launcher-3/</loc>
     <lastmod>2017-12-22T10:40:45+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-start-activity-from-launcher-2/</loc>
+    <loc>https://glumes.github.io/post/android/android-start-activity-from-launcher-2/</loc>
     <lastmod>2017-12-22T10:40:42+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-start-activity-from-launcher-1/</loc>
+    <loc>https://glumes.github.io/post/android/android-start-activity-from-launcher-1/</loc>
     <lastmod>2017-12-22T10:40:38+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/rxjava-wrapper-callback/</loc>
+    <loc>https://glumes.github.io/post/android/rxjava-wrapper-callback/</loc>
     <lastmod>2017-12-22T10:38:34+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/android-hal-summary/</loc>
+    <loc>https://glumes.github.io/post/android/android-hal-summary/</loc>
     <lastmod>2017-12-22T10:31:13+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/kotlin-functional-programming-whth-anko/</loc>
+    <loc>https://glumes.github.io/post/android/kotlin-functional-programming-whth-anko/</loc>
     <lastmod>2017-12-22T10:26:57+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/kotlin-with-anko/</loc>
+    <loc>https://glumes.github.io/post/android/kotlin-with-anko/</loc>
     <lastmod>2017-12-22T10:21:26+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/post/setup_opencv_environment/</loc>
+    <loc>https://glumes.github.io/post/opencv/setup_opencv_environment/</loc>
     <lastmod>2017-12-22T09:53:04+08:00</lastmod>
   </url>
   

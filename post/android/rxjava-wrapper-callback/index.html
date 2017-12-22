@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>用 RxJava 封装回调方法 CallBack</title>
+  <meta property="og:title" content="用 RxJava 封装回调方法 CallBack" />
+  <meta name="twitter:title" content="用 RxJava 封装回调方法 CallBack" />
+  <meta name="description" content="在知乎上看到这样一个问题：RxJava正确的封装callback的方式应该是怎么样的？。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。
+
+">
+  <meta property="og:description" content="在知乎上看到这样一个问题：RxJava正确的封装callback的方式应该是怎么样的？。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。
+
+">
+  <meta name="twitter:description" content="在知乎上看到这样一个问题：RxJava正确的封装callback的方式应该是怎么样的？。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/post/android/rxjava-wrapper-callback/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/post/android/rxjava-wrapper-callback/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Code" href="/tags">Code</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>用 RxJava 封装回调方法 CallBack</h1>
+                
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 4 min (1606 mots)
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>在知乎上看到这样一个问题：<a href="https://www.zhihu.com/question/39492234">RxJava正确的封装callback的方式应该是怎么样的？</a>。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。</p>
+
+<p></p>
+
+<p>最近在处理蓝牙操作时，也想着如何把 RxJava 优势用到蓝牙开发中来。</p>
+
+<p>使用 RxJava 能够简化我们的编程，有效的避免回调地狱 (<code>Callback Hell</code>) 的情况。将回调操作交给观察者 Observer 的 onNext 中去处理，同时还有着丰富的操作符进行各项处理。</p>
+
+<p>但是有些现成的操作已经处理好回调方法了，例如蓝牙扫描，只要在 onLeScan 方法中处理返回的蓝牙设备即可，其他方法也大致如此，发出请求，在回调中处理请求。</p>
+
+<pre><code>mBluetoothAdapter.startLeScan(new BluetoothAdapter.LeScanCallback() {
+            @Override
+            public void onLeScan(BluetoothDevice bluetoothDevice, int i, byte[] bytes) {
+                // 回调方法，处理扫描到的蓝牙设备
+            }
+        });
+</code></pre>
+
+<p>而现在，要做的就是用 RxJava 对蓝牙扫描过程进行封装，返回 RxJava 中的被观察者 Observable ，然后在再对这个 Observable 使用各种操作符，线程调度，最后执行订阅 subscribe 方法。</p>
+
+<h2 id="rxjava-创建-observable-过程">RxJava 创建 Observable 过程</h2>
+
+<p>创建一个 Observable 的方法大致是这样的：</p>
+
+<pre><code>		Observable.create(new Observable.OnSubscribe&lt;String&gt;() {
+            @Override
+            public void call(Subscriber&lt;? super String&gt; subscriber) {
+                // 在回调方法中，对发射的数据处理 onNext、onComplete、 onError 
+                // 实则是调用 subscriber 的方法进行处理
+            }
+        }).subscribe(new Observer());
+</code></pre>
+
+<p>使用 create 方法将会创建一个 Observable 对象并返回。而 create 方法的参数 OnSubscribe 就是一个回调方法，在执行订阅 subscribe 方法时会回调里面的 call 方法。</p>
+
+<p>而 call 方法里的参数 subscriber 就是我们在 subscribe 方法中传入的观察者 Observer 。RxJava 内部会对传入的 Observer 进行处理，包装成 ObserverSubscriber 对象，继承自 Subscriber ，所以最终都是调用的 Subscriber 类型的方法。</p>
+
+<p>所以假若对回调方法进包装，那么在 call 方法中就应该对回调数据进行处理了。</p>
+
+<p>同时，subscribe 方法最后返回的对象是 Subscription 类型的。我们可以用  Subscription 类型的对象的 unsubscribe 方法来取消订阅。参照 RxJava 源码发现，Subscriber 类型实现了 Subscription 接口，并且最后返回的也是 call 方法中的参数 subscriber 。</p>
+
+<pre><code>        try {
+            // allow the hook to intercept and/or decorate
+            // 回调 call 方法
+            RxJavaHooks.onObservableStart(observable, observable.onSubscribe).call(subscriber);
+            // 返回 Subscription 
+            return RxJavaHooks.onObservableReturn(subscriber);
+        } catch (Throwable e) { // 省略
+        }
+</code></pre>
+
+<p>对于使用 from 方法创建的 Observable ，最后的调用过程也是一致的，RxJava 内部将传入的参数封装成了 OnSubscribeFromIterable 对象，其他的大同小异了。</p>
+
+<h2 id="rxjava-封装蓝牙扫描过程">RxJava 封装蓝牙扫描过程</h2>
+
+<p>对蓝牙扫描的包装：</p>
+
+<p>有了上面的思路，就可以简单的实现包装了，使用 create 方法返回了一个 <code>Observable&lt;BluetoothDevice&gt;</code>对象，然后在对其订阅。</p>
+
+<pre><code>Subscription subscription = Observable.create(new Observable.OnSubscribe&lt;BluetoothDevice&gt;() {
+            @Override
+            public void call(final Subscriber&lt;? super BluetoothDevice&gt; subscriber) {
+                BluetoothAdapter.LeScanCallback leScanCallback =  new BluetoothAdapter.LeScanCallback() {
+                    @Override
+                    public void onLeScan(BluetoothDevice bluetoothDevice, int i, byte[] bytes) {
+                        //
+                        subscriber.onNext(bluetoothDevice);
+                    }
+                } ;
+                mBluetoothAdapter.startLeScan(leScanCallback) ;
+            }
+        }).subscribe(new Observer()) ;
+</code></pre>
+
+<p>简单地说，已经实现了对 BluetoothDevice 对象的封装，可依旧存在问题，我们可以使用 Subscription 来取消订阅，不接收发送数据，但却没有停止蓝牙设备的扫描，因此下一步就是在取消订阅同时终止扫描。</p>
+
+<pre><code>    Subscription subscription = Observable.create(new Observable.OnSubscribe&lt;BluetoothDevice&gt;() {
+            @Override
+            public void call(final Subscriber&lt;? super BluetoothDevice&gt; subscriber) {
+                final BluetoothAdapter.LeScanCallback leScanCallback =  new BluetoothAdapter.LeScanCallback() {
+                    @Override
+                    public void onLeScan(BluetoothDevice bluetoothDevice, int i, byte[] bytes) {
+                        // 判断是否还在订阅，避免发送不必要的数据
+                        if (!subscriber.isUnsubscribed()){
+                            subscriber.onNext(bluetoothDevice);
+                        }
+                    }
+                } ;
+                mBluetoothAdapter.startLeScan(leScanCallback) ;
+                // 使用 Subscriptions 的 create 方法创建一个只有取消订阅时才调用的方法
+                subscriber.add(Subscriptions.create(new Action0() {
+                    @Override
+                    public void call() {
+                        mBluetoothAdapter.stopLeScan(leScanCallback);
+                    }
+                }));
+            }
+        }).subscribe();
+</code></pre>
+
+<p>Subscriber 类有个方法是 addSubscription ，使用 Subscriptions 类的 create 方法就可以创建一个在取消订阅时才执行的方法。</p>
+
+<p>Subscriptions 类的命名方式有点类似于 Java 的 Collections 命名，工具类后缀加个 s 的方式。</p>
+
+<p>这样就实现了在取消订阅的同时也停止蓝牙扫描过程。</p>
+
+<h2 id="rxjava-自带处理方式">RxJava 自带处理方式</h2>
+
+<p>最后，RxJava 在后续的版本中还提供了其他的方法来针对上述问题，不需要再通过 Subscriber 添加一个 Subscription 来解决了。</p>
+
+<pre><code>Observable.fromEmitter(new Action1&lt;Emitter&lt;BluetoothDevice&gt;&gt;() {
+            @Override
+            public void call(final Emitter&lt;BluetoothDevice&gt; bluetoothDeviceEmitter) {
+            final BluetoothAdapter.LeScanCallback scanCallback = new BluetoothAdapter.LeScanCallback() {
+                    @Override
+                    public void onLeScan(BluetoothDevice bluetoothDevice, int i, byte[] bytes) {
+                        bluetoothDeviceEmitter.onNext(bluetoothDevice);
+                    }
+                };
+                // 开始扫描
+                mBluetoothAdapter.startLeScan(scanCallback) ;
+                // 当 unsubscribe 时执行该方法
+                bluetoothDeviceEmitter.setCancellation(new Cancellable() {
+                    @Override
+                    public void cancel() throws Exception {
+                        mBluetoothAdapter.stopLeScan(scanCallback);
+                    }
+                });
+            }
+        }, Emitter.BackpressureMode.BUFFER); // RxJava 解决背压问题的方式
+</code></pre>
+
+<p>通过 Observable 的 fromEmitter 方法来创建 Observable ，同时通过 Emitter 的 setCancellation 方法设置取消订阅时的动作。</p>
+
+<p>同时，还可以通过 Emitter 的不同的 <code>BackpressureMode</code> 来处理背压问题，也就是当生产者的生产速度比消费者的消费速度快的情况，Emmiter 提供了如下方法：</p>
+
+<ul>
+<li>BUFFER               缓存</li>
+<li>LATEST                使用最新的</li>
+<li>DROP                   直接丢弃</li>
+<li>ERROR/NONE      抛出异常 MissingBackpressureException</li>
+</ul>
+
+<p>如此一来就可以使用 RxJava 对蓝牙扫描过程进行封装了。</p>
+
+<p>用 RxJava 封装其他回调方法也大致如此了，把原本的回调方法处理用 onNext 来处理，异常用 onError 处理，需要取消回调的就在取消订阅时处理。</p>
+
+<h2 id="参考">参考</h2>
+
+<p>1、<a href="http://ryanharter.com/blog/2015/07/07/wrapping-existing-libraries-with-rxjava/">http://ryanharter.com/blog/2015/07/07/wrapping-existing-libraries-with-rxjava/</a>
+2、<a href="http://blog.chengyunfeng.com/?p=1019">http://blog.chengyunfeng.com/?p=1019</a></p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/android/android-hal-summary/" data-toggle="tooltip" data-placement="top" title="Android 硬件抽象层调用流程小结">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/android/android-start-activity-from-launcher-1/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（一）">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

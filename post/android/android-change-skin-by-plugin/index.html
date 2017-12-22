@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android 插件换肤原理及源码分析</title>
+  <meta property="og:title" content="Android 插件换肤原理及源码分析" />
+  <meta name="twitter:title" content="Android 插件换肤原理及源码分析" />
+  <meta name="description" content="在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。
+
+">
+  <meta property="og:description" content="在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。
+
+">
+  <meta name="twitter:description" content="在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/post/android/android-change-skin-by-plugin/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/post/android/android-change-skin-by-plugin/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Code" href="/tags">Code</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Android 插件换肤原理及源码分析</h1>
+                
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 6 min (2766 mots)
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。</p>
+
+<p></p>
+
+<h2 id="插件换肤原理概述">插件换肤原理概述</h2>
+
+<p>基于 插件进行应用换肤 的技术大致可以分为两个方面：</p>
+
+<ul>
+<li>如何加载插件包中各式各样的资源，如 drawable、color 等。</li>
+<li>如何定位到需要换肤的控件，并优雅地更改样式，如 无须重启换肤 等。</li>
+</ul>
+
+<p>针对第一个问题，相关的研究已经比较多了，通过研究 <code>Resource</code>类 的源码，在其构造函数中有个<code>AssetManager</code>类参数，而最终获取资源都是通过<code>AssetManager</code>来获取的。</p>
+
+<p>于是，通过构造<code>AssetManager</code>并生成插件的<code>Resource</code>类，就可以加载插件包中的资源。</p>
+
+<p>针对第二个问题，首先是定位需要换肤的控件，大多数是通过在控件的 XML 布局中添加 <strong><em>标识</em></strong>，标识那些需要换肤的控件及需要改变的属性。然后再通过控件的<code>set</code>方法改变属性即可。</p>
+
+<p>在改变控件的属性时，若每次都通过遍历页面所有 View 来换肤则性能开销太大，通过 <code>LayoutInflater.Factory</code> 接口在加载布局文件时便先处理所有 View 的属性，只保存那些需要换肤的控件，则会优化性能。</p>
+
+<p>当然还是有其他问题待解决的，例如：<code>Resource</code>类加载的资源 ID 冲突， 插件<code>Resource</code>不同安卓版本的兼容性，使用<code>LayoutInflater.Factory</code>是一种侵入式编程，会干涉系统构造 View 的过程，如何无侵入的换肤，动态加载的控件如何进行换肤 等等问题&hellip;&hellip;</p>
+
+<p>看到很多换肤的框架都参考了该工程，也来分析一下其原理。</p>
+
+<p>再了解插件换肤的大致原理后，再去分析换肤框架的源码就变得简单多了，无非就是要解决上述的问题，下面就对 Android-Skin-Loader 源码进行分析。</p>
+
+<h2 id="动态加载插件资源">动态加载插件资源</h2>
+
+<p>在 <code>SkinManager</code>的<code>load</code>方法中，加载了插件包，并且得到了插件的资源<code>Resource</code>。</p>
+
+<pre><code>						PackageManager mPm = context.getPackageManager();
+						PackageInfo mInfo = mPm.getPackageArchiveInfo(skinPkgPath, PackageManager.GET_ACTIVITIES);
+						// 得到插件包名，根据包名和资源 ID 得到资源
+						skinPackageName = mInfo.packageName;
+
+						// 通过反射构造 AssetManager 类
+						AssetManager assetManager = AssetManager.class.newInstance();
+						Method addAssetPath = assetManager.getClass().getMethod(&quot;addAssetPath&quot;, String.class);
+						// 反射调用 addAssetPath 方法
+						addAssetPath.invoke(assetManager, skinPkgPath);
+						// 得到皮肤插件的 Resource
+						Resources superRes = context.getResources();
+						Resources skinResource = new Resources(assetManager,superRes.getDisplayMetrics(),superRes.getConfiguration());
+						
+						// 保存皮肤包路径
+						SkinConfig.saveSkinPath(context, skinPkgPath);
+</code></pre>
+
+<p>有了插件资源<code>Resource</code>，就可以去得到想要的资源了。</p>
+
+<h2 id="换肤控件及属性的标识">换肤控件及属性的标识</h2>
+
+<p>Android-Skin-Loader 框架自定义了一个 <code>enable</code>的属性，用在 XML 文件中来标识哪些控件需要进行换肤。</p>
+
+<p>并且 Android-Skin-Loader 在需要继承的基类 <code>BaseActivity</code>、<code>BaseFragment</code>、<code>BaseFragmentActivity</code>中都设置了<code>LayoutInflater.Factory</code>，以便在布局加载之前进行预操作，也就是保存那些 需要换肤的控件 和识别 需要换肤的属性，这里 <em>换肤控件</em> 和 <em>换肤属性</em> 两个东西要区别开，它们所要进行的操作是不一样的，要先找到 *换肤控件*，然后再去找它的 <em>换肤属性</em> 。</p>
+
+<pre><code>@Override
+	public View onCreateView(String name, Context context, AttributeSet attrs) {
+		// 从 AttributeSet 中得到换肤属性，判断是否需要进行换肤
+		boolean isSkinEnable = attrs.getAttributeBooleanValue(SkinConfig.NAMESPACE, SkinConfig.ATTR_SKIN_ENABLE, false);
+        if (!isSkinEnable){
+        		return null; // 不需要换肤的，则返回 null，由系统构造
+        }
+		// 构造需要换肤的 View
+		View view = createView(context, name, attrs);
+		if (view == null){
+			return null;
+		}
+		// 解析需要换肤 View 的属性
+		parseSkinAttr(context, attrs, view);
+		return view;
+	}
+</code></pre>
+
+<p>以上代码就是我们所说的侵入式编程，干扰了系统构造 View 的过程，所做的工作就是找出需要换肤的 View 并交由下一步进行解析。</p>
+
+<pre><code>private void parseSkinAttr(Context context, AttributeSet attrs, View view) {
+		List&lt;SkinAttr&gt; viewAttrs = new ArrayList&lt;SkinAttr&gt;();
+		
+		for (int i = 0; i &lt; attrs.getAttributeCount(); i++){
+			String attrName = attrs.getAttributeName(i);
+			String attrValue = attrs.getAttributeValue(i);
+			
+			if(!AttrFactory.isSupportedAttr(attrName)){
+				continue; // AttrFactory 定义了哪些属性支持换肤，若该属性不支持换肤就跳过继续
+			}
+		    if(attrValue.startsWith(&quot;@&quot;)){ // 表明是引用类型，例如 @color/red
+					int id = Integer.parseInt(attrValue.substring(1));
+					String typeName = context.getResources().getResourceTypeName(id); // 类型名
+					String entryName = context.getResources().getResourceEntryName(id); // 入口名
+					SkinAttr mSkinAttr = AttrFactory.get(attrName, id, entryName, typeName);
+					if (mSkinAttr != null) {
+						viewAttrs.add(mSkinAttr);
+					}
+		    }
+		    }
+		if(!ListUtils.isEmpty(viewAttrs)){
+			SkinItem skinItem = new SkinItem();
+			skinItem.view = view;
+			skinItem.attrs = viewAttrs;
+			// 将需要 换肤的控件 和 换肤的属性 这两个东西进行保存
+			mSkinItems.add(skinItem);
+			if(SkinManager.getInstance().isExternalSkin()){
+				skinItem.apply(); // 如果是外部的皮肤，则要 apply 一下，防止换肤不及时
+			}
+		}
+	}
+</code></pre>
+
+<p>上述代码的作用就是从需要换肤的控件中，找到那些需要更改的属性，并将它保存在<code>mSkinItems</code>全局变量中。</p>
+
+<p>Android-Skin-Loader 框架中有一个抽象基类<code>SkinAttr</code>表示需要更改的属性，而具体需要更改的属性都是继承自<code>SkinAttr</code>，所以如果想要更改更多的属性，就必须自己添加对应的<code>SkinAttr</code>类了。</p>
+
+<p>解析完属性后，换肤控件及属性都被保存在了<code>mSkinItems</code>全局变量中，这样就完成了加载布局界面的预操作。</p>
+
+<p>显然，Android-Skin-Loader 框架对于解决找出待更改的属性这一问题，并不是那么的方便，并且干预了系统构造 View 的过程。</p>
+
+<p>下面研究 hongyang 大神的解决思路：<a href="https://github.com/hongyangAndroid/AndroidChangeSkin">AndroidChangeSkin</a> 代码。</p>
+
+<p>AndroidChangeSkin 框架并没有使用 <code>LayoutInflater.Factory</code>方案了，采用了一种无侵入的方案。</p>
+
+<p>对于标识需要换肤的控件这一问题，AndroidChangeSkin 并没有再添加自定义属性，而是使用 View 自带的 <code>tag</code>属性。并在在<code>tag</code>属性的字符串值中，传递了要换肤的标识、要换肤的属性、要换肤的属性名。通过解析这三者来完成标识的任务。这样就不必要对每个属性都进行操作了。</p>
+
+<pre><code>	//传入activity，找到content元素，递归遍历所有的子View，根据tag命名，记录需要换肤的View
+	public static List&lt;SkinView&gt; getSkinViews(Activity activity)
+    {
+        List&lt;SkinView&gt; skinViews = new ArrayList&lt;SkinView&gt;();
+        ViewGroup content = (ViewGroup) activity.findViewById(android.R.id.content);
+        addSkinViews(content, skinViews); // 找到需要换肤的 View 放到 skinViews 里面
+        return skinViews;
+    }
+    
+	 /**
+     * 得到换肤的 View ，如果 tag 为 null 或者 tag 不是字符串，则返回 null
+     * 解析需要换肤的 View ，得到所有需要更改的属性 SkinAttr
+     */
+    public static SkinView getSkinView(View view)
+    {
+        Object tag = view.getTag(R.id.skin_tag_id);
+        if (tag == null)
+        {
+            tag = view.getTag();
+        }
+        if (tag == null) return null;
+        if (!(tag instanceof String)) return null;
+        String tagStr = (String) tag;
+
+        List&lt;SkinAttr&gt; skinAttrs = parseTag(tagStr);
+        if (!skinAttrs.isEmpty())
+        {
+            changeViewTag(view);
+            return new SkinView(view, skinAttrs);
+        }
+        return null;
+    }
+</code></pre>
+
+<p>AndroidChangeSkin 完成查找*换肤控件*和*换肤属性*两大任务，之所以说是无侵入性，就是因为它是从 Activity 布局的顶层开始遍历的，是在布局文件加载完成之后。</p>
+
+<h2 id="换肤操作及响应回调">换肤操作及响应回调</h2>
+
+<p>完成了 View 的标识及查找任务之后，剩下就是最终的换肤操作了。</p>
+
+<p>要做到无须重启应用和 Activity 完成换肤，Android-Skin-Loader 和 AndroidChangeSkin 都是基于*观察者模式*来处理的，也就是通过回调方法。</p>
+
+<p>收到进行换肤的指令时，在页面中响应回调方法，通过皮肤插件的<code>Resource</code>加载对应的资源完成替换。</p>
+
+<p>在此之前，我们找到了需要换肤的 View 和需要更改的属性，那么最终的换肤操作也就是由这些 View 来设置它的新属性，插件资源的加载也就是发生在这里了。也只有在这个时候，才会去加载皮肤插件中的资源，而之前的第一步只是构造插件的<code>Resource</code>并没有加载资源。</p>
+
+<p>Android-Skin-Loader 是为每一个需要更改的属性定义了一个类，并在此类中去加载资源。</p>
+
+<pre><code>public class TextColorAttr extends SkinAttr {
+
+	@Override
+	public void apply(View view) {
+		if(view instanceof TextView){
+			TextView tv = (TextView)view;
+			if(RES_TYPE_NAME_COLOR.equals(attrValueTypeName)){
+		 tv.setTextColor(SkinManager.getInstance().convertToColorStateList(attrValueRefId));
+</code></pre>
+
+<p>而 androidChangeSkin 则没有编写那么多类，采用了枚举类型来更改属性，同样也是在属性中加载资源。</p>
+
+<pre><code>public enum SkinAttrType
+{
+    BACKGROUND(&quot;background&quot;){
+                @Override
+                public void apply(View view, String resName)
+                {
+                    Drawable drawable = getResourceManager().getDrawableByName(resName);
+                    if (drawable != null)
+                    {
+                        view.setBackgroundDrawable(drawable);
+                    } else{
+					try{
+	                     int color = getResourceManager().getColor(resName);
+	                     view.setBackgroundColor(color);
+					},
+</code></pre>
+
+<p>至于，基于观察者模式来响应换肤操作就比较简单了，看过代码很容易知道是怎么一个编程方式了。</p>
+
+<h2 id="动态添加-view-的换肤">动态添加 View 的换肤</h2>
+
+<p>以上只是分析了从布局文件中加载的换肤，对于运行时动态添加的 View 同样可以换肤，只不过不能再 XML 文件中添加属性了。</p>
+
+<p>毕竟即使是在运行时添加的 View 也是要先确定好需求，编写对应代码的。只不过少了标识该 View 是否需要换肤这一步，直接找到需要换肤的属性就好了，在收到换肤指令时，也是加载插件资源，直接更改属性即可。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>在总结了基于插件换肤的原理和相关代码之后，发现其实应用换肤也不是那么难嘛&hellip;.</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li><a href="http://blog.zhaiyifan.cn/2015/09/10/Android%E6%8D%A2%E8%82%A4%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">http://blog.zhaiyifan.cn/2015/09/10/Android%E6%8D%A2%E8%82%A4%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/</a></li>
+<li><a href="http://blog.csdn.net/zhi184816/article/details/53436761">http://blog.csdn.net/zhi184816/article/details/53436761</a></li>
+<li><a href="http://www.jianshu.com/p/af7c0585dd5b">http://www.jianshu.com/p/af7c0585dd5b</a></li>
+</ol>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/android/android-start-service/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Service 启动过程源码分析（一）">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/android/android-layout-inflater/" data-toggle="tooltip" data-placement="top" title="Android 布局加载之 LayoutInflater">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

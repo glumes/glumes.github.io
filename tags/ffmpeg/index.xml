@@ -15,10 +15,10 @@
     
     <item>
       <title>FFmpeg 3.0 版本视频解码浅析 MPEG-&gt;PCM （下）</title>
-      <link>https://glumes.github.io/post/ffmpeg-convert-mpeg-to-pcm-2/</link>
+      <link>https://glumes.github.io/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm-2/</link>
       <pubDate>Fri, 22 Dec 2017 16:05:30 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/ffmpeg-convert-mpeg-to-pcm-2/</guid>
+      <guid>https://glumes.github.io/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm-2/</guid>
       <description>&lt;p&gt;有了上一篇文章基础，这里就只关注 FFmpeg 如何解析的具体实践了。&lt;/p&gt;
 
 &lt;p&gt;在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。&lt;/p&gt;

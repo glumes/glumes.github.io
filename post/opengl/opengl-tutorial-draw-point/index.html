@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>OpenGL 学习系列---点的绘制流程</title>
+  <meta property="og:title" content="OpenGL 学习系列---点的绘制流程" />
+  <meta name="twitter:title" content="OpenGL 学习系列---点的绘制流程" />
+  <meta name="description" content="终于要开始探索奇妙的 3D 世界了，OpenGL 搞起。
+
+">
+  <meta property="og:description" content="终于要开始探索奇妙的 3D 世界了，OpenGL 搞起。
+
+">
+  <meta name="twitter:description" content="终于要开始探索奇妙的 3D 世界了，OpenGL 搞起。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/post/opengl/opengl-tutorial-draw-point/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/post/opengl/opengl-tutorial-draw-point/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Code" href="/tags">Code</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>OpenGL 学习系列---点的绘制流程</h1>
+                
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 12 min (5675 mots)
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>终于要开始探索奇妙的 3D 世界了，OpenGL 搞起。</p>
+
+<p></p>
+
+<h2 id="opengl-简介">OpenGL 简介</h2>
+
+<p>OpenGL 是一种应用程序编程接口，它是一种可以对图形硬件设备特性进行访问的软件库。</p>
+
+<p>重点：OpenGL 是一种接口，既然是接口，那么就必然要有实现。</p>
+
+<p>事实上，它的实现是由显示设备厂商提供的，而且依赖于厂商提供的硬件设备。</p>
+
+<p>OpenGL 常用于 CAD、虚拟实境、科学可视化程序和电子游戏开发。</p>
+
+<p>在 Android 上使用的是 OpenGL ES，它是 OpenGL 的子集，在 OpenGL 的基础之上裁剪掉了一些非必要的部分，主要是针对手机、PAD 和游戏主机等嵌入式设备设计的。</p>
+
+<p>在 Android 上开发 OpenGL 既可以使用 Java 也可以使用 C ，话不多说，撸起袖子就是干！</p>
+
+<h2 id="opengl-的绘制流程">OpenGL 的绘制流程</h2>
+
+<p>学习 OpenGL 的绘制，最好还是先从 2D 绘制开始，逐渐过渡到 3D 绘制。</p>
+
+<p>Android 为 OpenGL 的绘制提供了一个特定的视图<code>GLSurfaceView</code>，就像 SurfaceView 一样，它渲染绘制也可以在一个单独的线程中，而非主线程，毕竟 GLSurfaceView 就是继承自 SurfaceView 的。</p>
+
+<p>在使用 GLSurfaceView 时，需要通过<code>setRenderer</code>方法给它设置一个渲染器，而主要的渲染工作就是由渲染器<code>Renderer</code>完成了。</p>
+
+<p>通过继承<code>GLSurfaceView.Renderer</code>类来实现我们自己的渲染器程序，主要有如下三个方法：</p>
+
+<ul>
+<li>onSurfaceCreated
+
+<ul>
+<li>当 GLSurfaceView 创建时调用，主要做一些准备工作。</li>
+</ul></li>
+<li>onSurfaceChanged
+
+<ul>
+<li>当 GLSurfaceView 视图改变时调用，第一次创建时也会被调用。</li>
+</ul></li>
+<li>onDrawFrame
+
+<ul>
+<li>每一帧绘制时被调用。</li>
+</ul></li>
+</ul>
+
+<p>实现渲染器程序时，首先要考虑三个问题：</p>
+
+<ul>
+<li>在什么地方进行绘制？</li>
+<li>绘制成什么形状？</li>
+<li>用什么颜色来绘制？</li>
+</ul>
+
+<p>而我们的程序也主要以解决上述三个问题为主，下面以 OpenGL 绘制一个点来讲解。</p>
+
+<h3 id="opengl-坐标">OpenGL 坐标</h3>
+
+<p>手机屏幕的坐标是以左上角为原点（0，0），向右为 X 轴正方形，向下为 Y 轴正方向，而 OpenGL 也有着它自己的一套坐标定义。</p>
+
+<p>假设我们定义了一个点的坐标（4.3，2.1），也就是它的 X 轴坐标和 Y 轴坐标，而 OpenGL 最后会把我们定义的坐标映射手机屏幕的实际物理坐标上。</p>
+
+<p>无论是 X 坐标还是 Y 坐标，OpenGL 都会把手机屏幕映射到 [-1，1] 的范围内。也就是说：屏幕的左边对应 X 轴的 -1 ，屏幕的右边对应 +1，屏幕的底边会对应 Y 轴的 -1，而屏幕的顶边就对应 +1。</p>
+
+<p>不管屏幕是什么形状和大小，这个坐标范围都是一样的，例如下图所示：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_coordinate_small.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_coordinate_small.png" /></p>
+
+<p>所以，上面定义的坐标（4.3，2.1），最后是会被映射到手机屏幕之外的，处于不可见的状态。</p>
+
+<p>这里，假定绘制一个位于原点的点（0，0），那么映射之后的位置就手机屏幕的中心了。</p>
+
+<h3 id="基本图元">基本图元</h3>
+
+<p>解决了位置的问题，接下来就是形状和颜色的问题。</p>
+
+<p>如同 Android 的 Canvas 对象提供了一些方法来完成基本的绘制：drawPoint、drawRect、drawLine 等，OpenGL 程序也提供且仅提供了三种基本的图元来完成绘制。</p>
+
+<ul>
+<li>点</li>
+<li>线</li>
+<li>三角形</li>
+</ul>
+
+<p>其他的所有形状都是基于这三种图元来完成的，比如矩形就可以看成是两个三角形拼成的。</p>
+
+<p>由于我们要绘制的是一个点，在坐标系中，一个坐标就可以代替一个点了。假设要绘制一个三角形，那么在坐标系中就需要三个点才行了。</p>
+
+<p>接下来就涉及到 OpenGL 如何把定义的点的数据绘制出来了。</p>
+
+<h3 id="渲染管线">渲染管线</h3>
+
+<p>首先要明白一个概念<code>渲染管线</code>。</p>
+
+<p>根据百度百科的定义，渲染管线也称为<code>渲染流水线</code>或<code>像素流水线</code>或<code>像素管线</code>，是显示芯片内部（GPU）处理图形信号相互独立的并行处理单元。</p>
+
+<p>显卡的渲染管线就是显示核心的重要组成部分，是负责给图形配上颜色的一组专门通道。渲染管线的数量是决定显示芯片性能和档次的最重要的参数之一。</p>
+
+<p>现阶段的显卡都是分为<code>顶点渲染</code>和<code>像素渲染</code>的。在显卡，内部分为两大区域，一个区域是顶点渲染单元（也叫顶点着色），主要负责描绘图形，也就是建立模型。一个区域是像素渲染管线，主要负责把顶点绘出的图形填上颜色。</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_pipeline.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_pipeline.png" /></p>
+
+<p>上图就是 OpenGL 中渲染管线的一个处理流程。</p>
+
+<p>可以看到，流程图从读取顶点数据开始，然后后执行两个着色器：</p>
+
+<ul>
+<li>顶点着色器
+
+<ul>
+<li>主要负责描绘图形，也就是根据顶点坐标，建立图形模型。</li>
+</ul></li>
+<li>片段着色器
+
+<ul>
+<li>主要负责把顶点绘出的图形填上颜色。</li>
+</ul></li>
+</ul>
+
+<p>由于这两个着色器对于最后图形显示效果至关重要，并且它们还是可以通过编程来控制的，这也是为什么<code>可编程渲染管线</code>要优于固定编程管线了。</p>
+
+<p>事实上，随着显示技术的发展，渲染管线将不复存在了，顶点着色器和渲染管线统一被<code>流处理器（Stream Processors）</code>所取代。</p>
+
+<p>但是目前手机上 OpenGL 还是使用渲染管线中，有了渲染管线，我们就可以完成点的形状绘制和着色两大问题了，接下来的工作也是围绕这条渲染管线开始的。</p>
+
+<h3 id="内存拷贝">内存拷贝</h3>
+
+<p>当定义完了顶点坐标，并且明确了下一步：<strong>顶点坐标将要通过渲染管线进行一系列处理</strong>，那么接下来就是如何把顶点坐标传递给渲染管线了。</p>
+
+<p>OpenGL 的实现是由显示设备厂商提供的，它作为本地系统库直接运行在硬件上。而我们定义的顶点 Java 代码是运行在虚拟机上的，这就涉及到了如何把 Java 层的内存复制到 Native 层了。</p>
+
+<p>一种方法是直接使用<code>JNI</code>开发，直接调用本地系统库，也就是用 <code>C++</code> 来开发 OpenGL，这种实现肯定要学会的。</p>
+
+<p>另一种方法就是在 Java 层把内存块复制到 Native 层。</p>
+
+<p>使用<code>ByteBuffer.allocateDirect()</code>方法就可以分配一块 Native 内存，这块内存不会被 Java 的垃圾回收器管理。</p>
+
+<p>它的使用方法大致都一样，抽出公共的模板：</p>
+
+<pre><code>   // 声明一个字节缓冲区 FloatBuffer
+   private FloatBuffer floatBuffer;
+   // 定义顶点数据
+   float[] vertexData = new float[16];
+   // FloatBuffer 初始化工作并放入顶点数据
+   floatBuffer = ByteBuffer
+       .allocateDirect(vertexData.length * Constant.BYTES_PRE_FLOAT)
+       .order(ByteOrder.nativeOrder())
+       .asFloatBuffer()
+       .put(vertexData);
+</code></pre>
+
+<p>在<code>allocateDirect</code>方法分配了内存并指定了大小之后，下一步就是告诉 ByteBuffer 按照<code>本地字节序</code>组织它的内容。本地字节序是指，当一个值占用多个字节时，比如 32 位整型数，字节按照从最重要位到最不重要位或者相反顺序排列。</p>
+
+<p>接下来<code>asFloatBuffer</code>方法可以得到一个反映底层字节的 FloatBuffer 类实例，避免直接操作单独的字节，而是使用浮点数。</p>
+
+<p>最后，通过<code>put</code>方法就可以把数据从 Java 层内存复制到 Native 层了，当进程结束时，这块内存就会被释放掉。</p>
+
+<h3 id="顶点着色器">顶点着色器</h3>
+
+<p>接下来可编程的部分了，定义着色器（<code>Shader</code>）程序。</p>
+
+<p>使用不同的着色器对输入的图元数据执行计算操作，判断它们的位置、颜色，以及其他渲染属性。</p>
+
+<p>首先是顶点着色器。</p>
+
+<p>在渲染管线中传输的每个顶点坐标位置，OpenGL 都会调用一个顶点着色器来处理顶点相关的数据，这个处理过程可以很复杂，也可以很简单。</p>
+
+<p>想要定义一个着色器程序，还要通过一种特殊的语言去编写：<code>OpenGL Shading Language</code>，简称<code>GLSL</code>.</p>
+
+<p><code>GLSL</code>语言类似于 C 语言或者 Java 语言，它的程序入口也是一个名为<code>main</code>的函数。关于 GLSL 的部分，完全可以单独写一篇博客了，暂时先不详细阐述。</p>
+
+<p>下面就是一个简单的顶点着色器程序：</p>
+
+<pre><code>attribute vec4 a_Position;
+void main()
+{
+    gl_Position = a_Position;
+    gl_PointSize = 30.0;
+}
+</code></pre>
+
+<p>着色器类似于一个函数调用的方式——数据传输进来，经过处理，然后再传输出去。</p>
+
+<p>其中，<code>gl_Position</code>和<code>gl_PointSize</code>就是着色器中的特殊全局变量，它接收输入。</p>
+
+<p><code>a_Position</code>就是我们定义的一个变量，它是<code>vec4</code>类型的。而<code>attribute</code>只能存在于顶点着色器中，一般用于保存顶点数据，它可以在数据缓冲区中读取数据。</p>
+
+<p>数据缓存区中的顶点坐标会赋值给 a_Position ，a_Position 会传递给 gl_Position。</p>
+
+<p>而 gl_PointSize 则固定了点的大小为 30。</p>
+
+<p>有了顶点着色器，就能够为每个顶点生成最终的位置，接下来就是定义片段着色器。</p>
+
+<p>根据上图的渲染管线，顶点着色器到片段着色器之间，还要经过<code>组装图元</code>和<code>光栅化图元</code>。</p>
+
+<h3 id="光栅化技术">光栅化技术</h3>
+
+<p>移动设备的显示屏由成百上千个小的、独立的部件组成，他们称为<code>像素</code>。每个像素通常由三个单独的子组件构成，它们发出红色、绿色和蓝色的光，因为每个像素都非常小，人的眼睛会把红色、绿色和蓝色的光混合在一起，从而创造出巨量的颜色范围。</p>
+
+<p>OpenGL 就是通过 <em>光栅化</em> 技术的过程把每个点、直线及三角形分解成大量的小片段，它们可以映射到移动设备显示屏的像素上，从而生成一幅图像。这些片段类似于显示屏上的像素，每一个都包含单一的纯色。</p>
+
+<p>如下图所示：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_guangshanhua.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_guangshanhua.png" /></p>
+
+<p>OpenGL 通过光栅化技术把一条直线映射为一个片段集合，显示系统通常会把这些片段直接映射到屏幕上的像素，结果一个片段就对应一个像素。</p>
+
+<p>明白了这样的显示原理，就可以在其中做一些操作了，这就是片段着色器的功能了。</p>
+
+<h3 id="片段着色器">片段着色器</h3>
+
+<p>片段着色器的主要目的就是告诉 GPU 每个片段的最终颜色应该是什么。</p>
+
+<p>对于基本图元的每个片段，片段着色器都会被调用一次，因此，如果一个三角形被映射到 10000 个片段，那么片段着色器就会被调用 10000 次。</p>
+
+<p>下面就是一个简单的片段着色器程序：</p>
+
+<pre><code>precision mediump float;
+uniform vec4 u_Color;
+void main()
+{
+    gl_FragColor = u_Color;
+}
+</code></pre>
+
+<p>其中，<code>gl_FragColor</code>变量就是 OpenGL 最终渲染出来的颜色的全局变量，而<code>u_Color</code>就是我们定义的变量，通过在 Java 层绑定到 <code>u_Color</code>变量并给它赋值，就会传递到 Native 层的<code>gl_FragColor</code>中。</p>
+
+<p>而第一行的<code>mediump</code>指的就是片段着色器的精度了，有三种可选，这里用中等精度就行了。<code>uniform</code>则表示该变量是不可变的了，也就是固定颜色了，目前显示固定颜色就好了。</p>
+
+<h3 id="编译-opengl-程序">编译 OpenGL 程序</h3>
+
+<p>明白了着色器的功能和光栅化技术之后，对渲染管线的流程也就更加清楚了，接下来就是编译 OpenGL 的程序了。</p>
+
+<p>编译 OpenGL 程序基本流程如下：</p>
+
+<ul>
+<li>编译着色器</li>
+<li>创建 OpenGL 程序和着色器链接</li>
+<li>验证 OpenGL 程序</li>
+<li>确定使用 OpenGL 程序</li>
+</ul>
+
+<h4 id="编译着色器">编译着色器</h4>
+
+<p>创建新的文件编写着色器程序，然后再从文件以字符串的形式中读取文件内容。这样会比把着色器程序写成字符串的形式更加清晰。</p>
+
+<p>当读取了着色器程序内容之后，就可以编译了。</p>
+
+<pre><code>   // 编译顶点着色器
+    public static int compileVertexShader(String shaderCode) {
+        return compileShader(GL_VERTEX_SHADER, shaderCode);
+    }
+    
+    // 编译片段着色器
+    public static int compleFragmentShader(String shaderCode) {
+        return compileShader(GL_FRAGMENT_SHADER, shaderCode);
+    }
+
+    // 根据类型编译着色器
+    private static int compileShader(int type, String shaderCode) {
+	    // 根据不同的类型创建着色器 ID
+        final int shaderObjectId = glCreateShader(type);
+        if (shaderObjectId == 0) {
+            return 0;
+        }
+        // 将着色器 ID 和着色器程序内容连接
+        glShaderSource(shaderObjectId, shaderCode);
+        // 编译着色器
+        glCompileShader(shaderObjectId);
+		// 以下为验证编译结果是否失败
+        final int[] compileStatsu = new int[1];
+        glGetShaderiv(shaderObjectId, GL_COMPILE_STATUS, compileStatsu, 0);
+        if ((compileStatsu[0] == 0)) {
+	        // 失败则删除
+            glDeleteShader(shaderObjectId);
+            return 0;
+        }
+        return shaderObjectId;
+    }
+</code></pre>
+
+<p>以上程序主要就是通过<code>glCreateShader</code>方法创建了着色器 ID，然后通过<code>glShaderSource</code>连接上着色器程序内容，接下来通过<code>glCompileShader</code>编译着色器，最后通过<code>glGetShaderiv</code>验证是否失败。</p>
+
+<p><code>glGetShaderiv</code>函数比较通用，在着色器阶段和 OpenGL 程序阶段都会通过它来验证结果。</p>
+
+<h4 id="创建-opengl-程序和着色器链接">创建 OpenGL 程序和着色器链接</h4>
+
+<p>接下来就是创建 OpenGL 程序并加着色器加进来。</p>
+
+<pre><code>  public static int linkProgram(int vertexShaderId, int fragmentShaderId) {
+		// 创建 OpenGL 程序 ID
+        final int programObjectId = glCreateProgram();
+        if (programObjectId == 0) {
+            return 0;
+        }
+        // 链接上 顶点着色器
+        glAttachShader(programObjectId, vertexShaderId);
+        // 链接上 片段着色器
+        glAttachShader(programObjectId, fragmentShaderId);
+        // 链接着色器之后，链接 OpenGL 程序
+        glLinkProgram(programObjectId);
+        final int[] linkStatus = new int[1];
+        // 验证链接结果是否失败
+        glGetProgramiv(programObjectId, GL_LINK_STATUS, linkStatus, 0);
+        if (linkStatus[0] == 0) {
+	        // 失败则删除 OpenGL 程序
+            glDeleteProgram(programObjectId);
+            return 0;
+        }
+        return programObjectId;
+    }
+</code></pre>
+
+<p>首先通过<code>glCreateProgram</code>程序创建 OpenGL 程序，然后通过<code>glAttachShader</code>将着色器程序 ID 添加上 OpenGL 程序，接下来通过<code>glLinkProgram</code>链接 OpenGL 程序，最后通过<code>glGetProgramiv</code>来验证链接是否失败。</p>
+
+<h4 id="验证-opengl-程序">验证 OpenGL 程序</h4>
+
+<p>链接了 OpenGL 程序后，就是验证 OpenGL 是否可用。</p>
+
+<pre><code> public static boolean validateProgram(int programObjectId) {
+        glValidateProgram(programObjectId);
+        final int[] validateStatus = new int[1];
+        glGetProgramiv(programObjectId, GL_VALIDATE_STATUS, validateStatus, 0);
+        return validateStatus[0] != 0;
+
+    }
+</code></pre>
+
+<p>通过<code>glValidateProgram</code>函数验证，并再次通过<code>glGetProgramiv</code>函数验证是否失败。</p>
+
+<h4 id="确定使用-opengl-程序">确定使用 OpenGL 程序</h4>
+
+<p>当一切完成后，就是确定使用该 OpenGL 程序了。</p>
+
+<pre><code>// 创建 OpenGL 程序过程
+ public static int buildProgram(Context context, int vertexShaderSource, int fragmentShaderSource) {
+        int program;
+
+        int vertexShader = compileVertexShader(
+                TextResourceReader.readTextFileFromResource(context, vertexShaderSource));
+
+        int fragmentShader = compleFragmentShader(
+                TextResourceReader.readTextFileFromResource(context, fragmentShaderSource));
+
+        program = linkProgram(vertexShader, fragmentShader);
+
+        validateProgram(program);
+
+        return program;
+    }
+
+// 创建完毕后，确定使用
+    mProgram = ShaderHelper.buildProgram(context, R.raw.point_vertex_shader
+                , R.raw.point_fragment_shader);
+
+        glUseProgram(mProgram);
+</code></pre>
+
+<p>将上述的过程合并起来，<code>buildProgram</code>函数返回的 OpenGL 程序 ID 即可，通过<code>glUseProgram</code>函数表示使用该 OpenGL 程序。</p>
+
+<h3 id="绘制">绘制</h3>
+
+<p>完成了 OpenGL 程序的编译，就是最后的绘制了，再回到渲染器 <code>Renderer</code>里面。</p>
+
+<pre><code>public class PointRenderer extends BaseRenderer {
+
+    private Point mPoint;
+    public PointRenderer(Context mContext) {
+        super(mContext);
+    }
+
+    @Override
+    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        super.onSurfaceCreated(gl, config);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        // 在 onSurfaceCreated 里面初始化，否则会报线程错误
+        mPoint = new Point(mContext);
+        // 绑定相应的顶点数据
+        mPoint.bindData();
+    }
+    
+    @Override
+    public void onSurfaceChanged(GL10 gl, int width, int height) {
+        // 确定视口大小
+        glViewport(0, 0, width, height);
+    }
+
+    @Override
+    public void onDrawFrame(GL10 gl) {
+        // 清屏
+        glClear(GL_COLOR_BUFFER_BIT);
+        // 绘制
+        mPoint.draw();
+    }
+}
+</code></pre>
+
+<p>在<code>onSurfaceCreated</code>函数里面做初始化工作，绑定数据等；在<code>onSurfaceChanged</code>方法里面确定视图大小，在<code>onDrawFrame</code>里面执行绘制。</p>
+
+<p>为了简化渲染流程，把所有的操作都放在放在要渲染的对象里面去了，声明一个 Point 对象，代表要绘制的点。</p>
+
+<pre><code>public class Point extends BaseShape {
+
+    // 着色器中定义的变量，在 Java 层绑定并赋值
+    private static final String U_COLOR = &quot;u_Color&quot;;
+    private static final String A_POSITION = &quot;a_Position&quot;;
+    private int aColorLocation;
+    private int aPositionLocation;
+    
+    float[] pointVertex = {
+            0f, 0f
+    };
+
+    public Point(Context context) {
+        super(context);
+        mProgram = ShaderHelper.buildProgram(context, R.raw.point_vertex_shader
+                , R.raw.point_fragment_shader);
+        glUseProgram(mProgram);
+        vertexArray = new VertexArray(pointVertex);
+        POSITION_COMPONENT_COUNT = 2;
+    }
+
+    @Override
+    public void bindData() {
+        //绑定值
+        aColorLocation = glGetUniformLocation(mProgram, U_COLOR);
+        aPositionLocation = glGetAttribLocation(mProgram, A_POSITION);
+        // 给绑定的值赋值，也就是从顶点数据那里开始读取，每次读取间隔是多少
+        vertexArray.setVertexAttribPointer(0, aPositionLocation, POSITION_COMPONENT_COUNT,
+                0);
+    }
+
+    @Override
+    public void draw() {
+        // 给绑定的值赋值
+        glUniform4f(aColorLocation, 0.0f, 0.0f, 1.0f, 1.0f);
+        glDrawArrays(GL_POINTS, 0, 1);
+    }
+}
+</code></pre>
+
+<p>在 Point 的构造函数中，编译并使用 OpenGL 程序，而在 <code>bindData</code>函数中，通过<code>glGetUniformLocation</code>和<code>glGetAttribLocation</code>函数绑定了我们在 OpenGL 中声明的变量<code>u_Color</code>和<code>a_Position</code>，要注意的是，<code>attribute</code>类型和<code>uniform</code>类型所对应的方法是不同的，最后通过给<code>POSITION_COMPONENT_COUNT</code>变量赋值，指定每个顶点数据的个数为 2 。</p>
+
+<p>绑定了变量之后，接下来就是给他们赋值了，对于<code>uniform</code>类型变量，由于是固定值，所以直接调用<code>glUniform4f</code>方法给其赋值就好了，而<code>attribute</code>类型变量，则需要对应顶点数据中的值了，<code>vertexArray.setVertexAttribPointer</code>方法就是完成这个任务的。</p>
+
+<pre><code>	// 给某个顶点数据绑定值，并 Enable 使能
+    public void setVertexAttribPointer(int dataOffset, int attributeLocation, int componentCount, int stride) {
+        floatBuffer.position(dataOffset);
+        glVertexAttribPointer(attributeLocation, componentCount, GL_FLOAT, false, stride, floatBuffer);
+        glEnableVertexAttribArray(attributeLocation);
+        floatBuffer.position(0);
+    }
+</code></pre>
+
+<p>在<code>setVertexAttribPointer</code>方法中，使用了<code>glVertexAttribPointer</code>方法来绑定值，它的参数释义如下所示：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_setVertexAttribPointer.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_setVertexAttribPointer.png" /></p>
+
+<p>通过<code>glEnableVertexAttribArray</code>方法来开启使用即可。</p>
+
+<p>最后通过<code>glDrawArrays</code>方法来执行最后的绘制，<code>GL_POINTS</code>代表绘制的类型，而参数<code>0，1</code>则代表绘制的点的范围，它是一个左闭右开的区间。</p>
+
+<p>以上步骤就完成了一个点的绘制，如图所示：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_point.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_point.png" /></p>
+
+<p>具体代码详情，可以参考我的 Github 项目：</p>
+
+<p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
+
+<h3 id="小结">小结</h3>
+
+<p>使用 OpenGL 进行绘制的原理，也就是按照 GPU 的渲染管线流程，提供了顶点数据之后，执行顶点着色器，然后执行片段着色器，最后映射到手机屏幕上。</p>
+
+<p>而作为可编程的阶段，我们就是在顶点着色器和片段着色器中做我们想要的处理，编写了着色器代码之后，通过编译链接成 OpenGL 程序。然后给 OpenGL 中设定的变量绑定对应的值，从顶点数据何处开始读取值。到这里，一切准备工作就做完了。</p>
+
+<p>最后就在在渲染器 Renderer 中开始绘制了。</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li>《OpenGL ES 应用开发实践指南》</li>
+<li>《OpenGL 编程指南》（原书第八版）</li>
+<li><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></li>
+</ol>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/python/python-functional-programming/" data-toggle="tooltip" data-placement="top" title="Python 函数式编程">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/opengl/opengl-tutorial-draw-basic-shape/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---基本形状的绘制">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

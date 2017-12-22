@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</title>
+  <meta property="og:title" content="用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析" />
+  <meta name="twitter:title" content="用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析" />
+  <meta name="description" content="之前有写过一篇文章：用 RxJava 封装回调方法 CallBack。
+
+RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。
+
+这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。
+
+">
+  <meta property="og:description" content="之前有写过一篇文章：用 RxJava 封装回调方法 CallBack。
+
+RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。
+
+这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。
+
+">
+  <meta name="twitter:description" content="之前有写过一篇文章：用 RxJava 封装回调方法 CallBack。
+
+RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。
+
+这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对 …">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/post/android/rxjava-wrapper-dialog/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/post/android/rxjava-wrapper-dialog/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Code" href="/tags">Code</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</h1>
+                
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 4 min (1543 mots)
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>之前有写过一篇文章：<a href="http://www.glumes.com/wrapper-callback-by-rxjava/">用 RxJava 封装回调方法 CallBack</a>。</p>
+
+<p>RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。</p>
+
+<p>这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。</p>
+
+<p></p>
+
+<p>下来展示具体代码的操作，用的是 RxJava 2.x 的版本：</p>
+
+<pre><code> private Observable&lt;Integer&gt; handleRxJavaDialog() {
+        return Observable.create(emitter -&gt; {
+            final AlertDialog dialog = new AlertDialog.Builder(mContext)
+                    .setMessage(&quot;RxJava封装Dialog事件流&quot;)
+                    .setNegativeButton(&quot;取消&quot;, (dialog12, which) -&gt; emitter.onNext(which)) 
+                    .setPositiveButton(&quot;确认&quot;, (dialog1, which) -&gt; emitter.onComplete())
+                    .create();
+            dialog.show();
+            // 当被取消订阅，unsubscribed 时调用的方法
+            emitter.setCancellable(() -&gt; {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+            });
+        });
+    }
+</code></pre>
+
+<p>如此封装之后，直接通过 RxJava 的 onNext 方法将事件封装到 RxJava 事件流里面去。</p>
+
+<p>弄到这，想起了一个开源的 RxJava 系列框架：<a href="https://github.com/JakeWharton/RxBinding">RxBinding</a>，和本文的封装有相同之处。</p>
+
+<h2 id="rxbinding-实现简要分析">RxBinding 实现简要分析</h2>
+
+<p>RxBinding 是用来处理控件异步调用的一个框架，它也已经更新到了 RxJava 2.x 的版本。</p>
+
+<p>在它的源码里对许多控件都进行了封装，可以看到如：<code>RxView</code>、<code>RxTextView</code>、<code>RxSeekBar</code>、<code>RxProgressBar</code>、<code>RxPopupMenu</code>等等。</p>
+
+<p>它们的使用也是大同小异，比如要对一个 View 封装其点击事件，就可以这样写：</p>
+
+<pre><code>  RxView.clicks(mBtn)
+		.subscribe(new Consumer&lt;Object&gt;() {
+            @Override
+            public void accept(@NonNull Object o) throws Exception {
+                Timber.d(&quot;RxView&quot;);
+            }
+        });
+</code></pre>
+
+<p>在代码的前半部分<code>RxView.clicks(mBtn)</code>返回的正好是一个 Observable 对象，然后就可以像平时使用 RxJava 一样添加各种操作符，最后通过 subscribe 进行订阅了。</p>
+
+<p>在 RxView.clicks 的源码中，最后返回的是一个 ViewClickObservable，从名字可见，这个 Observable 专门是用来处理点击事件的，在 RxBinding 中还有很多专门处理其他事件的 Observable，例如：<code>ViewDragObservable</code>、<code>ViewLongClickObservable</code>、<code>ViewScrollChangeEventObservable</code>等等，他们的实现方法也都大同小异了。</p>
+
+<pre><code>  @CheckResult @NonNull
+  public static Observable&lt;Object&gt; clicks(@NonNull View view) {
+    checkNotNull(view, &quot;view == null&quot;);
+    return new ViewClickObservable(view);
+  }
+</code></pre>
+
+<p>在专门处理各种事件的 Observable 类中，都会有一个实现 <code>Disposable</code>接口和具体事件所对应的接口的 Listener 类，而这个 Listener 类的作用，就是给我们所需要的 View 设置对应事件回调接口的，并且在回调接口中调用 Observable 的 onNext 方法来将事件转换到 RxJava 的事件流中。</p>
+
+<pre><code>	ViewClickObservable(View view) {
+    this.view = view;
+	}
+
+  @Override protected void subscribeActual(Observer&lt;? super Object&gt; observer) {
+    if (!checkMainThread(observer)) {
+      return;
+    }
+    Listener listener = new Listener(view, observer);
+	// onSubscribe 设置了 Disposable 接口，当取消订阅时该执行的操作。
+    observer.onSubscribe(listener);
+    view.setOnClickListener(listener);
+  }
+// ViewClickObservable 的 Listener 类实现了 OnClickListener 接口
+  static final class Listener extends MainThreadDisposable implements OnClickListener {
+    private final View view;
+    private final Observer&lt;? super Object&gt; observer;
+
+    Listener(View view, Observer&lt;? super Object&gt; observer) {
+      this.view = view;
+      this.observer = observer;
+    }
+	// 在 onClick 方法内，调用 onNext 方法，将 onClick 的事件转移到了 RxJava 的事件流里面去了
+    @Override public void onClick(View v) {
+      if (!isDisposed()) {
+        observer.onNext(Notification.INSTANCE);
+      }
+    }
+    // 当被取消订阅时，就设置接口为 null.
+    @Override protected void onDispose() {
+      view.setOnClickListener(null);
+    }
+  }
+</code></pre>
+
+<p>而在开始订阅时，就调用<code>subscribeActual</code>方法来给 View 设置回调接口以便转换事件流。并且还设置了<code>Disposable</code>以便响应当结束订阅时的操作。</p>
+
+<p>这一逻辑和本文上半部分将的有相同之处，核心都是用 onNext 方法转换事件流。</p>
+
+<p>而 RxBinding 则封装的更多了，没有在 create 方法里面进行操作， 而是针对 View 控件不同的事件来生成对应的 Observable 对象，对象里面持有 View 控件的实例，并且也完成了给 View 控件设置回调接口以及取消订阅时的方法。</p>
+
+<p>但毫无疑问，针对 View 控件的事件来生成 Observable 会使得代码的兼容性更强了吧，毕竟大多数控件都有公共事件，而只需要针对这个功能事件写一遍代码就行了，不需要针对每个控件来实现一套代码了。</p>
+
+<p>总结经验，写代码时还是要多想想，谋定而后动！！！</p>
+
+<h2 id="参考">参考</h2>
+
+<p>1、<a href="http://adelnizamutdinov.github.io/blog/2014/11/23/advanced-rxjava-on-android-popupmenus-and-dialogs/">http://adelnizamutdinov.github.io/blog/2014/11/23/advanced-rxjava-on-android-popupmenus-and-dialogs/</a></p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/android/android-layout-inflater/" data-toggle="tooltip" data-placement="top" title="Android 布局加载之 LayoutInflater">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm-1/" data-toggle="tooltip" data-placement="top" title="FFmpeg 3.0 版本视频解码浅析 MPEG-&gt;PCM （上）">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

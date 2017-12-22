@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Python 命令行参数解析工具 docopt</title>
+  <meta property="og:title" content="Python 命令行参数解析工具 docopt" />
+  <meta name="twitter:title" content="Python 命令行参数解析工具 docopt" />
+  <meta name="description" content="正如标题所言，docopt 是一个用来解析命令行参数的工具，当想要在 Python 程序后面附加参数时，就不需要再为此而发愁了。
+
+docopt 是一个开源的库，代码地址：https://github.com/docopt/docopt。它在 README 中就已经做了详细的介绍，并且还附带了很多例子可供学习，这篇文章也是翻译一下 README 中内容&hellip;&hellip;
+
+">
+  <meta property="og:description" content="正如标题所言，docopt 是一个用来解析命令行参数的工具，当想要在 Python 程序后面附加参数时，就不需要再为此而发愁了。
+
+docopt 是一个开源的库，代码地址：https://github.com/docopt/docopt。它在 README 中就已经做了详细的介绍，并且还附带了很多例子可供学习，这篇文章也是翻译一下 README 中内容&hellip;&hellip;
+
+">
+  <meta name="twitter:description" content="正如标题所言，docopt 是一个用来解析命令行参数的工具，当想要在 Python 程序后面附加参数时，就不需要再为此而发愁了。
+
+docopt 是一个开源的库，代码地址：https://github.com/docopt/docopt。它在 README 中就已经做了详细的介绍，并且还附带了很多例子可供学习，这篇文章也是翻译一下 README 中内容&hellip;&hellip;
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/post/python/python-docopt/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/post/python/python-docopt/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Code" href="/tags">Code</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Python 命令行参数解析工具 docopt</h1>
+                
+                
+                  <span class="post-meta">
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 3 min (1503 mots)
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>正如标题所言，docopt 是一个用来解析命令行参数的工具，当想要在 Python 程序后面附加参数时，就不需要再为此而发愁了。</p>
+
+<p>docopt 是一个开源的库，代码地址：<a href="https://github.com/docopt/docopt">https://github.com/docopt/docopt</a>。它在 README 中就已经做了详细的介绍，并且还附带了很多例子可供学习，这篇文章也是翻译一下 README 中内容&hellip;&hellip;</p>
+
+<p></p>
+
+<p>docopt 最大的特点在于不用考虑如何解析命令行参数，而是当你把心中想要的格式按照一定的规则写出来后，解析也就完成了。</p>
+
+<h2 id="docopt-的实现简单分析">docopt 的实现简单分析</h2>
+
+<p>在 Python 中有这么一个属性 <code>__doc__</code>，它的值是字符串，一般表示帮助信息，而 docopt 正是利用了这一属性，把帮助信息替换成命令行参数解析说明，再对它进行解析即可。</p>
+
+<p>举个 docopt 中的例子来说明：</p>
+
+<pre><code>&quot;&quot;&quot;Naval Fate.
+
+Usage:
+  naval_fate.py ship new &lt;name&gt;...
+  naval_fate.py ship &lt;name&gt; move &lt;x&gt; &lt;y&gt; [--speed=&lt;kn&gt;]
+  naval_fate.py ship shoot &lt;x&gt; &lt;y&gt;
+  naval_fate.py mine (set|remove) &lt;x&gt; &lt;y&gt; [--moored | --drifting]
+  naval_fate.py (-h | --help)
+  naval_fate.py --version
+
+Options:
+  -h --help     Show this screen.
+  --version     Show version.
+  --speed=&lt;kn&gt;  Speed in knots [default: 10].
+  --moored      Moored (anchored) mine.
+  --drifting    Drifting mine.
+&quot;&quot;&quot;
+from docopt import docopt
+if __name__ == '__main__':
+    arguments = docopt(__doc__, version='Naval Fate 2.0')
+    print(arguments)
+</code></pre>
+
+<p>上述代码段中，很大一段帮助信息就是我们的命令行参数解析说明，在函数入口处调用<code>docopt</code>函数进行解析，返回的<code>arguments</code>变量是一个字典型变量，它记录了选项是否被选用了，参数的值是什么等信息，当程序从命令行运行时，我们就是根据<code>arguments</code>变量的记录来得知用户输入的选项和参数信息。</p>
+
+<p>所以如何写好命令行参数解析说明就变得至关重要了，命令行解析信息包含两部分，分别是使用模式格式和选项描述格式。</p>
+
+<h2 id="使用模式格式-usage-pattern-format">使用模式格式（Usage pattern format）</h2>
+
+<p>使用模式以<code>usage:</code>开始，以空行结束，如上代码段所示，它主要描述了用户添加命令行参数时的格式，也就是使用时的格式，解析也是按照此格式来进行的。</p>
+
+<p>每一个使用模式都包含如下元素：
+*   参数
+参数使用大写字母或者使用尖括号<code>&lt;&gt;</code>围起来。
+*   选项
+选项以短横线开始<code>-</code>或者<code>--</code>。只有一个字母时格式<code>-o</code>，多于一个字母时<code>--output</code>。同时还可以把多个单字母的选项合并，<code>-ovi</code>等同于<code>-o</code>、<code>-v</code>、<code>-i</code>。选项也能有参数，此时别忘了给选项添加描述说明。</p>
+
+<p>接下来是使用模式中用到的一些标识的含义，正确地使用他们能够更好的完成解析任务：
+*   <code>[]</code>
+代表可选的元素，方括号内的元素可有可无
+*   <code>()</code>
+代表必须要有的元素，括号内的元素必须要有，哪怕是多个里面选一个。
+*   <code>|</code>
+互斥的元素，竖线两旁的元素只能有一个留下
+*   <code>...</code>
+代表元素可以重复出现，最后解析的结果是一个列表
+*   <code>[options]</code>
+指定特定的选项，完成特定的任务。</p>
+
+<h2 id="选项描述格式-option-description-format">选项描述格式（Option description format）</h2>
+
+<p>选项描述同样必不可少，尤其是当选项有参数，并且还需要为它赋默认值时。</p>
+
+<p>为选项添加参数的格式有两种：</p>
+
+<pre><code>-o FILE --output-FILE     # 不使用逗号，使用 = 符号
+-i &lt;file&gt;, --input &lt;file&gt; # 使用逗号，不使用 = 符号
+</code></pre>
+
+<p>为选项添加描述说明，只需要用两个空格分隔选项和说明即可。</p>
+
+<p>为选项添加默认值时，把它添加到选择描述后面即可，格式如下<code>[default: &lt;my-default-value&gt;]</code></p>
+
+<pre><code>--coefficient=K  The K coefficient [default: 2.95]
+--output=FILE    Output file [default: test.txt]
+--directory=DIR  Some directory [default: ./]
+</code></pre>
+
+<p>如果选项是可以重复的，那么它的值<code>[default: ...]</code>将会一个 <code>list</code>列表，若不可以重复，则它的值是一个字符串。</p>
+
+<h2 id="使用">使用</h2>
+
+<p>理解了 使用模式格式 和 选项描述格式 之后，再配合给出的例子就能较好的理解了。</p>
+
+<p>接下来就是得到输入的信息了。</p>
+
+<p>在前面提到<code>arguments</code>参数是一个字典类型，包含了用户输入的选项和参数信息，还是上面的代码段例子，假如我们从命令行运行的输入是</p>
+
+<pre><code>python3 test.py ship Guardian move 100 150 --speed=15
+</code></pre>
+
+<p>那么打印<code>arguments</code>参数如下：</p>
+
+<pre><code>{'--drifting': False,
+ '--help': False,
+ '--moored': False,
+ '--speed': '15',
+ '--version': False,
+ '&lt;name&gt;': ['Guardian'],
+ '&lt;x&gt;': '100',
+ '&lt;y&gt;': '150',
+ 'mine': False,
+ 'move': True,
+ 'new': False,
+ 'remove': False,
+ 'set': False,
+ 'ship': True,
+ 'shoot': False}
+</code></pre>
+
+<p>从打印信息可以看到，对于选项，使用布尔型来表示用户是否输入了该选项，对于参数，则使用具体值来表述。</p>
+
+<p>这样一来，程序就可以从<code>arguments</code>变量中得到下一步的操作了。若是用户什么参数都没输入，则打印<code>Usage</code>说明提示输入内容。</p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm-2/" data-toggle="tooltip" data-placement="top" title="FFmpeg 3.0 版本视频解码浅析 MPEG-&gt;PCM （下）">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/post/python/python-functional-programming/" data-toggle="tooltip" data-placement="top" title="Python 函数式编程">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+
