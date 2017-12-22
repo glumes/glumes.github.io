@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Glumes Blog</title>
-    <link>https://glumes.github.io/</link>
-    <description>Recent content on Glumes Blog</description>
+    <title>Android on Glumes Blog</title>
+    <link>https://glumes.github.io/tags/android/</link>
+    <description>Recent content in Android on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
     <lastBuildDate>Fri, 22 Dec 2017 10:40:49 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://glumes.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -74,17 +74,6 @@
     </item>
     
     <item>
-      <title>用 RxJava 封装回调方法 CallBack</title>
-      <link>https://glumes.github.io/post/rxjava-wrapper-callback/</link>
-      <pubDate>Fri, 22 Dec 2017 10:38:34 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/rxjava-wrapper-callback/</guid>
-      <description>&lt;p&gt;在知乎上看到这样一个问题：&lt;a href=&#34;https://www.zhihu.com/question/39492234&#34;&gt;RxJava正确的封装callback的方式应该是怎么样的？&lt;/a&gt;。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Android 硬件抽象层调用流程小结</title>
       <link>https://glumes.github.io/post/android-hal-summary/</link>
       <pubDate>Fri, 22 Dec 2017 10:31:13 +0800</pubDate>
@@ -121,26 +110,6 @@
 &lt;p&gt;使用 Anko 来构建界面会更加简单、快捷。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Python、C&#43;&#43;、Android OpenCV 开发环境的配置</title>
-      <link>https://glumes.github.io/post/setup_opencv_environment/</link>
-      <pubDate>Fri, 22 Dec 2017 09:53:04 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/setup_opencv_environment/</guid>
-      <description>&lt;p&gt;在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://glumes.github.io/page/about/</link>
-      <pubDate>Wed, 20 Dec 2017 15:23:52 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/page/about/</guid>
-      <description>this is about page</description>
     </item>
     
   </channel>

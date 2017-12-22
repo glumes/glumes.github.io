@@ -152,21 +152,153 @@
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="https://glumes.github.io/post/imgtest/">
-                <h2 class="post-title">Imgtest</h2>
+              <a href="https://glumes.github.io/post/android-start-activity-from-launcher-4/">
+                <h2 class="post-title"> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</h2>
 
                 
               </a>
 
               <p class="post-meta">
-                Posted on December 21, 2017
+                Posted on December 22, 2017
               </p>
               <div class="post-entry">
                 
-                  <p>测试图片</p>
+                  <p>在如下三篇文章中过了一遍 Launcher 启动 Activity 的代码流程。</p>
 
-<p><img src="https://glumes.github.io/img/databinding.png" alt="testimge" /></p>
+<ul>
+<li><a href="start-activity-from-launcher-in-android-1"> Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a></li>
+<li><a href="start-activity-from-launcher-in-android-2"> Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a></li>
+<li><a href="start-activity-from-launcher-in-android-3"> Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a></li>
+</ul>
 
+<p>然而， 即使看过了多遍代码流程依旧有点云里雾里的感觉。不从整体上来把握，光抓住细节代码会始终不得要领。</p>
+
+<p>由于是从 Launcher 组件启动一个 Activity 组件，其中还需要与 ActivityManagerService 通信，而这三个部分都是位于不同的进程内，涉及进程间通信，因此可以将整个过程划分为三个不同的部分来分析，在 Launcher 进程内的操作，在 ActivityManagerService 进程内的操作，在创建的应用程序进程内的操作。</p>
+
+<p></p>
+                  <a href="https://glumes.github.io/post/android-start-activity-from-launcher-4/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.github.io/tags/android/">Android</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.github.io/post/android-start-activity-from-launcher-3/">
+                <h2 class="post-title">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-2/"> Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a> 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 <code>Resumed</code>状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 <code>startSpecificActivityLocked</code>方法创建进程。</p>
+
+<p></p>
+                  <a href="https://glumes.github.io/post/android-start-activity-from-launcher-3/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.github.io/tags/android/">Android</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.github.io/post/android-start-activity-from-launcher-2/">
+                <h2 class="post-title">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a> 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。</p>
+
+<p>通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。</p>
+
+<p></p>
+                  <a href="https://glumes.github.io/post/android-start-activity-from-launcher-2/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.github.io/tags/android/">Android</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.github.io/post/android-start-activity-from-launcher-1/">
+                <h2 class="post-title">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。</p>
+
+<p>这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。</p>
+
+<p>而当我们点击应用程序图标时，也就开启了从 Launcher 启动 Activity 的过程。</p>
+
+<p></p>
+                  <a href="https://glumes.github.io/post/android-start-activity-from-launcher-1/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.github.io/tags/android/">Android</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.github.io/post/rxjava-wrapper-callback/">
+                <h2 class="post-title">用 RxJava 封装回调方法 CallBack</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>在知乎上看到这样一个问题：<a href="https://www.zhihu.com/question/39492234">RxJava正确的封装callback的方式应该是怎么样的？</a>。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。</p>
+
+<p></p>
+                  <a href="https://glumes.github.io/post/rxjava-wrapper-callback/" class="post-read-more">[Read More]</a>
                 
               </div>
 
@@ -175,22 +307,123 @@
             </article>
           
             <article class="post-preview">
-              <a href="https://glumes.github.io/post/first/">
-                <h2 class="post-title">First</h2>
+              <a href="https://glumes.github.io/post/android-hal-summary/">
+                <h2 class="post-title">Android 硬件抽象层调用流程小结</h2>
 
                 
               </a>
 
               <p class="post-meta">
-                Posted on December 20, 2017
+                Posted on December 22, 2017
               </p>
               <div class="post-entry">
                 
-                  <p>this is first page</p>
+                  <p>Android 从 5.0 开始使用新的相机 API Camera2 来代替之前的旧版本，从而支持更多的特性。</p>
 
+<p>在学习新的 API 调用之外，也还是要了解一下 Android 底层发生了哪些变化，从而能够让我们对 API 的调用流程更加的清晰，知其所以然。</p>
+
+<p></p>
+                  <a href="https://glumes.github.io/post/android-hal-summary/" class="post-read-more">[Read More]</a>
                 
               </div>
 
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.github.io/tags/android/">Android</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.github.io/post/kotlin-functional-programming-whth-anko/">
+                <h2 class="post-title">Kotlin 函数式编程与 Anko 构建布局实现原理分析</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>之前讲到了如何在 <a href="http://www.glumes.com/kotlin-anko-usage/">Kotlin 开发中使用 Anko 构建布局</a>。</p>
+
+<p>这一篇将是分析其原理。</p>
+
+<p></p>
+                  <a href="https://glumes.github.io/post/kotlin-functional-programming-whth-anko/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.github.io/tags/android/">Android</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.github.io/post/kotlin-with-anko/">
+                <h2 class="post-title">Kotlin 使用 Anko 布局那些事</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>学习 Kotlin 应该都或多或少听过 Anko 这个开源库。</p>
+
+<p>使用 Anko 来构建界面会更加简单、快捷。</p>
+
+<p></p>
+                  <a href="https://glumes.github.io/post/kotlin-with-anko/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.github.io/tags/android/">Android</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.github.io/post/setup_opencv_environment/">
+                <h2 class="post-title">Python、C&#43;&#43;、Android OpenCV 开发环境的配置</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。</p>
+
+<p></p>
+                  <a href="https://glumes.github.io/post/setup_opencv_environment/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.github.io/tags/opencv/">Opencv</a>&nbsp;
+                  
+                </span>
               
 
             </article>

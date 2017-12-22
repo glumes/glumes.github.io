@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Opencv on Glumes Blog</title>
+    <link>https://glumes.github.io/tags/opencv/</link>
+    <description>Recent content in Opencv on Glumes Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
+    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <lastBuildDate>Fri, 22 Dec 2017 09:53:04 +0800</lastBuildDate>
+    
+	<atom:link href="https://glumes.github.io/tags/opencv/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python、C&#43;&#43;、Android OpenCV 开发环境的配置</title>
+      <link>https://glumes.github.io/post/setup_opencv_environment/</link>
+      <pubDate>Fri, 22 Dec 2017 09:53:04 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/post/setup_opencv_environment/</guid>
+      <description>&lt;p&gt;在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

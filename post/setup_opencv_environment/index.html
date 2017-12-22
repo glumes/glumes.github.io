@@ -8,15 +8,9 @@
   <title>Python、C&#43;&#43;、Android OpenCV 开发环境的配置</title>
   <meta property="og:title" content="Python、C&#43;&#43;、Android OpenCV 开发环境的配置" />
   <meta name="twitter:title" content="Python、C&#43;&#43;、Android OpenCV 开发环境的配置" />
-  <meta name="description" content="在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C&#43;&#43; 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。
-
-">
-  <meta property="og:description" content="在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C&#43;&#43; 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。
-
-">
-  <meta name="twitter:description" content="在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C&#43;&#43; 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。
-
-">
+  <meta name="description" content="setup opencv environment">
+  <meta property="og:description" content="setup opencv environment">
+  <meta name="twitter:description" content="setup opencv environment">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.github.io/post/setup_opencv_environment/" />
@@ -102,37 +96,19 @@
         
           
             <li>
-              <a title="about hugo" href="/about/">about hugo</a>
+              <a title="Code" href="/">Code</a>
             </li>
           
         
           
             <li>
-              <a title="getting started" href="/getting-started/">getting started</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="Blog" href="/">Blog</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="Samples" href="/">Samples</a>
+              <a title="Life" href="/">Life</a>
             </li>
           
         
           
             <li>
               <a title="About" href="/page/about/">About</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="Tags" href="/tags">Tags</a>
             </li>
           
         
@@ -164,34 +140,8 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://glumes.github.io/img/databinding.png" data-img-desc-1="Triangle"></div>
-  
 
-  <header class="header-section has-img">
-    
-      <div class="intro-header big-img">
-        
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>Python、C&#43;&#43;、Android OpenCV 开发环境的配置</h1>
-                  
-                  
-                    <span class="post-meta">
-  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 21, 2017
-  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 2 min (407 mots)
-  
-</span>
-
-
-                  
-              </div>
-            </div>
-          </div>
-        </div>
-        <span class="img-desc" style="display: inline;"></span>
-      </div>
+  <header class="header-section ">
     
     <div class="intro-header no-img">
       
@@ -203,8 +153,8 @@
                 
                 
                   <span class="post-meta">
-  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 21, 2017
-  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 2 min (407 mots)
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 2 min (406 mots)
   
 </span>
 
@@ -284,9 +234,8 @@ cv2.destroyAllWindows()
 
 <p>报错的内容是：<code>The current event queue and the main event queue are not the same</code>。</p>
 
-<p>正好在 OpenCV 的 Github 上有个 Issue 也提到了这个问题：<a href="https://github.com/opencv/opencv/issues/7474">https://github.com/opencv/opencv/issues/7474</a></p>
-
-<p>给出的原因是因为没有安装好 ffmpeg。</p>
+<p>正好在 OpenCV 的 Github 上有个 Issue 也提到了这个问题：<a href="https://github.com/opencv/opencv/issues/7474">https://github.com/opencv/opencv/issues/7474</a>
+给出的原因是因为没有安装好 ffmpeg。</p>
 
 <p>所以还是建议直接通过 brew 的方式安装，然后再创建链接好了。</p>
 
@@ -430,21 +379,13 @@ int main(int argc, const char * argv[])
 <h2 id="参考">参考</h2>
 
 <p>1、<a href="http://www.jianshu.com/p/11959977589a">http://www.jianshu.com/p/11959977589a</a></p>
-
-<p><strong>觉得文章还不错，可以关注一下微信公众号【纸上浅谈】</strong></p>
-
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/wechat_qr_code12.jpg" alt="Wechat" /></p>
       </article>
 
       <ul class="pager blog-pager">
         
-          <li class="previous">
-            <a href="https://glumes.github.io/post/first/" data-toggle="tooltip" data-placement="top" title="First">&larr; Previous Post</a>
-          </li>
-        
         
           <li class="next">
-            <a href="https://glumes.github.io/post/imgtest/" data-toggle="tooltip" data-placement="top" title="Imgtest">Next Post &rarr;</a>
+            <a href="https://glumes.github.io/post/kotlin-with-anko/" data-toggle="tooltip" data-placement="top" title="Kotlin 使用 Anko 布局那些事">Next Post &rarr;</a>
           </li>
         
       </ul>
@@ -483,7 +424,7 @@ int main(int argc, const char * argv[])
         <p class="credits copyright text-muted">
           
             
-              <a href="www.glumes.com">Glumes</a>
+              <a href="http://www.glumes.com">Glumes</a>
             
           
 
