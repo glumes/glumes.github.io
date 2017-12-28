@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dagger2 on Glumes Blog</title>
+    <link>https://glumes.github.io/tags/dagger2/</link>
+    <description>Recent content in Dagger2 on Glumes Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
+    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <lastBuildDate>Fri, 22 Dec 2017 10:47:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://glumes.github.io/tags/dagger2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dagger2 在 Android 中的使用</title>
+      <link>https://glumes.github.io/post/android/android-dagger-use/</link>
+      <pubDate>Fri, 22 Dec 2017 10:47:52 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/post/android/android-dagger-use/</guid>
+      <description>&lt;p&gt;Dagger2 是一个进行依赖注入的框架，早先是由 Square 公司写的，后来由 Google 来维护了，能由 Google 亲自维护的东西，肯定值得学习。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

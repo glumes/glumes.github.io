@@ -8,16 +8,62 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <lastBuildDate>Fri, 22 Dec 2017 16:00:05 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Code</title>
-      <link>https://glumes.github.io/categories/code/</link>
+      <title>Android</title>
+      <link>https://glumes.github.io/categories/android/</link>
+      <pubDate>Fri, 22 Dec 2017 16:00:05 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/categories/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>https://glumes.github.io/categories/docker/</link>
+      <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/categories/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ffmpeg</title>
+      <link>https://glumes.github.io/categories/ffmpeg/</link>
+      <pubDate>Fri, 22 Dec 2017 16:05:30 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/categories/ffmpeg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Opencv</title>
+      <link>https://glumes.github.io/categories/opencv/</link>
       <pubDate>Fri, 22 Dec 2017 09:53:04 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/categories/code/</guid>
+      <guid>https://glumes.github.io/categories/opencv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Opengl</title>
+      <link>https://glumes.github.io/categories/opengl/</link>
+      <pubDate>Fri, 22 Dec 2017 16:21:16 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/categories/opengl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://glumes.github.io/categories/python/</link>
+      <pubDate>Fri, 22 Dec 2017 16:10:57 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/categories/python/</guid>
       <description></description>
     </item>
     

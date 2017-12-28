@@ -23,6 +23,15 @@
     </item>
     
     <item>
+      <title>Dagger2</title>
+      <link>https://glumes.github.io/tags/dagger2/</link>
+      <pubDate>Fri, 22 Dec 2017 10:47:52 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/tags/dagger2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Docker</title>
       <link>https://glumes.github.io/tags/docker/</link>
       <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
@@ -37,6 +46,24 @@
       <pubDate>Fri, 22 Dec 2017 16:05:30 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.github.io/tags/ffmpeg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Framework</title>
+      <link>https://glumes.github.io/tags/framework/</link>
+      <pubDate>Fri, 22 Dec 2017 15:40:19 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/tags/framework/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kotlin</title>
+      <link>https://glumes.github.io/tags/kotlin/</link>
+      <pubDate>Fri, 22 Dec 2017 10:26:57 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/tags/kotlin/</guid>
       <description></description>
     </item>
     
@@ -64,6 +91,15 @@
       <pubDate>Fri, 22 Dec 2017 16:10:57 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rxjava</title>
+      <link>https://glumes.github.io/tags/rxjava/</link>
+      <pubDate>Fri, 22 Dec 2017 16:00:05 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/tags/rxjava/</guid>
       <description></description>
     </item>
     
