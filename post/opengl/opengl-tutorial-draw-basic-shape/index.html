@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -201,7 +201,7 @@ var _hmt = _hmt || [];
 
 <p>定义如下顶点数据，绘制一条屏幕对角线的直线：</p>
 
-<pre><code>    float[] lineVertex = {
+<pre><code class="language-java">    float[] lineVertex = {
             -0.5f, 0.5f,
             0.5f, -0.5f
     };
@@ -211,7 +211,7 @@ var _hmt = _hmt || [];
 
 <p>顶点着色器代码：</p>
 
-<pre><code>attribute vec4 a_Position;
+<pre><code class="language-java">attribute vec4 a_Position;
 void main(){
     gl_Position = a_Position;
 }
@@ -221,7 +221,7 @@ void main(){
 
 <p>片段着色器代码：</p>
 
-<pre><code>precision mediump float;
+<pre><code class="language-java">precision mediump float;
 uniform vec4 u_Color;
 void main()
 {
@@ -235,7 +235,7 @@ void main()
 
 <p>最后还是通过<code>glDrawArrays</code>方法执行绘制。</p>
 
-<pre><code>glDrawArrays(GL_LINES, 0, 2);
+<pre><code class="language-java">glDrawArrays(GL_LINES, 0, 2);
 </code></pre>
 
 <p><code>GL_LINES</code>代表绘制的类型是直线，而<code>0，2</code>则是绘制的顶点范围。</p>
@@ -246,7 +246,7 @@ void main()
 
 <p>顶点数据也发生了相应的改动，假设如下的数据，注意要以逆时针定义数据。</p>
 
-<pre><code>    float[] triangleVertex = {
+<pre><code class="language-java">    float[] triangleVertex = {
             -0.5f, 0.5f,
             -0.5f, -0.5f,
             0.5f, -0.5f
@@ -255,7 +255,7 @@ void main()
 
 <p>那么最后绘制时，绘制类型也会发生变化了，顶点个数范围也会变化。</p>
 
-<pre><code> glDrawArrays(GL_TRIANGLES, 0, 3);
+<pre><code class="language-java"> glDrawArrays(GL_TRIANGLES, 0, 3);
 </code></pre>
 
 <p>绘制三角形结果如图：</p>
@@ -278,7 +278,7 @@ void main()
 
 <p>所以，以三角形扇的形式绘制一个矩形，我们可以重新定义矩形的顶点数据：</p>
 
-<pre><code>   float[] rectangleVertex = {
+<pre><code class="language-java">   float[] rectangleVertex = {
 		   // 第一个点就是三角形扇的中心点
             0f,    0f, 
             -0.5f, -0.8f,   
@@ -292,7 +292,7 @@ void main()
 
 <p>而着色器代码依旧不变，绘制一个纯色的矩形，绘制代码如下：</p>
 
-<pre><code>  glDrawArrays(GL_TRIANGLE_FAN, 0, 6);
+<pre><code class="language-java">  glDrawArrays(GL_TRIANGLE_FAN, 0, 6);
 </code></pre>
 
 <p>绘制类型为<code>GL_TRIANGLE_FAN</code>，顶点数量也变成了 6 个。</p>
@@ -359,7 +359,7 @@ void main()
 
 <p>这样一来，顶点数据就不能再靠手写了。</p>
 
-<pre><code>    // 圆形分割的数量，分成 360 份，可由 360 个线段组成空心圆，也可以由 360 个三角形组成实心圆
+<pre><code class="language-java">    // 圆形分割的数量，分成 360 份，可由 360 个线段组成空心圆，也可以由 360 个三角形组成实心圆
     public static final int VERTEX_DATA_NUM = 360;
     // 360 个顶点的位置，因为有 x 和 y 坐标，所以 double 一下，再加上中心点 和 闭合的点
     float[] circleVertex = new float[VERTEX_DATA_NUM * 2 + 4];
@@ -388,7 +388,7 @@ void main()
 
 <p>在绘制时依旧使用三角形扇的形式来绘制。</p>
 
-<pre><code>	// 要把顶点数据个数对应上
+<pre><code class="language-java">	// 要把顶点数据个数对应上
     glDrawArrays(GL_TRIANGLE_FAN, 0, VERTEX_DATA_NUM + 2);
 </code></pre>
 
@@ -400,7 +400,7 @@ void main()
 
 <p>还是上面定义的顶点数据，但是我们只用其中分割成 360 份的那部分顶点数据就好了，也就是去掉首位两个点，然后把这个 360 个点依次连接绘制成圆形。</p>
 
-<pre><code>        glDrawArrays(GL_LINE_LOOP, 1, VERTEX_DATA_NUM );
+<pre><code class="language-java">        glDrawArrays(GL_LINE_LOOP, 1, VERTEX_DATA_NUM );
 </code></pre>
 
 <p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_circle_empty_yellow.png" alt="hhttp://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_circle_empty_yellow.png" /></p>
@@ -557,7 +557,15 @@ void main()
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

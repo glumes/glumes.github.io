@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -215,7 +215,7 @@ var _hmt = _hmt || [];
 
 <p>最直接的表现就是可以声明一个变量，它的类型就是函数。</p>
 
-<pre><code>    val arg = fun(a:Int,b:Int) = a+b // 变量 arg 是一个函数类型
+<pre><code class="language-java">    val arg = fun(a:Int,b:Int) = a+b // 变量 arg 是一个函数类型
     println(arg)    // 打印类型 (kotlin.Int, kotlin.Int) -&gt; kotlin.Int
     println(arg(1,2))    // 调用该函数，打印结果为 3
 </code></pre>
@@ -230,7 +230,7 @@ var _hmt = _hmt || [];
 
 <p>最常见的就是给 Context 添加 Toast 的拓展函数。</p>
 
-<pre><code>	fun Context.showToast(msg: String) {
+<pre><code class="language-java">	fun Context.showToast(msg: String) {
 	    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 	}
 	// Activity 中调用
@@ -243,7 +243,7 @@ var _hmt = _hmt || [];
 
 <p>注意 <strong>子类可以调用父类的拓展函数</strong>。</p>
 
-<pre><code>open class A
+<pre><code class="language-java">open class A
 class B:A()
 fun A.add(a:Int,b:Int):Int{
     return a + b
@@ -273,12 +273,12 @@ fun main(args: Array&lt;String&gt;) {
 
 <p>就比如在 Kotlin 中使用 while 语句，while 中不能再使用赋值表达式了。</p>
 
-<pre><code>while( (i=2) &lt; 3) {}  // while 中不能执行 i = 2 的操作了
+<pre><code class="language-java">while( (i=2) &lt; 3) {}  // while 中不能执行 i = 2 的操作了
 </code></pre>
 
 <p>上述代码在 Kotlin 中是编译不过的了，这个时候就可以使用 Lambda 表达式。</p>
 
-<pre><code> while ({ i=4; i }() &gt; 0){ } // 使用 lambda 表达式，最后还要添加小括号（），表示调用该函数
+<pre><code class="language-java"> while ({ i=4; i }() &gt; 0){ } // 使用 lambda 表达式，最后还要添加小括号（），表示调用该函数
 </code></pre>
 
 <p>因为没有指定类型，所以最后的变量 <code>i</code>被视为了返回值，在添加小括号表示调用，就实现了将<code>i</code>赋值并且与 0 进行判断的比较。</p>
@@ -289,7 +289,7 @@ fun main(args: Array&lt;String&gt;) {
 
 <p>比如有如下函数，它只有一个参数，当然就是最后一个参数了。</p>
 
-<pre><code>fun passLambda(init:() -&gt; Int){
+<pre><code class="language-java">fun passLambda(init:() -&gt; Int){
     println(&quot;lambda expression as argument&quot;)
     println(init())
 }
@@ -309,7 +309,7 @@ fun main(args: Array&lt;String&gt;) {
 
 <p>如果函数字面值只有一个参数，那么可以把它连同<code>-&gt;</code>一起省略掉，直接用<code>it</code>来代替。</p>
 
-<pre><code>fun singleArgument(init: (a:Int) -&gt; Int){ // 作为参数的函数只有一个参数
+<pre><code class="language-java">fun singleArgument(init: (a:Int) -&gt; Int){ // 作为参数的函数只有一个参数
     println(&quot;use it to replace single argument&quot;)
     println(init(3))
 }
@@ -330,7 +330,7 @@ fun main(args: Array&lt;String&gt;) {
 
 <p>带接收者的函数字面值的表达形式如下：</p>
 
-<pre><code>class ReceiveObject // 定义一个类作为接收者对象
+<pre><code class="language-java">class ReceiveObject // 定义一个类作为接收者对象
 fun exec(init: ReceiveObject.() -&gt; Int){}
 fun exec(init: ReceiveObject.(a:Int) -&gt; String){}
 fun exec(str:String,init: ReceiveObject.(a:Int,b:Int) -&gt; Int){}
@@ -338,7 +338,7 @@ fun exec(str:String,init: ReceiveObject.(a:Int,b:Int) -&gt; Int){}
 
 <p>可以看到，与之前的函数定义不同的是，在 函数的参数 前多加了一个类型 ReceiveObject ，这个类型就是指定的接受者对象。有点像是给这个类添加了拓展函数。</p>
 
-<pre><code>class ReceiveObject{
+<pre><code class="language-java">class ReceiveObject{
     fun show(){
         println(&quot;access&quot;)
     }
@@ -377,7 +377,7 @@ fun main(args: Array&lt;String&gt;) {
 
 <p>举个简单的例子：</p>
 
-<pre><code>class Html{
+<pre><code class="language-java">class Html{
     fun body(init:Body.() -&gt; Unit){}
     fun head(init:Head.() -&gt; Unit){}
 }
@@ -419,7 +419,7 @@ fun main(args: Array&lt;String&gt;) {
 
 <p>再来看一个 Anko 实现布局的代码：</p>
 
-<pre><code>	verticalLayout {
+<pre><code class="language-kotlin">	verticalLayout {
 		textView(&quot;hello,Anko&quot;)
         button()
     }
@@ -427,7 +427,7 @@ fun main(args: Array&lt;String&gt;) {
 
 <p>相信这时候再看源码就很简单了。</p>
 
-<pre><code>inline fun Activity.relativeLayout(init: (@AnkoViewDslMarker _RelativeLayout).() -&gt; Unit): android.widget.RelativeLayout {
+<pre><code class="language-kotlin">inline fun Activity.relativeLayout(init: (@AnkoViewDslMarker _RelativeLayout).() -&gt; Unit): android.widget.RelativeLayout {
     return ankoView(`$$Anko$Factories$Sdk25ViewGroup`.RELATIVE_LAYOUT, theme = 0) { init() }
 }
 
@@ -454,7 +454,7 @@ inline fun ViewManager.textView(text: CharSequence?): android.widget.TextView {
 
 <p><code>verticalLayout</code>拓展函数最终返回的是一个 <code>ankoView</code>。</p>
 
-<pre><code>// verticalLayout 函数实现
+<pre><code class="language-kotlin">// verticalLayout 函数实现
 inline fun Activity.verticalLayout(theme: Int = 0, init: _LinearLayout.() -&gt; Unit): LinearLayout {
     return ankoView(`$$Anko$Factories$CustomViews`.VERTICAL_LAYOUT_FACTORY, theme, init)
 }
@@ -477,7 +477,7 @@ inline fun &lt;T : View&gt; Activity.ankoView(factory: (ctx: Context) -&gt; T, t
 
 <p>它的 addView 方法如下：</p>
 
-<pre><code>	fun &lt;T : View&gt; addView(activity: Activity, view: T) {
+<pre><code class="language-kotlin">	fun &lt;T : View&gt; addView(activity: Activity, view: T) {
 	        createAnkoContext(activity, { AnkoInternals.addView(this, view) }, true)
 	}
 	// 第二个参数是带接收者类型的函数
@@ -501,7 +501,7 @@ inline fun &lt;T : View&gt; Activity.ankoView(factory: (ctx: Context) -&gt; T, t
 
 <p>这里参数 <code>this</code>比较重要，因为<code>init</code>函数是一个带接收者类型的函数，所以这里的<code>this</code>指的就是接收者类型<code>AnkoContext</code>。</p>
 
-<pre><code>    fun &lt;T : View&gt; addView(manager: ViewManager, view: T) {
+<pre><code class="language-kotlin">    fun &lt;T : View&gt; addView(manager: ViewManager, view: T) {
         return when (manager) {
             is ViewGroup -&gt; manager.addView(view)
             is AnkoContext&lt;*&gt; -&gt; manager.addView(view, null)
@@ -514,7 +514,7 @@ inline fun &lt;T : View&gt; Activity.ankoView(factory: (ctx: Context) -&gt; T, t
 
 <p>由于<code>manager</code>参数代表了接收者类型，而我们使用的接收者类型是 <code>AnkoContextImpl</code>，所以最后的添加布局工作代码在 <code>AnkoContextImpl</code> 类中。</p>
 
-<pre><code>    override fun addView(view: View?, params: ViewGroup.LayoutParams?) {
+<pre><code class="language-kotlin">    override fun addView(view: View?, params: ViewGroup.LayoutParams?) {
         if (view == null) return
         if (myView != null) {
             alreadyHasView()
@@ -657,7 +657,15 @@ inline fun &lt;T : View&gt; Activity.ankoView(factory: (ctx: Context) -&gt; T, t
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

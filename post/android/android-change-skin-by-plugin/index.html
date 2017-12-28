@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -222,7 +222,7 @@ var _hmt = _hmt || [];
 
 <p>在 <code>SkinManager</code>的<code>load</code>方法中，加载了插件包，并且得到了插件的资源<code>Resource</code>。</p>
 
-<pre><code>						PackageManager mPm = context.getPackageManager();
+<pre><code class="language-java">						PackageManager mPm = context.getPackageManager();
 						PackageInfo mInfo = mPm.getPackageArchiveInfo(skinPkgPath, PackageManager.GET_ACTIVITIES);
 						// 得到插件包名，根据包名和资源 ID 得到资源
 						skinPackageName = mInfo.packageName;
@@ -248,7 +248,7 @@ var _hmt = _hmt || [];
 
 <p>并且 Android-Skin-Loader 在需要继承的基类 <code>BaseActivity</code>、<code>BaseFragment</code>、<code>BaseFragmentActivity</code>中都设置了<code>LayoutInflater.Factory</code>，以便在布局加载之前进行预操作，也就是保存那些 需要换肤的控件 和识别 需要换肤的属性，这里 <em>换肤控件</em> 和 <em>换肤属性</em> 两个东西要区别开，它们所要进行的操作是不一样的，要先找到 *换肤控件*，然后再去找它的 <em>换肤属性</em> 。</p>
 
-<pre><code>@Override
+<pre><code class="language-java">@Override
 	public View onCreateView(String name, Context context, AttributeSet attrs) {
 		// 从 AttributeSet 中得到换肤属性，判断是否需要进行换肤
 		boolean isSkinEnable = attrs.getAttributeBooleanValue(SkinConfig.NAMESPACE, SkinConfig.ATTR_SKIN_ENABLE, false);
@@ -268,7 +268,7 @@ var _hmt = _hmt || [];
 
 <p>以上代码就是我们所说的侵入式编程，干扰了系统构造 View 的过程，所做的工作就是找出需要换肤的 View 并交由下一步进行解析。</p>
 
-<pre><code>private void parseSkinAttr(Context context, AttributeSet attrs, View view) {
+<pre><code class="language-java">private void parseSkinAttr(Context context, AttributeSet attrs, View view) {
 		List&lt;SkinAttr&gt; viewAttrs = new ArrayList&lt;SkinAttr&gt;();
 		
 		for (int i = 0; i &lt; attrs.getAttributeCount(); i++){
@@ -315,7 +315,7 @@ var _hmt = _hmt || [];
 
 <p>对于标识需要换肤的控件这一问题，AndroidChangeSkin 并没有再添加自定义属性，而是使用 View 自带的 <code>tag</code>属性。并在在<code>tag</code>属性的字符串值中，传递了要换肤的标识、要换肤的属性、要换肤的属性名。通过解析这三者来完成标识的任务。这样就不必要对每个属性都进行操作了。</p>
 
-<pre><code>	//传入activity，找到content元素，递归遍历所有的子View，根据tag命名，记录需要换肤的View
+<pre><code class="language-java">	//传入activity，找到content元素，递归遍历所有的子View，根据tag命名，记录需要换肤的View
 	public static List&lt;SkinView&gt; getSkinViews(Activity activity)
     {
         List&lt;SkinView&gt; skinViews = new ArrayList&lt;SkinView&gt;();
@@ -363,7 +363,7 @@ var _hmt = _hmt || [];
 
 <p>Android-Skin-Loader 是为每一个需要更改的属性定义了一个类，并在此类中去加载资源。</p>
 
-<pre><code>public class TextColorAttr extends SkinAttr {
+<pre><code class="language-java">public class TextColorAttr extends SkinAttr {
 
 	@Override
 	public void apply(View view) {
@@ -375,7 +375,7 @@ var _hmt = _hmt || [];
 
 <p>而 androidChangeSkin 则没有编写那么多类，采用了枚举类型来更改属性，同样也是在属性中加载资源。</p>
 
-<pre><code>public enum SkinAttrType
+<pre><code class="language-java">public enum SkinAttrType
 {
     BACKGROUND(&quot;background&quot;){
                 @Override
@@ -521,7 +521,15 @@ var _hmt = _hmt || [];
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

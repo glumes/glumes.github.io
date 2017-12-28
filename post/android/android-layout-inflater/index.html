@@ -34,7 +34,7 @@ LayoutInflater 实例的获取有多种方式， …">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -203,7 +203,7 @@ var _hmt = _hmt || [];
 
 <p>由于 Android 系统源码中关于 Content 部分采用的是装饰模式，Context 的具体功能都是由 <code>ContextImpl</code> 来实现的。通过在 ContextImpl 中找到<code>getSystemService</code>的代码，一路跟进，得知最后返回的实例是<code>PhoneLayoutInflater</code>。</p>
 
-<pre><code>        registerService(Context.LAYOUT_INFLATER_SERVICE, LayoutInflater.class,
+<pre><code class="language-java">        registerService(Context.LAYOUT_INFLATER_SERVICE, LayoutInflater.class,
                 new CachedServiceFetcher&lt;LayoutInflater&gt;() {
             @Override
             public LayoutInflater createService(ContextImpl ctx) {
@@ -219,7 +219,7 @@ var _hmt = _hmt || [];
 
 <p>LayoutInflater 加载布局的 inflate 方法也有多种重载形式：</p>
 
-<pre><code>View inflate(@LayoutRes int resource, @Nullable ViewGroup root)
+<pre><code class="language-java">View inflate(@LayoutRes int resource, @Nullable ViewGroup root)
 View inflate(@LayoutRes int resource, @Nullable ViewGroup root, boolean attachToRoot)
 </code></pre>
 
@@ -227,7 +227,7 @@ View inflate(@LayoutRes int resource, @Nullable ViewGroup root, boolean attachTo
 
 <p>不过有点需要注意的地方，若 <code>root</code>为 null，则在 xml 布局中为 <code>resource</code>设置的属性会失效，只是单纯的加载布局。</p>
 
-<pre><code>				  // temp 是 xml 布局中的顶层 View
+<pre><code class="language-java">				  // temp 是 xml 布局中的顶层 View
                     final View temp = createViewFromTag(root, name, inflaterContext, attrs);
                     ViewGroup.LayoutParams params = null;
                     if (root != null) { // root 
@@ -250,7 +250,7 @@ View inflate(@LayoutRes int resource, @Nullable ViewGroup root, boolean attachTo
 
 <p>跟进<code>createViewFromTag</code>方法查看 View 是如何创建出来的。</p>
 
-<pre><code>			View view; // 最后要返回的 View
+<pre><code class="language-java">			View view; // 最后要返回的 View
             if (mFactory2 != null) {
                 view = mFactory2.onCreateView(parent, name, context, attrs); // 是否设置了 Factory2 
             } else if (mFactory != null) {
@@ -285,7 +285,7 @@ View inflate(@LayoutRes int resource, @Nullable ViewGroup root, boolean attachTo
 
 <p>若没有设置过 Factory 接口，则是判断是否为自定义控件或者系统控件，不管是 onCreateView 方法还是 createView 方法，内部最终都是调用到了 createView 方法，通过它来生成 View 。</p>
 
-<pre><code>// 通过反射生成 View 的参数，分别是 Context 和 AttributeSet 类
+<pre><code class="language-java">// 通过反射生成 View 的参数，分别是 Context 和 AttributeSet 类
 static final Class&lt;?&gt;[] mConstructorSignature = new Class[] {
             Context.class, AttributeSet.class};
             
@@ -347,7 +347,7 @@ public final View createView(String name, String prefix, AttributeSet attrs)
 
 <p>若布局文件中有多个需要加载的 View ，则通过<code>rInflateChildren</code>方法继续加载顶层 View 下的 View ，最后通过<code>rInflate</code>方法来加载。</p>
 
-<pre><code>void rInflate(XmlPullParser parser, View parent, Context context,
+<pre><code class="language-java">void rInflate(XmlPullParser parser, View parent, Context context,
             AttributeSet attrs, boolean finishInflate) throws XmlPullParserException, IOException {
         final int depth = parser.getDepth();
         int type;
@@ -510,7 +510,15 @@ public final View createView(String name, String prefix, AttributeSet attrs)
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

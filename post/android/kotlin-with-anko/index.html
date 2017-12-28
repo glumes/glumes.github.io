@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -242,7 +242,7 @@ var _hmt = _hmt || [];
 
 <p>使用 Anko 创建布局很简单：</p>
 
-<pre><code>class AnkoActivity : AppCompatActivity() {
+<pre><code class="language-kotlin">class AnkoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         relativeLayout {
@@ -275,7 +275,7 @@ var _hmt = _hmt || [];
 
 <p>多实践几次就可以熟练这种写法，通过 Anko 来创建一个登陆界面：</p>
 
-<pre><code>	verticalLayout {
+<pre><code class="language-kotlin">	verticalLayout {
             padding = dip(8)
             val account = textView(&quot;account&quot;) {
                 id = R.id.account_text
@@ -318,7 +318,7 @@ var _hmt = _hmt || [];
 
 <p>除了直接在 Activity 里面写布局，还可以使用 AnkoComponent 接口创建布局，这样就可以将界面代码和 Activity 的代码分离了。</p>
 
-<pre><code>class MyActivity : AppCompatActivity() {
+<pre><code class="language-kotlin">class MyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         MyActivityUI().setContentView(this)
@@ -345,7 +345,7 @@ class MyActivityUI : AnkoComponent&lt;MyActivity&gt; {
 
 <p>也可以把它转换一下，使用 <code>apply</code> 的语法糖，最后返回的调用该方法的对象，再接着返回该对象的 view 就好了。</p>
 
-<pre><code>class MyActivityUI : AnkoComponent&lt;MyActivity&gt; {
+<pre><code class="language-kotlin">class MyActivityUI : AnkoComponent&lt;MyActivity&gt; {
     override fun createView(ui: AnkoContext&lt;AnkoActivity&gt;) = ui.apply {
         verticalLayout {
             val name = editText()
@@ -363,7 +363,7 @@ class MyActivityUI : AnkoComponent&lt;MyActivity&gt; {
 
 <p>创建  Activity，将 Fragment 添加上来。</p>
 
-<pre><code>class AnkoFragmentActivity : AppCompatActivity() {
+<pre><code class="language-kotlin">class AnkoFragmentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         linearLayout {
@@ -374,7 +374,7 @@ class MyActivityUI : AnkoComponent&lt;MyActivity&gt; {
 }
 </code></pre>
 
-<pre><code>class AnkoFragment : Fragment() {
+<pre><code class="language-kotlin">class AnkoFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 //        return inflater.inflate(R.layout.fragment_anko, container, false)
@@ -402,7 +402,7 @@ class MyActivityUI : AnkoComponent&lt;MyActivity&gt; {
 
 <p>比如，自定义 View ，绘制一个矩形：</p>
 
-<pre><code>public class RectangleView extends View {
+<pre><code class="language-kotlin">public class RectangleView extends View {
     public int size ;
     public Paint mPaint;
     public RectangleView(Context context) {
@@ -426,7 +426,7 @@ class MyActivityUI : AnkoComponent&lt;MyActivity&gt; {
 
 <p>让自定义 View 支持 Anko 的加载方式，还需要添加如下的拓展函数：</p>
 
-<pre><code>inline fun ViewManager.rectangleView(init: RectangleView.() -&gt; Unit): RectangleView {
+<pre><code class="language-kotlin">inline fun ViewManager.rectangleView(init: RectangleView.() -&gt; Unit): RectangleView {
     return ankoView({ RectangleView(it) }, theme = 0, init = init)
 }
 </code></pre>
@@ -435,7 +435,7 @@ class MyActivityUI : AnkoComponent&lt;MyActivity&gt; {
 
 <p>最后就可以像使用其他控件一样来添加到布局中了。</p>
 
-<pre><code>    //加载自定义的 View
+<pre><code class="language-kotlin">    //加载自定义的 View
         relativeLayout {
             var view = rectangleView {
                 id = R.id.custom_view_id
@@ -470,7 +470,7 @@ class MyActivityUI : AnkoComponent&lt;MyActivity&gt; {
 
 <p>写法依旧简单：</p>
 
-<pre><code>       swipeRefreshLayout {
+<pre><code class="language-kotlin">       swipeRefreshLayout {
             setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN)
             onRefresh {
                 mainHandler.postDelayed(Runnable {
@@ -612,7 +612,15 @@ class MyActivityUI : AnkoComponent&lt;MyActivity&gt; {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

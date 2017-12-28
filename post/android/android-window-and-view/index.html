@@ -48,7 +48,7 @@ Android 6.0 …">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -240,7 +240,7 @@ var _hmt = _hmt || [];
 
 <p>attach 方法内创建 Window 的代码示例如下：</p>
 
-<pre><code>		mWindow = new PhoneWindow(this); // 创建 Window，实例是 PhonwWindow
+<pre><code class="language-java">		mWindow = new PhoneWindow(this); // 创建 Window，实例是 PhonwWindow
         mWindow.setCallback(this);    // 设置回调
         mWindow.setOnWindowDismissedCallback(this);  // 设置回调
         mWindow.getLayoutInflater().setPrivateFactory(this);
@@ -281,7 +281,7 @@ var _hmt = _hmt || [];
 
 <p>因此，我们的 Activity 中的所有 View 也是添加在 Window 上的，而这一切入点就是<code>setContentView</code>方法。</p>
 
-<pre><code>    public void setContentView(int layoutResID) {
+<pre><code class="language-java">    public void setContentView(int layoutResID) {
         getWindow().setContentView(layoutResID);
         initWindowDecorActionBar();
     }
@@ -301,7 +301,7 @@ var _hmt = _hmt || [];
 
 <p>而<code>setContentView</code>方法就是对上述图片创建 DecorView 的解释了。</p>
 
-<pre><code>    @Override
+<pre><code class="language-java">    @Override
     public void setContentView(int layoutResID) {
         if (mContentParent == null) {    // 代表图中 ContentView 的内容
             installDecor();    // 创建 DecorView
@@ -331,7 +331,7 @@ var _hmt = _hmt || [];
 
 <p>下面就是分析 DecorView 是如何创建并添加初始的布局内容的。</p>
 
-<pre><code>    private void installDecor() {
+<pre><code class="language-java">    private void installDecor() {
         if (mDecor == null) {
             mDecor = generateDecor();    // 直接 new 一个 DecorView 对象
         }
@@ -344,7 +344,7 @@ var _hmt = _hmt || [];
 
 <p>在 installDecor 方法中直接 new 了一个 DecorView 对象，此时它还是只是一个 FrameLayout 容器，内部还没有东西。接着就是去创建内容栏。</p>
 
-<pre><code>		int layoutResource ;
+<pre><code class="language-java">		int layoutResource ;
 		// 省略掉根据各自 Feature 参数来初始化不同的 layoutResource 过程
 		mDecor.startChanging();    // 标识 DecorView 中的内容开始改变
         View in = mLayoutInflater.inflate(layoutResource, null);    // 加载 XML 布局文件，可能没有标题栏，但一定有内容栏
@@ -368,7 +368,7 @@ var _hmt = _hmt || [];
 
 <p>在<code>handleResumeActivity</code>方法内的处理代码如下：</p>
 
-<pre><code>	// 变量 r 指的是 ActivityClientRecord 类，变量 a 指的是 Activity，也就是 r.activity
+<pre><code class="language-java">	// 变量 r 指的是 ActivityClientRecord 类，变量 a 指的是 Activity，也就是 r.activity
 		 if (r.window == null &amp;&amp; !a.mFinished &amp;&amp; willBeVisible) {    // if 判断成立
                 r.window = r.activity.getWindow();
                 View decor = r.window.getDecorView();    // 设置 DecorView 可见
@@ -508,7 +508,15 @@ var _hmt = _hmt || [];
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

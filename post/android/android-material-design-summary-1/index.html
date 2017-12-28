@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -201,8 +201,7 @@ var _hmt = _hmt || [];
 
 <p>TextInputLayout 的作用是当输入文字时，它可以把提示文字 Hint 移至 EditText 上方。</p>
 
-<pre><code>
-    &lt;android.support.design.widget.TextInputLayout
+<pre><code class="language-java">    &lt;android.support.design.widget.TextInputLayout
         android:layout_width=&quot;0dp&quot;
         android:layout_height=&quot;wrap_content&quot;
         android:layout_marginStart=&quot;8dp&quot;
@@ -224,7 +223,7 @@ var _hmt = _hmt || [];
 
 <p>而当 EditText 中输入的内容不正确时，TextInputLayout 还能够进行错误的处理。<code>setError</code> 方法会在 EditText 下方显示红色的错误消息。<code>setErrorEnabled</code>方法开启错误提醒功能，使用代码如下：</p>
 
-<pre><code> String username = mUsernameLayout.getEditText().getText().toString();
+<pre><code class="language-java"> String username = mUsernameLayout.getEditText().getText().toString();
         String password = mPasswordLayout.getEditText().getText().toString();
 
         if (!username.equals(RIGHT_NAME)){
@@ -247,7 +246,7 @@ var _hmt = _hmt || [];
 
 <p>使用 ViewPager 还需要对应的 Adapter ，简单使用代码如下：</p>
 
-<pre><code>   mTabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager());
+<pre><code class="language-java">   mTabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager());
 
         mViewpager.setAdapter(mTabPagerAdapter);
 
@@ -267,7 +266,7 @@ var _hmt = _hmt || [];
 
 <p>Toolbar 可以用来替换 ActionBar 的，如果要替换 ActionBar ，那么在使用时，需要配置 Activity 的 theme 为<code>Theme.AppCompat.NoActionBar</code>，或者在对应的主题中加入如下：</p>
 
-<pre><code>		&lt;item name=&quot;windowActionBar&quot;&gt;false&lt;/item&gt;
+<pre><code class="language-java">		&lt;item name=&quot;windowActionBar&quot;&gt;false&lt;/item&gt;
 		&lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;
 </code></pre>
 
@@ -279,7 +278,7 @@ var _hmt = _hmt || [];
 
 <p>Toolbar 也有各种设置选项，包括标题，子标题，Logo，菜单等。</p>
 
-<pre><code>	mToolbar.setTitle(&quot;Title&quot;);
+<pre><code class="language-java">	mToolbar.setTitle(&quot;Title&quot;);
         mToolbar.setSubtitle(&quot;SubTitle&quot;);
         mToolbar.setNavigationIcon(R.mipmap.ic_drawer_home);
         mToolbar.inflateMenu(R.menu.toolbar_menu);
@@ -406,7 +405,15 @@ var _hmt = _hmt || [];
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

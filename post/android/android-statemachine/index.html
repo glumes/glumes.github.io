@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -215,7 +215,7 @@ var _hmt = _hmt || [];
 
 <p>Android 中的状态机是一个分层的消息处理机制，每一层都会有一到多个节点，而状态机的消息就是在这些节点之间流转处理，如下结构所示：</p>
 
-<pre><code>	// 状态机分层结构
+<pre><code class="language-sh">	// 状态机分层结构
           mP0
          /   \
         mP1   mS0
@@ -231,7 +231,7 @@ var _hmt = _hmt || [];
 
 <p>在我们使用 StateMachine 之前，要构造好所需的状态分层结构。通过<code>addState</code>方法来向状态机中添加节点，例如如下的状态结构，mS1 和 mS2 节点有公共的父节点 mP1，同时还有一个孤立的节点 mP2。</p>
 
-<pre><code>      // 状态分层结构设定
+<pre><code class="language-java">      // 状态分层结构设定
         mP1      mP2
        /   \
       mS2   mS1
@@ -256,7 +256,7 @@ var _hmt = _hmt || [];
 
 <p>除此之外，节点还可以通过<code>transitionTo</code>方法将当前节点转移至另外一个新的节点。</p>
 
-<pre><code>          mP0
+<pre><code class="language-java">          mP0
          /   \
         mP1   mS0
        /   \
@@ -281,7 +281,7 @@ var _hmt = _hmt || [];
 
 <p>如果我们在初始化状态机时只是传递了一个名字，而没有传递 Looper 或者 Handler 之类的消息循环，那么状态机默认就是启用其内部的一个线程<code>HandlerThread</code>。</p>
 
-<pre><code>  protected StateMachine(String name) {
+<pre><code class="language-java">  protected StateMachine(String name) {
         mSmThread = new HandlerThread(name); // 创建 HandlerThread 线程
         mSmThread.start();
         Looper looper = mSmThread.getLooper();
@@ -415,7 +415,15 @@ var _hmt = _hmt || [];
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

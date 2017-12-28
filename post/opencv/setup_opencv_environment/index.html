@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -215,7 +215,7 @@ var _hmt = _hmt || [];
 
 <p>解决办法就是进入到 <code>/usr/local/lib/python3.6/site-packages</code> 目录下，通过 <code>ln</code> 命令将 <code>/usr/local/Cellar/opencv/3.3.1_1/lib/python3.6/site-packages</code> 目录下的 <code>cv2.so</code> 链接到当前目录。</p>
 
-<pre><code>///usr/local/lib/python3.6/site-packages 目录下执行如下指令
+<pre><code class="language-sh">///usr/local/lib/python3.6/site-packages 目录下执行如下指令
 sudo ln -s /usr/local/Cellar/opencv/3.3.1_1/lib/python3.6/site-packages/cv2.so cv2.so
 </code></pre>
 
@@ -231,7 +231,7 @@ sudo ln -s /usr/local/Cellar/opencv/3.3.1_1/lib/python3.6/site-packages/cv2.so c
 
 <p>通过这种方式安装的 OpenCV 在运行播放视频的代码时会出错：</p>
 
-<pre><code>import cv2
+<pre><code class="language-java">import cv2
 videoUrl = &quot;/Users/glumes/Desktop/kpt1.mp4&quot;
 cap = cv2.VideoCapture('/Users/glumes/Desktop/kpt1.mp4')
 while(cap.isOpened()):
@@ -255,7 +255,7 @@ cv2.destroyAllWindows()
 
 <p>简单的展示一张图片代码示例：</p>
 
-<pre><code>import cv2
+<pre><code class="language-java">import cv2
 print(cv2.__version__)
 imgUrl = '/Users/glumes/Desktop/blog_camera_block.png'
 img = cv2.imread(imgUrl,0)
@@ -298,7 +298,7 @@ cv2.destroyAllWindows()
 
 <p>同样还是预览一张图片作为示例：</p>
 
-<pre><code>//
+<pre><code class="language-c++">//
 //  main.cpp
 //  OpenCVEnv
 //
@@ -350,7 +350,7 @@ int main(int argc, const char * argv[])
 
 <p>别忘了在工程的 build.gradle 添加如下代码来导入</p>
 
-<pre><code>  implementation project(':OpenCVLibrary330')
+<pre><code class="language-gradle">  implementation project(':OpenCVLibrary330')
 </code></pre>
 
 <p>之后，就是导入 <code>so</code> 动态库。</p>
@@ -361,7 +361,7 @@ int main(int argc, const char * argv[])
 
 <p>接下来修改 CMakeLists.txt 文件，将头文件和库进行导入。</p>
 
-<pre><code># 包含头文件
+<pre><code class="language-cmake"># 包含头文件
  include_directories(/Users/glumes/Downloads/OpenCV-android-sdk/sdk/native/jni/include)
 # 添加 lib_opencv 动态库
  add_library( lib_opencv SHARED IMPORTED )
@@ -376,7 +376,7 @@ int main(int argc, const char * argv[])
 
 <p>在默认的 native-lib 动态库中，添加 opencv 的动态库，这样就可以链接到了。</p>
 
-<pre><code>target_link_libraries( # Specifies the target library.
+<pre><code class="language-cmake">target_link_libraries( # Specifies the target library.
                        native-lib
 					   # 链接 opencv 的动态库
                        lib_opencv
@@ -497,7 +497,15 @@ int main(int argc, const char * argv[])
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

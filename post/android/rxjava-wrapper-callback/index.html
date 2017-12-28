@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -201,7 +201,7 @@ var _hmt = _hmt || [];
 
 <p>但是有些现成的操作已经处理好回调方法了，例如蓝牙扫描，只要在 onLeScan 方法中处理返回的蓝牙设备即可，其他方法也大致如此，发出请求，在回调中处理请求。</p>
 
-<pre><code>mBluetoothAdapter.startLeScan(new BluetoothAdapter.LeScanCallback() {
+<pre><code class="language-java">mBluetoothAdapter.startLeScan(new BluetoothAdapter.LeScanCallback() {
             @Override
             public void onLeScan(BluetoothDevice bluetoothDevice, int i, byte[] bytes) {
                 // 回调方法，处理扫描到的蓝牙设备
@@ -215,7 +215,7 @@ var _hmt = _hmt || [];
 
 <p>创建一个 Observable 的方法大致是这样的：</p>
 
-<pre><code>		Observable.create(new Observable.OnSubscribe&lt;String&gt;() {
+<pre><code class="language-java">		Observable.create(new Observable.OnSubscribe&lt;String&gt;() {
             @Override
             public void call(Subscriber&lt;? super String&gt; subscriber) {
                 // 在回调方法中，对发射的数据处理 onNext、onComplete、 onError 
@@ -232,7 +232,7 @@ var _hmt = _hmt || [];
 
 <p>同时，subscribe 方法最后返回的对象是 Subscription 类型的。我们可以用  Subscription 类型的对象的 unsubscribe 方法来取消订阅。参照 RxJava 源码发现，Subscriber 类型实现了 Subscription 接口，并且最后返回的也是 call 方法中的参数 subscriber 。</p>
 
-<pre><code>        try {
+<pre><code class="language-java">        try {
             // allow the hook to intercept and/or decorate
             // 回调 call 方法
             RxJavaHooks.onObservableStart(observable, observable.onSubscribe).call(subscriber);
@@ -250,7 +250,7 @@ var _hmt = _hmt || [];
 
 <p>有了上面的思路，就可以简单的实现包装了，使用 create 方法返回了一个 <code>Observable&lt;BluetoothDevice&gt;</code>对象，然后在对其订阅。</p>
 
-<pre><code>Subscription subscription = Observable.create(new Observable.OnSubscribe&lt;BluetoothDevice&gt;() {
+<pre><code class="language-java">Subscription subscription = Observable.create(new Observable.OnSubscribe&lt;BluetoothDevice&gt;() {
             @Override
             public void call(final Subscriber&lt;? super BluetoothDevice&gt; subscriber) {
                 BluetoothAdapter.LeScanCallback leScanCallback =  new BluetoothAdapter.LeScanCallback() {
@@ -267,7 +267,7 @@ var _hmt = _hmt || [];
 
 <p>简单地说，已经实现了对 BluetoothDevice 对象的封装，可依旧存在问题，我们可以使用 Subscription 来取消订阅，不接收发送数据，但却没有停止蓝牙设备的扫描，因此下一步就是在取消订阅同时终止扫描。</p>
 
-<pre><code>    Subscription subscription = Observable.create(new Observable.OnSubscribe&lt;BluetoothDevice&gt;() {
+<pre><code class="language-java">    Subscription subscription = Observable.create(new Observable.OnSubscribe&lt;BluetoothDevice&gt;() {
             @Override
             public void call(final Subscriber&lt;? super BluetoothDevice&gt; subscriber) {
                 final BluetoothAdapter.LeScanCallback leScanCallback =  new BluetoothAdapter.LeScanCallback() {
@@ -301,7 +301,7 @@ var _hmt = _hmt || [];
 
 <p>最后，RxJava 在后续的版本中还提供了其他的方法来针对上述问题，不需要再通过 Subscriber 添加一个 Subscription 来解决了。</p>
 
-<pre><code>Observable.fromEmitter(new Action1&lt;Emitter&lt;BluetoothDevice&gt;&gt;() {
+<pre><code class="language-java">Observable.fromEmitter(new Action1&lt;Emitter&lt;BluetoothDevice&gt;&gt;() {
             @Override
             public void call(final Emitter&lt;BluetoothDevice&gt; bluetoothDeviceEmitter) {
             final BluetoothAdapter.LeScanCallback scanCallback = new BluetoothAdapter.LeScanCallback() {
@@ -452,7 +452,15 @@ var _hmt = _hmt || [];
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

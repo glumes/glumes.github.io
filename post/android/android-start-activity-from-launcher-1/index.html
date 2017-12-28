@@ -40,7 +40,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -234,7 +234,7 @@ var _hmt = _hmt || [];
 
 <p>Launcher 毕竟是一个系统应用，它的源代码位于 <code>packages/apps/Launcher2/src/com/android/launcher2/Launcher.java</code> 。</p>
 
-<pre><code>/**
+<pre><code class="language-java">/**
  * Default launcher application.
  */
 public final class Launcher extends Activity
@@ -245,7 +245,7 @@ public final class Launcher extends Activity
 
 <p>所以在<code>onClick</code>方法中就能找到启动 Activity 组件的调用方法 <code>startActivitySafely</code>。其中<code>Intent</code>参数包含了相应的信息。</p>
 
-<pre><code> boolean startActivitySafely(View v, Intent intent, Object tag) {
+<pre><code class="language-java"> boolean startActivitySafely(View v, Intent intent, Object tag) {
         boolean success = false;
         try {
 	        // 调用 Launcher 类的 startActivity 函数，不是 Activity 里面的，参数形式不对。
@@ -262,7 +262,7 @@ public final class Launcher extends Activity
 
 <h3 id="launcher-类的-startactivity-方法">Launcher 类的 startActivity() 方法</h3>
 
-<pre><code> boolean startActivity(View v, Intent intent, Object tag) {
+<pre><code class="language-java"> boolean startActivity(View v, Intent intent, Object tag) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             // Only launch using the new animation if the shortcut has not opted out (this is a
@@ -306,7 +306,7 @@ public final class Launcher extends Activity
 
 <p>这里，假设没有动画，并且 user == null 的 if 判断成立，则直接调用父类 Activity 的 <code>startActivity(Intent intent)</code>方法。</p>
 
-<pre><code>@Override
+<pre><code class="language-java">@Override
     public void startActivity(Intent intent) {
         this.startActivity(intent, null);
     }
@@ -314,7 +314,7 @@ public final class Launcher extends Activity
 
 <p>最终调用了父类 Activity 的<code>startActivity(Intent intent, @Nullable Bundle options)</code>方法。</p>
 
-<pre><code> @Override
+<pre><code class="language-java"> @Override
     public void startActivity(Intent intent, @Nullable Bundle options) {
         if (options != null) {
             startActivityForResult(intent, -1, options);
@@ -327,7 +327,7 @@ public final class Launcher extends Activity
 <p>###Activity 类的 startActivityForResult() 方法
 由于之前假设的 options 参数为 null，则直接调用<code>startActivityForResult(intent, -1)</code>，方法原型如下：</p>
 
-<pre><code>public void startActivityForResult(Intent intent, int requestCode) {
+<pre><code class="language-java">public void startActivityForResult(Intent intent, int requestCode) {
         startActivityForResult(intent, requestCode, null);
     }
 </code></pre>
@@ -335,7 +335,7 @@ public final class Launcher extends Activity
 <p>这里面调用的也是<code>startActivityForResult</code>，只不过第三个参数为 null 了，也就是上面的 options 参数。
 只有当请求码 <code>requestCode &gt;=0</code>，才会执行调用者的 <code>onActivityResult()</code>方法，这里为 -1 ，不会。</p>
 
-<pre><code>public void startActivityForResult(Intent intent, int requestCode, @Nullable Bundle options) {
+<pre><code class="language-java">public void startActivityForResult(Intent intent, int requestCode, @Nullable Bundle options) {
         if (mParent == null) {
             Instrumentation.ActivityResult ar =
                 mInstrumentation.execStartActivity(
@@ -362,7 +362,7 @@ public final class Launcher extends Activity
 
 <p>方法原型为：</p>
 
-<pre><code>    public ActivityResult execStartActivity(
+<pre><code class="language-java">    public ActivityResult execStartActivity(
             Context who, IBinder contextThread, IBinder token, Activity target,
             Intent intent, int requestCode, Bundle options) {
 </code></pre>
@@ -435,7 +435,7 @@ public final class Launcher extends Activity
 
 <p>而<code>ActivityThread</code>类的成员函数<code>getApplicationThread()</code>用来获取它内部的一个类型为<code>ApplicationThread</code>的<code>Binder本地对象</code>。</p>
 
-<pre><code>private class ApplicationThread extends ApplicationThreadNative {}
+<pre><code class="language-java">private class ApplicationThread extends ApplicationThreadNative {}
 public abstract class ApplicationThreadNative extends Binder implements IApplicationThread {}
 </code></pre>
 
@@ -447,7 +447,7 @@ public abstract class ApplicationThreadNative extends Binder implements IApplica
 
 <h3 id="instrumentation-类的-execstartactivity-方法">Instrumentation 类的 execStartActivity() 方法</h3>
 
-<pre><code>    public ActivityResult execStartActivity(
+<pre><code class="language-java">    public ActivityResult execStartActivity(
             Context who, IBinder contextThread, IBinder token, Activity target,
             Intent intent, int requestCode, Bundle options) {
         IApplicationThread whoThread = (IApplicationThread) contextThread;
@@ -472,7 +472,7 @@ public abstract class ApplicationThreadNative extends Binder implements IApplica
 
 <p>ActivityManagerNative.getDefault() 方法返回的就是 ActivityManagerService 的代理对象，代理对象的获取在之前 <a href="http://www.glumes.com/android-binder-note-1/">Binder 学习</a>的文章中已经了解过了。</p>
 
-<pre><code>public abstract class ActivityManagerNative extends Binder implements IActivityManager{
+<pre><code class="language-java">public abstract class ActivityManagerNative extends Binder implements IActivityManager{
 
 	static public IActivityManager asInterface(IBinder obj) {
         if (obj == null) {
@@ -513,7 +513,7 @@ public abstract class ApplicationThreadNative extends Binder implements IApplica
 
 <p>在 ActivityManagerNative 中还看到了一个有意思的单例写法：</p>
 
-<pre><code>public abstract class Singleton&lt;T&gt; {
+<pre><code class="language-java">public abstract class Singleton&lt;T&gt; {
     private T mInstance;
     protected abstract T create();
     public final T get() {
@@ -531,7 +531,7 @@ public abstract class ApplicationThreadNative extends Binder implements IApplica
 
 <p>Instrumentation 类的 execStartActivity() 方法最终调用了ActivityManagerProxy 类的 startActivity() 方法，由 ActivityManagerService 的代理对象 Binder 去发起类型为 START_ACTIVITY_TRANSACTION 的进程间通信请求。参数信息如注释所示：</p>
 
-<pre><code>    public int startActivity(IApplicationThread caller, String callingPackage, Intent intent,
+<pre><code class="language-java">    public int startActivity(IApplicationThread caller, String callingPackage, Intent intent,
             String resolvedType, IBinder resultTo, String resultWho, int requestCode,
             int startFlags, ProfilerInfo profilerInfo, Bundle options) throws RemoteException {
         Parcel data = Parcel.obtain();
@@ -716,7 +716,15 @@ public abstract class ApplicationThreadNative extends Binder implements IApplica
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

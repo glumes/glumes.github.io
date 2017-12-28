@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -209,7 +209,7 @@ var _hmt = _hmt || [];
 
 <p>比如，我们在写一个无须跨进程的本地服务 LocalService 时，需要在 Service 定义一个类继承自 Binder ，然后在 onBind() 方法中返回该 Binder 对象。这样在 <code>ServiceConnection</code> 接口的 onServiceConnection 方法中就会收到该 Binder 对象，通过该 Binder 对象就可以执行 LocalService 中的公共方法。</p>
 
-<pre><code>public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+<pre><code class="language-java">public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
        mLocalBinder = (LocalService.LocalBinder) iBinder;
 }
 </code></pre>
@@ -219,14 +219,14 @@ onServiceConnection 方法，其中的 <code>IBinder</code> 参数就是 Service
 
 <p>而当 Service 组件是一个跨进程的 RemoteService 时，在 onServiceConnected 方法中再如上代码所示的调用返回的 IBinder 对象，则会报如下的转型错误：</p>
 
-<pre><code>java.lang.ClassCastException: android.os.BinderProxy cannot be cast to com.glumes.ipc_binder.service.LocalService$LocalBinder
+<pre><code class="language-java">java.lang.ClassCastException: android.os.BinderProxy cannot be cast to com.glumes.ipc_binder.service.LocalService$LocalBinder
 </code></pre>
 
 <p>这是因为 RemoteService 在另外的进程中，而<code>不同的进程内存资源是不能共享</code>的，服务端不能将自己的 Binder 本地对象返回过去，只能返回一个 <code>代理对象 Binder</code> ，客户端 Client 通过这个代理对象 Binder 来调用 RemoteService 的相关方法。这个代理对象的类型就是 <code>BinderProxy</code>。</p>
 
 <p>在 onServiceConnection 方法中通过 <code>asInterface</code> 方法来将 Service 返回的代理对象 Binder 转换成代理对象 Proxy，其中，Proxy 持有 Binder 的引用，其变量名为 <code>mRemote</code>。</p>
 
-<pre><code>public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+<pre><code class="language-java">public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             // ActivityManagerService 在 bindService 的过程中会回调该方法，将 Service 的 Binder 对象传回来
             // 再调用 asInterface 方法根据是否在同一进程进行转换。
             // 如果在同一进程，返回的是本地对象 Binder 
@@ -271,18 +271,18 @@ onServiceConnection 方法，其中的 <code>IBinder</code> 参数就是 Service
 
 <p>onServiceConnection 的方法原型如下，由系统回调该方法，其中的参数 iBinder 就是 Service 的 Binder 代理对象。</p>
 
-<pre><code>public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+<pre><code class="language-java">public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
 </code></pre>
 
 <p>而在 onServiceConnection 方法内执行 <code>asInterface</code> 方法，返回的内部代理类 Proxy 。</p>
 
-<pre><code>// asInterface 方法原型为，其实参数 obj 为 onServiceConnected 方法的参数 iBinder 。
+<pre><code class="language-java">// asInterface 方法原型为，其实参数 obj 为 onServiceConnected 方法的参数 iBinder 。
 public static IBookManager asInterface(IBinder obj){
 </code></pre>
 
 <p>返回的内部代理类 Proxy 构造方法如下，其函数调用都是通过该 mRemote 对象的 <code>transact</code> 方法来完成的，此 mRemote 对象就是远程服务在 Binder 驱动中对应的 mRemote 引用，它的类型就是 <code>BinderProxy</code>，而 Proxy 类只是对 mRemote 对象组合了一下而已。</p>
 
-<pre><code>   private static class Proxy implements IBookManager{
+<pre><code class="language-java">   private static class Proxy implements IBookManager{
         private IBinder mRemote ;
         public Proxy(IBinder remote) {
             mRemote = remote;
@@ -444,7 +444,15 @@ public static IBookManager asInterface(IBinder obj){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

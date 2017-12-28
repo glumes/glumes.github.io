@@ -40,7 +40,7 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -211,7 +211,7 @@ var _hmt = _hmt || [];
 
 <p>下来展示具体代码的操作，用的是 RxJava 2.x 的版本：</p>
 
-<pre><code> private Observable&lt;Integer&gt; handleRxJavaDialog() {
+<pre><code class="language-java"> private Observable&lt;Integer&gt; handleRxJavaDialog() {
         return Observable.create(emitter -&gt; {
             final AlertDialog dialog = new AlertDialog.Builder(mContext)
                     .setMessage(&quot;RxJava封装Dialog事件流&quot;)
@@ -241,7 +241,7 @@ var _hmt = _hmt || [];
 
 <p>它们的使用也是大同小异，比如要对一个 View 封装其点击事件，就可以这样写：</p>
 
-<pre><code>  RxView.clicks(mBtn)
+<pre><code class="language-java">  RxView.clicks(mBtn)
 		.subscribe(new Consumer&lt;Object&gt;() {
             @Override
             public void accept(@NonNull Object o) throws Exception {
@@ -254,7 +254,7 @@ var _hmt = _hmt || [];
 
 <p>在 RxView.clicks 的源码中，最后返回的是一个 ViewClickObservable，从名字可见，这个 Observable 专门是用来处理点击事件的，在 RxBinding 中还有很多专门处理其他事件的 Observable，例如：<code>ViewDragObservable</code>、<code>ViewLongClickObservable</code>、<code>ViewScrollChangeEventObservable</code>等等，他们的实现方法也都大同小异了。</p>
 
-<pre><code>  @CheckResult @NonNull
+<pre><code class="language-java">  @CheckResult @NonNull
   public static Observable&lt;Object&gt; clicks(@NonNull View view) {
     checkNotNull(view, &quot;view == null&quot;);
     return new ViewClickObservable(view);
@@ -263,7 +263,7 @@ var _hmt = _hmt || [];
 
 <p>在专门处理各种事件的 Observable 类中，都会有一个实现 <code>Disposable</code>接口和具体事件所对应的接口的 Listener 类，而这个 Listener 类的作用，就是给我们所需要的 View 设置对应事件回调接口的，并且在回调接口中调用 Observable 的 onNext 方法来将事件转换到 RxJava 的事件流中。</p>
 
-<pre><code>	ViewClickObservable(View view) {
+<pre><code class="language-java">	ViewClickObservable(View view) {
     this.view = view;
 	}
 
@@ -421,7 +421,15 @@ var _hmt = _hmt || [];
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

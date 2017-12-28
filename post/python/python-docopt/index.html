@@ -36,7 +36,7 @@ docopt 是一个开源的库，代码地址：https://github.com/docopt/docopt�
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -211,7 +211,7 @@ var _hmt = _hmt || [];
 
 <p>举个 docopt 中的例子来说明：</p>
 
-<pre><code>&quot;&quot;&quot;Naval Fate.
+<pre><code class="language-python">&quot;&quot;&quot;Naval Fate.
 
 Usage:
   naval_fate.py ship new &lt;name&gt;...
@@ -266,7 +266,7 @@ if __name__ == '__main__':
 
 <p>为选项添加参数的格式有两种：</p>
 
-<pre><code>-o FILE --output-FILE     # 不使用逗号，使用 = 符号
+<pre><code class="language-sh">-o FILE --output-FILE     # 不使用逗号，使用 = 符号
 -i &lt;file&gt;, --input &lt;file&gt; # 使用逗号，不使用 = 符号
 </code></pre>
 
@@ -274,7 +274,7 @@ if __name__ == '__main__':
 
 <p>为选项添加默认值时，把它添加到选择描述后面即可，格式如下<code>[default: &lt;my-default-value&gt;]</code></p>
 
-<pre><code>--coefficient=K  The K coefficient [default: 2.95]
+<pre><code class="language-sh">--coefficient=K  The K coefficient [default: 2.95]
 --output=FILE    Output file [default: test.txt]
 --directory=DIR  Some directory [default: ./]
 </code></pre>
@@ -289,12 +289,12 @@ if __name__ == '__main__':
 
 <p>在前面提到<code>arguments</code>参数是一个字典类型，包含了用户输入的选项和参数信息，还是上面的代码段例子，假如我们从命令行运行的输入是</p>
 
-<pre><code>python3 test.py ship Guardian move 100 150 --speed=15
+<pre><code class="language-python">python3 test.py ship Guardian move 100 150 --speed=15
 </code></pre>
 
 <p>那么打印<code>arguments</code>参数如下：</p>
 
-<pre><code>{'--drifting': False,
+<pre><code class="language-sh">{'--drifting': False,
  '--help': False,
  '--moored': False,
  '--speed': '15',
@@ -424,7 +424,15 @@ if __name__ == '__main__':
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

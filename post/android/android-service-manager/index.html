@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -213,7 +213,7 @@ var _hmt = _hmt || [];
 
 <p>首先从 ContextImpl 的 getSystemService 方法入手：</p>
 
-<pre><code>    @Override
+<pre><code class="language-java">    @Override
     public Object getSystemService(String name) {
         return SystemServiceRegistry.getSystemService(this, name);
     }
@@ -223,7 +223,7 @@ var _hmt = _hmt || [];
 
 <p>而 <code>SystemServiceRegistry</code> 的 getSystemService 方法内容如下：</p>
 
-<pre><code>/**
+<pre><code class="language-java">/**
      * Gets a system service from a given context.
      */
     public static Object getSystemService(ContextImpl ctx, String name) {
@@ -236,7 +236,7 @@ var _hmt = _hmt || [];
 
 <p>而 ServiceFetcher 是一个接口类型，定义如下，它的 getService 方法就是返回所需的 Service 。</p>
 
-<pre><code>    /**
+<pre><code class="language-java">    /**
      * Base interface for classes that fetch services.
      * These objects must only be created during static initialization.
      */
@@ -251,7 +251,7 @@ var _hmt = _hmt || [];
 
 <p>在 SystemServiceRegistry 源码里有个 <code>registerService</code> 方法，它就是向<code>SYSTEM_SERVICE_FETCHERS</code>添加 <code>ServiceFetcher</code>。</p>
 
-<pre><code>/**
+<pre><code class="language-java">/**
      * Statically registers a system service with the context.
      * This method must be called during static initialization only.
      */
@@ -266,7 +266,7 @@ var _hmt = _hmt || [];
 
 <p>而最终通过 <code>ServiceFetcher</code>的 getService 方法返回的 Service 也是在 registerService 方法中传入的，查看其中某个 Service 代码如下：</p>
 
-<pre><code> registerService(Context.ALARM_SERVICE, AlarmManager.class,
+<pre><code class="language-java"> registerService(Context.ALARM_SERVICE, AlarmManager.class,
             new CachedServiceFetcher&lt;AlarmManager&gt;() {
             @Override
             public AlarmManager createService(ContextImpl ctx) {
@@ -280,7 +280,7 @@ var _hmt = _hmt || [];
 
 <p>ServiceManager 返回 Service 的 Binder 对象的代码如下：</p>
 
-<pre><code> /**
+<pre><code class="language-java"> /**
      * Returns a reference to a service with the given name.
      * 
      * @param name the name of the service to get
@@ -427,7 +427,15 @@ var _hmt = _hmt || [];
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

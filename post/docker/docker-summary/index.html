@@ -42,7 +42,7 @@ Docker 容器在启动速度、硬盘使用、性能、系统支持量、隔离�
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -252,7 +252,7 @@ var _hmt = _hmt || [];
 
 <p>使用<code>docker pull</code>命令从网络上下载镜像。该命令的格式为：</p>
 
-<pre><code>docker pull NAME[:TAG]
+<pre><code class="language-sh">docker pull NAME[:TAG]
 docker pull ubuntu		// 最新版本
 docker pull ubuntu: 14.04	// 标签为 14.04 版本
 </code></pre>
@@ -267,7 +267,7 @@ docker pull ubuntu: 14.04	// 标签为 14.04 版本
 
 <p>可以使用<code>docker tag</code>命令为本地镜像添加新的标签，而不是修改原来的标签。相当于是多了一个别名，本质还是原来的标签。</p>
 
-<pre><code>docker tag ubuntu:latest ubuntu:newTag	// 新的标签
+<pre><code class="language-sh">docker tag ubuntu:latest ubuntu:newTag	// 新的标签
 docker inspect dockerId		// 通过 ID 查看具体信息
 </code></pre>
 
@@ -283,14 +283,14 @@ docker inspect dockerId		// 通过 ID 查看具体信息
 
 <p>根据镜像的标签来删除：</p>
 
-<pre><code>docker rmi ubuntu:newTag 	//删除 newTag 标签的镜像
+<pre><code class="language-sh">docker rmi ubuntu:newTag 	//删除 newTag 标签的镜像
 </code></pre>
 
 <p>当一个镜像文件有多个标签时，则只是删除标签，若只有一个标签了，那么就是删除镜像文件了。</p>
 
 <p>根据镜像的 ID 删除镜像：</p>
 
-<pre><code>docker rmi e4415b714b	// 删除对应 ID 的镜像
+<pre><code class="language-sh">docker rmi e4415b714b	// 删除对应 ID 的镜像
 </code></pre>
 
 <p>首先会删除指向该镜像的标签，然后再删除镜像文件本身。</p>
@@ -307,13 +307,13 @@ docker inspect dockerId		// 通过 ID 查看具体信息
 
 <p>可以使用<code>docker create</code>命令新建一个容器，但此时容器处于停止状态，使用<code>docker start</code>命令来启动它。</p>
 
-<pre><code>docker create -it ubuntu:latest		// 新建一个容器
+<pre><code class="language-sh">docker create -it ubuntu:latest		// 新建一个容器
 docker start 8ca2dd62ec24		//  根据容器 ID 来启动它
 </code></pre>
 
 <p>还可以使用<code>docker run</code>命令来新建并启动容器，相当于把之前的两步合为一步了。</p>
 
-<pre><code>docker run -t -i ubuntu:latest /bin/bash	// 启动一个 bash 终端
+<pre><code class="language-sh">docker run -t -i ubuntu:latest /bin/bash	// 启动一个 bash 终端
 </code></pre>
 
 <p>上述命令就创建了一个容器，并且启动了一个 bash 终端，允许用户进行交互。其中，<code>-t</code>选项让 Docker 分配一个伪终端并绑定到容器的标准输入上，<code>-i</code>则让容器的标准输入保持打开。</p>
@@ -324,7 +324,7 @@ docker start 8ca2dd62ec24		//  根据容器 ID 来启动它
 
 <p>当需要 Docker 容器在后台以守护态形式运行时，可以通过添加<code>-d</code>参数来实现。</p>
 
-<pre><code>docker run -d ubuntu:latest /bin/bash -c &quot;while true;do echo hell world;sleep 1;done&quot;	// 后台运行，打印日志
+<pre><code class="language-sh">docker run -d ubuntu:latest /bin/bash -c &quot;while true;do echo hell world;sleep 1;done&quot;	// 后台运行，打印日志
 
 docker logs abc19f3d5fd1	// 通过容器 ID 查看输出信息
 </code></pre>
@@ -343,13 +343,13 @@ docker logs abc19f3d5fd1	// 通过容器 ID 查看输出信息
 
 <p><code>docker attach</code>是 Docker 自带的命令。</p>
 
-<pre><code>docker run -idt 0ef2e08ed3fa	// 后台运行容器
+<pre><code class="language-sh">docker run -idt 0ef2e08ed3fa	// 后台运行容器
 docker attach 299ea4d823fb		// 再次进入到容器中
 </code></pre>
 
 <p>使用<code>docker exec</code>命令可以直接在容器内运行新的命令。</p>
 
-<pre><code>docker run -idt 0ef2e08ed3fa	// 后台运行容器
+<pre><code class="language-sh">docker run -idt 0ef2e08ed3fa	// 后台运行容器
 docker exec -ti 299ea4d823fb /bin/bash		// 在容器内创建一个 bash
 </code></pre>
 
@@ -477,7 +477,15 @@ docker exec -ti 299ea4d823fb /bin/bash		// 在容器内创建一个 bash
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

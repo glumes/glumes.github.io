@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -215,7 +215,7 @@ var _hmt = _hmt || [];
 
 <p>而 SystemServer 的执行主要在其 main 方法中，Android 6.0 的源码中不再是以前 Android 4.x 的 init1，init2 方法了。</p>
 
-<pre><code> /**
+<pre><code class="language-java"> /**
      * The main entry point from zygote.
      */
     public static void main(String[] args) {
@@ -225,7 +225,7 @@ var _hmt = _hmt || [];
 
 <p>继续跟进 run 方法查看：</p>
 
-<pre><code> private void run() {
+<pre><code class="language-java"> private void run() {
         try {
            
 	        // 如果当前系统时间比 1970 年更早，就设置当前系统时间为 1970 年
@@ -305,7 +305,7 @@ var _hmt = _hmt || [];
 
 <p>SystemServer 进程启动系统服务有两种方式，分别是 SystemServiceManager 的<code>startService</code> 方式和 ServiceManager 的 <code>addService</code> 方式。</p>
 
-<pre><code>       ServiceManager.addService(&quot;scheduling_policy&quot;, new SchedulingPolicyService());
+<pre><code class="language-java">       ServiceManager.addService(&quot;scheduling_policy&quot;, new SchedulingPolicyService());
        Trace.traceEnd(Trace.TRACE_TAG_SYSTEM_SERVER);
        mSystemServiceManager.startService(TelecomLoaderService.class);
 </code></pre>
@@ -337,7 +337,7 @@ var _hmt = _hmt || [];
 
 <p>通过查看 <code>SystemService</code>这个抽象类的源码可知，有如下方法：</p>
 
-<pre><code> /**
+<pre><code class="language-java"> /**
      * Publish the service so it is accessible to other services and apps.
      */
     protected final void publishBinderService(String name, IBinder service) {
@@ -356,7 +356,7 @@ var _hmt = _hmt || [];
 
 <p>而 ServiceManager 的对应方法为，最后一个变量设置 true 的话，则表示允许隔离的沙盒进程访问该服务。</p>
 
-<pre><code>/**
+<pre><code class="language-java">/**
      * Place a new @a service called @a name into the service
      * manager.
      * 
@@ -382,7 +382,7 @@ var _hmt = _hmt || [];
 
 <p>在<code>init.rc</code>中有如下代码启动 ServiceManager 。</p>
 
-<pre><code>service servicemanager /system/bin/servicemanager
+<pre><code class="language-java">service servicemanager /system/bin/servicemanager
     class core
     user system
     group system
@@ -523,7 +523,15 @@ var _hmt = _hmt || [];
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

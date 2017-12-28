@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -203,7 +203,7 @@ var _hmt = _hmt || [];
 
 <p>比如，我们有一个函数 y = x + 1 ，就可以编写如下代码：</p>
 
-<pre><code>def func(x):
+<pre><code class="language-python">def func(x):
 	return x + 1 
 </code></pre>
 
@@ -253,7 +253,7 @@ var _hmt = _hmt || [];
 
 <p>map() 函数接收两个参数，一个是函数，一个是 Iterable，map 将传入的函数依次作用到序列的每个元素，并把结果作为新的 Iterable 返回。</p>
 
-<pre><code>def f(x):
+<pre><code class="language-python">def f(x):
     return x + 1
 data = [1,2,3,4]
 r = map(f,data)
@@ -264,7 +264,7 @@ print(list(r))
 
 <p>reduce() 把一个函数作用在一个序列上，这个函数必须接收两个参数，reduce 把结果继续和序列的下一个元素做累积计算。</p>
 
-<pre><code>from functools import reduce
+<pre><code class="language-python">from functools import reduce
 
 def f(x,y):
     return  x*y
@@ -279,7 +279,7 @@ print(r)
 
 <p>filter() 函数用于过滤序列，filter 函数把传入的函数依次作用于每个元素，返回根据返回的是 True 还是 False 决定保留还是丢弃该元素。</p>
 
-<pre><code>def is_odd(n):
+<pre><code class="language-python">def is_odd(n):
     return n % 2 == 1
 
 result  = filter(is_odd,[1,2,3,4,5])
@@ -293,14 +293,14 @@ print(list(result))
 
 <p>例如按绝对值排序代码：</p>
 
-<pre><code>print(sorted([-34,5,-2,43],key=abs))
+<pre><code class="language-python">print(sorted([-34,5,-2,43],key=abs))
 </code></pre>
 
 <h3 id="闭包">闭包</h3>
 
 <p>闭包是那些带着它们被定义时的环境的函数。特别的，一个闭包可以引用它定义时存在的变量。</p>
 
-<pre><code>def func(x):
+<pre><code class="language-python">def func(x):
     def f():
         return  x + 1
     return f
@@ -432,7 +432,15 @@ print(result())
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>

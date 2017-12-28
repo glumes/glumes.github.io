@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://glumes.github.io/css/syntax.css" /><script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -215,12 +215,12 @@ var _hmt = _hmt || [];
 
 <p>在 Project 的 build.gradle 中添加：</p>
 
-<pre><code>classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+<pre><code class="language-gradle">classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 </code></pre>
 
 <p>在 app module 的 build.gradle 中添加：</p>
 
-<pre><code>apply plugin: 'com.neenbedankt.android-apt'
+<pre><code class="language-gradle">apply plugin: 'com.neenbedankt.android-apt'
 
 dependencies {
     // apt command comes from the android-apt plugin
@@ -246,7 +246,7 @@ dependencies {
 
 <p>这样一来，我们首先就得编写 Student 类。</p>
 
-<pre><code>public class Student {
+<pre><code class="language-java">public class Student {
     private String name ;
 
     @Inject
@@ -268,7 +268,7 @@ dependencies {
 
 <p>在 Activity 中我们同样采用 @Inject 注解来表明哪个成员变量需要采用注入的方式来提供依赖。</p>
 
-<pre><code>public class MainActivity extends AppCompatActivity {
+<pre><code class="language-java">public class MainActivity extends AppCompatActivity {
     
     @Inject
     Student student;
@@ -280,7 +280,7 @@ dependencies {
 
 <p>Dagger2 中提供了 <code>@Component</code> 注解作为注入器完成我们的注入工作，使用 @Component 注解，我们可以定义一个接口作为注入器，将所需的依赖注入到目标容器中。</p>
 
-<pre><code>@Component()
+<pre><code class="language-java">@Component()
 public interface StudentComponent {
     void inject(MainActivity mainActivity) ;
 }
@@ -294,7 +294,7 @@ public interface StudentComponent {
 
 <p>在 MainActivity 的 onCreate 方法中添加如下代码完成注入：</p>
 
-<pre><code>@Override
+<pre><code class="language-java">@Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
@@ -312,7 +312,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 <p>例如，我们要注入 Retrofit ，就可以在 Module 里面进行一次封装，HttpModule 里面封装了和 HTTP 请求相关的类，这些类大多是第三方类库里面提供的。</p>
 
-<pre><code>@Module
+<pre><code class="language-java">@Module
 public class HttpModule {
 	@Provides
     Retrofit provideRetrofit(OkHttpClient client,Gson gson){
@@ -328,7 +328,7 @@ public class HttpModule {
 
 <p>当采用 Module 的方式注入时，Component 里面的东西也要相关的进行更改了，要在 Component 里面添加我们的 Module 的内容。</p>
 
-<pre><code>@Component(
+<pre><code class="language-java">@Component(
         modules = {
                 HttpModule.class
         }
@@ -354,7 +354,7 @@ public class HttpModule {
 
 <p>另外，根据<code>面向接口编程</code>的思想，我们在需要注入的类上声明的可能是一个接口类型，而提供了却是它的实现类型。这个过程同样也可以用 Module 来完成，只需要 Module 的 provide 方法返回类型为接口类型，而实际 return 的类型为实现类型即可，比如最简单的返回 Context 类型。</p>
 
-<pre><code>@Module
+<pre><code class="language-java">@Module
 public class ActivityModule {
 
     private Activity mActivity ;
@@ -377,7 +377,7 @@ public class ActivityModule {
 
 <h3 id="component-的继承-subcomponent">Component 的继承 Subcomponent</h3>
 
-<pre><code>// 使用 Subcomponent 注解
+<pre><code class="language-java">// 使用 Subcomponent 注解
 @Subcomponent( 
         modules = {
                 FragmentModule.class,
@@ -392,7 +392,7 @@ public interface FragmentComponent {
 
 <p>当使用 Subcomponent 注解时，该 Subcomponent 会拥有它的父 Component 的所有内容，但同时还需要在父 Component 中声明它的子 Component 组件。</p>
 
-<pre><code>@Component(
+<pre><code class="language-java">@Component(
         modules = {
                 AppModule.class,
                 HttpModule.class,
@@ -408,7 +408,7 @@ public interface AppComponent {
 
 <h3 id="component-的依赖-dependencies">Component 的依赖 dependencies</h3>
 
-<pre><code>@Component(
+<pre><code class="language-java">@Component(
 	// 声明依赖
         dependencies = AppComponent.class ,
         modules = {
@@ -422,7 +422,7 @@ public interface FragmentComponent {
 
 <p>当使用依赖 <code>dependencies</code> 方式时，该 Component 就不能拥有父 Component 的所有内容了，只能拥有父 Component 提供给它的那些内容。</p>
 
-<pre><code>@Component(
+<pre><code class="language-java">@Component(
         modules = {
                 AppModule.class,
                 HttpModule.class,
@@ -449,14 +449,14 @@ public interface AppComponent {
 
 <p>而 Dagger 也提供了 <code>@Singleton</code>注解来实现单例功能。只需要在 Component 中声明<code>Scope</code>注解，并且在 Component 使用到的 Module 中声明同样的注解即可。</p>
 
-<pre><code>// 使用 Scope 注解
+<pre><code class="language-java">// 使用 Scope 注解
 @Scope
 @Documented
 @Retention(RUNTIME)
 public @interface Singleton {}
 </code></pre>
 
-<pre><code>// 单例注解
+<pre><code class="language-java">// 单例注解
 @Singleton
 @Component(
         modules = {
@@ -471,7 +471,7 @@ public interface AppComponent {
 
 <p>在使用到的 Module 中声明同样的注解，标明相同的作用域。</p>
 
-<pre><code>@Module
+<pre><code class="language-java">@Module
 public class GankApiModule {
 
     public GankApiModule() {
@@ -492,7 +492,7 @@ public class GankApiModule {
 
 <p>同样，若我们的类只需要和 Activity 或者 Fragment 的生命一样长就行了，那么就可以自定义一个注解来标明：</p>
 
-<pre><code>// 标明 Activity 作用域
+<pre><code class="language-java">// 标明 Activity 作用域
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ActivityScope {
@@ -645,7 +645,15 @@ public @interface FragmentScope {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://glumes.github.io/js/main.js"></script><script> renderMathInElement(document.body); </script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://glumes.github.io/js/load-photoswipe.js"></script>
