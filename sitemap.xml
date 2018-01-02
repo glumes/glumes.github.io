@@ -153,13 +153,13 @@
   </url>
   
   <url>
-    <loc>https://glumes.github.io/tags/android/</loc>
+    <loc>https://glumes.github.io/categories/android/</loc>
     <lastmod>2017-12-22T16:00:05+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/categories/android/</loc>
+    <loc>https://glumes.github.io/tags/android/</loc>
     <lastmod>2017-12-22T16:00:05+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -177,25 +177,25 @@
   </url>
   
   <url>
-    <loc>https://glumes.github.io/tags/docker/</loc>
-    <lastmod>2017-12-22T16:24:03+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://glumes.github.io/categories/docker/</loc>
     <lastmod>2017-12-22T16:24:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/tags/ffmpeg/</loc>
-    <lastmod>2017-12-22T16:05:30+08:00</lastmod>
+    <loc>https://glumes.github.io/tags/docker/</loc>
+    <lastmod>2017-12-22T16:24:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.github.io/categories/ffmpeg/</loc>
+    <lastmod>2017-12-22T16:05:30+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/tags/ffmpeg/</loc>
     <lastmod>2017-12-22T16:05:30+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -219,25 +219,25 @@
   </url>
   
   <url>
-    <loc>https://glumes.github.io/tags/opencv/</loc>
-    <lastmod>2017-12-22T09:53:04+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://glumes.github.io/categories/opencv/</loc>
     <lastmod>2017-12-22T09:53:04+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/tags/opengl/</loc>
-    <lastmod>2017-12-22T16:21:16+08:00</lastmod>
+    <loc>https://glumes.github.io/tags/opencv/</loc>
+    <lastmod>2017-12-22T09:53:04+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.github.io/categories/opengl/</loc>
+    <lastmod>2017-12-22T16:21:16+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.github.io/tags/opengl/</loc>
     <lastmod>2017-12-22T16:21:16+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -255,13 +255,13 @@
   </url>
   
   <url>
-    <loc>https://glumes.github.io/tags/python/</loc>
+    <loc>https://glumes.github.io/categories/python/</loc>
     <lastmod>2017-12-22T16:10:57+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.github.io/categories/python/</loc>
+    <loc>https://glumes.github.io/tags/python/</loc>
     <lastmod>2017-12-22T16:10:57+08:00</lastmod>
     <priority>0</priority>
   </url>
