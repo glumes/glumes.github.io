@@ -5,18 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Framework</title>
-  <meta property="og:title" content="Framework" />
-  <meta name="twitter:title" content="Framework" />
+  <title>Life</title>
+  <meta property="og:title" content="Life" />
+  <meta name="twitter:title" content="Life" />
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.github.io/tags/framework/" />
+  <meta property="og:url" content="https://glumes.github.io/tags/life/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.github.io/tags/framework/" />
-  <link rel="alternate" href="https://glumes.github.io/tags/framework/index.xml" type="application/rss+xml" title="Glumes Blog">
+  <link rel="canonical" href="https://glumes.github.io/tags/life/" />
+  <link rel="alternate" href="https://glumes.github.io/tags/life/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -166,7 +166,7 @@ var _hmt = _hmt || [];
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="page-heading">
-              <h1>#Framework</h1>
+              <h1>#Life</h1>
               <hr class="small">
             </div>
           </div>
@@ -183,172 +183,32 @@ var _hmt = _hmt || [];
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="https://glumes.github.io/post/android/android-start-service/">
-                <h2 class="post-title">Android 6.0 Service 启动过程源码分析（一）</h2>
+              <a href="https://glumes.github.io/post/travel/">
+                <h2 class="post-title">泸沽湖-丽江之行</h2>
 
+                
+                  <h3 class="post-subtitle">
+                    甜蜜之旅
+                  </h3>
                 
               </a>
 
               <p class="post-meta">
-                Posted on December 22, 2017
+                Posted on January 4, 2018
               </p>
               <div class="post-entry">
                 
-                  <p>Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。</p>
-
-<p>Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。</p>
+                  <p>元旦假期和亲爱的去了趟 泸沽湖-丽江。</p>
 
 <p></p>
-                  <a href="https://glumes.github.io/post/android/android-start-service/" class="post-read-more">[Read More]</a>
+                  <a href="https://glumes.github.io/post/travel/" class="post-read-more">[Read More]</a>
                 
               </div>
 
               
                 <span class="post-meta">
                   
-                    #<a href="https://glumes.github.io/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.github.io/tags/framework/">Framework</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.github.io/post/android/android-start-activity-from-launcher-4/">
-                <h2 class="post-title"> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>在如下三篇文章中过了一遍 Launcher 启动 Activity 的代码流程。</p>
-
-<ul>
-<li><a href="start-activity-from-launcher-in-android-1"> Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a></li>
-<li><a href="start-activity-from-launcher-in-android-2"> Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a></li>
-<li><a href="start-activity-from-launcher-in-android-3"> Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a></li>
-</ul>
-
-<p>然而， 即使看过了多遍代码流程依旧有点云里雾里的感觉。不从整体上来把握，光抓住细节代码会始终不得要领。</p>
-
-<p>由于是从 Launcher 组件启动一个 Activity 组件，其中还需要与 ActivityManagerService 通信，而这三个部分都是位于不同的进程内，涉及进程间通信，因此可以将整个过程划分为三个不同的部分来分析，在 Launcher 进程内的操作，在 ActivityManagerService 进程内的操作，在创建的应用程序进程内的操作。</p>
-
-<p></p>
-                  <a href="https://glumes.github.io/post/android/android-start-activity-from-launcher-4/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.github.io/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.github.io/tags/framework/">Framework</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.github.io/post/android/android-start-activity-from-launcher-3/">
-                <h2 class="post-title">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-2/"> Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a> 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 <code>Resumed</code>状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 <code>startSpecificActivityLocked</code>方法创建进程。</p>
-
-<p></p>
-                  <a href="https://glumes.github.io/post/android/android-start-activity-from-launcher-3/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.github.io/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.github.io/tags/framework/">Framework</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.github.io/post/android/android-start-activity-from-launcher-2/">
-                <h2 class="post-title">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a> 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。</p>
-
-<p>通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。</p>
-
-<p></p>
-                  <a href="https://glumes.github.io/post/android/android-start-activity-from-launcher-2/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.github.io/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.github.io/tags/framework/">Framework</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.github.io/post/android/android-start-activity-from-launcher-1/">
-                <h2 class="post-title">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。</p>
-
-<p>这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。</p>
-
-<p>而当我们点击应用程序图标时，也就开启了从 Launcher 启动 Activity 的过程。</p>
-
-<p></p>
-                  <a href="https://glumes.github.io/post/android/android-start-activity-from-launcher-1/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.github.io/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.github.io/tags/framework/">Framework</a>&nbsp;
+                    #<a href="https://glumes.github.io/tags/life/">life</a>&nbsp;
                   
                 </span>
               
@@ -385,7 +245,7 @@ var _hmt = _hmt || [];
               </li>
           
           <li>
-            <a href="https://glumes.github.io/tags/framework/index.xml" title="RSS">
+            <a href="https://glumes.github.io/tags/life/index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

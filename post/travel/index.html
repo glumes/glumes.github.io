@@ -5,20 +5,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Python、C&#43;&#43;、Android OpenCV 开发环境的配置</title>
-  <meta property="og:title" content="Python、C&#43;&#43;、Android OpenCV 开发环境的配置" />
-  <meta name="twitter:title" content="Python、C&#43;&#43;、Android OpenCV 开发环境的配置" />
-  <meta name="description" content="setup opencv environment">
-  <meta property="og:description" content="setup opencv environment">
-  <meta name="twitter:description" content="setup opencv environment">
+  <title>泸沽湖-丽江之行</title>
+  <meta property="og:title" content="泸沽湖-丽江之行" />
+  <meta name="twitter:title" content="泸沽湖-丽江之行" />
+  <meta name="description" content="甜蜜之旅">
+  <meta property="og:description" content="甜蜜之旅">
+  <meta name="twitter:description" content="甜蜜之旅">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.github.io/post/opencv/setup_opencv_environment/" />
+  <meta property="og:url" content="https://glumes.github.io/post/travel/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.github.io/post/opencv/setup_opencv_environment/" />
+  <link rel="canonical" href="https://glumes.github.io/post/travel/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -180,12 +180,16 @@ var _hmt = _hmt || [];
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-              <h1>Python、C&#43;&#43;、Android OpenCV 开发环境的配置</h1>
+              <h1>泸沽湖-丽江之行</h1>
+                
+                  
+                    <h2 class="post-subheading">甜蜜之旅</h2>
+                  
                 
                 
                   <span class="post-meta">
-  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
-  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 4 min (1623 mots)
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on January 4, 2018
+  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 1 min (337 mots)
   
 </span>
 
@@ -204,220 +208,348 @@ var _hmt = _hmt || [];
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p>在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。</p>
+        <p>元旦假期和亲爱的去了趟 泸沽湖-丽江。</p>
 
 <p></p>
 
-<h2 id="opencv-的安装">OpenCV 的安装</h2>
 
-<p>OpenCV 的安装有两种方式，可以通过下载源码自行编译，也可以通过<code>homebrew</code>来安装。</p>
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
 
-<h3 id="源码编译">源码编译</h3>
+	
 
-<p>通过源码编译可以参考下面这两篇文章：</p>
 
-<p>1、<a href="https://www.pyimagesearch.com/2016/12/05/macos-install-opencv-3-and-python-3-5/">https://www.pyimagesearch.com/2016/12/05/macos-install-opencv-3-and-python-3-5/</a></p>
 
-<p>2、<a href="https://www.pyimagesearch.com/2015/06/29/install-opencv-3-0-and-python-3-4-on-osx/">https://www.pyimagesearch.com/2015/06/29/install-opencv-3-0-and-python-3-4-on-osx/</a></p>
 
-<p>大致操作都是要从 Github 上下载好源码，然后配置 cmake ，再通过 make 编译出 <code>cv2.so</code> 库。</p>
 
-<h3 id="homebrew-安装">Homebrew 安装</h3>
+  
 
-<p>通过 homebrew 来安装 OpenCV 就相对简单多了。</p>
 
-<p>直接 <code>brew install opencv</code> 命令就好了。</p>
 
-<p>不过，要注意的是：下载好的 OpenCV 还在 <code>/usr/local/Cellar/opencv/3.3.1_1/</code> 目录下。</p>
+  
 
-<p>这时候，在 Terminal 上，直接运行 Python3 命令，然后在交互式环境中通过 <code>import cv2</code>的命令来导入 OpenCV 的库依旧是找不到的。</p>
 
-<p>解决办法就是进入到 <code>/usr/local/lib/python3.6/site-packages</code> 目录下，通过 <code>ln</code> 命令将 <code>/usr/local/Cellar/opencv/3.3.1_1/lib/python3.6/site-packages</code> 目录下的 <code>cv2.so</code> 链接到当前目录。</p>
 
-<pre><code class="language-sh">///usr/local/lib/python3.6/site-packages 目录下执行如下指令
-sudo ln -s /usr/local/Cellar/opencv/3.3.1_1/lib/python3.6/site-packages/cv2.so cv2.so
-</code></pre>
+  
 
-<p>这样就可以完成导入了。</p>
+<style>.gallery .img2 {background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg');}</style>
 
-<h2 id="python-配置-opencv-环境">Python 配置 OpenCV 环境</h2>
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img2"  >
+      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg" />
+    </div>
+    
+    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
 
-<p>Python 开发用的 IDE 是 PyCharm。</p>
+</div>
 
-<p>事实上在 PyCharm 的 Project Interpreter 中可以添加 Python 库的，直接选择 <code>opencv-python</code> 库就好了，它最终也是通过 <code>pip</code>命令来下载对应的库的。</p>
 
-<p>但却有个问题：</p>
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
 
-<p>通过这种方式安装的 OpenCV 在运行播放视频的代码时会出错：</p>
+	
 
-<pre><code class="language-java">import cv2
-videoUrl = &quot;/Users/glumes/Desktop/kpt1.mp4&quot;
-cap = cv2.VideoCapture('/Users/glumes/Desktop/kpt1.mp4')
-while(cap.isOpened()):
-    ret, frame = cap.read()
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    cv2.imshow('frame', gray)
-    if cv2.waitKey(0) &amp; 0xFF == ord('q'):
-        break
-cap.release()
-cv2.destroyAllWindows()
-</code></pre>
 
-<p>报错的内容是：<code>The current event queue and the main event queue are not the same</code>。</p>
 
-<p>正好在 OpenCV 的 Github 上有个 Issue 也提到了这个问题：<a href="https://github.com/opencv/opencv/issues/7474">https://github.com/opencv/opencv/issues/7474</a>
-给出的原因是因为没有安装好 ffmpeg。</p>
 
-<p>所以还是建议直接通过 brew 的方式安装，然后再创建链接好了。</p>
 
-<p>安装好之后，就可以开始运行我们的 OpenCV 代码了。</p>
+  
 
-<p>简单的展示一张图片代码示例：</p>
 
-<pre><code class="language-java">import cv2
-print(cv2.__version__)
-imgUrl = '/Users/glumes/Desktop/blog_camera_block.png'
-img = cv2.imread(imgUrl,0)
-cv2.imshow('image',img)
-cv2.waitKey(0)
-print(&quot;waiting&quot;)
-cv2.destroyAllWindows()
-</code></pre>
 
-<h2 id="c-配置-opencv-环境">C++ 配置 OpenCV 环境</h2>
+  
 
-<p>C++ 开发用的 Mac 的 Xcode。</p>
 
-<p>首先要在 Xcode 中创建一个命令行工程。</p>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_mac_pro_command_line.png" alt="mac-command-line-project" /></p>
+  
 
-<p>然后在工程名处右键，选择 <code>Add File to Project</code>，通过快捷键 <code>Command＋Shift＋G</code>进入到 <code>/usr/local/lib</code>目录下，将所有和 OpenCV 相关的 <code>dylib</code> 库添加进来。</p>
+<style>.gallery .img3 {background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg');}</style>
 
-<p>完成了之后，再到工程的 <code>Build Settings</code>中去添加对应的头文件和库文件。</p>
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img3"  >
+      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg" />
+    </div>
+    
+    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+	
 
-<p>找到 Search Paths，然后在 Header Search Paths 中添加</p>
 
-<ul>
-<li>/usr/local/include</li>
-<li>/usr/local/include/opencv</li>
-</ul>
 
-<p>在 Library Search Paths 中添加</p>
 
-<ul>
-<li>/usr/local/lib</li>
-</ul>
 
-<p>效果图如下：</p>
+  
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_xcode_build_setting.png" alt="xcode_build_setting" /></p>
 
-<p>完成之后，就可以开始编写 C++ 代码来开发 OpenCV 了。</p>
 
-<p>同样还是预览一张图片作为示例：</p>
+  
 
-<pre><code class="language-c++">//
-//  main.cpp
-//  OpenCVEnv
-//
-//  Created by glumes on 2017/11/7.
-//  Copyright © 2017年 glumes. All rights reserved.
-//
 
-#include &lt;iostream&gt;
-#include &lt;opencv2/opencv.hpp&gt;
-#include &lt;opencv2/highgui/highgui.hpp&gt;
-#include &lt;opencv/cvaux.hpp&gt;
-#include &lt;fstream&gt;
-using namespace std;
-#define BYTE unsigned char
 
-int main(int argc, const char * argv[])
-{
-    //这个地方的目录需要改成自己的
-    IplImage* img = cvLoadImage(&quot;/Users/glumes/Desktop/blog_opengl_result_point.png&quot;, 1);
-    cvNamedWindow(&quot;picture&quot;, 1);
-    cvShowImage(&quot;picture&quot;, img);
-    cvWaitKey(0);
-    cvReleaseImage(&amp;img);
-    cvDestroyWindow(&quot;picture&quot;);
-    return 0;
-}
+  
 
-</code></pre>
+<style>.gallery .img4 {background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg');}</style>
 
-<p>点击运行，当编译成功时，就可以看到多了一个命令行窗口，里面就是我们预览的图片内容。</p>
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img4"  >
+      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg" />
+    </div>
+    
+    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+	
 
-<p>完成了开发环境的配置之后，就可以愉快地进行 OpenCV 开发咯。</p>
 
-<h2 id="android-配置-opencv-开发环境">Android 配置 OpenCV 开发环境</h2>
 
-<p>在 Android 上配置 OpenCV 的环境相对就简单多了。</p>
 
-<p>首先要做的就是在官网上 <a href="https://opencv.org/releases.html">https://opencv.org/releases.html</a> 下载好对应的 SDK ，有 2.x 版本的也有 3.x 版本的。</p>
 
-<p>解压之后，主要有三个目录：<code>apk</code>、<code>sdk</code>、<code>samples</code>，要关心的就是<code>sdk</code>目录了。</p>
+  
 
-<p>在 AS 上新建一个 Android 工程，创建时最好先勾选了 C++ Support 选项，后面会在 CMakeLists.txt 文件中进行更改。</p>
 
-<p>然后选择 Import Module，在弹出的框中，选择下载好的 SDK 的 java 文件夹，如下图：</p>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_import_opencv_module.png" alt="import_opencv_module" /></p>
+  
 
-<p>这会将 OpenCV 提供的对 NDK 调用封装的库以依赖的形式导入到我们的工程。</p>
 
-<p>别忘了在工程的 build.gradle 添加如下代码来导入</p>
 
-<pre><code class="language-gradle">  implementation project(':OpenCVLibrary330')
-</code></pre>
+  
 
-<p>之后，就是导入 <code>so</code> 动态库。</p>
+<style>.gallery .img5 {background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg');}</style>
 
-<p>将 OpenCV-android-sdk\sdk\native\libs 目录下的内容拷贝到应用的 jibLibs 目录下。</p>
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img5"  >
+      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg" />
+    </div>
+    
+    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_import_opencv_so.png" alt="import_opencv_sp" /></p>
+</div>
 
-<p>接下来修改 CMakeLists.txt 文件，将头文件和库进行导入。</p>
+<h2 id="出发">出发</h2>
 
-<pre><code class="language-cmake"># 包含头文件
- include_directories(/Users/glumes/Downloads/OpenCV-android-sdk/sdk/native/jni/include)
-# 添加 lib_opencv 动态库
- add_library( lib_opencv SHARED IMPORTED )
-# 设置库的导入路径
- set_target_properties(lib_opencv PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libopencv_java3.so)
 
-</code></pre>
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
 
-<p>这里仅仅是导入了 libs 目录下的动态 so 库，也可以将静态的 <code>.a</code> 库导入。</p>
 
-<p>完成了这一步后，就可以用 C++ 进行 OpenCV 的开发了。</p>
+	
 
-<p>在默认的 native-lib 动态库中，添加 opencv 的动态库，这样就可以链接到了。</p>
 
-<pre><code class="language-cmake">target_link_libraries( # Specifies the target library.
-                       native-lib
-					   # 链接 opencv 的动态库
-                       lib_opencv
 
-                       # Links the target library to the log library
-                       # included in the NDK.
-                       ${log-lib} )
-</code></pre>
 
-<p>具体的详细配置 Demo 可以参考我的 Github 地址  <a href="https://github.com/glumes/AndroidOpenCV">https://github.com/glumes/AndroidOpenCV</a></p>
 
-<h2 id="参考">参考</h2>
+  
 
-<p>1、<a href="http://www.jianshu.com/p/11959977589a">http://www.jianshu.com/p/11959977589a</a></p>
+
+
+  
+
+
+
+  
+
+<style>.gallery .img6 {background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg');}</style>
+
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img6"  >
+      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg" />
+    </div>
+    
+    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1514991611/life/IMG_5564.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+
+</div>
+
+<p>29号请假，早上就从深圳出发了。</p>
+
+
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
+
+
+	
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+<style>.gallery .img7 {background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1514992061/life/IMG_1559.jpg');}</style>
+
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img7"  >
+      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1514992061/life/IMG_1559.jpg" />
+    </div>
+    
+    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1514992061/life/IMG_1559.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+
+</div>
+
+<p>出发时天都还没亮呢，还能够在飞机上看到日出，不过上飞机就直接睡着了，日出什么的还是想想好了。</p>
+
+
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
+
+
+	
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+<style>.gallery .img8 {background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1514993953/life/IMG_4155.jpg');}</style>
+
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img8"  >
+      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1514993953/life/IMG_4155.jpg" />
+    </div>
+    
+    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1514993953/life/IMG_4155.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+
+</div>
+
+<p>还是头一次来到深圳宝安机场，中途又在昆明转机，总算在十二点左右达到了泸沽湖。</p>
+
+
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
+
+
+	
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+<style>.gallery .img9 {background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1514994042/life/IMG_4160.jpg');}</style>
+
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img9"  >
+      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1514994042/life/IMG_4160.jpg" />
+    </div>
+    
+    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1514994042/life/IMG_4160.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+
+</div>
+
+<h2 id="泸沽湖">泸沽湖</h2>
+
+<p>因为看了《亲爱的客栈》这部综艺节目，慕名而来。</p>
+
+<p>泸沽湖的宁蒗机场还挺小的，穿着短袖就去了，下飞机冻成狗，毕竟海拔2000多米呢，赶紧在更衣室把短袖换掉了。</p>
+
+
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
+
+
+	
+
+
+  <link rel="stylesheet" href="/css/hugo-easy-gallery.css" />
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+<style>.gallery .img1 {background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1515043850/life/IMG_4161.jpg');}</style>
+
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img1"  >
+      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1515043850/life/IMG_4161.jpg" />
+    </div>
+    
+    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1515043850/life/IMG_4161.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+
+</div>
+
+<p>坐机场大巴就到了客栈，不过进景区还得交 100 元的门票。</p>
+
+<p>还没到景区，就可以感受到风景这边独好了。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1515044949/life/IMG_4173.jpg" alt="scene" /></p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1515044949/life/IMG_4166.jpg" alt="scene" /></p>
+
+<p>还有羞涩的不愿意让我拍照的女朋友，反倒自己拍风景去了。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1515045203/life/IMG_4165.jpg" alt="gril" /></p>
+
+<p><img src="http://res.cloudinary.com/glumes-com/image/upload/v1515045203/life/IMG_4172.jpg" alt="girl" /></p>
+
+<p>元旦提前一天来还是挺明智的，住在大落水村，路上基本没什么人。</p>
+
+<p><img src="http://res.cloudinary.com/glumes-com/image/upload/v1515045740/life/IMG_4177.jpg" alt="road" /></p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1515045740/life/IMG_4186.jpg" alt="road" /></p>
       </article>
 
       <ul class="pager blog-pager">
         
-        
-          <li class="next">
-            <a href="https://glumes.github.io/post/android/kotlin-with-anko/" data-toggle="tooltip" data-placement="top" title="Kotlin 使用 Anko 布局那些事">Next Post &rarr;</a>
+          <li class="previous">
+            <a href="https://glumes.github.io/post/docker/docker-summary/" data-toggle="tooltip" data-placement="top" title="Docker 基础知识">&larr; Previous Post</a>
           </li>
+        
         
       </ul>
             
