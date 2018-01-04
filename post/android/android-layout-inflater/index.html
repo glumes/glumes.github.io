@@ -188,18 +188,10 @@ var _hmt = _hmt || [];
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Android 布局加载之 LayoutInflater</h1>
+                <h1 align="center">Android 布局加载之 LayoutInflater</h1>
                 
-                
-                  <span class="post-meta">
-  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
-  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 5 min (2100 mots)
-  
-</span>
-
-
                 
             </div>
           </div>
@@ -213,8 +205,23 @@ var _hmt = _hmt || [];
 <div class="container" role="main">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-        <p>Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。</p>
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Fri Dec 22, 2017</h4>
+    </section>
+    <h5 id="wc">2200 Words|Read in about 5 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.github.io/tags/android/">Android</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。</p>
 
 <p>LayoutInflater 实例的获取有多种方式，但最终是通过<code>(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)</code>来得到的，也就是说加载布局的 <code>LayoutInflater</code> 是来自于系统服务的。</p>
 
@@ -419,8 +426,7 @@ public final View createView(String name, String prefix, AttributeSet attrs)
 <li><a href="https://segmentfault.com/a/1190000003813755">https://segmentfault.com/a/1190000003813755</a></li>
 <li><a href="http://blog.csdn.net/panda1234lee/article/details/9009719">http://blog.csdn.net/panda1234lee/article/details/9009719</a></li>
 </ol>
-      </article>
-
+        </article>
       <ul class="pager blog-pager">
         
           <li class="previous">

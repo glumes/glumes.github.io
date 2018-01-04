@@ -182,18 +182,10 @@ var _hmt = _hmt || [];
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Android 6.0 Launcher 启动 Activity 过程源码分析（三）</h1>
+                <h1 align="center">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</h1>
                 
-                
-                  <span class="post-meta">
-  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
-  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 11 min (5391 mots)
-  
-</span>
-
-
                 
             </div>
           </div>
@@ -207,8 +199,25 @@ var _hmt = _hmt || [];
 <div class="container" role="main">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-        <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-2/"> Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a> 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 <code>Resumed</code>状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 <code>startSpecificActivityLocked</code>方法创建进程。</p>
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Fri Dec 22, 2017</h4>
+    </section>
+    <h5 id="wc">5400 Words|Read in about 11 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.github.io/tags/android/">Android</a> &nbsp;
+        
+        <a href="https://glumes.github.io/tags/framework/">Framework</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-2/"> Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a> 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 <code>Resumed</code>状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 <code>startSpecificActivityLocked</code>方法创建进程。</p>
 
 <p></p>
 
@@ -901,8 +910,7 @@ public final void bindApplication(String processName, ApplicationInfo appInfo,
 <p>1、 Android 6.0 源码
 2、《Android 系统源代码情景分析》
 3、<a href="http://duanqz.github.io/2016-07-29-Activity-LaunchProcess-Part1">http://duanqz.github.io/2016-07-29-Activity-LaunchProcess-Part1</a></p>
-      </article>
-
+        </article>
       <ul class="pager blog-pager">
         
           <li class="previous">

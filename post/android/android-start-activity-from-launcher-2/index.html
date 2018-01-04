@@ -188,18 +188,10 @@ var _hmt = _hmt || [];
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Android 6.0 Launcher 启动 Activity 过程源码分析（二）</h1>
+                <h1 align="center">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</h1>
                 
-                
-                  <span class="post-meta">
-  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
-  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 9 min (4294 mots)
-  
-</span>
-
-
                 
             </div>
           </div>
@@ -213,8 +205,25 @@ var _hmt = _hmt || [];
 <div class="container" role="main">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-        <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a> 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。</p>
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Fri Dec 22, 2017</h4>
+    </section>
+    <h5 id="wc">4300 Words|Read in about 9 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.github.io/tags/android/">Android</a> &nbsp;
+        
+        <a href="https://glumes.github.io/tags/framework/">Framework</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a> 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。</p>
 
 <p>通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。</p>
 
@@ -693,8 +702,7 @@ void addActivityToTop(ActivityRecord r) {
 <ul>
 <li>Activity 的 堆栈 ActivityStack</li>
 </ul>
-      </article>
-
+        </article>
       <ul class="pager blog-pager">
         
           <li class="previous">

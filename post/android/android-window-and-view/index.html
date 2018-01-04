@@ -202,18 +202,10 @@ var _hmt = _hmt || [];
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Android Activity 创建 Window 及添加 View 流程分析</h1>
+                <h1 align="center">Android Activity 创建 Window 及添加 View 流程分析</h1>
                 
-                
-                  <span class="post-meta">
-  <i class="fa fa-calendar-o"></i>&nbsp;Posted on December 22, 2017
-  &nbsp;|&nbsp; <i class="fa fa-clock-o"></i> 6 min (2996 mots)
-  
-</span>
-
-
                 
             </div>
           </div>
@@ -227,8 +219,23 @@ var _hmt = _hmt || [];
 <div class="container" role="main">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-        <p>在之前有分析过 Android 6.0 Launcher 启动 Activity 过程，文章的链接如下：</p>
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Fri Dec 22, 2017</h4>
+    </section>
+    <h5 id="wc">3000 Words|Read in about 6 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.github.io/tags/android/">Android</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在之前有分析过 Android 6.0 Launcher 启动 Activity 过程，文章的链接如下：</p>
 
 <ol>
 <li><a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a></li>
@@ -417,8 +424,7 @@ var _hmt = _hmt || [];
 <li><code>Instrumentation</code>类开始回调 Activity 的一系列生命周期方法，当回调<code>onCreate</code>方法时，主要做的就是创建 DecorView，并将我们传递过来的 View 添加到 DecorView 的内容栏中，而此时，DecorView 和 Window 两者还是处于分离的状态。</li>
 <li>在 Activity 生命周期的<code>onResume</code>方法内，将 DecorView 添加进了 Window 中，并设置 DecorView 可见，此时，就完成了 Activity Window 的创建和 View 的添加过程。</li>
 </ul>
-      </article>
-
+        </article>
       <ul class="pager blog-pager">
         
           <li class="previous">
