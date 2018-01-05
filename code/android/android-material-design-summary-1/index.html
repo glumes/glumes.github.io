@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android Material Desing 控件小结-1</title>
+  <meta property="og:title" content="Android Material Desing 控件小结-1" />
+  <meta name="twitter:title" content="Android Material Desing 控件小结-1" />
+  <meta name="description" content="总结一下 Material Design 控件使用。
+
+">
+  <meta property="og:description" content="总结一下 Material Design 控件使用。
+
+">
+  <meta name="twitter:description" content="总结一下 Material Design 控件使用。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/code/android/android-material-design-summary-1/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/code/android/android-material-design-summary-1/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffpmeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="code-heading">
+                <h1 align="center">Android Material Desing 控件小结-1</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Fri Dec 22, 2017</h4>
+    </section>
+    <h5 id="wc">700 Words|Read in about 2 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.github.io/tags/android/">Android</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>总结一下 Material Design 控件使用。</p>
+
+<p></p>
+
+<h2 id="textinputlayout">TextInputLayout</h2>
+
+<p>TextInputLayout 控件是一个容器，只接受一个子元素，而子元素需要是一个 EditText 控件。</p>
+
+<p>TextInputLayout 的作用是当输入文字时，它可以把提示文字 Hint 移至 EditText 上方。</p>
+
+<pre><code class="language-java">    &lt;android.support.design.widget.TextInputLayout
+        android:layout_width=&quot;0dp&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_marginStart=&quot;8dp&quot;
+        app:layout_constraintLeft_toLeftOf=&quot;parent&quot;
+        android:layout_marginEnd=&quot;8dp&quot;
+        app:layout_constraintRight_toRightOf=&quot;parent&quot;
+        android:layout_marginTop=&quot;8dp&quot;
+        app:layout_constraintTop_toBottomOf=&quot;@+id/usernameLayout&quot;
+        android:id=&quot;@+id/passwordLayout&quot;
+        &gt;
+
+        &lt;EditText
+            android:id=&quot;@+id/password&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:hint=&quot;hint&quot;/&gt;
+    &lt;/android.support.design.widget.TextInputLayout&gt;
+</code></pre>
+
+<p>而当 EditText 中输入的内容不正确时，TextInputLayout 还能够进行错误的处理。<code>setError</code> 方法会在 EditText 下方显示红色的错误消息。<code>setErrorEnabled</code>方法开启错误提醒功能，使用代码如下：</p>
+
+<pre><code class="language-java"> String username = mUsernameLayout.getEditText().getText().toString();
+        String password = mPasswordLayout.getEditText().getText().toString();
+
+        if (!username.equals(RIGHT_NAME)){
+            mUsernameLayout.setError(&quot;not right username&quot;);
+            Log.d(TAG,&quot;not right username&quot;);
+        }else if (!password.equals(RIGHT_PASSWORD)){
+            mPasswordLayout.setError(&quot;not right password&quot;);
+            Log.d(TAG,&quot;not right password&quot;);
+        }else {
+            // 取消错误提醒
+            mUsernameLayout.setErrorEnabled(false);
+            mPasswordLayout.setErrorEnabled(false);
+            Toast.makeText(TextInputActivity.this,&quot;Welcome !&quot;,Toast.LENGTH_SHORT).show();
+        }
+</code></pre>
+
+<h2 id="tablayout">TabLayout</h2>
+
+<p>TabLayout 控件是用来和 ViewPager 配合使用的。当滑动 ViewPager 内部的页面时需要让上方的 Tab 也随之移动时就可以考虑使用 TabLayout 了。</p>
+
+<p>使用 ViewPager 还需要对应的 Adapter ，简单使用代码如下：</p>
+
+<pre><code class="language-java">   mTabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager());
+
+        mViewpager.setAdapter(mTabPagerAdapter);
+
+        // 设置回调
+        mViewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+        // 设置 Tab 模式
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+
+        mTabLayout.setupWithViewPager(mViewpager);
+</code></pre>
+
+<p>初次之后，还可以给 TabLayout 设置各种属性，既可以从 XML 布局中添加，也可以在代码中通过 set 方法来设置，如下图所示：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-tablayout-attribute.png" alt="tablayout-attribute" /></p>
+
+<h2 id="toolbar">Toolbar</h2>
+
+<p>Toolbar 可以用来替换 ActionBar 的，如果要替换 ActionBar ，那么在使用时，需要配置 Activity 的 theme 为<code>Theme.AppCompat.NoActionBar</code>，或者在对应的主题中加入如下：</p>
+
+<pre><code class="language-java">		&lt;item name=&quot;windowActionBar&quot;&gt;false&lt;/item&gt;
+		&lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;
+</code></pre>
+
+<p>不然会报错<code>This Activity already has an action bar supplied by the window decor.</code></p>
+
+<p>并且在代码中还需要添加 <code>setSupportActionBar(toolbar);</code>。</p>
+
+<p>如果当做单独的控件来使用则不需要对主题进行设置。</p>
+
+<p>Toolbar 也有各种设置选项，包括标题，子标题，Logo，菜单等。</p>
+
+<pre><code class="language-java">	mToolbar.setTitle(&quot;Title&quot;);
+        mToolbar.setSubtitle(&quot;SubTitle&quot;);
+        mToolbar.setNavigationIcon(R.mipmap.ic_drawer_home);
+        mToolbar.inflateMenu(R.menu.toolbar_menu);
+        mToolbar.setLogo(R.mipmap.ic_launcher);
+</code></pre>
+
+<p>其中，当想给 Toolbar 弹出的菜单设置样式时，可以通过 <code>popupTheme</code>属性来设置样式。popupTheme 的样式可以自定义 style ，也可以使用安卓自带的。</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li><a href="http://blog.csdn.net/qiujuer/article/details/51462471">http://blog.csdn.net/qiujuer/article/details/51462471</a></li>
+<li><a href="http://www.jcodecraeer.com/a/basictutorial/2015/0821/3338.html">http://www.jcodecraeer.com/a/basictutorial/2015/0821/3338.html</a></li>
+<li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html</a></li>
+<li><a href="http://www.jianshu.com/p/79604c3ddcae">http://www.jianshu.com/p/79604c3ddcae</a></li>
+</ol>
+        </article>
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/code/android/android-binder-summary/" data-toggle="tooltip" data-placement="top" title="Android Binder Summary">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/code/android/android-material-design-summary-2/" data-toggle="tooltip" data-placement="top" title="Android Material Desing 控件小结-2">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/code/android/android-binder-summary/">Android Binder Summary</a></li>
+                    
+                    <li><a href="/code/android/android-dagger-use/">Dagger2 在 Android 中的使用</a></li>
+                    
+                    <li><a href="/code/android/android-start-activity-from-launcher-4/"> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</a></li>
+                    
+                    <li><a href="/code/android/android-start-activity-from-launcher-3/">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a></li>
+                    
+                    <li><a href="/code/android/android-start-activity-from-launcher-2/">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

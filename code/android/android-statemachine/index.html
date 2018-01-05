@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android StateMachine 状态机分析</title>
+  <meta property="og:title" content="Android StateMachine 状态机分析" />
+  <meta name="twitter:title" content="Android StateMachine 状态机分析" />
+  <meta name="description" content="之前就有写过一篇文章来学习状态机：状态机学习。
+
+在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。
+
+">
+  <meta property="og:description" content="之前就有写过一篇文章来学习状态机：状态机学习。
+
+在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。
+
+">
+  <meta name="twitter:description" content="之前就有写过一篇文章来学习状态机：状态机学习。
+
+在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/code/android/android-statemachine/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/code/android/android-statemachine/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffpmeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="code-heading">
+                <h1 align="center">Android StateMachine 状态机分析</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Fri Dec 22, 2017</h4>
+    </section>
+    <h5 id="wc">2500 Words|Read in about 5 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.github.io/tags/android/">Android</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>之前就有写过一篇文章来学习状态机：<a href="http://www.glumes.com/statemachine_learn/">状态机学习</a>。</p>
+
+<p>在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。</p>
+
+<p></p>
+
+<p>StateMachine 类位于 Android 源码中的，路径是<code>frameworks/base/core/java/com/android/internal/util/StateMachine.java</code>，从路径名可以看出，这是一个工具类，该类对状态机进行了封装，方便使用。</p>
+
+<p>在安卓源码中进行搜索，会发现很多类用到了状态机，比如：<code>WifiStateMachine</code>、<code>A2dpStateMachine</code>、<code>NsdStateMachine</code>、<code>P2dStateMachine</code>等等，它们都直接或间接的继承了 StateMachine 类。可见，状态机的思想在安卓源码中得到了广泛使用。</p>
+
+<p>在我们的应用开发中也可以使用源码中的<code>StateMachine</code>类，只要从源码中把<code>StateMachine</code>和<code>State</code>类拷贝到我们的工程目录就可以使用了，对于其 import 的一些类，在我们的开发环境中也全都有，不用担心。</p>
+
+<p>如果你对状态机有那么一丝丝的了解，那么学习 StateMachine 类最好的资料就是它的注释了，解释的一清二楚。</p>
+
+<h2 id="简单使用阐述">简单使用阐述</h2>
+
+<p>Android 中的状态机是一个分层的消息处理机制，每一层都会有一到多个节点，而状态机的消息就是在这些节点之间流转处理，如下结构所示：</p>
+
+<pre><code class="language-sh">	// 状态机分层结构
+          mP0
+         /   \
+        mP1   mS0
+       /   \
+      mS2   mS1
+     /  \    \
+    mS3  mS4  mS5  ---&gt; initial state 初始节点
+</code></pre>
+
+<p>而节点就是<code>State</code>类，它实现了<code>IState</code>接口，除了<code>enter</code>、<code>exit</code>方法外，还有<code>processMessage</code>方法，表示用来处理节点的消息。若返回<code>HANDLED</code>则表示消息处理完成，若返回<code>NOT_HANDLED</code>则表示消息没有处理。</p>
+
+<h2 id="构造状态机">构造状态机</h2>
+
+<p>在我们使用 StateMachine 之前，要构造好所需的状态分层结构。通过<code>addState</code>方法来向状态机中添加节点，例如如下的状态结构，mS1 和 mS2 节点有公共的父节点 mP1，同时还有一个孤立的节点 mP2。</p>
+
+<pre><code class="language-java">      // 状态分层结构设定
+        mP1      mP2
+       /   \
+      mS2   mS1
+      // 构造状态机结构代码
+      addState(mP1);
+          addState(mS1, mP1);
+          addState(mS2, mP1);
+      addState(mP2);
+</code></pre>
+
+<p><code>addState</code>方法添加节点时，还能指定其父节点添加。</p>
+
+<p>当我们构造完了状态机时，还需要指定其中一个节点为启动点，消息从启动点开始处理，通过<code>setInitialState</code>方法来指定启动点，最后通过<code>start</code>方法启动状态机。</p>
+
+<h2 id="状态机消息处理">状态机消息处理</h2>
+
+<p>当构造完想要的状态机结构时，就是对状态机内部消息流转的处理了。</p>
+
+<p>当<code>start</code>状态机时，状态机的第一个动作就是调用节点的<code>enter</code>方法，不过，它调用的是指定的启动点的最远的父节点的<code>enter</code>方法，然后再是次一级的父节点的<code>enter</code>方法，最后才是启动点的<code>enter</code>方法，就如同上面的结构所示，先调用 mP1 点，然后才是 mS1 点的方法，此时 mS1 节点就是状态机的当前对外的点。由此可见，当启动点进入 <code>enter</code>状态时，它的父节点，直至最顶层的父节点都进入了<code>enter</code>状态了。</p>
+
+<p>状态机中的每个节点都 0 个或 1 个父节点，当子节点不能处理当前消息时，它可以通过返回<code>NOT_HANDLED</code>将当前消息传递给其父节点来处理。如果一个消息从未被处理过，那么<code>unhandledMessage</code>方法将会被调用给最后一次机会来处理该消息。</p>
+
+<p>除此之外，节点还可以通过<code>transitionTo</code>方法将当前节点转移至另外一个新的节点。</p>
+
+<pre><code class="language-java">          mP0
+         /   \
+        mP1   mS0
+       /   \
+      mS2   mS1
+     /  \    \
+    mS3  mS4  mS5  ---&gt; initial state
+</code></pre>
+
+<p>例如，当 mS5 处理消息，想要将当前节点转移至 mS4 时，那么它会先找到 mS5 和 mS4 最近的公有父节点 mP1。然后，除了这个最近的公有父节点 mP1 以及它的上层节点外，mS5 进入<code>enter</code>状态时启动的那些父节点都会退出调用<code>exit</code>方法。最后再由 mP1 节点下的节点调用<code>enter</code>方法直到新节点 mS4 调用了<code>enter</code>方法。</p>
+
+<p>也就是说，从 mS5 到 mS4 状态的转变，先是 mS5、mS1 调用了<code>exit</code>方法，再是 mS2、mS4 调用了<code>enter</code>方法，这就是状态机中节点发生状态转移时的调用过程。</p>
+
+<p>除此之外，节点还可以调用<code>deferMessage</code>和<code>sendMessageAtFroneOfQueue</code>方法。<code>deferMessage</code>方法使得消息存储在消息队列中，当状态转移到新节点时才会处理，而<code>sendMessageAtFrontOfQueue</code>方法则是将消息放置到消息队列的头部。</p>
+
+<p>当状态机的所有消息都完成时，可以调用<code>transitionToHaltingState</code>方法来将状态机处理停止状态。此时，状态机将转移到<code>HaltingState</code>停止状态，并调用<code>halting</code>方法。随后收到的所有消息都只是会调用<code>haltedProcessMessage</code>方法来处理了。</p>
+
+<p>若想要完全的停止状态机，则可以使用<code>quit</code>或者<code>quitNow</code>方法来处理。</p>
+
+<p>以上就是状态机对于消息处理的过程，长篇的文字说明还是不如代码来的直观，这里就不贴完整的代码了，参考代码的连接如下：<a href="https://gist.github.com/glumes/e76ea009843eecb2b1e5cf9d8a38a369">GithubGist 链接地址</a></p>
+
+<h2 id="状态机实现原理分析">状态机实现原理分析</h2>
+
+<p>如果我们在初始化状态机时只是传递了一个名字，而没有传递 Looper 或者 Handler 之类的消息循环，那么状态机默认就是启用其内部的一个线程<code>HandlerThread</code>。</p>
+
+<pre><code class="language-java">  protected StateMachine(String name) {
+        mSmThread = new HandlerThread(name); // 创建 HandlerThread 线程
+        mSmThread.start();
+        Looper looper = mSmThread.getLooper();
+        initStateMachine(name, looper);
+    }
+    // 将消息循环 Looper 与 Handler 进行绑定
+  private void initStateMachine(String name, Looper looper) {
+        mName = name;
+        mSmHandler = new SmHandler(looper, this);
+    }
+</code></pre>
+
+<p>构造状态及时，在其内部开启了一个线程，并将其消息循环 Looer 传递给了 <code>SmHandler</code> 对象，而<code>SmHandler</code>对象就是状态机中最主要的用来派发消息事件和切换状态的了，它派发的消息都是在 HandlerThread 线程进行处理的。</p>
+
+<p>同时，SmHandler 内部有两个数组，用来保存状态机中的链式状态关系，分别是<code>mStateStack</code>和<code>mTempStateStack</code>变量。当状态机完成启动时，就会通过上面来个变量来保存节点信息。</p>
+
+<p>而状态机的消息处理，内部也是通过 SmHandler 来处理转发的。</p>
+
+<p>具体的实现，建议参考这篇文章：<a href="http://blog.csdn.net/yangwen123/article/details/10591451">http://blog.csdn.net/yangwen123/article/details/10591451</a> 讲的实在太详细了，拜读了多遍也不敢说写的能比它更清楚。</p>
+
+<h2 id="参考">参考</h2>
+
+<p>1、<a href="http://blog.csdn.net/yangwen123/article/details/10591451">http://blog.csdn.net/yangwen123/article/details/10591451</a></p>
+        </article>
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/code/android/android-lrucache/" data-toggle="tooltip" data-placement="top" title="Android LruCache实现分析">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/code/android/android-start-service/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Service 启动过程源码分析（一）">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/code/android/android-lrucache/">Android LruCache实现分析</a></li>
+                    
+                    <li><a href="/code/android/android-window-and-view/">Android Activity 创建 Window 及添加 View 流程分析</a></li>
+                    
+                    <li><a href="/code/android/android-system-server/">Android 系统服务启动 SystemServer</a></li>
+                    
+                    <li><a href="/code/android/android-service-manager/">Android 系统服务管理 ServiceManager</a></li>
+                    
+                    <li><a href="/code/android/android-material-design-summary-2/">Android Material Desing 控件小结-2</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Docker 基础知识</title>
+  <meta property="og:title" content="Docker 基础知识" />
+  <meta name="twitter:title" content="Docker 基础知识" />
+  <meta name="description" content="可以简单地将 Docker 理解为一种沙盒 Sandbox 。每个容器内运行一个应用，不同的容器相互隔离，容器之间也可以建立通信机制。
+
+容器的创建和停止都十分快速，容器自身对资源的需求也十分有限，远远低于虚拟机，甚至把容器当做应用本身也没问题。
+
+Docker 容器在启动速度、硬盘使用、性能、系统支持量、隔离性等方面与传统的虚拟机相比都有明显的优势。
+
+">
+  <meta property="og:description" content="可以简单地将 Docker 理解为一种沙盒 Sandbox 。每个容器内运行一个应用，不同的容器相互隔离，容器之间也可以建立通信机制。
+
+容器的创建和停止都十分快速，容器自身对资源的需求也十分有限，远远低于虚拟机，甚至把容器当做应用本身也没问题。
+
+Docker 容器在启动速度、硬盘使用、性能、系统支持量、隔离性等方面与传统的虚拟机相比都有明显的优势。
+
+">
+  <meta name="twitter:description" content="可以简单地将 Docker 理解为一种沙盒 Sandbox 。每个容器内运行一个应用，不同的容器相互隔离，容器之间也可以建立通信机制。
+
+容器的创建和停止都十分快速，容器自身对资源的需求也十分有限，远远低于虚拟机，甚至把容器当做应用本身也没问题。
+
+Docker 容器在启动速度、硬盘使用、性能、系统支持量、隔离性等方面与传统的虚拟机相比都有明显的优势。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/code/docker/docker-summary/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/code/docker/docker-summary/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffpmeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="code-heading">
+                <h1 align="center">Docker 基础知识</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Fri Dec 22, 2017</h4>
+    </section>
+    <h5 id="wc">2400 Words|Read in about 5 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.github.io/tags/docker/">Docker</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>可以简单地将 Docker 理解为一种沙盒 Sandbox 。每个容器内运行一个应用，不同的容器相互隔离，容器之间也可以建立通信机制。</p>
+
+<p>容器的创建和停止都十分快速，容器自身对资源的需求也十分有限，远远低于虚拟机，甚至把容器当做应用本身也没问题。</p>
+
+<p>Docker 容器在启动速度、硬盘使用、性能、系统支持量、隔离性等方面与传统的虚拟机相比都有明显的优势。</p>
+
+<p></p>
+
+<h2 id="虚拟化与-docker">虚拟化与 Docker</h2>
+
+<p>虚拟化技术是什么？假设现在我只有一台电脑，但是我既想使用 Windows 操作系统也想使用 Ubuntu 操作系统，那么我可以选择再买一台电脑，也可以考虑安装虚拟机来使用 Ubuntu，而安装虚拟机就是使用了虚拟化技术，有了虚拟机，甚至可以安装使用多个 Ubuntu 系统了。每个虚拟机之间都各自独立，但服务器、网络、内存和存储等资源则是虚拟器软件进行统一管理。相当于一个多对一的模型了。</p>
+
+<p>在计算机科学领域中，虚拟化代表着对计算资源的抽象，它是一种资源管理技术，目标往往是为了在同一个主机上运行多个系统或应用，从而提高系统资源的利用率，同时降低成本。</p>
+
+<p>虚拟化技术可以分为基于 <em>硬件的虚拟化</em> 和 <em>基于软件的虚拟化</em> 。前者使用并不常见，后者从对象所在的层次，又可以分为 <em>应用虚拟化</em> 和 <em>平台虚拟化</em> 。</p>
+
+<p>在平台虚拟化中，主要有两类：</p>
+
+<ul>
+<li>完全虚拟化。虚拟机模拟完整的底层硬件环境和特权指令的执行过程，客户操作系统无需进行修改。
+
+<ul>
+<li>常用的 VMware Workstation、VirtualBox 等。</li>
+</ul></li>
+<li>操作系统级虚拟化。内核通过创建多个虚拟的操作系统实例（内核和库）来隔离不同的进程。
+
+<ul>
+<li>Docker 容器等。</li>
+</ul></li>
+</ul>
+
+<p>Docker 容器是在操作系统层面上实现虚拟化，而不是在硬件层面实现虚拟化，直接复用本地主机的操作系统，不需要有额外的虚拟机管理应用，因此更加轻量级。</p>
+
+<h2 id="docker-基本概念">Docker 基本概念</h2>
+
+<p>Docker 支持 Ubuntu、CentOS、Windows 和 MacOS 等系统，具体的安装可以参考 StackOverFlow 。</p>
+
+<p>一篇不错的理解 Docker 相关概念的文章：<a href="http://dockone.io/article/783">10张图带你深入理解Docker容器和镜像</a></p>
+
+<h3 id="docker-镜像-image">Docker 镜像（Image）</h3>
+
+<p>Docker 镜像类似于虚拟机镜像，可以将它理解为一个面向 Docker 引擎的只读模板，包含了文件系统。</p>
+
+<p>镜像是创建 Docker 容器的基础。通过版本管理和增量的文件系统，Docker 提供了一套十分简单的机制来创建和更新现有的镜像。</p>
+
+<h4 id="获取镜像">获取镜像</h4>
+
+<p>使用<code>docker pull</code>命令从网络上下载镜像。该命令的格式为：</p>
+
+<pre><code class="language-sh">docker pull NAME[:TAG]
+docker pull ubuntu		// 最新版本
+docker pull ubuntu: 14.04	// 标签为 14.04 版本
+</code></pre>
+
+<p>如果不显式地指定 TAG ，则默认会选择 latest 标签，下载最新版本。</p>
+
+<h4 id="查看镜像信息">查看镜像信息</h4>
+
+<p>使用<code>docker images</code>命令可以列出本地主机上已有的镜像。</p>
+
+<p>其中镜像的 ID 信息唯一标识了镜像，而镜像的 TAG 信息用于标记来自同一个仓库的不同镜像。</p>
+
+<p>可以使用<code>docker tag</code>命令为本地镜像添加新的标签，而不是修改原来的标签。相当于是多了一个别名，本质还是原来的标签。</p>
+
+<pre><code class="language-sh">docker tag ubuntu:latest ubuntu:newTag	// 新的标签
+docker inspect dockerId		// 通过 ID 查看具体信息
+</code></pre>
+
+<p>使用<code>docker inspect</code>命令可以获取镜像的详细信息，以 JSON 的格式返回。</p>
+
+<h4 id="搜寻镜像">搜寻镜像</h4>
+
+<p>使用<code>docker search</code>命令可以搜索远程仓库中共享的镜像。</p>
+
+<h4 id="删除镜像">删除镜像</h4>
+
+<p>使用<code>docker rmi</code>命令删除镜像。</p>
+
+<p>根据镜像的标签来删除：</p>
+
+<pre><code class="language-sh">docker rmi ubuntu:newTag 	//删除 newTag 标签的镜像
+</code></pre>
+
+<p>当一个镜像文件有多个标签时，则只是删除标签，若只有一个标签了，那么就是删除镜像文件了。</p>
+
+<p>根据镜像的 ID 删除镜像：</p>
+
+<pre><code class="language-sh">docker rmi e4415b714b	// 删除对应 ID 的镜像
+</code></pre>
+
+<p>首先会删除指向该镜像的标签，然后再删除镜像文件本身。</p>
+
+<h3 id="docker-容器-container">Docker 容器（Container）</h3>
+
+<p>Docker 容器类似于一个轻量级的沙箱，Docker 利用容器来运行和隔离应用。</p>
+
+<p>容器是从镜像创建的应用运行实例，可以将其启动、开始、停止、删除，而这些容器都是相互隔离的、互不可见的。</p>
+
+<p>镜像自身是只读的。容器从镜像启动的时候，Docker 会在镜像的最上层创建一个可写层，镜像本身将保持不变。</p>
+
+<h4 id="新建容器">新建容器</h4>
+
+<p>可以使用<code>docker create</code>命令新建一个容器，但此时容器处于停止状态，使用<code>docker start</code>命令来启动它。</p>
+
+<pre><code class="language-sh">docker create -it ubuntu:latest		// 新建一个容器
+docker start 8ca2dd62ec24		//  根据容器 ID 来启动它
+</code></pre>
+
+<p>还可以使用<code>docker run</code>命令来新建并启动容器，相当于把之前的两步合为一步了。</p>
+
+<pre><code class="language-sh">docker run -t -i ubuntu:latest /bin/bash	// 启动一个 bash 终端
+</code></pre>
+
+<p>上述命令就创建了一个容器，并且启动了一个 bash 终端，允许用户进行交互。其中，<code>-t</code>选项让 Docker 分配一个伪终端并绑定到容器的标准输入上，<code>-i</code>则让容器的标准输入保持打开。</p>
+
+<p>使用 Ctrl+d 或者输入 <code>exit</code>命令来退出容器，当使用<code>exit</code>命令退出后，该容器就自动处于终止状态了。</p>
+
+<h4 id="守护态运行">守护态运行</h4>
+
+<p>当需要 Docker 容器在后台以守护态形式运行时，可以通过添加<code>-d</code>参数来实现。</p>
+
+<pre><code class="language-sh">docker run -d ubuntu:latest /bin/bash -c &quot;while true;do echo hell world;sleep 1;done&quot;	// 后台运行，打印日志
+
+docker logs abc19f3d5fd1	// 通过容器 ID 查看输出信息
+</code></pre>
+
+<p>容器启动后会返回唯一的 ID，也可以通过 <code>docker ps</code>命令查看容器信息，通过<code>docker logs</code>命令查看输出信息。</p>
+
+<h4 id="终止容器">终止容器</h4>
+
+<p>使用<code>docker stop</code>来终止一个运行中的容器，当 Docker 容器中指定的应用终结时，容器也自动终止。而<code>docker kill</code>命令会直接强行终止容器。</p>
+
+<p>使用<code>docker ps -a -q</code>命令可以查看处于终止状态的容器 ID 信息，并且可以通过 <code>docker start</code>命令来重新启动。</p>
+
+<h4 id="进入容器">进入容器</h4>
+
+<p>当使用<code>-d</code>参数时，容器启动后会进入后台运行，这时想再进入容器，可以使用 <code>docker attach</code>命令、<code>docker exec</code>命令。</p>
+
+<p><code>docker attach</code>是 Docker 自带的命令。</p>
+
+<pre><code class="language-sh">docker run -idt 0ef2e08ed3fa	// 后台运行容器
+docker attach 299ea4d823fb		// 再次进入到容器中
+</code></pre>
+
+<p>使用<code>docker exec</code>命令可以直接在容器内运行新的命令。</p>
+
+<pre><code class="language-sh">docker run -idt 0ef2e08ed3fa	// 后台运行容器
+docker exec -ti 299ea4d823fb /bin/bash		// 在容器内创建一个 bash
+</code></pre>
+
+<h4 id="删除容器">删除容器</h4>
+
+<p>使用<code>docker rm</code>命令删除处于终止状态的容器。</p>
+
+<p>如果要删除一个运行中的容器，可以添加<code>-f</code>参数来强制删除。</p>
+
+<h3 id="docker-仓库-repository">Docker 仓库（Repository）</h3>
+
+<p>Docker 仓库类似于代码仓库，是 Docker 集中存放镜像文件的场所。</p>
+
+<p>由于众所周知的原因，Docker Hub 中的镜像不通过科学上网的话是无法直接下载的。在这里，推荐使用 <a href="https://www.daocloud.io/mirror">DaoCloud</a> 来加速下载。</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-vt/">https://www.ibm.com/developerworks/cn/linux/l-cn-vt/</a></li>
+<li>《Docker 技术入门与实战》</li>
+</ol>
+        </article>
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/code/opengl/opengl-tutorial-draw-basic-shape/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---基本形状的绘制">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+            
+            <div>
+                 
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

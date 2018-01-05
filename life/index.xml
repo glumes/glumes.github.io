@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lives on Glumes Blog</title>
+    <link>https://glumes.github.io/life/</link>
+    <description>Recent content in Lives on Glumes Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
+    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <lastBuildDate>Thu, 04 Jan 2018 14:20:04 +0800</lastBuildDate>
+    
+	<atom:link href="https://glumes.github.io/life/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>泸沽湖-丽江之行</title>
+      <link>https://glumes.github.io/life/journey-with-lover/</link>
+      <pubDate>Thu, 04 Jan 2018 14:20:04 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.github.io/life/journey-with-lover/</guid>
+      <description>&lt;p&gt;元旦假期和亲爱的去了趟 泸沽湖-丽江。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

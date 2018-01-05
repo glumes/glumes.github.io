@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android Activity 创建 Window 及添加 View 流程分析</title>
+  <meta property="og:title" content="Android Activity 创建 Window 及添加 View 流程分析" />
+  <meta name="twitter:title" content="Android Activity 创建 Window 及添加 View 流程分析" />
+  <meta name="description" content="在之前有分析过 Android 6.0 Launcher 启动 Activity 过程，文章的链接如下：
+
+
+Android 6.0 Launcher 启动 Activity 过程源码分析（一）
+Android 6.0 Launcher 启动 Activity 过程源码分析（二）
+Android 6.0 Launcher 启动 Activity 过程源码分析（三）
+Android 6.0 Launcher 启动 Activity 过程源码分析（四）
+
+
+">
+  <meta property="og:description" content="在之前有分析过 Android 6.0 Launcher 启动 Activity 过程，文章的链接如下：
+
+
+Android 6.0 Launcher 启动 Activity 过程源码分析（一）
+Android 6.0 Launcher 启动 Activity 过程源码分析（二）
+Android 6.0 Launcher 启动 Activity 过程源码分析（三）
+Android 6.0 Launcher 启动 Activity 过程源码分析（四）
+
+
+">
+  <meta name="twitter:description" content="在之前有分析过 Android 6.0 Launcher 启动 Activity 过程，文章的链接如下：
+
+
+Android 6.0 Launcher 启动 Activity 过程源码分析（一）
+Android 6.0 Launcher 启动 Activity 过程源码分析（二）
+Android 6.0 Launcher 启动 Activity 过程源码分析（三）
+Android 6.0 …">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/code/android/android-window-and-view/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/code/android/android-window-and-view/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffpmeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="code-heading">
+                <h1 align="center">Android Activity 创建 Window 及添加 View 流程分析</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Fri Dec 22, 2017</h4>
+    </section>
+    <h5 id="wc">3000 Words|Read in about 6 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.github.io/tags/android/">Android</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在之前有分析过 Android 6.0 Launcher 启动 Activity 过程，文章的链接如下：</p>
+
+<ol>
+<li><a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a></li>
+<li><a href="http://www.glumes.com/start-activity-from-launcher-in-android-2/">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a></li>
+<li><a href="http://www.glumes.com/start-activity-from-launcher-in-android-3/">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a></li>
+<li><a href="http://www.glumes.com/start-activity-from-launcher-in-android-4/">Android 6.0 Launcher 启动 Activity 过程源码分析（四）</a></li>
+</ol>
+
+<p></p>
+
+<p>大致的总结一下：</p>
+
+<p>从<code>ContextImpl</code>的<code>startActivity</code>方法开始，通过<code>ActivityManagerProxy</code>代理对象向<code>ActivityManagerService</code>发起 IPC 调用。</p>
+
+<p><code>ActivityManagerService</code>会对<code>startActivity</code>方法进行响应，处理传递过来的<code>Intent</code>。这其中包括，解析<code>Intent</code>信息，创建或分配待启动的 Activity 的 <code>Task</code>任务，将启动者 Activity 运行至<code>Paused</code>状态，创建待启动 Activity 的进程。</p>
+
+<p>完成一系列准备工作之后，就该启动 Activity 了。启动的入口是<code>ActivityThread</code>类的<code>main</code>方法。在<code>main</code>方法中会开启主线程的消息循环，并调用<code>attch</code>方法，之后就是创建 Application，然后再创建 Activity。</p>
+
+<p>创建 Activity 是 ActivityManagerService 进程向应用程序进程发送一个进程间通信，应用程序进程通过<code>handleLaunchActivity</code>方法进行响应，在其方法内部执行了<code>performLaunchActivity</code>方法和<code>handleResumeActivity</code>来完成启动。</p>
+
+<p>在<code>performLaunchActivity</code>方法内部，通过反射创建了 Activity 类，并且调用了 Activity 类的 <code>attach</code> 方法，为其关联运行过程中所依赖的一系列上下文环境变量，比如 Activity 的 Context 就是在 attach 方法内部调用<code>attachBaseContext</code>方法添加上的，同时，还调度了待启动的 Activity 的生命周期，从  OnCreate 到 OnStart 状态 。</p>
+
+<p>在<code>performLaunchActivity</code>方法后，就执行了<code>handleResumeActivity</code>方法，将 Activity 的状态运行至 <code>onResume</code> 状态，此时 Activity 就处于可见的状态了。Activity 也处于能够正常工作的状态了。</p>
+
+<p>而 Activity 类的 attach 方法也就是本文要追踪的方法了，在此方法内如何为 Activity 创建 Window 的，之后才是向 Window 中添加 View。</p>
+
+<h2 id="window-的创建">Window 的创建</h2>
+
+<p>attach 方法内创建 Window 的代码示例如下：</p>
+
+<pre><code class="language-java">		mWindow = new PhoneWindow(this); // 创建 Window，实例是 PhonwWindow
+        mWindow.setCallback(this);    // 设置回调
+        mWindow.setOnWindowDismissedCallback(this);  // 设置回调
+        mWindow.getLayoutInflater().setPrivateFactory(this);
+        if (info.softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_UNSPECIFIED) {
+            mWindow.setSoftInputMode(info.softInputMode);    // 调整键盘
+        }
+        if (info.uiOptions != 0) {
+            mWindow.setUiOptions(info.uiOptions);
+        }
+
+        mWindow.setWindowManager(    // 设置 WindowManager
+                (WindowManager)context.getSystemService(Context.WINDOW_SERVICE),
+                mToken, mComponent.flattenToString(),
+                (info.flags &amp; ActivityInfo.FLAG_HARDWARE_ACCELERATED) != 0);
+        if (mParent != null) {
+            mWindow.setContainer(mParent.getWindow());
+        }
+        mWindowManager = mWindow.getWindowManager();
+</code></pre>
+
+<p>在 Android 6.0 的源码中，创建 Window 不再采用策略模式了，直接创建了 PhoneWindow。Window 是一个抽象类，它的唯一实现就是 PhoneWindow。</p>
+
+<p>接下来就是为 Window 设置回调，回调是实现都是由 Activity 来实现的，回调方法有很多，就不一一列举了，常见的有如下一些：
+*   onAttachedToWindow
+*   onDetachedFromWindow
+*   dispatchTouchEvent
+*   dispatchKetEvent</p>
+
+<p>从 dispatchTouchEvent 回调可以看出，Activity 响应触摸事件，实际上的响应了 Window 的回调方法，说明触摸事件是传递给我们的 Window，然后再又 Activity 进行分发的。</p>
+
+<p>然后就是为 Window 设置 WindowManager 。</p>
+
+<p>至此，Activity 的 Window 就算是创建完成的，剩下的就是往 Window 中添加 View 了。</p>
+
+<h2 id="window-中-view-的添加">Window 中 View 的添加</h2>
+
+<p>Android 中的所有视图都是通过 Window 来呈现的，不管是 Activity、Dialog 还是 Toast，它们的视图实际上都是附加在 Window 上的。</p>
+
+<p>因此，我们的 Activity 中的所有 View 也是添加在 Window 上的，而这一切入点就是<code>setContentView</code>方法。</p>
+
+<pre><code class="language-java">    public void setContentView(int layoutResID) {
+        getWindow().setContentView(layoutResID);
+        initWindowDecorActionBar();
+    }
+</code></pre>
+
+<p>getWindow 方法返回的就是上面创建的 PhoneWindow 对象，而重点就在于<code>setContentView</code>方法内。</p>
+
+<p>是时候展现一张经典的图了：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-activity-window.png" alt="activity-window" /></p>
+
+<p>在上图中，DecorView 就是一个 FrameLayout 的 ViewGroup 容器，也是 Activity 中的顶级 View，一般来说它内部包含标题栏和内部栏，但还是会随着主题发生变化的，但不管怎么样，内容栏是肯定有的。</p>
+
+<p>当创建了一个 DecorView 对象时，还得把内容栏和标题栏给添加进去才行。</p>
+
+<p>同时，DecorView 是依附于 Window 之上的，没有了 Window，DecorView 也无从谈起了。当我们创建好了 DecorView 时，还得把 DecorView 添加到 Window 上。</p>
+
+<p>而<code>setContentView</code>方法就是对上述图片创建 DecorView 的解释了。</p>
+
+<pre><code class="language-java">    @Override
+    public void setContentView(int layoutResID) {
+        if (mContentParent == null) {    // 代表图中 ContentView 的内容
+            installDecor();    // 创建 DecorView
+        } else if (!hasFeature(FEATURE_CONTENT_TRANSITIONS)) {
+            mContentParent.removeAllViews();    // 
+        }
+        if (hasFeature(FEATURE_CONTENT_TRANSITIONS)) {
+            final Scene newScene = Scene.getSceneForLayout(mContentParent, layoutResID,
+                    getContext());
+            transitionTo(newScene);
+        } else {
+            mLayoutInflater.inflate(layoutResID, mContentParent);    // 将布局文件加载到 mContentParent 中去，注意 mContentParent 就是上图中的内容栏
+        }
+        mContentParent.requestApplyInsets();
+        final Callback cb = getCallback();
+        if (cb != null &amp;&amp; !isDestroyed()) {
+            cb.onContentChanged();    // 在 Activity 内部回调 onContentChanged 方法，表示视图已经发生改变
+        }
+    }
+</code></pre>
+
+<p>首先要明确的是<code>mContentParent</code>指的就是图中的<code>ContentView</code>内容栏，当内容栏为 null 时，则去为 Window 创建 DecorView 。</p>
+
+<p>当 DecorView 创建完成后，则直接调用 LayoutInflater 的 inflate 方法将我们自己的布局文件添加到<code>mContentParent</code>中，由此完成了 View 的添加。关于 LayoutInflater 如何将布局添加到父布局中，可以参考之前写的文章：<a href="http://www.glumes.com/android-layoutinflater/">Android 布局加载之LayoutInflater</a>。</p>
+
+<h2 id="decorview-的创建和初始-view-的添加">DecorView 的创建和初始 View 的添加</h2>
+
+<p>下面就是分析 DecorView 是如何创建并添加初始的布局内容的。</p>
+
+<pre><code class="language-java">    private void installDecor() {
+        if (mDecor == null) {
+            mDecor = generateDecor();    // 直接 new 一个 DecorView 对象
+        }
+        if (mContentParent == null) {
+            mContentParent = generateLayout(mDecor);    // 创建内容栏
+        }
+	}
+	
+</code></pre>
+
+<p>在 installDecor 方法中直接 new 了一个 DecorView 对象，此时它还是只是一个 FrameLayout 容器，内部还没有东西。接着就是去创建内容栏。</p>
+
+<pre><code class="language-java">		int layoutResource ;
+		// 省略掉根据各自 Feature 参数来初始化不同的 layoutResource 过程
+		mDecor.startChanging();    // 标识 DecorView 中的内容开始改变
+        View in = mLayoutInflater.inflate(layoutResource, null);    // 加载 XML 布局文件，可能没有标题栏，但一定有内容栏
+        decor.addView(in, new ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT));    // 为 DecorView 添加内容
+        mContentRoot = (ViewGroup) in;
+        ViewGroup contentParent = (ViewGroup)findViewById(ID_ANDROID_CONTENT);
+        mDecor.finishChanging(); // 标识 DecorView 中的内容改变完成
+</code></pre>
+
+<p>在上面曾提到了，在 DecorView 中，标题栏可能没有，则内容栏是一定要有的，这是因为用户可能在 Actiivty 设置了相应的参数，比如设置 Window 类型为 <code>FEATURE_NO_TITLE</code> 的类型。</p>
+
+<p>而 DecorView 添加内容 View 时，这个 View 是从 XML 布局文件中加载的，针对不同的 FEATURE， XML 布局文件中的内容也不相同，有的可能就没有标题栏了，只有一个内容栏，而且不管怎么样，所有的内容栏的 ID 都是固定的，为 <code>android.R.id.content</code>。</p>
+
+<p>至此，DecorView 就完成了创建过程，并且还向其中添加了标题栏和内容栏。</p>
+
+<h2 id="decorview-添加至-window-上">DecorView 添加至 Window 上</h2>
+
+<p>众所周知，在 Activity 的 onCreate 和 onStart 阶段，View 还是处于不可见的状态，只有在 onResume 状态时，View 才是可见的。</p>
+
+<p>而我们现在只是分析完了 DecorView 的添加，还并没将它依附到 Window 上去。只有将 View 添加到 Window 上之后，它才能够拥有具体的功能，处理外界的输入信息等等。</p>
+
+<p>在<code>handleResumeActivity</code>方法内的处理代码如下：</p>
+
+<pre><code class="language-java">	// 变量 r 指的是 ActivityClientRecord 类，变量 a 指的是 Activity，也就是 r.activity
+		 if (r.window == null &amp;&amp; !a.mFinished &amp;&amp; willBeVisible) {    // if 判断成立
+                r.window = r.activity.getWindow();
+                View decor = r.window.getDecorView();    // 设置 DecorView 可见
+                decor.setVisibility(View.INVISIBLE);
+                ViewManager wm = a.getWindowManager();
+                WindowManager.LayoutParams l = r.window.getAttributes();
+                a.mDecor = decor;
+                l.type = WindowManager.LayoutParams.TYPE_BASE_APPLICATION;
+                l.softInputMode |= forwardBit;
+                if (a.mVisibleFromClient) {
+                    a.mWindowAdded = true;
+                    wm.addView(decor, l);    // WindowManager 添加 DecorView
+                }
+</code></pre>
+
+<p>截取的代码片段，其中<code>r</code>指的就是<code>ActivityClientRecord</code>类型，存储了 Activity 的状态，此时<code>r</code>的<code>window</code>变量还是为 null 的。于是为<code>ActivityClientRecord</code>相应的变量设置值，以记录当前 Activity 的状态，然后在设置 DecorView 为可见，并把 DecorView 添加到 WindowManager 中去，以便 DecorView 能够响应各种事件，进行事件分发等等操作。</p>
+
+<p>至此，就分析完了 Activity 的 Window 的创建以及 View 的添加过程。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>最后再来一发小小的总结，Activity 创建 Window 并添加 View 的流程大致如下：</p>
+
+<ul>
+<li><code>ActivityThread</code>是应用程序的入口，它的<code>attach</code>方法会开启主线程消息循环，然后创建<code>Application</code>、<code>Activity</code>等。</li>
+<li>创建<code>Activity</code>时，又有调用<code>Activity</code>的<code>attach</code>方法，在此方法内将为 Activity 创建一个 Window，此时 Window 内还是空白的。</li>
+<li><code>Instrumentation</code>类开始回调 Activity 的一系列生命周期方法，当回调<code>onCreate</code>方法时，主要做的就是创建 DecorView，并将我们传递过来的 View 添加到 DecorView 的内容栏中，而此时，DecorView 和 Window 两者还是处于分离的状态。</li>
+<li>在 Activity 生命周期的<code>onResume</code>方法内，将 DecorView 添加进了 Window 中，并设置 DecorView 可见，此时，就完成了 Activity Window 的创建和 View 的添加过程。</li>
+</ul>
+        </article>
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/code/android/android-system-server/" data-toggle="tooltip" data-placement="top" title="Android 系统服务启动 SystemServer">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/code/android/android-lrucache/" data-toggle="tooltip" data-placement="top" title="Android LruCache实现分析">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/code/android/android-system-server/">Android 系统服务启动 SystemServer</a></li>
+                    
+                    <li><a href="/code/android/android-service-manager/">Android 系统服务管理 ServiceManager</a></li>
+                    
+                    <li><a href="/code/android/android-material-design-summary-2/">Android Material Desing 控件小结-2</a></li>
+                    
+                    <li><a href="/code/android/android-material-design-summary-1/">Android Material Desing 控件小结-1</a></li>
+                    
+                    <li><a href="/code/android/android-binder-summary/">Android Binder Summary</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

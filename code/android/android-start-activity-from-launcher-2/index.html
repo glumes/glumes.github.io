@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android 6.0 Launcher 启动 Activity 过程源码分析（二）</title>
+  <meta property="og:title" content="Android 6.0 Launcher 启动 Activity 过程源码分析（二）" />
+  <meta name="twitter:title" content="Android 6.0 Launcher 启动 Activity 过程源码分析（二）" />
+  <meta name="description" content="在 Android 6.0 Launcher 启动 Activity 过程源码分析（一） 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。
+
+通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。
+
+">
+  <meta property="og:description" content="在 Android 6.0 Launcher 启动 Activity 过程源码分析（一） 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。
+
+通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。
+
+">
+  <meta name="twitter:description" content="在 Android 6.0 Launcher 启动 Activity 过程源码分析（一） 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。
+
+通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最 …">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/code/android/android-start-activity-from-launcher-2/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/code/android/android-start-activity-from-launcher-2/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffpmeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="code-heading">
+                <h1 align="center">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Fri Dec 22, 2017</h4>
+    </section>
+    <h5 id="wc">4300 Words|Read in about 9 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.github.io/tags/android/">Android</a> &nbsp;
+        
+        <a href="https://glumes.github.io/tags/framework/">Framework</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a> 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。</p>
+
+<p>通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。</p>
+
+<p></p>
+
+<h3 id="activitymanagerservice-类的-startactivity-方法">ActivityManagerService 类的 startActivity()方法</h3>
+
+<pre><code class="language-java"> @Override
+    public final int startActivity(IApplicationThread caller, String callingPackage,
+            Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode,
+            int startFlags, ProfilerInfo profilerInfo, Bundle options) {
+        return startActivityAsUser(caller, callingPackage, intent, resolvedType, resultTo,
+            resultWho, requestCode, startFlags, profilerInfo, options,
+            UserHandle.getCallingUserId());
+    }
+</code></pre>
+
+<p>显然，最后调用了 <code>startActivityAsUser</code> 方法：</p>
+
+<h3 id="activitymanagerservice-类的-startactivityasuser-方法">ActivityManagerService 类的 startActivityAsUser()方法</h3>
+
+<pre><code class="language-java">@Override
+    public final int startActivityAsUser(IApplicationThread caller, String callingPackage,
+            Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode,
+            int startFlags, ProfilerInfo profilerInfo, Bundle options, int userId) {
+        // 相关验证过程
+        enforceNotIsolatedCaller(&quot;startActivity&quot;);
+        userId = handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), userId,
+                false, ALLOW_FULL_ONLY, &quot;startActivity&quot;, null);
+        // 
+        return mStackSupervisor.startActivityMayWait(caller, -1, callingPackage, intent,
+                resolvedType, null, null, resultTo, resultWho, requestCode, startFlags,
+                profilerInfo, null, null, options, false, userId, null, null);
+    }
+</code></pre>
+
+<p>在 <code>startActivityAsUser</code>先是执行了相关的验证过程，然后调用了类型为 <code>ActivityStackSupervisor</code>的<code>mStackSupervisor</code>的<code>startActivityMayWait()</code>方法。</p>
+
+<h3 id="activitystacksupervisor-类的-startactivitymaywait-方法">ActivityStackSupervisor 类的 startActivityMayWait() 方法</h3>
+
+<p>Android 中的 Activity 组件堆栈信息，也就是 Task，是用 <code>ActivityStack</code> 类管理的，而<code>ActivityStackSupervisor</code>则是一个管理所有的<code>ActivityStack</code>的类。</p>
+
+<pre><code class="language-java">    final int startActivityMayWait(IApplicationThread caller, int callingUid,
+            String callingPackage, Intent intent, String resolvedType,
+            IVoiceInteractionSession voiceSession, IVoiceInteractor voiceInteractor,
+            IBinder resultTo, String resultWho, int requestCode, int startFlags,
+            ProfilerInfo profilerInfo, WaitResult outResult, Configuration config,
+            Bundle options, boolean ignoreTargetSecurity, int userId,
+            IActivityContainer iContainer, TaskRecord inTask) {
+	    // 省略部分代码
+     
+        // Collect information about the target of the Intent.
+        // 通过 PackageManagerService 解析 Intent 参数内容，获得更多信息，保存到 ActivityInfo 类中
+        ActivityInfo aInfo =
+                resolveActivity(intent, resolvedType, startFlags, profilerInfo, userId);
+		
+		// 省略部分关于 aInfo 代码
+
+            int res = startActivityLocked(caller, intent, resolvedType, aInfo,
+                    voiceSession, voiceInteractor, resultTo, resultWho,
+                    requestCode, callingPid, callingUid, callingPackage,
+                    realCallingPid, realCallingUid, startFlags, options, ignoreTargetSecurity,
+                    componentSpecified, null, container, inTask);
+
+            Binder.restoreCallingIdentity(origId);
+            return res;
+        }
+    }
+
+// resolveActivity 函数
+    ActivityInfo resolveActivity(Intent intent, String resolvedType, int startFlags,
+            ProfilerInfo profilerInfo, int userId) {
+        // Collect information about the target of the Intent.
+        ActivityInfo aInfo;
+        try {
+            ResolveInfo rInfo =
+                AppGlobals.getPackageManager().resolveIntent(
+                        intent, resolvedType,
+                        PackageManager.MATCH_DEFAULT_ONLY
+                                    | ActivityManagerService.STOCK_PM_FLAGS, userId);
+            aInfo = rInfo != null ? rInfo.activityInfo : null;
+        } catch (RemoteException e) {
+            aInfo = null;
+        }
+        // 省略部分代码
+        
+    }
+</code></pre>
+
+<p>首先会先调用<code>resolveActivity</code>函数，通过 PackageManagerService 解析 Intent 得到更多信息，返回<code>ActivityInfo</code>对象之后，便执行 <code>startActivityLocked</code>方法。</p>
+
+<h3 id="activitystacksupervisor-类的-startactivitylocked-方法">ActivityStackSupervisor 类的 startActivityLocked() 方法</h3>
+
+<pre><code class="language-java">final int startActivityLocked(IApplicationThread caller,
+            Intent intent, String resolvedType, ActivityInfo aInfo,
+            IVoiceInteractionSession voiceSession, IVoiceInteractor voiceInteractor,
+            IBinder resultTo, String resultWho, int requestCode,
+            int callingPid, int callingUid, String callingPackage,
+            int realCallingPid, int realCallingUid, int startFlags, Bundle options,
+            boolean ignoreTargetSecurity, boolean componentSpecified, ActivityRecord[] outActivity,
+            ActivityContainer container, TaskRecord inTask) {
+        int err = ActivityManager.START_SUCCESS;
+		ProcessRecord callerApp = null;
+        if (caller != null) {
+            callerApp = mService.getRecordForAppLocked(caller); // 得到调用者的 ProcessRecord
+            if (callerApp != null) {
+                callingPid = callerApp.pid;  // 调用者的 PID
+                callingUid = callerApp.info.uid; // 调用者的 UID 
+            } else {
+                err = ActivityManager.START_PERMISSION_DENIED;
+            }
+        }
+		
+		// 省略部分代码 ，得到描述 Launcher 组件的 ActivityRecord 对象，保存在变量 sourceRecord 中
+		ActivityRecord sourceRecord = null;
+        ActivityRecord resultRecord = null;
+        if (resultTo != null) {
+            sourceRecord = isInAnyStackLocked(resultTo);
+            if (DEBUG_RESULTS) Slog.v(TAG_RESULTS,
+                    &quot;Will send result to &quot; + resultTo + &quot; &quot; + sourceRecord);
+            if (sourceRecord != null) { 
+            // 从 Launcher 启动，requestCode 为 -1 ，下面的if不成立，resultRecord 为 null 。
+                if (requestCode &gt;= 0 &amp;&amp; !sourceRecord.finishing) {
+                    resultRecord = sourceRecord;
+                }
+            }
+        }
+		
+		// 创建用来描述被启动的 Activity 组件的 ActivityRecord 。
+		ActivityRecord r = new ActivityRecord(mService, callerApp, callingUid, callingPackage, intent, resolvedType, aInfo, mService.mConfiguration, resultRecord, resultWho, requestCode, componentSpecified, voiceSession != null, this, container, options);
+                	
+		err = startActivityUncheckedLocked(r, sourceRecord, voiceSession, voiceInteractor,
+                startFlags, true, options, inTask);
+}
+
+// 根据 token 找到对应的 ActivityRecord 变量，相当于一个数组变量里面的每个元素又持有一个数组。
+ActivityRecord isInAnyStackLocked(IBinder token) {
+		// mActivityDisplays 变量的类型为 SparseArray&lt;ActivityDisplay&gt;
+        int numDisplays = mActivityDisplays.size();
+        for (int displayNdx = 0; displayNdx &lt; numDisplays; ++displayNdx) {
+        // 内部持有一个 ArrayList&lt;ActivityStack&gt; 类型的变量 mStacks
+            ArrayList&lt;ActivityStack&gt; stacks = mActivityDisplays.valueAt(displayNdx).mStacks;
+            for (int stackNdx = stacks.size() - 1; stackNdx &gt;= 0; --stackNdx) {
+                final ActivityRecord r = stacks.get(stackNdx).isInStackLocked(token);
+                if (r != null) {
+                    return r;
+                }
+            }
+        }
+        return null;
+    }
+</code></pre>
+
+<p>每一个应用程序进程都使用一个 <code>ProcessRecord</code>对象来描述，并且保存在 ActivityManagerService 内部。ActivityStackSupervisor 的 mService 变量指向了ActivityManagerService 。通过它的成员函数<code>getRecordForAppLocked</code>来获得参数<code>caller</code>对应的一个<code>ProcessRecord</code>对象<code>callerApp</code>。而参数<code>caller</code>指向的是 Launcher 组件所运行的应用程序进程的一个 ApplicationThread 对象，因此，<code>ProcessRecord</code>对象 <code>callerApp</code>实际上就指向了 Launcher 组件所运行的应用程序进程，接着得到这个应用程序进程的 PID  和 UID ，保存在参数<code>callingPid</code>和<code>callingUid</code>中。</p>
+
+<p>ActivityStackSupervisor 变量内部有一个变量 mActivityDisplays，类型为<code>SparseArray&lt;ActivityDisplay&gt;</code>,而<code>ActivityDisplay</code>变量内部又持有一个<code>mStack</code>变量，类型为<code>ArrayList&lt;ActivityStack&gt;</code>，通过找到Activity 组件堆栈 <code>ActivityStack</code>，从而得到用来描述<code>Launcher</code>组件的<code>ActivityRecord</code>对象，保存在变量<code>sourceRecord</code>中，而由于 requestCode 为 -1 ，则 <code>resultRecord</code>继续为 null 。</p>
+
+<p>最后，创建了一个 ActivityRecord 对象<code>r</code>用来描述即将启动的 Activity 组件。</p>
+
+<p>现在，就已经得到请求启动 Activity 组件的 Launcher ActivityRecord 信息<code>sourceRecord</code>以及需要启动的 Activity 的组件信息<code>r</code>，下一步就执行<code>startActivityUncheckedLocked</code>操作。</p>
+
+<h3 id="activitystacksupervisor-类的-startactivityuncheckedlocked-方法">ActivityStackSupervisor 类的 startActivityUncheckedLocked() 方法</h3>
+
+<pre><code class="language-java">final int startActivityUncheckedLocked(final ActivityRecord r, ActivityRecord sourceRecord,
+            IVoiceInteractionSession voiceSession, IVoiceInteractor voiceInteractor, int startFlags, boolean doResume, Bundle options, TaskRecord inTask) {
+		final Intent intent = r.intent;
+        final int callingUid = r.launchedFromUid;
+        // 得到目标 Activity 组件的启动标志位
+		int launchFlags = intent.getFlags(); 
+		
+        // We'll invoke onUserLeaving before onPause only if the launching
+        // activity did not explicitly state that this is an automated launch.
+        mUserLeaving = (launchFlags &amp; Intent.FLAG_ACTIVITY_NO_USER_ACTION) == 0;
+
+		boolean addingToTask = false; // 是否将需要启动的 Activity 添加到给定的 task 中
+        TaskRecord reuseTask = null; // 
+
+        // If the caller is not coming from another activity, but has given us an
+        // explicit task into which they would like us to launch the new activity,
+        // then let's see about doing that.
+        // 如果调用者
+        if (sourceRecord == null &amp;&amp; inTask != null &amp;&amp; inTask.stack != null) {
+		 // 省略部分代码
+         // If task is empty, then adopt the interesting intent launch flags in to the
+         // activity being started.
+            if (root == null) {
+                final int flagsOfInterest = Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_MULTIPLE_TASK | Intent.FLAG_ACTIVITY_NEW_DOCUMENT
+                        | Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS;
+                launchFlags = (launchFlags&amp;~flagsOfInterest)
+                        | (baseIntent.getFlags()&amp;flagsOfInterest);
+                intent.setFlags(launchFlags);
+                inTask.setIntent(r);
+                addingToTask = true;
+        }
+		
+		// 省略启动 Activity 已经启动过的情况，主要是将 Activity 移植 Task 栈顶
+		// 启动一个从未启动过的 Activity 
+		boolean newTask = false; // 表示在一个新的 Task 中启动 Activity
+        boolean keepCurTransition = false;
+        
+        // Should this be considered a new task?
+        // 是否要创建一个新的 Task ，当然是要的
+        if (r.resultTo == null &amp;&amp; inTask == null &amp;&amp; !addingToTask
+                &amp;&amp; (launchFlags &amp; Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
+            newTask = true;
+            targetStack = computeStackFocus(r, newTask);
+            targetStack.moveToFront(&quot;startingNewTask&quot;);
+
+            if (reuseTask == null) {  // reuseTask 为 null，创建一个新的 Task 
+                r.setTask(targetStack.createTaskRecord(getNextTaskId(),
+                        newTaskInfo != null ? newTaskInfo : r.info,
+                        newTaskIntent != null ? newTaskIntent : intent,
+                        voiceSession, voiceInteractor, !launchTaskBehind /* toTop */),
+                        taskToAffiliate);
+                if (DEBUG_TASKS) Slog.v(TAG_TASKS,
+                        &quot;Starting new activity &quot; + r + &quot; in new task &quot; + r.task);
+            } else {
+                r.setTask(reuseTask, taskToAffiliate);
+            }
+            if (isLockTaskModeViolation(r.task)) {
+                Slog.e(TAG, &quot;Attempted Lock Task Mode violation r=&quot; + r);
+                return ActivityManager.START_RETURN_LOCK_TASK_MODE_VIOLATION;
+            }
+            if (!movedHome) {
+                if ((launchFlags &amp;
+                        (FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_TASK_ON_HOME))
+                        == (FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_TASK_ON_HOME)) {
+                    // Caller wants to appear on home activity, so before starting
+                    // their own activity we will bring home to the front.
+                    r.task.setTaskToReturnTo(HOME_ACTIVITY_TYPE);
+                }
+            }
+        } else if (sourceRecord != null) {
+			// 上面的 if 判断成立，省略代码
+			// 在调用者的 Task 中做操作 ，resumeTopActivityLocked 方法
+		} else if (inTask != null) {
+			// 上面的 if 判断成立，省略代码
+			// 在指定的 Task 中做操作，
+		} else {
+			// 上面的 if 判断成立，省略代码
+		}
+			
+		mService.grantUriPermissionFromIntentLocked(callingUid, r.packageName,
+                intent, r.getUriPermissionsLocked(), r.userId);
+
+        if (sourceRecord != null &amp;&amp; sourceRecord.isRecentsActivity()) {
+            r.task.setTaskToReturnTo(RECENTS_ACTIVITY_TYPE);
+        }
+        if (newTask) {
+            EventLog.writeEvent(EventLogTags.AM_CREATE_TASK, r.userId, r.task.taskId);
+        }
+        ActivityStack.logStartActivity(EventLogTags.AM_CREATE_ACTIVITY, r, r.task);
+        targetStack.mLastPausedActivity = null;
+        // 启动 Activity 组件的下一步
+        targetStack.startActivityLocked(r, newTask, doResume, keepCurTransition, options);
+        if (!launchTaskBehind) {
+            // Don't set focus on an activity that's going to the back.
+            mService.setFocusedActivityLocked(r, &quot;startedActivity&quot;);
+        }
+        return ActivityManager.START_SUCCESS;
+}
+</code></pre>
+
+<p>检查 launchFlags 的 <code>Intent.Flag_ACTIVITY_NO_USER_ACTION</code> 是否等于 1 。如果等于 1，则表示目标 Activity 组件不是由用户手动启动的。如果目标 Activity 组件是由用户手动启动的，那么用来启动它的源 Activity 就会获得一个用户离开事件通知。</p>
+
+<p>由于是从 Launcher 启动 Activity 组件，则 <code>Flag_ACTIVITY_NO_USER_ACTION</code>等于 0 ，mUserLeaving 为 True ，表示后面要向 Launcher 组件发送一个用户离开事件通知。</p>
+
+<p>由于从 Launcher 启动的 Activity 运行在另一个 Task 中，则 addingToTask 为 <code>false</code> ，同时 <code>reuseTask</code>也是为 <code>null</code> 的，<code>inTask</code>为 <code>null</code>，并且 <code>r.resultTo</code>是一个 ActivityRecord 类型，由于 Activity 组件还没启动，也是为 <code>null</code>。所以，最上面的 if 判断成立，直接创建一个新的 Task 了。</p>
+
+<h3 id="activitystack-类的-startactivitylocked-方法">ActivityStack 类的 startActivityLocked() 方法</h3>
+
+<pre><code class="language-java">    final void startActivityLocked(ActivityRecord r, boolean newTask,
+            boolean doResume, boolean keepCurTransition, Bundle options) {
+		TaskRecord rTask = r.task;
+        final int taskId = rTask.taskId;
+        // mLaunchTaskBehind tasks get placed at the back of the task stack.
+        if (!r.mLaunchTaskBehind &amp;&amp; (taskForIdLocked(taskId) == null || newTask)) {
+            // Last activity in task had been removed or ActivityManagerService is reusing task.
+            // Insert or replace.
+            // Might not even be in.
+            insertTaskAtTop(rTask, r);
+            mWindowManager.moveTaskToTop(taskId);
+        }
+		
+		 if (!newTask) {
+			 // newTask 为 true ，省略部分代码
+		 }
+		 
+		// Place a new activity at top of stack, so it is next to interact
+        // with the user.
+
+        // If we are not placing the new activity frontmost, we do not want
+        // to deliver the onUserLeaving callback to the actual frontmost activity 
+        // task 变量为 null，尚未赋值， IF 判断不成立
+        if (task == r.task &amp;&amp; mTaskHistory.indexOf(task) != (mTaskHistory.size() - 1)) {
+            mStackSupervisor.mUserLeaving = false;
+            if (DEBUG_USER_LEAVING) Slog.v(TAG_USER_LEAVING,
+                    &quot;startActivity() behind front, mUserLeaving=false&quot;);
+        }
+
+		task = r.task;
+		// Slot the activity into the history stack and proceed
+        if (DEBUG_ADD_REMOVE) Slog.i(TAG, &quot;Adding activity &quot; + r + &quot; to stack to task &quot; + task,
+                new RuntimeException(&quot;here&quot;).fillInStackTrace());
+        task.addActivityToTop(r);
+        task.setFrontOfTask();
+		 r.putInHistory();
+
+		// 省略 Window 添加部分代码
+        if (doResume) {
+            mStackSupervisor.resumeTopActivitiesLocked(this, r, options);
+        }
+    }
+// 将 ActivityRecord 添加到栈的方法
+void addActivityToTop(ActivityRecord r) {
+        addActivityAtIndex(mActivities.size(), r);
+}
+</code></pre>
+
+<p>在上一步中，已经通过 <code>r.setTask()</code>方法创建了一个新的 Task，并且 <code>newTask</code>变量为 <code>true</code> 。当 Activity 是在一个新的 Task 中启动时，需要将它放到 TaskRecord 的中，并且位于堆栈的最上方。</p>
+
+<p>当添加完之后，便继续执行 <code>resumeTopActivitiesLocked</code> 方法。</p>
+
+<h3 id="activitystacksupervisor-类的-resumetopactivitieslocked-方法">ActivityStackSupervisor 类的 resumeTopActivitiesLocked() 方法</h3>
+
+<pre><code class="language-java">boolean resumeTopActivitiesLocked(ActivityStack targetStack, ActivityRecord target,
+            Bundle targetOptions) {
+        if (targetStack == null) {
+            targetStack = mFocusedStack;
+        }
+        // Do targetStack first.
+        boolean result = false;
+        if (isFrontStack(targetStack)) {
+	        // 调用 ActivityStack 类的 resumeTopActivityLocked 方法
+            result = targetStack.resumeTopActivityLocked(target, targetOptions);
+        }
+
+        for (int displayNdx = mActivityDisplays.size() - 1; displayNdx &gt;= 0; --displayNdx) {
+            final ArrayList&lt;ActivityStack&gt; stacks = mActivityDisplays.valueAt(displayNdx).mStacks;
+            for (int stackNdx = stacks.size() - 1; stackNdx &gt;= 0; --stackNdx) {
+                final ActivityStack stack = stacks.get(stackNdx);
+                if (stack == targetStack) {
+                    // Already started above.
+                    continue;
+                }
+                if (isFrontStack(stack)) {
+	                // 调用 ActivityStack 类的 resumeTopActivityLocked 方法，参数为 null
+                    stack.resumeTopActivityLocked(null);
+                }
+            }
+        }
+        return result;
+    }
+</code></pre>
+
+<p>ActivityStackSupervisor 类重载了两种形式的 <code>resumeTopActivitiesLocked</code>方法，主要就是将所有ActivityStack栈顶的ActivityRecord迁移到显示状态，都是调用 <code>ActivityStack</code>类的<code>resumeTopActivityLocked</code>方法，只不过参数略有不同了。</p>
+
+<h3 id="activitystack-类的-resumetopactivitylocked-方法">ActivityStack 类的 resumeTopActivityLocked() 方法</h3>
+
+<pre><code class="language-java">final boolean resumeTopActivityLocked(ActivityRecord prev, Bundle options) {
+        if (mStackSupervisor.inResumeTopActivity) {
+            // Don't even start recursing.
+            return false;
+        }
+
+        boolean result = false;
+        try {
+            // Protect against recursion.
+            mStackSupervisor.inResumeTopActivity = true;
+            if (mService.mLockScreenShown == ActivityManagerService.LOCK_SCREEN_LEAVING) {
+                mService.mLockScreenShown = ActivityManagerService.LOCK_SCREEN_HIDDEN;
+                mService.updateSleepIfNeededLocked();
+            }
+            result = resumeTopActivityInnerLocked(prev, options);
+        } finally {
+            mStackSupervisor.inResumeTopActivity = false;
+        }
+        return result;
+    }
+</code></pre>
+
+<p>在该方法内部最后调用了<code>resumeTopActivityInnerLocked</code>方法。</p>
+
+<h3 id="activitystack-类的-resumetopactivityinnerlocked-方法">ActivityStack 类的 resumeTopActivityInnerLocked() 方法</h3>
+
+<pre><code class="language-java">    private boolean resumeTopActivityInnerLocked(ActivityRecord prev, Bundle options) {
+		 // Find the first activity that is not finishing.
+		 // 找到当前 ActivityRecord 的栈顶，指向了要启动的 Activity 组件。
+        final ActivityRecord next = topRunningActivityLocked(null);
+		final TaskRecord prevTask = prev != null ? prev.task : null;
+		
+		if (next == null) {
+			进入该分支表示没有要启动的 Activity 。
+		}
+		// 省略部分代码
+		// If the top activity is the resumed one, nothing to do.
+		// 检查要启动的 Activity 组件是否等于当前被激活的 Activity 组件，如果等于，并且处于 RESUMED 状态，直接返回
+        if (mResumedActivity == next &amp;&amp; next.state == ActivityState.RESUMED &amp;&amp;
+                    mStackSupervisor.allResumedActivitiesComplete()) {
+            // Make sure we have executed any pending transitions, since there
+            // should be nothing left to do at this point.
+            mWindowManager.executeAppTransition();
+            mNoAnimActivities.clear();
+            ActivityOptions.abort(options);
+            return false;
+        }
+		
+		// If we are sleeping, and there is no resumed activity, and the top
+        // activity is paused, well that is the state we want.
+        // 检查要启动的 Activity 组件是否等于上一次被中止了的 Activity 组件，如果等于，
+        // 并且这时候系统正要进入关机或睡眠状态，则直接退出，启动毫无意义
+        if (mService.isSleepingOrShuttingDown()
+                &amp;&amp; mLastPausedActivity == next
+                &amp;&amp; mStackSupervisor.allPausedActivitiesComplete()) {
+            // Make sure we have executed any pending transitions, since there
+            // should be nothing left to do at this point.
+            mWindowManager.executeAppTransition();
+            mNoAnimActivities.clear();
+            ActivityOptions.abort(options);
+            return false;
+        }
+
+		// If we are currently pausing an activity, then don't do anything until that is done.
+        // 检查系统中止 Activity 组件是否完成，如果没有，则直接返回了，等待所有的 Activity 进入中止状态
+        if (!mStackSupervisor.allPausedActivitiesComplete()) {
+            return false;
+        }
+
+		// We need to start pausing the current activity so the top one can be resumed...
+        // Launcher 组件进入 onPause 状态
+        boolean dontWaitForPause = (next.info.flags&amp;ActivityInfo.FLAG_RESUME_WHILE_PAUSING) != 0;
+        boolean pausing = mStackSupervisor.pauseBackStacks(userLeaving, true, dontWaitForPause);
+        if (mResumedActivity != null) {
+        // mResumedActivity 指向了 Launcher 组件，不为 null ，则中止 Launcher 组件
+            pausing |= startPausingLocked(userLeaving, false, true, dontWaitForPause);
+        }
+		// 省略部分代码
+		
+		if (next.app != null &amp;&amp; next.app.thread != null) {
+			// 待启动的 Activity 在新的进程中，app 变量为 null 
+		} else {
+			// 创建一个新的应用程序进程
+			mStackSupervisor.startSpecificActivityLocked(next, true, true);
+		}
+		
+    }
+
+</code></pre>
+
+<p>ActivityStack 类有三个成员变量：<code>mResumedActivity</code>、<code>mLastPausedActivity</code>、<code>mPausingActivity</code>，它们的类型均为 <code>ActivityRecord</code>，分别用来描述系统当前激活的 Activity 组件、上一次被中止的 Activity 组件，以及正在被中止的 Activity 组件。</p>
+
+<p>而在<code>resumeTopActivityInnerLocked</code>方法中，待其的 Activity 的 ActivityRecord 已经位于栈顶了，需要将它运行到 <code>Resumed</code> 状态，而在这之前需要判断满足很多条件，比如当前所有的 Activity 组件要处于 <code>onPaused</code>状态，Launcher 组件要处于<code>onPaused</code>状态，否则会直接 return 退出了。</p>
+
+<p>当满足上面的条件时，最后就是判断待启动的 Activity 组件的应用程序进程是否创建，如果还没有，则通过<code>startSpecificActivityLocked</code>创建一个应用程序进程来启动 Activity 组件。</p>
+
+<h2 id="涉及到的其他类">涉及到的其他类</h2>
+
+<ul>
+<li>ActivityStack</li>
+<li>ActivityStackSupervisor</li>
+<li>ActivityDisplay</li>
+<li>ActivityRecord</li>
+<li>ActivityInfo</li>
+<li>TaskRecord</li>
+</ul>
+
+<h2 id="参考">参考</h2>
+
+<p>1、 Android 6.0 源码
+2、《Android 系统源代码情景分析》
+3、<a href="http://duanqz.github.io/2016-07-29-Activity-LaunchProcess-Part1">http://duanqz.github.io/2016-07-29-Activity-LaunchProcess-Part1</a></p>
+
+<h2 id="疑问">疑问</h2>
+
+<ul>
+<li>Activity 的 堆栈 ActivityStack</li>
+</ul>
+        </article>
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/code/android/android-start-activity-from-launcher-1/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（一）">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/code/android/android-start-activity-from-launcher-3/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（三）">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/code/android/android-start-activity-from-launcher-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a></li>
+                    
+                    <li><a href="/code/android/rxjava-wrapper-callback/">用 RxJava 封装回调方法 CallBack</a></li>
+                    
+                    <li><a href="/code/android/android-hal-summary/">Android 硬件抽象层调用流程小结</a></li>
+                    
+                    <li><a href="/code/android/kotlin-functional-programming-whth-anko/">Kotlin 函数式编程与 Anko 构建布局实现原理分析</a></li>
+                    
+                    <li><a href="/code/android/kotlin-with-anko/">Kotlin 使用 Anko 布局那些事</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+

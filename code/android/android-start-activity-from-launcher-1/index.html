@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android 6.0 Launcher 启动 Activity 过程源码分析（一）</title>
+  <meta property="og:title" content="Android 6.0 Launcher 启动 Activity 过程源码分析（一）" />
+  <meta name="twitter:title" content="Android 6.0 Launcher 启动 Activity 过程源码分析（一）" />
+  <meta name="description" content="当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。
+
+这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。
+
+而当我们点击应用程序图标时，也就开启了从 Launcher 启动 Activity 的过程。
+
+">
+  <meta property="og:description" content="当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。
+
+这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。
+
+而当我们点击应用程序图标时，也就开启了从 Launcher 启动 Activity 的过程。
+
+">
+  <meta name="twitter:description" content="当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。
+
+这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。
+
+而当我们点击应用程序图标时， …">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.github.io/code/android/android-start-activity-from-launcher-1/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.github.io/code/android/android-start-activity-from-launcher-1/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://glumes.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?05e1e8b7484a08c51cd0953664168cd7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://glumes.github.io/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.github.io/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffpmeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="code-heading">
+                <h1 align="center">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Fri Dec 22, 2017</h4>
+    </section>
+    <h5 id="wc">3400 Words|Read in about 7 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.github.io/tags/android/">Android</a> &nbsp;
+        
+        <a href="https://glumes.github.io/tags/framework/">Framework</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。</p>
+
+<p>这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。</p>
+
+<p>而当我们点击应用程序图标时，也就开启了从 Launcher 启动 Activity 的过程。</p>
+
+<p></p>
+
+<h2 id="过程概述">过程概述</h2>
+
+<p>Activity 其实也还是 Java 里的一个类，但是在 Android 开发中可不能把它当做一个普通类来处理，它可是 Android 四大组件之一。</p>
+
+<p>Activity 的启动是由 ActivityManagerService 来完成的，由于 Launcher 组件、Activity 组件、ActivityManagerService 组件分别是运行在三个不同的进程中的，这三个进程的通信是通过 Binder 进程间通信机制来完成。</p>
+
+<p>Launcher 组件通过 ServiceManager 得到 ActivityManagerService 的代理对象 Binder ，通过它向 ActivityManagerService 发起进程间通信请求，同时把自己应用程序进程（ActivityThread）的 Binder 对象（ApplicationThread）传递给 ActivityManagerService，以便 ActivityManagerService 调用 Launcher 组件的方法。这样就形成了一个有来有去的双方通信机制。</p>
+
+<p>Launcher 组件启动 Activity 的过程大致如下所示：</p>
+
+<ol>
+<li>Launcher 组件向 ActivityManagerService 组件发送一个启动 Activity 组件的进程间通信请求。
+2ActivityManagerService 首先将要启动的 Activity 组件的信息保存下来，然后再向 Launcher 组件发送一个进入中止状态（<code>onPause 方法</code>）的进程间通信请求。</li>
+<li>Launcher 组件进入到中止状态（<code>onPause 方法</code>）之后，就会向 ActivityManagerService 发送一个已进入中止状态的进程间通信请求，以便 ActivityManagerService 可以继续执行启动 Activity 组件的操作。</li>
+<li>ActivityManagerService 会检查当前 Activity 组件的应用程序进程是否存在，如果不存在，则会通过 Binder 进程间通信机制来请求 Zygote 进程将当前应用程序进程启动起来。</li>
+<li>新的应用程序进程启动完毕后，就会向 ActivityManagerService 发送一个启动完成的进程间通信请求，以便 ActivityManagerService 可以继续执行启动 Activity 组件的操作。</li>
+<li>ActivityManagerService 将第二步保留的 Activity 组件的信息发送给第四步创建的应用程序进程，以便它可以将 Activity 组件启动起来。</li>
+</ol>
+
+<h2 id="代码过程分析">代码过程分析</h2>
+
+<h3 id="launcher-类的-startactivitysafely-方法">Launcher 类的 startActivitySafely() 方法</h3>
+
+<p>Launcher 毕竟是一个系统应用，它的源代码位于 <code>packages/apps/Launcher2/src/com/android/launcher2/Launcher.java</code> 。</p>
+
+<pre><code class="language-java">/**
+ * Default launcher application.
+ */
+public final class Launcher extends Activity
+        implements View.OnClickListener, OnLongClickListener, LauncherModel.Callbacks, View.OnTouchListener {
+</code></pre>
+
+<p>从代码中可以看到 Launcher 继承自 Activity，并且实现了点击、长按、触摸等接口。</p>
+
+<p>所以在<code>onClick</code>方法中就能找到启动 Activity 组件的调用方法 <code>startActivitySafely</code>。其中<code>Intent</code>参数包含了相应的信息。</p>
+
+<pre><code class="language-java"> boolean startActivitySafely(View v, Intent intent, Object tag) {
+        boolean success = false;
+        try {
+	        // 调用 Launcher 类的 startActivity 函数，不是 Activity 里面的，参数形式不对。
+            success = startActivity(v, intent, tag);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
+            Log.e(TAG, &quot;Unable to launch. tag=&quot; + tag + &quot; intent=&quot; + intent, e);
+        }
+        return success;
+    }
+</code></pre>
+
+<p><code>startActivitySafely</code>函数又调用了 Launcher 里面封装的 <code>startActivity(View view, Intent intent, Object tag)</code>。</p>
+
+<h3 id="launcher-类的-startactivity-方法">Launcher 类的 startActivity() 方法</h3>
+
+<pre><code class="language-java"> boolean startActivity(View v, Intent intent, Object tag) {
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            // Only launch using the new animation if the shortcut has not opted out (this is a
+            // private contract between launcher and may be ignored in the future).
+            boolean useLaunchAnimation = (v != null) &amp;&amp;  
+                    !intent.hasExtra(INTENT_EXTRA_IGNORE_LAUNCH_ANIMATION);
+            // 安卓多用户相关 UserHandle 
+            UserHandle user = (UserHandle) intent.getParcelableExtra(ApplicationInfo.EXTRA_PROFILE);
+            LauncherApps launcherApps = (LauncherApps) // 
+                    this.getSystemService(Context.LAUNCHER_APPS_SERVICE);
+            if (useLaunchAnimation) {  // 是否使用启动动画
+                ActivityOptions opts = ActivityOptions.makeScaleUpAnimation(v, 0, 0,
+                        v.getMeasuredWidth(), v.getMeasuredHeight());
+                if (user == null || user.equals(android.os.Process.myUserHandle())) {
+                    // Could be launching some bookkeeping activity
+                    startActivity(intent, opts.toBundle()); // 使用动画，启动Activity
+                } else {
+                    launcherApps.startMainActivity(intent.getComponent(), user,
+                            intent.getSourceBounds(),
+                            opts.toBundle());
+                }
+            } else {
+                if (user == null || user.equals(android.os.Process.myUserHandle())) {
+                    startActivity(intent);
+                } else {
+                    launcherApps.startMainActivity(intent.getComponent(), user,
+                            intent.getSourceBounds(), null);
+                }
+            }
+            return true;
+        } catch (SecurityException e) {
+            Toast.makeText(this, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
+</code></pre>
+
+<p>由于启动的 Activity 和 Launcher 组件不在同一进程，则在 Intent 上添加了 <code>FLAG_ACTIVITY_NEW_TASK</code>的 Flag 启动标识，以便可以在新的 <code>TASK</code>中启动。</p>
+
+<p>启动时会判断当前 Activity 组件是否使用动画效果。并且，Android 中还有  <code>LAUNCHER_APPS_SERVICE</code> 这样一个 Service 用来启动 Activity 组件。</p>
+
+<p>这里，假设没有动画，并且 user == null 的 if 判断成立，则直接调用父类 Activity 的 <code>startActivity(Intent intent)</code>方法。</p>
+
+<pre><code class="language-java">@Override
+    public void startActivity(Intent intent) {
+        this.startActivity(intent, null);
+    }
+</code></pre>
+
+<p>最终调用了父类 Activity 的<code>startActivity(Intent intent, @Nullable Bundle options)</code>方法。</p>
+
+<pre><code class="language-java"> @Override
+    public void startActivity(Intent intent, @Nullable Bundle options) {
+        if (options != null) {
+            startActivityForResult(intent, -1, options);
+        } else {
+            startActivityForResult(intent, -1); // 方法内调用的也是上一种方法形式，只是 options 为 null 
+        }
+    }
+</code></pre>
+
+<p>###Activity 类的 startActivityForResult() 方法
+由于之前假设的 options 参数为 null，则直接调用<code>startActivityForResult(intent, -1)</code>，方法原型如下：</p>
+
+<pre><code class="language-java">public void startActivityForResult(Intent intent, int requestCode) {
+        startActivityForResult(intent, requestCode, null);
+    }
+</code></pre>
+
+<p>这里面调用的也是<code>startActivityForResult</code>，只不过第三个参数为 null 了，也就是上面的 options 参数。
+只有当请求码 <code>requestCode &gt;=0</code>，才会执行调用者的 <code>onActivityResult()</code>方法，这里为 -1 ，不会。</p>
+
+<pre><code class="language-java">public void startActivityForResult(Intent intent, int requestCode, @Nullable Bundle options) {
+        if (mParent == null) {
+            Instrumentation.ActivityResult ar =
+                mInstrumentation.execStartActivity(
+                    this, mMainThread.getApplicationThread(), mToken, this,
+                    intent, requestCode, options);
+            if (ar != null) {
+                mMainThread.sendActivityResult(
+                    mToken, mEmbeddedID, requestCode, ar.getResultCode(),
+                    ar.getResultData());
+            }
+            if (requestCode &gt;= 0) {
+                mStartedActivity = true;
+            }
+            cancelInputsAndStartExitTransition(options);
+        } else {
+			// 由于第一次从 Launcher 启动 Activity ，mParent 为 null 。
+        }
+    }
+</code></pre>
+
+<p>在 if 判断里面执行了 <code>Instrumentation</code> 类的<code>execStartActivity</code>方法。</p>
+
+<p><code>Instrumentation</code> 类会在应用的任何代码执行前被实列化，是用来监控应用程序和系统之间的交互操作。</p>
+
+<p>方法原型为：</p>
+
+<pre><code class="language-java">    public ActivityResult execStartActivity(
+            Context who, IBinder contextThread, IBinder token, Activity target,
+            Intent intent, int requestCode, Bundle options) {
+</code></pre>
+
+<p>这里比较重要的就是里面传入的参数了，之前的参数都是 Intent 附带的 Activity 组件的信息。</p>
+
+<p>一一对应如下：</p>
+
+<table>
+<thead>
+<tr>
+<th>参数类型</th>
+<th>实际参数</th>
+<th>含义</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Context who</td>
+<td>this</td>
+<td>Context 类</td>
+</tr>
+
+<tr>
+<td>IBinder contextThread</td>
+<td>mMainThread.getApplicationThread()</td>
+<td>自己的Binder本地对象</td>
+</tr>
+
+<tr>
+<td>IBinder token</td>
+<td>mToken</td>
+<td>ActivityManagerService 中的ActivityRecord 代理对象</td>
+</tr>
+
+<tr>
+<td>Activity target</td>
+<td>this</td>
+<td>目标</td>
+</tr>
+
+<tr>
+<td>Intent intent</td>
+<td>intent</td>
+<td>组件信息</td>
+</tr>
+
+<tr>
+<td>int requestCode</td>
+<td>requestCode</td>
+<td>请求码</td>
+</tr>
+
+<tr>
+<td>Bundle options</td>
+<td>options</td>
+<td>附件信息</td>
+</tr>
+</tbody>
+</table>
+
+<p>其中，options、requestCode、intent、who 参数都比较好理解。</p>
+
+<p>而 contextThread 参数是一个 <code>IBinder</code> 类型，实际参数为<code>mMainThread.getApplicationThread()</code>。</p>
+
+<p>其实 <code>mMainThread</code> 的类型为 <code>ActivityThread</code>，用来描述一个应用程序进程，它并不是一个线程，是一个 <code>final</code> 类型的类。</p>
+
+<p>系统每当启动一个应用程序进程时，都会在它里面加载一个 <code>ActivityThread</code>类实例，并且将这个 <code>ActivityThread</code>类实例保存在每一个在该进程启动的 Activity 组件的父类 Activity 的成员变量 <code>mMainThread</code>中。</p>
+
+<p>而<code>ActivityThread</code>类的成员函数<code>getApplicationThread()</code>用来获取它内部的一个类型为<code>ApplicationThread</code>的<code>Binder本地对象</code>。</p>
+
+<pre><code class="language-java">private class ApplicationThread extends ApplicationThreadNative {}
+public abstract class ApplicationThreadNative extends Binder implements IApplicationThread {}
+</code></pre>
+
+<p><code>ApplicationThread</code>类是一个 Binder 类，那么它的作用是用来与 ActivityManagerService 通信的。</p>
+
+<p>之前在 <a href="http://www.glumes.com/android-binder-note-1/">Binder 学习</a>的时候，bindService 操作会在 onServiceConnected 返回 Service 的一个 Binder 对象，通过该 Binder 对象便可以执行 Service 中的函数，此时便完成的了 Activity 与 Service 的通信。而现在，我们在 execStartActivity() 方法中把自己的 Binder 对象传递给 ActivityManagerService，不就是相当于 onServiceConnected 中回调 Binder 了嘛。有了这个 Binder 对象，ActivityManagerService 才能够通知 Launcher 组件进入 <code>Paused</code> 状态。</p>
+
+<p><code>mToken</code>类也是一个 Binder 类型，它是一个 <code>Binder代理对象</code>，它指向了 ActivityManagerService 中一个类型为 <code>ActivityRecord</code>的 <code>Binder本地对象</code>。每一个已经启动的 Activity 组件在 ActivityManagerService 中都有一个对应的<code>ActivityRecord</code>对象，用来维护对应的 Activity 组件的运行状态。将它传递给 ActivityManagerService，以便 ActivityManagerService 获得 Launcher 组件的详细信息了。</p>
+
+<h3 id="instrumentation-类的-execstartactivity-方法">Instrumentation 类的 execStartActivity() 方法</h3>
+
+<pre><code class="language-java">    public ActivityResult execStartActivity(
+            Context who, IBinder contextThread, IBinder token, Activity target,
+            Intent intent, int requestCode, Bundle options) {
+        IApplicationThread whoThread = (IApplicationThread) contextThread;
+		// 省略部分代码
+        try {
+            intent.migrateExtraStreamToClipData();
+            intent.prepareToLeaveProcess();
+            int result = ActivityManagerNative.getDefault()
+                .startActivity(whoThread, who.getBasePackageName(), intent,
+                        intent.resolveTypeIfNeeded(who.getContentResolver()),
+                        token, target != null ? target.mEmbeddedID : null,
+                        requestCode, 0, null, options);
+            checkStartActivityResult(result, intent);
+        } catch (RemoteException e) {
+            throw new RuntimeException(&quot;Failure from system&quot;, e);
+        }
+        return null;
+    }
+</code></pre>
+
+<p>Intent 执行了一些准备工作后，便调用 ActivityManagerService 的代理对象的 <code>startActivity</code>方法了。</p>
+
+<p>ActivityManagerNative.getDefault() 方法返回的就是 ActivityManagerService 的代理对象，代理对象的获取在之前 <a href="http://www.glumes.com/android-binder-note-1/">Binder 学习</a>的文章中已经了解过了。</p>
+
+<pre><code class="language-java">public abstract class ActivityManagerNative extends Binder implements IActivityManager{
+
+	static public IActivityManager asInterface(IBinder obj) {
+        if (obj == null) {
+            return null;
+        }
+        IActivityManager in =
+            (IActivityManager)obj.queryLocalInterface(descriptor);
+        if (in != null) {
+            return in;
+        }
+
+        return new ActivityManagerProxy(obj);
+    }
+    
+	static public IActivityManager getDefault() {
+        return gDefault.get();
+    }
+	
+	private static final Singleton&lt;IActivityManager&gt; gDefault = new Singleton&lt;IActivityManager&gt;() {
+        protected IActivityManager create() {
+        // 通过 ServiceManager 来获得 ActivityServiceManager 的代理对象。
+        // 再通过 asInterface 方法判断是否为同一进程，不是，则封装成 ActivityManagerProxy 代理对象。
+        // ActivityManagerProxy 代理对象的操作都是由 ActivityServiceManager 的代理对象 Binder 来完成的。
+        // ActivityManagerProxy 只是在之上对数据封装了一层。
+            IBinder b = ServiceManager.getService(&quot;activity&quot;);
+            if (false) {
+                Log.v(&quot;ActivityManager&quot;, &quot;default service binder = &quot; + b);
+            }
+            IActivityManager am = asInterface(b);
+            if (false) {
+                Log.v(&quot;ActivityManager&quot;, &quot;default service = &quot; + am);
+            }
+            return am;
+        }
+    };
+}
+</code></pre>
+
+<p>在 ActivityManagerNative 中还看到了一个有意思的单例写法：</p>
+
+<pre><code class="language-java">public abstract class Singleton&lt;T&gt; {
+    private T mInstance;
+    protected abstract T create();
+    public final T get() {
+        synchronized (this) {
+            if (mInstance == null) {
+                mInstance = create();
+            }
+            return mInstance;
+        }
+    }
+}
+</code></pre>
+
+<h3 id="activitymanagerproxy-类的-startactivity-方法">ActivityManagerProxy 类的 startActivity() 方法</h3>
+
+<p>Instrumentation 类的 execStartActivity() 方法最终调用了ActivityManagerProxy 类的 startActivity() 方法，由 ActivityManagerService 的代理对象 Binder 去发起类型为 START_ACTIVITY_TRANSACTION 的进程间通信请求。参数信息如注释所示：</p>
+
+<pre><code class="language-java">    public int startActivity(IApplicationThread caller, String callingPackage, Intent intent,
+            String resolvedType, IBinder resultTo, String resultWho, int requestCode,
+            int startFlags, ProfilerInfo profilerInfo, Bundle options) throws RemoteException {
+        Parcel data = Parcel.obtain();
+        Parcel reply = Parcel.obtain();
+        data.writeInterfaceToken(IActivityManager.descriptor);
+        // caller 参数为 Launcher 组件所运行的应用程序进程的 ApplicationThread Binder 本地对象。
+        data.writeStrongBinder(caller != null ? caller.asBinder() : null); 
+        // Launcher 组件的包名
+        data.writeString(callingPackage);
+        // 需要启动的 Activity 组件的信息
+        intent.writeToParcel(data, 0);
+        data.writeString(resolvedType);
+        // ActivityManagerService 内部的 ActivityRecord 对象，保存了 Launcher 组件的详细信息。
+        data.writeStrongBinder(resultTo);
+        data.writeString(resultWho);
+        data.writeInt(requestCode);
+        data.writeInt(startFlags);
+        if (profilerInfo != null) {
+            data.writeInt(1);
+            profilerInfo.writeToParcel(data, Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+        } else {
+            data.writeInt(0);
+        }
+        if (options != null) {
+            data.writeInt(1);
+            options.writeToParcel(data, 0);
+        } else {
+            data.writeInt(0);
+        }
+        mRemote.transact(START_ACTIVITY_TRANSACTION, data, reply, 0);
+        reply.readException();
+        int result = reply.readInt();
+        reply.recycle();
+        data.recycle();
+        return result;
+    }
+</code></pre>
+
+<p>以上五步，就完成了启动一个 Activity ，在 Launcher 组件中的步骤，这五步都在 Launcher 应用程序进程内执行的。</p>
+
+<p>剩下的步骤将会在 ActivityManagerService 进程去执行。</p>
+
+<h2 id="涉及到的其他类">涉及到的其他类</h2>
+
+<ul>
+<li>UserHandle</li>
+<li>LauncherApps</li>
+<li>ActivityOptions</li>
+<li>Instrumentation
+
+<ul>
+<li>监控应用程序和系统之间的交互操作</li>
+</ul></li>
+<li>ActivityRecord
+
+<ul>
+<li>维护 Activity 组件的运行状态</li>
+</ul></li>
+<li>ActivityThread
+
+<ul>
+<li>表示 Android 应用程序进程</li>
+</ul></li>
+<li>ApplicationThread
+
+<ul>
+<li>Binder 类型变量，用来和 ActivityManagerService 通信</li>
+</ul></li>
+</ul>
+
+<h2 id="参考">参考</h2>
+
+<p>1、  Android 6.0 源码
+2、《Android 系统源代码情景分析》</p>
+        </article>
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.github.io/code/android/rxjava-wrapper-callback/" data-toggle="tooltip" data-placement="top" title="用 RxJava 封装回调方法 CallBack">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.github.io/code/android/android-start-activity-from-launcher-2/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（二）">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/code/android/rxjava-wrapper-callback/">用 RxJava 封装回调方法 CallBack</a></li>
+                    
+                    <li><a href="/code/android/android-hal-summary/">Android 硬件抽象层调用流程小结</a></li>
+                    
+                    <li><a href="/code/android/kotlin-functional-programming-whth-anko/">Kotlin 函数式编程与 Anko 构建布局实现原理分析</a></li>
+                    
+                    <li><a href="/code/android/kotlin-with-anko/">Kotlin 使用 Anko 布局那些事</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.github.io/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/main.js"></script>
+
+<script src="https://glumes.github.io/js/highlight.min.js"></script>
+<script src="https://glumes.github.io/js/prism.js"></script>
+<script src="https://glumes.github.io/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://glumes.github.io/js/load-photoswipe.js"></script>
+
+
+
+  </body>
+</html>
+
