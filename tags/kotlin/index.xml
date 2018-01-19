@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kotlin on Glumes Blog</title>
-    <link>https://glumes.github.io/tags/kotlin/</link>
+    <link>https://glumes.com/tags/kotlin/</link>
     <description>Recent content in Kotlin on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
@@ -10,15 +10,15 @@
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
     <lastBuildDate>Fri, 22 Dec 2017 10:26:57 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.github.io/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://glumes.com/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Kotlin 函数式编程与 Anko 构建布局实现原理分析</title>
-      <link>https://glumes.github.io/post/android/kotlin-functional-programming-whth-anko/</link>
+      <link>https://glumes.com/post/android/kotlin-functional-programming-whth-anko/</link>
       <pubDate>Fri, 22 Dec 2017 10:26:57 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/android/kotlin-functional-programming-whth-anko/</guid>
+      <guid>https://glumes.com/post/android/kotlin-functional-programming-whth-anko/</guid>
       <description>&lt;p&gt;之前讲到了如何在 &lt;a href=&#34;http://www.glumes.com/kotlin-anko-usage/&#34;&gt;Kotlin 开发中使用 Anko 构建布局&lt;/a&gt;。&lt;/p&gt;
 
 &lt;p&gt;这一篇将是分析其原理。&lt;/p&gt;
@@ -28,10 +28,10 @@
     
     <item>
       <title>Kotlin 使用 Anko 布局那些事</title>
-      <link>https://glumes.github.io/post/android/kotlin-with-anko/</link>
+      <link>https://glumes.com/post/android/kotlin-with-anko/</link>
       <pubDate>Fri, 22 Dec 2017 10:21:26 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/android/kotlin-with-anko/</guid>
+      <guid>https://glumes.com/post/android/kotlin-with-anko/</guid>
       <description>&lt;p&gt;学习 Kotlin 应该都或多或少听过 Anko 这个开源库。&lt;/p&gt;
 
 &lt;p&gt;使用 Anko 来构建界面会更加简单、快捷。&lt;/p&gt;

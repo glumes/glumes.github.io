@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Glumes Blog</title>
-    <link>https://glumes.github.io/tags/</link>
+    <link>https://glumes.com/tags/</link>
     <description>Recent content in Tags on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
@@ -10,105 +10,105 @@
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
     <lastBuildDate>Fri, 22 Dec 2017 16:00:05 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://glumes.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Android</title>
-      <link>https://glumes.github.io/tags/android/</link>
+      <link>https://glumes.com/tags/android/</link>
       <pubDate>Fri, 22 Dec 2017 16:00:05 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/tags/android/</guid>
+      <guid>https://glumes.com/tags/android/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dagger2</title>
-      <link>https://glumes.github.io/tags/dagger2/</link>
+      <link>https://glumes.com/tags/dagger2/</link>
       <pubDate>Fri, 22 Dec 2017 10:47:52 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/tags/dagger2/</guid>
+      <guid>https://glumes.com/tags/dagger2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Docker</title>
-      <link>https://glumes.github.io/tags/docker/</link>
+      <link>https://glumes.com/tags/docker/</link>
       <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/tags/docker/</guid>
+      <guid>https://glumes.com/tags/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ffmpeg</title>
-      <link>https://glumes.github.io/tags/ffmpeg/</link>
+      <link>https://glumes.com/tags/ffmpeg/</link>
       <pubDate>Fri, 22 Dec 2017 16:05:30 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/tags/ffmpeg/</guid>
+      <guid>https://glumes.com/tags/ffmpeg/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Framework</title>
-      <link>https://glumes.github.io/tags/framework/</link>
+      <link>https://glumes.com/tags/framework/</link>
       <pubDate>Fri, 22 Dec 2017 15:40:19 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/tags/framework/</guid>
+      <guid>https://glumes.com/tags/framework/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kotlin</title>
-      <link>https://glumes.github.io/tags/kotlin/</link>
+      <link>https://glumes.com/tags/kotlin/</link>
       <pubDate>Fri, 22 Dec 2017 10:26:57 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/tags/kotlin/</guid>
+      <guid>https://glumes.com/tags/kotlin/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Life</title>
-      <link>https://glumes.github.io/tags/life/</link>
+      <link>https://glumes.com/tags/life/</link>
       <pubDate>Thu, 04 Jan 2018 14:20:04 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/tags/life/</guid>
+      <guid>https://glumes.com/tags/life/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Opencv</title>
-      <link>https://glumes.github.io/tags/opencv/</link>
+      <link>https://glumes.com/tags/opencv/</link>
       <pubDate>Fri, 22 Dec 2017 09:53:04 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/tags/opencv/</guid>
+      <guid>https://glumes.com/tags/opencv/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Opengl</title>
-      <link>https://glumes.github.io/tags/opengl/</link>
+      <link>https://glumes.com/tags/opengl/</link>
       <pubDate>Fri, 22 Dec 2017 16:21:16 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/tags/opengl/</guid>
+      <guid>https://glumes.com/tags/opengl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>https://glumes.github.io/tags/python/</link>
+      <link>https://glumes.com/tags/python/</link>
       <pubDate>Fri, 22 Dec 2017 16:10:57 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/tags/python/</guid>
+      <guid>https://glumes.com/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rxjava</title>
-      <link>https://glumes.github.io/tags/rxjava/</link>
+      <link>https://glumes.com/tags/rxjava/</link>
       <pubDate>Fri, 22 Dec 2017 16:00:05 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/tags/rxjava/</guid>
+      <guid>https://glumes.com/tags/rxjava/</guid>
       <description></description>
     </item>
     

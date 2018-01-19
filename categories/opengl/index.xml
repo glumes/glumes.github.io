@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Opengl on Glumes Blog</title>
-    <link>https://glumes.github.io/categories/opengl/</link>
+    <link>https://glumes.com/categories/opengl/</link>
     <description>Recent content in Opengl on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
@@ -10,15 +10,15 @@
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
     <lastBuildDate>Fri, 22 Dec 2017 16:21:16 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.github.io/categories/opengl/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://glumes.com/categories/opengl/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>OpenGL 学习系列---基本形状的绘制</title>
-      <link>https://glumes.github.io/post/opengl/opengl-tutorial-draw-basic-shape/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/</link>
       <pubDate>Fri, 22 Dec 2017 16:21:16 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/opengl/opengl-tutorial-draw-basic-shape/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/</guid>
       <description>&lt;p&gt;在之前的一篇博客中，讲述了 OpenGL 绘制一个点的流程及相关的代码，其中关于 OpenGL 程序编译部分都是可以在其他项目中接着复用的，接下来会讲到如何去绘制其他的基本图元。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -26,10 +26,10 @@
     
     <item>
       <title>OpenGL 学习系列---点的绘制流程</title>
-      <link>https://glumes.github.io/post/opengl/opengl-tutorial-draw-point/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-draw-point/</link>
       <pubDate>Fri, 22 Dec 2017 16:19:28 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/opengl/opengl-tutorial-draw-point/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-draw-point/</guid>
       <description>&lt;p&gt;终于要开始探索奇妙的 3D 世界了，OpenGL 搞起。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

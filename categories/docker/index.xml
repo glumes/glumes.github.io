@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker on Glumes Blog</title>
-    <link>https://glumes.github.io/categories/docker/</link>
+    <link>https://glumes.com/categories/docker/</link>
     <description>Recent content in Docker on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
@@ -10,15 +10,15 @@
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
     <lastBuildDate>Fri, 22 Dec 2017 16:24:03 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://glumes.com/categories/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Docker 基础知识</title>
-      <link>https://glumes.github.io/post/docker/docker-summary/</link>
+      <link>https://glumes.com/post/docker/docker-summary/</link>
       <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/docker/docker-summary/</guid>
+      <guid>https://glumes.com/post/docker/docker-summary/</guid>
       <description>&lt;p&gt;可以简单地将 Docker 理解为一种沙盒 Sandbox 。每个容器内运行一个应用，不同的容器相互隔离，容器之间也可以建立通信机制。&lt;/p&gt;
 
 &lt;p&gt;容器的创建和停止都十分快速，容器自身对资源的需求也十分有限，远远低于虚拟机，甚至把容器当做应用本身也没问题。&lt;/p&gt;

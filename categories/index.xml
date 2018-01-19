@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Glumes Blog</title>
-    <link>https://glumes.github.io/categories/</link>
+    <link>https://glumes.com/categories/</link>
     <description>Recent content in Categories on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
@@ -10,69 +10,69 @@
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
     <lastBuildDate>Fri, 22 Dec 2017 16:00:05 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://glumes.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Android</title>
-      <link>https://glumes.github.io/categories/android/</link>
+      <link>https://glumes.com/categories/android/</link>
       <pubDate>Fri, 22 Dec 2017 16:00:05 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/categories/android/</guid>
+      <guid>https://glumes.com/categories/android/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Docker</title>
-      <link>https://glumes.github.io/categories/docker/</link>
+      <link>https://glumes.com/categories/docker/</link>
       <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/categories/docker/</guid>
+      <guid>https://glumes.com/categories/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ffmpeg</title>
-      <link>https://glumes.github.io/categories/ffmpeg/</link>
+      <link>https://glumes.com/categories/ffmpeg/</link>
       <pubDate>Fri, 22 Dec 2017 16:05:30 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/categories/ffmpeg/</guid>
+      <guid>https://glumes.com/categories/ffmpeg/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Life</title>
-      <link>https://glumes.github.io/categories/life/</link>
+      <link>https://glumes.com/categories/life/</link>
       <pubDate>Thu, 04 Jan 2018 14:20:04 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/categories/life/</guid>
+      <guid>https://glumes.com/categories/life/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Opencv</title>
-      <link>https://glumes.github.io/categories/opencv/</link>
+      <link>https://glumes.com/categories/opencv/</link>
       <pubDate>Fri, 22 Dec 2017 09:53:04 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/categories/opencv/</guid>
+      <guid>https://glumes.com/categories/opencv/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Opengl</title>
-      <link>https://glumes.github.io/categories/opengl/</link>
+      <link>https://glumes.com/categories/opengl/</link>
       <pubDate>Fri, 22 Dec 2017 16:21:16 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/categories/opengl/</guid>
+      <guid>https://glumes.com/categories/opengl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>https://glumes.github.io/categories/python/</link>
+      <link>https://glumes.com/categories/python/</link>
       <pubDate>Fri, 22 Dec 2017 16:10:57 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/categories/python/</guid>
+      <guid>https://glumes.com/categories/python/</guid>
       <description></description>
     </item>
     

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Framework on Glumes Blog</title>
-    <link>https://glumes.github.io/tags/framework/</link>
+    <link>https://glumes.com/tags/framework/</link>
     <description>Recent content in Framework on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
@@ -10,15 +10,15 @@
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
     <lastBuildDate>Fri, 22 Dec 2017 15:40:19 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.github.io/tags/framework/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://glumes.com/tags/framework/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Android 6.0 Service 启动过程源码分析（一）</title>
-      <link>https://glumes.github.io/post/android/android-start-service/</link>
+      <link>https://glumes.com/post/android/android-start-service/</link>
       <pubDate>Fri, 22 Dec 2017 15:40:19 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/android/android-start-service/</guid>
+      <guid>https://glumes.com/post/android/android-start-service/</guid>
       <description>&lt;p&gt;Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。&lt;/p&gt;
 
 &lt;p&gt;Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。&lt;/p&gt;
@@ -28,10 +28,10 @@
     
     <item>
       <title> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</title>
-      <link>https://glumes.github.io/post/android/android-start-activity-from-launcher-4/</link>
+      <link>https://glumes.com/post/android/android-start-activity-from-launcher-4/</link>
       <pubDate>Fri, 22 Dec 2017 10:40:49 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/android/android-start-activity-from-launcher-4/</guid>
+      <guid>https://glumes.com/post/android/android-start-activity-from-launcher-4/</guid>
       <description>&lt;p&gt;在如下三篇文章中过了一遍 Launcher 启动 Activity 的代码流程。&lt;/p&gt;
 
 &lt;ul&gt;
@@ -49,10 +49,10 @@
     
     <item>
       <title>Android 6.0 Launcher 启动 Activity 过程源码分析（三）</title>
-      <link>https://glumes.github.io/post/android/android-start-activity-from-launcher-3/</link>
+      <link>https://glumes.com/post/android/android-start-activity-from-launcher-3/</link>
       <pubDate>Fri, 22 Dec 2017 10:40:45 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/android/android-start-activity-from-launcher-3/</guid>
+      <guid>https://glumes.com/post/android/android-start-activity-from-launcher-3/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-2/&#34;&gt; Android 6.0 Launcher 启动 Activity 过程源码分析（二）&lt;/a&gt; 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 &lt;code&gt;Resumed&lt;/code&gt;状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 &lt;code&gt;startSpecificActivityLocked&lt;/code&gt;方法创建进程。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -60,10 +60,10 @@
     
     <item>
       <title>Android 6.0 Launcher 启动 Activity 过程源码分析（二）</title>
-      <link>https://glumes.github.io/post/android/android-start-activity-from-launcher-2/</link>
+      <link>https://glumes.com/post/android/android-start-activity-from-launcher-2/</link>
       <pubDate>Fri, 22 Dec 2017 10:40:42 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/android/android-start-activity-from-launcher-2/</guid>
+      <guid>https://glumes.com/post/android/android-start-activity-from-launcher-2/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-1/&#34;&gt;Android 6.0 Launcher 启动 Activity 过程源码分析（一）&lt;/a&gt; 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。&lt;/p&gt;
 
 &lt;p&gt;通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。&lt;/p&gt;
@@ -73,10 +73,10 @@
     
     <item>
       <title>Android 6.0 Launcher 启动 Activity 过程源码分析（一）</title>
-      <link>https://glumes.github.io/post/android/android-start-activity-from-launcher-1/</link>
+      <link>https://glumes.com/post/android/android-start-activity-from-launcher-1/</link>
       <pubDate>Fri, 22 Dec 2017 10:40:38 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.github.io/post/android/android-start-activity-from-launcher-1/</guid>
+      <guid>https://glumes.com/post/android/android-start-activity-from-launcher-1/</guid>
       <description>&lt;p&gt;当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。&lt;/p&gt;
 
 &lt;p&gt;这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。&lt;/p&gt;
