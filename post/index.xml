@@ -8,10 +8,25 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Thu, 04 Jan 2018 14:20:04 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 23 Jan 2018 17:44:53 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 学习系列---坐标系统</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-coordinate/</link>
+      <pubDate>Tue, 23 Jan 2018 17:44:53 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-coordinate/</guid>
+      <description>&lt;p&gt;在前面绘制基本图形中，遇到了很明显的问题，圆形不像圆形，正多边形不像正多边形？就像下面图形一样：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png&#34; alt=&#34;http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;好好的正五边形却东倒西歪的，这就是因为我们前面的绘制都是把它当成 二维 的绘制，而在 OpenGL 中却是绘制 三维的。在二维和三维之间还有个转换，而之前为了方便学习则忽略了这个转换，现在就要开始理解它了 —— &lt;code&gt;坐标系统&lt;/code&gt;！！&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>泸沽湖-丽江之行</title>

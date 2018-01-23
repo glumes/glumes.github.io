@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>OpenGL 学习系列---坐标系统</title>
+  <meta property="og:title" content="OpenGL 学习系列---坐标系统" />
+  <meta name="twitter:title" content="OpenGL 学习系列---坐标系统" />
+  <meta name="description" content="一个点的坐标转换的心路历程">
+  <meta property="og:description" content="一个点的坐标转换的心路历程">
+  <meta name="twitter:description" content="一个点的坐标转换的心路历程">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-coordinate/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-coordinate/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffpmeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">OpenGL 学习系列---坐标系统</h1>
+                
+                  
+                    <h2 align="center" class="post-subheading">一个点的坐标转换的心路历程</h2>
+                  
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Tue Jan 23, 2018</h4>
+    </section>
+    <h5 id="wc">3700 Words|Read in about 8 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在前面绘制基本图形中，遇到了很明显的问题，圆形不像圆形，正多边形不像正多边形？就像下面图形一样：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png" /></p>
+
+<p>好好的正五边形却东倒西歪的，这就是因为我们前面的绘制都是把它当成 二维 的绘制，而在 OpenGL 中却是绘制 三维的。在二维和三维之间还有个转换，而之前为了方便学习则忽略了这个转换，现在就要开始理解它了 —— <code>坐标系统</code>！！</p>
+
+<p></p>
+
+<h2 id="坐标系统">坐标系统</h2>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516603056/code/3d_coordinate.jpg" alt="3d-coordinate" /></p>
+
+<p>在立体几何的坐标系里面定义一个点的位置，需要 x、y、z 三个坐标轴的值，而在 OpenGL 中绘制 3D 物体也是需要的。</p>
+
+<p>在绘制基本形状时，只是定义了 x、y 轴的坐标，这样 z 轴的坐标就默认为 0 了。</p>
+
+<p>OpenGL 将定义好的坐标轴的值转换为实际绘制的坐标，需要经过五个坐标系统的转换。</p>
+
+<p>如下图所示：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_coordinate_systems.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_coordinate_systems.png" /></p>
+
+<p>这里面涉及到了五个坐标空间和三个转换矩阵：</p>
+
+<p>空间：</p>
+
+<ul>
+<li>局部空间（Local Space）</li>
+<li>世界空间（World Space）</li>
+<li>观察空间（View Space）</li>
+<li>裁剪空间（Clip Space）</li>
+<li>屏幕空间（Screen Space）</li>
+</ul>
+
+<p>矩阵：</p>
+
+<ul>
+<li>模型矩阵（Model Matrix）</li>
+<li>视图矩阵（View Matrix）</li>
+<li>投影矩阵（Projection Matrix）</li>
+</ul>
+
+<p>根据流程图，每个坐标空间的转换都需要一个转换矩阵来完成。</p>
+
+<p>最后裁剪空间到屏幕空间的转换，就是将经过这一系列转换后的坐标映射到屏幕的坐标上，这一过程就不需要转换矩阵了。</p>
+
+<p>在进入不同的坐标空间之前，需要先了解 OpenGL 的坐标系：</p>
+
+<p>OpenGL 是一个右手坐标系，正 X 轴在右手边，正 Y 轴朝上，正 Z 轴穿过屏幕朝向你。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516695925/code/opengl_coordinate_systems_right_handed.png" alt="" /></p>
+
+<p>与之相对的就是左手坐标系，其正 Z 轴穿过屏幕朝向里面了。</p>
+
+<h2 id="局部空间">局部空间</h2>
+
+<p>局部空间坐标是 OpenGL 绘制坐标的起点，接下来所有的转换操作都是在局部空间坐标基础上进行的。</p>
+
+<p>局部空间坐标就是我们自己定义的起始坐标点，是相对于原点 <code>$(0,0,0)$</code> 的。</p>
+
+<p>此时所在的空间就是局部空间，也就是说我们在局部空间里面定义物体的起始坐标。</p>
+
+<h2 id="世界空间">世界空间</h2>
+
+<p>我们定义每一个坐标点都是在局部空间，相对于 <code>$(0,0,0)$</code> 的。这样一来，当多个物体同时绘制时，就会扎堆了。</p>
+
+<p>而世界空间就是当所有物体一起绘制、仍然相对于原点的、更大的一个坐标系。</p>
+
+<p>局部空间和世界空间有点相像，可以在局部空间定义坐标系时就考虑到世界坐标系，避免多个物体绘制时出现扎堆现象。</p>
+
+<p>当然还有更好的方法，就是使用模型矩阵（Model Matrix）。</p>
+
+<p>使用模型矩阵，可以对物体进行位移、缩放、旋转。</p>
+
+<p>这样的话就可以将物体从坐标原点移开，并且还能够进行一些相关操作，不用去考虑在局部空间来定义世界空间的坐标了。</p>
+
+<h2 id="观察空间">观察空间</h2>
+
+<blockquote>
+<p>横看成岭侧成峰 远近高低各不同</p>
+</blockquote>
+
+<p>当物体在世界空间中就位了，接下来就是要考虑从哪个方向和角度来观察物体了。</p>
+
+<p>观察空间，又是 OpenGL 的摄像机，是将世界空间的坐标转化为摄像机的视角所观察到的空间坐标。</p>
+
+<p>也就是说，在观察空间里，坐标原点不再是世界空间的坐标原点了，而是以摄像机的视角作为场景原点，这就不再是简单地进行平移、旋转了，而是切换到另一种坐标系里。</p>
+
+<p>OpenGL 本身是没有摄像机的概念的，不过可以通过把场景中的所有物体往相反的方向移动来模拟出摄像机。这样就场景没动，而摄像机在移动。</p>
+
+<p>要定义一个摄像机，或者说要定义一个摄像机视角为坐标原点的坐标系，需要：</p>
+
+<ul>
+<li>摄像机在世界空间中的位置</li>
+<li>摄像机观察的方向</li>
+<li>指向摄像机右测的向量</li>
+<li>指向摄像机上方的向量</li>
+</ul>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516610022/code/camera_axes.png" alt="" /></p>
+
+<p>如图，最终建立了一个以摄像机位置为原点的坐标系。</p>
+
+<p>其中，蓝色箭头为摄像机坐标系中的 Z 轴，绿色箭头为摄像机坐标系中的 Y 轴，红色箭头为摄像机坐标系中的 X 轴。</p>
+
+<p>而接下来要做的就是将物体在世界空间中的坐标转换到以摄像机视角为原点的观察空间坐标中。</p>
+
+<p>这其中也需要用到一个转换矩阵：视图矩阵（View Matrix）。通过视图矩阵来切换坐标系。</p>
+
+<h2 id="裁剪空间">裁剪空间</h2>
+
+<p>当物体坐标都位于观察空间后，接下来要做的就是裁剪。根据我们的需要来裁剪一定范围内的物体，而在这个范围之外的坐标就会被忽略掉。</p>
+
+<p>裁剪空间实质上还是进行坐标的操作。</p>
+
+<p>从观察空间到裁剪空间，需要用到：投影矩阵（Projection Matrix）。</p>
+
+<p>投影矩阵会指定一个坐标范围，这个范围内的坐标将变换为<code>归一化设备坐标</code> ，不在这个范围内的坐标就会被裁剪掉。</p>
+
+<p>观察空间中的坐标经过投影矩阵的变换之后称为投影坐标，又叫做<code>裁剪坐标</code>。</p>
+
+<p>说是裁剪坐标，其实是待裁剪，接下来的裁剪过程将由 OpenGL 来完成的。投影矩阵的变换，只是筛选出那些不需要被裁剪的坐标。</p>
+
+<p>由投影矩阵创建的范围，是一个封闭的空间几何体，被称为<code>视景体</code>。</p>
+
+<p>投影矩阵有两种不同的形式，创建的视景体也有两种样式。</p>
+
+<h3 id="正交投影">正交投影</h3>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516615886/code/opengl_ortho.png" alt="" /></p>
+
+<p>正交投影会创建一个类似立方体的视景体。它由左、上、右、下 四个方向距离和近平面距离、远平面距离组成。四个方向距离定义了近平面和远平面的大小。而在近平面和远平面之外的坐标点就会被裁剪掉了。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516623682/code/opengl_ortho_2.png" alt="" /></p>
+
+<p>在场景中处于视景体内的物体会被投影到近平面上，然后再将近平面上投影出的内容映射到屏幕上。</p>
+
+<p>它所用到的矩阵是正交投影矩阵。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516633713/code/opengl_ortho_result.png" alt="" /></p>
+
+<p>由于正交投影是平行投影的一种，其投影线是平行的，所以投影到近平面上的图形不会产生真实世界中的<code>近大远小</code>的效果。因为正交投影没有把透视考虑进去，所以，远处的物体不会变小，这适用于一些特定的场合。</p>
+
+<h3 id="透视投影">透视投影</h3>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516634352/code/perspective_frustum.png" alt="" /></p>
+
+<p>透视投影是能够产生<code>近大远小</code>效果的，就像我们人眼一样，看远处的物体就变得很小了。</p>
+
+<p>它所用到的矩阵就是透视投影矩阵。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516634355/code/opengl_frustum.png" alt="" /></p>
+
+<p>透视投影也会创建一个视景体，类似于锥形。它同样也有着近平面距离和远平面距离，而且也是将近平面的内容映射到屏幕视口中，但不同与正交投影近平面和远平面大小相同，所以它的左、上、右、下距离都是相对于近平面的。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516634355/code/opengl_frustum_analysis.png" alt="" /></p>
+
+<p>可以看到，透视投影的投影线互不平行，都相交于视点。因此，同样尺寸的物体，才会近处的投影出来大，远处的投影出来小。</p>
+
+<h3 id="透视除法">透视除法</h3>
+
+<p>当坐标经过投影矩阵的变换到裁剪空间之后，紧接着就会进行<code>透视除法</code>的操作。</p>
+
+<p>透视除法是在三维绘制中产生<code>近大远小</code>效果非常关键重要的一步。</p>
+
+<p>在此之前要先来了解一下 OpenGL 中的 <code>w 分量</code>。</p>
+
+<p>OpenGL 坐标系中除了 x、y、z 坐标外，还有 w 分量，默认情况下都是 1 。而经过透视投影变换之后，w 分量不再是 1 了，正交投影不改变 w 分量。</p>
+
+<p>而 OpenGL 进行裁剪，实质上是 GPU 进行裁剪的过程，就是将 x、y、z 坐标的绝对值与 w 分量绝对值进行比较，只要有一个分量的绝对值大于 w 的绝对值，就认为不在视景体内，会被裁剪掉。</p>
+
+<p>经过裁剪之后，再进行透视除法。就是将 x、y、z 坐标分别除以 w 分量，得到新的 x、y、z 坐标。由于 x、y、z 坐标的绝对值都小于 w 的绝对值，所以得到新的坐标值都是位于 $[-1,1]$ 的区间内的。此时得到的坐标，也就是<code>归一化设备坐标</code>。</p>
+
+<p>归一化设备坐标是独立于屏幕的，而且它的坐标系用的是左手坐标系。</p>
+
+<p>经过透视投影矩阵变换之后，每个坐标的 w 分量都不相同了，这样再经过透视除法操作，就会使得远处的物体看起来变小了。</p>
+
+<h2 id="屏幕空间">屏幕空间</h2>
+
+<p>有了归一化设备坐标，最后一步就是将坐标投射到屏幕上，这一步是由 OpenGL 来完成的。</p>
+
+<p>OpenGL 会使用 <code>glViewPort</code> 函数来将归一化设备坐标映射到屏幕坐标，每个坐标都关联了屏幕上的一个点，这个过程称为<code>视口变换</code>。这一步操作不再需要变换矩阵了。</p>
+
+<p>就这样，一个点的坐标就完成了从局部空间坐标 <code>$(x,y,z,w)$</code> 到屏幕坐标 <code>$(x,y)$</code> 的转变。</p>
+
+<h2 id="坐标的矩阵操作">坐标的矩阵操作</h2>
+
+<p>点的坐标可以看作是一个向量，用 <code>$V$</code> 表示，而矩阵用 <code>$M$</code> 表示。</p>
+
+<p>那么，从 局部空间 -&gt; 世界空间 -&gt; 观察空间 -&gt; 裁剪空间 ，四个空间的转换，需要用到三个转换矩阵，<strong>点从某个坐标系变换到另一个坐标系的时候都要左乘某个变换矩阵</strong>，最后裁剪空间的坐标可以表示如下：</p>
+
+<div>$$V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local}$$</div>
+
+<p>而在着色器脚本中，<code>gl_Position</code> 对应的也是 <code>$V_{clip}$</code>  裁剪坐标。</p>
+
+<p>有了裁剪空间坐标后，接下来的事情就交个 OpenGL 去完成裁剪和透视除法就好了。</p>
+
+<h2 id="图形适应宽高比">图形适应宽高比</h2>
+
+<p>在文章一开始提到的，绘制的圆形变成了椭圆，绘制的正多边形却东倒西歪的，现在也能给出原因了。</p>
+
+<p>默认情况下，局部空间、世界空间、观察空间、裁剪空间的坐标系都是重合的，都是以$(0,0,0)$为坐标原点。一开始只是给出了理想状态下的平面坐标点，并且定义着色器脚本如下：</p>
+
+<pre><code class="language-glsl">attribute vec4 a_Position;
+void main(){
+    gl_Position = a_Position;
+}
+</code></pre>
+
+<p>那么它经过一系列转换后，最后 OpenGL 用来裁剪的坐标还是我们定义的基于平面的坐标，只有$(x,y)$值，而 $z$ 坐标默认为 0，$w$ 坐标默认为 1 。经过透视除法后的归一化设备坐标依旧是$(x,y)$。</p>
+
+<p>而归一化设备坐标假定的坐标空间是一个正方形，但手机屏幕的视口却是一个长方形，这样的话，就会有一个方向被拉伸。同样的份数，但长度越长，导致每一份的长度也增加了，所以也就被拉伸了。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516693872/code/opengl_aspect.png" alt="" /></p>
+
+<p>要解决这种问题，可以在归一化设备坐标上进行操作，将较长的一边乘以相应的比例系数，转化到同样的长度比上。</p>
+
+<pre><code class="language-bash">// 1280 * 720 的宽高比
+aspect =  width / height ;
+x = x * aspect 
+y = y 
+</code></pre>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516694723/code/opengl_aspect_cube.png" alt="" /></p>
+
+<p>这样一来，将较长的一边的比例放大了，取较短的那一边作为 1 的标准。</p>
+
+<p>当然也可以在坐标转换成归一化设备坐标之前，也就是在投影时就把拉伸的情况考虑进去。</p>
+
+<p>使用正交投影，再将物体的宽高投影到近平面上时，就把屏幕的宽高比例系数考虑进去，这样在转换成归一化设备坐标之前就已经完成了图形的宽高比适应。</p>
+
+<p>这样的话，就需要修改着色器脚本语言，把投影矩阵考虑在内。</p>
+
+<pre><code class="language-glsl">attribute vec4 a_Position;
+uniform mat4 u_Matrix;
+void main(){
+    gl_Position = u_Matrix * a_Position;
+}
+</code></pre>
+
+<p>具体实操下一篇博客再写了。</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li>《OpenGL ES 应用开发实践指南》</li>
+<li>《OpenGL ES 3.x 游戏开发》</li>
+<li><a href="http://blog.csdn.net/iispring/article/details/27970937">http://blog.csdn.net/iispring/article/details/27970937</a></li>
+</ol>
+
+<p>具体代码详情，可以参考我的 Github 项目：
+<a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
+        </article>
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/life/journey-with-lover/" data-toggle="tooltip" data-placement="top" title="泸沽湖-丽江之行">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-draw-basic-shape/">OpenGL 学习系列---基本形状的绘制</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-draw-point/">OpenGL 学习系列---点的绘制流程</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i &lt; all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+
+
+
+
+  </body>
+</html>
+

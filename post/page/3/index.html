@@ -182,6 +182,37 @@
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-binder-summary/">
+                <h2 class="post-title">Android Binder Summary</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。</p>
+
+<p>它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 <code>/dev/binder</code>。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-binder-summary/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/android/android-dagger-use/">
                 <h2 class="post-title">Dagger2 在 Android 中的使用</h2>
 
@@ -480,35 +511,6 @@
 
             </article>
           
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opencv/setup_opencv_environment/">
-                <h2 class="post-title">Python、C&#43;&#43;、Android OpenCV 开发环境的配置</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opencv/setup_opencv_environment/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opencv/">Opencv</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
         </div>
         
           <ul class="pager main-pager">
@@ -517,6 +519,10 @@
                 <a href="/post/page/2/">&larr; Newer Posts</a>
               </li>
             
+            
+              <li class="next">
+                <a href="/post/page/4/">Older Posts &rarr;</a>
+              </li>
             
           </ul>
         
@@ -572,13 +578,25 @@
     class="active"><a href="/post/page/3/">3</a></li>
     
     
+    
+    
+    
+    
+        
+        
+    
+    
     <li
-    class="disabled">
-    <a href="" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    ><a href="/post/page/4/">4</a></li>
+    
+    
+    <li
+    >
+    <a href="/post/page/4/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
     <li>
-        <a href="/post/page/3/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/post/page/4/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -672,6 +690,39 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
 <script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i &lt; all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+
 
 
 
