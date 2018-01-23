@@ -272,13 +272,13 @@
 
 <p>局部空间坐标是 OpenGL 绘制坐标的起点，接下来所有的转换操作都是在局部空间坐标基础上进行的。</p>
 
-<p>局部空间坐标就是我们自己定义的起始坐标点，是相对于原点 <code>$(0,0,0)$</code> 的。</p>
+<p>局部空间坐标就是我们自己定义的起始坐标点，是相对于原点 <code>$ (0,0,0) $</code> 的。</p>
 
 <p>此时所在的空间就是局部空间，也就是说我们在局部空间里面定义物体的起始坐标。</p>
 
 <h2 id="世界空间">世界空间</h2>
 
-<p>我们定义每一个坐标点都是在局部空间，相对于 <code>$(0,0,0)$</code> 的。这样一来，当多个物体同时绘制时，就会扎堆了。</p>
+<p>我们定义每一个坐标点都是在局部空间，相对于 $ (0,0,0) $ 的。这样一来，当多个物体同时绘制时，就会扎堆了。</p>
 
 <p>而世界空间就是当所有物体一起绘制、仍然相对于原点的、更大的一个坐标系。</p>
 
@@ -385,7 +385,7 @@
 
 <p>而 OpenGL 进行裁剪，实质上是 GPU 进行裁剪的过程，就是将 x、y、z 坐标的绝对值与 w 分量绝对值进行比较，只要有一个分量的绝对值大于 w 的绝对值，就认为不在视景体内，会被裁剪掉。</p>
 
-<p>经过裁剪之后，再进行透视除法。就是将 x、y、z 坐标分别除以 w 分量，得到新的 x、y、z 坐标。由于 x、y、z 坐标的绝对值都小于 w 的绝对值，所以得到新的坐标值都是位于 $[-1,1]$ 的区间内的。此时得到的坐标，也就是<code>归一化设备坐标</code>。</p>
+<p>经过裁剪之后，再进行透视除法。就是将 x、y、z 坐标分别除以 w 分量，得到新的 x、y、z 坐标。由于 x、y、z 坐标的绝对值都小于 w 的绝对值，所以得到新的坐标值都是位于 $ [-1,1] $ 的区间内的。此时得到的坐标，也就是<code>归一化设备坐标</code>。</p>
 
 <p>归一化设备坐标是独立于屏幕的，而且它的坐标系用的是左手坐标系。</p>
 
@@ -617,17 +617,7 @@ MathJax.Hub.Config({
 });
 </script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    // Fix <code> tags after MathJax finishes running. This is a
-    // hack to overcome a shortcoming of Markdown. Discussion at
-    // https://github.com/mojombo/jekyll/issues/199
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i &lt; all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
+
 
 
 
