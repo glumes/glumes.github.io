@@ -44,10 +44,10 @@ void main()
     
     <item>
       <title>OpenGL 学习系列---坐标系统</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-coordinate/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/</link>
       <pubDate>Tue, 23 Jan 2018 17:44:53 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-coordinate/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/</guid>
       <description>&lt;p&gt;在前面绘制基本图形中，遇到了很明显的问题，圆形不像圆形，正多边形不像正多边形？就像下面图形一样：&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png&#34; alt=&#34;http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png&#34; /&gt;&lt;/p&gt;
