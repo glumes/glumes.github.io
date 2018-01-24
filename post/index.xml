@@ -8,10 +8,39 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Tue, 23 Jan 2018 17:44:53 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jan 2018 18:17:58 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 学习系列---投影矩阵</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/</link>
+      <pubDate>Wed, 24 Jan 2018 18:17:58 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/</guid>
+      <description>&lt;p&gt;在 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-coordinate/&#34;&gt;OpenGL 坐标系统&lt;/a&gt; 文章中，根据点的坐标变换得出了如下的公式：&lt;/p&gt;
+
+&lt;div&gt;$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$&lt;/div&gt;
+
+&lt;p&gt;这个公式每左乘一个矩阵，都代表了一种坐标系的变换。&lt;/p&gt;
+
+&lt;p&gt;转化为着色器脚本语言如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-glsl&#34;&gt;attribute vec4 a_Position;
+uniform mat4 u_ModelMatrix;
+uniform mat4 u_ProjectionMatrix;
+uniform mat4 u_ViewMatrix;
+void main()
+{
+    gl_Position  = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;本篇文章就主要是对投影矩阵来分析的。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 学习系列---坐标系统</title>
