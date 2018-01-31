@@ -3,6 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/android/setup-android-crack-environment/</loc>
+    <lastmod>2018-01-31T15:47:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/android/understand-mvp-architecture/</loc>
+    <lastmod>2018-01-31T15:42:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/android/build-android-source-code/</loc>
+    <lastmod>2018-01-31T15:31:44+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/android/android-rxjava/</loc>
+    <lastmod>2018-01-31T15:26:16+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/android/understand-state-machine/</loc>
+    <lastmod>2018-01-31T15:20:14+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/</loc>
     <lastmod>2018-01-24T18:17:58+08:00</lastmod>
   </url>
@@ -169,24 +194,36 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-01-24T18:17:58+08:00</lastmod>
+    <lastmod>2018-01-31T15:47:59+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://glumes.com/tags/android/</loc>
-    <lastmod>2017-12-22T16:00:05+08:00</lastmod>
+    <lastmod>2018-01-31T15:47:59+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/android/</loc>
-    <lastmod>2017-12-22T16:00:05+08:00</lastmod>
+    <lastmod>2018-01-31T15:47:59+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/architecture/</loc>
+    <lastmod>2018-01-31T15:42:28+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/</loc>
-    <lastmod>2017-12-22T16:00:05+08:00</lastmod>
+    <lastmod>2018-01-31T15:47:59+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/crack/</loc>
+    <lastmod>2018-01-31T15:47:59+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -270,7 +307,7 @@
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-01-24T18:17:58+08:00</lastmod>
+    <lastmod>2018-01-31T15:47:59+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -288,13 +325,19 @@
   
   <url>
     <loc>https://glumes.com/tags/rxjava/</loc>
-    <lastmod>2017-12-22T16:00:05+08:00</lastmod>
+    <lastmod>2018-01-31T15:26:16+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/statemachine/</loc>
+    <lastmod>2018-01-31T15:20:14+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/tags/</loc>
-    <lastmod>2017-12-22T16:00:05+08:00</lastmod>
+    <lastmod>2018-01-31T15:47:59+08:00</lastmod>
     <priority>0</priority>
   </url>
   

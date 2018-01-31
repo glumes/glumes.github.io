@@ -8,10 +8,21 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 22 Dec 2017 16:00:05 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 31 Jan 2018 15:26:16 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/rxjava/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>安卓异步之RxJava</title>
+      <link>https://glumes.com/post/android/android-rxjava/</link>
+      <pubDate>Wed, 31 Jan 2018 15:26:16 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/android-rxjava/</guid>
+      <description>&lt;p&gt;不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</title>

@@ -5,69 +5,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>OpenGL 学习系列---投影矩阵</title>
-  <meta property="og:title" content="OpenGL 学习系列---投影矩阵" />
-  <meta name="twitter:title" content="OpenGL 学习系列---投影矩阵" />
-  <meta name="description" content="在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
-
-$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$
-
-这个公式每左乘一个矩阵，都代表了一种坐标系的变换。
-
-转化为着色器脚本语言如下：
-
-attribute vec4 a_Position;
-uniform mat4 u_ModelMatrix;
-uniform mat4 u_ProjectionMatrix;
-uniform mat4 u_ViewMatrix;
-void main()
-{
-    gl_Position  = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
-}
-
-
-本篇文章就主要是对投影矩阵来分析的。
+  <title>理解使用MVP架构</title>
+  <meta property="og:title" content="理解使用MVP架构" />
+  <meta name="twitter:title" content="理解使用MVP架构" />
+  <meta name="description" content="在安卓开发中使用 MVP 模式已经非常普遍了，网上关于 MVP 的讲解也相当多了，不过看得再多还是自己写一遍比较熟练。
 
 ">
-  <meta property="og:description" content="在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
-
-$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$
-
-这个公式每左乘一个矩阵，都代表了一种坐标系的变换。
-
-转化为着色器脚本语言如下：
-
-attribute vec4 a_Position;
-uniform mat4 u_ModelMatrix;
-uniform mat4 u_ProjectionMatrix;
-uniform mat4 u_ViewMatrix;
-void main()
-{
-    gl_Position  = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
-}
-
-
-本篇文章就主要是对投影矩阵来分析的。
+  <meta property="og:description" content="在安卓开发中使用 MVP 模式已经非常普遍了，网上关于 MVP 的讲解也相当多了，不过看得再多还是自己写一遍比较熟练。
 
 ">
-  <meta name="twitter:description" content="在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
+  <meta name="twitter:description" content="在安卓开发中使用 MVP 模式已经非常普遍了，网上关于 MVP 的讲解也相当多了，不过看得再多还是自己写一遍比较熟练。
 
-$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$
-
-这个公式每左乘一个矩阵，都代表了一种坐标系的变换。
-
-转化为着色器脚本语言如下：
-
-attribute vec4 a_Position;
-uniform mat4 …">
+">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/" />
+  <meta property="og:url" content="https://glumes.com/post/android/understand-mvp-architecture/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/" />
+  <link rel="canonical" href="https://glumes.com/post/android/understand-mvp-architecture/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -228,7 +185,7 @@ uniform mat4 …">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">OpenGL 学习系列---投影矩阵</h1>
+                <h1 align="center">理解使用MVP架构</h1>
                 
                 
             </div>
@@ -248,218 +205,327 @@ uniform mat4 …">
         
 <div>
     <section id="datecount">
-        <h4 id="date"> Wed Jan 24, 2018</h4>
+        <h4 id="date"> Wed Jan 31, 2018</h4>
     </section>
-    <h5 id="wc">1900 Words|Read in about 4 Min</h5>
+    <h5 id="wc">2000 Words|Read in about 4 Min</h5>
     <h5 id="tags">Tags: 
         
-        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+        <a href="https://glumes.com/tags/android/">android</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/architecture/">architecture</a> &nbsp;
     </h5>
 </div>
 
         
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate/">OpenGL 坐标系统</a> 文章中，根据点的坐标变换得出了如下的公式：</p>
-
-<div>$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$</div>
-
-<p>这个公式每左乘一个矩阵，都代表了一种坐标系的变换。</p>
-
-<p>转化为着色器脚本语言如下：</p>
-
-<pre><code class="language-glsl">attribute vec4 a_Position;
-uniform mat4 u_ModelMatrix;
-uniform mat4 u_ProjectionMatrix;
-uniform mat4 u_ViewMatrix;
-void main()
-{
-    gl_Position  = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
-}
-</code></pre>
-
-<p>本篇文章就主要是对投影矩阵来分析的。</p>
+            <p>在安卓开发中使用 MVP 模式已经非常普遍了，网上关于 MVP 的讲解也相当多了，不过看得再多还是自己写一遍比较熟练。</p>
 
 <p></p>
 
-<p>OpenGL 在观察空间转换到裁剪空间时，需要用到投影矩阵。而在着色器脚本中，也需要提供一个投影矩阵给对应的 <code>u_ProjectionMatrix</code>变量。</p>
+<p>MVP 分别代表了：M（Model）、V（View）、P（Presenter）的缩写，代表了三个不同的模块。</p>
 
-<p>首先要在程序里绑定到对应的变量，然后再给变量赋值。</p>
+<ul>
+<li>Model：负责处理数据的加载或者存储，比如从网络中或者本地数据库中获取数据。</li>
+<li>View：负责界面数据的展示，以及与用户行为的交互。</li>
+<li>Presenter：是模型和视图的桥梁，将模型和视图分离开来，主要负责处理事务逻辑。</li>
+</ul>
 
-<pre><code class="language-java">// 绑定到着色器脚本中的对应变量
-private static final String U_ProMatrix = &quot;u_ProjectionMatrix&quot;;
-private int uProMatrixLocation;
-uProMatrixLocation = glGetUniformLocation(mProgram,U_ProMatrix);
-// 给变量赋值，projectionMatrix 为投影矩阵
-glUniformMatrix4fv(uProMatrixLocation,1,false,projectionMatrix,0)
+
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
+
+
+	
+
+
+  <link rel="stylesheet" href="/css/hugo-easy-gallery.css" />
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+<style>.gallery .img1 {background-image: url('http://7xqe3m.com1.z0.glb.clouddn.com/blog-mvp-and-mvc.png');}</style>
+
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img1"  >
+      <img itemprop="thumbnail" src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-mvp-and-mvc.png" />
+    </div>
+    
+    <a href="http://7xqe3m.com1.z0.glb.clouddn.com/blog-mvp-and-mvc.png" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+
+</div>
+
+<p>如果所示，MVP 与 MVC 的不同之处在于，MVP 中的 View 层和 Model 层之间不进行交互，是通过中间的 Presenter 中来进行交互的。这样的好处就是能够解耦，降低 View 层和 Model 层之间的耦合度。</p>
+
+<p>谷歌官方也给出了一个 MVP 模式的示例：<a href="https://github.com/googlesamples/android-architecture">https://github.com/googlesamples/android-architecture</a></p>
+
+<h2 id="mvp-模式实现登陆功能">MVP 模式实现登陆功能</h2>
+
+<p>用 MVP 模式简单实现了一个登陆功能，项目的包结构如下，根据模块层次来分层的。</p>
+
+
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
+
+
+	
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+<style>.gallery .img2 {background-image: url('http://7xqe3m.com1.z0.glb.clouddn.com/blog-mvp-project-dir.png');}</style>
+
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img2"  >
+      <img itemprop="thumbnail" src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-mvp-project-dir.png" />
+    </div>
+    
+    <a href="http://7xqe3m.com1.z0.glb.clouddn.com/blog-mvp-project-dir.png" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+
+</div>
+
+<h3 id="接口定义">接口定义</h3>
+
+<p>在 LoginContract 接口中定义了 M 层、V 层、P 层的接口，以及 Model 层数据传递到 Presenter 时的回调接口，将所有的接口放到一个总的接口中，这样不会那么的散乱，便于管理。</p>
+
+<p>而且， M 层、V 层、P 层的实现类都将实现这些接口，这样的好处就是便于替换。</p>
+
+<p>因为 Java 中的向上转型，当我们如下声明一个类时，LoginPresenter 类就向上转型成了 LoginContract.Presenter 类，这时，LoginPresenter 只能调用向上转型的类，也就是接口类中的定义的方法，不能再调用自己实现的其他方法，这样一样，就方便我们在需要的时候对  M 层、V 层、P 层 的类进行替换，可以替换内部的实现方法，而调用的方法名不变。</p>
+
+<pre><code class="language-java">private LoginContract.Presenter mPresenter = new LoginPresenter()
 </code></pre>
 
-<p>正如前文讲到的，投影矩阵会创建一个视景体对物体坐标进行裁剪，得到的裁剪坐标再经过透视除法之后，就会得到归一化设备坐标。归一化设备坐标再经过视口转换，最终将坐标映射到了屏幕上。</p>
+<pre><code class="language-java">public interface LoginContract {
 
-<p>OpenGL 提供了两种投影方式：正交投影和透视投影。</p>
-
-<h2 id="正交投影矩阵">正交投影矩阵</h2>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516615886/code/opengl_ortho.png" alt="" /></p>
-
-<p>不管是正交投影还是透视投影，最终都是将视景体内的物体投影在近平面上，这也是 3D 坐标转换到 2D 坐标的关键一步。</p>
-
-<p>而近平面上的坐标接着也会转换成归一化设备坐标，再映射到屏幕视口上。</p>
-
-<p>为了解决之前的图像拉伸问题，就是要保证近平面的宽高比和视口的宽高比一致，而且是以较短的那一边作为 1 的标准，让图像保持居中。</p>
-
-<p>OpenGL 提供了 <code>Matrix.orthoM</code> 函数来生成正交投影矩阵。</p>
-
-<pre><code class="language-java">    /**
-     * Computes an orthographic projection matrix.
-     *
-     * @param m returns the result 正交投影矩阵
-     * @param mOffset 偏移量，默认为 0 ,不偏移
-     * @param left 左平面距离
-     * @param right 右平面距离
-     * @param bottom 下平面距离
-     * @param top 上平面距离
-     * @param near 近平面距离
-     * @param far 远平面距离
+    /**
+     * View 层的接口
      */
-    public static void orthoM(float[] m, int mOffset,
-        float left, float right, float bottom, float top,
-        float near, float far)
-</code></pre>
+    interface View extends BaseView&lt;Presenter&gt; {
+        void showLoading();
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516623682/code/opengl_ortho_2.png" alt="" /></p>
+        void hideLoading();
 
-<p>需要注意的是，我们的左、上、右、下距离都是相对于近平面中心的。</p>
+        void setEmail(String email);
 
-<p>近平面的坐标原点位于中心，向右为 $X$ 轴正方向，向上为 $Y$ 轴正方向，所以我们的 left、bottom 要为负数，而 right、top 要为正数。同时，近平面和远平面的距离都是指相对于视点的距离，所以 near、far 要为正数，而且 $far &gt; near$。</p>
+        void setPassword(String password);
 
-<p>可以在 GLSurfaceView 的 surfaceChanged 里面来设定正交投影矩阵。</p>
+        void toActivity();
 
-<pre><code class="language-java">  @Override
-    public void onSurfaceChanged(GL10 gl, int width, int height) {
-        float aspectRatio = width &gt; height ? (float) width / (float) height : (float) height / (float) width;
-        if (width &gt; height){
-            Matrix.orthoM(projectionMatrix,0,-aspectRatio,aspectRatio,-1f,1f,0f,10f);
-        }else {
-            Matrix.orthoM(projectionMatrix,0,-1f,1f,-aspectRatio,aspectRatio,0f,10f);
-        }
+        boolean isActive();
     }
+
+    /**
+     * Presenter 层的接口
+     */
+    interface Presenter extends BasePresenter {
+        void showLoadingDialog();
+
+        void cancelLoadingDialog();
+
+        void checkUserInfo(String email,String  password);
+    }
+
+    /**
+     * Model 层的接口
+     */
+    interface Model {
+
+        List&lt;String&gt; LoaderInitData();
+
+        void checkUserInfo(String email,String password,LoginContract.CallBack callBack);
+
+    }
+
+    /**
+     * Model 层传递数据到 Presenter 层时的回调接口
+     */
+    interface CallBack {
+        void LoginSuccess();
+        void LoginFailed();
+    }
+}
 </code></pre>
 
-<p>这样的话，就把近平面的宽高比设定与视口的宽高比一致了。解决了之前绘制的图像被拉伸的问题。</p>
+<h3 id="v-层实现">V 层实现</h3>
 
-<h2 id="透视投影矩阵">透视投影矩阵</h2>
+<p>将 Fragment 作为 MVP 中的 V 层，而 Activity 则是作为一个总的控制类，并没有做具体的业务逻辑操作，这里是仿照着谷歌官方的例子来编写的，当然也可以将 Activity 作为 V 层来实现。</p>
 
-<p>OpenGL 提供了两个函数来创建透视投影矩阵：<code>frustumM</code> 和 <code>perspectiveM</code>。</p>
+<p>在 V 层中需要绑定 P 层的 Presenter ，而 V 层则处理数据的展示和与用户的 UI 交互。</p>
 
-<h3 id="frustumm">frustumM</h3>
+<p>而 P 层则是负责处理具体的逻辑。</p>
 
-<p>frustumM 函数创建的视景体是一个锥形。</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516780049/opengl_frustumM_hgt4sg.jpg" alt="" /></p>
-
-<p>它的视景体有点类似于正交投影，在参数理解上基本都相同的。</p>
+<p>所以，V 层是将用户的事件都交给了 P 层去处理，而 P 层通过调用 M 层处理的数据，再将它展示给 V 层去。</p>
 
 <pre><code class="language-java">/**
-     * Defines a projection matrix in terms of six clip planes.
-     *
-     * @param m the float array that holds the output perspective matrix
-     * @param offset the offset into float array m where the perspective
-     *        matrix data is written
-     * @param left 
-     * @param right
-     * @param bottom
-     * @param top
-     * @param near
-     * @param far
-     */
-    public static void frustumM(float[] m, int offset,
-            float left, float right, float bottom, float top,
-            float near, float far)
+ * 给 View 来传入 Presenter 来绑定 presenter
+ *
+ * @param presenter
+ */
+
+@Override
+public void setPresenter(LoginContract.Presenter presenter) {
+    this.mPresenter = presenter;
+}
 </code></pre>
 
-<p>需要注意的是 near 和 far 变量的值必须要大于 0 。因为它们都是相对于视点的距离，也就是照相机的距离。</p>
+<h3 id="p-层实现">P 层实现</h3>
 
-<p>当用视图矩阵确定了照相机的位置时，要确保物体距离视点的位置在 near 和 far  的区间范围内，否则就会看不到物体。</p>
+<p>P 层是 MVP 中最重要的负责具体逻辑处理的一层，它持有 V 层和 M 层的引用，毕竟它需要调用 V 层和 M 层的方法。</p>
 
-<p>由于透视投影会产生近大远小的效果，当照相机位置不变，改变 near 的值时也会改变物体大小，near 越小，则离视点越近，相当于物体越远，那么显示的物体也就越小了。</p>
+<p>由于 P 层持有了 V 层的引用，当 presenter 有后台异步的耗时操作时，如果这时退出了 V 层，而后台异步线程的操作并不会立即停止，这时候就会引发内存泄漏了。</p>
 
-<p>当然也可以 near 和 far 的距离不动，改变摄像机的位置来改变观察到的物体大小。</p>
-
-<h3 id="perspectivem">perspectiveM</h3>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516780049/opengl_perspectiveM_z2fgys.jpg" alt="" /></p>
-
-<p>OpenGL 还提供了  <code>perspectiveM</code> 函数来创建投影矩阵，它的视景体和 <code>frustumM</code> 函数相同，但是构造的参数有所不同。</p>
-
-<pre><code class="language-java"> /**
-     * Defines a projection matrix in terms of a field of view angle, an
-     * aspect ratio, and z clip planes.
-     *
-     * @param m the float array that holds the perspective matrix
-     * @param offset the offset into float array m where the perspective
-     *        matrix data is written
-     * @param fovy field of view in y direction, in degrees
-     * @param aspect width to height aspect ratio of the viewport
-     * @param zNear
-     * @param zFar
+<pre><code class="language-java">/**
+ * 构造方法中通过 View 的 setPresenter 让 View 获得了 Presenter 的实例
+ * 这样,在 View 中就可以对 Presenter 中的方法进行操作了
+ *
+ * @param view
+ */
+public LoginPresenter(LoginContract.View view) {
+    mView = view;
+    /**
+     *  Presenter 绑定 View
      */
-    public static void perspectiveM(float[] m, int offset,
-          float fovy, float aspect, float zNear, float zFar)
+    mView.setPresenter(this);
+
+    /**
+     * Presenter 引用数据层 Model
+     */
+
+    mModel = new LoginModel();
+
+    /**
+     * 得到主线程,也就是 UI 线程的消息循环 Looper
+     */
+    UiHandler = new Handler(Looper.getMainLooper());
+}
 </code></pre>
 
-<p>视景体不再需要确定近平面左、上、右、下距离了。</p>
+<h3 id="m-层实现">M 层实现</h3>
 
-<p>通过视角来决定我们能看到的视野大小。视角就是图中所示的那个夹角。另外的参数是视口的宽高比，还有近平面和远平面的距离，参数个数减少了。</p>
+<p>M 层也实现了 LoginContract 中的 Model 接口，M 层主要负责从网络或者本地数据库中加载数据，因为安卓的主线程并不是线程安全的，而且主线程中不允许进行网络和耗时操作，所以 M 层中的操作都是在异步的子线程中进行的，这样就需要向主线程的消息循环中发送消息，获得主线程中的消息循环（Looper.getMainLooper()），从而更新主线程的 UI 。</p>
 
-<p><img src="http://res.cloudinary.com/glumes-com/image/upload/v1516784280/opengl_fovy_bhplik.png" alt="" /></p>
+<pre><code class="language-java">public class LoginModel implements LoginContract.Model {
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516784279/opengl_fovy_result_gpzjwz.png" alt="" /></p>
+    public LoginModel() {
+    }
+}
+</code></pre>
 
-<p>上述图片左边是 90 视角，右边是 45 度视角。显然，视野角度越大，则看到的内容更多，但是物体显得更小，而视野角度越小，则看的内容更少，但物体显得更大。有点类似于成语 <strong>一叶障目</strong> 的感觉。</p>
+<p>具体的代码实现都可以在 Github 上找到，项目地址是：<a href="https://github.com/glumes/MVPLogin">https://github.com/glumes/MVPLogin</a></p>
 
-<p>和 <code>frustumM</code>不同的是，一旦确定了视角和宽高比，那么整个摄像机视野也就确定了，此时完整的锥形视野已经形成了，也就是说物体的近大远小效果已经完成了。这时，近平面距离和远平面距离只是确定想要截取锥形视野中的哪一部分了。不像在<code>frustumM</code>函数中，近、远平面的距离还能够调整近大远小的效果。</p>
+<h3 id="注意事项">注意事项</h3>
 
-<h2 id="小结">小结</h2>
+<h4 id="防止内存泄漏">防止内存泄漏</h4>
 
-<p>理解了 OpenGL 中的几种投影矩阵，在实际开发调试时就更得心应手了。</p>
+<p>在这里，我用的是 Fragment 作为 V 层，为了防止在 P 层中的异步耗时操作执行的时候，V 层已经退出了，所以在仿照谷歌官方的例子，在 V 层接口中定义了 <code>isActive()</code> 方法：</p>
+
+<pre><code class="language-java">/**
+ * 防止 P 层中持有 V 层导致内存泄漏
+ * 通过 Fragment 中的 isAdded() 方法判断当前 Fragment 是否已经添加到 Activity 当中去
+ * @return
+ */
+@Override
+public boolean isActive() {
+    return isAdded();
+}
+</code></pre>
+
+<p>如果是采用 Activity 作为 V 层，则可以在 P 层添加一个销毁 V 层的方法，P 层增加了类似的生命周期的方法，用来在退出 Activity 的时候取消持有的 V 层引用。</p>
+
+<pre><code class="language-java">//presenter中添加mvpView 置为null的方法public void onDestroy(){    
+    mvpView = null;
+}
+
+//退出时销毁持有Activity@Overrideprotected void onDestroy() {    
+    mvpPresenter.onDestroy();    
+    super.onDestroy();
+}
+</code></pre>
+
+<h4 id="声明-presenter-并绑定-v-层">声明 Presenter 并绑定 V 层</h4>
+
+<p>在 Activity 中有这样一段代码，通过 new 创建了一个 Presenter，但却没有赋值给任何对象。</p>
+
+<p>在谷歌的官方例子中也是这样创建的，这是因为将 Fragment 作为 V 层，并不需要在 Activity 中处理什么逻辑操作。</p>
+
+<pre><code class="language-java">private LoginFragment mFragment;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    mFragment = LoginFragment.newInstance();
+
+    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+    transaction.replace(R.id.content,mFragment);
+    transaction.commit();
+
+    /**
+     * 声明 Presenter 的同时,将 View 和 Presenter 绑定起来
+     * 因为 Activity 是一个总控制类,所以 New 方法创建了一个 Presenter 却不需要赋值给 Activity 中的变量
+     */
+    new LoginPresenter(mFragment);
+}
+</code></pre>
+
+<p>通过查看代码可以得知，在 Presenter 的构造函数中，通过 <code>mView.setPresenter(this);</code> 将 Presenter 自身又传入了 V 层中，这样 V 层通过 <code>setPresenter()</code> 方法持有了 P 层的引用，这样一来，P 层和 V 层就互相持有了各自的引用 。</p>
+
+<pre><code class="language-java">public LoginPresenter(LoginContract.View view) {
+    mView = view;
+    /**
+     *  Presenter 绑定 View
+     */
+    mView.setPresenter(this);
+</code></pre>
 
 <h2 id="参考">参考</h2>
 
 <ol>
-<li>《OpenGL ES 应用开发实践指南》</li>
-<li>《OpenGL ES 3.x 游戏开发》</li>
+<li><a href="http://www.cnblogs.com/liuling/archive/2015/12/23/mvp-pattern-android.html">http://www.cnblogs.com/liuling/archive/2015/12/23/mvp-pattern-android.html</a></li>
+<li><a href="http://blog.csdn.net/dantestones/article/details/51445208">http://blog.csdn.net/dantestones/article/details/51445208</a></li>
+<li><a href="http://blog.csdn.net/lmj623565791/article/details/46596109">http://blog.csdn.net/lmj623565791/article/details/46596109</a></li>
 </ol>
-
-<p>具体代码详情，可以参考我的 Github 项目：</p>
-
-<p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
         </article>
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---坐标系统">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/android/build-android-source-code/" data-toggle="tooltip" data-placement="top" title="编译安卓源码">&larr; Previous Post</a>
           </li>
         
         
           <li class="next">
-            <a href="https://glumes.com/post/android/understand-state-machine/" data-toggle="tooltip" data-placement="top" title="理解状态机">Next Post &rarr;</a>
+            <a href="https://glumes.com/post/android/setup-android-crack-environment/" data-toggle="tooltip" data-placement="top" title="搭建 Android 反编译环境">Next Post &rarr;</a>
           </li>
         
       </ul>
             
             <div>
                  
-                <h2>See Also</h2>
-                <ul>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-coordinate-system/">OpenGL 学习系列---坐标系统</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-draw-basic-shape/">OpenGL 学习系列---基本形状的绘制</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-draw-point/">OpenGL 学习系列---点的绘制流程</a></li>
-                    
-                </ul>
-                
             </div>
             
 

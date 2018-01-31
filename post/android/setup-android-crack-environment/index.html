@@ -5,18 +5,27 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Categories</title>
-  <meta property="og:title" content="Categories" />
-  <meta name="twitter:title" content="Categories" />
+  <title>搭建 Android 反编译环境</title>
+  <meta property="og:title" content="搭建 Android 反编译环境" />
+  <meta name="twitter:title" content="搭建 Android 反编译环境" />
+  <meta name="description" content="在 MAC 上搭建 Android 反编译环境主要就是三个东西：apktool 、dex2jar 、jd-gui 。
+
+">
+  <meta property="og:description" content="在 MAC 上搭建 Android 反编译环境主要就是三个东西：apktool 、dex2jar 、jd-gui 。
+
+">
+  <meta name="twitter:description" content="在 MAC 上搭建 Android 反编译环境主要就是三个东西：apktool 、dex2jar 、jd-gui 。
+
+">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/categories/" />
+  <meta property="og:url" content="https://glumes.com/post/android/setup-android-crack-environment/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/categories/" />
-  <link rel="alternate" href="https://glumes.com/categories/index.xml" type="application/rss+xml" title="Glumes Blog">
+  <link rel="canonical" href="https://glumes.com/post/android/setup-android-crack-environment/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -175,8 +184,8 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
-            <div class="categories-heading">
-                <h1 align="center">Categories</h1>
+            <div class="post-heading">
+                <h1 align="center">搭建 Android 反编译环境</h1>
                 
                 
             </div>
@@ -188,35 +197,179 @@
 
 
     
-  
-  <div class="container" role="main">
-    <article class="post-preview">
-      <div class="list-group col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Wed Jan 31, 2018</h4>
+    </section>
+    <h5 id="wc">1100 Words|Read in about 3 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/android/">android</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/crack/">crack</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在 MAC 上搭建 Android 反编译环境主要就是三个东西：<code>apktool</code> 、<code>dex2jar</code> 、<code>jd-gui</code> 。</p>
+
+<p></p>
+
+<p>apktool 工具主要是将 apk 文件进行反编译，反编译之后的代码为 <code>smali</code> 代码。
+ dex2jar 工具主要是将 apk 文件文件转成 <code>jar</code> 文件，最后再使用 jd-gui 工具查看刚刚转成的 <code>jar</code> 文件。</p>
+
+<p>apktool、dex2jar、jd-gui 这三个工具是跨平台的，不仅能在 Windows 上使用，也可以在 MAC 上使用。</p>
+
+<p>它们的相应的网站地址为：</p>
+
+<ul>
+<li><p>apktool
+官网和下载地址：<a href="https://ibotpeaches.github.io/Apktool/install/">https://ibotpeaches.github.io/Apktool/install/</a></p></li>
+
+<li><p>dex2jar
+Github 主页：<a href="https://github.com/pxb1988/dex2jar">https://github.com/pxb1988/dex2jar</a>
+官网和下载地址：<a href="https://bitbucket.org/pxb1988/dex2jar/downloads">https://bitbucket.org/pxb1988/dex2jar/downloads</a></p></li>
+
+<li><p>jd-guit
+Github 主页：<a href="https://github.com/java-decompiler/jd-gui">https://github.com/java-decompiler/jd-gui</a>
+官网和下载地址：<a href="http://jd.benow.ca/">http://jd.benow.ca/</a></p></li>
+</ul>
+
+<h2 id="mac-上安装-apktool">MAC 上安装 apktool</h2>
+
+<p>安装方法如官网所示：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-install-apktool-on-mac.png" alt="install-apktool-on-mac" /></p>
+
+<p>首先还是需要检查 Java 环境是否配好，需要 Java 1.7 的版本，不过我在 MAC 上 Java 1.8 的版本安装也没问题。</p>
+
+<p>步骤如下：
+1、    右键点击下载 <code>wrapper script</code> 脚本，并将它保存重命名为 <code>apktool</code> ，不要带任何文件后缀名。
+2、    到 <a href="https://bitbucket.org/iBotPeaches/apktool/downloads">https://bitbucket.org/iBotPeaches/apktool/downloads</a> 网站去下载 apktool.jar 文件，并将它重命名为 <code>apktool.jar</code> 。
+3、    将刚刚下载的 <code>apktool.jar</code> 文件和 <code>apktool</code> 文件移到到 <code>/usr/local/bin</code> 目录中去。
+4、    使用 <code>chmod +x</code> 命令赋予上面两个文件执行权限。
+5、    运行 <code>apktool</code> 命令即可验证 apktool 是否安装正确。</p>
+
+<p>如果出现如下图片所示的，则代表安装成功了。</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-apktool-install-success.png" alt="apktool-install-success" /></p>
+
+<h2 id="jd-gui-和-dex2jar-安装">jd-gui 和 dex2jar 安装</h2>
+
+<p>jd-gui 和 dex2jar 工具直接到官网上下载解压缩就可以使用了。</p>
+
+<p>dex2jar 是一个命令行工具，而 jd-gui 是一个有可视化界面的工具。</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-jd-gui.png" alt="jd-gui" /></p>
+
+<h2 id="测试使用">测试使用</h2>
+
+<h3 id="apktool-使用">apktool 使用</h3>
+
+<p>反编译 apk 的命令为 ：</p>
+
+<pre><code class="language-sh">apktool d[ecode] [options] &lt;file_apk&gt;
+</code></pre>
+
+<p>编译 apk 的命令为：</p>
+
+<pre><code class="language-sh">apktool b[uild] [option] &lt;app_path&gt;
+</code></pre>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-apktool-decode.png" alt="apktool-decode" /></p>
+
+<p>如上图，则是将一个 apk 文件进行反编译了，会生成一个与 apk 名称对应的文件夹，这里面就是反汇编之后的东西，其中 smali 文件夹就是汇编代码。</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-apktool-build.png" alt="apktool-build" /></p>
+
+<p>如上图，则是将 app-release 目录重新编译生成 apk 文件了。</p>
+
+<p>在 app-release 目录中会多出两个 <code>dist</code> 和 <code>build</code> 目录。其中，<code>dist</code> 目录就是生成的 apk 文件目录，而 build 目录就是其他文件目录了。</p>
+
+<p>不过，目前重新编译出来的 apk 文件是不能安装的，因为还没有签名。关于如何给 apk 文件添加签名，应该还需要再来一篇博客学一下才行。</p>
+
+<h3 id="dex2jar-使用">dex2jar 使用</h3>
+
+<p>dex2jar 是将 apk 文件转化成 jar 文件的，其实就是将 apk 里的 <code>classes.dex</code> 文件转化成 jar 文件。</p>
+
+<p>将下载的 dex2jar 文件解压之后，进入文件夹内，将 <code>d2j-dex2jar.sh</code> 和 <code>d2j_invoke.sh</code> 文件赋予可执行权限。</p>
+
+<pre><code class="language-sh">chmod +x  d2j-dex2jar.sh d2j_invoke.sh
+</code></pre>
+
+<p>之后就可以运行如下脚本来将对应的 apk 文件转化成 jar 文件了。</p>
+
+<pre><code class="language-sh"> ./d2j-dex2jar.sh /Users/meizu/Demo/Android/AndroidCrackDemo/app/app-release.apk 
+</code></pre>
+
+<p>还在当前目录下会生成一个 <code>app-release-dex2jar.jar</code> 的文件。这时就需要打开 jd-gui 软件，将生成的 jar 包拖进去即可。</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-jd-gui-view-jar.png" alt="jd-gui-view-jar" /></p>
+
+<h2 id="参考">参考</h2>
+
+<p><a href="http://blog.csdn.net/yanzi1225627/article/details/48215549">http://blog.csdn.net/yanzi1225627/article/details/48215549</a></p>
+        </article>
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/android/understand-mvp-architecture/" data-toggle="tooltip" data-placement="top" title="理解使用MVP架构">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/android/understand-mvp-architecture/">理解使用MVP架构</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
       
-      <a href="https://glumes.com/categories/android/" class="list-group-item">
-          android<span class="badge">26</span></a>
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
       
-      <a href="https://glumes.com/categories/opengl/" class="list-group-item">
-          opengl<span class="badge">4</span></a>
-      
-      <a href="https://glumes.com/categories/ffmpeg/" class="list-group-item">
-          ffmpeg<span class="badge">2</span></a>
-      
-      <a href="https://glumes.com/categories/python/" class="list-group-item">
-          python<span class="badge">2</span></a>
-      
-      <a href="https://glumes.com/categories/docker/" class="list-group-item">
-          docker<span class="badge">1</span></a>
-      
-      <a href="https://glumes.com/categories/life/" class="list-group-item">
-          life<span class="badge">1</span></a>
-      
-      <a href="https://glumes.com/categories/opencv/" class="list-group-item">
-          opencv<span class="badge">1</span></a>
-      
-      </div>
-    </article>
+
+    </div>
   </div>
+</div>
 
     <footer>
   <div class="container">
@@ -242,7 +395,7 @@
               </li>
           
           <li>
-            <a href="https://glumes.com/categories/index.xml" title="RSS">
+            <a href="" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

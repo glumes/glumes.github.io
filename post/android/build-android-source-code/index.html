@@ -5,20 +5,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>FFmpeg 3.0 版本视频解码浅析 </title>
-  <meta property="og:title" content="FFmpeg 3.0 版本视频解码浅析 " />
-  <meta name="twitter:title" content="FFmpeg 3.0 版本视频解码浅析 " />
-  <meta name="description" content="MPEG封装格式到PCM数据格式">
-  <meta property="og:description" content="MPEG封装格式到PCM数据格式">
-  <meta name="twitter:description" content="MPEG封装格式到PCM数据格式">
+  <title>编译安卓源码</title>
+  <meta property="og:title" content="编译安卓源码" />
+  <meta name="twitter:title" content="编译安卓源码" />
+  <meta name="description" content="花了一两天时间终于在 Mac 上成功编译了 Android 主线最新代码，中间遇到了不少问题，也查阅了好多资料，总算是成功了，看到模拟器启动的那一刻还是挺激动的。
+
+">
+  <meta property="og:description" content="花了一两天时间终于在 Mac 上成功编译了 Android 主线最新代码，中间遇到了不少问题，也查阅了好多资料，总算是成功了，看到模拟器启动的那一刻还是挺激动的。
+
+">
+  <meta name="twitter:description" content="花了一两天时间终于在 Mac 上成功编译了 Android 主线最新代码，中间遇到了不少问题，也查阅了好多资料，总算是成功了，看到模拟器启动的那一刻还是挺激动的。
+
+">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/" />
+  <meta property="og:url" content="https://glumes.com/post/android/build-android-source-code/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/" />
+  <link rel="canonical" href="https://glumes.com/post/android/build-android-source-code/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -179,11 +185,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">FFmpeg 3.0 版本视频解码浅析 </h1>
-                
-                  
-                    <h2 align="center" class="post-subheading">MPEG封装格式到PCM数据格式</h2>
-                  
+                <h1 align="center">编译安卓源码</h1>
                 
                 
             </div>
@@ -203,121 +205,191 @@
         
 <div>
     <section id="datecount">
-        <h4 id="date"> Fri Dec 22, 2017</h4>
+        <h4 id="date"> Wed Jan 31, 2018</h4>
     </section>
-    <h5 id="wc">1000 Words|Read in about 2 Min</h5>
+    <h5 id="wc">2000 Words|Read in about 4 Min</h5>
     <h5 id="tags">Tags: 
         
-        <a href="https://glumes.com/tags/ffmpeg/">FFmpeg</a> &nbsp;
+        <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
     </h5>
 </div>
 
         
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>有了上一篇文章基础，这里就只关注 FFmpeg 如何解析的具体实践了。</p>
-
-<p>在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。</p>
-
-<p>在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。</p>
+            <p>花了一两天时间终于在 Mac 上成功编译了 Android 主线最新代码，中间遇到了不少问题，也查阅了好多资料，总算是成功了，看到模拟器启动的那一刻还是挺激动的。</p>
 
 <p></p>
 
-<p>如果觉得麻烦，也可以直接从网上找一个工程使用现成的东西，也可以参考的我的学习项目：<a href="https://github.com/glumes/FFMPEGLearn">https://github.com/glumes/FFMPEGLearn</a></p>
+<h2 id="环境准备">环境准备</h2>
 
-<h2 id="ffmpeg-3-0-与-2-0-的不同之处">FFmpeg 3.0 与 2.0 的不同之处</h2>
+<p>由于我编译的是安卓主线的最新代码，版本是安卓 6.0 的，而网上有些博文是基于 Android 4.0 版本的，这两者之间的编译还是有些差距的，这里列举一下我的环境。</p>
 
-<p>如果是刚开始学习，完全可以参照雷神的博客来写例子，而且还能运行成功。不过，既然 FFmpeg 都出了 3.0 版本了，还是要跟进学习一下。</p>
+<ul>
+<li>   Mac 一台，16 G 内存（版本：10.11.5）。</li>
+<li>   Java 8</li>
+<li>   Xcode 安装（包含命令行工具等等）</li>
+<li>   Android 开发环境安装</li>
+</ul>
 
-<p>FFmpeg 2.0 解码流程大致如下：</p>
+<p>如果本身就是开发安卓的，那么这些环境准备工作应该都可以略过了，之前就应该配好了的，只要电脑足够强劲就行了。</p>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/ffmpeg.png" alt="ffmpeg" /></p>
+<h2 id="大小写区分的文件系统">大小写区分的文件系统</h2>
 
-<p>而 FFmpeg 3.0 就开始有点变化了。</p>
+<p>在 Mac 电脑上需要创建一个大小写区分的文件系统，而 Mac 默认是大小写不区分的。</p>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/ffmpeg3.0-outline.png" alt="ffmpeg-outline" /></p>
+<h3 id="使用磁盘工具创建">使用磁盘工具创建</h3>
 
-<p>可以看到，在具体解析操作时发生了变化，不再是之前的<code>avcodec_decode_video2</code>函数，而是拆分成了两个函数，<code>avcodec_send_packet</code>和<code>avcodec_receive_frame</code>。</p>
+<p>Mac 自带了磁盘工具软件来创建磁盘，也就是我们平时安装软件时的 <code>.dmg</code> 格式的文件。不过，在我使用的时候，明明选择了 <code>OS X 拓展（区分大小写，日志式）</code> ，可创建出的磁盘镜像依旧还是不区分大小写的，试了两次之后还是不行，干脆放弃了，转用命令行。</p>
 
-<p><code>avcodec_send_packet</code>负责发送编码压缩后的数据，也就是 Packet 数据，而<code>avcodec_receive_frame</code>负责接收解码后的原始数据，也就是 Frame 数据，这么一来一回的配合，每次从文件中读取一部分内容，直到将整个文件解码完成。</p>
+<h3 id="使用命令行创建">使用命令行创建 </h3>
 
-<h2 id="解码流程代码">解码流程代码</h2>
+<p>在安卓的官方教程中都已经给出了具体的命令了：<a href="https://source.android.com/source/initializing.html#setting-up-a-mac-os-x-build-environment">https://source.android.com/source/initializing.html#setting-up-a-mac-os-x-build-environment</a></p>
 
-<p>FFmpge 的解码流程大都是相同的，只是在细节地方会有差异，主体流程还是没变，看了好多解码的代码，大多也是这样的，只是在解码成具体的某些格式时，对原始数据 Frame 的操作会有不同。</p>
+<ul>
+<li>   创建一个大小是 40 G 的，区分大小写的，稀疏磁盘映像的文件系统。</li>
+</ul>
 
-<pre><code class="language-java">// 声明一堆待会要用到的变量
-    AVCodecContext *avCodecContext = nullptr;
-    AVCodec *avCodec = nullptr;
-    AVCodecParserContext *parserContext = nullptr;
-    AVPacket *packet;
-    AVFrame *frame;
-
-    // 为上面声明的变量在赋值，并且检查赋值是否成功
-	avcodec_register_all()
-	// 为解码器赋值，并制定解码器类型
-	avCodec = avcodec_find_decoder(AV_CODEC_ID_HEVC);
-	// 为 AVCodecParserContext 和 AVCodecContext 赋值
-	parserContext = av_parser_init(avCodec-&gt;id);
-	avCodecContext = avcodec_alloc_context3(avCodec);
-	// 打开解码器
-	avcodec_open2(avCodecContext, avCodec, nullptr);
-	// 为 Packet 和 Frame 赋值
-    frame = av_frame_alloc();
-    packet = av_packet_alloc();
-
-    while // 开始一点点的解码文件内容，直到文件末尾
-    	// 解码从 while 中一次读取到的内容
-    	av_parser_parse2
-    	// 发送读取到的 packet
-    	avcodec_send_packet
-    	// 接收解析完的 frame
-    	avcodec_receive_frame
-		// 对原生数据进行相关操作，解码成不同数据格式，操作不同。
-		// todo
-	
-	//最后，释放上面声明的变量
-	av_frame_free
-	av_packet_free
-	avcodec_free_context
-	av_parser_close
-
+<pre><code class="language-sh">hdiutil create -type SPARSE -fs 'Case-sensitive Journaled HFS+' -size 40g ~/android.dmg
 </code></pre>
 
-<h2 id="mpeg-pcm-的解码">MPEG-&gt;PCM 的解码</h2>
+<p>然而，当我用了这个命令行之后，发现的确创建了磁盘，但却是只读的，不能写入，这就很尴尬了。
+解决方法就是干脆不创建稀疏磁盘映像了，创建一个固定大小的可读写的磁盘映像。</p>
 
-<p>在了解视频文件的相关基础以及 FFmpeg 解码的大致流程后，就可以开始进行 MPEG-&gt;PCM的解码工作了。</p>
+<p>使用 <code>hdiutil create -help</code> 命令，读/写磁盘映像的命令对应的是 <code>UDIF</code> ，更换命令行如下：</p>
 
-<p>不过，在这里还是少了两个重要的概念：</p>
+<pre><code class="language-sh">hdiutil create -type UDIF -fs 'Case-sensitive Journaled HFS+' -size 80g ~/android.dmg
+</code></pre>
 
-<ol>
-<li>FFmpeg 各种类以及变量的含义。</li>
-<li>各种音视频文件的格式协议。</li>
-</ol>
+<p>将 <code>SPARSE</code> 替换成 <code>UDIF</code> ，并且将容量扩大到 80 G 。</p>
 
-<p>前半部分还好，对着雷神的博客一点点的看，还是能看懂的。至于各种音视频文件的协议，那就要靠慢慢积累了。</p>
+<ul>
+<li>   调整磁盘映像文件大小</li>
+</ul>
 
-<p>这里就不贴上全部的代码了，可以参考如下两个地方：</p>
+<pre><code class="language-sh">hdiutil resize -size &lt;new-size-you-want&gt;g ~/android.dmg.sparseimage
+</code></pre>
 
-<ol>
-<li><a href="http://ffmpeg.org/doxygen/trunk/decode_video_8c-example.html">http://ffmpeg.org/doxygen/trunk/decode_video_8c-example.html</a></li>
-<li><a href="https://github.com/glumes/FFMPEGLearn/blob/master/FFmpegLib/src/main/cpp/ffmpeg_examples/decode_video.cpp">https://github.com/glumes/FFMPEGLearn/blob/master/FFmpegLib/src/main/cpp/ffmpeg_examples/decode_video.cpp</a></li>
-</ol>
+<p>由于创建的固定大小的，也就没什么需要再改变的了。</p>
+
+<ul>
+<li>   挂载磁盘映像</li>
+</ul>
+
+<pre><code class="language-sh"># mount the android file imagefunction mountAndroid { hdiutil attach ~/android.dmg -mountpoint /Volumes/android; }
+</code></pre>
+
+<p>将此 function 写入到 <code>~/.bash_profile</code> 文件中，就可以直接在命令行使用 mountAndroid 命令了。其实，创建了磁盘映像之后，直接双击也可以将其挂载上去了。</p>
+
+<ul>
+<li>   卸载磁盘映像</li>
+</ul>
+
+<pre><code class="language-sh"># unmount the android file imagefunction umountAndroid() { hdiutil detach /Volumes/android; }
+</code></pre>
+
+<h2 id="下载-android-源码">下载 Android 源码</h2>
+
+<p>由于众所周知的原因，Android 源码是在 <a href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/">清华大学 TUNA 镜像源</a> 上下载的。</p>
+
+<p>我使用的是每月更新的初始化包。首先需要进入到自己挂载的区分大小写的磁盘镜像中去，然后按照清华大学的 Android 镜像使用帮助给的命令执行即可。</p>
+
+<pre><code class="language-sh">//下载 repo 工具
+mkdir ~/bin
+PATH=~/bin:$PATH
+curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo
+chmod a+x ~/bin/repo //使用每月更新的初始化包
+wget https://mirrors.tuna.tsinghua.edu.cn/aosp-monthly/aosp-latest.tar # 下载初始化包
+tar xf aosp-latest.tar
+cd AOSP   # 解压得到的 AOSP 工程目录# 这时 ls 的话什么也看不到，因为只有一个隐藏的 .repo 目录
+repo sync # 正常同步一遍即可得到完整目录# 或 repo sync -l 仅checkout代码
+</code></pre>
+
+<p>解压之后，AOSP 文件夹的大小大概是 37.5 G 左右。</p>
+
+<h2 id="一波三折的编译过程">一波三折的编译过程</h2>
+
+<p>下载好了 Android 源码就可以进行编译了，整个编译过程就三个命令：</p>
+
+<ul>
+<li>   脚本环境初始化
+<code>sh
+source build/envsetup.sh
+</code>
+*   选择要编译的目标
+<code>sh
+lunch // 根据提示的选项用数字来选择
+</code></li>
+<li>   执行编译
+<code>sh
+make -j4// 数字4代表执行的线程，根据个人电脑情况所定
+</code></li>
+</ul>
+
+<p>然后要顺利执行完这三个命令，中间还会遇到很多问题&hellip;&hellip;</p>
+
+<h3 id="使用-bash-而非-zsh">使用 bash 而非 zsh</h3>
+
+<p>在执行</p>
+
+<pre><code class="language-sh">source build/envsetup.sh
+</code></pre>
+
+<p>命令时，使用 zsh 并不能把所有的内容都初始化，有些命令还是需要 bash 来完成的。</p>
+
+<pre><code class="language-sh">echo $SHELL  // 查看当前使用的shell
+chsh-s /bin/bash    // 切换到 bash 
+</code></pre>
+
+<h3 id="更新-curl-工具">更新 curl 工具</h3>
+
+<p>在执行 make 命令时，会遇到如下的问题，需要安装 Jack server。这个东西是不需要再另行安装的，应该编译过程中会搞定的。执行在编译时用到了 curl 工具，而 curl 工具需要支持 ssl 。</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-java-server-not-install-2.png" alt="java-server-not-install-2" /></p>
+
+<p>通过 <code>curl --version</code> 查看当前 curl 版本，如果是 7.43 或者更低，不能再版本信息中看到 OpenSSL 的字样，说明就要更新了，然而，通过 homerew 更新 curl 之后，会发现，当前的版本仍是之前的版本，解决方法如下：<a href="http://stackoverflow.com/questions/31708574/curl-does-not-support-http2-on-mac">http://stackoverflow.com/questions/31708574/curl-does-not-support-http2-on-mac</a></p>
+
+<pre><code class="language-sh">// 安装新版 curlbrew install curl --with-nghttp2 --with-openssl
+# link the formula to replace the system cURL
+$  brew link curl --force
+# now reload the shell
+</code></pre>
+
+<p>这个时候在查看 curl 版本，就会发现已经更新了。</p>
+
+<h3 id="空间不足">空间不足</h3>
+
+<p>如果在编译过程中出现了如下图片所示的错误，No space left on device ，说明创建的磁盘空间不足了，需要再扩大一下磁盘空间了。<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-no-space-left.png" alt="no-space-left" /></p>
+
+<h2 id="编译成功">编译成功</h2>
+
+<p>在解决上面的问题之后，虽说编译过程还是会报出很多错误，但是都可以忽略了，并不影响到最后的编译结果。当然，如果编译到一半停住了，那肯定是要解决问题了。例如网上还有的问题就是报的内存不够之类的。
+漫长的等待之后，就会出现编译成功的提示了。
+<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-make-success.png" alt="make-success" /></p>
+
+<h3 id="模拟器">模拟器</h3>
+
+<p>接下来就是启动模拟器了，一个令人激动的时刻了，因为之前选择的编译就是在模拟器上的。
+执行 <code>emulator</code> 命令即可启动模拟器，但还是会收到如下的提示：<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-system-partition.png" alt="system-partition" /></p>
+
+<p>因为 Android 最新的版本是 6.0 的，所以我们还要指定一下模拟器的配置信息。<code>emulator  -partition-size 2048</code>在经过漫长的等待之后，模拟器就启动了，显示的就是最新的 Android 主分支上的 6.0 的系统了。</p>
 
 <h2 id="参考">参考</h2>
 
 <ol>
-<li><a href="http://www.jianshu.com/p/7e96223ff329">http://www.jianshu.com/p/7e96223ff329</a></li>
-<li><a href="http://blog.csdn.net/leixiaohua1020/article/details/42181271">http://blog.csdn.net/leixiaohua1020/article/details/42181271</a></li>
+<li><a href="http://www.jianshu.com/p/367f0886e62b#">http://www.jianshu.com/p/367f0886e62b#</a></li>
+<li><a href="http://www.cnblogs.com/qianxudetianxia/p/3681890.html">http://www.cnblogs.com/qianxudetianxia/p/3681890.html</a></li>
+<li><a href="http://blog.alexwan1989.com/2016/01/12/Android%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">http://blog.alexwan1989.com/2016/01/12/Android%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</a></li>
 </ol>
         </article>
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/ffmpeg/encode-and-decode-summary/" data-toggle="tooltip" data-placement="top" title="音视频编解码的那些基础理论">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/android/android-rxjava/" data-toggle="tooltip" data-placement="top" title="安卓异步之RxJava">&larr; Previous Post</a>
           </li>
         
         
           <li class="next">
-            <a href="https://glumes.com/post/python/python-docopt/" data-toggle="tooltip" data-placement="top" title="Python 命令行参数解析工具 docopt">Next Post &rarr;</a>
+            <a href="https://glumes.com/post/android/understand-mvp-architecture/" data-toggle="tooltip" data-placement="top" title="理解使用MVP架构">Next Post &rarr;</a>
           </li>
         
       </ul>
@@ -327,7 +399,15 @@
                 <h2>See Also</h2>
                 <ul>
                     
-                    <li><a href="/post/ffmpeg/encode-and-decode-summary/">音视频编解码的那些基础理论</a></li>
+                    <li><a href="/post/android/android-rxjava/">安卓异步之RxJava</a></li>
+                    
+                    <li><a href="/post/android/rxjava-wrapper-dialog/">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</a></li>
+                    
+                    <li><a href="/post/android/android-layout-inflater/">Android 布局加载之 LayoutInflater</a></li>
+                    
+                    <li><a href="/post/android/android-change-skin-by-plugin/">Android 插件换肤原理及源码分析</a></li>
+                    
+                    <li><a href="/post/android/android-start-service/">Android 6.0 Service 启动过程源码分析（一）</a></li>
                     
                 </ul>
                 

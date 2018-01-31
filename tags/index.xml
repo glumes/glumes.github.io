@@ -8,7 +8,7 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 22 Dec 2017 16:00:05 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 31 Jan 2018 15:47:59 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,9 +16,27 @@
     <item>
       <title>Android</title>
       <link>https://glumes.com/tags/android/</link>
-      <pubDate>Fri, 22 Dec 2017 16:00:05 +0800</pubDate>
+      <pubDate>Wed, 31 Jan 2018 15:47:59 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Architecture</title>
+      <link>https://glumes.com/tags/architecture/</link>
+      <pubDate>Wed, 31 Jan 2018 15:42:28 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/architecture/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Crack</title>
+      <link>https://glumes.com/tags/crack/</link>
+      <pubDate>Wed, 31 Jan 2018 15:47:59 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/crack/</guid>
       <description></description>
     </item>
     
@@ -106,9 +124,18 @@
     <item>
       <title>Rxjava</title>
       <link>https://glumes.com/tags/rxjava/</link>
-      <pubDate>Fri, 22 Dec 2017 16:00:05 +0800</pubDate>
+      <pubDate>Wed, 31 Jan 2018 15:26:16 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/tags/rxjava/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Statemachine</title>
+      <link>https://glumes.com/tags/statemachine/</link>
+      <pubDate>Wed, 31 Jan 2018 15:20:14 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/statemachine/</guid>
       <description></description>
     </item>
     
