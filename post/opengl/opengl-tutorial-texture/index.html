@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>OpenGL 学习系列---纹理</title>
+  <meta property="og:title" content="OpenGL 学习系列---纹理" />
+  <meta name="twitter:title" content="OpenGL 学习系列---纹理" />
+  <meta name="description" content="接下来探索纹理了。
+
+">
+  <meta property="og:description" content="接下来探索纹理了。
+
+">
+  <meta name="twitter:description" content="接下来探索纹理了。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-texture/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-texture/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">OpenGL 学习系列---纹理</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Wed Mar 21, 2018</h4>
+    </section>
+    <h5 id="wc">2600 Words|Read in about 6 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>接下来探索纹理了。</p>
+
+<p></p>
+
+<p>纹理，简单的理解就是一副图像。而把一副图像映射到图形上的过程，叫做<code>纹理映射</code>。</p>
+
+<p>比如有如下图形和三角形，想要把图形中的一部分映射到三角形上。</p>
+
+
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
+
+
+	
+
+
+  <link rel="stylesheet" href="/css/hugo-easy-gallery.css" />
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+<style>.gallery .img1 {background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1517477894/code/S80201-17371719.jpg');}</style>
+
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img1"  >
+      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1517477894/code/S80201-17371719.jpg" />
+    </div>
+    
+    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1517477894/code/S80201-17371719.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+
+</div>
+
+
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
+
+
+	
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+<style>.gallery .img2 {background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1517477147/code/2044035O6-2.jpg');}</style>
+
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img2"  >
+      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1517477147/code/2044035O6-2.jpg" />
+    </div>
+    
+    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1517477147/code/2044035O6-2.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+
+</div>
+
+<p>结果就是这样的：</p>
+
+
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
+
+
+	
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+<style>.gallery .img3 {background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1517477896/code/S80201-17321771.jpg');}</style>
+
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img3"  >
+      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1517477896/code/S80201-17321771.jpg" />
+    </div>
+    
+    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1517477896/code/S80201-17321771.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+
+</div>
+
+<p>这就是纹理映射的一个小小例子。</p>
+
+<h2 id="基本原理">基本原理</h2>
+
+<p>要注意到，OpenGL 绘制的物体是 3D 的，而纹理是 2D 的，那么纹理映射就是将 2D 的纹理映射到 3D 的物体上，可以想象成用一张纸裹着一个物体一样，不过要按照一定规律来。</p>
+
+<p>OpenGL 中绘制的物体是有坐标系的，每个点都对应 x、y、z 坐标，而纹理也有着它的坐标，只要 3D 物体中的每个点都对应了 2D 纹理中的某个点，那么就可以把纹理映射到 3D 物体上去了。</p>
+
+<p>纹理的坐标，叫做<code>纹理坐标系</code>。它的范围只有 $[0,0]$ 到 $[1,1]$ 。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1517481677/code/opengl_texture_coordinate.png" alt="" /></p>
+
+<p>它的坐标原点位于左下角，水平向右为 S 轴，竖直向上为 Y 轴。不论实际的纹理图片尺寸大小如何，横向、纵向坐标最大值都是 1 。</p>
+
+<p>例如：实际图为 512 x 256 像素分辨率，则横向第 512 个像素对应纹理坐标为 1 ，纵向第 256 个像素对应纹理坐标为 1 。不过，纹理图最好是采用像素为 2 的 n 次方的纹理图。</p>
+
+<p>纹理映射的基本思想就是：首先为图元中的每个顶点指定恰当的纹理坐标，然后通过纹理坐标在纹理图中可以确定选中的纹理区域，最后将选中纹理区域中的内容根据纹理坐标映射到指定的图元上。</p>
+
+<p>纹理映射在 OpenGL 的渲染管线上的体现：在渲染管线中，先进行顶点着色器，绘制出物体的大致形状，之后会进行<code>光栅化</code>，将物体光栅化为许多片段组成，然后再进行片段着色器，将图形的每个片段进行着色。</p>
+
+<p>那么就需要在 顶点着色器 中将纹理的坐标传入，在光栅化阶段，纹理坐标将根据 顶点着色器 对它的处理以及 片段和各顶点的位置关系 插值产生，然后才是将插值计算后的结果传入到片段着色器中。</p>
+
+<h2 id="着色器操作">着色器操作</h2>
+
+<p>相比直接绘制图形，使用纹理后，着色器也要改变了。</p>
+
+<p>顶点着色器：</p>
+
+<pre><code class="language-glsl">attribute vec4 a_Position;
+attribute vec2 a_TextureCoordinates;
+varying vec2 v_TextureCoordinates;
+uniform mat4 u_ModelMatrix;
+uniform mat4 u_ViewMatrix;
+uniform mat4 u_ProjectionMatrix;
+uniform mat4 u_Matrix;
+
+void main() {
+    v_TextureCoordinates = a_TextureCoordinates ;
+    gl_Position = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
+}
+</code></pre>
+
+<p>在顶点着色器中多了 <code>v_TextureCoordinates</code> 变量，它是 <code>varying</code> 类型，意思为可变类型，在光栅化处理时会对该变量进行处理，随后传入到片段着色器中。</p>
+
+<p>片段着色器</p>
+
+<pre><code class="language-glsl">precision mediump float;
+uniform sampler2D u_TextureUnit;
+varying vec2 v_TextureCoordinates;
+
+void main(){
+	// 未使用纹理的颜色赋值 ： gl_FragColor = u_Color;
+    gl_FragColor = texture2D(u_TextureUnit,v_TextureCoordinates);
+}
+</code></pre>
+
+<p><code>v_TextureCoordinates1</code>变量就是接受来自顶点着色器传的值，<code>u_TextureUnit</code>变量就是使用的采样器，类型是<code>sampler2D</code>。</p>
+
+<p>使用纹理后的片段着色器要使用 <code>texture2D</code> 函数给颜色赋值。</p>
+
+<p><code>texture2D</code>函数的作用就是采样，从纹理中采取像素赋值给 <code>gl_FragColor</code>变量，也就是最后的颜色。</p>
+
+<h2 id="上层代码">上层代码</h2>
+
+<p>大致了解了着色器代码，接着就是上层的 Java 代码了。</p>
+
+<p>和要创建一个 OpenGL ProgramId 类似，使用纹理也需要创建一个纹理 ID。</p>
+
+<pre><code class="language-java">	 /**
+     * 返回加载图像后的 OpenGl 纹理的 ID
+     * @param context
+     * @param resourceId
+     * @return
+     */
+    public static int loadTexture(Context context, int resourceId) {
+        final int[] textureObjectIds = new int[1];
+        glGenTextures(1, textureObjectIds, 0);
+        if (textureObjectIds[0] == 0) {
+            Timber.d(&quot;Could not generate a new OpenGL texture object.&quot;);
+            return 0;
+        }
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inScaled = false;
+        final Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId, options);
+
+        if (bitmap == null) {
+            Timber.d(&quot;resource Id could not be decoded&quot;);
+            glDeleteTextures(1, textureObjectIds, 0);
+            return 0;
+        }
+
+        glBindTexture(GL_TEXTURE_2D, textureObjectIds[0]);
+
+        // 设置缩小的情况下过滤方式
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        // 设置放大的情况下过滤方式
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        // 加载纹理到 OpenGL，读入 Bitmap 定义的位图数据，并把它复制到当前绑定的纹理对象
+        // 当前绑定的纹理对象就会被附加上纹理图像。
+        texImage2D(GL_TEXTURE_2D, 0, bitmap, 0);
+
+        bitmap.recycle();
+        
+        // 为当前绑定的纹理自动生成所有需要的多级渐远纹理
+        // 生成 MIP 贴图
+        glGenerateMipmap(GL_TEXTURE_2D);
+
+        // 解除与纹理的绑定，避免用其他的纹理方法意外地改变这个纹理
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+        return textureObjectIds[0];
+    }
+</code></pre>
+
+<ol>
+<li>首先使用 <code>glGenTextures</code> 创建纹理 ID。</li>
+<li>如果创建失败，则使用 <code>glDeleteTextures</code> 删除并退出。</li>
+<li>创建成功之后，使用 <code>glBindTexture</code> 函数将纹理 ID 和纹理目标绑定。</li>
+<li>之后会设置纹理在缩小和放大情况下的过滤方式。</li>
+<li>再使用 <code>texImage2D</code> 将纹理目标和 Bitmap 图片绑定。</li>
+<li>使用 <code>glGenerateMipmap</code> 函数生成多级渐远纹理和 MIP 纹理贴图。</li>
+<li>再使用 <code>glBindTexture</code>函数解除绑定。</li>
+</ol>
+
+<h3 id="glbindtexture-函数">glBindTexture 函数</h3>
+
+<p>这里要重点说一下 glBindTexture 函数。</p>
+
+<p>它的作用是绑定纹理名到指定的当前活动纹理单元，当一个纹理绑定到一个目标时，目标纹理单元先前绑定的纹理对象将被自动断开。纹理目标默认绑定的是 0 ，所以要断开时，也再将纹理目标绑定到 0 就好了。</p>
+
+<p>所以在代码的最后调用了 <code>glBindTexture(GL_TEXTURE_2D, 0)</code> 来解除绑定。</p>
+
+<p>当一个纹理被绑定时，在绑定的目标上的 OpenGL 操作将作用到绑定的纹理上，并且，对绑定的目标的查询也将返回其上绑定的纹理的状态。</p>
+
+<p>也就是说，这个纹理目标成为了被绑定到它上面的纹理的别名，而纹理名称为 0 则会引用到它的默认纹理。所以，当后续对纹理目标调用 <code>glTexParameteri</code> 函数设置过滤方式，其实也是对纹理设置的过滤方式。</p>
+
+<h3 id="绑定纹理中的值">绑定纹理中的值</h3>
+
+<p>创建并且设置了纹理着色器ID之后，就需要绑定并设置在着色器语言中的变量了。</p>
+
+<pre><code class="language-java">		// 绑定着色器脚本中的变量
+        uTextureUnitAttr = glGetUniformLocation(mProgram, U_TEXTURE_UNIT)
+		mTextureId = TextureHelper.loadTexture(mContext,R.drawable.texture)
+		// 激活纹理单元
+        glActiveTexture(GL_TEXTURE0)
+        // 绑定纹理目标
+        glBindTexture(GL_TEXTURE_2D, mTextureId)
+        // 给片段着色器中的采样器变量 sample2D 赋值
+        glUniform1i(uTextureUnitAttr, 0)
+
+</code></pre>
+
+<p>在着色器脚本中定义了 <code>uniform</code> 类型的采样器变量 <code>sampler2D</code>，在上层的应用代码需要将它绑定并赋值。而 <code>varying</code> 类型的变量由顶点着色器传过去，不需要另外赋值了。</p>
+
+<p>接下来要使用 glActiveTexture 函数激活纹理单元。在一个系统中，纹理单元的数据是有限的，在源码中从 GL_TEXTURE0 到 GL_TEXTURE31 共定义了三十二个纹理单元，但具体数量根据机型而定。</p>
+
+<p>通过 GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS 常量可以查询到。</p>
+
+<pre><code class="language-java">   var intBuffer:IntBuffer = IntBuffer.allocate(1)
+   glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS,intBuffer)
+   LogUtil.d(&quot;max combined texture image units &quot; + intBuffer[0])
+</code></pre>
+
+<p>激活了纹理单元，还需要再绑定纹理目标。</p>
+
+<p>一个纹理单元包含了多个类型纹理目标，如：GL_TEXTURE_1D、GL_TEXTURE_2D、CUBE_MAP 等等。</p>
+
+<p>因为纹理单元是纹理的一个别名，所以对纹理单元所做的操作，都相当于对纹理操作的。把一些对纹理所做的操作提取到函数里，最后再加载纹理，并绑定到纹理目标上。</p>
+
+<p>使用<code>glUniform1i</code>函数为采样器进行赋值为 0 ，这是和激活纹理单元相对应的。因为激活的纹理单元为 0 ，所以赋值也是为 0 。如果这里不一致，直接就看不到任何东西了。</p>
+
+<h3 id="实际效果">实际效果</h3>
+
+<p>当绑定并设置好片段着色器中的值之后，接下来的流程就和绘制基本图形一样了。</p>
+
+
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
+
+
+	
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+<style>.gallery .img4 {background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1517477896/code/S80201-17321771.jpg');}</style>
+
+<div class="box  " >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img img4"  >
+      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1517477896/code/S80201-17321771.jpg" />
+    </div>
+    
+    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1517477896/code/S80201-17321771.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+
+</div>
+
+<p>具体的绘制操作都在片段着色器里面定义了，而在上层代码中就不用花费很多心思了，在顶点着色器不变的情况下，甚至可以只改变片段着色器的值来绘制不同的纹理效果。</p>
+
+<h2 id="总结-名词混淆点">总结 &amp; 名词混淆点</h2>
+
+<p>在上面既是纹理单元又是纹理目标的很容易搞混，梳理一下概念：</p>
+
+<p>形如 GL_TEXTURE0、GL_TEXTURE1、GL_TEXTURE2 的就是纹理单元，一台机子上纹理单元数量是有限的，依具体机型而定。而 glActiveTexture 则是激活具体的纹理单元。</p>
+
+<p>一个纹理单元又包含多个类型的纹理目标，有：GL_TEXTURE_1D、GL_TEXTURE_2D、CUBE_MAP 等等。</p>
+
+<p>通过 glGenTextures 函数生成的 int 类型的值就是纹理，通过 glBindTexture 函数将纹理目标和纹理绑定后，对纹理目标所进行的操作都反映到对纹理上。</p>
+
+<p>纹理目标需要通过 texImage2D 函数附加上 Bitmap 位图。</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li><a href="http://blog.csdn.net/opengl_es/article/details/19852277">http://blog.csdn.net/opengl_es/article/details/19852277</a></li>
+<li><a href="http://blog.csdn.net/artisans/article/details/76695614">http://blog.csdn.net/artisans/article/details/76695614</a></li>
+</ol>
+        </article>
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/android/setup-android-crack-environment/" data-toggle="tooltip" data-placement="top" title="搭建 Android 反编译环境">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 学习系列---投影矩阵</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-coordinate-system/">OpenGL 学习系列---坐标系统</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-draw-basic-shape/">OpenGL 学习系列---基本形状的绘制</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-draw-point/">OpenGL 学习系列---点的绘制流程</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+

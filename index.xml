@@ -8,10 +8,21 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Wed, 31 Jan 2018 15:47:59 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 21 Mar 2018 23:08:02 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 学习系列---纹理</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-texture/</link>
+      <pubDate>Wed, 21 Mar 2018 23:08:02 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-texture/</guid>
+      <description>&lt;p&gt;接下来探索纹理了。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>搭建 Android 反编译环境</title>
