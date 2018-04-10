@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android 相机开发中的尺寸和方向问题</title>
+  <meta property="og:title" content="Android 相机开发中的尺寸和方向问题" />
+  <meta name="twitter:title" content="Android 相机开发中的尺寸和方向问题" />
+  <meta name="description" content="在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。
+
+">
+  <meta property="og:description" content="在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。
+
+">
+  <meta name="twitter:description" content="在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">Android 相机开发中的尺寸和方向问题</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Tue Apr 10, 2018</h4>
+    </section>
+    <h5 id="wc">3100 Words|Read in about 7 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/camera/">Camera</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。</p>
+
+<p></p>
+
+<p>其中尺寸指的是：</p>
+
+<ul>
+<li>相机显示预览帧的尺寸</li>
+<li>相机拍摄帧的尺寸</li>
+<li>Android 显示相机预览内容的控件尺寸</li>
+</ul>
+
+<p>而方向指的是</p>
+
+<ul>
+<li>相机显示预览帧的方向</li>
+<li>相机拍摄帧的方向</li>
+<li>Android 手机自身的方向</li>
+</ul>
+
+<p>在开发中要处理好这三个方向和三个尺寸各自的关系才行，这里以 Camera 1.0 版本的 API 作为示例，参考了 Google 的开源项目：<a href="https://github.com/google/cameraview">cameraview</a>  和 <a href="https://github.com/googlesamples/android-Camera2Basic">android-Camera2Basic</a> 。</p>
+
+<h2 id="尺寸">尺寸</h2>
+
+<p>相机作为硬件设备，可以提供两类尺寸：</p>
+
+<ul>
+<li>预览帧尺寸</li>
+<li>拍摄帧尺寸</li>
+</ul>
+
+<h3 id="预览帧尺寸">预览帧尺寸</h3>
+
+<p>通过 <code>getSupportedPreviewSizes</code> 方法可以得到支持的预览帧的尺寸集合。</p>
+
+<pre><code class="language-java">		private final SizeMap mPreviewSizes = new SizeMap();
+        mCamera = Camera.open(mCameraId);
+        mCameraParameters = mCamera.getParameters();
+        // Supported preview sizes
+        mPreviewSizes.clear();
+        for (Camera.Size size : mCameraParameters.getSupportedPreviewSizes()) {
+            mPreviewSizes.add(new Size(size.width, size.height));
+        }
+</code></pre>
+
+<p>而 <code>mPreviewSizes</code> 是 <code>SizeMap</code> 类型，查看源码，实际上就是在添加预览帧尺寸的长和宽时，还计算了他们的长宽比，并保存了起来，存储长宽比的结构可以是一对多的关系，也就是长宽比相同，长和宽的尺寸可以有多种，只要他们最后约分后的比例相同。</p>
+
+<pre><code class="language-java">    // 同一个长宽比，对应多个尺寸
+    private final ArrayMap&lt;AspectRatio, SortedSet&lt;Size&gt;&gt; mRatios = new ArrayMap&lt;&gt;();
+</code></pre>
+
+<p>比如，尺寸是 1920 * 1080 和 1280 * 720 的长宽比都是 16 : 9，而尺寸是 800 * 600 和 640 * 480 的的长宽比都是 4 : 3。</p>
+
+<p>在这里说法是 长宽比，也有说话是 宽高比 的。实际上都是相同的，都是将手机横放时的，较长的那一边比较短的那一边的值。</p>
+
+<p>在计算长宽比时，需要求出宽和高数值的最大公约数，这样才能进行约分计算，根据欧几里得算法，又叫做<code>辗转相除法</code>：两个整数的最大公约数等于其中较小的那个数和两个数相除余数的最大公约数。转换成代码如下：</p>
+
+<pre><code class="language-java">	// a &gt; b
+    private static int gcd(int a, int b) {
+        while (b != 0) {
+            int c = b;
+            b = a % b;
+            a = c;
+        }
+        return a;
+    }
+</code></pre>
+
+<h3 id="拍摄帧尺寸">拍摄帧尺寸</h3>
+
+<p>通过 <code>getSupportedPictureSizes</code> 方法可以得到支持的拍摄帧的尺寸集合。</p>
+
+<pre><code class="language-java">        // Supported picture sizes;
+        private final SizeMap mPictureSizes = new SizeMap();
+        mPictureSizes.clear();
+        for (Camera.Size size : mCameraParameters.getSupportedPictureSizes()) {
+            mPictureSizes.add(new Size(size.width, size.height));
+        }
+</code></pre>
+
+<p>存储结构和预览帧相似，在得到尺寸集合时，也计算了它们对应的长宽比。</p>
+
+<p>而 Android 显示相机预览内容的控件尺寸，在控件对应的方法中可以拿到它的 Width 和 Height 。</p>
+
+<h3 id="计算宽高比">计算宽高比</h3>
+
+<p>有了这三类尺寸，接下来就是要如何处理了。</p>
+
+<p>为了在预览和拍摄时，图像不会出现拉伸现象，预览帧的长宽比最好和显示控件的长宽比一致，并且拍摄帧的长宽比也和预览帧和显示控件的长宽比一致，总之三者的长宽比最好是一致的，才会有最好的预览和拍摄效果</p>
+
+<p>因为手机预览控件的图像 是由 相机预览帧 根据 控件大小 <strong>缩放</strong>得来的，当长宽比不一致时必然会导致预览图像变形。而预览帧的长宽比和拍摄帧的长宽比不一致的话，又会导致拍摄的图片变形拉伸。</p>
+
+<p>在 <a href="https://github.com/google/cameraview">cameraview</a> 的源码中，首先设定了默认的宽高比为 4 : 3 。</p>
+
+<pre><code class="language-java">AspectRatio DEFAULT_ASPECT_RATIO = AspectRatio.of(4, 3);
+</code></pre>
+
+<p>根据这一长宽比，可以从预览帧的尺寸集合中得到那些符合的尺寸列表，再从那些尺寸列表中找到宽和高都刚好大于预览控件的宽高的。若是小于预览控件的宽高则会导致图像被拉伸了。</p>
+
+<pre><code class="language-java">        SortedSet&lt;Size&gt; sizes = mPreviewSizes.sizes(mAspectRatio);
+        if (sizes == null) { // Not supported
+            mAspectRatio = chooseAspectRatio();
+            // 根据选定的长宽比得到对应的支持的尺寸集合
+            sizes = mPreviewSizes.sizes(mAspectRatio);
+        }
+        // 和预览控件的尺寸相比较，从尺寸集合中找到合适的尺寸
+        Size size = chooseOptimalSize(sizes);
+        // 把找到的合适尺寸，设置给相机的预览帧
+        mCameraParameters.setPreviewSize(size.getWidth(), size.getHeight());
+</code></pre>
+
+<p>具体找到合适的预览帧尺寸大小的代码如下：</p>
+
+<pre><code class="language-java">    private Size chooseOptimalSize(SortedSet&lt;Size&gt; sizes) {
+        if (!mPreview.isReady()) { // Not yet laid out
+            return sizes.first(); // Return the smallest size
+        }
+        int desiredWidth;
+        int desiredHeight;
+        // 预览界面的尺寸
+        final int surfaceWidth = mPreview.getWidth();
+        final int surfaceHeight = mPreview.getHeight();
+        // 是否是横屏,若是横屏的话，宽和高相互调换
+        if (isLandscape(mDisplayOrientation)) {
+            desiredWidth = surfaceHeight;
+            desiredHeight = surfaceWidth;
+        } else {
+            desiredWidth = surfaceWidth;
+            desiredHeight = surfaceHeight;
+        }
+
+        // 从选定的长宽比支持的尺寸中，找到长和宽都大于或等于控件尺寸的
+        Size result = null;
+        for (Size size : sizes) { // Iterate from small to large
+            if (desiredWidth &lt;= size.getWidth() &amp;&amp; desiredHeight &lt;= size.getHeight()) {
+                return size;
+            }
+            result = size;
+        }
+        // 实在没有符合条件的，选择支持尺寸中最大的返回。
+        return result;
+    }
+</code></pre>
+
+<p>注意到，当屏幕处于横屏模式式，预览控件的宽和高就发生变换了，要相互调换。</p>
+
+<p>找到合适的预览帧的尺寸后，就可以设置给相机了。</p>
+
+<p>而相机拍摄帧的尺寸，也是要根据长宽比来选定。</p>
+
+<pre><code class="language-java">        final Size pictureSize = mPictureSizes.sizes(mAspectRatio).last();
+</code></pre>
+
+<p>在宽高比一定的情况下，拍摄帧往往选择尺寸最大的，那样拍摄的图片更清楚，这也是为什么最后使用 <code>last</code> 方法。</p>
+
+<p>这样一来，在确定好了宽高比的情况下，就可以设置对应的尺寸了。</p>
+
+<p>在 Google 的  <a href="https://github.com/googlesamples/android-Camera2Basic">android-Camera2Basic</a> 工程中，也有这样一段设置尺寸的代码，不同的它是根据拍摄的图片的最大尺寸确定好了长宽比，而不是默认选择普遍的 4 : 3 的比例，之后在此基础之上才进行设置。</p>
+
+<pre><code class="language-java">       Size largest = Collections.max(Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)),
+                        new CompareSizesByArea());
+</code></pre>
+
+<p>可以看到，在相机中设置宽高比还是非常重要的一个环节。</p>
+
+<h2 id="方向">方向</h2>
+
+<p>搞定了尺寸问题，还剩下方向了。</p>
+
+<p>相机有两种方向需要处理：</p>
+
+<ul>
+<li>预览帧方向</li>
+<li>拍摄帧方向</li>
+</ul>
+
+<p>为了获得更好的相机体验，要处理好预览帧和拍摄帧的方向，保证通过手机屏幕看到的内容都是方向正常的。</p>
+
+<p>首先要明确手机的自然方向：</p>
+
+<ul>
+<li>当手机屏幕 <code>竖立时的自然方向</code>，此时，坐标原点位于左上角，向右为 X 轴正方向，向下为 Y 轴正方向，<strong>宽比高短</strong>。</li>
+<li>当手机屏幕 <code>横放时的自然方向</code>，此时，坐标原点位于左上角，向右为 X 轴正方向，向下为 Y 轴正方向，<strong>宽比高长</strong>。</li>
+</ul>
+
+<h3 id="预览帧方向">预览帧方向</h3>
+
+<p>而相机的图像数据是来自相机硬件图像传感器的，传感器被固定在手机上后有一个默认的取景方向：坐标原点位于手机<strong>逆时针横放</strong>时的左上角，即与横屏应用的屏幕 X 方向一致。也就是与竖屏应用的屏幕 X 方向呈 90 度角。</p>
+
+<p>这里盗图几张：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1522669736/code/back_camera_coordiante.png" alt="back_camera_coordinate" /></p>
+
+<p>所以，对于横屏应用来说，屏幕的自然方向和相机的图像传感器方向一致，因此看到的图像是正的。而对于竖屏应用来说，预览图像就侧过来了。需要将预览图像顺时针旋转 90 度角才可以正常预览图像。</p>
+
+<p>横屏拍摄结果：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1522669943/code/landscape_camera_orientation.png" alt="landscape_camera" /></p>
+
+<p>竖屏拍摄结果：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1522669953/code/portrait_camera_orientation.png" alt="portrait" /></p>
+
+<p>关于相机的预览方向和屏幕自然方向存在 90 度角的偏差，在 Camera 的 <code>orientation</code>属性中也有说明：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_678,w_1762/v1522674508/code/camera_orientation__description.png" alt="camera_orientation_description" /></p>
+
+<p>orientation 表示相机图像的方向。它的值是相机图像顺时针旋转到设备自然方向一致时的图像，它可能是 0、90、180、270 四种。</p>
+
+<p>对于竖屏应用来说，后置相机传感器是横屏安装的，当你面向屏幕时，如果后置相机传感器顶边和设备自然方向的右边是平行的，那么后置相机的 orientation 是 90。如果是前置相机传感器顶边和设备自然方向的右边是平行的，则前置相机的 orientation 是 270 。</p>
+
+<p>对于前置和后置相机传感器 orientation 是不同的，在不同的设备上也可能会有不同的值。</p>
+
+<p>在没有限定 Activity 方向时，采用官方推荐的代码来设置方向：</p>
+
+<pre><code class="language-java">  public static void setCameraDisplayOrientation(Activity activity, int cameraId, android.hardware.Camera camera) {
+        android.hardware.Camera.CameraInfo info =
+                new android.hardware.Camera.CameraInfo();
+        android.hardware.Camera.getCameraInfo(cameraId, info);
+        int rotation = activity.getWindowManager().getDefaultDisplay()
+                .getRotation();
+        int degrees = 0;
+        switch (rotation) {
+            case Surface.ROTATION_0:
+                degrees = 0;
+                break;
+            case Surface.ROTATION_90:
+                degrees = 90;
+                break;
+            case Surface.ROTATION_180:
+                degrees = 180;
+                break;
+            case Surface.ROTATION_270:
+                degrees = 270;
+                break;
+        }
+
+        int result;
+        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            result = (info.orientation + degrees) % 360;
+            result = (360 - result) % 360;  // compensate the mirror
+        } else {  // back-facing
+            result = (info.orientation - degrees + 360) % 360;
+        }
+        camera.setDisplayOrientation(result);
+    }
+</code></pre>
+
+<p>首先计算得到设备逆时针旋转的角度，对于后置摄像头传感器的计算：(info.orientation - degrees + 360) % 360 。</p>
+
+<p>因为摄像头图像方向要恢复到自然方向需要顺时针旋转，而屏幕逆时针旋转正好抵掉了摄像头的旋转，所以两者相减，然后再加上 360 取模运算。</p>
+
+<p>对于前置摄像头传感器，因为在使用前置摄像头时，从屏幕竖直方向看到的往往是一个镜像，这是因为摄像头硬件对图像做了水平翻转，也就是将图像内容对着竖直方向对调了，相当于预先旋转了 180 度。之后再只需要旋转 90 度就可以到自然方向了，只不过是个镜像，即左右翻转了。</p>
+
+<p>需要注意的一点是，在 API 14 之前，调用 setDisplayOrientation 方法时要先关闭预览。</p>
+
+<p>最后盗图更清晰明了一下：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1523330911/code/font_camera_orientation.png" alt="" /></p>
+
+<h3 id="拍摄帧方向">拍摄帧方向</h3>
+
+<p>确定了预览时的方向，还需要确定拍摄时的方向。</p>
+
+<p>通过 Camera.Parameters.setRotation 函数可以设置相机最终拍出的图片方向。</p>
+
+<p>官方的推荐代码：</p>
+
+<pre><code class="language-java">    public void onOrientationChanged(int orientation) {
+        if (orientation == ORIENTATION_UNKNOWN) {
+            return;
+        }
+        android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
+        android.hardware.Camera.getCameraInfo(cameraId, info);
+
+        orientation = (orientation + 45) / 90 * 90;
+        int rotation = 0;
+
+        if (info.facing == CameraInfo.CAMERA_FACING_FRONT) {
+            rotation = (info.orientation - orientation + 360) % 360;
+        } else {  // back-facing camera
+            rotation = (info.orientation + orientation) % 360;
+        }
+        mParameters.setRotation(rotation);
+    }
+</code></pre>
+
+<p>计算旋转的方向，需要考虑到当前屏幕的方向和相机的方向。</p>
+
+<p>OrientationEventListener 和 Camera.orientation 一起配合使用。当屏幕方向改变时，OrientationEventListener 会收到相应的通知，在 onOrientationChanged 的回调方法中去改变相机的拍摄方向，实际上在相机预览方向的改变也是在该回调方法中进行的。</p>
+
+<p>onOrientationChanged 方法的返回值是从 0 ~ 359。而 setRotation 的值只能是 0、90、180、270。所以需要对屏幕方向的 orientation 做一个类似四舍五入的操作。</p>
+
+<p>当然也可以在此回调中根据 Display 类的 getRotation 方法得到方向就行，总之就是有一个回调的通知，然后在此改变屏幕拍摄和预览的方向。</p>
+
+<p>对于前置摄像头，摄像头的 orientation 和屏幕方向的 orientation 两个之差即为要旋转的角度；对于后置摄像头，两者之和即为要旋转的角度。</p>
+
+<p>到这里，就对摄像头开发中的尺寸和方向设置有个更清晰的认识了。</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li><a href="https://blog.csdn.net/Tencent_Bugly/article/details/53375311">https://blog.csdn.net/Tencent_Bugly/article/details/53375311</a></li>
+<li><a href="https://blog.csdn.net/daiqiquan/article/details/40650055">https://blog.csdn.net/daiqiquan/article/details/40650055</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20559606">https://zhuanlan.zhihu.com/p/20559606</a></li>
+<li><a href="http://javayhu.me/blog/2017/09/25/camera-development-experience-on-android/">http://javayhu.me/blog/2017/09/25/camera-development-experience-on-android/</a></li>
+</ol>
+        </article>
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-texture/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---纹理">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+            
+            <div>
+                 
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+

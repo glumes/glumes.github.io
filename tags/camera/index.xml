@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Camera on Glumes Blog</title>
+    <link>https://glumes.com/tags/camera/</link>
+    <description>Recent content in Camera on Glumes Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
+    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <lastBuildDate>Tue, 10 Apr 2018 16:09:32 +0800</lastBuildDate>
+    
+	<atom:link href="https://glumes.com/tags/camera/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Android 相机开发中的尺寸和方向问题</title>
+      <link>https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/</link>
+      <pubDate>Tue, 10 Apr 2018 16:09:32 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/</guid>
+      <description>&lt;p&gt;在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

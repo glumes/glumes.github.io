@@ -8,10 +8,21 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Wed, 21 Mar 2018 23:08:02 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 10 Apr 2018 16:09:32 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android 相机开发中的尺寸和方向问题</title>
+      <link>https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/</link>
+      <pubDate>Tue, 10 Apr 2018 16:09:32 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/</guid>
+      <description>&lt;p&gt;在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 学习系列---纹理</title>
