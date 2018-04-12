@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android Camera 模型及 API 接口演变</title>
+  <meta property="og:title" content="Android Camera 模型及 API 接口演变" />
+  <meta name="twitter:title" content="Android Camera 模型及 API 接口演变" />
+  <meta name="description" content="要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。
+
+">
+  <meta property="og:description" content="要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。
+
+">
+  <meta name="twitter:description" content="要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/android/android-camrea-api-evolution/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/android/android-camrea-api-evolution/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">Android Camera 模型及 API 接口演变</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        
+        
+<div>
+    <section id="datecount">
+        <h4 id="date"> Thu Apr 12, 2018</h4>
+    </section>
+    <h5 id="wc">2100 Words|Read in about 5 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/camera/">Camera</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
+    </h5>
+</div>
+
+        
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。</p>
+
+<p></p>
+
+<p>可以通过这篇文章了解相关知识 <a href="https://glumes.com/post/android/android-hal-summary/">Android 硬件抽象层调用流程小结</a>，包括底层驱动、HAL 硬件抽象层接口、应用层到 HAL 的调用流程。</p>
+
+<p>基本上 HAL 的调用流程都是相似的，对于 Camera 也是这样。</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_camera_java_to_kernel.png" alt="Android Camera HAL 调用" /></p>
+
+<p>应用进程通过 Binder 通信得到一个系统服务，这个系统服务就是用来访问硬件的。</p>
+
+<p>系统服务最后都是通过 HAL 的接口来访问硬件的驱动程序，从而最终访问硬件设备。</p>
+
+<p>而 HAL 接口的实现方式则是由不同厂商去完成的，只需要按照接口定义的规范实现就好。</p>
+
+<p>正是由于 Android Camera 的硬件抽象层发生了变化，访问硬件的方式有所改变，才导致相机模型发生变化，上层 API 接口也就随之变化了。</p>
+
+<p>当了解了这些变化之后，再回过头去看 Camera 的 API 调用就显得清晰多了。</p>
+
+<h2 id="android-camera-1-0-的相机模型">Android Camera 1.0 的相机模型</h2>
+
+<p>Android 5.0 之前的 Camera 版本，功能比较单一，不像 5.0 之后那样支持很多特性，这也是由于它的 HAL 所决定的。</p>
+
+<p>用的是 <code>android.hardware.Camera</code> 包下的内容，回顾一下 Camera 1.0 的调用流程：</p>
+
+<ul>
+<li>创建预览类 （ SurfaceView ）</li>
+<li>打开相机（ Camera.open ）</li>
+<li>设置预览 （ setPreviewDisplay ）</li>
+<li>开始预览（ startPreview ）</li>
+<li>对焦（ autoFocus ）</li>
+<li>拍摄（ takePicture ）</li>
+<li>拍照监听器处理（ PictureCallback ）</li>
+</ul>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_camera_block.png" alt="Android 5.0 之前 HAL 接口" /></p>
+
+<p>HAL 接口被设计成了三种运行模式：</p>
+
+<ul>
+<li>预览</li>
+<li>静态拍摄</li>
+<li>视频录制</li>
+</ul>
+
+<p>其中，预览对应于代码中 Camera 类的 <code>startPreview</code> 函数，而静态拍摄对应于 Camera 类的 <code>takePicture</code> 函数，视频录制则是在 <code>MediaRecorder</code> 类的 <code>setCamera</code> 函数中传入 Camera 对象实例。</p>
+
+<p>三种模式具有略有不同又相互重叠的功能。这样就难以实现新类型的功能（例如连拍模式），因为新类型的功能会介于其中两种模式之间。</p>
+
+<p>从图中可以看到，应用层 Camera 会发出一个请求队列到 HAL ，请求队列中的每个请求都对应三种运行模式中的一种。</p>
+
+<p>当你想要在预览时拍照，然后再返回预览模式，那么就得在拍照前发送请求切换到静态拍摄模式，拍完后再发送请求切换到预览模式。</p>
+
+<h2 id="android-camera-2-0-的相机模型">Android Camera 2.0 的相机模型</h2>
+
+<p>在 Android 5.0 之后，相机 API 就有了较大的变化，用的是 <code>android.hardware.camera2</code> 包下的内容了。</p>
+
+<p>回顾一下 Camera 2.0 的调用流程：</p>
+
+<ul>
+<li>创建预览类（ SurfaceView 或者 TextureView 都行）</li>
+<li>打开相机（ CameraManager.openCamera ）</li>
+<li>相机回调（ CemeraDevice.StateCallback ）</li>
+<li>创建 CameraCaptureSession 会话（ createCaptureSession ）</li>
+<li>创建一个进行预览的请求（ CaptureRequest.Builder ）</li>
+<li>预览请求中设置输出的 Surface（ addTarget ）</li>
+<li>在会话中发出预览的请求（ setRepeatingRequest ）</li>
+<li>在会话的回调类中处理发出请求的结果（ CameraCaptureSession.CaptureCallback ）</li>
+<li>拍照时，创建一个拍照的请求（ CaptureRequest ）</li>
+<li>在会话中发出拍照的请求（ capture ）</li>
+<li>在会话的回调类中处理发出请求的结果（ CameraCaptureSession.CaptureCallback ）</li>
+</ul>
+
+<p>以上就是 Camera 2.0 相关的调用流程和对应的重要函数，大致就是每做一次操作都要在会话中发出一次请求。</p>
+
+<p>更具体的如下极客学院流程图所示：</p>
+
+<p><img src="http://wiki.jikexueyuan.com/project/android-actual-combat-skills/images/33-3.png" alt="Android Camera 2.0 调用" /></p>
+
+<p>Camera 2.0 的架构将多个运行模式整合为一个统一的视图，可以使用这种视图实现之前的任何模式以及一些其他模式，如连拍模式。这样一来，便可以提高用户对聚焦、曝光以及更多后期处理（例如降噪、对比度和锐化）效果的控制能力。此外，这种简化的视图还能够使应用开发者更轻松地使用相机的各种功能。</p>
+
+<p>Camera 2.0 将相机系统塑造为一个管道，该管道可按照 1:1 的基准将传入的帧捕获请求转化为帧。这些请求会封装有关帧的捕获和处理的所有配置信息，其中包括分辨率和像素格式；手动传感器、镜头和闪光灯控件；3A 运行模式；RAW-&gt;YUV 处理控件；统计信息生成等等。</p>
+
+<p>简单来说，应用框架从相机系统请求帧，然后相机系统将结果返回到输出流。</p>
+
+<p>可以将 Camera 2.0 看作是 Camera 1.0 的单向流管道。它会将每个捕获请求转化为传感器捕获的一张图像，这张图像将被处理成：</p>
+
+<ul>
+<li>包含有关捕获的元数据的结果对象。</li>
+<li>图像数据的 1 到 N 个缓冲区，每个缓冲区会进入自己的目的地 Surface。也就是我们创建 CaptureRequest 时的 addTarget 添加的 Surface。</li>
+</ul>
+
+<p>可能的输出 Surface 组经过预配置：</p>
+
+<ul>
+<li>每个 Surface 都是一个固定分辨率的图像缓冲区流的目标位置</li>
+<li>一次只能将少量的 Surface 配置为输出（约 3 个）</li>
+</ul>
+
+<p>一个请求中包含所需的全部捕获设置，以及要针对该请求将图像缓冲区推送到其中的输出 Surface 的列表。请求可以只发生一次（使用 capture ），也可以无限重复（使用 setRepeatingRequest ）。捕获的优先级高于重复请求的优先级。</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/camera_simple_model.png" alt="相机运行核心模式" /></p>
+
+<p>如上图所示，一个 capture 请求，左边就是要输出的目的 Surface 列表。而 CameraDevice 框内的就是请求的队列。相机的硬件设备会处理每个请求，将图像数据的缓冲区输出到设置的目的 Surface 中，同时在回调的 onCaptureComplete 方法中处理请求的结果 CaptureResult。</p>
+
+<p>就是这样一个队列模型，相机系统不断地处理队列中的请求，并且一次可以发起多个请求，而且提交的请求不会出现阻塞的情况，请求始终按照接收的顺序处理。</p>
+
+<p>同样的，如果想要实现连拍功能，只要不断发送捕获的请求 capture 就好了，而不需要像之前一样每次拍完照还得设置回预览模式。</p>
+
+<h2 id="相机模型">相机模型</h2>
+
+<p>这是一个更全面的相机模型图：</p>
+
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/camera_model.png" alt="相机模型" /></p>
+
+<p>在模型图里把一些主要函数和流程图都绘制包含进去了。我们调用的流程基本也是顺着紫色的 API 接口来的。</p>
+
+<p>可以看到，相机可以设置六种类型的 Surface 输出：</p>
+
+<ul>
+<li>MediaRecorder</li>
+<li>SurfaceView</li>
+<li>RenderScriptAllocation</li>
+<li>ImageReader</li>
+<li>MediaCodec</li>
+<li>SurfaceTexture</li>
+</ul>
+
+<p>而在 CameraCaptureSession 会话类中，发出的请求方法有如下：</p>
+
+<ul>
+<li>capture()</li>
+<li>captureBurst()</li>
+<li>setStreamingRequest()</li>
+<li>setStreamingBurst()</li>
+<li>stopRepeating()</li>
+</ul>
+
+<p>发出请求后，交由相机硬件去处理，处理后的会先将图像数据输出到缓冲区，然后再从缓冲区输出到设置的目的 Surface。</p>
+
+<p>同时，在会话中发出请求，在请求的回调中还会返回 CaptureResult 这样的请求结果，相当于是一个请求有两个返回的来源了。</p>
+
+<p>经过这样的理解安卓相机模型之后，再去看 API 的调用就不会那么困惑了。</p>
+
+<p>关于 Android Camera 的相关代码，可以参考我的 Github 工程：<a href="https://github.com/glumes/Camera2Sample">https://github.com/glumes/Camera2Sample</a>。</p>
+
+<h2 id="参考">参考</h2>
+
+<p>1、<a href="https://source.android.com/devices/camera/">https://source.android.com/devices/camera/</a></p>
+        </article>
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/" data-toggle="tooltip" data-placement="top" title="Android 相机开发中的尺寸和方向问题">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/android/android-camera-aspect-ratio--and-orientation/">Android 相机开发中的尺寸和方向问题</a></li>
+                    
+                    <li><a href="/post/android/build-android-source-code/">编译安卓源码</a></li>
+                    
+                    <li><a href="/post/android/android-rxjava/">安卓异步之RxJava</a></li>
+                    
+                    <li><a href="/post/android/rxjava-wrapper-dialog/">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</a></li>
+                    
+                    <li><a href="/post/android/android-layout-inflater/">Android 布局加载之 LayoutInflater</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+

@@ -8,10 +8,21 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Wed, 31 Jan 2018 15:47:59 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 12 Apr 2018 13:13:57 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/android/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android Camera 模型及 API 接口演变</title>
+      <link>https://glumes.com/post/android/android-camrea-api-evolution/</link>
+      <pubDate>Thu, 12 Apr 2018 13:13:57 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/android-camrea-api-evolution/</guid>
+      <description>&lt;p&gt;要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>搭建 Android 反编译环境</title>
