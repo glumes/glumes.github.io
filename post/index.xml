@@ -538,7 +538,7 @@ void main()
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/post/contact-and-reward/</guid>
-      <description>如果觉得文章对您有帮助，欢迎赞赏，您的支持将鼓励我继续创作。 .gallery .img1 {background-image: url(&#39;https://res.cloudinary.com/glumes-com/image/upload/v1525491021/life/WechatIMG343.jpg&#39;);} .gallery .img2 {background-image: url(&#39;https://res.cloudinary.com/glumes-com/image/upload/v1525491018/life/WechatIMG345.jpg&#39;);}</description>
+      <description>如果觉得文章对您有帮助，欢迎赞赏，您的支持将鼓励我继续创作! .gallery .img4 {background-image: url(&#39;https://res.cloudinary.com/glumes-com/image/upload/v1525491021/life/WechatIMG343.jpg&#39;);} 微信赞赏 .gallery .img1 {background-image: url(&#39;https://res.cloudinary.com/glumes-com/image/upload/v1525491018/life/WechatIMG345.jpg&#39;);} 支付宝赞赏 也欢迎一起交流探讨技术、生活，扫码关注微信公众</description>
     </item>
     
   </channel>
