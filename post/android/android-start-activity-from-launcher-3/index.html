@@ -201,6 +201,23 @@
         
 
         
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Fri Dec 22, 2017</h4>
+    </section>
+    <h5 id="wc">5400 Words|Read in about 11 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/framework/">Framework</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
             <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-2/"> Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a> 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 <code>Resumed</code>状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 <code>startSpecificActivityLocked</code>方法创建进程。</p>
@@ -893,10 +910,34 @@ public final void bindApplication(String processName, ApplicationInfo appInfo,
 
 <h2 id="参考">参考</h2>
 
-<p>1、 Android 6.0 源码
-2、《Android 系统源代码情景分析》
-3、<a href="http://duanqz.github.io/2016-07-29-Activity-LaunchProcess-Part1">http://duanqz.github.io/2016-07-29-Activity-LaunchProcess-Part1</a></p>
+<ol>
+<li>Android 6.0 源码</li>
+<li>《Android 系统源代码情景分析》</li>
+<li><a href="http://duanqz.github.io/2016-07-29-Activity-LaunchProcess-Part1">http://duanqz.github.io/2016-07-29-Activity-LaunchProcess-Part1</a></li>
+</ol>
 
+              
+                <p>
+
+      
+
+                  <h4>最后，如果觉得文章不错，欢迎关注微信公众号：纸上浅谈</h4>
+
+                  <br/>
+
+                  <img  width = 360px; height = 360px; src="https://res.cloudinary.com/glumes-com/image/upload/v1525500999/life/qrcode_for_gh_2b0ecb0a1283_344.jpg">
+
+                  <br/>
+
+                 <a href="https://glumes.com/post/contact-and-reward/">  觉得文章对您有帮助，欢迎打赏，或者加微信交流</a>
+
+                <br />
+                <br />
+
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-start-activity-from-launcher-3/">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a>
+
+                </p>
               
         </article>
 
@@ -935,6 +976,32 @@ public final void bindApplication(String processName, ApplicationInfo appInfo,
             
 
 
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
       
 
     </div>
