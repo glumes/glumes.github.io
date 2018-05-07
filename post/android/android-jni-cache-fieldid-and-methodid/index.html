@@ -5,18 +5,39 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Glumes Blog</title>
-  <meta property="og:title" content="Glumes Blog" />
-  <meta name="twitter:title" content="Glumes Blog" />
+  <title>Android  JNI 调用时缓存字段和方法 ID</title>
+  <meta property="og:title" content="Android  JNI 调用时缓存字段和方法 ID" />
+  <meta name="twitter:title" content="Android  JNI 调用时缓存字段和方法 ID" />
+  <meta name="description" content="在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。
+
+事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。
+
+缓存有两种方式，分别是使用时缓存和初始化时缓存。
+
+">
+  <meta property="og:description" content="在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。
+
+事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。
+
+缓存有两种方式，分别是使用时缓存和初始化时缓存。
+
+">
+  <meta name="twitter:description" content="在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。
+
+事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。
+
+缓存有两种方式，分别是使用时缓存和初始化时缓存。
+
+">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/" />
+  <meta property="og:url" content="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
+  <link rel="canonical" href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -162,13 +183,12 @@
   
   
   
-  
 
 
 
 
   
-    <div id="header-big-imgs" data-num-img=3 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1516345959/WechatIMG9337_jhk6yp.jpg" data-img-desc-1="广州 · 老城区"data-img-src-2="https://res.cloudinary.com/glumes-com/image/upload/v1517475212/life/WechatIMG309.jpg" data-img-desc-2="凤凰古城"data-img-src-3="https://res.cloudinary.com/glumes-com/image/upload/v1517475393/life/WechatIMG310.jpg" data-img-desc-3="张家界"></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_630,w_1920/v1525660602/life/WechatIMG360.jpg" data-img-desc-1="广州塔 · 小蛮腰"></div>
   
 
   <header class="header-section has-img">
@@ -183,7 +203,17 @@
                 <div class="page-heading">
                 
                   
-                     <h1 align="center">Glumes Blog</h1>
+                     <h1>Android  JNI 调用时缓存字段和方法 ID</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on May 7, 2018
+  
+  
+</span>
+
+
+                    
                   
                   
               </div>
@@ -198,16 +228,9 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
-            <div class="page-heading">
-                <h1 align="center">Glumes Blog</h1>
+            <div class="post-heading">
+                <h1 align="center">Android  JNI 调用时缓存字段和方法 ID</h1>
                 
-                
-                  <span class="post-meta">
-  
-  
-</span>
-
-
                 
             </div>
           </div>
@@ -218,325 +241,216 @@
 
 
     
-  <div role="main" class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
 
-        <div class="posts-list">
-          
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/rxjava-wrapper-callback/">
-                <h2 class="post-title">用 RxJava 封装回调方法 CallBack</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on December 22, 2017
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>在知乎上看到这样一个问题：<a href="https://www.zhihu.com/question/39492234">RxJava正确的封装callback的方式应该是怎么样的？</a>。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/rxjava-wrapper-callback/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/rxjava/">RxJava</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-hal-summary/">
-                <h2 class="post-title">Android 硬件抽象层调用流程小结</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on December 22, 2017
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>Android 从 5.0 开始使用新的相机 API Camera2 来代替之前的旧版本，从而支持更多的特性。</p>
-
-<p>在学习新的 API 调用之外，也还是要了解一下 Android 底层发生了哪些变化，从而能够让我们对 API 的调用流程更加的清晰，知其所以然。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-hal-summary/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/kotlin-functional-programming-whth-anko/">
-                <h2 class="post-title">Kotlin 函数式编程与 Anko 构建布局实现原理分析</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on December 22, 2017
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>之前讲到了如何在 <a href="http://www.glumes.com/kotlin-anko-usage/">Kotlin 开发中使用 Anko 构建布局</a>。</p>
-
-<p>这一篇将是分析其原理。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/kotlin-functional-programming-whth-anko/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/kotlin/">Kotlin</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/kotlin-with-anko/">
-                <h2 class="post-title">Kotlin 使用 Anko 布局那些事</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on December 22, 2017
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>学习 Kotlin 应该都或多或少听过 Anko 这个开源库。</p>
-
-<p>使用 Anko 来构建界面会更加简单、快捷。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/kotlin-with-anko/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/kotlin/">Kotlin</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opencv/setup_opencv_environment/">
-                <h2 class="post-title">Python、C&#43;&#43;、Android OpenCV 开发环境的配置</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on December 22, 2017
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opencv/setup_opencv_environment/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/opencv/">Opencv</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/contact-and-reward/">
-                <h2 class="post-title">赞赏 &amp; 联系</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on January 1, 0001
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p></p>
-                  <a href="https://glumes.com/post/contact-and-reward/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-            </article>
-          
-        </div>
-
         
-          <ul class="pager main-pager">
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Mon May 7, 2018</h4>
+    </section>
+    <h5 id="wc">800 Words|Read in about 2 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。</p>
+
+<p>事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。</p>
+
+<p>缓存有两种方式，分别是使用时缓存和初始化时缓存。</p>
+
+<p></p>
+
+<h2 id="使用时缓存">使用时缓存</h2>
+
+<hr />
+
+<p>使用时缓存，就是在调用时查找一次，然后将它缓存成 <code>static</code> 变量，这样下次调用时就已经被初始化过了。</p>
+
+<p>直到内存释放了，才会缓存失效。</p>
+
+<pre><code class="language-cpp">extern &quot;C&quot;
+JNIEXPORT void JNICALL
+Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_staticCacheField(JNIEnv *env, jobject instance, jobject animal) {
+    static jfieldID fid = NULL; // 声明为 static 变量进行缓存
+    // 两种方法都行
+//    jclass cls = env-&gt;GetObjectClass(animal);
+    jclass cls = env-&gt;FindClass(&quot;com/glumes/cppso/model/Animal&quot;);
+    jstring jstr;
+    const char *c_str;
+    // 从缓存中查找
+    if (fid == NULL) {
+        fid = env-&gt;GetFieldID(cls, &quot;name&quot;, &quot;Ljava/lang/String;&quot;);
+        if (fid == NULL) {
+            return;
+        }
+    } else {
+        LOGD(&quot;field id is cached&quot;);
+    }
+    jstr = (jstring) env-&gt;GetObjectField(animal, fid);
+    c_str = env-&gt;GetStringUTFChars(jstr, NULL);
+    if (c_str == NULL) {
+        return;
+    }
+    env-&gt;ReleaseStringUTFChars(jstr, c_str);
+    jstr = env-&gt;NewStringUTF(&quot;new name&quot;);
+    if (jstr == NULL) {
+        return;
+    }
+    env-&gt;SetObjectField(animal, fid, jstr);
+}
+</code></pre>
+
+<p>通过声明为 static 变量进行缓存。但这种缓存方式显然有弊端，当多个调用者同时调用时，就会出现缓存多次的情况，并且每次调用时都要检查是否缓存过了。</p>
+
+<h2 id="初始化时缓存">初始化时缓存</h2>
+
+<p>在初始化时缓存，就是在类加载时，进行缓存。当类被加载进内存时，会先调用类的静态代码块，所以可以在类的静态代码块中进行缓存。</p>
+
+<p>比如：</p>
+
+<pre><code class="language-java">public class CacheFieldAndMethodOps extends BaseOperation {
+    
+    static {
+        initCacheMethodId(); // 静态代码块中进行缓存
+    }
+    private static native void initCacheMethodId();
+}
+</code></pre>
+
+<p>在静态代码块中，可以将所需要的字段 id 或者方法 id 缓存成全局变量。</p>
+
+<p>具体代码如下：</p>
+
+<pre><code class="language-cpp">// 全局变量，作为缓存方法 id
+jmethodID InstanceMethodCache;
+
+// 初始化加载时缓存方法 id
+extern &quot;C&quot;
+JNIEXPORT void JNICALL
+Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_initCacheMethodId(JNIEnv *env, jclass type) {
+    jclass cls = env-&gt;FindClass(&quot;com/glumes/cppso/model/Animal&quot;);
+    InstanceMethodCache = env-&gt;GetMethodID(cls, &quot;getName&quot;, &quot;()Ljava/lang/String;&quot;);
+}
+</code></pre>
+
+<p>在 JNI 中直接将方法 id 缓存成全局变量了，这样再调用时，就不要再进行一次查找了，并且避免了多个线程同时调用会多次查找的情况。</p>
+
+<pre><code class="language-cpp">extern &quot;C&quot;
+JNIEXPORT void JNICALL
+Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_callCacheMethod(JNIEnv *env, jobject instance, jobject animal) {
+    jstring name = (jstring) env-&gt;CallObjectMethod(animal, InstanceMethodCache);
+    const char *c_name = env-&gt;GetStringUTFChars(name, NULL);
+    LOGD(&quot;call cache method and value is %s&quot;, c_name);
+}
+</code></pre>
+
+<h2 id="小结">小结</h2>
+
+<hr />
+
+<p>可以看出，如果不能预先知道方法和字段所在类的源码，那么在使用时缓存比较合理。但如果知道的话，在初始化时缓存优点较多，既避免了每次使用时检查，还避免了在多线程被调用的情况。</p>
+
+              
+                <p>
+
+      
+
+                  <h4>最后，如果觉得文章不错，欢迎关注微信公众号：纸上浅谈</h4>
+
+                  <br/>
+
+                  <img  width = 360px; height = 360px; src="https://res.cloudinary.com/glumes-com/image/upload/v1525500999/life/qrcode_for_gh_2b0ecb0a1283_344.jpg">
+
+                  <br/>
+
+                 <a href="https://glumes.com/post/contact-and-reward/">  觉得文章对您有帮助，欢迎打赏，或者加微信交流</a>
+
+                <br />
+                <br />
+
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/">Android  JNI 调用时缓存字段和方法 ID</a>
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/" data-toggle="tooltip" data-placement="top" title="Android 通过 JNI 调用 Java 类的构造方法和父类的方法">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
             
-              <li class="previous">
-                <a href="/page/4/">&larr; Newer Posts</a>
-              </li>
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/android/android-jni-invoke-constructor-method-and-super-method/">Android 通过 JNI 调用 Java 类的构造方法和父类的方法</a></li>
+                    
+                    <li><a href="/post/android/android-jni-access-field-and-method/">Android 通过 JNI 访问 Java 字段和方法调用</a></li>
+                    
+                    <li><a href="/post/android/android-jni-array-operation/">Android JNI 数组 操作</a></li>
+                    
+                    <li><a href="/post/android/android-jni-basic-operation/">Android JNI 基本操作 </a></li>
+                    
+                    <li><a href="/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></li>
+                    
+                </ul>
+                
+            </div>
             
-            
-          </ul>
-        
-      </div>
-      <div align="center" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
 
-<ul class="pagination">
-    
-    <li>
-        <a href="/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
-    </li>
-    
-    <li
-    >
-    <a href="/page/4/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-    </li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li
-    ><a href="/">1</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li
-    ><a href="/page/2/">2</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li
-    ><a href="/page/3/">3</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li
-    ><a href="/page/4/">4</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li
-    class="active"><a href="/page/5/">5</a></li>
-    
-    
-    <li
-    class="disabled">
-    <a href="" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-    </li>
-    
-    <li>
-        <a href="/page/5/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
-    </li>
-    
-</ul>
 
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
         
         
-        
-        
-        
-        
-        
-      </div>
+      
+
     </div>
   </div>
+</div>
 
     <footer>
   <div class="container">
@@ -562,7 +476,7 @@
               </li>
           
           <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
+            <a href="" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

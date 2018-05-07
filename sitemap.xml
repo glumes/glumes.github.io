@@ -3,6 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/</loc>
+    <lastmod>2018-05-07T10:39:50+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/</loc>
+    <lastmod>2018-05-07T10:32:01+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/android/android-jni-access-field-and-method/</loc>
+    <lastmod>2018-05-07T10:27:08+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/android/android-jni-array-operation/</loc>
+    <lastmod>2018-05-07T10:21:22+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/android/android-jni-basic-operation/</loc>
+    <lastmod>2018-05-07T09:44:57+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/android/android-camrea-api-evolution/</loc>
     <lastmod>2018-04-12T13:13:57+08:00</lastmod>
   </url>
@@ -209,18 +234,18 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-04-12T13:13:57+08:00</lastmod>
+    <lastmod>2018-05-07T10:39:50+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://glumes.com/tags/android/</loc>
-    <lastmod>2018-04-12T13:13:57+08:00</lastmod>
+    <lastmod>2018-05-07T10:39:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/android/</loc>
-    <lastmod>2018-04-12T13:13:57+08:00</lastmod>
+    <lastmod>2018-05-07T10:39:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -238,7 +263,7 @@
   
   <url>
     <loc>https://glumes.com/categories/</loc>
-    <lastmod>2018-04-12T13:13:57+08:00</lastmod>
+    <lastmod>2018-05-07T10:39:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -281,6 +306,12 @@
   <url>
     <loc>https://glumes.com/tags/framework/</loc>
     <lastmod>2017-12-22T15:40:19+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/jni/</loc>
+    <lastmod>2018-05-07T10:39:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -328,7 +359,7 @@
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-04-12T13:13:57+08:00</lastmod>
+    <lastmod>2018-05-07T10:39:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -358,7 +389,7 @@
   
   <url>
     <loc>https://glumes.com/tags/</loc>
-    <lastmod>2018-04-12T13:13:57+08:00</lastmod>
+    <lastmod>2018-05-07T10:39:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   

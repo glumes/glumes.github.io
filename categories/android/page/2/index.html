@@ -182,6 +182,161 @@
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-rxjava/">
+                <h2 class="post-title">安卓异步之RxJava</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on January 31, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-rxjava/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/rxjava/">RxJava</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/understand-state-machine/">
+                <h2 class="post-title">理解状态机</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on January 31, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>理解状态机的原理及使用。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/understand-state-machine/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/statemachine/">StateMachine</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/rxjava-wrapper-dialog/">
+                <h2 class="post-title">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>之前有写过一篇文章：<a href="http://www.glumes.com/wrapper-callback-by-rxjava/">用 RxJava 封装回调方法 CallBack</a>。</p>
+
+<p>RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。</p>
+
+<p>这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/rxjava-wrapper-dialog/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/rxjava/">RxJava</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-layout-inflater/">
+                <h2 class="post-title">Android 布局加载之 LayoutInflater</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。</p>
+
+<p>LayoutInflater 实例的获取有多种方式，但最终是通过<code>(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)</code>来得到的，也就是说加载布局的 <code>LayoutInflater</code> 是来自于系统服务的。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-layout-inflater/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-change-skin-by-plugin/">
+                <h2 class="post-title">Android 插件换肤原理及源码分析</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-change-skin-by-plugin/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/android/android-start-service/">
                 <h2 class="post-title">Android 6.0 Service 启动过程源码分析（一）</h2>
 
@@ -343,155 +498,6 @@
 
             </article>
           
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-service-manager/">
-                <h2 class="post-title">Android 系统服务管理 ServiceManager</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>在应用程序编程时，经常使用到 getSystemService(String serviceName) 方法来获得一个系统服务，它的实现也是在 ContextImpl 中的，根据不同的参数返回不同的系统服务，这些系统服务都是由 ServiceManager 管理的。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-service-manager/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-material-design-summary-2/">
-                <h2 class="post-title">Android Material Desing 控件小结-2</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>总结一下 Material Design 控件使用。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-material-design-summary-2/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-material-design-summary-1/">
-                <h2 class="post-title">Android Material Desing 控件小结-1</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>总结一下 Material Design 控件使用。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-material-design-summary-1/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-binder-summary/">
-                <h2 class="post-title">Android Binder Summary</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。</p>
-
-<p>它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 <code>/dev/binder</code>。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-binder-summary/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-dagger-use/">
-                <h2 class="post-title">Dagger2 在 Android 中的使用</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>Dagger2 是一个进行依赖注入的框架，早先是由 Square 公司写的，后来由 Google 来维护了，能由 Google 亲自维护的东西，肯定值得学习。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-dagger-use/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/dagger2/">Dagger2</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
         </div>
         
           <ul class="pager main-pager">
@@ -559,13 +565,25 @@
     ><a href="/categories/android/page/3/">3</a></li>
     
     
+    
+    
+    
+    
+        
+        
+    
+    
+    <li
+    ><a href="/categories/android/page/4/">4</a></li>
+    
+    
     <li
     >
     <a href="/categories/android/page/3/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
     <li>
-        <a href="/categories/android/page/3/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/categories/android/page/4/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>

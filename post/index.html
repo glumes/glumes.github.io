@@ -182,6 +182,167 @@
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/">
+                <h2 class="post-title">Android  JNI 调用时缓存字段和方法 ID</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on May 7, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。</p>
+
+<p>事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。</p>
+
+<p>缓存有两种方式，分别是使用时缓存和初始化时缓存。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/">
+                <h2 class="post-title">Android 通过 JNI 调用 Java 类的构造方法和父类的方法</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on May 7, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>Android 还可以通过 JNI 来调用 Java 一个类的构造方法，从而创建一个 Java 类。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-jni-access-field-and-method/">
+                <h2 class="post-title">Android 通过 JNI 访问 Java 字段和方法调用</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on May 7, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>在前面的两篇文章中，介绍了 Android 通过 JNI 进行基础类型、字符串和数组的相关操作，并描述了 Java 和 Native 在类型和签名之间的转换关系。</p>
+
+<p>有了之前那些基础，就可以实现 Java 和 Native 的相互调用了，在 Native 中去访问 Java 类的字段并调用相应的方法。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-jni-access-field-and-method/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-jni-array-operation/">
+                <h2 class="post-title">Android JNI 数组 操作</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on May 7, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>JNI 中有两种数组操作，基础数据类型数组和对象数组，JNI 对待基础数据类型数组和对象数组是不一样的。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-jni-array-operation/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-jni-basic-operation/">
+                <h2 class="post-title">Android JNI 基本操作 </h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on May 7, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C++ 方法，只要专注写好 C++ 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-jni-basic-operation/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/android/android-camrea-api-evolution/">
                 <h2 class="post-title">Android Camera 模型及 API 接口演变</h2>
 
@@ -326,179 +487,6 @@
                     #<a href="https://glumes.com/tags/android/">android</a>&nbsp;
                   
                     #<a href="https://glumes.com/tags/architecture/">architecture</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/build-android-source-code/">
-                <h2 class="post-title">编译安卓源码</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 31, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>花了一两天时间终于在 Mac 上成功编译了 Android 主线最新代码，中间遇到了不少问题，也查阅了好多资料，总算是成功了，看到模拟器启动的那一刻还是挺激动的。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/build-android-source-code/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-rxjava/">
-                <h2 class="post-title">安卓异步之RxJava</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 31, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-rxjava/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/rxjava/">RxJava</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/understand-state-machine/">
-                <h2 class="post-title">理解状态机</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 31, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>理解状态机的原理及使用。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/understand-state-machine/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/statemachine/">StateMachine</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">
-                <h2 class="post-title">OpenGL 学习系列---投影矩阵</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 24, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate/">OpenGL 坐标系统</a> 文章中，根据点的坐标变换得出了如下的公式：</p>
-
-<div>$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$</div>
-
-<p>这个公式每左乘一个矩阵，都代表了一种坐标系的变换。</p>
-
-<p>转化为着色器脚本语言如下：</p>
-
-<pre><code class="language-glsl">attribute vec4 a_Position;
-uniform mat4 u_ModelMatrix;
-uniform mat4 u_ProjectionMatrix;
-uniform mat4 u_ViewMatrix;
-void main()
-{
-    gl_Position  = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
-}
-</code></pre>
-
-<p>本篇文章就主要是对投影矩阵来分析的。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/">
-                <h2 class="post-title">OpenGL 学习系列---坐标系统</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    一个点的坐标转换的心路历程
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 23, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在前面绘制基本图形中，遇到了很明显的问题，圆形不像圆形，正多边形不像正多边形？就像下面图形一样：</p>
-
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png" /></p>
-
-<p>好好的正五边形却东倒西歪的，这就是因为我们前面的绘制都是把它当成 二维 的绘制，而在 OpenGL 中却是绘制 三维的。在二维和三维之间还有个转换，而之前为了方便学习则忽略了这个转换，现在就要开始理解它了 —— <code>坐标系统</code>！！</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
                   
                 </span>
               

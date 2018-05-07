@@ -182,6 +182,171 @@
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/python/python-docopt/">
+                <h2 class="post-title">Python 命令行参数解析工具 docopt</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>正如标题所言，docopt 是一个用来解析命令行参数的工具，当想要在 Python 程序后面附加参数时，就不需要再为此而发愁了。</p>
+
+<p>docopt 是一个开源的库，代码地址：<a href="https://github.com/docopt/docopt">https://github.com/docopt/docopt</a>。它在 README 中就已经做了详细的介绍，并且还附带了很多例子可供学习，这篇文章也是翻译一下 README 中内容&hellip;&hellip;</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/python/python-docopt/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/python/">Python</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/">
+                <h2 class="post-title">FFmpeg 3.0 版本视频解码浅析 </h2>
+
+                
+                  <h3 class="post-subtitle">
+                    MPEG封装格式到PCM数据格式
+                  </h3>
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>有了上一篇文章基础，这里就只关注 FFmpeg 如何解析的具体实践了。</p>
+
+<p>在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。</p>
+
+<p>在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/ffmpeg/">FFmpeg</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/ffmpeg/encode-and-decode-summary/">
+                <h2 class="post-title">音视频编解码的那些基础理论</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>最近在研究学习 FFmpeg，从网上参考了好多资料，其中最了不起的就当属——<a href="http://blog.csdn.net/leixiaohua1020">雷霄骅</a>大神了，若没有他的博文，别说入门了，可能连门在哪里都不知道，在此还是要表达一下对雷神的敬佩和敬仰。</p>
+
+<p>本文主要讲的是视频文件的解码，从视频文件的封装格式解码到原始数据格式，通过讲解涉及到的各种概念，从而理清整个思路和流程。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/ffmpeg/encode-and-decode-summary/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/ffmpeg/">FFmpeg</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/rxjava-wrapper-dialog/">
+                <h2 class="post-title">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>之前有写过一篇文章：<a href="http://www.glumes.com/wrapper-callback-by-rxjava/">用 RxJava 封装回调方法 CallBack</a>。</p>
+
+<p>RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。</p>
+
+<p>这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/rxjava-wrapper-dialog/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/rxjava/">RxJava</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-layout-inflater/">
+                <h2 class="post-title">Android 布局加载之 LayoutInflater</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。</p>
+
+<p>LayoutInflater 实例的获取有多种方式，但最终是通过<code>(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)</code>来得到的，也就是说加载布局的 <code>LayoutInflater</code> 是来自于系统服务的。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-layout-inflater/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/android/android-change-skin-by-plugin/">
                 <h2 class="post-title">Android 插件换肤原理及源码分析</h2>
 
@@ -326,157 +491,6 @@
 
 <p></p>
                   <a href="https://glumes.com/post/android/android-window-and-view/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-system-server/">
-                <h2 class="post-title">Android 系统服务启动 SystemServer</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>在之前 <a href="http://www.glumes.com/android-servicemanager/">Android 系统服务管理 ServiceManager</a> 中学习了各种系统服务 Service 都是通过 <code>ServiceManager</code> 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 <code>ContextImpl</code> 类、<code>SystemServiceRegistry</code> 类、<code>ServiceManager</code> 类、<code>ServiceManagerNative</code> 类等等。</p>
-
-<p>那么问题就来了，ServiceManager 所管理的那些 Service 的 Binder 对象引用又是何时注册添加的呢？</p>
-
-<p>事实上这些服务 Service 是 SystemServer 进程中启动的。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-system-server/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-service-manager/">
-                <h2 class="post-title">Android 系统服务管理 ServiceManager</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>在应用程序编程时，经常使用到 getSystemService(String serviceName) 方法来获得一个系统服务，它的实现也是在 ContextImpl 中的，根据不同的参数返回不同的系统服务，这些系统服务都是由 ServiceManager 管理的。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-service-manager/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-material-design-summary-2/">
-                <h2 class="post-title">Android Material Desing 控件小结-2</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>总结一下 Material Design 控件使用。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-material-design-summary-2/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-material-design-summary-1/">
-                <h2 class="post-title">Android Material Desing 控件小结-1</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>总结一下 Material Design 控件使用。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-material-design-summary-1/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-binder-summary/">
-                <h2 class="post-title">Android Binder Summary</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。</p>
-
-<p>它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 <code>/dev/binder</code>。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-binder-summary/" class="post-read-more">[Read More]</a>
                 
               </div>
 
