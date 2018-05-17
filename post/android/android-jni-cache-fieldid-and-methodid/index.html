@@ -5,26 +5,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Android Camera 模型及 API 接口演变</title>
-  <meta property="og:title" content="Android Camera 模型及 API 接口演变" />
-  <meta name="twitter:title" content="Android Camera 模型及 API 接口演变" />
-  <meta name="description" content="要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。
+  <title>Android  JNI 调用时缓存字段和方法 ID</title>
+  <meta property="og:title" content="Android  JNI 调用时缓存字段和方法 ID" />
+  <meta name="twitter:title" content="Android  JNI 调用时缓存字段和方法 ID" />
+  <meta name="description" content="在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。
+
+事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。
+
+缓存有两种方式，分别是使用时缓存和初始化时缓存。
 
 ">
-  <meta property="og:description" content="要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。
+  <meta property="og:description" content="在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。
+
+事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。
+
+缓存有两种方式，分别是使用时缓存和初始化时缓存。
 
 ">
-  <meta name="twitter:description" content="要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。
+  <meta name="twitter:description" content="在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。
+
+事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。
+
+缓存有两种方式，分别是使用时缓存和初始化时缓存。
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-camrea-api-evolution/" />
+  <meta property="og:url" content="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-camrea-api-evolution/" />
+  <link rel="canonical" href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -176,8 +188,40 @@
 
 
   
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_630,w_1920/v1525660602/life/WechatIMG360.jpg" data-img-desc-1="广州塔 · 小蛮腰"></div>
+  
 
-  <header class="header-section ">
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>Android  JNI 调用时缓存字段和方法 ID</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on May 7, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
     
     <div class="intro-header no-img">
       
@@ -185,7 +229,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">Android Camera 模型及 API 接口演变</h1>
+                <h1 align="center">Android  JNI 调用时缓存字段和方法 ID</h1>
                 
                 
             </div>
@@ -207,14 +251,14 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Thu Apr 12, 2018</h4>
+        <h4 id="date"> Mon May 7, 2018</h4>
     </section>
-    <h5 id="wc">2100 Words|Read in about 5 Min</h5>
+    <h5 id="wc">900 Words|Read in about 2 Min</h5>
     <h5 id="tags">Tags: 
         
-        <a href="https://glumes.com/tags/camera/">Camera</a> &nbsp;
-        
         <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
     </h5>
 </div>
 
@@ -222,156 +266,105 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。</p>
+            <p>在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。</p>
+
+<p>事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。</p>
+
+<p>缓存有两种方式，分别是使用时缓存和初始化时缓存。</p>
 
 <p></p>
 
-<p>可以通过这篇文章了解相关知识 <a href="https://glumes.com/post/android/android-hal-summary/">Android 硬件抽象层调用流程小结</a>，包括底层驱动、HAL 硬件抽象层接口、应用层到 HAL 的调用流程。</p>
+<h2 id="使用时缓存">使用时缓存</h2>
 
-<p>基本上 HAL 的调用流程都是相似的，对于 Camera 也是这样。</p>
+<hr />
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_camera_java_to_kernel.png" alt="Android Camera HAL 调用" /></p>
+<p>使用时缓存，就是在调用时查找一次，然后将它缓存成 <code>static</code> 变量，这样下次调用时就已经被初始化过了。</p>
 
-<p>应用进程通过 Binder 通信得到一个系统服务，这个系统服务就是用来访问硬件的。</p>
+<p>直到内存释放了，才会缓存失效。</p>
 
-<p>系统服务最后都是通过 HAL 的接口来访问硬件的驱动程序，从而最终访问硬件设备。</p>
+<pre><code class="language-cpp">extern &quot;C&quot;
+JNIEXPORT void JNICALL
+Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_staticCacheField(JNIEnv *env, jobject instance, jobject animal) {
+    static jfieldID fid = NULL; // 声明为 static 变量进行缓存
+    // 两种方法都行
+//    jclass cls = env-&gt;GetObjectClass(animal);
+    jclass cls = env-&gt;FindClass(&quot;com/glumes/cppso/model/Animal&quot;);
+    jstring jstr;
+    const char *c_str;
+    // 从缓存中查找
+    if (fid == NULL) {
+        fid = env-&gt;GetFieldID(cls, &quot;name&quot;, &quot;Ljava/lang/String;&quot;);
+        if (fid == NULL) {
+            return;
+        }
+    } else {
+        LOGD(&quot;field id is cached&quot;);
+    }
+    jstr = (jstring) env-&gt;GetObjectField(animal, fid);
+    c_str = env-&gt;GetStringUTFChars(jstr, NULL);
+    if (c_str == NULL) {
+        return;
+    }
+    env-&gt;ReleaseStringUTFChars(jstr, c_str);
+    jstr = env-&gt;NewStringUTF(&quot;new name&quot;);
+    if (jstr == NULL) {
+        return;
+    }
+    env-&gt;SetObjectField(animal, fid, jstr);
+}
+</code></pre>
 
-<p>而 HAL 接口的实现方式则是由不同厂商去完成的，只需要按照接口定义的规范实现就好。</p>
+<p>通过声明为 static 变量进行缓存。但这种缓存方式显然有弊端，当多个调用者同时调用时，就会出现缓存多次的情况，并且每次调用时都要检查是否缓存过了。</p>
 
-<p>正是由于 Android Camera 的硬件抽象层发生了变化，访问硬件的方式有所改变，才导致相机模型发生变化，上层 API 接口也就随之变化了。</p>
+<h2 id="初始化时缓存">初始化时缓存</h2>
 
-<p>当了解了这些变化之后，再回过头去看 Camera 的 API 调用就显得清晰多了。</p>
+<p>在初始化时缓存，就是在类加载时，进行缓存。当类被加载进内存时，会先调用类的静态代码块，所以可以在类的静态代码块中进行缓存。</p>
 
-<h2 id="android-camera-1-0-的相机模型">Android Camera 1.0 的相机模型</h2>
+<p>比如：</p>
 
-<p>Android 5.0 之前的 Camera 版本，功能比较单一，不像 5.0 之后那样支持很多特性，这也是由于它的 HAL 所决定的。</p>
+<pre><code class="language-java">public class CacheFieldAndMethodOps extends BaseOperation {
+    
+    static {
+        initCacheMethodId(); // 静态代码块中进行缓存
+    }
+    private static native void initCacheMethodId();
+}
+</code></pre>
 
-<p>用的是 <code>android.hardware.Camera</code> 包下的内容，回顾一下 Camera 1.0 的调用流程：</p>
+<p>在静态代码块中，可以将所需要的字段 id 或者方法 id 缓存成全局变量。</p>
 
-<ul>
-<li>创建预览类 （ SurfaceView ）</li>
-<li>打开相机（ Camera.open ）</li>
-<li>设置预览 （ setPreviewDisplay ）</li>
-<li>开始预览（ startPreview ）</li>
-<li>对焦（ autoFocus ）</li>
-<li>拍摄（ takePicture ）</li>
-<li>拍照监听器处理（ PictureCallback ）</li>
-</ul>
+<p>具体代码如下：</p>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_camera_block.png" alt="Android 5.0 之前 HAL 接口" /></p>
+<pre><code class="language-cpp">// 全局变量，作为缓存方法 id
+jmethodID InstanceMethodCache;
 
-<p>HAL 接口被设计成了三种运行模式：</p>
+// 初始化加载时缓存方法 id
+extern &quot;C&quot;
+JNIEXPORT void JNICALL
+Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_initCacheMethodId(JNIEnv *env, jclass type) {
+    jclass cls = env-&gt;FindClass(&quot;com/glumes/cppso/model/Animal&quot;);
+    InstanceMethodCache = env-&gt;GetMethodID(cls, &quot;getName&quot;, &quot;()Ljava/lang/String;&quot;);
+}
+</code></pre>
 
-<ul>
-<li>预览</li>
-<li>静态拍摄</li>
-<li>视频录制</li>
-</ul>
+<p>在 JNI 中直接将方法 id 缓存成全局变量了，这样再调用时，就不要再进行一次查找了，并且避免了多个线程同时调用会多次查找的情况。</p>
 
-<p>其中，预览对应于代码中 Camera 类的 <code>startPreview</code> 函数，而静态拍摄对应于 Camera 类的 <code>takePicture</code> 函数，视频录制则是在 <code>MediaRecorder</code> 类的 <code>setCamera</code> 函数中传入 Camera 对象实例。</p>
+<pre><code class="language-cpp">extern &quot;C&quot;
+JNIEXPORT void JNICALL
+Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_callCacheMethod(JNIEnv *env, jobject instance, jobject animal) {
+    jstring name = (jstring) env-&gt;CallObjectMethod(animal, InstanceMethodCache);
+    const char *c_name = env-&gt;GetStringUTFChars(name, NULL);
+    LOGD(&quot;call cache method and value is %s&quot;, c_name);
+}
+</code></pre>
 
-<p>三种模式具有略有不同又相互重叠的功能。这样就难以实现新类型的功能（例如连拍模式），因为新类型的功能会介于其中两种模式之间。</p>
+<h2 id="小结">小结</h2>
 
-<p>从图中可以看到，应用层 Camera 会发出一个请求队列到 HAL ，请求队列中的每个请求都对应三种运行模式中的一种。</p>
+<hr />
 
-<p>当你想要在预览时拍照，然后再返回预览模式，那么就得在拍照前发送请求切换到静态拍摄模式，拍完后再发送请求切换到预览模式。</p>
+<p>可以看出，如果不能预先知道方法和字段所在类的源码，那么在使用时缓存比较合理。但如果知道的话，在初始化时缓存优点较多，既避免了每次使用时检查，还避免了在多线程被调用的情况。</p>
 
-<h2 id="android-camera-2-0-的相机模型">Android Camera 2.0 的相机模型</h2>
-
-<p>在 Android 5.0 之后，相机 API 就有了较大的变化，用的是 <code>android.hardware.camera2</code> 包下的内容了。</p>
-
-<p>回顾一下 Camera 2.0 的调用流程：</p>
-
-<ul>
-<li>创建预览类（ SurfaceView 或者 TextureView 都行）</li>
-<li>打开相机（ CameraManager.openCamera ）</li>
-<li>相机回调（ CemeraDevice.StateCallback ）</li>
-<li>创建 CameraCaptureSession 会话（ createCaptureSession ）</li>
-<li>创建一个进行预览的请求（ CaptureRequest.Builder ）</li>
-<li>预览请求中设置输出的 Surface（ addTarget ）</li>
-<li>在会话中发出预览的请求（ setRepeatingRequest ）</li>
-<li>在会话的回调类中处理发出请求的结果（ CameraCaptureSession.CaptureCallback ）</li>
-<li>拍照时，创建一个拍照的请求（ CaptureRequest ）</li>
-<li>在会话中发出拍照的请求（ capture ）</li>
-<li>在会话的回调类中处理发出请求的结果（ CameraCaptureSession.CaptureCallback ）</li>
-</ul>
-
-<p>以上就是 Camera 2.0 相关的调用流程和对应的重要函数，大致就是每做一次操作都要在会话中发出一次请求。</p>
-
-<p>更具体的如下极客学院流程图所示：</p>
-
-<p><img src="http://wiki.jikexueyuan.com/project/android-actual-combat-skills/images/33-3.png" alt="Android Camera 2.0 调用" /></p>
-
-<p>Camera 2.0 的架构将多个运行模式整合为一个统一的视图，可以使用这种视图实现之前的任何模式以及一些其他模式，如连拍模式。这样一来，便可以提高用户对聚焦、曝光以及更多后期处理（例如降噪、对比度和锐化）效果的控制能力。此外，这种简化的视图还能够使应用开发者更轻松地使用相机的各种功能。</p>
-
-<p>Camera 2.0 将相机系统塑造为一个管道，该管道可按照 1:1 的基准将传入的帧捕获请求转化为帧。这些请求会封装有关帧的捕获和处理的所有配置信息，其中包括分辨率和像素格式；手动传感器、镜头和闪光灯控件；3A 运行模式；RAW-&gt;YUV 处理控件；统计信息生成等等。</p>
-
-<p>简单来说，应用框架从相机系统请求帧，然后相机系统将结果返回到输出流。</p>
-
-<p>可以将 Camera 2.0 看作是 Camera 1.0 的单向流管道。它会将每个捕获请求转化为传感器捕获的一张图像，这张图像将被处理成：</p>
-
-<ul>
-<li>包含有关捕获的元数据的结果对象。</li>
-<li>图像数据的 1 到 N 个缓冲区，每个缓冲区会进入自己的目的地 Surface。也就是我们创建 CaptureRequest 时的 addTarget 添加的 Surface。</li>
-</ul>
-
-<p>可能的输出 Surface 组经过预配置：</p>
-
-<ul>
-<li>每个 Surface 都是一个固定分辨率的图像缓冲区流的目标位置</li>
-<li>一次只能将少量的 Surface 配置为输出（约 3 个）</li>
-</ul>
-
-<p>一个请求中包含所需的全部捕获设置，以及要针对该请求将图像缓冲区推送到其中的输出 Surface 的列表。请求可以只发生一次（使用 capture ），也可以无限重复（使用 setRepeatingRequest ）。捕获的优先级高于重复请求的优先级。</p>
-
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/camera_simple_model.png" alt="相机运行核心模式" /></p>
-
-<p>如上图所示，一个 capture 请求，左边就是要输出的目的 Surface 列表。而 CameraDevice 框内的就是请求的队列。相机的硬件设备会处理每个请求，将图像数据的缓冲区输出到设置的目的 Surface 中，同时在回调的 onCaptureComplete 方法中处理请求的结果 CaptureResult。</p>
-
-<p>就是这样一个队列模型，相机系统不断地处理队列中的请求，并且一次可以发起多个请求，而且提交的请求不会出现阻塞的情况，请求始终按照接收的顺序处理。</p>
-
-<p>同样的，如果想要实现连拍功能，只要不断发送捕获的请求 capture 就好了，而不需要像之前一样每次拍完照还得设置回预览模式。</p>
-
-<h2 id="相机模型">相机模型</h2>
-
-<p>这是一个更全面的相机模型图：</p>
-
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/camera_model.png" alt="相机模型" /></p>
-
-<p>在模型图里把一些主要函数和流程图都绘制包含进去了。我们调用的流程基本也是顺着紫色的 API 接口来的。</p>
-
-<p>可以看到，相机可以设置六种类型的 Surface 输出：</p>
-
-<ul>
-<li>MediaRecorder</li>
-<li>SurfaceView</li>
-<li>RenderScriptAllocation</li>
-<li>ImageReader</li>
-<li>MediaCodec</li>
-<li>SurfaceTexture</li>
-</ul>
-
-<p>而在 CameraCaptureSession 会话类中，发出的请求方法有如下：</p>
-
-<ul>
-<li>capture()</li>
-<li>captureBurst()</li>
-<li>setStreamingRequest()</li>
-<li>setStreamingBurst()</li>
-<li>stopRepeating()</li>
-</ul>
-
-<p>发出请求后，交由相机硬件去处理，处理后的会先将图像数据输出到缓冲区，然后再从缓冲区输出到设置的目的 Surface。</p>
-
-<p>同时，在会话中发出请求，在请求的回调中还会返回 CaptureResult 这样的请求结果，相当于是一个请求有两个返回的来源了。</p>
-
-<p>经过这样的理解安卓相机模型之后，再去看 API 的调用就不会那么困惑了。</p>
-
-<p>关于 Android Camera 的相关代码，可以参考我的 Github 工程：<a href="https://github.com/glumes/Camera2Sample">https://github.com/glumes/Camera2Sample</a>。</p>
-
-<h2 id="参考">参考</h2>
-
-<p>1、<a href="https://source.android.com/devices/camera/">https://source.android.com/devices/camera/</a></p>
+<p>具体示例代码可参考我的 Github 项目 <a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a>，欢迎 Star。</p>
 
               
                 <p>
@@ -392,7 +385,7 @@
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/">Android  JNI 调用时缓存字段和方法 ID</a>
 
                 </p>
               
@@ -402,12 +395,12 @@
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/" data-toggle="tooltip" data-placement="top" title="Android 相机开发中的尺寸和方向问题">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/" data-toggle="tooltip" data-placement="top" title="Android 通过 JNI 调用 Java 类的构造方法和父类的方法">&larr; Previous Post</a>
           </li>
         
         
           <li class="next">
-            <a href="https://glumes.com/post/android/android-jni-basic-operation/" data-toggle="tooltip" data-placement="top" title="Android JNI 基本操作 ">Next Post &rarr;</a>
+            <a href="https://glumes.com/post/android/android-jni-reference-manage-rules/" data-toggle="tooltip" data-placement="top" title="Android JNI 中的引用管理">Next Post &rarr;</a>
           </li>
         
       </ul>
@@ -417,15 +410,15 @@
                 <h2>See Also</h2>
                 <ul>
                     
-                    <li><a href="/post/android/android-camera-aspect-ratio--and-orientation/">Android 相机开发中的尺寸和方向问题</a></li>
+                    <li><a href="/post/android/android-jni-invoke-constructor-method-and-super-method/">Android 通过 JNI 调用 Java 类的构造方法和父类的方法</a></li>
                     
-                    <li><a href="/post/android/build-android-source-code/">编译安卓源码</a></li>
+                    <li><a href="/post/android/android-jni-access-field-and-method/">Android 通过 JNI 访问 Java 字段和方法调用</a></li>
                     
-                    <li><a href="/post/android/android-rxjava/">安卓异步之RxJava</a></li>
+                    <li><a href="/post/android/android-jni-array-operation/">Android JNI 数组 操作</a></li>
                     
-                    <li><a href="/post/android/rxjava-wrapper-dialog/">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</a></li>
+                    <li><a href="/post/android/android-jni-basic-operation/">Android JNI 基本操作 </a></li>
                     
-                    <li><a href="/post/android/android-layout-inflater/">Android 布局加载之 LayoutInflater</a></li>
+                    <li><a href="/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></li>
                     
                 </ul>
                 

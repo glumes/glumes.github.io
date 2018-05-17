@@ -5,26 +5,41 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Android Camera 模型及 API 接口演变</title>
-  <meta property="og:title" content="Android Camera 模型及 API 接口演变" />
-  <meta name="twitter:title" content="Android Camera 模型及 API 接口演变" />
-  <meta name="description" content="要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。
+  <title>Android JNI 调用时的异常处理</title>
+  <meta property="og:title" content="Android JNI 调用时的异常处理" />
+  <meta name="twitter:title" content="Android JNI 调用时的异常处理" />
+  <meta name="description" content="Android JNI 调用时的异常主要有如下两种：
+
+
+Native 代码调用 Java 层代码时发生了异常要处理
+Native 代码自己抛出了一个异常让 Java 层去处理
+
 
 ">
-  <meta property="og:description" content="要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。
+  <meta property="og:description" content="Android JNI 调用时的异常主要有如下两种：
+
+
+Native 代码调用 Java 层代码时发生了异常要处理
+Native 代码自己抛出了一个异常让 Java 层去处理
+
 
 ">
-  <meta name="twitter:description" content="要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。
+  <meta name="twitter:description" content="Android JNI 调用时的异常主要有如下两种：
+
+
+Native 代码调用 Java 层代码时发生了异常要处理
+Native 代码自己抛出了一个异常让 Java 层去处理
+
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-camrea-api-evolution/" />
+  <meta property="og:url" content="https://glumes.com/post/android/android-jni-exception-handle/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-camrea-api-evolution/" />
+  <link rel="canonical" href="https://glumes.com/post/android/android-jni-exception-handle/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -176,8 +191,40 @@
 
 
   
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1526569935/life/pexels-photo-421788.jpg" data-img-desc-1="Waves"></div>
+  
 
-  <header class="header-section ">
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>Android JNI 调用时的异常处理</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on May 16, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
     
     <div class="intro-header no-img">
       
@@ -185,7 +232,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">Android Camera 模型及 API 接口演变</h1>
+                <h1 align="center">Android JNI 调用时的异常处理</h1>
                 
                 
             </div>
@@ -207,14 +254,14 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Thu Apr 12, 2018</h4>
+        <h4 id="date"> Wed May 16, 2018</h4>
     </section>
-    <h5 id="wc">2100 Words|Read in about 5 Min</h5>
+    <h5 id="wc">1200 Words|Read in about 3 Min</h5>
     <h5 id="tags">Tags: 
         
-        <a href="https://glumes.com/tags/camera/">Camera</a> &nbsp;
-        
         <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
     </h5>
 </div>
 
@@ -222,156 +269,121 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。</p>
+            <p>Android JNI 调用时的异常主要有如下两种：</p>
+
+<ul>
+<li>Native 代码调用 Java 层代码时发生了异常要处理</li>
+<li>Native 代码自己抛出了一个异常让 Java 层去处理</li>
+</ul>
 
 <p></p>
 
-<p>可以通过这篇文章了解相关知识 <a href="https://glumes.com/post/android/android-hal-summary/">Android 硬件抽象层调用流程小结</a>，包括底层驱动、HAL 硬件抽象层接口、应用层到 HAL 的调用流程。</p>
+<p>可以看到异常的发生和处理基本都需要 Native 和 Java 交互，而对于 Native 自身出了异常，也就是 C/C++ 代码有问题，导致应用崩溃的又是另一回事了。</p>
 
-<p>基本上 HAL 的调用流程都是相似的，对于 Camera 也是这样。</p>
+<h2 id="native-调用-java-方法时的异常">Native 调用 Java 方法时的异常</h2>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_camera_java_to_kernel.png" alt="Android Camera HAL 调用" /></p>
+<p>之前的博客中就讲述了如何从 <a href="https://glumes.com/post/android/android-jni-access-field-and-method/">Native 调用 Java 的方法</a>，先准备一个有异常的方法供 Native 去调用。</p>
 
-<p>应用进程通过 Binder 通信得到一个系统服务，这个系统服务就是用来访问硬件的。</p>
+<pre><code class="language-java">    private int operation() {
+        return 2 / 0;
+    }
+</code></pre>
 
-<p>系统服务最后都是通过 HAL 的接口来访问硬件的驱动程序，从而最终访问硬件设备。</p>
+<p>然后在 Native 中调用该方法。</p>
 
-<p>而 HAL 接口的实现方式则是由不同厂商去完成的，只需要按照接口定义的规范实现就好。</p>
+<pre><code class="language-cpp">    jclass cls = env-&gt;FindClass(&quot;com/glumes/cppso/jnioperations/ExceptionOps&quot;);
+    jmethodID mid = env-&gt;GetMethodID(cls, &quot;&lt;init&gt;&quot;, &quot;()V&quot;);
+    jobject obj = env-&gt;NewObject(cls, mid);
+    mid = env-&gt;GetMethodID(cls, &quot;operation&quot;, &quot;()I&quot;);
+    // 先初始化一个类，然后调用类方法，就如博客中描述的那样
+    env-&gt;CallIntMethod(obj, mid);
+</code></pre>
 
-<p>正是由于 Android Camera 的硬件抽象层发生了变化，访问硬件的方式有所改变，才导致相机模型发生变化，上层 API 接口也就随之变化了。</p>
+<p>显然，除数为 0 ，一调用应用直接崩溃了。</p>
 
-<p>当了解了这些变化之后，再回过头去看 Camera 的 API 调用就显得清晰多了。</p>
+<pre><code class="language-java"> java.lang.ArithmeticException: divide by zero
+</code></pre>
 
-<h2 id="android-camera-1-0-的相机模型">Android Camera 1.0 的相机模型</h2>
+<p>接下来就是要进行异常处理的部分了。</p>
 
-<p>Android 5.0 之前的 Camera 版本，功能比较单一，不像 5.0 之后那样支持很多特性，这也是由于它的 HAL 所决定的。</p>
+<pre><code class="language-cpp">    jclass cls = env-&gt;FindClass(&quot;com/glumes/cppso/jnioperations/ExceptionOps&quot;);
+    jmethodID mid = env-&gt;GetMethodID(cls, &quot;&lt;init&gt;&quot;, &quot;()V&quot;);
+    jobject obj = env-&gt;NewObject(cls, mid);
+    mid = env-&gt;GetMethodID(cls, &quot;operation&quot;, &quot;()I&quot;);
+// 先初始化一个类，然后调用类方法，就如博客中描述的那样
+    env-&gt;CallIntMethod(obj, mid);
+    //检查是否发生了异常
+    jthrowable exc = env-&gt;ExceptionOccurred();
+//    jboolean result = env-&gt;ExceptionCheck();
 
-<p>用的是 <code>android.hardware.Camera</code> 包下的内容，回顾一下 Camera 1.0 的调用流程：</p>
+    if (exc) {
+        // 打印异常日志
+        env-&gt;ExceptionDescribe();
+        // 这行代码才是关键不让应用崩溃的代码，
+        env-&gt;ExceptionClear();
+        // 发生异常了要记得释放资源
+        env-&gt;DeleteLocalRef(cls);
+        env-&gt;DeleteLocalRef(obj);
+    }
+</code></pre>
 
-<ul>
-<li>创建预览类 （ SurfaceView ）</li>
-<li>打开相机（ Camera.open ）</li>
-<li>设置预览 （ setPreviewDisplay ）</li>
-<li>开始预览（ startPreview ）</li>
-<li>对焦（ autoFocus ）</li>
-<li>拍摄（ takePicture ）</li>
-<li>拍照监听器处理（ PictureCallback ）</li>
-</ul>
+<p>添加如上代码进行处理后，应用并不会直接崩溃了，并且在 LogCat 中会看到对应的异常日志，这里面到了做了哪些操作呢？</p>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_camera_block.png" alt="Android 5.0 之前 HAL 接口" /></p>
+<p>Native 提供了 <code>ExceptionOccurred</code> 和 <code>ExceptionCheck</code> 方法来检测是否有异常发生，前者返回的是 <code>jthrowable</code> 类型，后者返回的是 <code>jboolean</code> 类型。</p>
 
-<p>HAL 接口被设计成了三种运行模式：</p>
+<p>如果有异常，会通过 <code>ExceptionDescribe</code> 方法来打印异常信息，方便我们在 LogCat 中看到对应的信息。</p>
 
-<ul>
-<li>预览</li>
-<li>静态拍摄</li>
-<li>视频录制</li>
-</ul>
+<p>而 <code>ExceptionClear</code> 方法则是关键的不会让应用直接崩溃的方法，类似于 Java 的 <code>catch</code> 捕获异常处理，它会消除这次异常。</p>
 
-<p>其中，预览对应于代码中 Camera 类的 <code>startPreview</code> 函数，而静态拍摄对应于 Camera 类的 <code>takePicture</code> 函数，视频录制则是在 <code>MediaRecorder</code> 类的 <code>setCamera</code> 函数中传入 Camera 对象实例。</p>
+<p>这样就把由 Native 调用 Java 时的一个异常进行了处理，当处理完异常之后，别忘了释放对应的资源。</p>
 
-<p>三种模式具有略有不同又相互重叠的功能。这样就难以实现新类型的功能（例如连拍模式），因为新类型的功能会介于其中两种模式之间。</p>
+<p>不过，我们这样仅仅是消除了这次异常，还应该让调用者有异常的发生，那么就需要通过 Native 来抛出一个异常告诉 Java 调用者了。</p>
 
-<p>从图中可以看到，应用层 Camera 会发出一个请求队列到 HAL ，请求队列中的每个请求都对应三种运行模式中的一种。</p>
+<h2 id="native-抛出-java-中的异常">Native 抛出 Java 中的异常</h2>
 
-<p>当你想要在预览时拍照，然后再返回预览模式，那么就得在拍照前发送请求切换到静态拍摄模式，拍完后再发送请求切换到预览模式。</p>
+<p>有时在 Native 代码中进行一些操作，需要抛出异常到 Java ，交由上层去处理。</p>
 
-<h2 id="android-camera-2-0-的相机模型">Android Camera 2.0 的相机模型</h2>
+<p>比如 Java 调用 Native 方法传递了某个参数，而这个参数有问题，那么 Native 就可以抛出异常让 Java 去处理这个参数异常的问题。</p>
 
-<p>在 Android 5.0 之后，相机 API 就有了较大的变化，用的是 <code>android.hardware.camera2</code> 包下的内容了。</p>
+<p>Native 抛出异常的代码大致都是相同的，可以抽出一个通用函数来：</p>
 
-<p>回顾一下 Camera 2.0 的调用流程：</p>
+<pre><code class="language-cpp">void throwByName(JNIEnv *env, const char *name, const char *msg) {
+    jclass cls = env-&gt;FindClass(name);
+    if (cls != NULL) {
+        env-&gt;ThrowNew(cls, msg);
+    }
+    env-&gt;DeleteLocalRef(cls);
+}
+// 调用抛出异常
+extern &quot;C&quot;
+JNIEXPORT void JNICALL
+Java_com_glumes_cppso_jnioperations_ExceptionOps_nativeThrowException(JNIEnv *env, jobject instance) {
+    throwByName(env, &quot;java/lang/IllegalArgumentException&quot;, &quot;native throw exception&quot;);
+}
+</code></pre>
 
-<ul>
-<li>创建预览类（ SurfaceView 或者 TextureView 都行）</li>
-<li>打开相机（ CameraManager.openCamera ）</li>
-<li>相机回调（ CemeraDevice.StateCallback ）</li>
-<li>创建 CameraCaptureSession 会话（ createCaptureSession ）</li>
-<li>创建一个进行预览的请求（ CaptureRequest.Builder ）</li>
-<li>预览请求中设置输出的 Surface（ addTarget ）</li>
-<li>在会话中发出预览的请求（ setRepeatingRequest ）</li>
-<li>在会话的回调类中处理发出请求的结果（ CameraCaptureSession.CaptureCallback ）</li>
-<li>拍照时，创建一个拍照的请求（ CaptureRequest ）</li>
-<li>在会话中发出拍照的请求（ capture ）</li>
-<li>在会话的回调类中处理发出请求的结果（ CameraCaptureSession.CaptureCallback ）</li>
-</ul>
+<p>根据异常类型和异常信息来抛出异常。</p>
 
-<p>以上就是 Camera 2.0 相关的调用流程和对应的重要函数，大致就是每做一次操作都要在会话中发出一次请求。</p>
+<p>而在 Java 中，就必须要用 try &hellip; catch&hellip; 来准备好捕获这次异常了。</p>
 
-<p>更具体的如下极客学院流程图所示：</p>
+<pre><code class="language-java">        try {
+            nativeThrowException();
+        } catch (IllegalArgumentException e) {
+            Log.e(&quot;NativeMethod&quot;, e.getMessage());
+        }
+</code></pre>
 
-<p><img src="http://wiki.jikexueyuan.com/project/android-actual-combat-skills/images/33-3.png" alt="Android Camera 2.0 调用" /></p>
+<h2 id="异常处理小结">异常处理小结</h2>
 
-<p>Camera 2.0 的架构将多个运行模式整合为一个统一的视图，可以使用这种视图实现之前的任何模式以及一些其他模式，如连拍模式。这样一来，便可以提高用户对聚焦、曝光以及更多后期处理（例如降噪、对比度和锐化）效果的控制能力。此外，这种简化的视图还能够使应用开发者更轻松地使用相机的各种功能。</p>
+<p>除了以上两种异常情况之外，还有一个特别常见的异常，就是当判断某个变量为 NULL 之后，执行立即返回的操作。</p>
 
-<p>Camera 2.0 将相机系统塑造为一个管道，该管道可按照 1:1 的基准将传入的帧捕获请求转化为帧。这些请求会封装有关帧的捕获和处理的所有配置信息，其中包括分辨率和像素格式；手动传感器、镜头和闪光灯控件；3A 运行模式；RAW-&gt;YUV 处理控件；统计信息生成等等。</p>
+<p>当发生异常时，一定要先处理异常，然后才能继续执行后面的步骤。如果不是需要立即返回的，那么就通过 <code>ExceptionClear</code>清除这次异常，然后在进行其他的处理。</p>
 
-<p>简单来说，应用框架从相机系统请求帧，然后相机系统将结果返回到输出流。</p>
+<p>对于在 Native 中发生了异常，需要让 Java 层去处理了，则在 Native 中抛出对应的异常，由 Java 层去捕获，比如在使用 <code>ExceptionClear</code> 清除了异常之后，就可以通过 <code>throwNew</code> 来抛出异常信息。</p>
 
-<p>可以将 Camera 2.0 看作是 Camera 1.0 的单向流管道。它会将每个捕获请求转化为传感器捕获的一张图像，这张图像将被处理成：</p>
+<p>具体的异常处理方法和时机还是要看具体的使用场景，选择最合适的处理方法。</p>
 
-<ul>
-<li>包含有关捕获的元数据的结果对象。</li>
-<li>图像数据的 1 到 N 个缓冲区，每个缓冲区会进入自己的目的地 Surface。也就是我们创建 CaptureRequest 时的 addTarget 添加的 Surface。</li>
-</ul>
-
-<p>可能的输出 Surface 组经过预配置：</p>
-
-<ul>
-<li>每个 Surface 都是一个固定分辨率的图像缓冲区流的目标位置</li>
-<li>一次只能将少量的 Surface 配置为输出（约 3 个）</li>
-</ul>
-
-<p>一个请求中包含所需的全部捕获设置，以及要针对该请求将图像缓冲区推送到其中的输出 Surface 的列表。请求可以只发生一次（使用 capture ），也可以无限重复（使用 setRepeatingRequest ）。捕获的优先级高于重复请求的优先级。</p>
-
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/camera_simple_model.png" alt="相机运行核心模式" /></p>
-
-<p>如上图所示，一个 capture 请求，左边就是要输出的目的 Surface 列表。而 CameraDevice 框内的就是请求的队列。相机的硬件设备会处理每个请求，将图像数据的缓冲区输出到设置的目的 Surface 中，同时在回调的 onCaptureComplete 方法中处理请求的结果 CaptureResult。</p>
-
-<p>就是这样一个队列模型，相机系统不断地处理队列中的请求，并且一次可以发起多个请求，而且提交的请求不会出现阻塞的情况，请求始终按照接收的顺序处理。</p>
-
-<p>同样的，如果想要实现连拍功能，只要不断发送捕获的请求 capture 就好了，而不需要像之前一样每次拍完照还得设置回预览模式。</p>
-
-<h2 id="相机模型">相机模型</h2>
-
-<p>这是一个更全面的相机模型图：</p>
-
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/camera_model.png" alt="相机模型" /></p>
-
-<p>在模型图里把一些主要函数和流程图都绘制包含进去了。我们调用的流程基本也是顺着紫色的 API 接口来的。</p>
-
-<p>可以看到，相机可以设置六种类型的 Surface 输出：</p>
-
-<ul>
-<li>MediaRecorder</li>
-<li>SurfaceView</li>
-<li>RenderScriptAllocation</li>
-<li>ImageReader</li>
-<li>MediaCodec</li>
-<li>SurfaceTexture</li>
-</ul>
-
-<p>而在 CameraCaptureSession 会话类中，发出的请求方法有如下：</p>
-
-<ul>
-<li>capture()</li>
-<li>captureBurst()</li>
-<li>setStreamingRequest()</li>
-<li>setStreamingBurst()</li>
-<li>stopRepeating()</li>
-</ul>
-
-<p>发出请求后，交由相机硬件去处理，处理后的会先将图像数据输出到缓冲区，然后再从缓冲区输出到设置的目的 Surface。</p>
-
-<p>同时，在会话中发出请求，在请求的回调中还会返回 CaptureResult 这样的请求结果，相当于是一个请求有两个返回的来源了。</p>
-
-<p>经过这样的理解安卓相机模型之后，再去看 API 的调用就不会那么困惑了。</p>
-
-<p>关于 Android Camera 的相关代码，可以参考我的 Github 工程：<a href="https://github.com/glumes/Camera2Sample">https://github.com/glumes/Camera2Sample</a>。</p>
-
-<h2 id="参考">参考</h2>
-
-<p>1、<a href="https://source.android.com/devices/camera/">https://source.android.com/devices/camera/</a></p>
+<p>具体示例代码可参考我的 Github 项目 <a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a>，欢迎 Star。</p>
 
               
                 <p>
@@ -392,7 +404,7 @@
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-exception-handle/">Android JNI 调用时的异常处理</a>
 
                 </p>
               
@@ -402,13 +414,9 @@
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/" data-toggle="tooltip" data-placement="top" title="Android 相机开发中的尺寸和方向问题">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/android/android-jni-reference-manage-rules/" data-toggle="tooltip" data-placement="top" title="Android JNI 中的引用管理">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/android-jni-basic-operation/" data-toggle="tooltip" data-placement="top" title="Android JNI 基本操作 ">Next Post &rarr;</a>
-          </li>
         
       </ul>
             
@@ -417,15 +425,15 @@
                 <h2>See Also</h2>
                 <ul>
                     
-                    <li><a href="/post/android/android-camera-aspect-ratio--and-orientation/">Android 相机开发中的尺寸和方向问题</a></li>
+                    <li><a href="/post/android/android-jni-reference-manage-rules/">Android JNI 中的引用管理</a></li>
                     
-                    <li><a href="/post/android/build-android-source-code/">编译安卓源码</a></li>
+                    <li><a href="/post/android/android-jni-cache-fieldid-and-methodid/">Android  JNI 调用时缓存字段和方法 ID</a></li>
                     
-                    <li><a href="/post/android/android-rxjava/">安卓异步之RxJava</a></li>
+                    <li><a href="/post/android/android-jni-invoke-constructor-method-and-super-method/">Android 通过 JNI 调用 Java 类的构造方法和父类的方法</a></li>
                     
-                    <li><a href="/post/android/rxjava-wrapper-dialog/">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</a></li>
+                    <li><a href="/post/android/android-jni-access-field-and-method/">Android 通过 JNI 访问 Java 字段和方法调用</a></li>
                     
-                    <li><a href="/post/android/android-layout-inflater/">Android 布局加载之 LayoutInflater</a></li>
+                    <li><a href="/post/android/android-jni-array-operation/">Android JNI 数组 操作</a></li>
                     
                 </ul>
                 

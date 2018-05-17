@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android JNI 数组 操作</title>
+  <meta property="og:title" content="Android JNI 数组 操作" />
+  <meta name="twitter:title" content="Android JNI 数组 操作" />
+  <meta name="description" content="JNI 中有两种数组操作，基础数据类型数组和对象数组，JNI 对待基础数据类型数组和对象数组是不一样的。
+
+">
+  <meta property="og:description" content="JNI 中有两种数组操作，基础数据类型数组和对象数组，JNI 对待基础数据类型数组和对象数组是不一样的。
+
+">
+  <meta name="twitter:description" content="JNI 中有两种数组操作，基础数据类型数组和对象数组，JNI 对待基础数据类型数组和对象数组是不一样的。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/android/android-jni-array-operation/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/android/android-jni-array-operation/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_630,w_1920/v1525659528/life/WechatIMG355.jpg" data-img-desc-1="香港 · 维多利亚港"></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>Android JNI 数组 操作</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on May 7, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">Android JNI 数组 操作</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+        
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Mon May 7, 2018</h4>
+    </section>
+    <h5 id="wc">2200 Words|Read in about 5 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>JNI 中有两种数组操作，基础数据类型数组和对象数组，JNI 对待基础数据类型数组和对象数组是不一样的。</p>
+
+<p></p>
+
+<h2 id="基本数据类型数组">基本数据类型数组</h2>
+
+<hr />
+
+<p>对于基本数据类型数组，JNI 都有和 Java 相对应的结构，在使用起来和基本数据类型的使用类似。</p>
+
+<p>在 Android JNI 基础知识篇提到了 Java 数组类型对应的 JNI 数组类型。比如，Java int 数组对应了 jintArray，boolean 数组对应了 jbooleanArray。</p>
+
+<p>如同 String 的操作一样，JNI 提供了对应的转换函数：GetArrayElements、ReleaseArrayElements。</p>
+
+<pre><code class="language-java">    intArray = env-&gt;GetIntArrayElements(intArray_, NULL);
+    env-&gt;ReleaseIntArrayElements(intArray_, intArray, 0);
+</code></pre>
+
+<p>另外，JNI 还提供了如下的函数：</p>
+
+<ul>
+<li>GetTypeArrayRegion / SetTypeArrayRegion</li>
+</ul>
+
+<p>将数组内容复制到 C 缓冲区内，或将缓冲区内的内容复制到数组上。</p>
+
+<ul>
+<li>GetArrayLength</li>
+</ul>
+
+<p>得到数组中的元素个数，也就是长度。</p>
+
+<ul>
+<li>NewTypeArray</li>
+</ul>
+
+<p>返回一个指定数据类型的数组，并且通过 SetTypeArrayRegion 来给指定类型数组赋值。</p>
+
+<ul>
+<li>GetPrimitiveArrayCritical / ReleasePrimitiveArrayCritical</li>
+</ul>
+
+<p>如同 String 中的操作一样，返回一个指定基础数据类型数组的直接指针，在这两个操作之间不能做任何阻塞的操作。</p>
+
+<p>实际操作如下：</p>
+
+<pre><code class="language-java">    // Java 传递 数组 到 Native 进行数组求和
+    private native int intArraySum(int[] intArray, int size);
+</code></pre>
+
+<p>对应的 C++ 代码如下：</p>
+
+<pre><code class="language-cpp">JNIEXPORT jint JNICALL
+Java_com_glumes_cppso_jnioperations_ArrayTypeOps_intArraySum(JNIEnv *env, jobject instance,
+                                                             jintArray intArray_, jint num) {
+    jint *intArray;
+    int sum = 0;
+    // 操作方法一：
+    // 如同 getUTFString 一样，会申请 native 内存
+    intArray = env-&gt;GetIntArrayElements(intArray_, NULL);
+    if (intArray == NULL) {
+        return 0;
+    }
+    // 得到数组的长度
+    int length = env-&gt;GetArrayLength(intArray_);
+    LOGD(&quot;array length is %d&quot;, length);
+    for (int i = 0; i &lt; length; ++i) {
+        sum += intArray[i];
+    }
+    LOGD(&quot;sum is %d&quot;, sum);
+
+    // 操作方法二：
+    jint buf[num];
+    // 通过 GetIntArrayRegion 方法来获取数组内容
+    env-&gt;GetIntArrayRegion(intArray_, 0, num, buf);
+    sum = 0;
+    for (int i = 0; i &lt; num; ++i) {
+        sum += buf[i];
+    }
+    LOGD(&quot;sum is %d&quot;, sum);
+    // 使用完了别忘了释放内存
+    env-&gt;ReleaseIntArrayElements(intArray_, intArray, 0);
+    return sum;
+}
+</code></pre>
+
+<p>假如需要从 JNI 中返回一个基础数据类型的数组，对应的代码如下：</p>
+
+<pre><code class="language-java">    // 从 Native 返回基本数据类型数组
+    private native int[] getIntArray(int num);
+</code></pre>
+
+<p>对应的 C++ 代码如下：</p>
+
+<pre><code class="language-cpp">/**
+ * 从 Native 返回 int 数组，主要调用 set&lt;Type&gt;ArrayRegion 来填充数据，其他数据类型类似操作
+ */
+extern &quot;C&quot;
+JNIEXPORT jintArray JNICALL
+Java_com_glumes_cppso_jnioperations_ArrayTypeOps_getIntArray(JNIEnv *env, jobject instance,
+                                                             jint num) {
+    jintArray intArray;
+    intArray = env-&gt;NewIntArray(num);
+
+    jint buf[num];
+    for (int i = 0; i &lt; num; ++i) {
+        buf[i] = i * 2;
+    }
+
+    // 使用 setIntArrayRegion 来赋值
+    env-&gt;SetIntArrayRegion(intArray, 0, num, buf);
+    return intArray;
+}
+</code></pre>
+
+<p>以上例子，基本把相关的操作都使用上了，可以发现和 String 的操作大都是相似的。</p>
+
+<h2 id="对象数组">对象数组</h2>
+
+<hr />
+
+<p>对于对象数组，也就是引用类型数组，数组中的每个类型都是引用类型，JNI 只提供了如下函数来操作。</p>
+
+<ul>
+<li>GetObjectArrayElement / SetObjectArrayElement</li>
+</ul>
+
+<p>和基本数据类型不同的是，不能一次得到数据中的所有对象元素或者一次复制多个对象元素到缓冲区。只能通过上面的函数来访问或者修改指定位置的元素内容。</p>
+
+<p>字符串和数组都是引用类型，因此也只能通过上面的方法来访问。</p>
+
+<p>例如在 JNI 中创建一个二维的整型数组并返回：</p>
+
+<pre><code class="language-java">    // 从 Native 返回二维整型数组，相当于是一个一维整型数组，数组中的每一项内容又是数组
+    private native int[][] getTwoDimensionalArray(int size);
+</code></pre>
+
+<p>二维数组具有特殊性在于，可以将它看成一维数组，其中数组的每项内容又是一维数组。</p>
+
+<p>具体 C++ 代码如下：</p>
+
+<pre><code class="language-cpp">/**
+ * 从 Native 返回一个二维的整型数组
+ */
+extern &quot;C&quot;
+JNIEXPORT jobjectArray JNICALL
+Java_com_glumes_cppso_jnioperations_ArrayTypeOps_getTwoDimensionalArray(JNIEnv *env,
+                                                                        jobject instance,
+                                                                        jint size) {
+    // 声明一个对象数组
+    jobjectArray result;
+    // 找到对象数组中具体的对象类型,[I 指的就是数组类型
+    jclass intArrayCls = env-&gt;FindClass(&quot;[I&quot;);
+
+    if (intArrayCls == NULL) {
+        return NULL;
+    }
+    // 相当于初始化一个对象数组，用指定的对象类型
+    result = env-&gt;NewObjectArray(size, intArrayCls, NULL);
+
+    if (result == NULL) {
+        return NULL;
+    }
+    for (int i = 0; i &lt; size; ++i) {
+        // 用来给整型数组填充数据的缓冲区
+        jint tmp[256];
+        // 声明一个整型数组
+        jintArray iarr = env-&gt;NewIntArray(size);
+        if (iarr == NULL) {
+            return NULL;
+        }
+        for (int j = 0; j &lt; size; ++j) {
+            tmp[j] = i + j;
+        }
+        // 给整型数组填充数据
+        env-&gt;SetIntArrayRegion(iarr, 0, size, tmp);
+        // 给对象数组指定位置填充数据，这个数据就是一个一维整型数组
+        env-&gt;SetObjectArrayElement(result, i, iarr);
+        // 释放局部引用
+        env-&gt;DeleteLocalRef(iarr);
+    }
+    return result;
+}
+</code></pre>
+
+<p>首先需要使用 NewObjectArray 方法来创建对象数组。</p>
+
+<p>然后使用 SetObjectArrayElement 函数填充数据时，需要构建好每个位置对应的对象。这里就使用了 NewIntArray 来创造了一个对象，并给对象填充数据后，在赋值给对象数组。</p>
+
+<p>通过一个 for 循环就完成给对象数组赋值的操作。</p>
+
+<p>在创建对象数组时，有一个操作是找到对应的对象类型，通过 findClass 方法。findClass 的参数 <strong>[I</strong> 这里就涉及到 Java 与 JNI 对应签名的转换。</p>
+
+<h2 id="java-与-jni-签名的转换">Java 与 JNI 签名的转换</h2>
+
+<hr />
+
+<p>在前一篇文章中，用表格列出了 Java 与 JNI 对应的数据类型格式的转换关系，现在要列举的是 Java 与 JNI 对应签名的转换关系。</p>
+
+<p>这里的签名指的是在 JNI 中去查找 Java 中对应的数据类型、对应的方法时，需要将 Java 中的签名转换成 JNI 所能识别的。</p>
+
+<h4 id="对于类的签名转换">对于类的签名转换</h4>
+
+<p>对于 Java 中类或者接口的转换，需要用到 Java 中类或者接口的全限定名，把 Java 中描述类或者接口的 <strong>.</strong> 换成 <strong>/</strong> 就好了，比如 String 类型对应的 JNI 描述为：</p>
+
+<pre><code class="language-cpp">java/lang/String     // . 换成 / 
+</code></pre>
+
+<p>对于数组类型，则是用 <strong>[</strong> 来表示数组，然后跟一个字段的签名转换。</p>
+
+<pre><code class="language-cpp">[I 		// 代表一维整型数组，I 表示整型
+[[I	    // 代表二维整型数组
+[Ljava/lang/String;      // 代表一维字符串数组， 
+</code></pre>
+
+<h4 id="对于字段的签名转换">对于字段的签名转换</h4>
+
+<p>对应基础类型字段的转换：</p>
+
+<table>
+<thead>
+<tr>
+<th>Java 类型</th>
+<th>JNI 对应的描述转</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>boolean</td>
+<td>Z</td>
+</tr>
+
+<tr>
+<td>byte</td>
+<td>B</td>
+</tr>
+
+<tr>
+<td>char</td>
+<td>C</td>
+</tr>
+
+<tr>
+<td>short</td>
+<td>S</td>
+</tr>
+
+<tr>
+<td>int</td>
+<td>I</td>
+</tr>
+
+<tr>
+<td>long</td>
+<td>J</td>
+</tr>
+
+<tr>
+<td>float</td>
+<td>F</td>
+</tr>
+
+<tr>
+<td>double</td>
+<td>D</td>
+</tr>
+</tbody>
+</table>
+
+<p>对于引用类型的字段签名转换，是大写字母 <strong>L</strong> 开头，然后是类的签名转换，最后以 <strong>;</strong> 结尾。</p>
+
+<table>
+<thead>
+<tr>
+<th>Java 类型</th>
+<th>JNI 对应的描述转换</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>String</td>
+<td>Ljava/lang/String;</td>
+</tr>
+
+<tr>
+<td>Class</td>
+<td>Ljava/lang/Class;</td>
+</tr>
+
+<tr>
+<td>Throwable</td>
+<td>Ljava/lang/Throwable</td>
+</tr>
+
+<tr>
+<td>int[]</td>
+<td>&ldquo;[I&rdquo;</td>
+</tr>
+
+<tr>
+<td>Object[]</td>
+<td>&ldquo;[Ljava/lang/Object;&rdquo;</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="对于方法的签名转换">对于方法的签名转换</h4>
+
+<p>对于方法签名描述的转换，首先是将方法内所有参数转换成对应的字段描述，并全部写在小括号内，然后在小括号外再紧跟方法的返回值类型描述。</p>
+
+<table>
+<thead>
+<tr>
+<th>Java 类型</th>
+<th>JNI 对应的描述转换</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>String f();</td>
+<td>()Ljava/lang/String;</td>
+</tr>
+
+<tr>
+<td>long f(int i, Class c);</td>
+<td>(ILjava/lang/Class;)J</td>
+</tr>
+
+<tr>
+<td>String(byte[] bytes);</td>
+<td>([B)V</td>
+</tr>
+</tbody>
+</table>
+
+<p>这里要注意的是在 JNI 对应的描述转换中不要出现空格。</p>
+
+<p>了解并掌握这些转换后，就可以进行更多的操作了，实现 Java 与 C++ 的相互调用。</p>
+
+<p>比如，有一个自定义的 Java 类，然后再 Native 中打印类的对象数组的某一个字段值。</p>
+
+<pre><code class="language-java">    private native void printAnimalsName(Animal[] animal);
+</code></pre>
+
+<p>具体 C++ 代码如下：</p>
+
+<pre><code class="language-cpp">/**
+ * 打印对象数组中的信息
+ */
+extern &quot;C&quot;
+JNIEXPORT void JNICALL
+Java_com_glumes_cppso_jnioperations_ArrayTypeOps_printAnimalsName(JNIEnv *env, jobject instance,
+                                                                  jobjectArray animals) {
+    jobject animal;
+    // 数组长度
+    int size = env-&gt;GetArrayLength(animals);
+    // 数组中对应的类
+    jclass cls = env-&gt;FindClass(&quot;com/glumes/cppso/model/Animal&quot;);
+    // 类对应的字段描述
+    jfieldID fid = env-&gt;GetFieldID(cls, &quot;name&quot;, &quot;Ljava/lang/String;&quot;);
+    // 类的字段具体的值
+    jstring jstr;
+    // 类字段具体值转换成 C/C++ 字符串
+    const char *str;
+
+    for (int i = 0; i &lt; size; ++i) {
+        // 得到数组中的每一个元素
+        animal = env-&gt;GetObjectArrayElement(animals, i);
+        // 每一个元素具体字段的值
+        jstr = (jstring) (env-&gt;GetObjectField(animal, fid));
+        str = env-&gt;GetStringUTFChars(jstr, NULL);
+        if (str == NULL) {
+            continue;
+        }
+        LOGD(&quot;str is %s&quot;, str);
+        env-&gt;ReleaseStringUTFChars(jstr, str);
+    }
+}
+</code></pre>
+
+<p>具体示例代码可参考我的 Github 项目 <a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a>，欢迎 Star。</p>
+
+              
+                <p>
+
+      
+
+                  <h4>最后，如果觉得文章不错，欢迎关注微信公众号：纸上浅谈</h4>
+
+                  <br/>
+
+                  <img  width = 360px; height = 360px; src="https://res.cloudinary.com/glumes-com/image/upload/v1525500999/life/qrcode_for_gh_2b0ecb0a1283_344.jpg">
+
+                  <br/>
+
+                 <a href="https://glumes.com/post/contact-and-reward/">  觉得文章对您有帮助，欢迎打赏，或者加微信交流</a>
+
+                <br />
+                <br />
+
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-array-operation/">Android JNI 数组 操作</a>
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/android/android-jni-basic-operation/" data-toggle="tooltip" data-placement="top" title="Android JNI 基本操作 ">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.com/post/android/android-jni-access-field-and-method/" data-toggle="tooltip" data-placement="top" title="Android 通过 JNI 访问 Java 字段和方法调用">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/android/android-jni-basic-operation/">Android JNI 基本操作 </a></li>
+                    
+                    <li><a href="/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></li>
+                    
+                    <li><a href="/post/android/build-android-source-code/">编译安卓源码</a></li>
+                    
+                    <li><a href="/post/android/android-rxjava/">安卓异步之RxJava</a></li>
+                    
+                    <li><a href="/post/android/rxjava-wrapper-dialog/">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+

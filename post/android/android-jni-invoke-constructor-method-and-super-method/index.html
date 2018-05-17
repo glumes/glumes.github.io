@@ -5,26 +5,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Android Camera 模型及 API 接口演变</title>
-  <meta property="og:title" content="Android Camera 模型及 API 接口演变" />
-  <meta name="twitter:title" content="Android Camera 模型及 API 接口演变" />
-  <meta name="description" content="要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。
+  <title>Android 通过 JNI 调用 Java 类的构造方法和父类的方法</title>
+  <meta property="og:title" content="Android 通过 JNI 调用 Java 类的构造方法和父类的方法" />
+  <meta name="twitter:title" content="Android 通过 JNI 调用 Java 类的构造方法和父类的方法" />
+  <meta name="description" content="Android 还可以通过 JNI 来调用 Java 一个类的构造方法，从而创建一个 Java 类。
 
 ">
-  <meta property="og:description" content="要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。
+  <meta property="og:description" content="Android 还可以通过 JNI 来调用 Java 一个类的构造方法，从而创建一个 Java 类。
 
 ">
-  <meta name="twitter:description" content="要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。
+  <meta name="twitter:description" content="Android 还可以通过 JNI 来调用 Java 一个类的构造方法，从而创建一个 Java 类。
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-camrea-api-evolution/" />
+  <meta property="og:url" content="https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-camrea-api-evolution/" />
+  <link rel="canonical" href="https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -176,8 +176,40 @@
 
 
   
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_630,w_1920/v1525660603/life/WechatIMG358.jpg" data-img-desc-1="澳门 · 大三巴牌坊"></div>
+  
 
-  <header class="header-section ">
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>Android 通过 JNI 调用 Java 类的构造方法和父类的方法</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on May 7, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
     
     <div class="intro-header no-img">
       
@@ -185,7 +217,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">Android Camera 模型及 API 接口演变</h1>
+                <h1 align="center">Android 通过 JNI 调用 Java 类的构造方法和父类的方法</h1>
                 
                 
             </div>
@@ -207,14 +239,14 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Thu Apr 12, 2018</h4>
+        <h4 id="date"> Mon May 7, 2018</h4>
     </section>
-    <h5 id="wc">2100 Words|Read in about 5 Min</h5>
+    <h5 id="wc">1600 Words|Read in about 4 Min</h5>
     <h5 id="tags">Tags: 
         
-        <a href="https://glumes.com/tags/camera/">Camera</a> &nbsp;
-        
         <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
     </h5>
 </div>
 
@@ -222,156 +254,217 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。</p>
+            <p>Android 还可以通过 JNI 来调用 Java 一个类的构造方法，从而创建一个 Java 类。</p>
 
 <p></p>
 
-<p>可以通过这篇文章了解相关知识 <a href="https://glumes.com/post/android/android-hal-summary/">Android 硬件抽象层调用流程小结</a>，包括底层驱动、HAL 硬件抽象层接口、应用层到 HAL 的调用流程。</p>
+<h2 id="调用构造方法">调用构造方法</h2>
 
-<p>基本上 HAL 的调用流程都是相似的，对于 Camera 也是这样。</p>
+<p>调用构造方法的步骤和之前调用类的实例方法步骤类似，也需要获得对应的类和方法 id。</p>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_camera_java_to_kernel.png" alt="Android Camera HAL 调用" /></p>
+<p>对于类，通过 FindClass 可以找到对应的 Java 类型。</p>
 
-<p>应用进程通过 Binder 通信得到一个系统服务，这个系统服务就是用来访问硬件的。</p>
+<p>对于构造方法，它的方法 id 还是通过 <code>GetMethodID</code> 方法来获得，但是构造方法对应的名称为 <strong><init></strong>，返回值类型是 void 类型的。</p>
 
-<p>系统服务最后都是通过 HAL 的接口来访问硬件的驱动程序，从而最终访问硬件设备。</p>
+<p>完成了以上准备条件后，就可以通过 <code>NewObject</code> 来调用构造方法，从而创建具体的类。</p>
 
-<p>而 HAL 接口的实现方式则是由不同厂商去完成的，只需要按照接口定义的规范实现就好。</p>
+<p>下面以 String 的某个构造方法为例</p>
 
-<p>正是由于 Android Camera 的硬件抽象层发生了变化，访问硬件的方式有所改变，才导致相机模型发生变化，上层 API 接口也就随之变化了。</p>
+<pre><code class="language-java">public String(char value[]) // Java String 类的其中一个构造方法
+</code></pre>
 
-<p>当了解了这些变化之后，再回过头去看 Camera 的 API 调用就显得清晰多了。</p>
+<p>对应的 C++ 代码：</p>
 
-<h2 id="android-camera-1-0-的相机模型">Android Camera 1.0 的相机模型</h2>
+<pre><code>extern &quot;C&quot;
+JNIEXPORT jstring JNICALL
+Java_com_glumes_cppso_jnioperations_InvokeConstructorOps_invokeStringConstructors(JNIEnv *env, jobject instance) {
 
-<p>Android 5.0 之前的 Camera 版本，功能比较单一，不像 5.0 之后那样支持很多特性，这也是由于它的 HAL 所决定的。</p>
+    jclass stringClass;
+    jmethodID cid;
+    jcharArray elemArr;
+    jstring result;
 
-<p>用的是 <code>android.hardware.Camera</code> 包下的内容，回顾一下 Camera 1.0 的调用流程：</p>
+    // 由 C++ 字符串创建一个 Java 字符串
+    jstring temp = env-&gt;NewStringUTF(&quot;this is char array&quot;);
+    // 再从 Java 字符串获得一个字符数组指针，作为 String 构造函数的参数
+    const jchar *chars = env-&gt;GetStringChars(temp, NULL);
+    int len = 10;
 
-<ul>
-<li>创建预览类 （ SurfaceView ）</li>
-<li>打开相机（ Camera.open ）</li>
-<li>设置预览 （ setPreviewDisplay ）</li>
-<li>开始预览（ startPreview ）</li>
-<li>对焦（ autoFocus ）</li>
-<li>拍摄（ takePicture ）</li>
-<li>拍照监听器处理（ PictureCallback ）</li>
-</ul>
+    stringClass = env-&gt;FindClass(&quot;java/lang/String&quot;); // 找到具体的 String 类
+    if (stringClass == NULL) {
+        return NULL;
+    }
+    // 找到具体的方法，([C)V 表示选择 String 的 String(char value[]) 构造方法
+    cid = env-&gt;GetMethodID(stringClass, &quot;&lt;init&gt;&quot;, &quot;([C)V&quot;);
+    if (cid == NULL) {
+        return NULL;
+    }
+    // 字符串数组作为参数
+    elemArr = env-&gt;NewCharArray(len);
+    if (elemArr == NULL) {
+        return NULL;
+    }
+    // 给字符串数组赋值
+    env-&gt;SetCharArrayRegion(elemArr, 0, len, chars);
+    // 创建类
+    result = (jstring) env-&gt;NewObject(stringClass, cid, elemArr);
+    env-&gt;DeleteLocalRef(elemArr);
+    env-&gt;DeleteLocalRef(stringClass);
+    return result;
+}
+</code></pre>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_camera_block.png" alt="Android 5.0 之前 HAL 接口" /></p>
+<p>由于 String 的构造函数需要传递一个字符数组，就先构造好了字符数组并赋值，得到对应的类和方法 id 之后，直接通过 <code>NewObject</code> 方法调用即可。</p>
 
-<p>HAL 接口被设计成了三种运行模式：</p>
+<p>再来看一个调用自定义类的构造方法的示例，还是之前的 Animal 类，它的构造方法有一个 String 类型的参数。</p>
 
-<ul>
-<li>预览</li>
-<li>静态拍摄</li>
-<li>视频录制</li>
-</ul>
+<pre><code class="language-cpp">/**
+ * 创建一个 Java 的 Animal 类并返回
+ */
+extern &quot;C&quot;
+JNIEXPORT jobject JNICALL
+Java_com_glumes_cppso_jnioperations_InvokeConstructorOps_invokeAnimalConstructors(JNIEnv *env, jobject instance) {
+    jclass animalClass;
+    jmethodID mid;
+    jobject result;
+    animalClass = env-&gt;FindClass(&quot;com/glumes/cppso/model/Animal&quot;);
+    if (animalClass == NULL) {
+        return NULL;
+    }
+    mid = env-&gt;GetMethodID(animalClass, &quot;&lt;init&gt;&quot;, &quot;(Ljava/lang/String;)V&quot;);
+    if (mid == NULL) {
+        return NULL;
+    }
+    jstring args = env-&gt;NewStringUTF(&quot;this animal name&quot;);
+    result = env-&gt;NewObject(animalClass, mid, args);
+    env-&gt;DeleteLocalRef(animalClass);
+    return result;
+}
+</code></pre>
 
-<p>其中，预览对应于代码中 Camera 类的 <code>startPreview</code> 函数，而静态拍摄对应于 Camera 类的 <code>takePicture</code> 函数，视频录制则是在 <code>MediaRecorder</code> 类的 <code>setCamera</code> 函数中传入 Camera 对象实例。</p>
+<p>可以看到，整个调用流程只要按照步骤来，就可以了。</p>
 
-<p>三种模式具有略有不同又相互重叠的功能。这样就难以实现新类型的功能（例如连拍模式），因为新类型的功能会介于其中两种模式之间。</p>
+<p>除了 NewObject 方法之外，JNI 还提供了 AllocObject 方法来创建对象，以同样调用 Animal 类构造方法为例：</p>
 
-<p>从图中可以看到，应用层 Camera 会发出一个请求队列到 HAL ，请求队列中的每个请求都对应三种运行模式中的一种。</p>
+<pre><code class="language-cpp">/**
+ * 通过 AllocObject 方法来创建一个类
+ */
+extern &quot;C&quot;
+JNIEXPORT jobject JNICALL
+Java_com_glumes_cppso_jnioperations_InvokeConstructorOps_allocObjectConstructor(JNIEnv *env, jobject instance) {
+    jclass animalClass;
+    jobject result;
+    jmethodID mid;
+    // 获得对应的 类
+    animalClass = env-&gt;FindClass(&quot;com/glumes/cppso/model/Animal&quot;);
+    if (animalClass == NULL) {
+        return NULL;
+    }
+    // 获得构造方法 id
+    mid = env-&gt;GetMethodID(animalClass, &quot;&lt;init&gt;&quot;, &quot;(Ljava/lang/String;)V&quot;);
+    if (mid == NULL) {
+        return NULL;
+    }
+    // 构造方法的参数
+    jstring args = env-&gt;NewStringUTF(&quot;use AllocObject&quot;);
+    // 创建对象，此时创建的对象未初始化的对象
+    result = env-&gt;AllocObject(animalClass);
+    if (result == NULL) {
+        return NULL;
+    }
+    // 调用 CallNonvirtualVoidMethod 方法去调用类的构造方法
+    env-&gt;CallNonvirtualVoidMethod(result, animalClass, mid, args);
+    if (env-&gt;ExceptionCheck()) {
+        env-&gt;DeleteLocalRef(result);
+        return NULL;
+    }
+    return result;
+}
+</code></pre>
 
-<p>当你想要在预览时拍照，然后再返回预览模式，那么就得在拍照前发送请求切换到静态拍摄模式，拍完后再发送请求切换到预览模式。</p>
+<p>同样的，要先准备必要的东西。获得对应类的类型、方法 id、构造方法的参数。</p>
 
-<h2 id="android-camera-2-0-的相机模型">Android Camera 2.0 的相机模型</h2>
+<p>然后通过 <code>AllocObject</code> 方法创建对象，但要注意的是，此时创建的对象是未被初始化的，不同于 <code>NewObject</code> 方法创建的对象直接就是初始化了，在一定程度上，可以说 <code>AllocObject</code> 方法是延迟初始化的。</p>
 
-<p>在 Android 5.0 之后，相机 API 就有了较大的变化，用的是 <code>android.hardware.camera2</code> 包下的内容了。</p>
+<p>接下来是要通过 <code>CallNonvirtualVoidMethod</code> 来调用对应的构造方法。此处传入的一个参数不再是 jclass 类型，而是创建的未被初始化的类 jobject 。</p>
 
-<p>回顾一下 Camera 2.0 的调用流程：</p>
+<p>通过这种方法，同样可以创建一个 Java 中的类。</p>
 
-<ul>
-<li>创建预览类（ SurfaceView 或者 TextureView 都行）</li>
-<li>打开相机（ CameraManager.openCamera ）</li>
-<li>相机回调（ CemeraDevice.StateCallback ）</li>
-<li>创建 CameraCaptureSession 会话（ createCaptureSession ）</li>
-<li>创建一个进行预览的请求（ CaptureRequest.Builder ）</li>
-<li>预览请求中设置输出的 Surface（ addTarget ）</li>
-<li>在会话中发出预览的请求（ setRepeatingRequest ）</li>
-<li>在会话的回调类中处理发出请求的结果（ CameraCaptureSession.CaptureCallback ）</li>
-<li>拍照时，创建一个拍照的请求（ CaptureRequest ）</li>
-<li>在会话中发出拍照的请求（ capture ）</li>
-<li>在会话的回调类中处理发出请求的结果（ CameraCaptureSession.CaptureCallback ）</li>
-</ul>
+<h2 id="调用父类的方法">调用父类的方法</h2>
 
-<p>以上就是 Camera 2.0 相关的调用流程和对应的重要函数，大致就是每做一次操作都要在会话中发出一次请求。</p>
+<hr />
 
-<p>更具体的如下极客学院流程图所示：</p>
+<p>可以通过 JNI 来调用父类的实例方法。</p>
 
-<p><img src="http://wiki.jikexueyuan.com/project/android-actual-combat-skills/images/33-3.png" alt="Android Camera 2.0 调用" /></p>
+<p>在子类中通过调用 <code>CallNonvirtual&lt;Type&gt;Method</code> 方法来调用父类的方法。</p>
 
-<p>Camera 2.0 的架构将多个运行模式整合为一个统一的视图，可以使用这种视图实现之前的任何模式以及一些其他模式，如连拍模式。这样一来，便可以提高用户对聚焦、曝光以及更多后期处理（例如降噪、对比度和锐化）效果的控制能力。此外，这种简化的视图还能够使应用开发者更轻松地使用相机的各种功能。</p>
+<p>首先，构造一个相应的子类，然后获得父类的 类型和方法 id，以及准备对应的参数，根据父类方法的返回值选择调用不同的 <code>CallNonvirtual&lt;Type&gt;Method</code>  函数。</p>
 
-<p>Camera 2.0 将相机系统塑造为一个管道，该管道可按照 1:1 的基准将传入的帧捕获请求转化为帧。这些请求会封装有关帧的捕获和处理的所有配置信息，其中包括分辨率和像素格式；手动传感器、镜头和闪光灯控件；3A 运行模式；RAW-&gt;YUV 处理控件；统计信息生成等等。</p>
+<p>对于引用类型的，调用 CallNonvirtualObjectMethod 方法；对于基础类型的，调用 CallNonvirtualBooleanMethod、CallNonvirtualIntMethod 等等；对于无返回值类型的，调用 CallNonvirtualVoidMethod 方法。</p>
 
-<p>简单来说，应用框架从相机系统请求帧，然后相机系统将结果返回到输出流。</p>
+<p>具体看代码：</p>
 
-<p>可以将 Camera 2.0 看作是 Camera 1.0 的单向流管道。它会将每个捕获请求转化为传感器捕获的一张图像，这张图像将被处理成：</p>
+<pre><code class="language-cpp">/**
+ * 调用父类的方法
+ * 创建一个子类，由子类去调用父类的方法
+ */
+extern &quot;C&quot;
+JNIEXPORT void JNICALL
+Java_com_glumes_cppso_jnioperations_InvokeConstructorOps_callSuperMethod(JNIEnv *env, jobject instance) {
+    jclass cat_cls; // Cat 类的类型
+    jmethodID cat_cid; // Cat 类的构造方法 id
+    jstring cat_name; // Cat 类的构造方法参数
+    jobject cat;
+    // 获得对应的 类
+    cat_cls = env-&gt;FindClass(&quot;com/glumes/cppso/model/Cat&quot;);
+    if (cat_cls == NULL) {
+        return;
+    }
+    // 获得构造方法 id
+    cat_cid = env-&gt;GetMethodID(cat_cls, &quot;&lt;init&gt;&quot;, &quot;(Ljava/lang/String;)V&quot;);
+    if (cat_cid == NULL) {
+        return;
+    }
+    // 准备构造方法的参数
+    cat_name = env-&gt;NewStringUTF(&quot;this is cat name&quot;);
+    // 创建 Cat 类
+    cat = env-&gt;NewObject(cat_cls, cat_cid, cat_name);
+    if (cat == NULL) {
+        return;
+    }
+    //调用父类的 getName 参数
+    jclass animal_cls; // 父类的类型
+    jmethodID animal_mid; // 被调用的父类的方法 id
+    // 获得父类对应的类
+    animal_cls = env-&gt;FindClass(&quot;com/glumes/cppso/model/Animal&quot;);
+    if (animal_cls == NULL) {
+        return;
+    }
+    // 获得父类被调用的方法 id
+    animal_mid = env-&gt;GetMethodID(animal_cls, &quot;getName&quot;, &quot;()Ljava/lang/String;&quot;);
+    if (animal_mid == NULL) {
+        return;
+    }
+    jstring name = (jstring) env-&gt;CallNonvirtualObjectMethod(cat, animal_cls, animal_mid);
+    if (name == NULL) {
+        return;
+    }
+    LOGD(&quot;getName method value is %s&quot;, env-&gt;GetStringUTFChars(name, NULL));
 
-<ul>
-<li>包含有关捕获的元数据的结果对象。</li>
-<li>图像数据的 1 到 N 个缓冲区，每个缓冲区会进入自己的目的地 Surface。也就是我们创建 CaptureRequest 时的 addTarget 添加的 Surface。</li>
-</ul>
+    // 调用父类的其他方法
+    animal_mid = env-&gt;GetMethodID(animal_cls, &quot;callInstanceMethod&quot;, &quot;(I)V&quot;);
+    if (animal_mid == NULL) {
+        return;
+    }
+    env-&gt;CallNonvirtualVoidMethod(cat, animal_cls, animal_mid);
+}
+</code></pre>
 
-<p>可能的输出 Surface 组经过预配置：</p>
+<p>Cat 类作为 Animal 类的子类，首先由 NewObject 方法创建 Cat 类，然后调用它的父类的方法。</p>
 
-<ul>
-<li>每个 Surface 都是一个固定分辨率的图像缓冲区流的目标位置</li>
-<li>一次只能将少量的 Surface 配置为输出（约 3 个）</li>
-</ul>
+<p>由此，通过 JNI 来调用 Java 算是基本完成了。</p>
 
-<p>一个请求中包含所需的全部捕获设置，以及要针对该请求将图像缓冲区推送到其中的输出 Surface 的列表。请求可以只发生一次（使用 capture ），也可以无限重复（使用 setRepeatingRequest ）。捕获的优先级高于重复请求的优先级。</p>
-
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/camera_simple_model.png" alt="相机运行核心模式" /></p>
-
-<p>如上图所示，一个 capture 请求，左边就是要输出的目的 Surface 列表。而 CameraDevice 框内的就是请求的队列。相机的硬件设备会处理每个请求，将图像数据的缓冲区输出到设置的目的 Surface 中，同时在回调的 onCaptureComplete 方法中处理请求的结果 CaptureResult。</p>
-
-<p>就是这样一个队列模型，相机系统不断地处理队列中的请求，并且一次可以发起多个请求，而且提交的请求不会出现阻塞的情况，请求始终按照接收的顺序处理。</p>
-
-<p>同样的，如果想要实现连拍功能，只要不断发送捕获的请求 capture 就好了，而不需要像之前一样每次拍完照还得设置回预览模式。</p>
-
-<h2 id="相机模型">相机模型</h2>
-
-<p>这是一个更全面的相机模型图：</p>
-
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/camera_model.png" alt="相机模型" /></p>
-
-<p>在模型图里把一些主要函数和流程图都绘制包含进去了。我们调用的流程基本也是顺着紫色的 API 接口来的。</p>
-
-<p>可以看到，相机可以设置六种类型的 Surface 输出：</p>
-
-<ul>
-<li>MediaRecorder</li>
-<li>SurfaceView</li>
-<li>RenderScriptAllocation</li>
-<li>ImageReader</li>
-<li>MediaCodec</li>
-<li>SurfaceTexture</li>
-</ul>
-
-<p>而在 CameraCaptureSession 会话类中，发出的请求方法有如下：</p>
-
-<ul>
-<li>capture()</li>
-<li>captureBurst()</li>
-<li>setStreamingRequest()</li>
-<li>setStreamingBurst()</li>
-<li>stopRepeating()</li>
-</ul>
-
-<p>发出请求后，交由相机硬件去处理，处理后的会先将图像数据输出到缓冲区，然后再从缓冲区输出到设置的目的 Surface。</p>
-
-<p>同时，在会话中发出请求，在请求的回调中还会返回 CaptureResult 这样的请求结果，相当于是一个请求有两个返回的来源了。</p>
-
-<p>经过这样的理解安卓相机模型之后，再去看 API 的调用就不会那么困惑了。</p>
-
-<p>关于 Android Camera 的相关代码，可以参考我的 Github 工程：<a href="https://github.com/glumes/Camera2Sample">https://github.com/glumes/Camera2Sample</a>。</p>
-
-<h2 id="参考">参考</h2>
-
-<p>1、<a href="https://source.android.com/devices/camera/">https://source.android.com/devices/camera/</a></p>
+<p>具体示例代码可参考我的 Github 项目 <a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a>，欢迎 Star。</p>
 
               
                 <p>
@@ -392,7 +485,7 @@
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/">Android 通过 JNI 调用 Java 类的构造方法和父类的方法</a>
 
                 </p>
               
@@ -402,12 +495,12 @@
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/" data-toggle="tooltip" data-placement="top" title="Android 相机开发中的尺寸和方向问题">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/android/android-jni-access-field-and-method/" data-toggle="tooltip" data-placement="top" title="Android 通过 JNI 访问 Java 字段和方法调用">&larr; Previous Post</a>
           </li>
         
         
           <li class="next">
-            <a href="https://glumes.com/post/android/android-jni-basic-operation/" data-toggle="tooltip" data-placement="top" title="Android JNI 基本操作 ">Next Post &rarr;</a>
+            <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" data-toggle="tooltip" data-placement="top" title="Android  JNI 调用时缓存字段和方法 ID">Next Post &rarr;</a>
           </li>
         
       </ul>
@@ -417,15 +510,15 @@
                 <h2>See Also</h2>
                 <ul>
                     
-                    <li><a href="/post/android/android-camera-aspect-ratio--and-orientation/">Android 相机开发中的尺寸和方向问题</a></li>
+                    <li><a href="/post/android/android-jni-access-field-and-method/">Android 通过 JNI 访问 Java 字段和方法调用</a></li>
+                    
+                    <li><a href="/post/android/android-jni-array-operation/">Android JNI 数组 操作</a></li>
+                    
+                    <li><a href="/post/android/android-jni-basic-operation/">Android JNI 基本操作 </a></li>
+                    
+                    <li><a href="/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></li>
                     
                     <li><a href="/post/android/build-android-source-code/">编译安卓源码</a></li>
-                    
-                    <li><a href="/post/android/android-rxjava/">安卓异步之RxJava</a></li>
-                    
-                    <li><a href="/post/android/rxjava-wrapper-dialog/">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</a></li>
-                    
-                    <li><a href="/post/android/android-layout-inflater/">Android 布局加载之 LayoutInflater</a></li>
                     
                 </ul>
                 
