@@ -5,38 +5,41 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Android  JNI 调用时缓存字段和方法 ID</title>
-  <meta property="og:title" content="Android  JNI 调用时缓存字段和方法 ID" />
-  <meta name="twitter:title" content="Android  JNI 调用时缓存字段和方法 ID" />
-  <meta name="description" content="在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。
+  <title>Android JNI 调用时的异常处理</title>
+  <meta property="og:title" content="Android JNI 调用时的异常处理" />
+  <meta name="twitter:title" content="Android JNI 调用时的异常处理" />
+  <meta name="description" content="Android JNI 调用时的异常主要有如下两种：
 
-事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。
 
-缓存有两种方式，分别是使用时缓存和初始化时缓存。
+Native 代码调用 Java 层代码时发生了异常要处理
+Native 代码自己抛出了一个异常让 Java 层去处理
 
-">
-  <meta property="og:description" content="在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。
-
-事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。
-
-缓存有两种方式，分别是使用时缓存和初始化时缓存。
 
 ">
-  <meta name="twitter:description" content="在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。
+  <meta property="og:description" content="Android JNI 调用时的异常主要有如下两种：
 
-事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。
 
-缓存有两种方式，分别是使用时缓存和初始化时缓存。
+Native 代码调用 Java 层代码时发生了异常要处理
+Native 代码自己抛出了一个异常让 Java 层去处理
+
+
+">
+  <meta name="twitter:description" content="Android JNI 调用时的异常主要有如下两种：
+
+
+Native 代码调用 Java 层代码时发生了异常要处理
+Native 代码自己抛出了一个异常让 Java 层去处理
+
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" />
+  <meta property="og:url" content="https://glumes.com/post/android/android-jni-exception-handle/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" />
+  <link rel="canonical" href="https://glumes.com/post/android/android-jni-exception-handle/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -188,7 +191,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_630,w_1920/v1525660602/life/WechatIMG360.jpg" data-img-desc-1="广州塔 · 小蛮腰"></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1526569935/life/pexels-photo-421788.jpg" data-img-desc-1="Waves"></div>
   
 
   <header class="header-section has-img">
@@ -203,11 +206,11 @@
                 <div class="page-heading">
                 
                   
-                     <h1>Android  JNI 调用时缓存字段和方法 ID</h1>
+                     <h1>Android JNI 调用时的异常处理</h1>
                      
                     <span class="post-meta">
   
-  Posted on May 7, 2018
+  Posted on May 16, 2018
   
   
 </span>
@@ -229,7 +232,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">Android  JNI 调用时缓存字段和方法 ID</h1>
+                <h1 align="center">Android JNI 调用时的异常处理</h1>
                 
                 
             </div>
@@ -251,9 +254,9 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Mon May 7, 2018</h4>
+        <h4 id="date"> Wed May 16, 2018</h4>
     </section>
-    <h5 id="wc">900 Words|Read in about 2 Min</h5>
+    <h5 id="wc">1200 Words|Read in about 3 Min</h5>
     <h5 id="tags">Tags: 
         
         <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
@@ -266,103 +269,119 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。</p>
+            <p>Android JNI 调用时的异常主要有如下两种：</p>
 
-<p>事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。</p>
-
-<p>缓存有两种方式，分别是使用时缓存和初始化时缓存。</p>
+<ul>
+<li>Native 代码调用 Java 层代码时发生了异常要处理</li>
+<li>Native 代码自己抛出了一个异常让 Java 层去处理</li>
+</ul>
 
 <p></p>
 
-<h2 id="使用时缓存">使用时缓存</h2>
+<p>可以看到异常的发生和处理基本都需要 Native 和 Java 交互，而对于 Native 自身出了异常，也就是 C/C++ 代码有问题，导致应用崩溃的又是另一回事了。</p>
 
-<hr />
+<h2 id="native-调用-java-方法时的异常">Native 调用 Java 方法时的异常</h2>
 
-<p>使用时缓存，就是在调用时查找一次，然后将它缓存成 <code>static</code> 变量，这样下次调用时就已经被初始化过了。</p>
+<p>之前的博客中就讲述了如何从 <a href="https://glumes.com/post/android/android-jni-access-field-and-method/">Native 调用 Java 的方法</a>，先准备一个有异常的方法供 Native 去调用。</p>
 
-<p>直到内存释放了，才会缓存失效。</p>
-
-<pre><code class="language-cpp">extern &quot;C&quot;
-JNIEXPORT void JNICALL
-Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_staticCacheField(JNIEnv *env, jobject instance, jobject animal) {
-    static jfieldID fid = NULL; // 声明为 static 变量进行缓存
-    // 两种方法都行
-//    jclass cls = env-&gt;GetObjectClass(animal);
-    jclass cls = env-&gt;FindClass(&quot;com/glumes/cppso/model/Animal&quot;);
-    jstring jstr;
-    const char *c_str;
-    // 从缓存中查找
-    if (fid == NULL) {
-        fid = env-&gt;GetFieldID(cls, &quot;name&quot;, &quot;Ljava/lang/String;&quot;);
-        if (fid == NULL) {
-            return;
-        }
-    } else {
-        LOGD(&quot;field id is cached&quot;);
+<pre><code class="language-java">    private int operation() {
+        return 2 / 0;
     }
-    jstr = (jstring) env-&gt;GetObjectField(animal, fid);
-    c_str = env-&gt;GetStringUTFChars(jstr, NULL);
-    if (c_str == NULL) {
-        return;
-    }
-    env-&gt;ReleaseStringUTFChars(jstr, c_str);
-    jstr = env-&gt;NewStringUTF(&quot;new name&quot;);
-    if (jstr == NULL) {
-        return;
-    }
-    env-&gt;SetObjectField(animal, fid, jstr);
-}
 </code></pre>
 
-<p>通过声明为 static 变量进行缓存。但这种缓存方式显然有弊端，当多个调用者同时调用时，就会出现缓存多次的情况，并且每次调用时都要检查是否缓存过了。</p>
+<p>然后在 Native 中调用该方法。</p>
 
-<h2 id="初始化时缓存">初始化时缓存</h2>
-
-<p>在初始化时缓存，就是在类加载时，进行缓存。当类被加载进内存时，会先调用类的静态代码块，所以可以在类的静态代码块中进行缓存。</p>
-
-<p>比如：</p>
-
-<pre><code class="language-java">public class CacheFieldAndMethodOps extends BaseOperation {
-    
-    static {
-        initCacheMethodId(); // 静态代码块中进行缓存
-    }
-    private static native void initCacheMethodId();
-}
+<pre><code class="language-cpp">    jclass cls = env-&gt;FindClass(&quot;com/glumes/cppso/jnioperations/ExceptionOps&quot;);
+    jmethodID mid = env-&gt;GetMethodID(cls, &quot;&lt;init&gt;&quot;, &quot;()V&quot;);
+    jobject obj = env-&gt;NewObject(cls, mid);
+    mid = env-&gt;GetMethodID(cls, &quot;operation&quot;, &quot;()I&quot;);
+    // 先初始化一个类，然后调用类方法，就如博客中描述的那样
+    env-&gt;CallIntMethod(obj, mid);
 </code></pre>
 
-<p>在静态代码块中，可以将所需要的字段 id 或者方法 id 缓存成全局变量。</p>
+<p>显然，除数为 0 ，一调用应用直接崩溃了。</p>
 
-<p>具体代码如下：</p>
+<pre><code class="language-java"> java.lang.ArithmeticException: divide by zero
+</code></pre>
 
-<pre><code class="language-cpp">// 全局变量，作为缓存方法 id
-jmethodID InstanceMethodCache;
+<p>接下来就是要进行异常处理的部分了。</p>
 
-// 初始化加载时缓存方法 id
+<pre><code class="language-cpp">    jclass cls = env-&gt;FindClass(&quot;com/glumes/cppso/jnioperations/ExceptionOps&quot;);
+    jmethodID mid = env-&gt;GetMethodID(cls, &quot;&lt;init&gt;&quot;, &quot;()V&quot;);
+    jobject obj = env-&gt;NewObject(cls, mid);
+    mid = env-&gt;GetMethodID(cls, &quot;operation&quot;, &quot;()I&quot;);
+// 先初始化一个类，然后调用类方法，就如博客中描述的那样
+    env-&gt;CallIntMethod(obj, mid);
+    //检查是否发生了异常
+    jthrowable exc = env-&gt;ExceptionOccurred();
+//    jboolean result = env-&gt;ExceptionCheck();
+
+    if (exc) {
+        // 打印异常日志
+        env-&gt;ExceptionDescribe();
+        // 这行代码才是关键不让应用崩溃的代码，
+        env-&gt;ExceptionClear();
+        // 发生异常了要记得释放资源
+        env-&gt;DeleteLocalRef(cls);
+        env-&gt;DeleteLocalRef(obj);
+    }
+</code></pre>
+
+<p>添加如上代码进行处理后，应用并不会直接崩溃了，并且在 LogCat 中会看到对应的异常日志，这里面到了做了哪些操作呢？</p>
+
+<p>Native 提供了 <code>ExceptionOccurred</code> 和 <code>ExceptionCheck</code> 方法来检测是否有异常发生，前者返回的是 <code>jthrowable</code> 类型，后者返回的是 <code>jboolean</code> 类型。</p>
+
+<p>如果有异常，会通过 <code>ExceptionDescribe</code> 方法来打印异常信息，方便我们在 LogCat 中看到对应的信息。</p>
+
+<p>而 <code>ExceptionClear</code> 方法则是关键的不会让应用直接崩溃的方法，类似于 Java 的 <code>catch</code> 捕获异常处理，它会消除这次异常。</p>
+
+<p>这样就把由 Native 调用 Java 时的一个异常进行了处理，当处理完异常之后，别忘了释放对应的资源。</p>
+
+<p>不过，我们这样仅仅是消除了这次异常，还应该让调用者有异常的发生，那么就需要通过 Native 来抛出一个异常告诉 Java 调用者了。</p>
+
+<h2 id="native-抛出-java-中的异常">Native 抛出 Java 中的异常</h2>
+
+<p>有时在 Native 代码中进行一些操作，需要抛出异常到 Java ，交由上层去处理。</p>
+
+<p>比如 Java 调用 Native 方法传递了某个参数，而这个参数有问题，那么 Native 就可以抛出异常让 Java 去处理这个参数异常的问题。</p>
+
+<p>Native 抛出异常的代码大致都是相同的，可以抽出一个通用函数来：</p>
+
+<pre><code class="language-cpp">void throwByName(JNIEnv *env, const char *name, const char *msg) {
+    jclass cls = env-&gt;FindClass(name);
+    if (cls != NULL) {
+        env-&gt;ThrowNew(cls, msg);
+    }
+    env-&gt;DeleteLocalRef(cls);
+}
+// 调用抛出异常
 extern &quot;C&quot;
 JNIEXPORT void JNICALL
-Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_initCacheMethodId(JNIEnv *env, jclass type) {
-    jclass cls = env-&gt;FindClass(&quot;com/glumes/cppso/model/Animal&quot;);
-    InstanceMethodCache = env-&gt;GetMethodID(cls, &quot;getName&quot;, &quot;()Ljava/lang/String;&quot;);
+Java_com_glumes_cppso_jnioperations_ExceptionOps_nativeThrowException(JNIEnv *env, jobject instance) {
+    throwByName(env, &quot;java/lang/IllegalArgumentException&quot;, &quot;native throw exception&quot;);
 }
 </code></pre>
 
-<p>在 JNI 中直接将方法 id 缓存成全局变量了，这样再调用时，就不要再进行一次查找了，并且避免了多个线程同时调用会多次查找的情况。</p>
+<p>根据异常类型和异常信息来抛出异常。</p>
 
-<pre><code class="language-cpp">extern &quot;C&quot;
-JNIEXPORT void JNICALL
-Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_callCacheMethod(JNIEnv *env, jobject instance, jobject animal) {
-    jstring name = (jstring) env-&gt;CallObjectMethod(animal, InstanceMethodCache);
-    const char *c_name = env-&gt;GetStringUTFChars(name, NULL);
-    LOGD(&quot;call cache method and value is %s&quot;, c_name);
-}
+<p>而在 Java 中，就必须要用 try &hellip; catch&hellip; 来准备好捕获这次异常了。</p>
+
+<pre><code class="language-java">        try {
+            nativeThrowException();
+        } catch (IllegalArgumentException e) {
+            Log.e(&quot;NativeMethod&quot;, e.getMessage());
+        }
 </code></pre>
 
-<h2 id="小结">小结</h2>
+<h2 id="异常处理小结">异常处理小结</h2>
 
-<hr />
+<p>除了以上两种异常情况之外，还有一个特别常见的异常，就是当判断某个变量为 NULL 之后，执行立即返回的操作。</p>
 
-<p>可以看出，如果不能预先知道方法和字段所在类的源码，那么在使用时缓存比较合理。但如果知道的话，在初始化时缓存优点较多，既避免了每次使用时检查，还避免了在多线程被调用的情况。</p>
+<p>当发生异常时，一定要先处理异常，然后才能继续执行后面的步骤。如果不是需要立即返回的，那么就通过 <code>ExceptionClear</code>清除这次异常，然后在进行其他的处理。</p>
+
+<p>对于在 Native 中发生了异常，需要让 Java 层去处理了，则在 Native 中抛出对应的异常，由 Java 层去捕获，比如在使用 <code>ExceptionClear</code> 清除了异常之后，就可以通过 <code>throwNew</code> 来抛出异常信息。</p>
+
+<p>具体的异常处理方法和时机还是要看具体的使用场景，选择最合适的处理方法。</p>
 
 <p>具体示例代码可参考我的 Github 项目 <a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a>，欢迎 Star。</p>
 
@@ -385,7 +404,7 @@ Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_callCacheMethod(JNIEn
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/">Android  JNI 调用时缓存字段和方法 ID</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-exception-handle/">Android JNI 调用时的异常处理</a>
 
                 </p>
               
@@ -395,12 +414,12 @@ Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_callCacheMethod(JNIEn
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/" data-toggle="tooltip" data-placement="top" title="Android 通过 JNI 调用 Java 类的构造方法和父类的方法">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/android/android-jni-reference-manage-rules/" data-toggle="tooltip" data-placement="top" title="Android JNI 中的引用管理">&larr; Previous Post</a>
           </li>
         
         
           <li class="next">
-            <a href="https://glumes.com/post/android/android-jni-reference-manage-rules/" data-toggle="tooltip" data-placement="top" title="Android JNI 中的引用管理">Next Post &rarr;</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---观察矩阵">Next Post &rarr;</a>
           </li>
         
       </ul>
@@ -410,15 +429,15 @@ Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_callCacheMethod(JNIEn
                 <h2>See Also</h2>
                 <ul>
                     
+                    <li><a href="/post/android/android-jni-reference-manage-rules/">Android JNI 中的引用管理</a></li>
+                    
+                    <li><a href="/post/android/android-jni-cache-fieldid-and-methodid/">Android  JNI 调用时缓存字段和方法 ID</a></li>
+                    
                     <li><a href="/post/android/android-jni-invoke-constructor-method-and-super-method/">Android 通过 JNI 调用 Java 类的构造方法和父类的方法</a></li>
                     
                     <li><a href="/post/android/android-jni-access-field-and-method/">Android 通过 JNI 访问 Java 字段和方法调用</a></li>
                     
                     <li><a href="/post/android/android-jni-array-operation/">Android JNI 数组 操作</a></li>
-                    
-                    <li><a href="/post/android/android-jni-basic-operation/">Android JNI 基本操作 </a></li>
-                    
-                    <li><a href="/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></li>
                     
                 </ul>
                 

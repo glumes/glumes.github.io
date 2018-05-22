@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android JNI 中的引用管理</title>
+  <meta property="og:title" content="Android JNI 中的引用管理" />
+  <meta name="twitter:title" content="Android JNI 中的引用管理" />
+  <meta name="description" content="在 Native 代码中有时候会接收 Java 传入的引用类型参数，有时候也会通过 NewObject 方法来创建一个 Java 的引用类型变量。
+
+在编写 Native 代码时，要注意这个代表 Java 数据结构类型的引用在使用时会被 GC 回收的可能性。
+
+">
+  <meta property="og:description" content="在 Native 代码中有时候会接收 Java 传入的引用类型参数，有时候也会通过 NewObject 方法来创建一个 Java 的引用类型变量。
+
+在编写 Native 代码时，要注意这个代表 Java 数据结构类型的引用在使用时会被 GC 回收的可能性。
+
+">
+  <meta name="twitter:description" content="在 Native 代码中有时候会接收 Java 传入的引用类型参数，有时候也会通过 NewObject 方法来创建一个 Java 的引用类型变量。
+
+在编写 Native 代码时，要注意这个代表 Java 数据结构类型的引用在使用时会被 GC 回收的可能性。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/android/android-jni-reference-manage-rules/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/android/android-jni-reference-manage-rules/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1526569790/life/pexels-photo-940380.jpg" data-img-desc-1="Sunset"></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>Android JNI 中的引用管理</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on May 16, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">Android JNI 中的引用管理</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+        
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Wed May 16, 2018</h4>
+    </section>
+    <h5 id="wc">3000 Words|Read in about 6 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在 Native 代码中有时候会接收 Java 传入的引用类型参数，有时候也会通过 NewObject 方法来创建一个 Java 的引用类型变量。</p>
+
+<p>在编写 Native 代码时，要注意这个代表 Java 数据结构类型的引用在使用时会被 GC 回收的可能性。</p>
+
+<p></p>
+
+<p>Native 代码并不能直接通过引用来访问其内部的数据接口，必须要通过调用 JNI 接口来间接操作这些引用对象，就如在之前的系列文章中写的那样。并且 JNI 还提供了和 Java 相对应的引用类型，因此，我们就需要通过管理好这些引用来管理 Java 对象，避免在使用时被 GC 回收了。</p>
+
+<h2 id="引用简介">引用简介</h2>
+
+<p>JNI 提供了三种引用类型：</p>
+
+<ul>
+<li>局部引用</li>
+<li>全局引用</li>
+<li>弱全局引用</li>
+</ul>
+
+<h2 id="局部引用">局部引用</h2>
+
+<p>局部引用是最常见的一种引用。绝大多数 JNI 函数创建的都是局部引用，比如：NewObject、FindClass、NewObjectArray 函数等等。</p>
+
+<blockquote>
+<p>局部引用会阻止 GC 回收所引用的对象，同时，它不能在本地函数中跨函数传递，不能跨线程使用。</p>
+</blockquote>
+
+<p>局部引用在 Native 函数返回后，所引用的对象会被 GC 自动回收，也可以通过 DeleteLocalRef 函数来手动回收。</p>
+
+<p>在之前文章 JNI 调用时缓存字段和方法 ID，第一种方法采用的是使用时缓存，把字段 ID 通过 static 变量缓存起来。</p>
+
+<p>如果把 FindClass 函数创建的局部引用也通过 static 变量缓存起来，那么在函数退出后，局部引用被自动释放了，static 静态变量中存储的就是一个被释放后的内存地址，成为了一个野指针，再次调用时就会引起程序崩溃了。</p>
+
+<pre><code class="language-cpp">extern &quot;C&quot;
+JNIEXPORT jstring JNICALL
+Java_com_glumes_cppso_jnioperations_LocalAndGlobalReferenceOps_errorCacheUseLocalReference(
+        JNIEnv *env, jobject instance) {
+    static jmethodID mid = NULL;
+    static jclass cls;
+    // 局部引用不能使用 static 来缓存，否则函数退出后，自动释放，成为野指针，程序 Crash
+    if (cls == NULL) {
+        cls = env-&gt;FindClass(&quot;java/lang/String&quot;);
+        if (cls == NULL) {
+            return NULL;
+        }
+    } else {
+        LOGD(&quot;cls is not null but program will crash&quot;);
+    }
+    if (mid == NULL) {
+        mid = env-&gt;GetMethodID(cls, &quot;&lt;init&gt;&quot;, &quot;([C)V&quot;);
+        if (mid == NULL) {
+            return NULL;
+        }
+    }
+    jcharArray charEleArr = env-&gt;NewCharArray(10);
+    const jchar *j_char = env-&gt;GetStringChars(env-&gt;NewStringUTF(&quot;LocalReference&quot;), NULL);
+    env-&gt;SetCharArrayRegion(charEleArr, 0, 10, j_char);
+    jstring result = (jstring) env-&gt;NewObject(cls, mid, charEleArr);
+    env-&gt;DeleteLocalRef(charEleArr);
+    return result;
+}
+</code></pre>
+
+<h4 id="局部引用手动释放时机">局部引用手动释放时机</h4>
+
+<p>局部引用除了自动释放外，还可以通过 DeleteLocalRef 函数手动释放，它一般存在于以下场景中：</p>
+
+<ul>
+<li>当要创建大量的局部引用对象时，会造成 JNI 局部引用表的溢出。</li>
+</ul>
+
+<p>假如有以下代码，则要特别注意，及时释放局部引用，防止溢出。</p>
+
+<pre><code class="language-cpp">    for (int i = 0; i &lt; len; ++i) {
+        jstring jstr = (*env)-&gt;GetObjectArrayElement(env, arr, i);
+        ... /* process jstr */
+        (*env)-&gt;DeleteLocalRef(env, jstr);
+    }
+</code></pre>
+
+<ul>
+<li>编写工具类时，即时释放局部引用。</li>
+</ul>
+
+<p>在编写工具类时，很难知道被调用者具体会是谁，考虑到通用性，完成工具类的任务之后，就要及时释放相应的局部引用，防止被占着内存空间。</p>
+
+<ul>
+<li>不需要返回的 Native 方法，即时释放局部引用。</li>
+</ul>
+
+<p>如果 Native 方法不会返回，那么自动释放局部引用就失效了，这时候就必须要手动释放。比如，在某个一直等待的循环中，如果不及时释放局部引用，很快就会溢出了。</p>
+
+<ul>
+<li>局部引用使用完了就删除，不必要等到函数结尾。</li>
+</ul>
+
+<p>比如，通过局部引用创建了一个大对象，然后这个对象在函数中间就完成了任务，那么就可以早早地通过手动释放了，而不是等到函数的结尾才释放。</p>
+
+<h4 id="管理局部引用">管理局部引用</h4>
+
+<p>Java 还提供了一些函数来管理局部引用的生命周期：</p>
+
+<ul>
+<li>EnsureLocalCapacity</li>
+<li>NewLocalRef</li>
+<li>PushLocalFrame</li>
+<li>PopLocalFrame</li>
+</ul>
+
+<h4 id="ensurelocalcapacity-函数">EnsureLocalCapacity 函数</h4>
+
+<p>JNI 的规范指出，JVM 要确保每个 Native 方法至少可以创建 16 个局部引用，经验表明，16 个局部引用已经足够平常的使用了。</p>
+
+<p>但是，如果要与 JVM 的中对象进行复杂的交互计算，就需要创建更多的局部引用了，这时就需要使用 <code>EnsureLocalCapacity</code> 来确保可以创建指定数量的局部引用，如果创建成功返回 0 ，返回返回小于 0 ，如下代码示例：</p>
+
+<pre><code class="language-cpp">    // Use EnsureLocalCapacity
+    int len = 20;
+    if (env-&gt;EnsureLocalCapacity(len) &lt; 0) {
+        // 创建失败，out of memory
+    }
+    for (int i = 0; i &lt; len; ++i) {
+        jstring  jstr = env-&gt;GetObjectArrayElement(arr,i);
+        // 处理 字符串
+        // 创建了足够多的局部引用，这里就不用删除了，显然占用更多的内存
+    }
+</code></pre>
+
+<p>引用确保可以创建了足够的局部引用数量，所以在循环处理局部引用时可以不进行删除了，但是显然会消耗更多的内存空间了。</p>
+
+<h4 id="pushlocalframe-与-poplocalframe-函数对">PushLocalFrame 与 PopLocalFrame 函数对</h4>
+
+<p>PushLocalFrame 与 PopLocalFrame 是两个配套使用的函数对。</p>
+
+<p>它们可以为局部引用创建一个指定数量内嵌的空间，在这个函数对之间的局部引用都会在这个空间内，直到释放后，所有的局部引用都会被释放掉，不用再担心每一个局部引用的释放问题了。</p>
+
+<p>常见的使用场景就是在循环中：</p>
+
+<pre><code class="language-cpp"> // Use PushLocalFrame &amp; PopLocalFrame
+    for (int i = 0; i &lt; len; ++i) {
+        if (env-&gt;PushLocalFrame(len)) { // 创建指定数据的局部引用空间
+            //out ot memory
+        }
+        jstring jstr = env-&gt;GetObjectArrayElement(arr, i);
+        // 处理字符串
+        // 期间创建的局部引用，都会在 PushLocalFrame 创建的局部引用空间中
+        // 调用 PopLocalFrame 直接释放这个空间内的所有局部引用
+        env-&gt;PopLocalFrame(NULL); 
+    }
+</code></pre>
+
+<p>使用 PushLocalFrame &amp; PopLocalFrame 函数对，就可以在期间放心地处理局部引用，最后统一释放掉。</p>
+
+<h2 id="全局引用">全局引用</h2>
+
+<hr />
+
+<blockquote>
+<p>全局引用和局部引用一样，也会阻止它所引用的对象被回收。但是它不会在方法返回时被自动释放，必须要通过手动释放才行，而且，全局引用可以跨方法、跨线程使用。</p>
+</blockquote>
+
+<p>全局引用只能通过 <code>NewGlobalRef</code>函数来创建，然后通过 <code>DeleteGlobalRef</code> 函数来手动释放。</p>
+
+<p>还是上面提到的缓存字段的例子，现在就可以使用全局引用来缓存了。</p>
+
+<pre><code class="language-cpp">
+extern &quot;C&quot;
+JNIEXPORT jstring JNICALL
+Java_com_glumes_cppso_jnioperations_LocalAndGlobalReferenceOps_cacheWithGlobalReference(JNIEnv *env, jobject instance) {
+    static jclass stringClass = NULL;
+    if (stringClass == NULL) {
+        jclass localRefs = env-&gt;FindClass(&quot;java/lang/String&quot;);
+        if (localRefs == NULL) {
+            return NULL;
+        }
+        stringClass = (jclass) env-&gt;NewGlobalRef(localRefs);
+        env-&gt;DeleteLocalRef(localRefs);
+        if (stringClass == NULL) {
+            return NULL;
+        }
+    } else {
+        LOGD(&quot;use stringClass cached&quot;);
+    }
+    static jmethodID stringMid = NULL;
+    if (stringMid == NULL) {
+        stringMid = env-&gt;GetMethodID(stringClass, &quot;&lt;init&gt;&quot;, &quot;(Ljava/lang/String;)V&quot;);
+        if (stringMid == NULL) {
+            return NULL;
+        }
+    } else {
+        LOGD(&quot;use method cached&quot;);
+    }
+    jstring str = env-&gt;NewStringUTF(&quot;string&quot;);
+    return (jstring) env-&gt;NewObject(stringClass, stringMid, str);
+}
+</code></pre>
+
+<h3 id="弱全局引用">弱全局引用</h3>
+
+<hr />
+
+<blockquote>
+<p>弱全局引用有点类似于 Java 中的弱引用，它所引用的对象可以被 GC 回收，并且它也可以跨方法、跨线程使用。</p>
+</blockquote>
+
+<p>弱引用使用 <code>NewWeakGlobalRef</code> 方法创建，使用 <code>DeleteWeakGlobalRef</code> 方法释放。</p>
+
+<pre><code class="language-cpp">extern &quot;C&quot;
+JNIEXPORT void JNICALL
+Java_com_glumes_cppso_jnioperations_LocalAndGlobalReferenceOps_useWeakGlobalReference(JNIEnv *env, jobject instance) {
+    static jclass stringClass = NULL;
+    if (stringClass == NULL) {
+        jclass localRefs = env-&gt;FindClass(&quot;java/lang/String&quot;);
+        if (localRefs == NULL) {
+            return;
+        }
+        stringClass = (jclass) env-&gt;NewWeakGlobalRef(localRefs);
+        if (stringClass == NULL) {
+            return;
+        }
+    }
+    static jmethodID stringMid = NULL;
+    if (stringMid == NULL) {
+        stringMid = env-&gt;GetMethodID(stringClass, &quot;&lt;init&gt;&quot;, &quot;(Ljava/lang/String;)V&quot;);
+        if (stringMid == NULL) {
+            return;
+        }
+    }
+    jboolean isGC = env-&gt;IsSameObject(stringClass, NULL);
+    if (isGC) {
+        LOGD(&quot;weak reference has been gc&quot;);
+    } else {
+        jstring str = (jstring) env-&gt;NewObject(stringClass, stringMid,
+                                               env-&gt;NewStringUTF(&quot;jstring&quot;));
+        LOGD(&quot;str is %s&quot;, env-&gt;GetStringUTFChars(str, NULL));
+    }
+}
+</code></pre>
+
+<p>在使用弱引用时，要先检查弱引用所指的类对象是否被 GC 给回收了。通过 <code>isSameObject</code> 方法进行检查。</p>
+
+<p><code>isSameObject</code> 方法可以用来比较两个引用类型是否相同，也可以用来比较引用是否为 NULL。同时，还可以用 <code>isSameObject</code> 来比较弱全局引用所引用的对象是否被 GC 了，返回 JNI_TRUE 则表示回收了，JNI_FALSE 则表示未被回收。</p>
+
+<pre><code class="language-cpp">env-&gt;IsSameObject(obj1, obj2) // 比较局部引用 和 全局引用是否相同
+env-&gt;IsSameObject(obj, NULL)  // 比较局部引用或者全局引用是否为 NULL
+env-&gt;IsSameObject(wobj, NULL) // 比较弱全局引用所引用对象是否被 GC 回收
+</code></pre>
+
+<h2 id="合理管理引用">合理管理引用</h2>
+
+<hr />
+
+<p>总结一些关于引用管理方面的知识点，可以减少内存的使用和避免因为对象被引用不能释放而造成的内存浪费。</p>
+
+<p>通常来说，Native 代码大体有两种情况：</p>
+
+<ul>
+<li>直接实现 Java 层声明的 Native 函数的代码</li>
+<li>用在任何场景下的工具函数</li>
+</ul>
+
+<p>对于直接实现 Java 层声明的 Native 函数，不要造成全局引用和弱全局引用的累加，因为它们在函数返回后并不会自动释放。</p>
+
+<p>对于工具类的 Native 函数，由于它的调用场合和次数是不确定的，所以要格外小心各种引用类型，避免造成累积而导致内存溢出，比如如下规则：</p>
+
+<ul>
+<li>返回基础类型的 Native 工具函数，不能造成全局引用、弱全局引用、局部引用的积累。</li>
+<li>返回引用类型的 Native 工具函数，除了要返回的引用之外，也不能造成任何的全局引用、弱全局引用、局部引用的积累。</li>
+</ul>
+
+<p>同时，对于工具类的 Native 函数，使用缓存技术来保存一些全局引用也是能够提高效率的，正如 <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/">Android JNI 调用时缓存字段和方法 ID</a> 文章中写到的一样。同时，在工具类中，如果返回的是引用类型，最好说明返回的引用是哪一种类型，如下代码所示：</p>
+
+<pre><code class="language-cpp">while (JNI_TRUE) {
+       jstring infoString = GetInfoString(info);
+       ... /* process infoString */
+       ??? /* we need to call DeleteLocalRef, DeleteGlobalRef,
+              or DeleteWeakGlobalRef depending on the type of
+              reference returned by GetInfoString. */
+}
+</code></pre>
+
+<p>因为不清楚返回的引用是什么类型，导致不知道调用哪种方式来删除这个引用类型。</p>
+
+<p>JNI 中提供了 <code>NewLocalRef</code> 函数来保证工具类函数返回的总是一个局部引用类型，如下代码：</p>
+
+<pre><code class="language-cpp"> static jstring cachedString = NULL;
+ if (cachedString == NULL) {
+       /* create cachedString for the first time */
+       jstring cachedStringLocal = ... ;
+       /* cache the result in a global reference */
+       cachedString =(*env)-&gt;NewGlobalRef(env, cachedStringLocal);
+ }
+return (*env)-&gt;NewLocalRef(env, cachedString);
+</code></pre>
+
+<p>正如之前提到的，static 缓存是不能缓存一个局部引用的，而 cachedString 正是一个缓存的全局引用，但是通过 NewLocalRef 函数确保将返回的是一个局部引用，这样再使用后局部引用就会被自动释放掉了。</p>
+
+<p>对于引用的管理，最好的方式还是使用 <code>PushLocalFrame</code> 与 <code>PopLocalFrame</code> 函数对，在这个函数对之间的局部引用就可以自动被 PushLocalFrame 和 PopLocalFrame 接管了。</p>
+
+<h2 id="参考">参考</h2>
+
+<hr />
+
+<ol>
+<li><a href="https://blog.csdn.net/xyang81/article/details/44657385">https://blog.csdn.net/xyang81/article/details/44657385</a></li>
+</ol>
+
+<p>具体示例代码可参考我的 Github 项目 <a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a>，欢迎 Star。</p>
+
+              
+                <p>
+
+      
+
+                  <h4>最后，如果觉得文章不错，欢迎关注微信公众号：纸上浅谈</h4>
+
+                  <br/>
+
+                  <img  width = 360px; height = 360px; src="https://res.cloudinary.com/glumes-com/image/upload/v1525500999/life/qrcode_for_gh_2b0ecb0a1283_344.jpg">
+
+                  <br/>
+
+                 <a href="https://glumes.com/post/contact-and-reward/">  觉得文章对您有帮助，欢迎打赏，或者加微信交流</a>
+
+                <br />
+                <br />
+
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-reference-manage-rules/">Android JNI 中的引用管理</a>
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" data-toggle="tooltip" data-placement="top" title="Android  JNI 调用时缓存字段和方法 ID">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.com/post/android/android-jni-exception-handle/" data-toggle="tooltip" data-placement="top" title="Android JNI 调用时的异常处理">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/android/android-jni-cache-fieldid-and-methodid/">Android  JNI 调用时缓存字段和方法 ID</a></li>
+                    
+                    <li><a href="/post/android/android-jni-invoke-constructor-method-and-super-method/">Android 通过 JNI 调用 Java 类的构造方法和父类的方法</a></li>
+                    
+                    <li><a href="/post/android/android-jni-access-field-and-method/">Android 通过 JNI 访问 Java 字段和方法调用</a></li>
+                    
+                    <li><a href="/post/android/android-jni-array-operation/">Android JNI 数组 操作</a></li>
+                    
+                    <li><a href="/post/android/android-jni-basic-operation/">Android JNI 基本操作 </a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+

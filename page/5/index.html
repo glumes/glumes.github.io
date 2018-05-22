@@ -227,6 +227,117 @@
           
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-start-activity-from-launcher-3/">
+                <h2 class="post-title">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on December 22, 2017
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-2/"> Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a> 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 <code>Resumed</code>状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 <code>startSpecificActivityLocked</code>方法创建进程。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-start-activity-from-launcher-3/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                
+                  #<a href="https://glumes.com/tags/framework/">Framework</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-start-activity-from-launcher-2/">
+                <h2 class="post-title">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on December 22, 2017
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a> 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。</p>
+
+<p>通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-start-activity-from-launcher-2/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                
+                  #<a href="https://glumes.com/tags/framework/">Framework</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-start-activity-from-launcher-1/">
+                <h2 class="post-title">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on December 22, 2017
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。</p>
+
+<p>这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。</p>
+
+<p>而当我们点击应用程序图标时，也就开启了从 Launcher 启动 Activity 的过程。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-start-activity-from-launcher-1/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                
+                  #<a href="https://glumes.com/tags/framework/">Framework</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/android/rxjava-wrapper-callback/">
                 <h2 class="post-title">用 RxJava 封装回调方法 CallBack</h2>
                 
@@ -527,6 +638,9 @@
     
 </ul>
 
+        
+        
+        
         
         
         

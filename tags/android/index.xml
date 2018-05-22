@@ -8,10 +8,39 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Mon, 07 May 2018 10:39:50 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 16 May 2018 17:55:52 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/android/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android JNI 调用时的异常处理</title>
+      <link>https://glumes.com/post/android/android-jni-exception-handle/</link>
+      <pubDate>Wed, 16 May 2018 17:55:52 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/android-jni-exception-handle/</guid>
+      <description>&lt;p&gt;Android JNI 调用时的异常主要有如下两种：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Native 代码调用 Java 层代码时发生了异常要处理&lt;/li&gt;
+&lt;li&gt;Native 代码自己抛出了一个异常让 Java 层去处理&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Android JNI 中的引用管理</title>
+      <link>https://glumes.com/post/android/android-jni-reference-manage-rules/</link>
+      <pubDate>Wed, 16 May 2018 17:50:06 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/android-jni-reference-manage-rules/</guid>
+      <description>&lt;p&gt;在 Native 代码中有时候会接收 Java 传入的引用类型参数，有时候也会通过 NewObject 方法来创建一个 Java 的引用类型变量。&lt;/p&gt;
+
+&lt;p&gt;在编写 Native 代码时，要注意这个代表 Java 数据结构类型的引用在使用时会被 GC 回收的可能性。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Android  JNI 调用时缓存字段和方法 ID</title>
