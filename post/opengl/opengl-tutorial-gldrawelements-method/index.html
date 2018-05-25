@@ -5,42 +5,145 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>OpenGL 学习系列---观察矩阵</title>
-  <meta property="og:title" content="OpenGL 学习系列---观察矩阵" />
-  <meta name="twitter:title" content="OpenGL 学习系列---观察矩阵" />
-  <meta name="description" content="在 OpenGL 投影矩阵 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。
+  <title>OpenGL 的 glDrawElements  绘制方法</title>
+  <meta property="og:title" content="OpenGL 的 glDrawElements  绘制方法" />
+  <meta name="twitter:title" content="OpenGL 的 glDrawElements  绘制方法" />
+  <meta name="description" content="在之前的绘制中，我们都是通过 glDrawArrays 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。
 
-这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：https://glumpy.github.io/modern-gl.html）
+回顾一下之前提到的绘制类型：
 
 
 
-当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于视点的，视点也就是我们这篇文章要讲到的摄像机。
+
+绘制类型
+绘制方式
+
+
+
+
+
+GL_POINTS
+将传入的顶点坐标作为单独的点绘制
+
+
+
+GL_LINES
+将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线
+
+
+
+GL_LINE_STRIP
+将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线
+
+
+
+GL_LINE_LOOP
+将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。
+
+
+
+GL_TRIANGLES
+将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形
+
+
+
+GL_TRIANGLE_STRIP
+将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形
+
+
+
+GL_TRIANGLE_FAN
+将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形
+
+
+
 
 ">
-  <meta property="og:description" content="在 OpenGL 投影矩阵 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。
+  <meta property="og:description" content="在之前的绘制中，我们都是通过 glDrawArrays 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。
 
-这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：https://glumpy.github.io/modern-gl.html）
+回顾一下之前提到的绘制类型：
 
 
 
-当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于视点的，视点也就是我们这篇文章要讲到的摄像机。
+
+绘制类型
+绘制方式
+
+
+
+
+
+GL_POINTS
+将传入的顶点坐标作为单独的点绘制
+
+
+
+GL_LINES
+将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线
+
+
+
+GL_LINE_STRIP
+将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线
+
+
+
+GL_LINE_LOOP
+将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。
+
+
+
+GL_TRIANGLES
+将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形
+
+
+
+GL_TRIANGLE_STRIP
+将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形
+
+
+
+GL_TRIANGLE_FAN
+将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形
+
+
+
 
 ">
-  <meta name="twitter:description" content="在 OpenGL 投影矩阵 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。
+  <meta name="twitter:description" content="在之前的绘制中，我们都是通过 glDrawArrays 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。
 
-这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：https://glumpy.github.io/modern-gl.html）
+回顾一下之前提到的绘制类型：
 
 
 
-当定义裁剪空间视景体时，我们都需要提供近 …">
+
+绘制类型
+绘制方式
+
+
+
+
+
+GL_POINTS
+将传入的顶点坐标作为单独的点绘制
+
+
+
+GL_LINES
+将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线
+
+
+
+GL_LINE_STRIP
+将传入的顶点 …">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -192,7 +295,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1526962400/pexels-photo-122400_vqkkh9.jpg" data-img-desc-1="Camera"></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/q_87/v1527249158/code/glDrawElements.jpg" data-img-desc-1="Pen"></div>
   
 
   <header class="header-section has-img">
@@ -207,11 +310,11 @@
                 <div class="page-heading">
                 
                   
-                     <h1>OpenGL 学习系列---观察矩阵</h1>
+                     <h1>OpenGL 的 glDrawElements  绘制方法</h1>
                      
                     <span class="post-meta">
   
-  Posted on May 22, 2018
+  Posted on May 25, 2018
   
   
 </span>
@@ -233,7 +336,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">OpenGL 学习系列---观察矩阵</h1>
+                <h1 align="center">OpenGL 的 glDrawElements  绘制方法</h1>
                 
                 
             </div>
@@ -255,14 +358,12 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Tue May 22, 2018</h4>
+        <h4 id="date"> Fri May 25, 2018</h4>
     </section>
-    <h5 id="wc">2200 Words|Read in about 5 Min</h5>
+    <h5 id="wc">1500 Words|Read in about 3 Min</h5>
     <h5 id="tags">Tags: 
         
         <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
-        
-        <a href="https://glumes.com/tags/camera/">Camera</a> &nbsp;
     </h5>
 </div>
 
@@ -270,169 +371,139 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 投影矩阵</a> 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。</p>
+            <p>在之前的绘制中，我们都是通过 <code>glDrawArrays</code> 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。</p>
 
-<p>这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：<a href="https://glumpy.github.io/modern-gl.html">https://glumpy.github.io/modern-gl.html</a>）</p>
+<p>回顾一下之前提到的绘制类型：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526483191/ViewFrustum_gvy6aq.png" alt="" /></p>
+<table>
+<thead>
+<tr>
+<th>绘制类型</th>
+<th>绘制方式</th>
+</tr>
+</thead>
 
-<p>当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于<code>视点</code>的，视点也就是我们这篇文章要讲到的摄像机。</p>
+<tbody>
+<tr>
+<td>GL_POINTS</td>
+<td>将传入的顶点坐标作为单独的点绘制</td>
+</tr>
+
+<tr>
+<td>GL_LINES</td>
+<td>将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线</td>
+</tr>
+
+<tr>
+<td>GL_LINE_STRIP</td>
+<td>将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线</td>
+</tr>
+
+<tr>
+<td>GL_LINE_LOOP</td>
+<td>将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。</td>
+</tr>
+
+<tr>
+<td>GL_TRIANGLES</td>
+<td>将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形</td>
+</tr>
+
+<tr>
+<td>GL_TRIANGLE_STRIP</td>
+<td>将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形</td>
+</tr>
+
+<tr>
+<td>GL_TRIANGLE_FAN</td>
+<td>将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形</td>
+</tr>
+</tbody>
+</table>
 
 <p></p>
 
-<p>在上面的图片中，我们可以把投影矩阵的视景体的四条虚线边看成是以摄像机为起始点发出的射线。</p>
+<p>假设要绘制一个立方体，以 <code>GL_TRIANGLES</code> 的类型进行绘制，那么六个面，每个面由两个三角形组成，就得向渲染管线传入 36 个顶点，36 个顶点按照顺序进行绘制，而实际上，一个矩形也就才 8 个顶点而已。</p>
 
-<p>这样一来，当起始点也就是摄像机位置发生改变时，它所发出的射线也会随之改变，那么视景体的形状也就改变了，在其内部所观察到的内容也会发生变化。</p>
+<p>为了优化绘制的效率，减少数据的传递，于是就有了 <code>glDrawElements</code> 绘制方法。</p>
 
-<p>比如，假设此时摄像机位于彩色小球的上面，那么整个视景体就是垂直立起来了的，所观察到的小球也是朝上的那一面了。</p>
+<h2 id="gldrawelements-绘制方法">glDrawElements 绘制方法</h2>
 
-<p>所以，可以看到相机的位置和朝向，决定了视景体在什么位置和什么朝向展开。</p>
+<p><code>glDrawElements</code> 方法还是需要传递顶点数据，但只需要传递物体实际上的顶点数据，也就是最少的，不重复的顶点数据。</p>
 
-<p>在 OpenGL 坐标系统的转换公式中也可以印证这一点：</p>
+<p>然后再向渲染管线传递要绘制的顶点数据的索引，根据索引从顶点数据中取出对应的顶点，然后再按照指定的方式进行绘制。</p>
 
-<div>$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$</div>
+<p>如下图所示，图片截自《OpenGL ES 3.x 游戏开发上卷》：</p>
 
-<p>它的计算顺序是左乘，也就是说要先进行视图矩阵的计算，然后再进行投影矩阵的计算，这样一来我们就要先确定了相机的位置，然后再根据相机确定投影矩阵。</p>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1527217394/code/glDrawElements_single.png" alt="" /></p>
 
-<h2 id="确定摄像机位置">确定摄像机位置</h2>
+<p>由三个三角形组成的倒置的梯形，实际上只有五个顶点 $ {v0,v1,v2,v3,v4}$，因此也只传递了五个顶点，接下来就是确定这个五个顶点的索引顺序。</p>
 
-<p>在这里，确定相机的位置，并不仅仅是定义相机在三维中的 $(x,y,z)$坐标，而是要确定一个以相机位置为原点的坐标系。</p>
+<p>索引顺序和我们要绘制的方式有很大的关系，不同绘制方式的索引顺序不同。</p>
 
-<p>在上面也提到，投影矩阵或者说视景体的一个展开，是以相机作为参考的，那么我们肯定还需要一个摄像机的观察方向，这个方向就是视景体展开的方向。</p>
+<p>采用 <code>GL_TRIANGLE_STRIP</code> 的类型绘制，那么索引顺序就是 ${0,1,2,3,4}$。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516610022/code/camera_axes.png" alt="camera" /></p>
+<p>具体方法调用情况代码：</p>
 
-<p>如上图的左二内容所示，摄像机在 Z 轴正方向向坐标系的原点进行观察，假设此时摄像机坐标为 $A(-1,1,1)$，而原点为 $O(0,0,0)$，那么观察方向就是从 $A$ 点向 $O$ 点。而方向向量就是 $A-O$，就是向量  $ \overrightarrow {OA}(-1,1,1)$，它的方向也就是图二中的蓝色箭头所示，可以看到 摄像机的方向向量和它的观察方向正好是相反的。</p>
-
-<p>一个三维的空间坐标系是需要三个互相垂直的轴的，现在已经有了方向向量这一个了。这时可以借助一个辅助向量 上向量  $\overrightarrow{UP}$，把上向量与方向向量进行叉乘，$ \overrightarrow {UP} \cdot \overrightarrow{OA}$，就可以得到一个向量，同时垂直于上向量和方向向量，它就是右向量  $\overrightarrow{Right}$ ，它的方向指向 $X$ 轴正方向 。这里要小心叉乘的顺序，否则得到的方向就是反的了。</p>
-
-<p>如图三所以，灰色的就是辅助上向量 $\overrightarrow{UP}$，而红色箭头所指方向就是 $X$ 轴正方向。</p>
-
-<p>再利用右向量和方向向量的叉乘，就可以得到指向摄像机 $Y$ 轴方向的向量，如最右图的绿色箭头所示。</p>
-
-<p>这样就构造了三个轴互相垂直的坐标系，它就是摄像机的坐标系。</p>
-
-<h2 id="matrix-lookat-函数">Matrix.lookAt 函数</h2>
-
-<p>从上面的内容可以看到，只要知道了相机坐标点，以及观察的点，还有辅助的上向量，就可以确定摄像机的坐标系了。</p>
-
-<p>确定摄像机之后，就是用它来生成我们的观察矩阵，把观察矩阵用于在 OpenGL 渲染管线中进行处理。</p>
-
-<p>和投影矩阵一样，Android 也提供了对应函数 <code>Matrix.setLookAtM</code> 来生成 OpenGL 坐标转换中的观察矩阵。</p>
-
-<pre><code class="language-java">	 /**
-     * Defines a viewing transformation in terms of an eye point, a center of
-     * view, and an up vector.
-     *
-     * @param rm returns the result
-     * @param rmOffset index into rm where the result matrix starts
-     * @param eyeX eye point X
-     * @param eyeY eye point Y
-     * @param eyeZ eye point Z
-     * @param centerX center of view X
-     * @param centerY center of view Y
-     * @param centerZ center of view Z
-     * @param upX up vector X
-     * @param upY up vector Y
-     * @param upZ up vector Z
-     */
-    public static void setLookAtM(float[] rm, int rmOffset,
-            float eyeX, float eyeY, float eyeZ,
-            float centerX, float centerY, float centerZ, float upX, float upY,
-            float upZ)
+<pre><code class="language-java">	// 函数原型
+    public static native void glDrawElements(
+        int mode, // 绘制方式
+        int count, // 绘制数量
+        int type, // 索引的数据类型
+        java.nio.Buffer indices // 索引缓冲
+    );
+	// 定义顶点的索引数据
+    private byte[] front = {
+            // 前面索引
+            0, 1, 2, 3
+    };
+    // 索引数据传递到缓冲区
+    private ByteBuffer frontBuffer = ByteBuffer.allocateDirect(indices.length *Constants.BYTES_PRE_BYTE)
+									 .put(indices)
+	frontBuffer.position(0)								 
+	// glDrawElements 绘制
+	GLES20.glDrawElements(GLES20.GL_TRIANGLE_STRIP,front.size,GLES20.GL_UNSIGNED_BYTE, frontBuffer)
+	// glDrawArrays 绘制
+	// GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4)
 </code></pre>
 
-<p>其中，第一个参数就是要传入的观察矩阵，第二个参数是偏移量，这个一般是  0 ，之后就是相机位置、观察点、辅助上向量。</p>
+<p>在函数原型中定义了要传入的参数，根据要绘制的方法和索引缓冲区，找到对应的点进行绘制。</p>
 
-<h2 id="移动相机观察内容">移动相机观察内容</h2>
+<p>对于绘制时有重复点，采用这种方式，就可以减少向渲染管线中传递重复的点了。</p>
 
-<p>接下来通过移动摄像机来观察物体，从而加深对摄像机的理解。</p>
+<p>而且，在定义一个顶点时，大都是 <code>float</code> 类型，它是四个字节，而对于绘制量比较小，顶点数量在 <code>byte</code> 所能表达整数范围内，可以采用 <code>byte</code> 类型定义索引顺序，它只占一个字节，减少了内存的使用。</p>
 
-<h3 id="旋转移动相机">旋转移动相机</h3>
+<h2 id="gldrawelements-和-gldrawarrays-的对比">glDrawElements 和 glDrawArrays 的对比</h2>
 
-<p>用 OpenGL 来绘制一个立方体，并通过旋转移动摄像机，让摄像机绕 $Y$ 轴做圆形旋转，从而可以从不同方向来观察物体，效果图如下：</p>
+<p><code>glDrawElements</code> 方法的 <code>count</code> 的参数定义了要取多少个索引出来绘制，而且这个绘制是连续的，必须要把 <code>count</code> 数量的顶点绘制完。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif" alt="rotate-camera" /></p>
+<p>这里就有一个很有意思的地方了，有一些小游戏是这样的：要求一笔绘制完一个形状，而且不允许交叉。</p>
 
-<p>让立方体稍微向 $Z$ 轴做一点倾斜，这样最多就可以观察到三个面了。</p>
+<p>比如，要求一笔绕过立方体的六个面，而且不允许交叉，这就很难做到的了。</p>
 
-<p>具体代码示例：</p>
+<p>而使用 <code>glDrawElements</code> 方法同样会这样，采用索引不能一次不交叉的把图形全部绘制完，得采取两次绘制。</p>
 
-<pre><code class="language-java">    var num = 0
-    var RotateNum  = 360 // 绕 Y 轴做圆形旋转，把圆分成 360 份
-    val radian = (2 * Math.PI / RotateNum).toFloat() // 每一份对应的弧度
-	override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
-		//... 省略代码
-		// 通过 RxJava 的 interval 操作符，每隔 30 毫秒，移动相机观察角度
-        Observable.interval(30, TimeUnit.MILLISECONDS)
-                .subscribe {
-                    eyeX = eyeDistance * Math.sin((radian * num).toDouble()).toFloat()
-                    eyeZ = eyeDistance * Math.cos((radian * num).toDouble()).toFloat()
-                    num++
-                    if (num &gt; 360) {
-                        num = 0
-                    }
-                }
-		// 设置观察矩阵
-	    MatrixState.setCamera(eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ)		
-	    // 让物体稍微向 Z 轴负方向倾斜一定角度
-	    MatrixState.rotate(-30f, 0f, 0f, 1f)
-	}
+<p>比如在实践绘制一个立方体时，采用了如下的方式：</p>
+
+<pre><code class="language-java">	// 前面索引
+    private byte[] front = {0, 1, 2, 3};
+    // 后面索引
+    private byte[] back = { 4, 5, 6, 7};
+	// 上面索引
+    private byte[] top = {0, 1, 4, 5};
+    // 下面索引
+    private byte[] bottom = { 2, 3, 6, 7};
+    // 左面索引
+    private byte[] left = {0, 4, 2, 6};
+    // 右侧索引
+    private byte[] right = {1, 5, 3, 7};
 </code></pre>
 
-<p>在 GLSurfaceView 的 onSurfaceChanged 方法里面设定观察矩阵，并通过 RxJava 的 interval 操作符每隔 30 毫秒改变相机位置的 $X$ 坐标和 $Z$ 坐标，让摄像机在 $XOY$ 平面上绕 $Y$ 轴做圆周运动。</p>
+<p>把立方体分解成了六个面的内容进行绘制，也就是采用了六个索引缓存。</p>
 
-<p>在 onDrawFrame 方法里，每当坐标改变了，就改变相机的位置。</p>
+<p>而对于使用 <code>glDrawArrays</code>的方式，可以一次性把所有顶点传到渲染管线，并且可以选择绘制的开始和结尾点，这样就只要一个缓冲区就好了，不过代码就是要多占用内存空间了。</p>
 
-<pre><code class="language-java">    override fun onDrawFrame(gl: GL10?) {
-		//... 省略代码
-        MatrixState.setCamera(eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ)
-        GLES20.glUniformMatrix4fv(uViewMatrixAttr, 1, false, MatrixState.getVMatrix(), 0)
-        //... 省略代码
-    }
-</code></pre>
-
-<p>由于是做圆周运动，圆的半径是没有变的，所以看到的物体大小是不变的，只是看到的内容不同。</p>
-
-<h3 id="前后移动相机">前后移动相机</h3>
-
-<p>我们还可以前后移动相机，这样就相当于人走近或者离开物体，感觉到物体大小发生变化（实际上并没有）。</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526959206/code/rotate-camera-front-and-back.gif" alt="rotate-camera" /></p>
-
-<p>如上图，物体还是那个物体，但是从不同的远近来观察，所看到的大小就不一样了。</p>
-
-<pre><code class="language-java">    override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
-        super.onSurfaceChanged(gl, width, height)
-        var isPlus = true
-        var distance = eyeZ
-        Observable.interval(100, TimeUnit.MILLISECONDS)
-                .subscribe {
-                    distance = if (isPlus) distance + 0.1f else distance - 0.1f
-                    if (distance &lt; 2.0f) {
-                        isPlus = true
-                    }
-                    if (distance &gt; 5.0f) {
-                        isPlus = false
-                    }
-                    eyeZ = distance
-                    updateCamera()
-                }
-        // 将物体调整一下，可以看到三个面
-        MatrixState.rotate(-45f, 0f, 1f, 0f)
-        MatrixState.rotate(45f, 1f, 0f, 0f)
-    }
-</code></pre>
-
-<p>如上代码所示，我们改变了相机的 $Z$ 轴坐标，让它在 $[2.0,5.0]$ 之间来回移动，这样就达到了前后移动相机的效果。</p>
-
-<p>最后，还可以把两种旋转结合起来，即做圆周运动又前后移动相机，效果如下：</p>
-
-<p><embed src="https://res.cloudinary.com/glumes-com/video/upload/v1526960805/code/rotate-camera-total.mp4" autostart="false" height="500" width="500" /></p>
-
-<h2 id="小结">小结</h2>
-
-<p>通过上面的例子，就应该对 OpenGL 中的相机有一个更加清晰的认识了。</p>
+<p>所以说，能用 glDrawElements 方式的还是要采用的。</p>
 
 <p>具体代码详情，可以参考我的 Github 项目：</p>
 
@@ -457,7 +528,7 @@
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/">OpenGL 学习系列---观察矩阵</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/">OpenGL 的 glDrawElements  绘制方法</a>
 
                 </p>
               
@@ -467,13 +538,9 @@
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/android/android-jni-exception-handle/" data-toggle="tooltip" data-placement="top" title="Android JNI 调用时的异常处理">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---观察矩阵">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" data-toggle="tooltip" data-placement="top" title="OpenGL 的 glDrawElements  绘制方法">Next Post &rarr;</a>
-          </li>
         
       </ul>
             
@@ -482,15 +549,15 @@
                 <h2>See Also</h2>
                 <ul>
                     
-                    <li><a href="/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></li>
-                    
-                    <li><a href="/post/android/android-camera-aspect-ratio--and-orientation/">Android 相机开发中的尺寸和方向问题</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-view-matrix/">OpenGL 学习系列---观察矩阵</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-texture/">OpenGL 学习系列---纹理</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 学习系列---投影矩阵</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-coordinate-system/">OpenGL 学习系列---坐标系统</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-draw-basic-shape/">OpenGL 学习系列---基本形状的绘制</a></li>
                     
                 </ul>
                 

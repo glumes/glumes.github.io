@@ -8,10 +8,69 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Tue, 22 May 2018 12:04:10 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 25 May 2018 19:47:29 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 的 glDrawElements  绘制方法</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</link>
+      <pubDate>Fri, 25 May 2018 19:47:29 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</guid>
+      <description>&lt;p&gt;在之前的绘制中，我们都是通过 &lt;code&gt;glDrawArrays&lt;/code&gt; 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。&lt;/p&gt;
+
+&lt;p&gt;回顾一下之前提到的绘制类型：&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;绘制类型&lt;/th&gt;
+&lt;th&gt;绘制方式&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;GL_POINTS&lt;/td&gt;
+&lt;td&gt;将传入的顶点坐标作为单独的点绘制&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;GL_LINES&lt;/td&gt;
+&lt;td&gt;将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;GL_LINE_STRIP&lt;/td&gt;
+&lt;td&gt;将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;GL_LINE_LOOP&lt;/td&gt;
+&lt;td&gt;将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;GL_TRIANGLES&lt;/td&gt;
+&lt;td&gt;将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;GL_TRIANGLE_STRIP&lt;/td&gt;
+&lt;td&gt;将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;GL_TRIANGLE_FAN&lt;/td&gt;
+&lt;td&gt;将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 学习系列---观察矩阵</title>
