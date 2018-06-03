@@ -8,10 +8,86 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Wed, 21 Mar 2018 23:08:02 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 25 May 2018 19:47:29 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/opengl/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 的 glDrawElements  绘制方法</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</link>
+      <pubDate>Fri, 25 May 2018 19:47:29 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</guid>
+      <description>&lt;p&gt;在之前的绘制中，我们都是通过 &lt;code&gt;glDrawArrays&lt;/code&gt; 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。&lt;/p&gt;
+
+&lt;p&gt;回顾一下之前提到的绘制类型：&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;绘制类型&lt;/th&gt;
+&lt;th&gt;绘制方式&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;GL_POINTS&lt;/td&gt;
+&lt;td&gt;将传入的顶点坐标作为单独的点绘制&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;GL_LINES&lt;/td&gt;
+&lt;td&gt;将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;GL_LINE_STRIP&lt;/td&gt;
+&lt;td&gt;将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;GL_LINE_LOOP&lt;/td&gt;
+&lt;td&gt;将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;GL_TRIANGLES&lt;/td&gt;
+&lt;td&gt;将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;GL_TRIANGLE_STRIP&lt;/td&gt;
+&lt;td&gt;将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;GL_TRIANGLE_FAN&lt;/td&gt;
+&lt;td&gt;将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>OpenGL 学习系列---观察矩阵</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-view-matrix/</link>
+      <pubDate>Tue, 22 May 2018 12:04:10 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-view-matrix/</guid>
+      <description>&lt;p&gt;在 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/&#34;&gt;OpenGL 投影矩阵&lt;/a&gt; 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。&lt;/p&gt;
+
+&lt;p&gt;这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：&lt;a href=&#34;https://glumpy.github.io/modern-gl.html&#34;&gt;https://glumpy.github.io/modern-gl.html&lt;/a&gt;）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1526483191/ViewFrustum_gvy6aq.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于&lt;code&gt;视点&lt;/code&gt;的，视点也就是我们这篇文章要讲到的摄像机。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 学习系列---纹理</title>

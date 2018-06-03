@@ -5,26 +5,145 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Android Material Desing 控件小结-1</title>
-  <meta property="og:title" content="Android Material Desing 控件小结-1" />
-  <meta name="twitter:title" content="Android Material Desing 控件小结-1" />
-  <meta name="description" content="总结一下 Material Design 控件使用。
+  <title>OpenGL 的 glDrawElements  绘制方法</title>
+  <meta property="og:title" content="OpenGL 的 glDrawElements  绘制方法" />
+  <meta name="twitter:title" content="OpenGL 的 glDrawElements  绘制方法" />
+  <meta name="description" content="在之前的绘制中，我们都是通过 glDrawArrays 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。
+
+回顾一下之前提到的绘制类型：
+
+
+
+
+绘制类型
+绘制方式
+
+
+
+
+
+GL_POINTS
+将传入的顶点坐标作为单独的点绘制
+
+
+
+GL_LINES
+将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线
+
+
+
+GL_LINE_STRIP
+将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线
+
+
+
+GL_LINE_LOOP
+将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。
+
+
+
+GL_TRIANGLES
+将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形
+
+
+
+GL_TRIANGLE_STRIP
+将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形
+
+
+
+GL_TRIANGLE_FAN
+将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形
+
+
+
 
 ">
-  <meta property="og:description" content="总结一下 Material Design 控件使用。
+  <meta property="og:description" content="在之前的绘制中，我们都是通过 glDrawArrays 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。
+
+回顾一下之前提到的绘制类型：
+
+
+
+
+绘制类型
+绘制方式
+
+
+
+
+
+GL_POINTS
+将传入的顶点坐标作为单独的点绘制
+
+
+
+GL_LINES
+将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线
+
+
+
+GL_LINE_STRIP
+将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线
+
+
+
+GL_LINE_LOOP
+将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。
+
+
+
+GL_TRIANGLES
+将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形
+
+
+
+GL_TRIANGLE_STRIP
+将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形
+
+
+
+GL_TRIANGLE_FAN
+将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形
+
+
+
 
 ">
-  <meta name="twitter:description" content="总结一下 Material Design 控件使用。
+  <meta name="twitter:description" content="在之前的绘制中，我们都是通过 glDrawArrays 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。
 
-">
+回顾一下之前提到的绘制类型：
+
+
+
+
+绘制类型
+绘制方式
+
+
+
+
+
+GL_POINTS
+将传入的顶点坐标作为单独的点绘制
+
+
+
+GL_LINES
+将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线
+
+
+
+GL_LINE_STRIP
+将传入的顶点 …">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-material-design-summary-1/" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-material-design-summary-1/" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -176,8 +295,40 @@
 
 
   
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/q_87/v1527249158/code/glDrawElements.jpg" data-img-desc-1="Pen"></div>
+  
 
-  <header class="header-section ">
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>OpenGL 的 glDrawElements  绘制方法</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on May 25, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
     
     <div class="intro-header no-img">
       
@@ -185,7 +336,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">Android Material Desing 控件小结-1</h1>
+                <h1 align="center">OpenGL 的 glDrawElements  绘制方法</h1>
                 
                 
             </div>
@@ -207,12 +358,12 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Fri Dec 22, 2017</h4>
+        <h4 id="date"> Fri May 25, 2018</h4>
     </section>
-    <h5 id="wc">700 Words|Read in about 2 Min</h5>
+    <h5 id="wc">1500 Words|Read in about 3 Min</h5>
     <h5 id="tags">Tags: 
         
-        <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
+        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
     </h5>
 </div>
 
@@ -220,110 +371,143 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>总结一下 Material Design 控件使用。</p>
+            <p>在之前的绘制中，我们都是通过 <code>glDrawArrays</code> 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。</p>
+
+<p>回顾一下之前提到的绘制类型：</p>
+
+<table>
+<thead>
+<tr>
+<th>绘制类型</th>
+<th>绘制方式</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>GL_POINTS</td>
+<td>将传入的顶点坐标作为单独的点绘制</td>
+</tr>
+
+<tr>
+<td>GL_LINES</td>
+<td>将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线</td>
+</tr>
+
+<tr>
+<td>GL_LINE_STRIP</td>
+<td>将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线</td>
+</tr>
+
+<tr>
+<td>GL_LINE_LOOP</td>
+<td>将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。</td>
+</tr>
+
+<tr>
+<td>GL_TRIANGLES</td>
+<td>将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形</td>
+</tr>
+
+<tr>
+<td>GL_TRIANGLE_STRIP</td>
+<td>将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形</td>
+</tr>
+
+<tr>
+<td>GL_TRIANGLE_FAN</td>
+<td>将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形</td>
+</tr>
+</tbody>
+</table>
 
 <p></p>
 
-<h2 id="textinputlayout">TextInputLayout</h2>
+<p>假设要绘制一个立方体，以 <code>GL_TRIANGLES</code> 的类型进行绘制，那么六个面，每个面由两个三角形组成，就得向渲染管线传入 36 个顶点，36 个顶点按照顺序进行绘制，而实际上，一个矩形也就才 8 个顶点而已。</p>
 
-<p>TextInputLayout 控件是一个容器，只接受一个子元素，而子元素需要是一个 EditText 控件。</p>
+<p>为了优化绘制的效率，减少数据的传递，于是就有了 <code>glDrawElements</code> 绘制方法。</p>
 
-<p>TextInputLayout 的作用是当输入文字时，它可以把提示文字 Hint 移至 EditText 上方。</p>
+<h2 id="gldrawelements-绘制方法">glDrawElements 绘制方法</h2>
 
-<pre><code class="language-java">    &lt;android.support.design.widget.TextInputLayout
-        android:layout_width=&quot;0dp&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:layout_marginStart=&quot;8dp&quot;
-        app:layout_constraintLeft_toLeftOf=&quot;parent&quot;
-        android:layout_marginEnd=&quot;8dp&quot;
-        app:layout_constraintRight_toRightOf=&quot;parent&quot;
-        android:layout_marginTop=&quot;8dp&quot;
-        app:layout_constraintTop_toBottomOf=&quot;@+id/usernameLayout&quot;
-        android:id=&quot;@+id/passwordLayout&quot;
-        &gt;
+<p><code>glDrawElements</code> 方法还是需要传递顶点数据，但只需要传递物体实际上的顶点数据，也就是最少的，不重复的顶点数据。</p>
 
-        &lt;EditText
-            android:id=&quot;@+id/password&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:hint=&quot;hint&quot;/&gt;
-    &lt;/android.support.design.widget.TextInputLayout&gt;
+<p>然后再向渲染管线传递要绘制的顶点数据的索引，根据索引从顶点数据中取出对应的顶点，然后再按照指定的方式进行绘制。</p>
+
+<p>如下图所示，图片截自《OpenGL ES 3.x 游戏开发上卷》：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1527217394/code/glDrawElements_single.png" alt="" /></p>
+
+<p>由三个三角形组成的倒置的梯形，实际上只有五个顶点 $ {v0,v1,v2,v3,v4}$，因此也只传递了五个顶点，接下来就是确定这个五个顶点的索引顺序。</p>
+
+<p>索引顺序和我们要绘制的方式有很大的关系，不同绘制方式的索引顺序不同。</p>
+
+<p>采用 <code>GL_TRIANGLE_STRIP</code> 的类型绘制，那么索引顺序就是 ${0,1,2,3,4}$。</p>
+
+<p>具体方法调用情况代码：</p>
+
+<pre><code class="language-java">	// 函数原型
+    public static native void glDrawElements(
+        int mode, // 绘制方式
+        int count, // 绘制数量
+        int type, // 索引的数据类型
+        java.nio.Buffer indices // 索引缓冲
+    );
+	// 定义顶点的索引数据
+    private byte[] front = {
+            // 前面索引
+            0, 1, 2, 3
+    };
+    // 索引数据传递到缓冲区
+    private ByteBuffer frontBuffer = ByteBuffer.allocateDirect(indices.length *Constants.BYTES_PRE_BYTE)
+									 .put(indices)
+	frontBuffer.position(0)								 
+	// glDrawElements 绘制
+	GLES20.glDrawElements(GLES20.GL_TRIANGLE_STRIP,front.size,GLES20.GL_UNSIGNED_BYTE, frontBuffer)
+	// glDrawArrays 绘制
+	// GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4)
 </code></pre>
 
-<p>而当 EditText 中输入的内容不正确时，TextInputLayout 还能够进行错误的处理。<code>setError</code> 方法会在 EditText 下方显示红色的错误消息。<code>setErrorEnabled</code>方法开启错误提醒功能，使用代码如下：</p>
+<p>在函数原型中定义了要传入的参数，根据要绘制的方法和索引缓冲区，找到对应的点进行绘制。</p>
 
-<pre><code class="language-java"> String username = mUsernameLayout.getEditText().getText().toString();
-        String password = mPasswordLayout.getEditText().getText().toString();
+<p>对于绘制时有重复点，采用这种方式，就可以减少向渲染管线中传递重复的点了。</p>
 
-        if (!username.equals(RIGHT_NAME)){
-            mUsernameLayout.setError(&quot;not right username&quot;);
-            Log.d(TAG,&quot;not right username&quot;);
-        }else if (!password.equals(RIGHT_PASSWORD)){
-            mPasswordLayout.setError(&quot;not right password&quot;);
-            Log.d(TAG,&quot;not right password&quot;);
-        }else {
-            // 取消错误提醒
-            mUsernameLayout.setErrorEnabled(false);
-            mPasswordLayout.setErrorEnabled(false);
-            Toast.makeText(TextInputActivity.this,&quot;Welcome !&quot;,Toast.LENGTH_SHORT).show();
-        }
+<p>而且，在定义一个顶点时，大都是 <code>float</code> 类型，它是四个字节，而对于绘制量比较小，顶点数量在 <code>byte</code> 所能表达整数范围内，可以采用 <code>byte</code> 类型定义索引顺序，它只占一个字节，减少了内存的使用。</p>
+
+<h2 id="gldrawelements-和-gldrawarrays-的对比">glDrawElements 和 glDrawArrays 的对比</h2>
+
+<p><code>glDrawElements</code> 方法的 <code>count</code> 的参数定义了要取多少个索引出来绘制，而且这个绘制是连续的，必须要把 <code>count</code> 数量的顶点绘制完。</p>
+
+<p>这里就有一个很有意思的地方了，有一些小游戏是这样的：要求一笔绘制完一个形状，而且不允许交叉。</p>
+
+<p>比如，要求一笔绕过立方体的六个面，而且不允许交叉，这就很难做到的了。</p>
+
+<p>而使用 <code>glDrawElements</code> 方法同样会这样，采用索引不能一次不交叉的把图形全部绘制完，得采取两次绘制。</p>
+
+<p>比如在实践绘制一个立方体时，采用了如下的方式：</p>
+
+<pre><code class="language-java">	// 前面索引
+    private byte[] front = {0, 1, 2, 3};
+    // 后面索引
+    private byte[] back = { 4, 5, 6, 7};
+	// 上面索引
+    private byte[] top = {0, 1, 4, 5};
+    // 下面索引
+    private byte[] bottom = { 2, 3, 6, 7};
+    // 左面索引
+    private byte[] left = {0, 4, 2, 6};
+    // 右侧索引
+    private byte[] right = {1, 5, 3, 7};
 </code></pre>
 
-<h2 id="tablayout">TabLayout</h2>
+<p>把立方体分解成了六个面的内容进行绘制，也就是采用了六个索引缓存。</p>
 
-<p>TabLayout 控件是用来和 ViewPager 配合使用的。当滑动 ViewPager 内部的页面时需要让上方的 Tab 也随之移动时就可以考虑使用 TabLayout 了。</p>
+<p>而对于使用 <code>glDrawArrays</code>的方式，可以一次性把所有顶点传到渲染管线，并且可以选择绘制的开始和结尾点，这样就只要一个缓冲区就好了，不过代码就是要多占用内存空间了。</p>
 
-<p>使用 ViewPager 还需要对应的 Adapter ，简单使用代码如下：</p>
+<p>所以说，能用 glDrawElements 方式的还是要采用的。</p>
 
-<pre><code class="language-java">   mTabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager());
+<p>具体代码详情，可以参考我的 Github 项目：</p>
 
-        mViewpager.setAdapter(mTabPagerAdapter);
-
-        // 设置回调
-        mViewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-        // 设置 Tab 模式
-        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
-
-        mTabLayout.setupWithViewPager(mViewpager);
-</code></pre>
-
-<p>初次之后，还可以给 TabLayout 设置各种属性，既可以从 XML 布局中添加，也可以在代码中通过 set 方法来设置，如下图所示：</p>
-
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-tablayout-attribute.png" alt="tablayout-attribute" /></p>
-
-<h2 id="toolbar">Toolbar</h2>
-
-<p>Toolbar 可以用来替换 ActionBar 的，如果要替换 ActionBar ，那么在使用时，需要配置 Activity 的 theme 为<code>Theme.AppCompat.NoActionBar</code>，或者在对应的主题中加入如下：</p>
-
-<pre><code class="language-java">		&lt;item name=&quot;windowActionBar&quot;&gt;false&lt;/item&gt;
-		&lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;
-</code></pre>
-
-<p>不然会报错<code>This Activity already has an action bar supplied by the window decor.</code></p>
-
-<p>并且在代码中还需要添加 <code>setSupportActionBar(toolbar);</code>。</p>
-
-<p>如果当做单独的控件来使用则不需要对主题进行设置。</p>
-
-<p>Toolbar 也有各种设置选项，包括标题，子标题，Logo，菜单等。</p>
-
-<pre><code class="language-java">	mToolbar.setTitle(&quot;Title&quot;);
-        mToolbar.setSubtitle(&quot;SubTitle&quot;);
-        mToolbar.setNavigationIcon(R.mipmap.ic_drawer_home);
-        mToolbar.inflateMenu(R.menu.toolbar_menu);
-        mToolbar.setLogo(R.mipmap.ic_launcher);
-</code></pre>
-
-<p>其中，当想给 Toolbar 弹出的菜单设置样式时，可以通过 <code>popupTheme</code>属性来设置样式。popupTheme 的样式可以自定义 style ，也可以使用安卓自带的。</p>
-
-<h2 id="参考">参考</h2>
-
-<ol>
-<li><a href="http://blog.csdn.net/qiujuer/article/details/51462471">http://blog.csdn.net/qiujuer/article/details/51462471</a></li>
-<li><a href="http://www.jcodecraeer.com/a/basictutorial/2015/0821/3338.html">http://www.jcodecraeer.com/a/basictutorial/2015/0821/3338.html</a></li>
-<li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html</a></li>
-<li><a href="http://www.jianshu.com/p/79604c3ddcae">http://www.jianshu.com/p/79604c3ddcae</a></li>
-</ol>
+<p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
 
               
                 <p>
@@ -344,7 +528,7 @@
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-material-design-summary-1/">Android Material Desing 控件小结-1</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/">OpenGL 的 glDrawElements  绘制方法</a>
 
                 </p>
               
@@ -354,13 +538,9 @@
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/android/android-binder-summary/" data-toggle="tooltip" data-placement="top" title="Android Binder Summary">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---观察矩阵">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/android-material-design-summary-2/" data-toggle="tooltip" data-placement="top" title="Android Material Desing 控件小结-2">Next Post &rarr;</a>
-          </li>
         
       </ul>
             
@@ -369,15 +549,15 @@
                 <h2>See Also</h2>
                 <ul>
                     
-                    <li><a href="/post/android/android-binder-summary/">Android Binder Summary</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-view-matrix/">OpenGL 学习系列---观察矩阵</a></li>
                     
-                    <li><a href="/post/android/android-dagger-use/">Dagger2 在 Android 中的使用</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-texture/">OpenGL 学习系列---纹理</a></li>
                     
-                    <li><a href="/post/android/android-start-activity-from-launcher-4/"> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 学习系列---投影矩阵</a></li>
                     
-                    <li><a href="/post/android/android-start-activity-from-launcher-3/">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-coordinate-system/">OpenGL 学习系列---坐标系统</a></li>
                     
-                    <li><a href="/post/android/android-start-activity-from-launcher-2/">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-draw-basic-shape/">OpenGL 学习系列---基本形状的绘制</a></li>
                     
                 </ul>
                 
