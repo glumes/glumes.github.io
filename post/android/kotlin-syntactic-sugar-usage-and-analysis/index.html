@@ -5,32 +5,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Android 通过 JNI 访问 Java 字段和方法调用</title>
-  <meta property="og:title" content="Android 通过 JNI 访问 Java 字段和方法调用" />
-  <meta name="twitter:title" content="Android 通过 JNI 访问 Java 字段和方法调用" />
-  <meta name="description" content="在前面的两篇文章中，介绍了 Android 通过 JNI 进行基础类型、字符串和数组的相关操作，并描述了 Java 和 Native 在类型和签名之间的转换关系。
-
-有了之前那些基础，就可以实现 Java 和 Native 的相互调用了，在 Native 中去访问 Java 类的字段并调用相应的方法。
-
-">
-  <meta property="og:description" content="在前面的两篇文章中，介绍了 Android 通过 JNI 进行基础类型、字符串和数组的相关操作，并描述了 Java 和 Native 在类型和签名之间的转换关系。
-
-有了之前那些基础，就可以实现 Java 和 Native 的相互调用了，在 Native 中去访问 Java 类的字段并调用相应的方法。
-
-">
-  <meta name="twitter:description" content="在前面的两篇文章中，介绍了 Android 通过 JNI 进行基础类型、字符串和数组的相关操作，并描述了 Java 和 Native 在类型和签名之间的转换关系。
-
-有了之前那些基础，就可以实现 Java 和 Native 的相互调用了，在 Native 中去访问 Java 类的字段并调用相应的方法。
-
-">
+  <title>Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</title>
+  <meta property="og:title" content="Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析" />
+  <meta name="twitter:title" content="Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析" />
+  <meta name="description" content="在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless 等。 再不明白这些语法糖">
+  <meta property="og:description" content="在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless 等。 再不明白这些语法糖">
+  <meta name="twitter:description" content="在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless 等。 再不明白这些语法糖">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-jni-access-field-and-method/" />
+  <meta property="og:url" content="https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-jni-access-field-and-method/" />
+  <link rel="canonical" href="https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -182,7 +170,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_630,w_1920/v1525659524/life/WechatIMG356.jpg" data-img-desc-1="香港 · 海港城"></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="http://res.cloudinary.com/glumes-com/image/upload/c_scale,h_900,w_1804/v1530275743/life/WechatIMG420.jpg" data-img-desc-1="广深沿江高速"></div>
   
 
   <header class="header-section has-img">
@@ -197,11 +185,11 @@
                 <div class="page-heading">
                 
                   
-                     <h1>Android 通过 JNI 访问 Java 字段和方法调用</h1>
+                     <h1>Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</h1>
                      
                     <span class="post-meta">
   
-  Posted on May 7, 2018
+  Posted on June 29, 2018
   
   
 </span>
@@ -223,7 +211,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">Android 通过 JNI 访问 Java 字段和方法调用</h1>
+                <h1 align="center">Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</h1>
                 
                 
             </div>
@@ -245,14 +233,14 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Mon May 7, 2018</h4>
+        <h4 id="date"> Fri Jun 29, 2018</h4>
     </section>
-    <h5 id="wc">1900 Words|Read in about 4 Min</h5>
+    <h5 id="wc">2100 Words|Read in about 5 Min</h5>
     <h5 id="tags">Tags: 
         
         <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
         
-        <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
+        <a href="https://glumes.com/tags/kotlin/">Kotlin</a> &nbsp;
     </h5>
 </div>
 
@@ -260,193 +248,256 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在前面的两篇文章中，介绍了 Android 通过 JNI 进行基础类型、字符串和数组的相关操作，并描述了 Java 和 Native 在类型和签名之间的转换关系。</p>
+            
 
-<p>有了之前那些基础，就可以实现 Java 和 Native 的相互调用了，在 Native 中去访问 Java 类的字段并调用相应的方法。</p>
+<p>在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。</p>
 
-<p></p>
+<p>再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。</p>
 
-<h2 id="访问字段">访问字段</h2>
+<h2 id="带接收者的函数字面值">带接收者的函数字面值</h2>
 
-<hr />
+<p>使用这些语法糖之前回顾一下 Kotlin 的函数式编程，在分析 <a href="https://glumes.com/post/android/kotlin-functional-programming-whth-anko/">Kotlin 使用 Anko 构建布局</a> 文章中有提到 <strong>带接收者的函数字面值</strong>。</p>
 
-<p>Native 方法访问 Java 的字段有两种形式，分别是访问类的实例字段和访问类的静态字段。</p>
+<p>它的形式是这样的：</p>
 
-<p>不管哪种操作，首先要定义一个具体的 Java 类型，其中，有实例的字段类型和方法，也有静态的字段类型和方法。</p>
+<pre><code class="language-kotlin">// 定义一个类
+class ReceiveObject 
+// 定义一个函数
+fun exec(invoke: ReceiveObject.()-&gt; Int){}
+</code></pre>
 
-<pre><code class="language-java">public class Animal {
-    protected String name;
-    public static int num = 0;
-    public Animal(String name) {
-        this.name = name;
+<p>在 Kotlin 中，函数也可以当做变量传参，例如：</p>
+
+<pre><code class="language-kotlin">fun funAsArg(args:()-&gt;Int){}
+// 调用
+funAsArg { 2 }
+</code></pre>
+
+<p><strong>args</strong> 是变量名，它的类型就是函数，函数形式在变量名后面约定：<code>()-&gt;Int</code>，函数没有参数，但是会返回一个 Int 类型的值。</p>
+
+<p>而带接收者的函数字面值，就是在作为传入参数的函数变量的具体函数形式的参数前面多了接收者对象，简单说就是在 <code>()</code>前面多了一个点和一个对象，成了如下的形式：</p>
+
+<pre><code class="language-kotlin">fun exec(invoke: ReceiveObject.()-&gt; Int){}
+</code></pre>
+
+<p>就是这多了的一个点和一个对象，让它有了不一样的功能。</p>
+
+<p>简单的说，invoke 变量是一个函数作为变量，需要传递一个具体函数实现作为形参给 invoke，那么在具体函数实现里面就可以调用接收者对象 ReceiveObject 的相关方法，如下：</p>
+
+<pre><code class="language-kotlin">	// 接收者对象，有个 show 方法
+	class ReceiveObject{
+	    fun show(){
+	        println(&quot;call&quot;)
+	    }
+	}
+	// 具体函数实现
+	val invoke: ReceiveObject.() -&gt; Int = {
+        this.show() // 用 this 指代 接收者对象 ReceiveObject
+        2
     }
-    public String getName() {
-        return this.name;
-    }
-    public int getNum() {
-        return num;
-    }
+    exec(invoke)
+</code></pre>
+
+<p>如上，在 invoke 方法里面使用 <code>this</code> 指代 ReceiveObject 对象，可以调用它的方法。</p>
+
+<p>而 invoke 变量是作为参数传递给 exec 函数的，如果 exec 函数为空，那么 inkoke 具体实现的 show 方法也不会被调用的，在 exec 中调用 invoke 的方法如下：</p>
+
+<pre><code class="language-kotlin">fun exec(invoke: ReceiveObject.() -&gt; Int){
+    val receObj = ReceiveObject()
+    // 两种调用形式
+	// 类似于 ReceiceObject 拓展函数一样的调用
+    receObj.invoke() 
+    // 把 ReceiceObject 作为参数传递给 invoke 调用
+    invoke(receObj)
 }
 </code></pre>
 
-<h3 id="访问类的实例字段">访问类的实例字段</h3>
+<p>在 exec 的具体调用中，我们需要构造一个 ReceiveObject 对象实例，不然怎么去调用它的 show 方法呢。</p>
 
-<p>访问 Java 类的字段，大致步骤如下：</p>
+<p>在上面的例子中，还需要构造一个指定的接收者对象实例才能完成 invoke 的调用，而 Kotlin 的语法糖中还有一种叫做 <code>拓展函数</code>。</p>
 
-<ol>
-<li>获取 Java 对象的类</li>
-<li>获取对应字段的 id</li>
-<li>获取具体的字段值</li>
-</ol>
+<h2 id="拓展函数">拓展函数</h2>
 
-<p>以访问以上 Animal 类的 name 字段，并将其修改为例：</p>
+<p>拓展函数相当于给某个类添加函数，但这个函数并不属于这个类的函数，和 static 方法是两码事。</p>
 
-<pre><code class="language-java">private native void accessInstanceFiled(Animal animal);
+<pre><code class="language-kotlin">	fun Context.showToast(msg: String) {
+	    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+	}
 </code></pre>
 
-<p>对应的 C++ 代码如下：</p>
+<p>在拓展函数中，使用 this 指代被拓展的类实例，上面代码中 this 指代就是 Context 。</p>
 
-<pre><code class="language-cpp">extern &quot;C&quot;
-JNIEXPORT void JNICALL
-Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_accessInstanceFiled(JNIEnv *env,jobject instance, jobject animal) {
-    jfieldID fid; // 想要获取的字段 id
-    jstring jstr; // 字段对应的具体的值
-    const char *str; // 将 Java 的字符串转换为 Native 的字符串
-    jclass cls = env-&gt;GetObjectClass(animal); // 获取 Java 对象的类
-    fid = env-&gt;GetFieldID(cls, &quot;name&quot;, &quot;Ljava/lang/String;&quot;); // 获取对应字段的 id
-    if (fid == NULL) { // 如果字段为 NULL ，直接退出，查找失败
-        return;
-    }
-    jstr = (jstring) env-&gt;GetObjectField(animal, fid); // 获取字段对应的值
-    str = env-&gt;GetStringUTFChars(jstr, NULL);
-    if (str == NULL) {
-        return;
-    }
-    LOGD(&quot;name is %s&quot;, str);
-    env-&gt;ReleaseStringUTFChars(jstr, str);
-    jstr = env-&gt;NewStringUTF(&quot;replaced name&quot;);
-    if (jstr == NULL) {
-        return;
-    }
-    env-&gt;SetObjectField(animal, fid, jstr); // 修改字段对应的值 
+<p>有了 拓展函数和带接收者的函数字面值，就可以实现文章标题提到的那些语法糖了。</p>
+
+<p>例如，针对 ReceiveObject 对象添加它的拓展函数，拓展函数的参数又是一个函数，函数是带接收者的函数字面值，这个接收者对象就是 ReceiveObject 对象它本身，这样调用 invoke 方法就不用再构造 ReceiveObject 对象了。</p>
+
+<pre><code class="language-kotlin">fun ReceiveObject.exec(invoke: ReceiveObject.() -&gt; Int){
+    invoke()
 }
 </code></pre>
 
-<p>在上面的代码中，首先通过 <code>GetObjectClass</code> 函数获取对应的 Java 类，其参数就是要获得的对象类型 jobject ，然后得到的结果就是一个 jclass 类型的值，代表 Java 的 Class 类型。</p>
+<h3 id="语法糖">语法糖</h3>
 
-<p>其次是通过 <code>GetFieldID</code> 方法获得 Java 类型对应的字段 id 。其中，第一个参数就是之前获得的 Java 类型，第二个参数就是在 Java 中字段的具体名字，第三个参数就是字段对应的具体类型，这个类型的签名描述要转换成 Native 的表示形式，也就是之前提到的 Java 和 Native 的签名转换。</p>
+<p>下面介绍的语法糖都是位于 Kotlin Standard.kt 文件中的。</p>
 
-<p>得到了 Java 类型和字段的 id 后，就可以通过 <code>GetObjectField</code> 方法来获取具体的值，它的两个参数分别是之前获得的 Java 类型和字段 id 。</p>
+<h3 id="run-语法糖">run 语法糖</h3>
 
-<p><code>GetObjectField</code> 方法有很多形态，对于字段值是引用类型的，统一是 <code>GetObjectField</code>，然后得到的结果转型为想要的类型。对于基础类型，则有则对应的方法，比如 <code>GetBooleanField</code>、<code>GetIntField</code>、<code>GetDoubleField</code> 等等。</p>
+<p>run 的语法糖有两种：</p>
 
-<p>得到了字段的值之后，就可以进行想要的操作了。</p>
-
-<p>最后，还可以通过 <code>SetObjectField</code> 方法来修改字段对应的值。它的前两个参数也是对应的 Java 类型和字段 id，最后的参数则是具体的值，此方法也是针对于字段类型是引用类型，而对于基础类型，也有着对应的方法，比如 <code>SetBooleanField</code>、<code>SetCharField</code>、<code>SetDoubleField</code>。</p>
-
-<h3 id="访问类的静态字段">访问类的静态字段</h3>
-
-<p>访问类的静态字段，大致步骤和类的实例字段类似：</p>
-
-<pre><code class="language-java">private native void accessStaticField(Animal animal);
-</code></pre>
-
-<p>对应的 C++ 代码如下：</p>
-
-<pre><code class="language-cpp">extern &quot;C&quot;
-JNIEXPORT void JNICALL
-Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_accessStaticField(JNIEnv *env, jobject instance,jobject animal) {
-    jfieldID fid;
-    jint num;
-    jclass cls = env-&gt;GetObjectClass(animal);
-    fid = env-&gt;GetStaticFieldID(cls, &quot;num&quot;, &quot;I&quot;);
-    if (fid == NULL) {
-        return;
+<pre><code class="language-kotlin">public inline fun &lt;R&gt; run(block: () -&gt; R): R {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
-    num = env-&gt;GetStaticIntField(cls, fid);
-    LOGD(&quot;get static field num is %d&quot;, num);
-    env-&gt;SetStaticIntField(cls, fid, ++num);
+    return block()
 }
 </code></pre>
 
-<p>类的静态和实例字段的访问最大不同就在于，JNI 调用对应的方法不同。对于类的静态字段，JNI 的方法多了 <code>Static</code> 的标志来表明这个对应于类的静态字段访问。</p>
+<p>这种语法糖传递的参数就仅仅是一个函数，不是带接收者对象的函数字面值，它的返回结果就是 block 函数调用后的结果。</p>
 
-<h2 id="方法调用">方法调用</h2>
+<p>调用示例：</p>
 
-<hr />
-
-<p>JNI 调用 Java 方法和 JNI 访问 Java 字段的步骤也大致相同，</p>
-
-<ol>
-<li>获取 Java 对象的类</li>
-<li>获取对应方法的 id</li>
-<li>调用具体的方法</li>
-</ol>
-
-<p>以调用类的实例方法和静态方法为例：</p>
-
-<h3 id="调用类的实例方法">调用类的实例方法</h3>
-
-<p>JNI 调用 Java 类的实例方法</p>
-
-<pre><code class="language-java">    private native void callInstanceMethod(Animal animal);
+<pre><code class="language-kotlin">    var result = kotlin.run { 
+            &quot;value&quot;
+        }
 </code></pre>
 
-<p>对应 C++ 代码如下：</p>
+<p>相对于给 arg 变量赋值为 value 字符串。</p>
 
-<pre><code class="language-cpp">// Native 访问 Java 的类实例方法
-extern &quot;C&quot;
-JNIEXPORT void JNICALL
-Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callInstanceMethod(JNIEnv *env, jobject instance,jobject animal) {
-    jclass cls = env-&gt;GetObjectClass(animal); // 获得具体的类
-    jmethodID mid = env-&gt;GetMethodID(cls, &quot;callInstanceMethod&quot;, &quot;(I)V&quot;); // 获得具体的方法 id
-    if (mid == NULL) {
-        return;
+<p>run 的另一种语法糖：</p>
+
+<pre><code class="language-kotlin">public inline fun &lt;T, R&gt; T.run(block: T.() -&gt; R): R {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
-    env-&gt;CallVoidMethod(animal, mid, 2); // 调用方法
+    return block()
 }
 </code></pre>
 
-<p>与访问字段不同的是，<code>GetFieldID</code> 方法换成了 <code>GetMethodID</code> 方法，另外由 <code>CallVoidMethod</code> 函数来调用具体的方法，前面两个参数是获得的类和方法 id，最后的参数是具体调用方法的参数。</p>
+<p>首先，这个语法糖是一个拓展函数，而且用到了泛型 <code>&lt;T,R&gt;</code>，T 类型的拓展函数，返回的是 R 类型，T 和 R 可以相同。</p>
 
-<p><code>GetMethodID</code> 方法的第一个参数就是具体的 Java 类型，第二个参数是该 Java 类的对应实例方法的名称，第三个参数就是该方法对应的返回类型和参数签名转换成 Native 对应的描述。</p>
+<p>其次，传递的参数是带接收者对象的函数字面值，也就是说可以在 block 函数里面调用 T 的相关方法，通过 this 来指代 T ，在 run 方法内部就是调用了 block 方法，返回 block 函数调用后的结果。</p>
 
-<p>对于不需要返回值的函数，调用 <code>CallVoidMethod</code> 即可，对于返回值为引用类型的，调用 <code>CallObjectMethod</code> 方法，对于返回基础类型的方法，则有各自对应的方法调用，比如：<code>CallBooleanMethod</code>、<code>CallShortMethod</code>、<code>CallDoubleMethod</code> 等等。</p>
+<p>调用示例：</p>
 
-<h3 id="调用类的静态方法">调用类的静态方法</h3>
-
-<p>对于调用类的静态方法和调用类的实例方法类似：</p>
-
-<pre><code class="language-java">    private native void callStaticMethod(Animal animal);
+<pre><code class="language-kotlin">            val result = &quot;a&quot;.run {
+                this.plus(&quot;b&quot;)
+            }
 </code></pre>
 
-<p>对应 C++ 代码如下：</p>
+<h3 id="contracts-dsl">Contracts DSL</h3>
 
-<pre><code class="language-cpp">// Native 访问 Java 的静态方法
-extern &quot;C&quot;
-JNIEXPORT void JNICALL
-Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callStaticMethod(JNIEnv *env,jobject instance, jobject animal) {
-    jclass cls = env-&gt;GetObjectClass(animal);
-    jmethodID argsmid = env-&gt;GetStaticMethodID(cls, &quot;callStaticMethod&quot;,
-                                               &quot;(Ljava/lang/String;)Ljava/lang/String;&quot;);
-    if (argsmid == NULL) {
-        return;
-    }
-    jstring jstr = env-&gt;NewStringUTF(&quot;jstring&quot;);
-    env-&gt;CallStaticObjectMethod(cls, argsmid, jstr);
+<p>在 run 的语法糖里面还出现了如下一段代码：</p>
+
+<pre><code class="language-kotlin"> contract {
+      callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+   }
 </code></pre>
 
-<p>调用类的静态方法 callStaticMethod，该方法需要传递一个 String 字符串参数，同时返回一个字符串参数。</p>
+<p>Google 了一番之后</p>
 
-<p>具体的调用过程和调用类的实例方法类似，差别也只是在于调用方法名多加了一个 Static 的标识。</p>
+<ul>
+<li><a href="https://discuss.kotlinlang.org/t/status-of-kotlin-internal-contracts/6392/2">https://discuss.kotlinlang.org/t/status-of-kotlin-internal-contracts/6392/2</a></li>
+<li><a href="https://stackoverflow.com/questions/49729037/how-does-kotlin-internal-contracts-contractbuilderktcontract-work-in-kotlin">https://stackoverflow.com/questions/49729037/how-does-kotlin-internal-contracts-contractbuilderktcontract-work-in-kotlin</a></li>
+<li><a href="https://aisia.moe/2018/03/25/kotlin-contracts-dsl/">https://aisia.moe/2018/03/25/kotlin-contracts-dsl/</a></li>
+</ul>
 
-<h2 id="小结">小结</h2>
+<p>得出原来这是 Kotlin 1.2.x 版本中出现的，但实际并没有用，是 Kotlin 后续发展用来解决如下代码问题的：</p>
 
-<hr />
+<pre><code class="language-kotlin">if (!x.isNullOrEmpty()) { 
+  // we know that 'x != null' here 
+  println(x.length)
+}
+</code></pre>
 
-<p>可以看到，从 JNI 中访问 Java 的字段和访问，两者的步骤都是大致相似的，只是调用的 JNI 方法有所区别。</p>
+<p>假设 x 是可以为 null 的，经过 isNullOrEmpty 函数判断之后，再执行 println 函数，那么它肯定就不是 null 了，就不需要再加两个 <code>!!</code> 来表示 x 不为 null 了，而现在的情况是要添加 <code>!!</code> 。</p>
 
-<p>具体示例代码可参考我的 Github 项目 <a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a>，欢迎 Star。</p>
+<p>从 Google 来的信息得知， contract 这段代码就是为了这样的问题的。</p>
+
+<p>由于语法糖都有那样一段代码，所以就先把它们去掉了。</p>
+
+<h3 id="let-语法糖">let 语法糖</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T, R&gt; T.let(block: (T) -&gt; R): R {
+    return block(this)
+}
+</code></pre>
+
+<p>let 语法糖传递的参数是一个函数，不是带接收者的函数字面值，但 block 函数的参数就是 T 类型，所以可以在 block 里面调用 T 类型的方法，但不能通过 this 来指代 T 了，通过 it 来指代 T 类型。</p>
+
+<p>调用示例：</p>
+
+<pre><code class="language-kotlin">            val result = &quot;a&quot;.let {
+                it.plus(&quot;b&quot;)
+            }
+</code></pre>
+
+<h3 id="with-语法糖">with 语法糖</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T, R&gt; with(receiver: T, block: T.() -&gt; R): R {
+    return receiver.block()
+}
+</code></pre>
+
+<p>with 语法糖不再是一个拓展函数了，而是需要在语法糖的第一个参数里面传入接收者对象的实例，第二个参数就是带接收者的函数字面值实例，返回的也是 block 调用的结果，这一点和 run 语法糖类似。</p>
+
+<p>调用示例：</p>
+
+<pre><code class="language-kotlin">            val result = with(&quot;a&quot;) {
+                this.plus(&quot;b&quot;)
+            }
+</code></pre>
+
+<h3 id="apply-语法糖">apply 语法糖</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T&gt; T.apply(block: T.() -&gt; Unit): T {
+    block()
+    return this
+}
+</code></pre>
+
+<p>apply 语法糖和 run 语法糖都类似，只不过它返回的不是 block 函数调用的结果，而是返回调用者本身，返回 T 类型。</p>
+
+<h3 id="also-语法糖">also 语法糖</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T&gt; T.also(block: (T) -&gt; Unit): T {
+    block(this)
+    return this
+}
+</code></pre>
+
+<p>also 语法糖和 let 语法糖有点类似，只不过返回的结果不是 block 调用结果，而是返回它本身，返回 T 类型。</p>
+
+<p>调用示例：</p>
+
+<pre><code class="language-kotlin">            var result = &quot;a&quot;.also {
+                it.plus(&quot;b&quot;)
+            }
+</code></pre>
+
+<h3 id="takeif-语法糖">takeIf 语法糖</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T&gt; T.takeIf(predicate: (T) -&gt; Boolean): T? {
+    return if (predicate(this)) this else null
+}
+</code></pre>
+
+<p>takeIf 语法糖会调用 predicate 函数进行判断，如果为 true 就返回它本身，否则返回 null 。</p>
+
+<h3 id="takeunless-语法糖">takeUnless 语法糖</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T&gt; T.takeUnless(predicate: (T) -&gt; Boolean): T? {
+    return if (!predicate(this)) this else null
+}
+</code></pre>
+
+<p>takeUnless 和 takeIf 正好相反，如果 predicate 返回 false 就返回它本身，否则返回 null 。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>这么多的语法糖，其实他们的原理都是类似的，共同点在于都是有返回值的，而区别就在于对原有的值进行了哪些操作，然后如何返回最终的值。</p>
+
+<p>最后，光是了解他们的原理和调用情况还是不够的，再不影响代码阅读的情况下要把它们引入到我们的代码中去，灵活地使用它们。</p>
+
 
               
                 <p>
@@ -465,7 +516,7 @@ Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callStaticMethod(JNIEnv *e
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-access-field-and-method/">Android 通过 JNI 访问 Java 字段和方法调用</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/">Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</a>
 
                 </p>
               
@@ -475,13 +526,9 @@ Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callStaticMethod(JNIEnv *e
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/android/android-jni-array-operation/" data-toggle="tooltip" data-placement="top" title="Android JNI 数组 操作">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" data-toggle="tooltip" data-placement="top" title="OpenGL 的 glDrawElements  绘制方法">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/" data-toggle="tooltip" data-placement="top" title="Android 通过 JNI 调用 Java 类的构造方法和父类的方法">Next Post &rarr;</a>
-          </li>
         
       </ul>
             
@@ -490,15 +537,15 @@ Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callStaticMethod(JNIEnv *e
                 <h2>See Also</h2>
                 <ul>
                     
-                    <li><a href="/post/android/android-jni-array-operation/">Android JNI 数组 操作</a></li>
+                    <li><a href="/post/android/kotlin-functional-programming-whth-anko/">Kotlin 函数式编程与 Anko 构建布局实现原理分析</a></li>
                     
-                    <li><a href="/post/android/android-jni-basic-operation/">Android JNI 基本操作 </a></li>
+                    <li><a href="/post/android/kotlin-with-anko/">Kotlin 使用 Anko 布局那些事</a></li>
                     
-                    <li><a href="/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></li>
+                    <li><a href="/post/android/android-jni-exception-handle/">Android JNI 调用时的异常处理</a></li>
                     
-                    <li><a href="/post/android/build-android-source-code/">编译安卓源码</a></li>
+                    <li><a href="/post/android/android-jni-reference-manage-rules/">Android JNI 中的引用管理</a></li>
                     
-                    <li><a href="/post/android/android-rxjava/">安卓异步之RxJava</a></li>
+                    <li><a href="/post/android/android-jni-cache-fieldid-and-methodid/">Android  JNI 调用时缓存字段和方法 ID</a></li>
                     
                 </ul>
                 

@@ -8,10 +8,19 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 25 May 2018 19:47:29 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 29 Jun 2018 20:31:53 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</title>
+      <link>https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</link>
+      <pubDate>Fri, 29 Jun 2018 20:31:53 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</guid>
+      <description>在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless 等。 再不明白这些语法糖</description>
+    </item>
     
     <item>
       <title>OpenGL 的 glDrawElements  绘制方法</title>
