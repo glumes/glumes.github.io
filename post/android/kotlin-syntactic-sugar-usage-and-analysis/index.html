@@ -8,9 +8,21 @@
   <title>Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</title>
   <meta property="og:title" content="Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析" />
   <meta name="twitter:title" content="Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析" />
-  <meta name="description" content="在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless 等。 再不明白这些语法糖">
-  <meta property="og:description" content="在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless 等。 再不明白这些语法糖">
-  <meta name="twitter:description" content="在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless 等。 再不明白这些语法糖">
+  <meta name="description" content="在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。
+
+再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。
+
+">
+  <meta property="og:description" content="在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。
+
+再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。
+
+">
+  <meta name="twitter:description" content="在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。
+
+再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。
+
+">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/" />
@@ -248,11 +260,11 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            
-
-<p>在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。</p>
+            <p>在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。</p>
 
 <p>再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。</p>
+
+<p></p>
 
 <h2 id="带接收者的函数字面值">带接收者的函数字面值</h2>
 
@@ -497,7 +509,6 @@ funAsArg { 2 }
 <p>这么多的语法糖，其实他们的原理都是类似的，共同点在于都是有返回值的，而区别就在于对原有的值进行了哪些操作，然后如何返回最终的值。</p>
 
 <p>最后，光是了解他们的原理和调用情况还是不够的，再不影响代码阅读的情况下要把它们引入到我们的代码中去，灵活地使用它们。</p>
-
 
               
                 <p>
