@@ -8,10 +8,23 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 22 Dec 2017 10:26:57 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 29 Jun 2018 20:31:53 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</title>
+      <link>https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</link>
+      <pubDate>Fri, 29 Jun 2018 20:31:53 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</guid>
+      <description>&lt;p&gt;在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。&lt;/p&gt;
+
+&lt;p&gt;再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Kotlin 函数式编程与 Anko 构建布局实现原理分析</title>

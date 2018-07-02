@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</title>
+  <meta property="og:title" content="Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析" />
+  <meta name="twitter:title" content="Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析" />
+  <meta name="description" content="在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。
+
+再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。
+
+">
+  <meta property="og:description" content="在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。
+
+再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。
+
+">
+  <meta name="twitter:description" content="在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。
+
+再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="http://res.cloudinary.com/glumes-com/image/upload/c_scale,h_900,w_1804/v1530275743/life/WechatIMG420.jpg" data-img-desc-1="广深沿江高速"></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on June 29, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+        
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Fri Jun 29, 2018</h4>
+    </section>
+    <h5 id="wc">2100 Words|Read in about 5 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/kotlin/">Kotlin</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。</p>
+
+<p>再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。</p>
+
+<p></p>
+
+<h2 id="带接收者的函数字面值">带接收者的函数字面值</h2>
+
+<p>使用这些语法糖之前回顾一下 Kotlin 的函数式编程，在分析 <a href="https://glumes.com/post/android/kotlin-functional-programming-whth-anko/">Kotlin 使用 Anko 构建布局</a> 文章中有提到 <strong>带接收者的函数字面值</strong>。</p>
+
+<p>它的形式是这样的：</p>
+
+<pre><code class="language-kotlin">// 定义一个类
+class ReceiveObject 
+// 定义一个函数
+fun exec(invoke: ReceiveObject.()-&gt; Int){}
+</code></pre>
+
+<p>在 Kotlin 中，函数也可以当做变量传参，例如：</p>
+
+<pre><code class="language-kotlin">fun funAsArg(args:()-&gt;Int){}
+// 调用
+funAsArg { 2 }
+</code></pre>
+
+<p><strong>args</strong> 是变量名，它的类型就是函数，函数形式在变量名后面约定：<code>()-&gt;Int</code>，函数没有参数，但是会返回一个 Int 类型的值。</p>
+
+<p>而带接收者的函数字面值，就是在作为传入参数的函数变量的具体函数形式的参数前面多了接收者对象，简单说就是在 <code>()</code>前面多了一个点和一个对象，成了如下的形式：</p>
+
+<pre><code class="language-kotlin">fun exec(invoke: ReceiveObject.()-&gt; Int){}
+</code></pre>
+
+<p>就是这多了的一个点和一个对象，让它有了不一样的功能。</p>
+
+<p>简单的说，invoke 变量是一个函数作为变量，需要传递一个具体函数实现作为形参给 invoke，那么在具体函数实现里面就可以调用接收者对象 ReceiveObject 的相关方法，如下：</p>
+
+<pre><code class="language-kotlin">	// 接收者对象，有个 show 方法
+	class ReceiveObject{
+	    fun show(){
+	        println(&quot;call&quot;)
+	    }
+	}
+	// 具体函数实现
+	val invoke: ReceiveObject.() -&gt; Int = {
+        this.show() // 用 this 指代 接收者对象 ReceiveObject
+        2
+    }
+    exec(invoke)
+</code></pre>
+
+<p>如上，在 invoke 方法里面使用 <code>this</code> 指代 ReceiveObject 对象，可以调用它的方法。</p>
+
+<p>而 invoke 变量是作为参数传递给 exec 函数的，如果 exec 函数为空，那么 inkoke 具体实现的 show 方法也不会被调用的，在 exec 中调用 invoke 的方法如下：</p>
+
+<pre><code class="language-kotlin">fun exec(invoke: ReceiveObject.() -&gt; Int){
+    val receObj = ReceiveObject()
+    // 两种调用形式
+	// 类似于 ReceiceObject 拓展函数一样的调用
+    receObj.invoke() 
+    // 把 ReceiceObject 作为参数传递给 invoke 调用
+    invoke(receObj)
+}
+</code></pre>
+
+<p>在 exec 的具体调用中，我们需要构造一个 ReceiveObject 对象实例，不然怎么去调用它的 show 方法呢。</p>
+
+<p>在上面的例子中，还需要构造一个指定的接收者对象实例才能完成 invoke 的调用，而 Kotlin 的语法糖中还有一种叫做 <code>拓展函数</code>。</p>
+
+<h2 id="拓展函数">拓展函数</h2>
+
+<p>拓展函数相当于给某个类添加函数，但这个函数并不属于这个类的函数，和 static 方法是两码事。</p>
+
+<pre><code class="language-kotlin">	fun Context.showToast(msg: String) {
+	    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+	}
+</code></pre>
+
+<p>在拓展函数中，使用 this 指代被拓展的类实例，上面代码中 this 指代就是 Context 。</p>
+
+<p>有了 拓展函数和带接收者的函数字面值，就可以实现文章标题提到的那些语法糖了。</p>
+
+<p>例如，针对 ReceiveObject 对象添加它的拓展函数，拓展函数的参数又是一个函数，函数是带接收者的函数字面值，这个接收者对象就是 ReceiveObject 对象它本身，这样调用 invoke 方法就不用再构造 ReceiveObject 对象了。</p>
+
+<pre><code class="language-kotlin">fun ReceiveObject.exec(invoke: ReceiveObject.() -&gt; Int){
+    invoke()
+}
+</code></pre>
+
+<h3 id="语法糖">语法糖</h3>
+
+<p>下面介绍的语法糖都是位于 Kotlin Standard.kt 文件中的。</p>
+
+<h3 id="run-语法糖">run 语法糖</h3>
+
+<p>run 的语法糖有两种：</p>
+
+<pre><code class="language-kotlin">public inline fun &lt;R&gt; run(block: () -&gt; R): R {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
+    return block()
+}
+</code></pre>
+
+<p>这种语法糖传递的参数就仅仅是一个函数，不是带接收者对象的函数字面值，它的返回结果就是 block 函数调用后的结果。</p>
+
+<p>调用示例：</p>
+
+<pre><code class="language-kotlin">    var result = kotlin.run { 
+            &quot;value&quot;
+        }
+</code></pre>
+
+<p>相对于给 arg 变量赋值为 value 字符串。</p>
+
+<p>run 的另一种语法糖：</p>
+
+<pre><code class="language-kotlin">public inline fun &lt;T, R&gt; T.run(block: T.() -&gt; R): R {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
+    return block()
+}
+</code></pre>
+
+<p>首先，这个语法糖是一个拓展函数，而且用到了泛型 <code>&lt;T,R&gt;</code>，T 类型的拓展函数，返回的是 R 类型，T 和 R 可以相同。</p>
+
+<p>其次，传递的参数是带接收者对象的函数字面值，也就是说可以在 block 函数里面调用 T 的相关方法，通过 this 来指代 T ，在 run 方法内部就是调用了 block 方法，返回 block 函数调用后的结果。</p>
+
+<p>调用示例：</p>
+
+<pre><code class="language-kotlin">            val result = &quot;a&quot;.run {
+                this.plus(&quot;b&quot;)
+            }
+</code></pre>
+
+<h3 id="contracts-dsl">Contracts DSL</h3>
+
+<p>在 run 的语法糖里面还出现了如下一段代码：</p>
+
+<pre><code class="language-kotlin"> contract {
+      callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+   }
+</code></pre>
+
+<p>Google 了一番之后</p>
+
+<ul>
+<li><a href="https://discuss.kotlinlang.org/t/status-of-kotlin-internal-contracts/6392/2">https://discuss.kotlinlang.org/t/status-of-kotlin-internal-contracts/6392/2</a></li>
+<li><a href="https://stackoverflow.com/questions/49729037/how-does-kotlin-internal-contracts-contractbuilderktcontract-work-in-kotlin">https://stackoverflow.com/questions/49729037/how-does-kotlin-internal-contracts-contractbuilderktcontract-work-in-kotlin</a></li>
+<li><a href="https://aisia.moe/2018/03/25/kotlin-contracts-dsl/">https://aisia.moe/2018/03/25/kotlin-contracts-dsl/</a></li>
+</ul>
+
+<p>得出原来这是 Kotlin 1.2.x 版本中出现的，但实际并没有用，是 Kotlin 后续发展用来解决如下代码问题的：</p>
+
+<pre><code class="language-kotlin">if (!x.isNullOrEmpty()) { 
+  // we know that 'x != null' here 
+  println(x.length)
+}
+</code></pre>
+
+<p>假设 x 是可以为 null 的，经过 isNullOrEmpty 函数判断之后，再执行 println 函数，那么它肯定就不是 null 了，就不需要再加两个 <code>!!</code> 来表示 x 不为 null 了，而现在的情况是要添加 <code>!!</code> 。</p>
+
+<p>从 Google 来的信息得知， contract 这段代码就是为了这样的问题的。</p>
+
+<p>由于语法糖都有那样一段代码，所以就先把它们去掉了。</p>
+
+<h3 id="let-语法糖">let 语法糖</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T, R&gt; T.let(block: (T) -&gt; R): R {
+    return block(this)
+}
+</code></pre>
+
+<p>let 语法糖传递的参数是一个函数，不是带接收者的函数字面值，但 block 函数的参数就是 T 类型，所以可以在 block 里面调用 T 类型的方法，但不能通过 this 来指代 T 了，通过 it 来指代 T 类型。</p>
+
+<p>调用示例：</p>
+
+<pre><code class="language-kotlin">            val result = &quot;a&quot;.let {
+                it.plus(&quot;b&quot;)
+            }
+</code></pre>
+
+<h3 id="with-语法糖">with 语法糖</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T, R&gt; with(receiver: T, block: T.() -&gt; R): R {
+    return receiver.block()
+}
+</code></pre>
+
+<p>with 语法糖不再是一个拓展函数了，而是需要在语法糖的第一个参数里面传入接收者对象的实例，第二个参数就是带接收者的函数字面值实例，返回的也是 block 调用的结果，这一点和 run 语法糖类似。</p>
+
+<p>调用示例：</p>
+
+<pre><code class="language-kotlin">            val result = with(&quot;a&quot;) {
+                this.plus(&quot;b&quot;)
+            }
+</code></pre>
+
+<h3 id="apply-语法糖">apply 语法糖</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T&gt; T.apply(block: T.() -&gt; Unit): T {
+    block()
+    return this
+}
+</code></pre>
+
+<p>apply 语法糖和 run 语法糖都类似，只不过它返回的不是 block 函数调用的结果，而是返回调用者本身，返回 T 类型。</p>
+
+<h3 id="also-语法糖">also 语法糖</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T&gt; T.also(block: (T) -&gt; Unit): T {
+    block(this)
+    return this
+}
+</code></pre>
+
+<p>also 语法糖和 let 语法糖有点类似，只不过返回的结果不是 block 调用结果，而是返回它本身，返回 T 类型。</p>
+
+<p>调用示例：</p>
+
+<pre><code class="language-kotlin">            var result = &quot;a&quot;.also {
+                it.plus(&quot;b&quot;)
+            }
+</code></pre>
+
+<h3 id="takeif-语法糖">takeIf 语法糖</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T&gt; T.takeIf(predicate: (T) -&gt; Boolean): T? {
+    return if (predicate(this)) this else null
+}
+</code></pre>
+
+<p>takeIf 语法糖会调用 predicate 函数进行判断，如果为 true 就返回它本身，否则返回 null 。</p>
+
+<h3 id="takeunless-语法糖">takeUnless 语法糖</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T&gt; T.takeUnless(predicate: (T) -&gt; Boolean): T? {
+    return if (!predicate(this)) this else null
+}
+</code></pre>
+
+<p>takeUnless 和 takeIf 正好相反，如果 predicate 返回 false 就返回它本身，否则返回 null 。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>这么多的语法糖，其实他们的原理都是类似的，共同点在于都是有返回值的，而区别就在于对原有的值进行了哪些操作，然后如何返回最终的值。</p>
+
+<p>最后，光是了解他们的原理和调用情况还是不够的，再不影响代码阅读的情况下要把它们引入到我们的代码中去，灵活地使用它们。</p>
+
+              
+                <p>
+
+                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
+
+                  <br/>
+
+                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+
+                  <br/>
+
+                 <a href="https://glumes.com/post/contact-and-reward/">  觉得文章对您有帮助，欢迎打赏，或者加微信交流</a>
+
+                <br />
+                <br />
+
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/">Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</a>
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" data-toggle="tooltip" data-placement="top" title="OpenGL 的 glDrawElements  绘制方法">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/" data-toggle="tooltip" data-placement="top" title="OpenGL 3D 模型加载和渲染">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/android/kotlin-functional-programming-whth-anko/">Kotlin 函数式编程与 Anko 构建布局实现原理分析</a></li>
+                    
+                    <li><a href="/post/android/kotlin-with-anko/">Kotlin 使用 Anko 布局那些事</a></li>
+                    
+                    <li><a href="/post/android/android-jni-exception-handle/">Android JNI 调用时的异常处理</a></li>
+                    
+                    <li><a href="/post/android/android-jni-reference-manage-rules/">Android JNI 中的引用管理</a></li>
+                    
+                    <li><a href="/post/android/android-jni-cache-fieldid-and-methodid/">Android  JNI 调用时缓存字段和方法 ID</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+

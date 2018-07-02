@@ -5,41 +5,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Android JNI 调用时的异常处理</title>
-  <meta property="og:title" content="Android JNI 调用时的异常处理" />
-  <meta name="twitter:title" content="Android JNI 调用时的异常处理" />
-  <meta name="description" content="Android JNI 调用时的异常主要有如下两种：
-
-
-Native 代码调用 Java 层代码时发生了异常要处理
-Native 代码自己抛出了一个异常让 Java 层去处理
-
+  <title>OpenGL 3D 模型加载和渲染</title>
+  <meta property="og:title" content="OpenGL 3D 模型加载和渲染" />
+  <meta name="twitter:title" content="OpenGL 3D 模型加载和渲染" />
+  <meta name="description" content="在使用 OpenGL 绘制时，我们最多绘制的是一些简单的图形，比如三角形、圆形、立方体等，因为这些图形的顶点数量不多，还是可以手动的写出那些顶点的，可要是绘制一些复杂图形该怎么办呢？
 
 ">
-  <meta property="og:description" content="Android JNI 调用时的异常主要有如下两种：
-
-
-Native 代码调用 Java 层代码时发生了异常要处理
-Native 代码自己抛出了一个异常让 Java 层去处理
-
+  <meta property="og:description" content="在使用 OpenGL 绘制时，我们最多绘制的是一些简单的图形，比如三角形、圆形、立方体等，因为这些图形的顶点数量不多，还是可以手动的写出那些顶点的，可要是绘制一些复杂图形该怎么办呢？
 
 ">
-  <meta name="twitter:description" content="Android JNI 调用时的异常主要有如下两种：
-
-
-Native 代码调用 Java 层代码时发生了异常要处理
-Native 代码自己抛出了一个异常让 Java 层去处理
-
+  <meta name="twitter:description" content="在使用 OpenGL 绘制时，我们最多绘制的是一些简单的图形，比如三角形、圆形、立方体等，因为这些图形的顶点数量不多，还是可以手动的写出那些顶点的，可要是绘制一些复杂图形该怎么办呢？
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-jni-exception-handle/" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-jni-exception-handle/" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -191,7 +176,7 @@ Native 代码自己抛出了一个异常让 Java 层去处理
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1526569935/life/pexels-photo-421788.jpg" data-img-desc-1="Waves"></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1530546092/life/pexels-photo-247932.jpg" data-img-desc-1="Robot"></div>
   
 
   <header class="header-section has-img">
@@ -206,11 +191,11 @@ Native 代码自己抛出了一个异常让 Java 层去处理
                 <div class="page-heading">
                 
                   
-                     <h1>Android JNI 调用时的异常处理</h1>
+                     <h1>OpenGL 3D 模型加载和渲染</h1>
                      
                     <span class="post-meta">
   
-  Posted on May 16, 2018
+  Posted on July 2, 2018
   
   
 </span>
@@ -232,7 +217,7 @@ Native 代码自己抛出了一个异常让 Java 层去处理
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">Android JNI 调用时的异常处理</h1>
+                <h1 align="center">OpenGL 3D 模型加载和渲染</h1>
                 
                 
             </div>
@@ -254,14 +239,12 @@ Native 代码自己抛出了一个异常让 Java 层去处理
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Wed May 16, 2018</h4>
+        <h4 id="date"> Mon Jul 2, 2018</h4>
     </section>
-    <h5 id="wc">1200 Words|Read in about 3 Min</h5>
+    <h5 id="wc">1900 Words|Read in about 4 Min</h5>
     <h5 id="tags">Tags: 
         
-        <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
-        
-        <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
+        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
     </h5>
 </div>
 
@@ -269,121 +252,182 @@ Native 代码自己抛出了一个异常让 Java 层去处理
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>Android JNI 调用时的异常主要有如下两种：</p>
-
-<ul>
-<li>Native 代码调用 Java 层代码时发生了异常要处理</li>
-<li>Native 代码自己抛出了一个异常让 Java 层去处理</li>
-</ul>
+            <p>在使用 OpenGL 绘制时，我们最多绘制的是一些简单的图形，比如三角形、圆形、立方体等，因为这些图形的顶点数量不多，还是可以手动的写出那些顶点的，可要是绘制一些复杂图形该怎么办呢？</p>
 
 <p></p>
 
-<p>可以看到异常的发生和处理基本都需要 Native 和 Java 交互，而对于 Native 自身出了异常，也就是 C/C++ 代码有问题，导致应用崩溃的又是另一回事了。</p>
+<p>这时候就可以使用 OpenGL 来加载 3D 模型。先使用 3D 建模工具构建物体，然后再将物体导出成特定的文件格式，最终通过 OpenGL 渲染模型。</p>
 
-<h2 id="native-调用-java-方法时的异常">Native 调用 Java 方法时的异常</h2>
+<p>例如如下的 3D 模型文件图像：</p>
 
-<p>之前的博客中就讲述了如何从 <a href="https://glumes.com/post/android/android-jni-access-field-and-method/">Native 调用 Java 的方法</a>，先准备一个有异常的方法供 Native 去调用。</p>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_555/v1530544235/code/WechatIMG24.jpg" alt="" /></p>
 
-<pre><code class="language-java">    private int operation() {
-        return 2 / 0;
-    }
+<h2 id="obj-模型文件">Obj 模型文件</h2>
+
+<p>obj 模型文件是众多 3D 模型文件中的一种，它的格式比较简单，本质上就是文本文件，只是格式固定了格式。</p>
+
+<p>obj 文件将顶点坐标、三角形面、纹理坐标等信息以固定格式的文本字符串表示。</p>
+
+<p>截取一小段 obj 文件内容：</p>
+
+<pre><code class="language-glsl"># Max2Obj Version 4.0 Mar 10th, 2001
+#
+# object (null) to come ...
+#
+v  -0.052045 11.934561 -0.071060
+v  -0.052045 11.728649 1.039199
+...
+# 288 vertices
+vt 0.000000 0.000000 0.000000
+vt 1.000000 0.000000 0.000000
+...
+vt 1.000000 1.000000 0.000000
+# 122 texture vertices
+vn 0.000000 0.000000 -1.570796
+vn 0.000000 0.000000 -1.570796
+...
+vn 0.000000 0.000000 1.570796
+# 8 vertex normals
+g (null)
+f 1/10/1 14/12/11 13/4/11 
+f 1/11/4 2/12/3 14/12/11
+...
+f 5/4/5 7/3/7 3/1/3
+# 576 faces
+g
 </code></pre>
 
-<p>然后在 Native 中调用该方法。</p>
+<ul>
+<li>&rdquo;#&rdquo; 开头的行表示注释，加载过程中可以忽略</li>
+<li>“v” 开头的行用于存放顶点坐标，后面三个数表示一个顶点的 x , y , z 坐标
+如：
+<br /></li>
+</ul>
 
-<pre><code class="language-cpp">    jclass cls = env-&gt;FindClass(&quot;com/glumes/cppso/jnioperations/ExceptionOps&quot;);
-    jmethodID mid = env-&gt;GetMethodID(cls, &quot;&lt;init&gt;&quot;, &quot;()V&quot;);
-    jobject obj = env-&gt;NewObject(cls, mid);
-    mid = env-&gt;GetMethodID(cls, &quot;operation&quot;, &quot;()I&quot;);
-    // 先初始化一个类，然后调用类方法，就如博客中描述的那样
-    env-&gt;CallIntMethod(obj, mid);
+<pre><code class="language-java">v  -0.052045 11.934561 -0.071060
 </code></pre>
 
-<p>显然，除数为 0 ，一调用应用直接崩溃了。</p>
+<ul>
+<li><p>&ldquo;vt&rdquo; 开头的行表示存放顶点纹理坐标，后面三个数表示纹理坐标的 S，T，P 分量，其中 P 指的是深度纹理采样，主要用于 3D 纹理的采样，但使用的较少
+如：</p>
 
-<pre><code class="language-java"> java.lang.ArithmeticException: divide by zero
+<pre><code class="language-java">vt 0.000000 0.000000 0.000000
+</code></pre></li>
+
+<li><p>&ldquo;vn&rdquo; 开头的行用于存放顶点法向量，后面三个数分别表示一个顶点的法向量在 x 轴，y 轴，z 轴上的分量。
+如：</p>
+
+<pre><code class="language-java">vn 0.000000 0.000000 1.570796
+</code></pre></li>
+
+<li><p>“g” 开头的行表示一组的开始，后面的字符串为此组的名称。组就是由顶点组成的一些面的集合，只包含 “g” 的行表示一组的结束，与 “g” 开头的行对应。</p></li>
+
+<li><p>&ldquo;f&rdquo; 开头的行表示组中的一个面，对于三角形图形，后面有三组用空格分隔的数据，代表三角形的三个顶点。每组数据中包含 3 个数值，用 <code>/</code> 分隔，依次表示<strong>顶点坐标数据索引</strong>、<strong>顶点纹理坐标数据索引</strong>、<strong>顶点法向量数据索引</strong>，注意这里都是指索引，而不是指具体数据，索引指向的是具体哪一行对应的坐标
+如：</p>
+
+<pre><code class="language-java">f 1/10/1 14/12/11 13/4/12 
 </code></pre>
 
-<p>接下来就是要进行异常处理的部分了。</p>
+<p>如上数据代表了三个顶点，其中三角形 3 个顶点坐标来自 1、14、13 号以 &ldquo;v&rdquo; 开头的行， 3 个顶点的纹理坐标来自 10、12、4 号以 “vt” 开头的行，3 个顶点的法向量来自 1、11、12 号以 “vn” 开头的行。</p></li>
+</ul>
 
-<pre><code class="language-cpp">    jclass cls = env-&gt;FindClass(&quot;com/glumes/cppso/jnioperations/ExceptionOps&quot;);
-    jmethodID mid = env-&gt;GetMethodID(cls, &quot;&lt;init&gt;&quot;, &quot;()V&quot;);
-    jobject obj = env-&gt;NewObject(cls, mid);
-    mid = env-&gt;GetMethodID(cls, &quot;operation&quot;, &quot;()I&quot;);
-// 先初始化一个类，然后调用类方法，就如博客中描述的那样
-    env-&gt;CallIntMethod(obj, mid);
-    //检查是否发生了异常
-    jthrowable exc = env-&gt;ExceptionOccurred();
-//    jboolean result = env-&gt;ExceptionCheck();
+<p>如果顶点坐标没有法向量和纹理坐标，那么直接可以忽略，用空格将三个顶点坐标索引分开就行</p>
 
-    if (exc) {
-        // 打印异常日志
-        env-&gt;ExceptionDescribe();
-        // 这行代码才是关键不让应用崩溃的代码，
-        env-&gt;ExceptionClear();
-        // 发生异常了要记得释放资源
-        env-&gt;DeleteLocalRef(cls);
-        env-&gt;DeleteLocalRef(obj);
-    }
+<pre><code class="language-java">f 1 3 4
 </code></pre>
 
-<p>添加如上代码进行处理后，应用并不会直接崩溃了，并且在 LogCat 中会看到对应的异常日志，这里面到了做了哪些操作呢？</p>
+<p>最后 OpenGL 在绘制时采用的是 <code>GL_TRIANGLES</code>，也就是由 ABCDEF 六个点绘制 ABC、DEF 两个三角形，所以 &ldquo;f&rdquo; 开头的行都代表绘制一个独立的三角形，最终图像由一个一个三角形拼接组成，并且彼此的点可以分开。</p>
 
-<p>Native 提供了 <code>ExceptionOccurred</code> 和 <code>ExceptionCheck</code> 方法来检测是否有异常发生，前者返回的是 <code>jthrowable</code> 类型，后者返回的是 <code>jboolean</code> 类型。</p>
+<h2 id="加载-obj-模型文件">加载 Obj 模型文件</h2>
 
-<p>如果有异常，会通过 <code>ExceptionDescribe</code> 方法来打印异常信息，方便我们在 LogCat 中看到对应的信息。</p>
+<p>明白了 Obj 模型文件代表的含义，接下来把它加载并用 OpenGL 进行渲染。</p>
 
-<p>而 <code>ExceptionClear</code> 方法则是关键的不会让应用直接崩溃的方法，类似于 Java 的 <code>catch</code> 捕获异常处理，它会消除这次异常。</p>
+<p>Obj 模型文件实质上也就是文本文件了，通过读取每一行来进行加载即可，假设加载的模型文件只有顶点坐标，实际代码如下：</p>
 
-<p>这样就把由 Native 调用 Java 时的一个异常进行了处理，当处理完异常之后，别忘了释放对应的资源。</p>
+<pre><code class="language-java">		// 加载所有的顶点坐标数据，把 List 容器的 index 当成 索引
+        ArrayList&lt;Float&gt; alv = new ArrayList&lt;&gt;();
+        // 代表绘制图像的每一个小三角形的坐标
+        ArrayList&lt;Float&gt; alvResult = new ArrayList&lt;&gt;();
+        // 最终要传入给 OpenGL 的数组
+        float[] vXYZ;
+        try {
+            InputStream in = context.getResources().getAssets().open(fname);
+            InputStreamReader isr = new InputStreamReader(in);
+            BufferedReader br = new BufferedReader(isr);
+            String temps = null;
+			// 遍历每一行来读取内容
+            while ((temps = br.readLine()) != null) {
+	            // 正则表达式 用空格分开
+                String[] tempsa = temps.split(&quot;[ ]+&quot;);
+                // 先把所有的顶点坐标加入到 List 中，这样就有了索引
+                if (tempsa[0].trim().equals(&quot;v&quot;)) {
+                    alv.add(Float.parseFloat(tempsa[1]));
+                    alv.add(Float.parseFloat(tempsa[2]));
+                    alv.add(Float.parseFloat(tempsa[3]));
+                } else if (tempsa[0].trim().equals(&quot;f&quot;)) {
+                // 根据 f 指示的索引，找到对应的顶点坐标，
+                // 这里 -1 的操作是因为 List 从 0 开始，f 开头的行的索引从 1 开始
+                // *3 是因为要跳过 3 的倍数个顶点
+                    int index = Integer.parseInt(tempsa[1].split(&quot;/&quot;)[0]) - 1;
+                    alvResult.add(alv.get(3 * index));
+                    alvResult.add(alv.get(3 * index + 1));
+                    alvResult.add(alv.get(3 * index + 2));
 
-<p>不过，我们这样仅仅是消除了这次异常，还应该让调用者有异常的发生，那么就需要通过 Native 来抛出一个异常告诉 Java 调用者了。</p>
+                    index = Integer.parseInt(tempsa[2].split(&quot;/&quot;)[0]) - 1;
+                    alvResult.add(alv.get(3 * index));
+                    alvResult.add(alv.get(3 * index + 1));
+                    alvResult.add(alv.get(3 * index + 2));
 
-<h2 id="native-抛出-java-中的异常">Native 抛出 Java 中的异常</h2>
-
-<p>有时在 Native 代码中进行一些操作，需要抛出异常到 Java ，交由上层去处理。</p>
-
-<p>比如 Java 调用 Native 方法传递了某个参数，而这个参数有问题，那么 Native 就可以抛出异常让 Java 去处理这个参数异常的问题。</p>
-
-<p>Native 抛出异常的代码大致都是相同的，可以抽出一个通用函数来：</p>
-
-<pre><code class="language-cpp">void throwByName(JNIEnv *env, const char *name, const char *msg) {
-    jclass cls = env-&gt;FindClass(name);
-    if (cls != NULL) {
-        env-&gt;ThrowNew(cls, msg);
-    }
-    env-&gt;DeleteLocalRef(cls);
-}
-// 调用抛出异常
-extern &quot;C&quot;
-JNIEXPORT void JNICALL
-Java_com_glumes_cppso_jnioperations_ExceptionOps_nativeThrowException(JNIEnv *env, jobject instance) {
-    throwByName(env, &quot;java/lang/IllegalArgumentException&quot;, &quot;native throw exception&quot;);
-}
-</code></pre>
-
-<p>根据异常类型和异常信息来抛出异常。</p>
-
-<p>而在 Java 中，就必须要用 try &hellip; catch&hellip; 来准备好捕获这次异常了。</p>
-
-<pre><code class="language-java">        try {
-            nativeThrowException();
-        } catch (IllegalArgumentException e) {
-            Log.e(&quot;NativeMethod&quot;, e.getMessage());
+                    index = Integer.parseInt(tempsa[3].split(&quot;/&quot;)[0]) - 1;
+                    alvResult.add(alv.get((3 * index)));
+                    alvResult.add(alv.get((3 * index + 1)));
+                    alvResult.add(alv.get((3 * index + 2)));
+                }
+            }
+            // 把面的坐标转换为最终要传递给 OpenGL 的数组
+            // 根据这个数组，然后按照 GL_TRIANGLES 方式进行绘制
+            int size = alvResult.size();
+            vXYZ = new float[size];
+            for (int i = 0; i &lt; size; i++) {
+                vXYZ[i] = alvResult.get(i);
+            }
+            return vXYZ;
+        } catch (IOException e) {
+            return null;
         }
 </code></pre>
 
-<h2 id="异常处理小结">异常处理小结</h2>
+<p>通过上面的函数就计算出了最终的顶点坐标位置，并将此顶点坐标位置传入给 GPU ，通过 FloatBuffer 进行转换等等，这就和之前的文章内容相同了。</p>
 
-<p>除了以上两种异常情况之外，还有一个特别常见的异常，就是当判断某个变量为 NULL 之后，执行立即返回的操作。</p>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_555/v1530544610/code/WechatIMG25.jpg" alt="" /></p>
 
-<p>当发生异常时，一定要先处理异常，然后才能继续执行后面的步骤。如果不是需要立即返回的，那么就通过 <code>ExceptionClear</code>清除这次异常，然后在进行其他的处理。</p>
+<p>如果只是单纯的导入了所有顶点，并决定了要绘制的颜色，就会出现类似上面的单一颜色的绘制情况，事实上可以通过修改片段着色器来给 3D 模型添加条纹着色效果。</p>
 
-<p>对于在 Native 中发生了异常，需要让 Java 层去处理了，则在 Native 中抛出对应的异常，由 Java 层去捕获，比如在使用 <code>ExceptionClear</code> 清除了异常之后，就可以通过 <code>throwNew</code> 来抛出异常信息。</p>
+<h2 id="利用着色器添加条纹着色效果">利用着色器添加条纹着色效果</h2>
 
-<p>具体的异常处理方法和时机还是要看具体的使用场景，选择最合适的处理方法。</p>
+<p>通过修改片段着色器来给 3D 形状添加条纹着色效果。</p>
 
-<p>具体示例代码可参考我的 Github 项目 <a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a>，欢迎 Star。</p>
+<pre><code class="language-glsl">precision mediump float;
+varying  vec3 vPosition;  //顶点位置
+void main() {
+   vec4 bColor=vec4(0.678,0.231,0.129,0);//条纹的颜色
+   vec4 mColor=vec4(0.763,0.657,0.614,0);//间隔的颜色
+   float y=vPosition.y;
+   y=mod((y+100.0)*4.0,4.0);
+   if(y&gt;1.8) {
+     gl_FragColor = bColor;//给此片元颜色值
+   } else {
+     gl_FragColor = mColor;//给此片元颜色值
+   }
+// 默认使用单一颜色进行绘制
+//   vec4 white = vec4(1,1,1,1);
+//   gl_FragColor = white;
+}
+</code></pre>
+
+<p>实现的方式也是根据片段的 y 坐标所在位置来决定该片段是采样条纹的颜色还是间隔的颜色。</p>
+
+<p>最后，加载 3D 模型就先了解到这了，如果想要加载更多效果，倒是可以继续深挖，只是没有 MAC 版本的 3ds Max 软件，却是少了一些乐趣~~</p>
 
               
                 <p>
@@ -402,7 +446,7 @@ Java_com_glumes_cppso_jnioperations_ExceptionOps_nativeThrowException(JNIEnv *en
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-exception-handle/">Android JNI 调用时的异常处理</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/">OpenGL 3D 模型加载和渲染</a>
 
                 </p>
               
@@ -412,13 +456,9 @@ Java_com_glumes_cppso_jnioperations_ExceptionOps_nativeThrowException(JNIEnv *en
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/android/android-jni-reference-manage-rules/" data-toggle="tooltip" data-placement="top" title="Android JNI 中的引用管理">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/" data-toggle="tooltip" data-placement="top" title="Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---观察矩阵">Next Post &rarr;</a>
-          </li>
         
       </ul>
             
@@ -427,15 +467,15 @@ Java_com_glumes_cppso_jnioperations_ExceptionOps_nativeThrowException(JNIEnv *en
                 <h2>See Also</h2>
                 <ul>
                     
-                    <li><a href="/post/android/android-jni-reference-manage-rules/">Android JNI 中的引用管理</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-gldrawelements-method/">OpenGL 的 glDrawElements  绘制方法</a></li>
                     
-                    <li><a href="/post/android/android-jni-cache-fieldid-and-methodid/">Android  JNI 调用时缓存字段和方法 ID</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-view-matrix/">OpenGL 学习系列---观察矩阵</a></li>
                     
-                    <li><a href="/post/android/android-jni-invoke-constructor-method-and-super-method/">Android 通过 JNI 调用 Java 类的构造方法和父类的方法</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-texture/">OpenGL 学习系列---纹理</a></li>
                     
-                    <li><a href="/post/android/android-jni-access-field-and-method/">Android 通过 JNI 访问 Java 字段和方法调用</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 学习系列---投影矩阵</a></li>
                     
-                    <li><a href="/post/android/android-jni-array-operation/">Android JNI 数组 操作</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-coordinate-system/">OpenGL 学习系列---坐标系统</a></li>
                     
                 </ul>
                 

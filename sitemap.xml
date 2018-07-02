@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/</loc>
+    <lastmod>2018-07-02T23:37:16+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</loc>
+    <lastmod>2018-06-29T20:31:53+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</loc>
     <lastmod>2018-05-25T19:47:29+08:00</lastmod>
   </url>
@@ -254,18 +264,18 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-05-25T19:47:29+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/tags/android/</loc>
-    <lastmod>2018-05-16T17:55:52+08:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2018-07-02T23:37:16+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/android/</loc>
-    <lastmod>2018-05-16T17:55:52+08:00</lastmod>
+    <lastmod>2018-06-29T20:31:53+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/android/</loc>
+    <lastmod>2018-06-29T20:31:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -283,7 +293,7 @@
   
   <url>
     <loc>https://glumes.com/categories/</loc>
-    <lastmod>2018-05-16T17:55:52+08:00</lastmod>
+    <lastmod>2018-06-29T20:31:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -300,25 +310,25 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/docker/</loc>
-    <lastmod>2017-12-22T16:24:03+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://glumes.com/categories/docker/</loc>
     <lastmod>2017-12-22T16:24:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/ffmpeg/</loc>
-    <lastmod>2017-12-22T16:05:30+08:00</lastmod>
+    <loc>https://glumes.com/tags/docker/</loc>
+    <lastmod>2017-12-22T16:24:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/ffmpeg/</loc>
+    <lastmod>2017-12-22T16:05:30+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/ffmpeg/</loc>
     <lastmod>2017-12-22T16:05:30+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -343,13 +353,7 @@
   
   <url>
     <loc>https://glumes.com/tags/kotlin/</loc>
-    <lastmod>2017-12-22T10:26:57+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/tags/life/</loc>
-    <lastmod>2018-01-04T14:20:04+08:00</lastmod>
+    <lastmod>2018-06-29T20:31:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -360,8 +364,8 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/opencv/</loc>
-    <lastmod>2017-12-22T09:53:04+08:00</lastmod>
+    <loc>https://glumes.com/tags/life/</loc>
+    <lastmod>2018-01-04T14:20:04+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -372,31 +376,37 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/opengl/</loc>
-    <lastmod>2018-05-25T19:47:29+08:00</lastmod>
+    <loc>https://glumes.com/tags/opencv/</loc>
+    <lastmod>2017-12-22T09:53:04+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/opengl/</loc>
-    <lastmod>2018-05-25T19:47:29+08:00</lastmod>
+    <lastmod>2018-07-02T23:37:16+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/opengl/</loc>
+    <lastmod>2018-07-02T23:37:16+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-05-25T19:47:29+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/tags/python/</loc>
-    <lastmod>2017-12-22T16:10:57+08:00</lastmod>
+    <lastmod>2018-07-02T23:37:16+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/python/</loc>
+    <lastmod>2017-12-22T16:10:57+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/python/</loc>
     <lastmod>2017-12-22T16:10:57+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -415,7 +425,7 @@
   
   <url>
     <loc>https://glumes.com/tags/</loc>
-    <lastmod>2018-05-16T17:55:52+08:00</lastmod>
+    <lastmod>2018-06-29T20:31:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   

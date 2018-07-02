@@ -8,10 +8,34 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 25 May 2018 19:47:29 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 02 Jul 2018 23:37:16 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 3D 模型加载和渲染</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/</link>
+      <pubDate>Mon, 02 Jul 2018 23:37:16 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/</guid>
+      <description>&lt;p&gt;在使用 OpenGL 绘制时，我们最多绘制的是一些简单的图形，比如三角形、圆形、立方体等，因为这些图形的顶点数量不多，还是可以手动的写出那些顶点的，可要是绘制一些复杂图形该怎么办呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</title>
+      <link>https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</link>
+      <pubDate>Fri, 29 Jun 2018 20:31:53 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</guid>
+      <description>&lt;p&gt;在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。&lt;/p&gt;
+
+&lt;p&gt;再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 的 glDrawElements  绘制方法</title>
