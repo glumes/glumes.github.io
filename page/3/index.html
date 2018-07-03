@@ -8,6 +8,26 @@
   <title>Glumes Blog</title>
   <meta property="og:title" content="Glumes Blog" />
   <meta name="twitter:title" content="Glumes Blog" />
+  <meta name="description" content="Job = Android Developer Location = GuangZhou
+Blog = https://glumes.com
+Github = https://github.com/glumes
+Interests = OpenGL、Kotlin、OpenCV、MachineLearn
+Email = ezglumes@gmail.com
+Scan the QRCode to Subscribe My WeChat ~~~
+ ">
+  <meta property="og:description" content="Job = Android Developer Location = GuangZhou
+Blog = https://glumes.com
+Github = https://github.com/glumes
+Interests = OpenGL、Kotlin、OpenCV、MachineLearn
+Email = ezglumes@gmail.com
+Scan the QRCode to Subscribe My WeChat ~~~
+ ">
+  <meta name="twitter:description" content="Job = Android Developer Location = GuangZhou
+Blog = https://glumes.com
+Github = https://github.com/glumes
+Interests = OpenGL、Kotlin、OpenCV、MachineLearn
+Email = ezglumes@gmail.com
+Scan the QRCode to …">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/" />
@@ -222,9 +242,65 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
+          <div class="well">
+            <div class="output_wrapper" id="output_wrapper_id" style="font-size: 20px; color: rgb(62, 62, 62); line-height: 2.1; word-spacing: 2px; letter-spacing: 2px; font-family: Lora, 'Times New Roman', serif; background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.05) 3%, rgba(0, 0, 0, 0) 3%), linear-gradient(360deg, rgba(50, 0, 0, 0.05) 3%, rgba(0, 0, 0, 0) 3%); background-size: 20px 20px; background-position: center center;"><p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;">Job = Android Developer  <br>   Location = GuangZhou<br>   Blog = <a href="https://glumes.com" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: rgb(30, 107, 184); word-wrap: break-word;">https://glumes.com</a><br>   Github = <a href="https://github.com/glumes" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: rgb(30, 107, 184); word-wrap: break-word;">https://github.com/glumes</a><br>   Interests = OpenGL、Kotlin、OpenCV、MachineLearn<br>   Email = <a href="mailto:ezglumes@gmail.com" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: rgb(30, 107, 184); word-wrap: break-word;">ezglumes@gmail.com</a><br>   Scan the QRCode to Subscribe My WeChat ~~~<br>   </p><figure style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><img src="https://res.cloudinary.com/glumes-com/image/upload/v1530630782/code/Artboard.png" alt="" title="" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; display: block; margin: 0px auto; max-width: 100%;"><figcaption style="line-height: inherit; margin: 0px; padding: 0px; margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;"></figcaption></figure></div>
+
+          </div>
+        
 
         <div class="posts-list">
           
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">
+                <h2 class="post-title">OpenGL 学习系列---投影矩阵</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on January 24, 2018
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate/">OpenGL 坐标系统</a> 文章中，根据点的坐标变换得出了如下的公式：</p>
+
+<div>$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$</div>
+
+<p>这个公式每左乘一个矩阵，都代表了一种坐标系的变换。</p>
+
+<p>转化为着色器脚本语言如下：</p>
+
+<pre><code class="language-glsl">attribute vec4 a_Position;
+uniform mat4 u_ModelMatrix;
+uniform mat4 u_ProjectionMatrix;
+uniform mat4 u_ViewMatrix;
+void main()
+{
+    gl_Position  = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
+}
+</code></pre>
+
+<p>本篇文章就主要是对投影矩阵来分析的。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                
+                </span>
+              
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/">
@@ -546,45 +622,6 @@
                 <span class="post-meta">
                 
                   #<a href="https://glumes.com/tags/ffmpeg/">FFmpeg</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/rxjava-wrapper-dialog/">
-                <h2 class="post-title">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on December 22, 2017
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>之前有写过一篇文章：<a href="http://www.glumes.com/wrapper-callback-by-rxjava/">用 RxJava 封装回调方法 CallBack</a>。</p>
-
-<p>RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。</p>
-
-<p>这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/rxjava-wrapper-dialog/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/rxjava/">RxJava</a>&nbsp;
                 
                 </span>
               
