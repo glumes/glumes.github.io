@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/opengl/opengl-tutorial-scissor-test/</loc>
+    <lastmod>2018-07-03T21:35:34+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/</loc>
+    <lastmod>2018-07-02T23:37:16+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</loc>
     <lastmod>2018-06-29T20:31:53+08:00</lastmod>
   </url>
@@ -259,7 +269,7 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-06-29T20:31:53+08:00</lastmod>
+    <lastmod>2018-07-03T21:35:34+08:00</lastmod>
   </url>
   
   <url>
@@ -378,19 +388,19 @@
   
   <url>
     <loc>https://glumes.com/tags/opengl/</loc>
-    <lastmod>2018-05-25T19:47:29+08:00</lastmod>
+    <lastmod>2018-07-03T21:35:34+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/opengl/</loc>
-    <lastmod>2018-05-25T19:47:29+08:00</lastmod>
+    <lastmod>2018-07-03T21:35:34+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-06-29T20:31:53+08:00</lastmod>
+    <lastmod>2018-07-03T21:35:34+08:00</lastmod>
     <priority>0</priority>
   </url>
   
