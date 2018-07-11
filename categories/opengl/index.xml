@@ -8,10 +8,21 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Tue, 03 Jul 2018 21:35:34 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 11 Jul 2018 14:25:52 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/opengl/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL ES 学习资源分享</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-share/</link>
+      <pubDate>Wed, 11 Jul 2018 14:25:52 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-share/</guid>
+      <description>&lt;p&gt;学习了一段时间的 OpenGL ES，并在公司的项目中得到了运用，也算是有了一些积累，现在分享一些当初学习的资源，大家一起来学习，共同交流进步。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 裁剪测试及注意点</title>
