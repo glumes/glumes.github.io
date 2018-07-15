@@ -8,10 +8,36 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Tue, 03 Jul 2018 21:35:34 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 13 Jul 2018 09:41:22 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/opengl/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 利用 Alpha 透明度进行测试</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-alpha-test/</link>
+      <pubDate>Fri, 13 Jul 2018 09:41:22 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-alpha-test/</guid>
+      <description>&lt;p&gt;在前面的博客文章中有提到 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-scissor-test/&#34;&gt;OpenGL 裁剪测试及注意点&lt;/a&gt;，并且裁剪测试只能裁剪一个矩形区域，相当于就是把整个内容都绘制上去了，但是透过一个小矩形区域来看绘制的物体。&lt;/p&gt;
+
+&lt;p&gt;除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。&lt;/p&gt;
+
+&lt;p&gt;关于 Alpha 透明度测试，在 用 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/&#34;&gt;OpenGL 对视频帧内容进行替换&lt;/a&gt; 也用实践用到过。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>OpenGL ES 学习资源分享</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-share/</link>
+      <pubDate>Wed, 11 Jul 2018 14:25:52 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-share/</guid>
+      <description>&lt;p&gt;学习了一段时间的 OpenGL ES，并在公司的项目中得到了运用，也算是有了一些积累，现在分享一些当初学习的资源，大家一起来学习，共同交流进步。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 裁剪测试及注意点</title>

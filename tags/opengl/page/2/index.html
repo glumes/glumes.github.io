@@ -5,27 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>OpenGL 裁剪测试及注意点</title>
-  <meta property="og:title" content="OpenGL 裁剪测试及注意点" />
-  <meta name="twitter:title" content="OpenGL 裁剪测试及注意点" />
-  <meta name="description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
-
-">
-  <meta property="og:description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
-
-">
-  <meta name="twitter:description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
-
-">
+  <title>Opengl</title>
+  <meta property="og:title" content="Opengl" />
+  <meta name="twitter:title" content="Opengl" />
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" />
+  <meta property="og:url" content="https://glumes.com/tags/opengl/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" />
-  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="canonical" href="https://glumes.com/tags/opengl/" />
+  <link rel="alternate" href="https://glumes.com/tags/opengl/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -168,58 +159,14 @@
 
 
     
-  
-  
-  
-
-
-
-
-  
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1530625119/code/pexels-photo-271402.jpg" data-img-desc-1="Scissor"></div>
-  
-
-  <header class="header-section has-img">
-    
-      <div class="intro-header big-img">
-        
-        
-        <div class="container">
-          <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
-                  
-                     <h1>OpenGL 裁剪测试及注意点</h1>
-                     
-                    <span class="post-meta">
-  
-  Posted on July 3, 2018
-  
-  
-</span>
-
-
-                    
-                  
-                  
-              </div>
-            </div>
-          </div>
-        </div>
-        <span class="img-desc" style="display: inline;"></span>
-      </div>
-    
+  <header class="header-section ">
     <div class="intro-header no-img">
-      
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
-            <div class="post-heading">
-                <h1 align="center">OpenGL 裁剪测试及注意点</h1>
-                
-                
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="page-heading">
+              <h1>#Opengl</h1>
+              <hr class="small">
             </div>
           </div>
         </div>
@@ -227,175 +174,109 @@
     </div>
   </header>
 
-
     
-<div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+  <div class="container" role="main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
-
-        
+        <div class="posts-list">
           
-          
-<div>
-    <section id="datecount">
-        <h4 id="date"> Tue Jul 3, 2018</h4>
-    </section>
-    <h5 id="wc">700 Words|Read in about 2 Min</h5>
-    <h5 id="tags">Tags: 
-        
-        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
-    </h5>
-</div>
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-tutorial-draw-point/">
+                <h2 class="post-title">OpenGL 学习系列---点的绘制流程</h2>
 
-          
-        
+                
+              </a>
 
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。</p>
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>终于要开始探索奇妙的 3D 世界了，OpenGL 搞起。</p>
 
 <p></p>
-
-<p>裁剪测试的效果就相当于在屏幕上开辟一个矩形区域，在该区域内再单独绘制内容。</p>
-
-<p>它的主要代码如下：</p>
-
-<pre><code class="language-java">		// 开启裁剪测试
-        GLES20.glEnable(GLES20.GL_SCISSOR_TEST)
-        // 指定开辟的矩形区域
-        GLES20.glScissor(x,y,width,height)
-        // 清除该区域内的颜色
-        GLES20.glClearColor(1f, 0f, 0f, 1f)
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-        // 在矩形局域内绘制内容
-        mCube.onDrawFrame(gl)
-        // 关闭裁剪测试
-        GLES20.glDisable(GLES20.GL_SCISSOR_TEST)
-</code></pre>
-
-<p>它的使用并不难，只要在 onDrawFrame 方法里面开启裁剪测试，然后绘制，然后关闭裁剪就行了，具体效果如下：</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1530624256/code/opengl-scissor.gif" alt="" /></p>
-
-<p>在原来的图像上裁剪了一小块矩形，然后绘制了一个旋转的形状。</p>
-
-<h2 id="注意点">注意点</h2>
-
-<p><code>glScissor</code> 方法可以指定裁剪的矩形区域，它的方法原型如下：</p>
-
-<pre><code class="language-java">    public static native void glScissor(
-        int x,
-        int y,
-        int width,
-        int height
-    );
-</code></pre>
-
-<p>其中，x 和 y 指矩形区域的左下角坐标，width 和 height 指矩形区域的宽和高。</p>
-
-<p>x 和 y 坐标所在的坐标系是以视口矩形区域的左下角为原点的，x 轴向右，y 轴向上的坐标系，对应到屏幕的坐标，就是以屏幕的左下角为原点，这和 Android 中以左上角为原点不同。</p>
-
-<p>另外，在绘制时我们把视口设置为屏幕的宽和高，那么在启用裁剪测试后，想让绘制的内容正好显示在指定的矩形区域内，就必须保证即便没有启用裁剪测试，内容也是绘制在指定的区域内，否则裁剪区域内将不会显示绘制内容。</p>
-
-<p>也就是说，裁剪测试只是在原来的视口标准的绘制区域内开辟一块矩形区域来显示，而不是把内容放到裁剪的区域内来显示。</p>
-
-<p>最后创建了一个微信群，欢迎加群交流讨论 OpenGL ES 相关技术~~</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1530624519/code/WechatIMG324.jpg" alt="" /></p>
-
-<p>具体代码详情，可以参考我的 Github 项目，求一波 star~~</p>
-
-<p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
-
-              
-                <p>
-
-                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
-
-                  <br/>
-
-                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
-
-                  <br/>
-
-                 <a href="https://glumes.com/post/contact-and-reward/">  觉得文章对您有帮助，欢迎打赏，或者加微信交流</a>
-
-                <br />
-                <br />
-
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a>
-
-                </p>
-              
-        </article>
-
-
-      <ul class="pager blog-pager">
-        
-          <li class="previous">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/" data-toggle="tooltip" data-placement="top" title="OpenGL 3D 模型加载和渲染">&larr; Previous Post</a>
-          </li>
-        
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-share/" data-toggle="tooltip" data-placement="top" title="OpenGL ES 学习资源分享">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-            
-            <div>
-                 
-                <h2>See Also</h2>
-                <ul>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-import-3d-object/">OpenGL 3D 模型加载和渲染</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-gldrawelements-method/">OpenGL 的 glDrawElements  绘制方法</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-view-matrix/">OpenGL 学习系列---观察矩阵</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-texture/">OpenGL 学习系列---纹理</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 学习系列---投影矩阵</a></li>
-                    
-                </ul>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-draw-point/" class="post-read-more">[Read More]</a>
                 
-            </div>
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+        </div>
+        
+          <ul class="pager main-pager">
             
-
-
-      
+              <li class="previous">
+                <a href="/tags/opengl/page/1/">&larr; Newer Posts</a>
+              </li>
+            
+            
+          </ul>
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script>
-    var disqus_config = function () {
+      </div>
+      <div align="center" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+<ul class="pagination">
+    
+    <li>
+        <a href="/tags/opengl/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li
+    >
+    <a href="/tags/opengl/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
     
     
     
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
+    
+    
+    
         
         
-      
+    
+    
+    <li
+    ><a href="/tags/opengl/">1</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li
+    class="active"><a href="/tags/opengl/page/2/">2</a></li>
+    
+    
+    <li
+    class="disabled">
+    <a href="" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li>
+        <a href="/tags/opengl/page/2/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
 
+        
+        
+      </div>
     </div>
   </div>
-</div>
 
     <footer>
   <div class="container">
@@ -421,7 +302,7 @@
               </li>
           
           <li>
-            <a href="" title="RSS">
+            <a href="https://glumes.com/tags/opengl/index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

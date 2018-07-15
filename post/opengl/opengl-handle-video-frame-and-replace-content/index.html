@@ -5,26 +5,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>OpenGL 裁剪测试及注意点</title>
-  <meta property="og:title" content="OpenGL 裁剪测试及注意点" />
-  <meta name="twitter:title" content="OpenGL 裁剪测试及注意点" />
-  <meta name="description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
+  <title>用 OpenGL 对视频帧内容进行替换</title>
+  <meta property="og:title" content="用 OpenGL 对视频帧内容进行替换" />
+  <meta name="twitter:title" content="用 OpenGL 对视频帧内容进行替换" />
+  <meta name="description" content="在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？
 
 ">
-  <meta property="og:description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
+  <meta property="og:description" content="在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？
 
 ">
-  <meta name="twitter:description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
+  <meta name="twitter:description" content="在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -176,7 +176,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1530625119/code/pexels-photo-271402.jpg" data-img-desc-1="Scissor"></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1531388956/code/sunset-boat-sea-ship-37730.jpg" data-img-desc-1="ship"></div>
   
 
   <header class="header-section has-img">
@@ -191,11 +191,11 @@
                 <div class="page-heading">
                 
                   
-                     <h1>OpenGL 裁剪测试及注意点</h1>
+                     <h1>用 OpenGL 对视频帧内容进行替换</h1>
                      
                     <span class="post-meta">
   
-  Posted on July 3, 2018
+  Posted on July 12, 2018
   
   
 </span>
@@ -217,7 +217,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">OpenGL 裁剪测试及注意点</h1>
+                <h1 align="center">用 OpenGL 对视频帧内容进行替换</h1>
                 
                 
             </div>
@@ -239,12 +239,10 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Tue Jul 3, 2018</h4>
+        <h4 id="date"> Thu Jul 12, 2018</h4>
     </section>
-    <h5 id="wc">700 Words|Read in about 2 Min</h5>
+    <h5 id="wc">1900 Words|Read in about 4 Min</h5>
     <h5 id="tags">Tags: 
-        
-        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
     </h5>
 </div>
 
@@ -252,60 +250,189 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。</p>
+            <p>在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？</p>
 
 <p></p>
 
-<p>裁剪测试的效果就相当于在屏幕上开辟一个矩形区域，在该区域内再单独绘制内容。</p>
+<p>首先要明确的是，视频是由一帧一帧图像组成的，它利用了人眼的视觉暂留效应，一秒内播放足够帧数的图片才会感觉到是连续的。</p>
 
-<p>它的主要代码如下：</p>
+<p>而想要对视频的内容进行替换，也就是要将每一帧图像的内容都进行替换了，一般来说这应该是属于视频后期处理了，用专业的 AE （Adobe After Effects）软件来处理会比较好。</p>
 
-<pre><code class="language-java">		// 开启裁剪测试
-        GLES20.glEnable(GLES20.GL_SCISSOR_TEST)
-        // 指定开辟的矩形区域
-        GLES20.glScissor(x,y,width,height)
-        // 清除该区域内的颜色
-        GLES20.glClearColor(1f, 0f, 0f, 1f)
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-        // 在矩形局域内绘制内容
-        mCube.onDrawFrame(gl)
-        // 关闭裁剪测试
-        GLES20.glDisable(GLES20.GL_SCISSOR_TEST)
+<h2 id="处理思路">处理思路</h2>
+
+<p>如果用 OpenGL 来处理，有这样的一个思路：</p>
+
+<p>首先通过 MediaCodec 对每一帧图像内容进行解码，然后再通过 OpenGL 对当前解码的一帧图像进行处理，在原图像上加一个透明的遮罩层，遮罩层的要求就是对于要替换的内容区域是非透明的，其他区域透明，将遮罩层和原图像进行融合，最后得到的就是一帧被替换过内容图像了，再将处理过的一帧图像进行编码，重新编码成新的视频内容。</p>
+
+<p>一直重复 解码 -&gt; 处理 -&gt; 编码这个过程，直到视频的每一帧内容都处理完了，就实现了对视频内容替换。</p>
+
+<p>当然这仅仅是个思路，难点在于如何找到合适的遮罩层，如果视频图像内容是变动的，要替换的内容不是固定的，那么对于遮罩层要求更高了，每一帧处理都得有个合适的遮罩。</p>
+
+<p>下面会针对视频的一帧图像内容进行处理，如何将一帧的图像内容替换了。</p>
+
+<h2 id="直接效果">直接效果</h2>
+
+<p>效果如下：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531377132/code/frame_replace.png" alt="Sketch 设计图" /></p>
+
+<p>代码实现的效果，左上方的内容被右上方内容替换了，最后成了右下角的图片。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531384765/code/WechatIMG57.jpg" alt="软件实现图" /></p>
+
+<h2 id="准备工作">准备工作</h2>
+
+<blockquote>
+<p>不会做设计的开发不是好码农</p>
+</blockquote>
+
+<p>是时候掏出我的大宝石软件 Sketch 切个图了：</p>
+
+<p>准备一张待替换内容：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531377368/code/replace_origin.png" alt="待替换图片" /></p>
+
+<p>然后再切一张同等大小，并把中间圆形位置的图片替换成想要的图片，其他周边内容设置透明度为 0 。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531377364/code/replace_shape.png" alt="带透明度的遮罩图" /></p>
+
+<p>接下来的事情就是将两张图片融合，分别介绍基于着色器和颜色混合来替换内容。</p>
+
+<blockquote>
+<p>这两个方案都有一个共同点，就是要将带遮罩的图片覆盖在原图上，不同的是如何处理两个图片之间的覆盖，透明度就是一个比较好的切入点。</p>
+</blockquote>
+
+<h2 id="使用着色器进行替换">使用着色器进行替换</h2>
+
+<p>在 OpenGL 的渲染管线中，会先构建图形，然后进行光栅化，光栅化后对每一个片元着色，在这个着色过程中可以根据需要对片元进行处理，包括抛弃某些片元等，简单说在 OpenGL 中就是先有形后有色，而在有形有色的过程中可以搞点小操作~~</p>
+
+<p>对片元进行处理就是我们的片元着色器脚本了。</p>
+
+<pre><code class="language-glsl">precision mediump float;
+varying vec2 vTextureCoord; //接收从顶点着色器过来的参数
+uniform sampler2D sTexture;//纹理内容数据
+void main() { 
+   vec4 bcolor = texture2D(sTexture, vTextureCoord);//给此片元从纹理中采样出颜色值 
+   if(bcolor.a&lt;0.6) {
+   		discard;
+   } else {
+      gl_FragColor=bcolor;
+}}
 </code></pre>
 
-<p>它的使用并不难，只要在 onDrawFrame 方法里面开启裁剪测试，然后绘制，然后关闭裁剪就行了，具体效果如下：</p>
+<p>我们的遮罩图除了要替换的内容，其他地方都是透明的，根据采样出的透明度值小于阈值，就抛弃该片元，直接就不显示了。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1530624256/code/opengl-scissor.gif" alt="" /></p>
+<p>而透明度满足要求的就会显示，并且在最后映射到视口上时，直接覆盖了原有的颜色。</p>
 
-<p>在原来的图像上裁剪了一小块矩形，然后绘制了一个旋转的形状。</p>
+<p>通过这种方式就实现了内容替换。</p>
 
-<h2 id="注意点">注意点</h2>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531384608/code/glsl_replace_content.gif" alt="使用着色器进行替换" /></p>
 
-<p><code>glScissor</code> 方法可以指定裁剪的矩形区域，它的方法原型如下：</p>
+<h2 id="使用颜色混合进行替换">使用颜色混合进行替换</h2>
 
-<pre><code class="language-java">    public static native void glScissor(
-        int x,
-        int y,
-        int width,
-        int height
-    );
+<p>使用颜色混合的方式不像着色器那样简单粗暴，要么抛弃某些片元，要么直接覆盖了。</p>
+
+<p>它是根据一定的计算规则，来计算两个颜色之间的融合。</p>
+
+<p>在 OpenGL 中使用颜色混合要设置合理的混合因子。</p>
+
+<pre><code class="language-java">        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+        // 绘制
+        glDisable(GL_BLEND)
 </code></pre>
 
-<p>其中，x 和 y 指矩形区域的左下角坐标，width 和 height 指矩形区域的宽和高。</p>
+<p>混合因子的设置使得如果遮罩图是透明的，使用被遮罩图的颜色，如果不是透明的，使用遮罩图的颜色，这样就不是直接抛弃某些片元了。</p>
 
-<p>x 和 y 坐标所在的坐标系是以视口矩形区域的左下角为原点的，x 轴向右，y 轴向上的坐标系，对应到屏幕的坐标，就是以屏幕的左下角为原点，这和 Android 中以左上角为原点不同。</p>
+<p>效果如下：</p>
 
-<p>另外，在绘制时我们把视口设置为屏幕的宽和高，那么在启用裁剪测试后，想让绘制的内容正好显示在指定的矩形区域内，就必须保证即便没有启用裁剪测试，内容也是绘制在指定的区域内，否则裁剪区域内将不会显示绘制内容。</p>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531384608/code/blend_replace_content.gif" alt="使用颜色混合进行替换" /></p>
 
-<p>也就是说，裁剪测试只是在原来的视口标准的绘制区域内开辟一块矩形区域来显示，而不是把内容放到裁剪的区域内来显示。</p>
+<h2 id="代码实现">代码实现</h2>
 
-<p>最后创建了一个微信群，欢迎加群交流讨论 OpenGL ES 相关技术~~</p>
+<p>在具体的代码实现中，采用了 EGL 来实现离屏的渲染。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1530624519/code/WechatIMG324.jpg" alt="" /></p>
+<p>在非主线程中，初始化 EGL 环境，然后准备好绘制的必要工作，接着执行绘制，最后把绘制的结果通过 glReadPixels 读取出来。</p>
 
-<p>具体代码详情，可以参考我的 Github 项目，求一波 star~~</p>
+<pre><code class="language-kotlin">        Observable.fromCallable {
+        // 初始化 EGL 环境
+            return@fromCallable initEgl()
+        }.map {
+        // 设置各种矩阵
+            prepare(width, height)
+            return@map it
+        }.map {
+        // 执行绘制
+            replaceContent(isBlend)
+            return@map it
+        }.map {
+        // 读取像素
+            val result = readPixel(width, height)
+            it.destroy()
+            return@map result
+        }.subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                // 设置效果
+                    mResultImage.setImageBitmap(it)
+                }, {
+                    showToast(&quot;replace failed&quot;)
+                })
+</code></pre>
 
+<p>具体的绘制过程比较简单，如果采用了颜色混合就执行颜色混合的绘制，否则采用着色器的绘制，也体现了就是将遮罩图直接覆盖在原图上的思想。</p>
+
+<pre><code class="language-kotlin"> private fun replaceContent(isBlend: Boolean) {
+        glClearColor(1f, 1f, 1f, 1f)
+        glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
+        mOriginImage?.drawSelf(mOriginTextureId)
+        if (isBlend) {
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+            mReplaceImage?.drawSelf(mReplaceTextureId)
+            glDisable(GL_BLEND)
+        } else {
+            mAlphaTextureRect?.drawSelf(mReplaceTextureId)
+        }
+    }
+</code></pre>
+
+<p>在最后读取像素内容时要注意，glReadPixels 读取的内容是上下颠倒的，需要将它翻转过来。</p>
+
+<pre><code class="language-glsl">   for (i in 0 until height) {
+            for (j in 0 until width) {
+                pixelMirroredArray[(height - i - 1) * width + j] = pixelArray[i * width + j]
+            }
+        }
+</code></pre>
+
+<p>具体的实现可以参考我的 Github 项目，求一波 Star 。</p>
+
+<blockquote>
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
+</blockquote>
+
+<h2 id="后续想法">后续想法</h2>
+
+<p>对于视频内容替换，这里仅仅是给出了一帧图像内容的替换，而且还是基于透明度的。</p>
+
+<p>看到好莱坞有些电影场景拍摄时，后面都会给出一块纯色的幕布，然后在后期处理时把幕布内容替换成背景，这种替换通过着色器比较颜色的范围应该也是可以实现的。</p>
+
+<p>当然了，要是搭配图像识别来替换内容玩法就更加丰富了。</p>
+
+<h2 id="最后">最后</h2>
+
+<p>俗话说：</p>
+
+<blockquote>
+<p>独学而无友，则孤陋而寡闻</p>
+</blockquote>
+
+<p>学习的路上是需要交流和分享的，这里有个二维码，如果你对 OpenGL ES 感兴趣欢迎一起来交流讨论。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531382740/code/WechatIMG432.jpg" alt="加群讨论" /></p>
+
+<p>要是二维码过期了，加微信 ezglume 好友，备注 OpenGL ，拉你入群~</p>
 
               
                 <p>
@@ -324,7 +451,7 @@
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">用 OpenGL 对视频帧内容进行替换</a>
 
                 </p>
               
@@ -334,33 +461,18 @@
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/" data-toggle="tooltip" data-placement="top" title="OpenGL 3D 模型加载和渲染">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-share/" data-toggle="tooltip" data-placement="top" title="OpenGL ES 学习资源分享">&larr; Previous Post</a>
           </li>
         
         
           <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-share/" data-toggle="tooltip" data-placement="top" title="OpenGL ES 学习资源分享">Next Post &rarr;</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/" data-toggle="tooltip" data-placement="top" title="OpenGL 利用 Alpha 透明度进行测试">Next Post &rarr;</a>
           </li>
         
       </ul>
             
             <div>
                  
-                <h2>See Also</h2>
-                <ul>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-import-3d-object/">OpenGL 3D 模型加载和渲染</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-gldrawelements-method/">OpenGL 的 glDrawElements  绘制方法</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-view-matrix/">OpenGL 学习系列---观察矩阵</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-texture/">OpenGL 学习系列---纹理</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 学习系列---投影矩阵</a></li>
-                    
-                </ul>
-                
             </div>
             
 

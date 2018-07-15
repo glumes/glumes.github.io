@@ -5,26 +5,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>OpenGL 裁剪测试及注意点</title>
-  <meta property="og:title" content="OpenGL 裁剪测试及注意点" />
-  <meta name="twitter:title" content="OpenGL 裁剪测试及注意点" />
-  <meta name="description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
+  <title>OpenGL ES 学习资源分享</title>
+  <meta property="og:title" content="OpenGL ES 学习资源分享" />
+  <meta name="twitter:title" content="OpenGL ES 学习资源分享" />
+  <meta name="description" content="学习了一段时间的 OpenGL ES，并在公司的项目中得到了运用，也算是有了一些积累，现在分享一些当初学习的资源，大家一起来学习，共同交流进步。
 
 ">
-  <meta property="og:description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
+  <meta property="og:description" content="学习了一段时间的 OpenGL ES，并在公司的项目中得到了运用，也算是有了一些积累，现在分享一些当初学习的资源，大家一起来学习，共同交流进步。
 
 ">
-  <meta name="twitter:description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
+  <meta name="twitter:description" content="学习了一段时间的 OpenGL ES，并在公司的项目中得到了运用，也算是有了一些积累，现在分享一些当初学习的资源，大家一起来学习，共同交流进步。
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-share/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-share/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -176,7 +176,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1530625119/code/pexels-photo-271402.jpg" data-img-desc-1="Scissor"></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1531290620/life/pexels-photo-333528.jpg" data-img-desc-1="Share"></div>
   
 
   <header class="header-section has-img">
@@ -191,11 +191,11 @@
                 <div class="page-heading">
                 
                   
-                     <h1>OpenGL 裁剪测试及注意点</h1>
+                     <h1>OpenGL ES 学习资源分享</h1>
                      
                     <span class="post-meta">
   
-  Posted on July 3, 2018
+  Posted on July 11, 2018
   
   
 </span>
@@ -217,7 +217,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">OpenGL 裁剪测试及注意点</h1>
+                <h1 align="center">OpenGL ES 学习资源分享</h1>
                 
                 
             </div>
@@ -239,9 +239,9 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Tue Jul 3, 2018</h4>
+        <h4 id="date"> Wed Jul 11, 2018</h4>
     </section>
-    <h5 id="wc">700 Words|Read in about 2 Min</h5>
+    <h5 id="wc">1700 Words|Read in about 4 Min</h5>
     <h5 id="tags">Tags: 
         
         <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
@@ -252,60 +252,141 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。</p>
+            <p>学习了一段时间的 OpenGL ES，并在公司的项目中得到了运用，也算是有了一些积累，现在分享一些当初学习的资源，大家一起来学习，共同交流进步。</p>
 
 <p></p>
 
-<p>裁剪测试的效果就相当于在屏幕上开辟一个矩形区域，在该区域内再单独绘制内容。</p>
+<h2 id="关于学习方式">关于学习方式</h2>
 
-<p>它的主要代码如下：</p>
+<p>在分享资源之前，简单地聊聊学习的方式。</p>
 
-<pre><code class="language-java">		// 开启裁剪测试
-        GLES20.glEnable(GLES20.GL_SCISSOR_TEST)
-        // 指定开辟的矩形区域
-        GLES20.glScissor(x,y,width,height)
-        // 清除该区域内的颜色
-        GLES20.glClearColor(1f, 0f, 0f, 1f)
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-        // 在矩形局域内绘制内容
-        mCube.onDrawFrame(gl)
-        // 关闭裁剪测试
-        GLES20.glDisable(GLES20.GL_SCISSOR_TEST)
-</code></pre>
+<p>有句名言说的好：</p>
 
-<p>它的使用并不难，只要在 onDrawFrame 方法里面开启裁剪测试，然后绘制，然后关闭裁剪就行了，具体效果如下：</p>
+<blockquote>
+<p>书籍的人类进步的阶梯</p>
+</blockquote>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1530624256/code/opengl-scissor.gif" alt="" /></p>
+<p>在需要解决一些未知领域的问题、完成一些未知领域的需求时，是必须要去学习一些新东西的。</p>
 
-<p>在原来的图像上裁剪了一小块矩形，然后绘制了一个旋转的形状。</p>
+<p>而在学习这些新东西时，不要太依赖于搜索引擎了，不然只是当下解决了某些问题、完成了某些需求。</p>
 
-<h2 id="注意点">注意点</h2>
+<p>通过看一些博客文章、看一些文章分析，在某些时刻确实是很有帮助的，但总是会存在一些碎片化知识，没有系统地形成知识网络，此时掌握的仅仅是技巧。还是要通过系统地去学习某些知识内容，在脑海里面有个完整的知识体系。</p>
 
-<p><code>glScissor</code> 方法可以指定裁剪的矩形区域，它的方法原型如下：</p>
+<p>这个简单的道理大家都懂，就不多说了~</p>
 
-<pre><code class="language-java">    public static native void glScissor(
-        int x,
-        int y,
-        int width,
-        int height
-    );
-</code></pre>
+<h2 id="简单上手">简单上手</h2>
 
-<p>其中，x 和 y 指矩形区域的左下角坐标，width 和 height 指矩形区域的宽和高。</p>
+<p>作为程序员学习一项内容，最重要的就是 Hello World 了。</p>
 
-<p>x 和 y 坐标所在的坐标系是以视口矩形区域的左下角为原点的，x 轴向右，y 轴向上的坐标系，对应到屏幕的坐标，就是以屏幕的左下角为原点，这和 Android 中以左上角为原点不同。</p>
+<blockquote>
+<p>《OpenGL ES 应用开发实践指南》</p>
+</blockquote>
 
-<p>另外，在绘制时我们把视口设置为屏幕的宽和高，那么在启用裁剪测试后，想让绘制的内容正好显示在指定的矩形区域内，就必须保证即便没有启用裁剪测试，内容也是绘制在指定的区域内，否则裁剪区域内将不会显示绘制内容。</p>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531233892/code/opengles2.png" alt="" /></p>
 
-<p>也就是说，裁剪测试只是在原来的视口标准的绘制区域内开辟一块矩形区域来显示，而不是把内容放到裁剪的区域内来显示。</p>
+<p>这本书比较通俗易懂，直接上手使用 OpenGL ES，可以说是手把手教学了。</p>
 
-<p>最后创建了一个微信群，欢迎加群交流讨论 OpenGL ES 相关技术~~</p>
+<p>作为初学者，最重要的是啥？环境配置、Demo 运行呀~~~</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1530624519/code/WechatIMG324.jpg" alt="" /></p>
+<p>在 《OpenGL ES 应用开发实践指南》里面，跟着书中的章节顺序走，每一章都会有代码示例，也算是一步步引导了。</p>
 
-<p>具体代码详情，可以参考我的 Github 项目，求一波 star~~</p>
+<p>你可以暂时不求甚解，先把示例工程运行起来，等熟练了再去深究原理。</p>
+
+<p>美中不足的是，这本书针对的 OpenGL ES 版本是 2.0 的，在 OpenGL ES 3.x 中的一些特性无法体验到了，而且现在的手机大多支持 OpenGL ES 3.x 版本了，不过要是考虑到兼容低版本的情况，还是可以使用 OpenGL ES 2.0 版本的。</p>
+
+<p>这本书是翻译过来的，它的英文原版封面如下：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531234024/code/opengles2_eng.png" alt="《OpenGL ES 应用开发实践指南》" /></p>
+
+<p>简单上手了 OpenGL ES 2.0 之后，该了解一下 OpenGL Shading Language （GLSL）了。</p>
+
+<p>GLSL 就是着色器脚本语言，这个语言是用来给 GPU 运行的，灵活地使用它才能更好地掌握 OpenGL ES，要知道现在手机相机上的一些滤镜效果都是通过 GLSL 来实现的哦。</p>
+
+<blockquote>
+<p>《OpenGL® Shading Language, Second Edition》</p>
+</blockquote>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531233599/code/glsl2.jpg" alt="《OpenGL® Shading Language, Second Edition》" /></p>
+
+<p>这本书是英文版的，讲解了 GLSL 的一些语法，基于的版本是 OpenGL ES 2.0 的，正好和前面的书籍配套学习了，而且英文难度不大，易懂。</p>
+
+<p>该书中同样有很多例子可以实践，比如光照、阴影、噪音等。</p>
+
+<p>通过这两本书的配套练习，可以掌握 OpenGL ES 2.x 版本的基本内容了。</p>
+
+<p>当然了，除此之外，你还需要更多的练习。</p>
+
+<p>可以参考这本书，获得更多打怪晋级的经验：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531234362/code/opengles_practice.png" alt="《Android 3D 游戏开发技术宝典》" /></p>
+
+<p>《Android 3D 游戏开发技术宝典》一书中有很多可以在实践中用到的内容，具体内容就等大家自行探索了~~~</p>
+
+<h2 id="高阶版本">高阶版本</h2>
+
+<p>当然了，学会了 OpenGL ES 2.0 再去看 OpenGL ES 3.x 就容易多了。</p>
+
+<p>这两者在 GLSL 上是有一些变化的，另外 OpenGL ES 3.x 支持的渲染效果更好，而且支持的特性更多。</p>
+
+<p>关于 OpenGL ES 3.x 版本的学习，有如下书籍推荐：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531235536/code/opengles3.png" alt="OpenGL ES 3.x 游戏开发" /></p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531235855/code/opengles33.png" alt="OpenGL ES 3.0 编程指南" /></p>
+
+<p>在 Android 后续系统版本中，都开始使用 Vulkan 来替代 OpenGL 了。</p>
+
+<p>等掌握了 OpenGL ES 之后，下一个就是 Vulkan 了~~~</p>
+
+<p>另外关于书籍推荐，其实大家可以到京东或者当当上搜索一下关键字就知道了，目前市面上关于 OpenGL ES 的书籍也不多，搜来搜去也就是那几本书啦~~~对于其他领域的书籍情况类似&hellip;</p>
+
+<h2 id="深入理解">深入理解</h2>
+
+<p>当你已经掌握了 OpenGL ES 的大部分内容，并且可以简单的运用他们了，这时候再想去深入理解它们，那就必须要说到 OpenGL ES 学习中的红宝书和蓝宝书了。</p>
+
+<p>红宝书指的是 《OpenGL 编程指南》，目前已经出到了第九版了，蓝宝书指的是《OpenGL 超级宝典》目前已经出到了第五版了。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/a_270/v1531235092/code/WechatIMG325.jpg" alt="红宝书与蓝宝书" /></p>
+
+<p>这两本书就没有前面那么多代码示例了，更多的是讲解一些原理相关的内容，而且也不是特别针对 Android 开发环境来讲的。这两本书更多是还是当做工具书来使用，当某些知识点不清晰时，看看书查漏补缺~~~（反正我是当工具书用了）</p>
+
+<blockquote>
+<p>听说，下雨天，代码和书籍更配哦~</p>
+</blockquote>
+
+<p>显然，光是看书是不够的，纸上得来终觉浅，绝知此事要躬行。</p>
+
+<p>在 OpenGL ES 开发中，有一些项目是必看的：</p>
+
+<ul>
+<li><a href="https://github.com/CyberAgent/android-gpuimage">https://github.com/CyberAgent/android-gpuimage</a></li>
+<li><a href="https://github.com/BradLarson/GPUImage2">https://github.com/BradLarson/GPUImage2</a></li>
+<li><a href="https://github.com/google/grafika">https://github.com/google/grafika</a></li>
+</ul>
+
+<p>这些项目中可以看到 OpenGL ES 在相机滤镜和视频录制方面的运用~</p>
+
+<h2 id="最后">最后</h2>
+
+<p>俗话说：</p>
+
+<blockquote>
+<p>独学而无友，则孤陋而寡闻</p>
+</blockquote>
+
+<p>光是掌握了这些书上的内容还是不够的，更多的是需要交流和讨论，让这些知识在每一次的探讨中变得更加生动灵活，不再是枯燥的代码和理论。</p>
+
+<p>那就赶紧扫码加入我们吧~~</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531236519/code/WechatIMG326.jpg" alt="" /></p>
+
+<p>要是二维码过期了，加微信 ezglume 好友，备注 OpenGL ，拉你入群~</p>
+
+<p>本文中提到的书籍资源，皆可在我的 Github 地址上下载得到：</p>
 
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
+
+<p>一些 OpenGL ES 学习的代码也会在这里，求 Star 一波 。</p>
 
               
                 <p>
@@ -324,7 +405,7 @@
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-share/">OpenGL ES 学习资源分享</a>
 
                 </p>
               
@@ -334,12 +415,12 @@
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/" data-toggle="tooltip" data-placement="top" title="OpenGL 3D 模型加载和渲染">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" data-toggle="tooltip" data-placement="top" title="OpenGL 裁剪测试及注意点">&larr; Previous Post</a>
           </li>
         
         
           <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-share/" data-toggle="tooltip" data-placement="top" title="OpenGL ES 学习资源分享">Next Post &rarr;</a>
+            <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" data-toggle="tooltip" data-placement="top" title="用 OpenGL 对视频帧内容进行替换">Next Post &rarr;</a>
           </li>
         
       </ul>
@@ -349,6 +430,8 @@
                 <h2>See Also</h2>
                 <ul>
                     
+                    <li><a href="/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a></li>
+                    
                     <li><a href="/post/opengl/opengl-tutorial-import-3d-object/">OpenGL 3D 模型加载和渲染</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-gldrawelements-method/">OpenGL 的 glDrawElements  绘制方法</a></li>
@@ -356,8 +439,6 @@
                     <li><a href="/post/opengl/opengl-tutorial-view-matrix/">OpenGL 学习系列---观察矩阵</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-texture/">OpenGL 学习系列---纹理</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 学习系列---投影矩阵</a></li>
                     
                 </ul>
                 

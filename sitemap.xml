@@ -3,6 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/android/android-jni-thread-operation/</loc>
+    <lastmod>2018-07-15T14:12:25+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/opengl/opengl-tutorial-alpha-test/</loc>
+    <lastmod>2018-07-13T09:41:22+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/</loc>
+    <lastmod>2018-07-12T16:59:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/opengl/opengl-tutorial-share/</loc>
+    <lastmod>2018-07-11T14:25:52+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/opengl/opengl-tutorial-scissor-test/</loc>
     <lastmod>2018-07-03T21:35:34+08:00</lastmod>
   </url>
@@ -269,7 +289,7 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-07-03T21:35:34+08:00</lastmod>
+    <lastmod>2018-07-15T14:12:25+08:00</lastmod>
   </url>
   
   <url>
@@ -280,7 +300,7 @@
   
   <url>
     <loc>https://glumes.com/categories/android/</loc>
-    <lastmod>2018-06-29T20:31:53+08:00</lastmod>
+    <lastmod>2018-07-15T14:12:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -298,7 +318,7 @@
   
   <url>
     <loc>https://glumes.com/categories/</loc>
-    <lastmod>2018-06-29T20:31:53+08:00</lastmod>
+    <lastmod>2018-07-15T14:12:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -388,19 +408,19 @@
   
   <url>
     <loc>https://glumes.com/tags/opengl/</loc>
-    <lastmod>2018-07-03T21:35:34+08:00</lastmod>
+    <lastmod>2018-07-13T09:41:22+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/opengl/</loc>
-    <lastmod>2018-07-03T21:35:34+08:00</lastmod>
+    <lastmod>2018-07-13T09:41:22+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-07-03T21:35:34+08:00</lastmod>
+    <lastmod>2018-07-15T14:12:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   

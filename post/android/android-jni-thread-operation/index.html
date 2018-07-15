@@ -5,26 +5,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>OpenGL 裁剪测试及注意点</title>
-  <meta property="og:title" content="OpenGL 裁剪测试及注意点" />
-  <meta name="twitter:title" content="OpenGL 裁剪测试及注意点" />
-  <meta name="description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
+  <title>Android JNI 中的线程操作</title>
+  <meta property="og:title" content="Android JNI 中的线程操作" />
+  <meta name="twitter:title" content="Android JNI 中的线程操作" />
+  <meta name="description" content="学习一下如何在 Native 代码中使用线程。
 
 ">
-  <meta property="og:description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
+  <meta property="og:description" content="学习一下如何在 Native 代码中使用线程。
 
 ">
-  <meta name="twitter:description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
+  <meta name="twitter:description" content="学习一下如何在 Native 代码中使用线程。
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" />
+  <meta property="og:url" content="https://glumes.com/post/android/android-jni-thread-operation/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" />
+  <link rel="canonical" href="https://glumes.com/post/android/android-jni-thread-operation/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -176,7 +176,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1530625119/code/pexels-photo-271402.jpg" data-img-desc-1="Scissor"></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1531635750/blog/pexels-photo-206650.jpg" data-img-desc-1="Thread"></div>
   
 
   <header class="header-section has-img">
@@ -191,11 +191,11 @@
                 <div class="page-heading">
                 
                   
-                     <h1>OpenGL 裁剪测试及注意点</h1>
+                     <h1>Android JNI 中的线程操作</h1>
                      
                     <span class="post-meta">
   
-  Posted on July 3, 2018
+  Posted on July 15, 2018
   
   
 </span>
@@ -217,7 +217,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">OpenGL 裁剪测试及注意点</h1>
+                <h1 align="center">Android JNI 中的线程操作</h1>
                 
                 
             </div>
@@ -239,12 +239,10 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Tue Jul 3, 2018</h4>
+        <h4 id="date"> Sun Jul 15, 2018</h4>
     </section>
-    <h5 id="wc">700 Words|Read in about 2 Min</h5>
+    <h5 id="wc">1600 Words|Read in about 4 Min</h5>
     <h5 id="tags">Tags: 
-        
-        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
     </h5>
 </div>
 
@@ -252,60 +250,190 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。</p>
+            <p>学习一下如何在 Native 代码中使用线程。</p>
 
 <p></p>
 
-<p>裁剪测试的效果就相当于在屏幕上开辟一个矩形区域，在该区域内再单独绘制内容。</p>
+<p>Native 中支持的线程标准是 POSIX 线程，它定义了一套创建和操作线程的 API 。</p>
 
-<p>它的主要代码如下：</p>
+<p>我们可以在 Native 代码中使用 POSIX 线程，就相当于使用一个库一样，首先需要包含这个库的头文件：</p>
 
-<pre><code class="language-java">		// 开启裁剪测试
-        GLES20.glEnable(GLES20.GL_SCISSOR_TEST)
-        // 指定开辟的矩形区域
-        GLES20.glScissor(x,y,width,height)
-        // 清除该区域内的颜色
-        GLES20.glClearColor(1f, 0f, 0f, 1f)
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-        // 在矩形局域内绘制内容
-        mCube.onDrawFrame(gl)
-        // 关闭裁剪测试
-        GLES20.glDisable(GLES20.GL_SCISSOR_TEST)
+<pre><code class="language-cpp">#include &lt;pthread.h&gt;
 </code></pre>
 
-<p>它的使用并不难，只要在 onDrawFrame 方法里面开启裁剪测试，然后绘制，然后关闭裁剪就行了，具体效果如下：</p>
+<p>这个头文件中定义了很多和线程相关的函数，这里就暂时使用到了其中部分内容。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1530624256/code/opengl-scissor.gif" alt="" /></p>
+<h2 id="创建线程">创建线程</h2>
 
-<p>在原来的图像上裁剪了一小块矩形，然后绘制了一个旋转的形状。</p>
+<p>POSIX 创建线程的函数如下：</p>
 
-<h2 id="注意点">注意点</h2>
-
-<p><code>glScissor</code> 方法可以指定裁剪的矩形区域，它的方法原型如下：</p>
-
-<pre><code class="language-java">    public static native void glScissor(
-        int x,
-        int y,
-        int width,
-        int height
-    );
+<pre><code class="language-cpp">int pthread_create(
+	pthread_t* __pthread_ptr, 
+	pthread_attr_t const* __attr, 
+	void* (*__start_routine)(void*), 
+	void* arg);
 </code></pre>
 
-<p>其中，x 和 y 指矩形区域的左下角坐标，width 和 height 指矩形区域的宽和高。</p>
+<p>它的参数对应如下：</p>
 
-<p>x 和 y 坐标所在的坐标系是以视口矩形区域的左下角为原点的，x 轴向右，y 轴向上的坐标系，对应到屏幕的坐标，就是以屏幕的左下角为原点，这和 Android 中以左上角为原点不同。</p>
+<ul>
+<li><p>__pthread_ptr 为指向 pthread_t 类型变量的指针，用它代表返回线程的句柄。</p></li>
 
-<p>另外，在绘制时我们把视口设置为屏幕的宽和高，那么在启用裁剪测试后，想让绘制的内容正好显示在指定的矩形区域内，就必须保证即便没有启用裁剪测试，内容也是绘制在指定的区域内，否则裁剪区域内将不会显示绘制内容。</p>
+<li><p>__attr 为指向 pthread_attr_t 结构的指针，可以通过该结构来指定新线程的一些属性，比如栈大小、调度优先级等，具体看 pthread_attr_t 结构的内容。如果没有特殊要求，可使用默认值，把该变量取值为 NULL 。</p></li>
 
-<p>也就是说，裁剪测试只是在原来的视口标准的绘制区域内开辟一块矩形区域来显示，而不是把内容放到裁剪的区域内来显示。</p>
+<li><p>第三个参数为该线程启动程序的函数指针，也就是线程启动时要执行的那个方法，类似于 Java Runnable 中的 run 方法，它的函数签名格式如下：</p>
 
-<p>最后创建了一个微信群，欢迎加群交流讨论 OpenGL ES 相关技术~~</p>
+<pre><code class="language-cpp">void* start_routine(void* args)
+</code></pre></li>
+</ul>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1530624519/code/WechatIMG324.jpg" alt="" /></p>
+<p>启动程序将线程参数看成 void 指针，返回 void 指针类型结果。</p>
 
-<p>具体代码详情，可以参考我的 Github 项目，求一波 star~~</p>
+<ul>
+<li>第四个参数为线程启动程序的参数，也就是函数的参数，如果不需要传递参数，它可以为 NULL 。</li>
+</ul>
 
-<p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
+<p><code>pthread_create</code> 函数如果执行成功了则返回 0 ，如果返回其他错误代码。</p>
+
+<p>接下来，我们可以体验一下 pthread_create 方法创建线程。</p>
+
+<p>首先，创建线程启动时运行的函数：</p>
+
+<pre><code class="language-cpp">void *printThreadHello(void *);
+void *printThreadHello(void *) {
+    LOGD(&quot;hello thread&quot;);
+    // 切记要有返回值
+    return NULL;
+}
+</code></pre>
+
+<p>要注意线程启动函数是要有返回值的，没有返回值就直接崩溃了。</p>
+
+<p>另外这个函数一旦 pthread_create 调用了，它就会立即执行。</p>
+
+<p>接下来创建线程：</p>
+
+<pre><code class="language-cpp">JNIEXPORT void JNICALL
+Java_com_glumes_cppso_jnioperations_ThreadOps_createNativeThread(JNIEnv *, jobject) {
+    pthread_t handles; // 线程句柄
+    int result = pthread_create(&amp;handles, NULL, printThreadHello, NULL);
+    if (result != 0) {
+        LOGD(&quot;create thread failed&quot;);
+    } else {
+        LOGD(&quot;create thread success&quot;);
+    }
+}
+</code></pre>
+
+<p>由于没有给该线程设置属性，并且线程运行函数也不需要参数，就都直接设置为了 NULL，那么上面那段程序就可以执行了，并且 printThreadHello 函数是运行在新的线程中的。</p>
+
+<h2 id="将线程附着在-java-虚拟机上">将线程附着在 Java 虚拟机上</h2>
+
+<p>在上面的线程启动函数中，只是简单的执行了打印 log 的操作，如果想要执行和 Java 相关的操作，比如从 JNI 调用 Java 的函数等等，那就需要用到 Java 虚拟机环境了，也就是用到 JNIEnv 指针，毕竟所有的调用函数都是以它开头的。</p>
+
+<p>pthread_create 创建的线程是一个 C++ 中的线程，虚拟机并不能识别它们，为了和 Java 空间交互，需要先把 POSIX 线程附着到 Java 虚拟机上，然后就可以获得当前线程的 JNIEnv 指针，因为 JNIEnv 指针只是在当前线程中有效。</p>
+
+<p>通过 <code>AttachCurrentThread</code> 方法可以将当前线程附着到 Java 虚拟机上，并且可以获得 JNIEnv 指针。</p>
+
+<p><code>AttachCurrentThread</code> 方法是由 JavaVM 指针调用的，它代表的是 Java 虚拟机接口指针，可以在 JNI_OnLoad 加载时来获得，通过全局变量保存起来</p>
+
+<pre><code class="language-cpp">static JavaVM *gVm = NULL;
+JNIEXPORT int JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
+    JNIEnv *env;
+    if (vm-&gt;GetEnv((void **) &amp;env, JNI_VERSION_1_6) != JNI_OK) {
+        return JNI_ERR;
+    }
+    gVm = vm;
+    return JNI_VERSION_1_6;
+}
+</code></pre>
+
+<p>当通过 <code>AttachCurrentThread</code> 方法将线程附着当 Java 虚拟机上后，还需要将该线程从 Java 虚拟机上分离，通过 <code>DetachCurrentThread</code> 方法，这两个方法是要同时使用的，否则会带来 BUG 。</p>
+
+<p>具体使用如下：</p>
+
+<p>首先在 Java 中定义在 C++ 线程中回调的方法，主要就是打印线程名字：</p>
+
+<pre><code class="language-java">    private void printThreadName() {
+        LogUtil.Companion.d(&quot;print thread name current thread name is &quot; + Thread.currentThread().getName());
+            Thread.sleep(5000);
+    }
+</code></pre>
+
+<p>然后定义 Native 线程中运行的方法：</p>
+
+<pre><code class="language-cpp">void *run(void *);
+void *run(void *args) {
+    JNIEnv *env = NULL;
+    // 将当前线程添加到 Java 虚拟机上
+    // 假设有参数传递
+    ThreadRunArgs *threadRunArgs = (ThreadRunArgs *) args;
+    if (gVm-&gt;AttachCurrentThread(&amp;env, NULL) == 0) {
+    // 回调 Java 的方法，打印当前线程 id ，发现不是主线程就对了
+        env-&gt;CallVoidMethod(gObj, printThreadName);
+        // 从 Java 虚拟机上分离当前线程
+        gVm-&gt;DetachCurrentThread();  
+    }
+    return (void *) threadRunArgs-&gt;result;
+}
+</code></pre>
+
+<p>最后创建线程并运行方法：</p>
+
+<pre><code class="language-cpp">		// 创建传递的参数
+	    ThreadRunArgs *threadRunArgs = new ThreadRunArgs();
+        threadRunArgs-&gt;id = i;
+        threadRunArgs-&gt;result = i * i;
+        // 运行线程
+        int result = pthread_create(&amp;handles, NULL, run, (void *) threadRunArgs);
+</code></pre>
+
+<p>通过这样的调用，就可以在 Native 线程中调用 Java 相关的函数了。</p>
+
+<h2 id="等待线程返回结果">等待线程返回结果</h2>
+
+<p>前面提到在线程运行函数中必须要有返回值，最开始只是返回了一个空指针 NULL ，并且在某个方法里面开启了新线程，新线程运行后，该方法也就立即返回退出，执行完了。</p>
+
+<p>现在，还可以在该方法里等待线程执行完毕后，拿到线程执行完的结果之后再推出。</p>
+
+<p>通过 <code>pthread_join</code> 方法可以等待线程终止。</p>
+
+<pre><code class="language-cpp">int pthread_join(pthread_t __pthread, void** __return_value_ptr);
+</code></pre>
+
+<p>其中：</p>
+
+<ul>
+<li>__pthread 代表创建线程的句柄</li>
+<li>__return_value_ptr 代表线程运行函数返回的结果</li>
+</ul>
+
+<p>使用如下：</p>
+
+<pre><code class="language-cpp">	for (int i = 0; i &lt; num; ++i) {
+        pthread_t pthread;
+        // 创建线程，
+        int result = pthread_create(&amp;handles[i], NULL, run, (void *) threadRunArgs);
+        }
+    }
+    for (int i = 0; i &lt; num; ++i) {
+        void *result = NULL; // 线程执行返回结果
+        // 等待线程执行结束
+        if (pthread_join(handles[i], &amp;result) != 0) {
+            throwByName(env, runtimeException, &quot;Unable to join thread&quot;);
+        } else {
+	        LOGD(&quot;return value is %d&quot;,result);
+        }
+    }
+</code></pre>
+
+<p>如果 pthread_join 返回为 0 代表执行成功，非 0 则执行失败。</p>
+
+<p>具体的代码示例可以参考我的 Github 项目，欢迎 Star 。</p>
+
+<blockquote>
+<p><a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a></p>
+</blockquote>
 
               
                 <p>
@@ -324,7 +452,7 @@
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-thread-operation/">Android JNI 中的线程操作</a>
 
                 </p>
               
@@ -334,33 +462,14 @@
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/" data-toggle="tooltip" data-placement="top" title="OpenGL 3D 模型加载和渲染">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/" data-toggle="tooltip" data-placement="top" title="OpenGL 利用 Alpha 透明度进行测试">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-share/" data-toggle="tooltip" data-placement="top" title="OpenGL ES 学习资源分享">Next Post &rarr;</a>
-          </li>
         
       </ul>
             
             <div>
                  
-                <h2>See Also</h2>
-                <ul>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-import-3d-object/">OpenGL 3D 模型加载和渲染</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-gldrawelements-method/">OpenGL 的 glDrawElements  绘制方法</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-view-matrix/">OpenGL 学习系列---观察矩阵</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-texture/">OpenGL 学习系列---纹理</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 学习系列---投影矩阵</a></li>
-                    
-                </ul>
-                
             </div>
             
 

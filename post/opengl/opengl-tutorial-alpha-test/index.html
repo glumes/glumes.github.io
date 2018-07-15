@@ -5,26 +5,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>OpenGL 裁剪测试及注意点</title>
-  <meta property="og:title" content="OpenGL 裁剪测试及注意点" />
-  <meta name="twitter:title" content="OpenGL 裁剪测试及注意点" />
-  <meta name="description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
+  <title>OpenGL 利用 Alpha 透明度进行测试</title>
+  <meta property="og:title" content="OpenGL 利用 Alpha 透明度进行测试" />
+  <meta name="twitter:title" content="OpenGL 利用 Alpha 透明度进行测试" />
+  <meta name="description" content="在前面的博客文章中有提到 OpenGL 裁剪测试及注意点，并且裁剪测试只能裁剪一个矩形区域，相当于就是把整个内容都绘制上去了，但是透过一个小矩形区域来看绘制的物体。
+
+除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。
+
+关于 Alpha 透明度测试，在 用 OpenGL 对视频帧内容进行替换 也用实践用到过。
 
 ">
-  <meta property="og:description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
+  <meta property="og:description" content="在前面的博客文章中有提到 OpenGL 裁剪测试及注意点，并且裁剪测试只能裁剪一个矩形区域，相当于就是把整个内容都绘制上去了，但是透过一个小矩形区域来看绘制的物体。
+
+除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。
+
+关于 Alpha 透明度测试，在 用 OpenGL 对视频帧内容进行替换 也用实践用到过。
 
 ">
-  <meta name="twitter:description" content="在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。
+  <meta name="twitter:description" content="在前面的博客文章中有提到 OpenGL 裁剪测试及注意点，并且裁剪测试只能裁剪一个矩形区域，相当于就是把整个内容都绘制上去了，但是透过一个小矩形区域来看绘制的物体。
+
+除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。
+
+关于 Alpha 透明度测试，在 用 OpenGL 对视频帧内容进行替换 也用实践用到过。
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -176,7 +188,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1530625119/code/pexels-photo-271402.jpg" data-img-desc-1="Scissor"></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1531447145/blog/forest-tree-tree-trunk-bark.jpg" data-img-desc-1="Tree"></div>
   
 
   <header class="header-section has-img">
@@ -191,11 +203,11 @@
                 <div class="page-heading">
                 
                   
-                     <h1>OpenGL 裁剪测试及注意点</h1>
+                     <h1>OpenGL 利用 Alpha 透明度进行测试</h1>
                      
                     <span class="post-meta">
   
-  Posted on July 3, 2018
+  Posted on July 13, 2018
   
   
 </span>
@@ -217,7 +229,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">OpenGL 裁剪测试及注意点</h1>
+                <h1 align="center">OpenGL 利用 Alpha 透明度进行测试</h1>
                 
                 
             </div>
@@ -239,9 +251,9 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Tue Jul 3, 2018</h4>
+        <h4 id="date"> Fri Jul 13, 2018</h4>
     </section>
-    <h5 id="wc">700 Words|Read in about 2 Min</h5>
+    <h5 id="wc">1600 Words|Read in about 4 Min</h5>
     <h5 id="tags">Tags: 
         
         <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
@@ -252,60 +264,157 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。</p>
+            <p>在前面的博客文章中有提到 <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a>，并且裁剪测试只能裁剪一个矩形区域，相当于就是把整个内容都绘制上去了，但是透过一个小矩形区域来看绘制的物体。</p>
+
+<p>除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。</p>
+
+<p>关于 Alpha 透明度测试，在 用 <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">OpenGL 对视频帧内容进行替换</a> 也用实践用到过。</p>
 
 <p></p>
 
-<p>裁剪测试的效果就相当于在屏幕上开辟一个矩形区域，在该区域内再单独绘制内容。</p>
+<p>在 OpenGL 中，每个颜色都有四个色彩通道 &mdash; RGBA，其中 A 就是 Alpha 透明度通道，可以利用它的值进行检测。</p>
 
-<p>它的主要代码如下：</p>
+<p>Alpha 测试的基本原理为，当绘制一个片元时，首先检测其 Alpha 值，若 Alpha 值满足要求，就通过测试，绘制此片元，否则丢弃此片元，不进行绘制。</p>
 
-<pre><code class="language-java">		// 开启裁剪测试
-        GLES20.glEnable(GLES20.GL_SCISSOR_TEST)
-        // 指定开辟的矩形区域
-        GLES20.glScissor(x,y,width,height)
-        // 清除该区域内的颜色
-        GLES20.glClearColor(1f, 0f, 0f, 1f)
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-        // 在矩形局域内绘制内容
-        mCube.onDrawFrame(gl)
-        // 关闭裁剪测试
-        GLES20.glDisable(GLES20.GL_SCISSOR_TEST)
+<p>比如如下的场景：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_500/v1530807546/code/WechatIMG27.jpg" alt="" /></p>
+
+<p>如果是裁剪测试，只能屏幕上透过一个矩形区域来观察实际场景。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_500/v1530807545/code/WechatIMG26.jpg" alt="" /></p>
+
+<p>而换成 Alpha 测试，就可以实现透过任意形状的观察，效果如下：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_500/v1530807540/code/WechatIMG28.jpg" alt="" /></p>
+
+<p>图上的内容实际由三部分组成，树、地形、中间带透明度的边框。</p>
+
+<p>正因为绘制的边框带透明度，才不会全部遮住后面的内容。</p>
+
+<p>具体绘制代码如下：</p>
+
+<pre><code class="language-java">            GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT or GLES20.GL_COLOR_BUFFER_BIT)
+            // 打开深度检测
+             GLES20.glEnable(GLES20.GL_DEPTH_TEST)
+			// 设置相机和观察矩阵，绘制地形和树
+            MatrixState.setProjectFrustum(-ratio!!, ratio!!, -1f, 1f, 1f, 100f)
+            MatrixState.setCamera(cx, 0f, cz, 0f, 0f, 0f, 0f, 1.0f, 0f)
+
+            MatrixState.pushMatrix()
+            MatrixState.translate(0f, -2f, 0f)
+            // 绘制地形
+            desert!!.drawSelf(desertId)
+            MatrixState.popMatrix()
+			// 开启混合，因为树要和地形有混合的地方
+            GLES20.glEnable(GLES20.GL_BLEND)
+			// 设置混合因子
+            GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA)
+            MatrixState.pushMatrix()
+            MatrixState.translate(0f, -2f, 0f)
+            // 绘制树
+            tg!!.drawSelf(treeId)
+            MatrixState.popMatrix()
+			// 关闭混合
+            GLES20.glDisable(GLES20.GL_BLEND)
+			// 清除深度缓冲
+            GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT)
+			// 设置相机和投影矩阵来绘制带透明度的边框
+            MatrixState.pushMatrix()
+            MatrixState.setProjectOrtho(-1f, 1f, -1f, 1f, 1f, 100f)
+            MatrixState.setCamera(0f, 0f, 3f, 0f, 0f, 0f, 0f, 1.0f, 0.0f)
+            rect!!.drawSelf(maskTextureId)
+            MatrixState.popMatrix()
 </code></pre>
 
-<p>它的使用并不难，只要在 onDrawFrame 方法里面开启裁剪测试，然后绘制，然后关闭裁剪就行了，具体效果如下：</p>
+<p>这里面绘制带透明度的边框时清除了一次深度缓冲，因为带透明度边框不属于主场景，不应该和主场景中的物体以同一标准进行深度检测，否则可能会产生不正确的视觉效果。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1530624256/code/opengl-scissor.gif" alt="" /></p>
+<h2 id="具体实现">具体实现</h2>
 
-<p>在原来的图像上裁剪了一小块矩形，然后绘制了一个旋转的形状。</p>
+<p>Alpha 测试的重点在于片段着色器的处理，在这里可以对每一个片段进行处理，根据 Alpha 来决定是否抛弃它。</p>
 
-<h2 id="注意点">注意点</h2>
-
-<p><code>glScissor</code> 方法可以指定裁剪的矩形区域，它的方法原型如下：</p>
-
-<pre><code class="language-java">    public static native void glScissor(
-        int x,
-        int y,
-        int width,
-        int height
-    );
+<pre><code class="language-glsl">precision mediump float;
+varying vec2 vTextureCoord; //接收从顶点着色器过来的参数
+uniform sampler2D sTexture;//纹理内容数据
+void main() { 
+	//给此片元从纹理中采样出颜色值 
+   vec4 bcolor = texture2D(sTexture, vTextureCoord);
+   if(bcolor.a&lt;0.6) {
+   		discard;
+   } else {
+      gl_FragColor=bcolor;
+}}
 </code></pre>
 
-<p>其中，x 和 y 指矩形区域的左下角坐标，width 和 height 指矩形区域的宽和高。</p>
+<p>根据具体的图片透明度，这里，如果透明度小于 0.6 ，就抛弃这个片元，否则的话就赋值给原本采样的颜色。</p>
 
-<p>x 和 y 坐标所在的坐标系是以视口矩形区域的左下角为原点的，x 轴向右，y 轴向上的坐标系，对应到屏幕的坐标，就是以屏幕的左下角为原点，这和 Android 中以左上角为原点不同。</p>
+<p>其中，在 GLSL 着色器语言中，<code>discard</code> 代表放弃该片元。</p>
 
-<p>另外，在绘制时我们把视口设置为屏幕的宽和高，那么在启用裁剪测试后，想让绘制的内容正好显示在指定的矩形区域内，就必须保证即便没有启用裁剪测试，内容也是绘制在指定的区域内，否则裁剪区域内将不会显示绘制内容。</p>
+<p>而 texture2D 方法代表纹理采样，它的结果类型是一个向量，向量在着色器代码中的地位非常重要，可以方便地存储以及操作 <strong>颜色</strong>、<strong>位置</strong>、<strong>纹理坐标</strong> 等不仅包含一个组成部分的量。</p>
 
-<p>也就是说，裁剪测试只是在原来的视口标准的绘制区域内开辟一块矩形区域来显示，而不是把内容放到裁剪的区域内来显示。</p>
+<p>对于一个向量，有时需要单独访问向量中的某个分量，基本语法为 <code>&lt;向量名&gt;.&lt;分量名&gt;</code>，从不同的角度来看，它的每个分量代表的含义是不同的：</p>
 
-<p>最后创建了一个微信群，欢迎加群交流讨论 OpenGL ES 相关技术~~</p>
+<ul>
+<li>将向量看作颜色时，可以使用 r、g、b、a 四个分量名，分别代表红、绿、蓝、透明度 4 个色彩通道。</li>
+</ul>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1530624519/code/WechatIMG324.jpg" alt="" /></p>
+<pre><code class="language-glsl">vec4 aColor;
+aColor.r = 0.6;
+aColor.g = 0.8;
+</code></pre>
 
-<p>具体代码详情，可以参考我的 Github 项目，求一波 star~~</p>
+<p>若向量是 4 维的，可以使用的分量名为 r、g、b、a；若向量是 3 维的，可以使用的分量名为 r、g、b；若是 2 维的，可以使用的 r、g 两个分量名。</p>
 
+<ul>
+<li><p>将向量看作位置时，可以使用 x、y、z、w 四个分量名，分别代表 x 轴、y 轴、z 轴分量及 w 值。</p>
+
+<pre><code class="language-glsl">vec4 aPosition;
+aPosition.x = 34.2
+aPosition.z = 12.2
+</code></pre>
+
+<p>若向量是 4 维的，可以使用的分量名为 x、y、z、w；若向量是 3 维的，可以使用的分量名为 x、y、z；若是 2 维的，可以使用的 x、y 两个分量名。</p></li>
+
+<li><p>将向量看作纹理坐标时，可以使用 s、t、p、q 四个分量名，分别代表纹理坐标的不同分量。</p>
+
+<pre><code class="language-glsl">vec4 aTexCoor;
+aTexCoor.s = 0.45;
+aTexCoor.t = 0.22;
+</code></pre>
+
+<p>若向量是 4 维的，可以使用的分量名为 s、t、p、q；若向量是 3 维的，可以使用的分量名为 s、t、p；若是 2 维的，可以使用的 s、t 两个分量名。</p></li>
+</ul>
+
+<p>除了使用 <code>.</code> 的形式来访问分量名，还可以将向量看作一个数组，用下标来进行访问：</p>
+
+<pre><code class="language-glsl">aColor[0] = 0.4;
+aPostion[2] = 0.34;
+aTexCoorp[1] = 0.12;
+</code></pre>
+
+<p>理解了 discard 的作用和向量各分量的含义，就很容易明白 Alpha 测试的原理了。</p>
+
+<p>实际上，Alpha 测试并不是渲染管线上要进行的操作流程，而是我们自己想出的根据 Alpha 透明度值对片元进行处理罢了。</p>
+
+<p>具体的实现可以参考我的 Github 项目，求一波 Star 。</p>
+
+<blockquote>
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
+</blockquote>
+
+<h2 id="最后">最后</h2>
+
+<p>俗话说：</p>
+
+<blockquote>
+<p>独学而无友，则孤陋而寡闻</p>
+</blockquote>
+
+<p>学习的路上是需要交流和分享的，这里有个二维码，如果你对 OpenGL ES 感兴趣欢迎一起来交流讨论。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531382740/code/WechatIMG432.jpg" alt="加群讨论" /></p>
+
+<p>要是二维码过期了，加微信 ezglume 好友，备注 OpenGL ，拉你入群~</p>
 
               
                 <p>
@@ -324,7 +433,7 @@
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/">OpenGL 利用 Alpha 透明度进行测试</a>
 
                 </p>
               
@@ -334,12 +443,12 @@
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/" data-toggle="tooltip" data-placement="top" title="OpenGL 3D 模型加载和渲染">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" data-toggle="tooltip" data-placement="top" title="用 OpenGL 对视频帧内容进行替换">&larr; Previous Post</a>
           </li>
         
         
           <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-share/" data-toggle="tooltip" data-placement="top" title="OpenGL ES 学习资源分享">Next Post &rarr;</a>
+            <a href="https://glumes.com/post/android/android-jni-thread-operation/" data-toggle="tooltip" data-placement="top" title="Android JNI 中的线程操作">Next Post &rarr;</a>
           </li>
         
       </ul>
@@ -349,15 +458,15 @@
                 <h2>See Also</h2>
                 <ul>
                     
+                    <li><a href="/post/opengl/opengl-tutorial-share/">OpenGL ES 学习资源分享</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a></li>
+                    
                     <li><a href="/post/opengl/opengl-tutorial-import-3d-object/">OpenGL 3D 模型加载和渲染</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-gldrawelements-method/">OpenGL 的 glDrawElements  绘制方法</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-view-matrix/">OpenGL 学习系列---观察矩阵</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-texture/">OpenGL 学习系列---纹理</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 学习系列---投影矩阵</a></li>
                     
                 </ul>
                 
