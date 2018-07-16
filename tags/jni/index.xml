@@ -8,10 +8,21 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Wed, 16 May 2018 17:55:52 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 15 Jul 2018 14:12:25 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/jni/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android JNI 中的线程操作</title>
+      <link>https://glumes.com/post/android/android-jni-thread-operation/</link>
+      <pubDate>Sun, 15 Jul 2018 14:12:25 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/android-jni-thread-operation/</guid>
+      <description>&lt;p&gt;学习一下如何在 Native 代码中使用线程。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Android JNI 调用时的异常处理</title>

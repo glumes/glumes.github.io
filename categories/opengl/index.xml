@@ -8,10 +8,23 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 13 Jul 2018 09:41:22 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Jul 2018 11:13:19 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/opengl/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 中的颜色混合和使用</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-color-blend/</link>
+      <pubDate>Mon, 16 Jul 2018 11:13:19 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-color-blend/</guid>
+      <description>&lt;p&gt;在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。&lt;/p&gt;
+
+&lt;p&gt;在 OpenGL 中同样有这样颜色混合的问题。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 利用 Alpha 透明度进行测试</title>
@@ -24,6 +37,17 @@
 &lt;p&gt;除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。&lt;/p&gt;
 
 &lt;p&gt;关于 Alpha 透明度测试，在 用 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/&#34;&gt;OpenGL 对视频帧内容进行替换&lt;/a&gt; 也用实践用到过。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用 OpenGL 对视频帧内容进行替换</title>
+      <link>https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/</link>
+      <pubDate>Thu, 12 Jul 2018 16:59:47 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/</guid>
+      <description>&lt;p&gt;在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

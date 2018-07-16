@@ -25,17 +25,6 @@
     </item>
     
     <item>
-      <title>用 OpenGL 对视频帧内容进行替换</title>
-      <link>https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/</link>
-      <pubDate>Thu, 12 Jul 2018 16:59:47 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/</guid>
-      <description>&lt;p&gt;在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</title>
       <link>https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</link>
       <pubDate>Fri, 29 Jun 2018 20:31:53 +0800</pubDate>

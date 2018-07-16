@@ -8,10 +8,23 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Sun, 15 Jul 2018 14:12:25 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Jul 2018 11:13:19 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 中的颜色混合和使用</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-color-blend/</link>
+      <pubDate>Mon, 16 Jul 2018 11:13:19 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-color-blend/</guid>
+      <description>&lt;p&gt;在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。&lt;/p&gt;
+
+&lt;p&gt;在 OpenGL 中同样有这样颜色混合的问题。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Android JNI 中的线程操作</title>

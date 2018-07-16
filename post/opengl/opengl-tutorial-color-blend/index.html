@@ -5,26 +5,32 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>用 OpenGL 对视频帧内容进行替换</title>
-  <meta property="og:title" content="用 OpenGL 对视频帧内容进行替换" />
-  <meta name="twitter:title" content="用 OpenGL 对视频帧内容进行替换" />
-  <meta name="description" content="在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？
+  <title>OpenGL 中的颜色混合和使用</title>
+  <meta property="og:title" content="OpenGL 中的颜色混合和使用" />
+  <meta name="twitter:title" content="OpenGL 中的颜色混合和使用" />
+  <meta name="description" content="在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。
+
+在 OpenGL 中同样有这样颜色混合的问题。
 
 ">
-  <meta property="og:description" content="在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？
+  <meta property="og:description" content="在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。
+
+在 OpenGL 中同样有这样颜色混合的问题。
 
 ">
-  <meta name="twitter:description" content="在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？
+  <meta name="twitter:description" content="在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。
+
+在 OpenGL 中同样有这样颜色混合的问题。
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -176,7 +182,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1531388956/code/sunset-boat-sea-ship-37730.jpg" data-img-desc-1="ship"></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1531710914/blog/pexels-photo-1231023.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -191,11 +197,11 @@
                 <div class="page-heading">
                 
                   
-                     <h1>用 OpenGL 对视频帧内容进行替换</h1>
+                     <h1>OpenGL 中的颜色混合和使用</h1>
                      
                     <span class="post-meta">
   
-  Posted on July 12, 2018
+  Posted on July 16, 2018
   
   
 </span>
@@ -217,7 +223,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">用 OpenGL 对视频帧内容进行替换</h1>
+                <h1 align="center">OpenGL 中的颜色混合和使用</h1>
                 
                 
             </div>
@@ -239,9 +245,9 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Thu Jul 12, 2018</h4>
+        <h4 id="date"> Mon Jul 16, 2018</h4>
     </section>
-    <h5 id="wc">1900 Words|Read in about 4 Min</h5>
+    <h5 id="wc">2600 Words|Read in about 6 Min</h5>
     <h5 id="tags">Tags: 
         
         <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
@@ -252,175 +258,306 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？</p>
+            <p>在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。</p>
+
+<p>在 OpenGL 中同样有这样颜色混合的问题。</p>
 
 <p></p>
 
-<p>首先要明确的是，视频是由一帧一帧图像组成的，它利用了人眼的视觉暂留效应，一秒内播放足够帧数的图片才会感觉到是连续的。</p>
+<p>在 OpenGL 的世界模型中是有深度的概念的，也就是由 z 轴坐标值来决定物体距离坐标原地的远近，但到最后世界模型里的物体都要投影到近平面，最后映射到视口上。而且，距离相机也就是视口越近的物体，就会遮住后面的物体，就和用肉眼去观察物体一下，后面的形状会被前面的形状挡住。</p>
 
-<p>而想要对视频的内容进行替换，也就是要将每一帧图像的内容都进行替换了，一般来说这应该是属于视频后期处理了，用专业的 AE （Adobe After Effects）软件来处理会比较好。</p>
+<p>但和肉眼观察不同的是，OpenGL 里最终呈现的颜色，是将两个片元混合之后计算的值，我们可以改变这片元混合的方式，这就和前面 Android 里面提到的 PorterDuffXfermode 混合模式一样。</p>
 
-<h2 id="处理思路">处理思路</h2>
+<h2 id="颜色混合基础知识">颜色混合基础知识</h2>
 
-<p>如果用 OpenGL 来处理，有这样的一个思路：</p>
+<p>OpenGL 中的颜色混合就是将通过各种测试准备进入帧缓冲的片元（源片元）与帧缓冲中的原有片元（目标片元）按照设定的比例加权计算最终片元的颜色值。新片元不一定是直接覆盖缓冲区中的源片元。</p>
 
-<p>首先通过 MediaCodec 对每一帧图像内容进行解码，然后再通过 OpenGL 对当前解码的一帧图像进行处理，在原图像上加一个透明的遮罩层，遮罩层的要求就是对于要替换的内容区域是非透明的，其他区域透明，将遮罩层和原图像进行融合，最后得到的就是一帧被替换过内容图像了，再将处理过的一帧图像进行编码，重新编码成新的视频内容。</p>
+<h3 id="混合因子">混合因子</h3>
 
-<p>一直重复 解码 -&gt; 处理 -&gt; 编码这个过程，直到视频的每一帧内容都处理完了，就实现了对视频内容替换。</p>
+<p>OpenGL 通过设置混合因子来指定两个片元的加权比例，每次都需要给出两个混合因子：</p>
 
-<p>当然这仅仅是个思路，难点在于如何找到合适的遮罩层，如果视频图像内容是变动的，要替换的内容不是固定的，那么对于遮罩层要求更高了，每一帧处理都得有个合适的遮罩。</p>
+<ul>
+<li>源因子，用于确定将进入帧缓冲的片元在最终片元中的比例</li>
+<li>目标因子，用于确定原帧缓冲中的片元在最终片元中的比例</li>
+</ul>
 
-<p>下面会针对视频的一帧图像内容进行处理，如何将一帧的图像内容替换了。</p>
+<p>由于 OpenGL 中每个颜色值包括 4 个色彩通道，因此，两种混子因子都有 4 个分量值，分别对应一个色彩通道，具体混合计算细节如下：</p>
 
-<h2 id="直接效果">直接效果</h2>
+<ul>
+<li>设源因子和目标因子分别为 $[S_r,S_g,S_b,S_a]$ 和 $[D_r,D_g,D_b,D_a]$ ，$S$ 表示是源因子，$D$ 表示是目标因子，r，g，b，a 下标分别表示 红、绿、蓝、透明度 4 个色彩通道。</li>
+<li>设源片元和目标片元的颜色值分别为  $[R_s,G_s,B_s,A_s]$  和 $[R_d,G_d,B_d,A_d]$，R，G，B，A 分别表示红、绿、蓝、透明度 4 个色彩通道，s 下标表示源片元，d 下标表示目标片元。</li>
+<li>混合后最终片元颜色各个色彩通道的值是由颜色混合方程式计算而来，系统提供的常用颜色混合方程式如下：</li>
+</ul>
 
-<p>效果如下：</p>
+<h3 id="混合方程式">混合方程式</h3>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531377132/code/frame_replace.png" alt="Sketch 设计图" /></p>
+<table>
+<thead>
+<tr>
+<th>方程式名</th>
+<th>最终片元颜色各个色彩通道的值</th>
+</tr>
+</thead>
 
-<p>代码实现的效果，左上方的内容被右上方内容替换了，最后成了右下角的图片。</p>
+<tbody>
+<tr>
+<td>GL_FUNC_ADD</td>
+<td>$[R_sS_r+R_dD_r, G_sS_g+G_dD_g, B_sS_b+B_dD_b, A_sS_a+A_dD_a]$</td>
+</tr>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531384765/code/WechatIMG57.jpg" alt="软件实现图" /></p>
+<tr>
+<td>GL_FUNC_SUBTRACT</td>
+<td>$[R_sS_r-R_dD_r, G_sS_g-G_dD_g, B_sS_b-B_dD_b, A_sS_a-A_dD_a]$</td>
+</tr>
 
-<h2 id="准备工作">准备工作</h2>
+<tr>
+<td>GL_FUNC_REVERSE_SUBTRACT</td>
+<td>$[R_dD_r-R_sS_r, G_dD_g-G_sS_g, B_dD_b-B_sS_b, A_dD_a-A_sS_a]$</td>
+</tr>
+
+<tr>
+<td>GL_MIN</td>
+<td>$[min(R_sS_r,R_dD_r),min(G_sS_g,G_dD_g),min(B_sS_b,B_dD_b),min(A_sS_a,A_dD_a)]$</td>
+</tr>
+
+<tr>
+<td>GL_MAX</td>
+<td>$[max(R_sS_r,R_dD_r),max(G_sS_g,G_dD_g),max(B_sS_b,B_dD_b),max(A_sS_a,A_dD_a)]$</td>
+</tr>
+</tbody>
+</table>
+
+<p>默认情况下，系统会自动调用 GL_FUNC_ADD 混合方程式来计算最终片元颜色各个色彩通道的值，如果想要调用其他混合方程式来计算最终的片元颜色，系统也有提供对应的方法：</p>
+
+<table>
+<thead>
+<tr>
+<th>方法签名</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>glBlendEquation(int mode)</td>
+<td>mode 参数的含义为指定混合方程式，用来计算最终片元的颜色，其值为混合方程式的名字</td>
+</tr>
+
+<tr>
+<td>glBlendEquationSeparate(int modeRGB,int modeAlpha)</td>
+<td>modeRGB 参数为颜色的 RGB 通道进行混合时所使用的混合方程式名，modeAlpha 参数的含义是颜色的 Alpha 透明度通道进行混合时所使用的混合方程式名字，通过其可以实现 RGB 和 Alpha 通道单独指定混合方程式的功能</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="源因子和目标因子">源因子和目标因子</h3>
+
+<p>对于颜色混合来说，选定了混合方程式，接下来最重要的就是设置混合因子了。</p>
+
+<p>在 OpenGL 中预置了一些混合因子，如下表：</p>
+
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>RGB 混合因子</th>
+<th>A 混合因子</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>GL_ZERO</td>
+<td>$[0,0,0]$</td>
+<td>0</td>
+</tr>
+
+<tr>
+<td>GL_ONE</td>
+<td>$[1,1,1]$</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>GL_SRC_COLOR</td>
+<td>$[R_s,G_s,B_s]$</td>
+<td>$A_s$</td>
+</tr>
+
+<tr>
+<td>GL_ONE_MINUS_SRC_COLOR</td>
+<td>$[1-R_s,1-G_s,1-B_s]$</td>
+<td>$1-As$</td>
+</tr>
+
+<tr>
+<td>GL_DST_COLOR</td>
+<td>$[R_d,G_d,B_d]$</td>
+<td>$A_d$</td>
+</tr>
+
+<tr>
+<td>GL_ONE_MINUS_DST_COLOR</td>
+<td>$[1- R_d, 1- G_d, 1- B_d]$</td>
+<td>$1-A_d$</td>
+</tr>
+
+<tr>
+<td>GL_SRC_ALPHA</td>
+<td>$[A_s, A_s, A_s]$</td>
+<td>$A_s$</td>
+</tr>
+
+<tr>
+<td>GL_ONE_MINUS<em>SRC</em> ALPHA</td>
+<td>$[1- A_s, 1- A_s, 1- A_s]$</td>
+<td>$1-As$</td>
+</tr>
+
+<tr>
+<td>GL<em>DST</em> ALPHA</td>
+<td>$[A_d, A_d, A_d]$</td>
+<td>$A_d$</td>
+</tr>
+
+<tr>
+<td>GL_ONE_MINUS<em>DST</em> ALPHA</td>
+<td>$[1- A_d, 1- A_d, 1- A_d]$</td>
+<td>$1-A_d$</td>
+</tr>
+
+<tr>
+<td>GL_SRC_ALPHA_SATURATE</td>
+<td>$[f , f, f] f=min(A_s, 1-A_d)$</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>GL_CONSTANT_COLOR</td>
+<td>$[R_c, G_c, B_c]$</td>
+<td>$A_c$</td>
+</tr>
+
+<tr>
+<td>GL_ONE_MINUS_CONSTANT_COLOR</td>
+<td>$[1- R_c, 1- G_c, 1- B_c]$</td>
+<td>$1-A_c$</td>
+</tr>
+
+<tr>
+<td>GL_CONSTANT_ALPHA</td>
+<td>$[Ac, Ac, Ac]$</td>
+<td>$A_c$</td>
+</tr>
+
+<tr>
+<td>GL_ONE_MINUS_CONSTANT_ALPHA</td>
+<td>$[1- Ac, 1- Ac, 1- Ac]$</td>
+<td>$1- Ac$</td>
+</tr>
+</tbody>
+</table>
+
+<p>其中，常量名称中有 SRC 代表各通道值来自源片元，有 DST 代表各通道值来自目标片元，另外 GL_SRC_ALPHA_SATURATE 只能用作源因子。</p>
+
+<p>对于常量名中有 CONSTANT 的代表使用预设颜色常量值对应色彩通道的值作为相应的因子值，其中的 $R_c$、$G_c$、$B_c$、$A_c$ 分别代表预设颜色常量值的 RGBA 通道的值，如果没有设置则默认值为 $[0.0f、0.0f、0.0f、0.0f]$ 。</p>
+
+<p>设置颜色常量值使用的是 glBlendColor 方法，如下：</p>
+
+<pre><code class="language-java">    public static native void glBlendColor(
+        float red,
+        float green,
+        float blue,
+        float alpha
+    );
+</code></pre>
+
+<h3 id="设置混合的方法">设置混合的方法</h3>
+
+<p>有了混合因子，接下来就是设置混合因子了，OpenGL 提供了如下方法来设置：</p>
+
+<table>
+<thead>
+<tr>
+<th>方法签名</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>glBlendFunc(GLenum sfactor, GLenum dfactor)</td>
+<td>第一个参数为设置的源因子，第二个参数为设置的目标因子，其值如上表</td>
+</tr>
+
+<tr>
+<td>glBlendFuncSeparate(GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha,GLenum dstAlpha)</td>
+<td>第一个参数为设置源因子的 RGB 值；第二个参数为设置目标因子 RGB 值；第三个参数为设置源因子 Alpha 的值；第四个参数为设置目标因子 Alpha 的值。该方法实现了 RGB 和 Alpha 通道单独指定混合因子值的功能</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="常用混合组合">常用混合组合</h3>
+
+<p>对于混合因子和混合 方程式的组合太多了，恰当的组合可以产生很好的效果，下面给出两组常用的组合：</p>
+
+<ul>
+<li><p>源因子 GL_SRC_ALPHA ，目标因子 GL_ONE_MINUS_SRC_ALPHA ，即源因子和目标因子分别为 $[A_s, A_s, A_s, A_s]$ 和 $[1-A_s, 1-A_s, 1-A_s, 1-A_s]$ 。此组合实现的是最典型的半透明遮挡效果。若源片元是透明的，则根据透明度透过后面的内容；若源片元不透明，则仅能看到源片元，因此，使用此组合时往往会采用半透明的纹理或颜色对源片元着色。</p></li>
+
+<li><p>源因子 GL_SRC_COLOR ，目标因子 GL_ONE_MINUS_SRC_COLOR ，即源因子和目标因子分别为 $[R_s, G_s, B_s, A_s]$ 和 $[1- R_s, 1- G_s, 1- B_s, 1-A_s$ 。此组合可以实现滤光镜效果，也就是平时透过有色眼镜或玻璃观察事物的感觉。与第一种常用组合不同，此组合不要求应用于源片元的颜色或者纹理是半透明的。</p></li>
+</ul>
+
+<h2 id="具体使用">具体使用</h2>
 
 <blockquote>
-<p>不会做设计的开发不是好码农</p>
+<p>前面讲了这么多理论，其实就是阐述两个颜色的 RGBA 值如何计算得到最后的 RGBA 值，并且每一个 R、G、B、A 分量都是两个颜色的 R、G、B、A 对应乘以不同的混合因子后相加得到的，这个混合因子的设置可以根据源片元的颜色来设定，也可以根据目标片元的颜色来设定。</p>
 </blockquote>
 
-<p>是时候掏出我的大宝石软件 Sketch 切个图了：</p>
+<p>先假设有这样的场景：</p>
 
-<p>准备一张待替换内容：</p>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531707676/code/blend_scene.jpg" alt="" /></p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531377368/code/replace_origin.png" alt="待替换图片" /></p>
+<p>通过这样的图片经过混合后去查看后面的内容，类似于刺激战场上开镜效果，</p>
 
-<p>然后再切一张同等大小，并把中间圆形位置的图片替换成想要的图片，其他周边内容设置透明度为 0 。</p>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531707815/code/lgq.png" alt="" /></p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531377364/code/replace_shape.png" alt="带透明度的遮罩图" /></p>
+<p>显然，图片的黑色区域是要可以透过看到后面内容的，绿色区域也是一样，不然就全遮盖住后面内容了。</p>
 
-<p>接下来的事情就是将两张图片融合，分别介绍基于着色器和颜色混合来替换内容。</p>
+<p>这里就可以用到上面的混合因子组合，源因子 GL_SRC_COLOR，目标因子 GL_ONE_MINUS_SRC_COLOR ，这个混合因子是根据源片元的颜色来设定的。</p>
 
-<blockquote>
-<p>这两个方案都有一个共同点，就是要将带遮罩的图片覆盖在原图上，不同的是如何处理两个图片之间的覆盖，透明度就是一个比较好的切入点。</p>
-</blockquote>
+<p>根据这两个混合因子和混合方程式计算，可以得出最后的颜色值。</p>
 
-<h2 id="使用着色器进行替换">使用着色器进行替换</h2>
+<p>根据源因子 GL_SRC_COLOR 计算，由于黑色的 RGB 值都为 0 ，RGB 混合因子都为 0，也就是透明的，源片元不会进入到最终片元。</p>
 
-<p>在 OpenGL 的渲染管线中，会先构建图形，然后进行光栅化，光栅化后对每一个片元着色，在这个着色过程中可以根据需要对片元进行处理，包括抛弃某些片元等，简单说在 OpenGL 中就是先有形后有色，而在有形有色的过程中可以搞点小操作~~</p>
+<p>根据源因子 GL_ONE_MINUS_SRC_COLOR 计算，由于黑色的 RGB 值都为 0 ，那么目标颜色的混合因子都为 1，也就是目标颜色都会被显示，可以看到后面的物体。</p>
 
-<p>对片元进行处理就是我们的片元着色器脚本了。</p>
+<p>对于绿色部分，就不存在为0 或者为 1 的情况了，就是两个颜色按照混合因子计算后的值了。</p>
 
-<pre><code class="language-glsl">precision mediump float;
-varying vec2 vTextureCoord; //接收从顶点着色器过来的参数
-uniform sampler2D sTexture;//纹理内容数据
-void main() { 
-   vec4 bcolor = texture2D(sTexture, vTextureCoord);//给此片元从纹理中采样出颜色值 
-   if(bcolor.a&lt;0.6) {
-   		discard;
-   } else {
-      gl_FragColor=bcolor;
-}}
+<p>具体的使用过程很简单，大致代码如下：</p>
+
+<pre><code class="language-java">			// 先绘制好背景内容 
+			// 开启颜色混合进行绘制
+            GLES20.glEnable(GLES20.GL_BLEND)
+	        // 设置混合因子
+            GLES20.glBlendFunc(GLES20.GL_SRC_COLOR, GLES20.GL_ONE_MINUS_SRC_COLOR)
+			// 绘制操作
+            rect!!.drawSelf(textureId)
+            MatrixState.popMatrix()
 </code></pre>
 
-<p>我们的遮罩图除了要替换的内容，其他地方都是透明的，根据采样出的透明度值小于阈值，就抛弃该片元，直接就不显示了。</p>
+<p>最后效果如下：</p>
 
-<p>而透明度满足要求的就会显示，并且在最后映射到视口上时，直接覆盖了原有的颜色。</p>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531709868/code/blend_src_color.jpg" alt="" /></p>
 
-<p>通过这种方式就实现了内容替换。</p>
+<p>当然，还可以使用另外一种混合因子组合 GL_SRC_ALPHA 和 GL_ONE_MINUS_SRC_ALPHA，根据源因子的透明度来设置混合因子。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531384608/code/glsl_replace_content.gif" alt="使用着色器进行替换" /></p>
-
-<h2 id="使用颜色混合进行替换">使用颜色混合进行替换</h2>
-
-<p>使用颜色混合的方式不像着色器那样简单粗暴，要么抛弃某些片元，要么直接覆盖了。</p>
-
-<p>它是根据一定的计算规则，来计算两个颜色之间的融合。</p>
-
-<p>在 OpenGL 中使用颜色混合要设置合理的混合因子。</p>
-
-<pre><code class="language-java">        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-        // 绘制
-        glDisable(GL_BLEND)
-</code></pre>
-
-<p>混合因子的设置使得如果遮罩图是透明的，使用被遮罩图的颜色，如果不是透明的，使用遮罩图的颜色，这样就不是直接抛弃某些片元了。</p>
-
-<p>效果如下：</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531384608/code/blend_replace_content.gif" alt="使用颜色混合进行替换" /></p>
-
-<h2 id="代码实现">代码实现</h2>
-
-<p>在具体的代码实现中，采用了 EGL 来实现离屏的渲染。</p>
-
-<p>在非主线程中，初始化 EGL 环境，然后准备好绘制的必要工作，接着执行绘制，最后把绘制的结果通过 glReadPixels 读取出来。</p>
-
-<pre><code class="language-kotlin">        Observable.fromCallable {
-        // 初始化 EGL 环境
-            return@fromCallable initEgl()
-        }.map {
-        // 设置各种矩阵
-            prepare(width, height)
-            return@map it
-        }.map {
-        // 执行绘制
-            replaceContent(isBlend)
-            return@map it
-        }.map {
-        // 读取像素
-            val result = readPixel(width, height)
-            it.destroy()
-            return@map result
-        }.subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                // 设置效果
-                    mResultImage.setImageBitmap(it)
-                }, {
-                    showToast(&quot;replace failed&quot;)
-                })
-</code></pre>
-
-<p>具体的绘制过程比较简单，如果采用了颜色混合就执行颜色混合的绘制，否则采用着色器的绘制，也体现了就是将遮罩图直接覆盖在原图上的思想。</p>
-
-<pre><code class="language-kotlin"> private fun replaceContent(isBlend: Boolean) {
-        glClearColor(1f, 1f, 1f, 1f)
-        glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
-        mOriginImage?.drawSelf(mOriginTextureId)
-        if (isBlend) {
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-            mReplaceImage?.drawSelf(mReplaceTextureId)
-            glDisable(GL_BLEND)
-        } else {
-            mAlphaTextureRect?.drawSelf(mReplaceTextureId)
-        }
-    }
-</code></pre>
-
-<p>在最后读取像素内容时要注意，glReadPixels 读取的内容是上下颠倒的，需要将它翻转过来。</p>
-
-<pre><code class="language-glsl">   for (i in 0 until height) {
-            for (j in 0 until width) {
-                pixelMirroredArray[(height - i - 1) * width + j] = pixelArray[i * width + j]
-            }
-        }
-</code></pre>
+<p>关于如何使用 GL_SRC_ALPHA 和 GL_ONE_MINUS_SRC_ALPHA 混合因子，可以参考之前的文章 <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">用 OpenGL 对视频帧内容进行替换</a>，大概原理都一样的，就是图片换成带透明度的，并且更改一下混合因子组合，就不赘述了。</p>
 
 <p>具体的实现可以参考我的 Github 项目，求一波 Star 。</p>
 
 <blockquote>
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
 </blockquote>
-
-<h2 id="后续想法">后续想法</h2>
-
-<p>对于视频内容替换，这里仅仅是给出了一帧图像内容的替换，而且还是基于透明度的。</p>
-
-<p>看到好莱坞有些电影场景拍摄时，后面都会给出一块纯色的幕布，然后在后期处理时把幕布内容替换成背景，这种替换通过着色器比较颜色的范围应该也是可以实现的。</p>
-
-<p>当然了，要是搭配图像识别来替换内容玩法就更加丰富了。</p>
 
 <h2 id="最后">最后</h2>
 
@@ -432,7 +569,7 @@ void main() {
 
 <p>学习的路上是需要交流和分享的，这里有个二维码，如果你对 OpenGL ES 感兴趣欢迎一起来交流讨论。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531382740/code/WechatIMG432.jpg" alt="加群讨论" /></p>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531710558/code/WechatIMG434.jpg" alt="加群讨论" /></p>
 
 <p>要是二维码过期了，加微信 ezglume 好友，备注 OpenGL ，拉你入群~</p>
 
@@ -453,7 +590,7 @@ void main() {
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">用 OpenGL 对视频帧内容进行替换</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/">OpenGL 中的颜色混合和使用</a>
 
                 </p>
               
@@ -463,13 +600,9 @@ void main() {
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-share/" data-toggle="tooltip" data-placement="top" title="OpenGL ES 学习资源分享">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/android/android-jni-thread-operation/" data-toggle="tooltip" data-placement="top" title="Android JNI 中的线程操作">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/" data-toggle="tooltip" data-placement="top" title="OpenGL 利用 Alpha 透明度进行测试">Next Post &rarr;</a>
-          </li>
         
       </ul>
             
@@ -478,15 +611,15 @@ void main() {
                 <h2>See Also</h2>
                 <ul>
                     
+                    <li><a href="/post/opengl/opengl-tutorial-alpha-test/">OpenGL 利用 Alpha 透明度进行测试</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-handle-video-frame-and-replace-content/">用 OpenGL 对视频帧内容进行替换</a></li>
+                    
                     <li><a href="/post/opengl/opengl-tutorial-share/">OpenGL ES 学习资源分享</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-import-3d-object/">OpenGL 3D 模型加载和渲染</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-gldrawelements-method/">OpenGL 的 glDrawElements  绘制方法</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-view-matrix/">OpenGL 学习系列---观察矩阵</a></li>
                     
                 </ul>
                 
