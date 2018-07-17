@@ -8,10 +8,19 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Mon, 16 Jul 2018 11:13:19 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 17 Jul 2018 22:28:37 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/opengl/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Opengl Tutorial Vertex Buffer Object Usage</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/</link>
+      <pubDate>Tue, 17 Jul 2018 22:28:37 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/</guid>
+      <description>在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 glDrawArrays 或 glDrawElements 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够</description>
+    </item>
     
     <item>
       <title>OpenGL 中的颜色混合和使用</title>

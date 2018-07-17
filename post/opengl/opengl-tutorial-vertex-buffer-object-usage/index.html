@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Opengl Tutorial Vertex Buffer Object Usage</title>
+  <meta property="og:title" content="Opengl Tutorial Vertex Buffer Object Usage" />
+  <meta name="twitter:title" content="Opengl Tutorial Vertex Buffer Object Usage" />
+  <meta name="description" content="在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 glDrawArrays 或 glDrawElements 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够">
+  <meta property="og:description" content="在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 glDrawArrays 或 glDrawElements 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够">
+  <meta name="twitter:description" content="在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 glDrawArrays 或 glDrawElements 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://glumes.com/" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>Opengl Tutorial Vertex Buffer Object Usage</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on July 17, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">Opengl Tutorial Vertex Buffer Object Usage</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+        
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Tue Jul 17, 2018</h4>
+    </section>
+    <h5 id="wc">2700 Words|Read in about 6 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            
+
+<p>在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 <code>glDrawArrays</code> 或 <code>glDrawElements</code> 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。</p>
+
+<p>可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。</p>
+
+<h2 id="顶点缓冲区">顶点缓冲区</h2>
+
+<p>在 OpenGL ES  中支持两种类型的顶点缓冲区对象，分别是数组缓冲区对象（Array Buffer）和 元素数组缓冲区对象（Element Array Buffer）。</p>
+
+<ul>
+<li>数组缓冲区对象对应的类型为 GL_ARRAY_BUFFER，一般用于存放待绘制物体的顶点相关数据，如顶点坐标、纹理坐标、法向量等。</li>
+<li>元素数组缓冲区对象对应的类型为 GL_ELEMENT_ARRAY_BUFFER ，一般用于存放图元的组装索引数据，在使用索引法进行绘制时使用。</li>
+</ul>
+
+<blockquote>
+<p>使用顶点缓冲区的好处就在于顶点数量非常多的时候，可以一次性将大量顶点数据送入到显存中。</p>
+</blockquote>
+
+<p>关于顶点缓冲区，又有另一种说法，叫做 <code>VBO</code>，其实就是 <code>Vertex Buffer Object</code>的缩写啦。</p>
+
+<h2 id="缓冲区对象的常用操作方法">缓冲区对象的常用操作方法</h2>
+
+<p>下面介绍一下关于顶点缓冲区的常用方法。</p>
+
+<h3 id="创建缓冲区对象-glgenbuffers">创建缓冲区对象 &ndash; glGenBuffers</h3>
+
+<p>glGenBuffers 方法用于创建缓冲对象，是在使用每个自定义缓冲前都需要调用的。</p>
+
+<pre><code class="language-java">	// 方法一
+    public static native void glGenBuffers(
+        int n,
+        java.nio.IntBuffer buffers
+    );
+    // 方法二
+    public static native void glGenBuffers(
+        int n,
+        int[] buffers,
+        int offset
+    );
+</code></pre>
+
+<ol>
+<li>在方法一中，参数 n 为需要创建的缓冲区数量，参数 buffers 为用于存放创建的 n 个缓冲区编号的 IntBuffer 。</li>
+<li>在方法二中，参数 n 为需要创建的缓冲区数量，参数 buffers 为用于存放创建的 n 个缓冲区编号的数组，参数 offset 为 buffers 数组所需的偏移量。</li>
+</ol>
+
+<h3 id="绑定缓冲区对象-glbindbuffer">绑定缓冲区对象 &ndash; glBindBuffer</h3>
+
+<p>glBindBuffer 方法用于绑定当前缓冲区对象，第一次调用 glBindBuffer 方法绑定缓冲区对象时，缓冲区对象以默认状态分配；如果分配成功，则分配的对象绑定为当前缓冲区对象。</p>
+
+<pre><code class="language-java">    public static native void glBindBuffer(
+        int target,
+        int buffer
+    );
+</code></pre>
+
+<p>其中，参数 target 用于描述需绑定的缓冲区类型，参数 buffer 为需要绑定的缓冲区编号。</p>
+
+<p>target 值如下：</p>
+
+<table>
+<thead>
+<tr>
+<th>target 值</th>
+<th>缓冲区类型</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>GL_ARRAY_BUFFER</td>
+<td>数组缓冲</td>
+</tr>
+
+<tr>
+<td>GL_ELEMENT_ARRAY_BUFFER</td>
+<td>元素数组缓冲</td>
+</tr>
+
+<tr>
+<td>GL_COPY_READ_BUFFER</td>
+<td>复制只读缓冲</td>
+</tr>
+
+<tr>
+<td>GL_COPY_WRITE_BUFFER</td>
+<td>复制可写缓冲</td>
+</tr>
+
+<tr>
+<td>GL_PIXEL_PACK_BUFFER</td>
+<td>像素打包缓冲</td>
+</tr>
+
+<tr>
+<td>GL_PIXEL_UNPACK_BUFFER</td>
+<td>像素解包缓冲</td>
+</tr>
+
+<tr>
+<td>GL_TRANSFORM_FEEDBACK_BUFFER</td>
+<td>变换反馈缓冲</td>
+</tr>
+
+<tr>
+<td>GL_UNIFORM_BUFFER</td>
+<td>一致变量缓冲</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="向缓冲区送入数据-glbufferdata-和-glbuffersubdata">向缓冲区送入数据 &ndash; glBufferData 和 glBufferSubData</h3>
+
+<p>glBufferData 方法一般用于向指定缓冲中送入数据，也可以用于对指定缓冲进行相关存储空间初始化。</p>
+
+<pre><code class="language-java">  public static native void glBufferData(
+        int target,
+        int size,
+        java.nio.Buffer data,
+        int usage
+    );
+</code></pre>
+
+<p>其中，target 用于描述指定的缓冲区类型，如上表所示；参数 size 用于给出缓冲区的大小（单位为字节），参数 data 为需要送入缓冲的数据，若没有数据要送入缓冲区，其值可以为 null；参数 usage 用于指定缓冲区的用途，可取的值如下表：</p>
+
+<table>
+<thead>
+<tr>
+<th>缓冲区用途可选参数值</th>
+<th>参数说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>GL_STATIC_DRAW</td>
+<td>在绘制时，缓冲区对象数据可以被修改一次，使用多次</td>
+</tr>
+
+<tr>
+<td>GL_STATIC_READ</td>
+<td>在 OpenGL ES 中读回的数据，缓冲区对象数据可以被修改一次，使用多次，且该数据可以冲应用程序中查询</td>
+</tr>
+
+<tr>
+<td>GL_STATIC_COPY</td>
+<td>从 OpenGL ES 中读回的数据，缓冲区对象数据可以被修改一次，使用多次，该数据将直接作为绘制图元或者指定图像的信息来源</td>
+</tr>
+
+<tr>
+<td>GL_DYNAMIC_DRAW</td>
+<td>在绘制时，缓冲区对象数据可以被重复修改、使用多次</td>
+</tr>
+
+<tr>
+<td>GL_DYNAMIC_READ</td>
+<td>从 OpenGL ES 中读回的数据，缓冲区对象数据可以被重复修改、使用多次，且该数据可以从应用程序中查询</td>
+</tr>
+
+<tr>
+<td>GL_DYNAMIC_COPY</td>
+<td>从 OpenGL ES 中读回的数据，缓冲区对象数据可以被重复修改、使用多次，该数据将直接作为绘制图元或者指定图像的信息来源</td>
+</tr>
+
+<tr>
+<td>GL_STREAM_DRAW</td>
+<td>在绘制时，缓冲区对象数据可以被修改一次，使用少数几次</td>
+</tr>
+
+<tr>
+<td>GL_STREAM_READ</td>
+<td>从 OpenGL ES 中读回的数据，缓冲区对象数据可以被修改一次，使用少数几次，且该数据可以从应用程序中查询</td>
+</tr>
+
+<tr>
+<td>GL_STREAM_COPY</td>
+<td>从 OpenGL ES 中读回的数据，缓冲区对象数据可以被修改一次，使用少数几次，且该数据将直接作为绘制图元或者指定图像的信息来源</td>
+</tr>
+</tbody>
+</table>
+
+<p>glBufferSubData 方法一般用于向指定缓冲中送入部分数据进行初始化或者更新，方法如下：</p>
+
+<pre><code class="language-java">    public static native void glBufferSubData(
+        int target,
+        int offset,
+        int size,
+        java.nio.Buffer data
+    );
+</code></pre>
+
+<p>其实，参数 target 还是用于描述指定的缓冲区类型，参数 offset 用于给出缓冲区被修改的数据的起始内存偏移量，参数 size 用于给出缓冲区中数据被修改的字节数，参数 data 为需要送入缓冲的数据。</p>
+
+<p>通过 glBufferSubData 方法，可以做到更改指定范围内的缓冲区数据。</p>
+
+<h3 id="删除缓冲区对象-gldeletebuffers">删除缓冲区对象 &ndash; glDeleteBuffers</h3>
+
+<p>glDeteleBuffers 方法用于删除指定的缓冲区对象，其方法签名如下：</p>
+
+<pre><code class="language-java">	// 方法一
+    public static native void glDeleteBuffers(
+        int n,
+        java.nio.IntBuffer buffers
+    );
+    // 方法二
+    public static native void glDeleteBuffers(
+        int n,
+        int[] buffers,
+        int offset
+    );
+</code></pre>
+
+<p>其中，第一个方法有两个参数，参数 n 为将要被删除的缓冲区对象数量，参数 buffers 为存储了 n 个要删除的缓冲区编号的 IntBuffer 。</p>
+
+<p>第二个方法有三个参数，参数 n 为将要被删除的缓冲区对象数量，参数 buffers 为存储了 n 个要删除缓冲区编号的数组，参数 offset 为数组所需的偏移量。</p>
+
+<h3 id="缓冲区查询-glgetbufferparameteriv">缓冲区查询 &ndash; glGetBufferParameteriv</h3>
+
+<p>可以通过 glGetBufferParameteriv 方法查询指定缓冲区的信息，其方法签名如下：</p>
+
+<pre><code class="language-java">    public static native void glGetBufferParameteriv(
+        int target,
+        int pname,
+        int[] params,
+        int offset
+    );
+</code></pre>
+
+<p>其中，参数 target 用于描述指定的缓冲区类型，参数 pname 为要查询的信息项目，具体项目见下表，参数 params 用于存放查询结果，offset 代表查询偏移量。</p>
+
+<table>
+<thead>
+<tr>
+<th>缓冲区查询信息</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>GL_BUFFER_SIZE</td>
+<td>缓冲区以字节计的大小</td>
+</tr>
+
+<tr>
+<td>GL_BUFFER_USAGE</td>
+<td>缓冲区用途</td>
+</tr>
+
+<tr>
+<td>GL_BUFFER_MAPPED</td>
+<td>是否为映射缓冲区</td>
+</tr>
+
+<tr>
+<td>GL_BUFFER_ACCESS_FLAGS</td>
+<td>缓冲区访问标志</td>
+</tr>
+
+<tr>
+<td>GL_BUFFER_MAP_LENGTH</td>
+<td>缓冲区映射长度</td>
+</tr>
+
+<tr>
+<td>GL_BUFFER_MAP_OFFSET</td>
+<td>缓冲区映射偏移量</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="实践">实践</h2>
+
+<p>前面说了那么理论，那么针对数组缓冲区 Array Buffer 和元素数组缓冲区 Element Array Buffer 分别进行实践，实现的效果都是绘制一个带纹理的矩形。</p>
+
+<p>如下：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531833700/code/WechatIMG37.jpg" alt="顶点缓冲区的使用" /></p>
+
+<h3 id="数组缓冲区使用">数组缓冲区使用</h3>
+
+<p>对于 Array Buffer  数组缓冲区，它可以存放顶点相关数据，比如顶点坐标、纹理坐标、法向量等，最后采用 glDrawArrays 方法来绘制，</p>
+
+<p>首先，定义好顶点坐标：</p>
+
+<pre><code class="language-java">        float vertices[] =
+                {
+                        -width / 2, height / 2, 0,
+                        -width / 2, -height / 2, 0,
+                        width / 2, height / 2, 0,
+
+                        -width / 2, -height / 2, 0,
+                        width / 2, -height / 2, 0,
+                        width / 2, height / 2, 0
+                };
+</code></pre>
+
+<p>然后定义好纹理坐标：</p>
+
+<pre><code class="language-java">        float textures[] =
+                {
+                        0f, 0f, 0f, 1f, 1f, 0f,
+                        0f, 1f, 1f, 1f, 1f, 0f,
+                };
+</code></pre>
+
+<p>接下来就是创建顶点坐标和纹理坐标的缓存数据，通过 <code>ByteBuffer</code> 进行转换得到 <code>FloatBuffer</code>。</p>
+
+<p>完成准备工作接下来就是创建对应的顶点缓冲区了。</p>
+
+<pre><code class="language-java">		// 指定缓存数量并生成
+        int[] bufferIds = new int[3];
+        GLES20.glGenBuffers(3, bufferIds, 0);
+
+        // 创建顶点坐标缓冲，绑定并传递数据
+        mVertexBufferId = bufferIds[0];
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, mVertexBufferId);
+        GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, vertices.length * 4, mVertexBuffer, GLES20.GL_STATIC_DRAW);
+        // 解除绑定
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
+
+        // 创建纹理坐标缓冲，绑定并传递数据
+        mTextureBufferId = bufferIds[1];
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, mTextureBufferId);
+        GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, textures.length * 4, mTextureBuffer, GLES20.GL_STATIC_DRAW);
+        // 解除绑定
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
+
+</code></pre>
+
+<p>接下来就是绘制的过程：</p>
+
+<pre><code class="language-java">		// 绑定到顶点坐标数据缓冲
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, mVertexBufferId);
+        // 启用顶点坐标数据数组
+        GLES20.glEnableVertexAttribArray(maPositionHandle);
+        // 指定顶点位置数据使用对应缓冲
+        GLES20.glVertexAttribPointer(maPositionHandle, 3, GLES20.GL_FLOAT, false, 3 * 4, 0);
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
+		
+		// 绑定到纹理坐标数据缓冲
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, mTextureBufferId);
+        // 启用纹理坐标数据数组
+        GLES20.glEnableVertexAttribArray(maTexCoorHandle);
+        // 指定纹理位置数据使用对应缓冲
+        GLES20.glVertexAttribPointer(maTexCoorHandle, 2, GLES20.GL_FLOAT, false, 2 * 4, 0);
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
+		// 执行绘制
+	    GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vCount);
+</code></pre>
+
+<p>在绘制时会使用到 <code>glVertexAttribPointer</code> 函数，这里有个细节差别，它和之前使用时参数不一样了。</p>
+
+<h3 id="元素数组缓冲区使用">元素数组缓冲区使用</h3>
+
+<p>使用 元素数组缓冲区 Element Array Buffer 就得采用 glDrawElement 的方式进行绘制，先要更改顶点坐标数据和纹理坐标数据，然后定义顶点索引数组，然后为索引数组生成对应的 元素数组缓冲区。</p>
+
+<pre><code class="language-java">		// 索引数组
+        byte[] indices = {
+                1, 2, 3,
+                0, 1, 2,
+        };
+</code></pre>
+
+<p>为索引数组生成对应的 元素数组缓冲区。</p>
+
+<pre><code class="language-java">     // 索引缓冲
+        mIndicesBufferId = bufferIds[2];
+        GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, mIndicesBufferId);
+        GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER, indices.length, mIndicesBuffer, GLES20.GL_STATIC_DRAW);
+        GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, 0);
+</code></pre>
+
+<p>另外在绘制时，也要绑定元素数组缓冲区后进行绘制：</p>
+
+<pre><code class="language-java"> GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, mIndicesBufferId);
+ GLES20.glDrawElements(GLES20.GL_TRIANGLES, vCount, GLES20.GL_UNSIGNED_BYTE, 0);
+</code></pre>
+
+<h2 id="小结">小结</h2>
+
+<p>对于博客的例子，一个纹理矩形只有四个顶点，体现不出顶点数组缓存的优势，多余大量点的情况下，这种优势还是挺明显的，尤其是存在要更改顶点数据的情况下，直接使用 glBufferSubData 方法去更改，而不是在重新传入新的顶点坐标数据。</p>
+
+<p>关于具体的代码实现，可以参考我的 Github 项目：</p>
+
+<blockquote>
+<p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
+</blockquote>
+
+
+              
+                <p>
+
+                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
+
+                  <br/>
+
+                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+
+                  <br/>
+
+                 <a href="https://glumes.com/post/contact-and-reward/">  觉得文章对您有帮助，欢迎打赏，或者加微信交流</a>
+
+                <br />
+                <br />
+
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">Opengl Tutorial Vertex Buffer Object Usage</a>
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" data-toggle="tooltip" data-placement="top" title="OpenGL 中的颜色混合和使用">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-color-blend/">OpenGL 中的颜色混合和使用</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-alpha-test/">OpenGL 利用 Alpha 透明度进行测试</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-handle-video-frame-and-replace-content/">用 OpenGL 对视频帧内容进行替换</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-share/">OpenGL ES 学习资源分享</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+
