@@ -5,12 +5,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Opengl Tutorial Vertex Buffer Object Usage</title>
-  <meta property="og:title" content="Opengl Tutorial Vertex Buffer Object Usage" />
-  <meta name="twitter:title" content="Opengl Tutorial Vertex Buffer Object Usage" />
-  <meta name="description" content="在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 glDrawArrays 或 glDrawElements 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够">
-  <meta property="og:description" content="在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 glDrawArrays 或 glDrawElements 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够">
-  <meta name="twitter:description" content="在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 glDrawArrays 或 glDrawElements 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够">
+  <title>OpenGL 顶点缓冲区 VBO 的使用</title>
+  <meta property="og:title" content="OpenGL 顶点缓冲区 VBO 的使用" />
+  <meta name="twitter:title" content="OpenGL 顶点缓冲区 VBO 的使用" />
+  <meta name="description" content="在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 glDrawArrays 或 glDrawElements 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。
+
+可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。
+
+">
+  <meta property="og:description" content="在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 glDrawArrays 或 glDrawElements 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。
+
+可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。
+
+">
+  <meta name="twitter:description" content="在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 glDrawArrays 或 glDrawElements 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。
+
+可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。
+
+">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" />
@@ -170,7 +182,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://glumes.com/" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1531838582/blog/pexels-photo-219005.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -185,7 +197,7 @@
                 <div class="page-heading">
                 
                   
-                     <h1>Opengl Tutorial Vertex Buffer Object Usage</h1>
+                     <h1>OpenGL 顶点缓冲区 VBO 的使用</h1>
                      
                     <span class="post-meta">
   
@@ -211,7 +223,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">Opengl Tutorial Vertex Buffer Object Usage</h1>
+                <h1 align="center">OpenGL 顶点缓冲区 VBO 的使用</h1>
                 
                 
             </div>
@@ -246,11 +258,11 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            
-
-<p>在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 <code>glDrawArrays</code> 或 <code>glDrawElements</code> 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。</p>
+            <p>在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 <code>glDrawArrays</code> 或 <code>glDrawElements</code> 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。</p>
 
 <p>可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。</p>
+
+<p></p>
 
 <h2 id="顶点缓冲区">顶点缓冲区</h2>
 
@@ -636,7 +648,6 @@
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
 </blockquote>
 
-
               
                 <p>
 
@@ -654,7 +665,7 @@
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">Opengl Tutorial Vertex Buffer Object Usage</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">OpenGL 顶点缓冲区 VBO 的使用</a>
 
                 </p>
               
