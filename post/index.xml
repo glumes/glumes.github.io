@@ -8,10 +8,25 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Tue, 17 Jul 2018 22:28:37 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 18 Jul 2018 23:16:22 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 顶点数组对象 VAO 的使用</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/</link>
+      <pubDate>Wed, 18 Jul 2018 23:16:22 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/</guid>
+      <description>&lt;p&gt;在之前使用 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/&#34;&gt;OpenGL 顶点缓冲区 VBO 的使用&lt;/a&gt; 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。&lt;/p&gt;
+
+&lt;p&gt;这就存在了一些重复的操作。&lt;/p&gt;
+
+&lt;p&gt;在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 顶点缓冲区 VBO 的使用</title>
