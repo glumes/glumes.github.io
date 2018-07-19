@@ -8,10 +8,27 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Wed, 18 Jul 2018 23:16:22 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 19 Jul 2018 11:45:15 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 优化项之面剔除和注意点</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/</link>
+      <pubDate>Thu, 19 Jul 2018 11:45:15 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/</guid>
+      <description>&lt;p&gt;现在我们用 OpenGL 绘制了如下的立方体：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。&lt;/p&gt;
+
+&lt;p&gt;那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 顶点数组对象 VAO 的使用</title>

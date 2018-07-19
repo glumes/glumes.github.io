@@ -5,38 +5,44 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>OpenGL 顶点数组对象 VAO 的使用</title>
-  <meta property="og:title" content="OpenGL 顶点数组对象 VAO 的使用" />
-  <meta name="twitter:title" content="OpenGL 顶点数组对象 VAO 的使用" />
-  <meta name="description" content="在之前使用 OpenGL 顶点缓冲区 VBO 的使用 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。
+  <title>OpenGL 优化项之面剔除和注意点</title>
+  <meta property="og:title" content="OpenGL 优化项之面剔除和注意点" />
+  <meta name="twitter:title" content="OpenGL 优化项之面剔除和注意点" />
+  <meta name="description" content="现在我们用 OpenGL 绘制了如下的立方体：
 
-这就存在了一些重复的操作。
 
-在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。
 
-">
-  <meta property="og:description" content="在之前使用 OpenGL 顶点缓冲区 VBO 的使用 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。
+不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。
 
-这就存在了一些重复的操作。
-
-在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。
+那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。
 
 ">
-  <meta name="twitter:description" content="在之前使用 OpenGL 顶点缓冲区 VBO 的使用 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。
+  <meta property="og:description" content="现在我们用 OpenGL 绘制了如下的立方体：
 
-这就存在了一些重复的操作。
 
-在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。
+
+不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。
+
+那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。
+
+">
+  <meta name="twitter:description" content="现在我们用 OpenGL 绘制了如下的立方体：
+
+
+
+不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。
+
+那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -188,7 +194,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1531927160/blog/pexels-photo-238368.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1531972138/blog/pexels-photo-220182.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -203,11 +209,11 @@
                 <div class="page-heading">
                 
                   
-                     <h1>OpenGL 顶点数组对象 VAO 的使用</h1>
+                     <h1>OpenGL 优化项之面剔除和注意点</h1>
                      
                     <span class="post-meta">
   
-  Posted on July 18, 2018
+  Posted on July 19, 2018
   
   
 </span>
@@ -229,7 +235,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">OpenGL 顶点数组对象 VAO 的使用</h1>
+                <h1 align="center">OpenGL 优化项之面剔除和注意点</h1>
                 
                 
             </div>
@@ -251,9 +257,9 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Wed Jul 18, 2018</h4>
+        <h4 id="date"> Thu Jul 19, 2018</h4>
     </section>
-    <h5 id="wc">1400 Words|Read in about 3 Min</h5>
+    <h5 id="wc">1500 Words|Read in about 3 Min</h5>
     <h5 id="tags">Tags: 
         
         <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
@@ -264,122 +270,136 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在之前使用 <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">OpenGL 顶点缓冲区 VBO 的使用</a> 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。</p>
+            <p>现在我们用 OpenGL 绘制了如下的立方体：</p>
 
-<p>这就存在了一些重复的操作。</p>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif" alt="" /></p>
 
-<p>在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。</p>
+<p>不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。</p>
+
+<p>那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。</p>
 
 <p></p>
 
+<h2 id="面剔除">面剔除</h2>
+
+<p>既然现在要把看不到的面丢弃，那么问题就来了：</p>
+
 <blockquote>
-<p>顶点数组对象又叫做 VAO （Vertex Array Object）。</p>
+<p>如何去确定哪个面看得到，哪个面看不到呢？</p>
 </blockquote>
 
-<p>顶点数组对象的主要功能就是将绘制的一个物体时所需的对应于不同方面的顶点缓冲及相关设置包装成一个整体，在绘制时直接使用顶点数组对象即可，不必分别使用每个顶点缓冲，这样可以进一步提高绘制效率。</p>
+<p>在 OpenGL 中允许检查所有正面朝向观察者的面，并渲染它们，而丢弃所有背向观察者的面，这就可以节省片段着色器的运行。</p>
 
-<h2 id="方法介绍">方法介绍</h2>
+<p>所以，我们要做的就是告诉 OpenGL 哪个面是正面，哪个面是背面。</p>
 
-<p>顶点数组对象主要提供了 glGenVertexArrays 和 glBindVertexArray 方法。</p>
+<h2 id="通过顶点连接顺序确定正反面">通过顶点连接顺序确定正反面</h2>
 
-<h3 id="glgenvertexarrays-方法">glGenVertexArrays 方法</h3>
+<p>当我们通过三角形来绘制形状时，会定义顶点连接的顺序，它可能是顺时针或逆时针。</p>
 
-<p>glGenVertexArrays 方法主要用于创建新的顶点数组对象，方法签名如下：</p>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531966617/code/faceculling_windingorder.png" alt="顶点连接顺序" /></p>
 
-<pre><code class="language-java">    public static native void glGenVertexArrays(
-        int n,
-        int[] arrays,
-        int offset
+<p>上图中，左侧三角形就是顺时针方向，右侧就是逆时针方向。</p>
+
+<p>而 OpenGL 就是利用这个三角形的顺时针或逆时针方向来决定三角形是正面还是反面。</p>
+
+<blockquote>
+<p>默认情况下，逆时针的顶点连接顺序被定义为三角形的正面</p>
+
+<p>逆时针或顺时针都是相对于观察者方向的</p>
+</blockquote>
+
+<p>当定义顶点顺序时，应该想象对应的三角形是面向你的，所以定义的三角形顶点方向应该逆时针的。</p>
+
+<p>这样定义的好处在于三角形顶点的实际连接顺序是在光栅化阶段进行的，也就是顶点着色器运行之后，这些顶点就是以观察者视角所见的了。</p>
+
+<p>对于上图，左侧三角形 1 -&gt; 2 -&gt;3 的连接顺序是顺时针的，这是在观察者位于屏幕前看到的，如果观察者位于屏幕后，连接顺序依旧是 1 -&gt; 2 -&gt; 3 ，那么就是逆时针了。</p>
+
+<p>这也是为什么说，定义三角形顶点顺序时要假设三角形是面向你的，保证逆时针定义，并且可以根据观察者方向的改变，顺时针和逆时针方向会发生改变。</p>
+
+<p>如下图：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531967122/code/faceculling_frontback.png" alt="逆时针和顺时针三角形的观察" /></p>
+
+<p>三角形的顶点顺序都 1 -&gt; 2 -&gt; 3，当我们定义这个顺序时，都是假设观察者正面向这个三角形呢，所以都是逆时针定义的。</p>
+
+<p>但是从右侧眼镜处来观察，右侧三角形方向是逆时针的，左侧三角形方向是顺时针的，这就是因为对于右侧三角形来说，观察者方向和当初定义顺序时的假设方向一致，而对于左侧三角形，观察者方向就和定义顺序时的假设方向相反了，所以从反方向来看就成了顺时针了。</p>
+
+<p>这样一来，在面剔除的优化下，右侧面可见，左侧面不可见了，也就是面向观察者的正面可见，反面不可见了。</p>
+
+<blockquote>
+<p>看了好多文章，都没有讲：为什么要逆时针定义三角形方向，但是观察时却成了顺时针了，就是因为当初定义的逆时针方向其实是和观察者方向挂钩的。</p>
+</blockquote>
+
+<p>当上图的观察者方向变成了左侧，那么顶点连接顺序都还是  1 -&gt; 2 -&gt; 3 的情况下，左侧三角形的顺序就和当初定义顶点顺序一样成了逆时针可见，而右侧的三角形顶点顺序就成了顺时针不可见。</p>
+
+<p>明白了这一点，就对于面剔除更加清晰了。</p>
+
+<h2 id="具体使用">具体使用</h2>
+
+<p>在 OpenGL 中可以通过如下方法开启面剔除：</p>
+
+<pre><code class="language-java">glEnable(GLES20.GL_CULL_FACE)
+</code></pre>
+
+<p>默认情况下，面剔除是关闭的。</p>
+
+<p>开启面剔除后，所有的背向观察者的面都会被丢弃，节省渲染性能。</p>
+
+<p>另外，OpenGL 还提供了其他功能来选择要剔除的面。</p>
+
+<pre><code class="language-java">    public static native void glCullFace(
+        int mode
     );
 </code></pre>
 
-<p>其中，参数 n 为要创建的顶点数组对象的数量，参数 arrays 用来存放创建的 n 个顶点数组对象的编号，参数 offset 为 arrays 数组的偏移量。</p>
+<p>有三个模式可选：</p>
 
-<h3 id="glbindvertexarray-方法">glBindVertexArray 方法</h3>
+<ul>
+<li>GL_BACK：只剔除背向面</li>
+<li>GL_FRONT：只剔除正向面</li>
+<li>GL_FRONT_AND_BACK：剔除正向面和背向面</li>
+</ul>
 
-<p>创建顶点数组对象之后，就可以用 glBindVertexArray 方法绑定指定的顶点数组对象，以便对指定的顶点数组对象进行设置或使用，方法签名如上：</p>
+<p>glCullFace 的初始值是 GL_BACK，只剔除背向面。</p>
 
-<pre><code class="language-java">    public static native void glBindVertexArray(
-        int array
+<p>除了需要剔除的面之外，还可以通过调用 glFrontFace 方法告诉 OpenGL 将顺时针的面（而不是逆时针的面）定义为正向面。</p>
+
+<pre><code class="language-java">    public static native void glFrontFace(
+        int mode
     );
 </code></pre>
 
-<p>其中，参数 array 为需要绑定的顶点数组对象的编号。</p>
+<p>它有两个选项：</p>
 
-<p>用 glBindVertexArray 方法绑定顶点数组对象之后，更改顶点数组状态的后续调用（如 glBindBuffer、glVertexAttribPointer、glEnableVertexAttribArray、glDisableVertexAttribArray 等）将影响绑定的顶点数组对象。</p>
+<ul>
+<li>GL_CCW：代表逆时针方向为正向面</li>
+<li>GL_CW：代表顺时针方向为正向面</li>
+</ul>
 
-<p>通过绑定不同的顶点数组对象，绘制时应用程序可以快速在不同顶点数组配置之间进行切换，大大提高了开发效率。</p>
+<p>glFrontFace 模式值是 GL_CCW，逆时针方向为正向面。</p>
 
-<h2 id="实践">实践</h2>
+<p>现假设开启面剔除，并且剔除正向，顺时针为正向：</p>
 
-<p>下面是具体的实践，还是绘制如下的一张纹理图：</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531833700/code/WechatIMG37.jpg" alt="顶点数组对象的使用" /></p>
-
-<p>使用顶点数组对象 VA0 之前，还是分别为顶点坐标、纹理坐标生成缓冲区，并传入数据。</p>
-
-<pre><code class="language-java">		// 生成纹理缓冲区
-        int[] bufferIds = new int[3];
-        GLES30.glGenBuffers(3, bufferIds, 0);
-        // 顶点缓冲
-        mVertexBufferId = bufferIds[0];
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, mVertexBufferId);
-        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER, vertices.length * 4, mVertexBuffer, GLES30.GL_STATIC_DRAW);
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, 0);
-        // 纹理缓冲
-        mTextureBufferId = bufferIds[1];
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, mTextureBufferId);
-        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER, textures.length * 4, mTextureBuffer, GLES30.GL_STATIC_DRAW);
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, 0);
-
+<pre><code class="language-java">	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
+	glFrontFace(GL_CW);
 </code></pre>
 
-<p>接下来就是使用顶点数组对象了。</p>
+<h2 id="小结">小结</h2>
 
-<pre><code class="language-java">		// 生成顶点数组对象
-        int[] vaoIds = new int[1];
-        GLES30.glGenVertexArrays(1, vaoIds, 0);
-        mVAOId = vaoIds[0];
-        // 绑定顶点数组对象
-        GLES30.glBindVertexArray(mVAOId);
-		// 在绑定顶点数组对象之后 调用 glBindBuffer glVertexAttribPointer
-		// glEnableVertexAttribArray，glDisableVertexAttribArray 等等
-		// 将影响绑定的顶点数组对象
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, mVertexBufferId);
-        GLES30.glEnableVertexAttribArray(maPositionHandle);
-        GLES30.glVertexAttribPointer(maPositionHandle, 3, GLES30.GL_FLOAT, false, 3 * 4, 0);
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, 0);
+<ol>
+<li><p>使用面剔除可以优化渲染过程，省下超过 50 % 的片段着色器执行数。</p></li>
 
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, mTextureBufferId);
-        GLES30.glEnableVertexAttribArray(maTexCoorHandle);
-        GLES30.glVertexAttribPointer(maTexCoorHandle, 2, GLES30.GL_FLOAT, false, 2 * 4, 0);
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, 0);
-		// 绑定到默认的顶点数组对象
-		  GLES30.glBindVertexArray(0);
-</code></pre>
+<li><p>使用面剔除时定义顶点要以逆时针方向定义。</p></li>
 
-<p>这里要注意的是，调用了 glBindVertexArray 绑定顶点数组对象之后，我们调用的 glBindBuffer、glVertexAttribPointer、glEnableVertexAttribArray、glDisableVertexAttribArray 等方法都属于该顶点数组对象之内了，都会影响到这个顶点数组对象，直到绑定了默认的顶点数组对象。</p>
+<li><p>逆时针或顺时针都是相对于观察者方向的。</p></li>
+</ol>
 
-<p>在我们使用 顶点缓冲区 VBO 绘制时，要在 onDrawFrame 方法里面为每一个顶点坐标、纹理坐标调用 glBindBuffer 、glVertexAttribPointer、glEnableVertexAttribArray 方法，而使用了 顶点数组对象 VA0 之后，就不需要这么麻烦了，因为相当于顶点数组对象把它们都接管了，直接绑定顶点数组对象就好了。</p>
+<h2 id="参考">参考</h2>
 
-<p>使用 顶点数组对象 VAO 绘制的代码如下：</p>
-
-<pre><code class="language-java">		// 绑定顶点数组对象
-        GLES30.glBindVertexArray(mVAOId);
-        GLES30.glBindBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER, mIndicesBufferId);
-        GLES30.glDrawElements(GLES30.GL_TRIANGLES, vCount, GLES30.GL_UNSIGNED_BYTE, 0);
-        GLES30.glBindBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER, 0);
-		// 解除绑定顶点数组对象
-        GLES30.glBindVertexArray(0);
-</code></pre>
-
-<p>通过这种方式相当于替代了那些繁琐的方法，并且可以直接通过更改绑定的顶点数组对象 ID 去更改绘制的内容，简单高效地实现切换顶点数据。</p>
-
-<p>关于具体的代码实现，可以参考我的 Github 项目：</p>
-
-<blockquote>
-<p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
-</blockquote>
+<ol>
+<li><a href="https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/04%20Face%20culling/">https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/04%20Face%20culling/</a></li>
+</ol>
 
               
                 <p>
@@ -398,7 +418,7 @@
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/">OpenGL 顶点数组对象 VAO 的使用</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/">OpenGL 优化项之面剔除和注意点</a>
 
                 </p>
               
@@ -408,13 +428,9 @@
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 顶点缓冲区 VBO 的使用">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 顶点数组对象 VAO 的使用">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 优化项之面剔除和注意点">Next Post &rarr;</a>
-          </li>
         
       </ul>
             
@@ -423,6 +439,8 @@
                 <h2>See Also</h2>
                 <ul>
                     
+                    <li><a href="/post/opengl/opengl-tutorial-vertex-array-object-usage/">OpenGL 顶点数组对象 VAO 的使用</a></li>
+                    
                     <li><a href="/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">OpenGL 顶点缓冲区 VBO 的使用</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-color-blend/">OpenGL 中的颜色混合和使用</a></li>
@@ -430,8 +448,6 @@
                     <li><a href="/post/opengl/opengl-tutorial-alpha-test/">OpenGL 利用 Alpha 透明度进行测试</a></li>
                     
                     <li><a href="/post/opengl/opengl-handle-video-frame-and-replace-content/">用 OpenGL 对视频帧内容进行替换</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-share/">OpenGL ES 学习资源分享</a></li>
                     
                 </ul>
                 
