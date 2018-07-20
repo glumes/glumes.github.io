@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/opengl/opengl-depth-test/</loc>
+    <lastmod>2018-07-20T14:50:22+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/</loc>
     <lastmod>2018-07-19T11:45:15+08:00</lastmod>
   </url>
@@ -309,7 +314,7 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-07-19T11:45:15+08:00</lastmod>
+    <lastmod>2018-07-20T14:50:22+08:00</lastmod>
   </url>
   
   <url>
@@ -428,19 +433,19 @@
   
   <url>
     <loc>https://glumes.com/tags/opengl/</loc>
-    <lastmod>2018-07-19T11:45:15+08:00</lastmod>
+    <lastmod>2018-07-20T14:50:22+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/opengl/</loc>
-    <lastmod>2018-07-19T11:45:15+08:00</lastmod>
+    <lastmod>2018-07-20T14:50:22+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-07-19T11:45:15+08:00</lastmod>
+    <lastmod>2018-07-20T14:50:22+08:00</lastmod>
     <priority>0</priority>
   </url>
   

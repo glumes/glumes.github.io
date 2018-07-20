@@ -8,10 +8,31 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Thu, 19 Jul 2018 11:45:15 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 20 Jul 2018 14:50:22 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/opengl/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 深度测试与精度值的那些事</title>
+      <link>https://glumes.com/post/opengl/opengl-depth-test/</link>
+      <pubDate>Fri, 20 Jul 2018 14:50:22 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-depth-test/</guid>
+      <description>&lt;p&gt;在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。&lt;/p&gt;
+
+&lt;p&gt;直接看一个没有使用深度测试的绘制：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1532052034/code/undepth_test.gif&#34; alt=&#34;未开启深度测试的情况&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。&lt;/p&gt;
+
+&lt;p&gt;这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。&lt;/p&gt;
+
+&lt;p&gt;要解决这种问题，就得使用深度测试了。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 优化项之面剔除和注意点</title>

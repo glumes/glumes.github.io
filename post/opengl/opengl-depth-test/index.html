@@ -5,26 +5,56 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>理解使用MVP架构</title>
-  <meta property="og:title" content="理解使用MVP架构" />
-  <meta name="twitter:title" content="理解使用MVP架构" />
-  <meta name="description" content="在安卓开发中使用 MVP 模式已经非常普遍了，网上关于 MVP 的讲解也相当多了，不过看得再多还是自己写一遍比较熟练。
+  <title>OpenGL 深度测试与精度值的那些事</title>
+  <meta property="og:title" content="OpenGL 深度测试与精度值的那些事" />
+  <meta name="twitter:title" content="OpenGL 深度测试与精度值的那些事" />
+  <meta name="description" content="在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。
+
+直接看一个没有使用深度测试的绘制：
+
+
+
+按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。
+
+这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。
+
+要解决这种问题，就得使用深度测试了。
 
 ">
-  <meta property="og:description" content="在安卓开发中使用 MVP 模式已经非常普遍了，网上关于 MVP 的讲解也相当多了，不过看得再多还是自己写一遍比较熟练。
+  <meta property="og:description" content="在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。
+
+直接看一个没有使用深度测试的绘制：
+
+
+
+按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。
+
+这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。
+
+要解决这种问题，就得使用深度测试了。
 
 ">
-  <meta name="twitter:description" content="在安卓开发中使用 MVP 模式已经非常普遍了，网上关于 MVP 的讲解也相当多了，不过看得再多还是自己写一遍比较熟练。
+  <meta name="twitter:description" content="在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。
+
+直接看一个没有使用深度测试的绘制：
+
+
+
+按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。
+
+这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。
+
+要解决这种问题，就得使用深度测试了。
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/understand-mvp-architecture/" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-depth-test/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/android/understand-mvp-architecture/" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-depth-test/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -176,8 +206,40 @@
 
 
   
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1532069624/blog/pexels-photo-137132.jpg" ></div>
+  
 
-  <header class="header-section ">
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>OpenGL 深度测试与精度值的那些事</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on July 20, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
     
     <div class="intro-header no-img">
       
@@ -185,7 +247,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">理解使用MVP架构</h1>
+                <h1 align="center">OpenGL 深度测试与精度值的那些事</h1>
                 
                 
             </div>
@@ -207,14 +269,12 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Wed Jan 31, 2018</h4>
+        <h4 id="date"> Fri Jul 20, 2018</h4>
     </section>
-    <h5 id="wc">2000 Words|Read in about 4 Min</h5>
+    <h5 id="wc">1800 Words|Read in about 4 Min</h5>
     <h5 id="tags">Tags: 
         
-        <a href="https://glumes.com/tags/android/">android</a> &nbsp;
-        
-        <a href="https://glumes.com/tags/architecture/">architecture</a> &nbsp;
+        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
     </h5>
 </div>
 
@@ -222,297 +282,171 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在安卓开发中使用 MVP 模式已经非常普遍了，网上关于 MVP 的讲解也相当多了，不过看得再多还是自己写一遍比较熟练。</p>
+            <p>在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。</p>
+
+<p>直接看一个没有使用深度测试的绘制：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532052034/code/undepth_test.gif" alt="未开启深度测试的情况" /></p>
+
+<p>按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。</p>
+
+<p>这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。</p>
+
+<p>要解决这种问题，就得使用深度测试了。</p>
 
 <p></p>
 
-<p>MVP 分别代表了：M（Model）、V（View）、P（Presenter）的缩写，代表了三个不同的模块。</p>
+<p>值得一提的是：在没有开启深度测试的情况下，假设绘制了多个不同远近的物体，那么对于最后的景象来说，哪怕是距离最远的，只要它的最后绘制的，都会显示在景象的前面。</p>
 
-<ul>
-<li>Model：负责处理数据的加载或者存储，比如从网络中或者本地数据库中获取数据。</li>
-<li>View：负责界面数据的展示，以及与用户行为的交互。</li>
-<li>Presenter：是模型和视图的桥梁，将模型和视图分离开来，主要负责处理事务逻辑。</li>
-</ul>
+<p>当深度测试被启用时，OpenGL 会将一个片段的深度值与深度缓冲的内容进行对比。OpenGL 会执行一个深度测试，如果这个测试通过了的话，深度缓冲将会更新为新的深度值，如果深度测试失败了，该片段将会被丢弃。</p>
 
+<p>深度缓冲是在片段着色器运行之后，在屏幕空间中运行的。屏幕空间坐标与通过 OpenGL 的 glViewport 所定义的视口密切相关，并且可以通过 GLSL 的内建变量 <code>gl_FragCoord</code> 从片段着色器中直接访问。</p>
 
-<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
+<p><code>gl_FragCoord</code> 的 x 和 y 分量代表了片段的屏幕空间坐标（其（0，0）位于左下角）。<code>gl_FragCoord</code> 中也包含了一个 z 分量，它包含了片段真正的深度值。z 值就是需要与深度缓冲内容所对比的那个汁。</p>
 
+<p>深度缓冲默认是禁止的，通过如下代码开启它：</p>
 
-	
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-<style>.gallery .img2 {background-image: url('http://7xqe3m.com1.z0.glb.clouddn.com/blog-mvp-and-mvc.png');}</style>
-
-<div class="box  " >
-  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <div class="img img2"  >
-      <img itemprop="thumbnail" src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-mvp-and-mvc.png" />
-    </div>
-    
-    <a href="http://7xqe3m.com1.z0.glb.clouddn.com/blog-mvp-and-mvc.png" itemprop="contentUrl"></a>
-  </figure>
-</div>
-
-
-</div>
-
-<p>如果所示，MVP 与 MVC 的不同之处在于，MVP 中的 View 层和 Model 层之间不进行交互，是通过中间的 Presenter 中来进行交互的。这样的好处就是能够解耦，降低 View 层和 Model 层之间的耦合度。</p>
-
-<p>谷歌官方也给出了一个 MVP 模式的示例：<a href="https://github.com/googlesamples/android-architecture">https://github.com/googlesamples/android-architecture</a></p>
-
-<h2 id="mvp-模式实现登陆功能">MVP 模式实现登陆功能</h2>
-
-<p>用 MVP 模式简单实现了一个登陆功能，项目的包结构如下，根据模块层次来分层的。</p>
-
-
-<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
-
-
-	
-
-
-  <link rel="stylesheet" href="/css/hugo-easy-gallery.css" />
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-<style>.gallery .img1 {background-image: url('http://7xqe3m.com1.z0.glb.clouddn.com/blog-mvp-project-dir.png');}</style>
-
-<div class="box  " >
-  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <div class="img img1"  >
-      <img itemprop="thumbnail" src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-mvp-project-dir.png" />
-    </div>
-    
-    <a href="http://7xqe3m.com1.z0.glb.clouddn.com/blog-mvp-project-dir.png" itemprop="contentUrl"></a>
-  </figure>
-</div>
-
-
-</div>
-
-<h3 id="接口定义">接口定义</h3>
-
-<p>在 LoginContract 接口中定义了 M 层、V 层、P 层的接口，以及 Model 层数据传递到 Presenter 时的回调接口，将所有的接口放到一个总的接口中，这样不会那么的散乱，便于管理。</p>
-
-<p>而且， M 层、V 层、P 层的实现类都将实现这些接口，这样的好处就是便于替换。</p>
-
-<p>因为 Java 中的向上转型，当我们如下声明一个类时，LoginPresenter 类就向上转型成了 LoginContract.Presenter 类，这时，LoginPresenter 只能调用向上转型的类，也就是接口类中的定义的方法，不能再调用自己实现的其他方法，这样一样，就方便我们在需要的时候对  M 层、V 层、P 层 的类进行替换，可以替换内部的实现方法，而调用的方法名不变。</p>
-
-<pre><code class="language-java">private LoginContract.Presenter mPresenter = new LoginPresenter()
+<pre><code class="language-java">glEnable(GL_DEPTH_TEST);
 </code></pre>
 
-<pre><code class="language-java">public interface LoginContract {
+<p>开启之后，如果一个片段通过了深度测试的话，OpenGL 就会在深度缓冲中存储该片段的 z 值；如果没有通过深度缓冲，则丢弃该片段。</p>
 
-    /**
-     * View 层的接口
-     */
-    interface View extends BaseView&lt;Presenter&gt; {
-        void showLoading();
+<p>如果开启了深度缓冲，就应该在每个渲染迭代之前，也就是 onDrawFrame 方法中清除深度缓冲，否则就仍在使用上一次渲染迭代时写入的深度值。</p>
 
-        void hideLoading();
-
-        void setEmail(String email);
-
-        void setPassword(String password);
-
-        void toActivity();
-
-        boolean isActive();
-    }
-
-    /**
-     * Presenter 层的接口
-     */
-    interface Presenter extends BasePresenter {
-        void showLoadingDialog();
-
-        void cancelLoadingDialog();
-
-        void checkUserInfo(String email,String  password);
-    }
-
-    /**
-     * Model 层的接口
-     */
-    interface Model {
-
-        List&lt;String&gt; LoaderInitData();
-
-        void checkUserInfo(String email,String password,LoginContract.CallBack callBack);
-
-    }
-
-    /**
-     * Model 层传递数据到 Presenter 层时的回调接口
-     */
-    interface CallBack {
-        void LoginSuccess();
-        void LoginFailed();
-    }
-}
+<pre><code class="language-java">// 清除深度缓冲
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 </code></pre>
 
-<h3 id="v-层实现">V 层实现</h3>
+<p>如果在某些情况下，需要对所有的片段执行深度测试并丢弃某些片段，但是又不希望深度缓冲被更新，这时就需要使用一个<code>只读深度缓冲</code>。</p>
 
-<p>将 Fragment 作为 MVP 中的 V 层，而 Activity 则是作为一个总的控制类，并没有做具体的业务逻辑操作，这里是仿照着谷歌官方的例子来编写的，当然也可以将 Activity 作为 V 层来实现。</p>
+<p>OpenGL 运行我们禁用深度缓冲的写入，只需要设置它的深度掩码为 <code>GL_FALSE</code> 即可。</p>
 
-<p>在 V 层中需要绑定 P 层的 Presenter ，而 V 层则处理数据的展示和与用户的 UI 交互。</p>
-
-<p>而 P 层则是负责处理具体的逻辑。</p>
-
-<p>所以，V 层是将用户的事件都交给了 P 层去处理，而 P 层通过调用 M 层处理的数据，再将它展示给 V 层去。</p>
-
-<pre><code class="language-java">/**
- * 给 View 来传入 Presenter 来绑定 presenter
- *
- * @param presenter
- */
-
-@Override
-public void setPresenter(LoginContract.Presenter presenter) {
-    this.mPresenter = presenter;
-}
+<pre><code class="language-java">// 设置只读的深度缓冲
+glDepthMask(GL_FALSE);
 </code></pre>
 
-<h3 id="p-层实现">P 层实现</h3>
+<h2 id="深度测试函数">深度测试函数</h2>
 
-<p>P 层是 MVP 中最重要的负责具体逻辑处理的一层，它持有 V 层和 M 层的引用，毕竟它需要调用 V 层和 M 层的方法。</p>
+<p>OpenGL 允许修改深度测试中使用的比较运算符，允许我们控制 OpenGL 什么时候该通过或丢弃一个片段，什么时候更新深度缓冲。</p>
 
-<p>由于 P 层持有了 V 层的引用，当 presenter 有后台异步的耗时操作时，如果这时退出了 V 层，而后台异步线程的操作并不会立即停止，这时候就会引发内存泄漏了。</p>
+<p>调用 <code>glDepthFunc</code> 函数设置比较运算符。</p>
 
-<pre><code class="language-java">/**
- * 构造方法中通过 View 的 setPresenter 让 View 获得了 Presenter 的实例
- * 这样,在 View 中就可以对 Presenter 中的方法进行操作了
- *
- * @param view
- */
-public LoginPresenter(LoginContract.View view) {
-    mView = view;
-    /**
-     *  Presenter 绑定 View
-     */
-    mView.setPresenter(this);
-
-    /**
-     * Presenter 引用数据层 Model
-     */
-
-    mModel = new LoginModel();
-
-    /**
-     * 得到主线程,也就是 UI 线程的消息循环 Looper
-     */
-    UiHandler = new Handler(Looper.getMainLooper());
-}
+<pre><code class="language-java">glDepthFunc(GL_LESS);
 </code></pre>
 
-<h3 id="m-层实现">M 层实现</h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
 
-<p>M 层也实现了 LoginContract 中的 Model 接口，M 层主要负责从网络或者本地数据库中加载数据，因为安卓的主线程并不是线程安全的，而且主线程中不允许进行网络和耗时操作，所以 M 层中的操作都是在异步的子线程中进行的，这样就需要向主线程的消息循环中发送消息，获得主线程中的消息循环（Looper.getMainLooper()），从而更新主线程的 UI 。</p>
+<tbody>
+<tr>
+<td>GL_ALWAYS</td>
+<td>永远通过深度测试</td>
+</tr>
 
-<pre><code class="language-java">public class LoginModel implements LoginContract.Model {
+<tr>
+<td>GL_NEVER</td>
+<td>永远不通过深度测试</td>
+</tr>
 
-    public LoginModel() {
-    }
-}
+<tr>
+<td>GL_LESS</td>
+<td>在片段深度值小于缓冲的深度值时通过测试</td>
+</tr>
+
+<tr>
+<td>GL_EQUAL</td>
+<td>在片段深度值等于缓冲区的深度值时通过测试</td>
+</tr>
+
+<tr>
+<td>GL_LEQUAL</td>
+<td>在片段深度值小于等于缓冲区的深度值时通过测试</td>
+</tr>
+
+<tr>
+<td>GL_GREATER</td>
+<td>在片段深度值大于缓冲区的深度值时通过测试</td>
+</tr>
+
+<tr>
+<td>GL_NOTEQUAL</td>
+<td>在片段深度值不等于缓冲区的深度值时通过测试</td>
+</tr>
+
+<tr>
+<td>GL_GEQUAL</td>
+<td>在片段深度值大于等于缓冲区的深度值时通过测试</td>
+</tr>
+</tbody>
+</table>
+
+<p>默认情况下使用的是 <code>GL_LESS</code>，它将丢弃深度值大于当前深度缓冲值的所有片段。</p>
+
+<p>对于如下代码的组合：</p>
+
+<pre><code class="language-java">glEnable(GL_DEPTH_TEST);
+glDepthFunc(GL_ALWAYS);
 </code></pre>
 
-<p>具体的代码实现都可以在 Github 上找到，项目地址是：<a href="https://github.com/glumes/MVPLogin">https://github.com/glumes/MVPLogin</a></p>
+<p>其效果等效于没有开启深度测试。</p>
 
-<h3 id="注意事项">注意事项</h3>
+<p>但我们开启深度测试之后，就可以得到正常的立方体绘制了。</p>
 
-<h4 id="防止内存泄漏">防止内存泄漏</h4>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif" alt="" /></p>
 
-<p>在这里，我用的是 Fragment 作为 V 层，为了防止在 P 层中的异步耗时操作执行的时候，V 层已经退出了，所以在仿照谷歌官方的例子，在 V 层接口中定义了 <code>isActive()</code> 方法：</p>
+<h2 id="深度值精度">深度值精度</h2>
 
-<pre><code class="language-java">/**
- * 防止 P 层中持有 V 层导致内存泄漏
- * 通过 Fragment 中的 isAdded() 方法判断当前 Fragment 是否已经添加到 Activity 当中去
- * @return
- */
-@Override
-public boolean isActive() {
-    return isAdded();
-}
-</code></pre>
+<p>上面提到的作为比较的深度缓冲，它是位于 0.0 ~ 1.0 之间的深度值，它会与要绘制的物体的 z 值进行比较。</p>
 
-<p>如果是采用 Activity 作为 V 层，则可以在 P 层添加一个销毁 V 层的方法，P 层增加了类似的生命周期的方法，用来在退出 Activity 的时候取消持有的 V 层引用。</p>
+<p>要绘制物体的 z 值就是在运用透视投影或者正交投影视时，介于近平面和远平面之间的任何值。</p>
 
-<pre><code class="language-java">//presenter中添加mvpView 置为null的方法public void onDestroy(){    
-    mvpView = null;
-}
+<p>要把这个 z 值转换为 OpenGL 中的深度值，也就是介于 0.0 和 1.0 之间的值。</p>
 
-//退出时销毁持有Activity@Overrideprotected void onDestroy() {    
-    mvpPresenter.onDestroy();    
-    super.onDestroy();
-}
-</code></pre>
+<p>有公式如下：</p>
 
-<h4 id="声明-presenter-并绑定-v-层">声明 Presenter 并绑定 V 层</h4>
+<p>$$\begin{equation} F_{depth} = \frac{z - near}{far - near} \end{equation}$$</p>
 
-<p>在 Activity 中有这样一段代码，通过 new 创建了一个 Presenter，但却没有赋值给任何对象。</p>
+<p>对于这种转换，可以看到，当物体非常接近近平面时，深度值会接近 0.0，当物体非常接近远平面时，深度值会接近 1.0 ，这种转换是一种线性的深度缓冲转换。</p>
 
-<p>在谷歌的官方例子中也是这样创建的，这是因为将 Fragment 作为 V 层，并不需要在 Activity 中处理什么逻辑操作。</p>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532068155/code/depth_linear_graph.png" alt="" /></p>
 
-<pre><code class="language-java">private LoginFragment mFragment;
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    mFragment = LoginFragment.newInstance();
+<p>而在实践中，几乎不可能是这样的线性转换。</p>
 
-    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-    transaction.replace(R.id.content,mFragment);
-    transaction.commit();
+<p>因为当 z 值很小的时候，非常接近近平面，此时我们的观察也会更加精细，而对于较远的物体，接近远平面了，对于它的观察也会比较粗略。</p>
 
-    /**
-     * 声明 Presenter 的同时,将 View 和 Presenter 绑定起来
-     * 因为 Activity 是一个总控制类,所以 New 方法创建了一个 Presenter 却不需要赋值给 Activity 中的变量
-     */
-    new LoginPresenter(mFragment);
-}
-</code></pre>
+<p>这就和人眼一样，近处的物体当然看得很清了，如果看不清，走近一点就好了，而对于很远的物体，走远了和走近了看得的结果差别不大。</p>
 
-<p>通过查看代码可以得知，在 Presenter 的构造函数中，通过 <code>mView.setPresenter(this);</code> 将 Presenter 自身又传入了 V 层中，这样 V 层通过 <code>setPresenter()</code> 方法持有了 P 层的引用，这样一来，P 层和 V 层就互相持有了各自的引用 。</p>
+<p>所以在实际将 z 值转换为深度缓冲值，用到的是非线性的转换方程。</p>
 
-<pre><code class="language-java">public LoginPresenter(LoginContract.View view) {
-    mView = view;
-    /**
-     *  Presenter 绑定 View
-     */
-    mView.setPresenter(this);
-</code></pre>
+<p>$$\begin{equation} F_{depth} = \frac{1/z - 1/near}{1/far - 1/near} \end{equation}$$</p>
+
+<p>它的效果如下：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532068512/code/depth_non_linear_graph.png" alt="" /></p>
+
+<p>可以看到在 z 值位于 1.0 和 2.0 之间时，对应的深度值为 0.0 到 0.5 的区间，这就占据了深度值区间范围的 50 %。而 2.0 之后的范围也才占据了 50 %。</p>
+
+<p>这就给了近处的物体一个很大的深度精度。</p>
+
+<p>对于深度值的区间 0.0 到 1.0 ，其实这个区间的前半部分还是和近平面非常近的，不要以为深度值 0.5 就是位于近平面和远平面之间了，其实还非常接近近平面呢。</p>
+
+<p>关于深度测试，就先说到这了，如果有绘制带有深度层次的内容，可别忘了开启深度测试哦。</p>
+
+<p>关于具体的代码实现，可以参考我的 Github 项目：</p>
+
+<blockquote>
+<p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
+</blockquote>
 
 <h2 id="参考">参考</h2>
 
 <ol>
-<li><a href="http://www.cnblogs.com/liuling/archive/2015/12/23/mvp-pattern-android.html">http://www.cnblogs.com/liuling/archive/2015/12/23/mvp-pattern-android.html</a></li>
-<li><a href="http://blog.csdn.net/dantestones/article/details/51445208">http://blog.csdn.net/dantestones/article/details/51445208</a></li>
-<li><a href="http://blog.csdn.net/lmj623565791/article/details/46596109">http://blog.csdn.net/lmj623565791/article/details/46596109</a></li>
+<li><a href="https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/01%20Depth%20testing/">https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/01%20Depth%20testing/</a></li>
 </ol>
 
               
@@ -532,7 +466,7 @@ protected void onCreate(Bundle savedInstanceState) {
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/understand-mvp-architecture/">理解使用MVP架构</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-depth-test/">OpenGL 深度测试与精度值的那些事</a>
 
                 </p>
               
@@ -542,18 +476,29 @@ protected void onCreate(Bundle savedInstanceState) {
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/android/build-android-source-code/" data-toggle="tooltip" data-placement="top" title="编译安卓源码">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 优化项之面剔除和注意点">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/setup-android-crack-environment/" data-toggle="tooltip" data-placement="top" title="搭建 Android 反编译环境">Next Post &rarr;</a>
-          </li>
         
       </ul>
             
             <div>
                  
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-face-culling-usage/">OpenGL 优化项之面剔除和注意点</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-vertex-array-object-usage/">OpenGL 顶点数组对象 VAO 的使用</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">OpenGL 顶点缓冲区 VBO 的使用</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-color-blend/">OpenGL 中的颜色混合和使用</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-alpha-test/">OpenGL 利用 Alpha 透明度进行测试</a></li>
+                    
+                </ul>
+                
             </div>
             
 
