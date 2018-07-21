@@ -252,6 +252,41 @@ Scan the QRCode to …">
           
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-jni-array-operation/">
+                <h2 class="post-title">Android JNI 数组 操作</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on May 7, 2018
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>JNI 中有两种数组操作，基础数据类型数组和对象数组，JNI 对待基础数据类型数组和对象数组是不一样的。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-jni-array-operation/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                
+                  #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/android/android-jni-basic-operation/">
                 <h2 class="post-title">Android JNI 基本操作 </h2>
                 
@@ -553,57 +588,6 @@ Scan the QRCode to …">
                 <span class="post-meta">
                 
                   #<a href="https://glumes.com/tags/statemachine/">StateMachine</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">
-                <h2 class="post-title">OpenGL 学习系列---投影矩阵</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on January 24, 2018
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate/">OpenGL 坐标系统</a> 文章中，根据点的坐标变换得出了如下的公式：</p>
-
-<div>$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$</div>
-
-<p>这个公式每左乘一个矩阵，都代表了一种坐标系的变换。</p>
-
-<p>转化为着色器脚本语言如下：</p>
-
-<pre><code class="language-glsl">attribute vec4 a_Position;
-uniform mat4 u_ModelMatrix;
-uniform mat4 u_ProjectionMatrix;
-uniform mat4 u_ViewMatrix;
-void main()
-{
-    gl_Position  = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
-}
-</code></pre>
-
-<p>本篇文章就主要是对投影矩阵来分析的。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
                 
                 </span>
               

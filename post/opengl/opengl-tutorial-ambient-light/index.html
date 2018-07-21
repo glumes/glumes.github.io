@@ -5,18 +5,27 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Posts</title>
-  <meta property="og:title" content="Posts" />
-  <meta name="twitter:title" content="Posts" />
+  <title>OpenGL 光照系列之环境光</title>
+  <meta property="og:title" content="OpenGL 光照系列之环境光" />
+  <meta name="twitter:title" content="OpenGL 光照系列之环境光" />
+  <meta name="description" content="在 OpenGL 中使用光照。
+
+">
+  <meta property="og:description" content="在 OpenGL 中使用光照。
+
+">
+  <meta name="twitter:description" content="在 OpenGL 中使用光照。
+
+">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/" />
-  <link rel="alternate" href="https://glumes.com/post/index.xml" type="application/rss+xml" title="Glumes Blog">
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -159,14 +168,58 @@
 
 
     
-  <header class="header-section ">
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1532184449/blog/pexels-photo-132340.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>OpenGL 光照系列之环境光</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on July 21, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
     <div class="intro-header no-img">
+      
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
-              <h1>Posts</h1>
-              <hr class="small">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">OpenGL 光照系列之环境光</h1>
+                
+                
             </div>
           </div>
         </div>
@@ -174,221 +227,216 @@
     </div>
   </header>
 
+
     
-  <div class="container" role="main">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
-        <div class="posts-list">
+
+        
           
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/kotlin-with-anko/">
-                <h2 class="post-title">Kotlin 使用 Anko 布局那些事</h2>
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Sat Jul 21, 2018</h4>
+    </section>
+    <h5 id="wc">1200 Words|Read in about 3 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+    </h5>
+</div>
 
-                
-              </a>
+          
+        
 
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>学习 Kotlin 应该都或多或少听过 Anko 这个开源库。</p>
-
-<p>使用 Anko 来构建界面会更加简单、快捷。</p>
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在 OpenGL 中使用光照。</p>
 
 <p></p>
-                  <a href="https://glumes.com/post/android/kotlin-with-anko/" class="post-read-more">[Read More]</a>
-                
-              </div>
 
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/kotlin/">Kotlin</a>&nbsp;
-                  
-                </span>
-              
+<p>OpenGL 中的光照模型相对实现世界进行了很大的简化，将光照分成了 3 种组成元素。</p>
 
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opencv/setup_opencv_environment/">
-                <h2 class="post-title">Python、C&#43;&#43;、Android OpenCV 开发环境的配置</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opencv/setup_opencv_environment/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opencv/">Opencv</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/contact-and-reward/">
-                <h2 class="post-title">赞赏 &amp; 联系</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 1, 0001
-              </p>
-              <div class="post-entry">
-                
-                  <p></p>
-                  <a href="https://glumes.com/post/contact-and-reward/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-
-            </article>
-          
-        </div>
-        
-          <ul class="pager main-pager">
-            
-              <li class="previous">
-                <a href="/post/page/6/">&larr; Newer Posts</a>
-              </li>
-            
-            
-          </ul>
-        
-      </div>
-      <div align="center" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-
-<ul class="pagination">
-    
-    <li>
-        <a href="/post/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
-    </li>
-    
-    <li
-    >
-    <a href="/post/page/6/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-    </li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li
-    ><a href="/post/">1</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li
-    ><a href="/post/page/2/">2</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li
-    ><a href="/post/page/3/">3</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="disabled"><span aria-hidden="true">&hellip;</span></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li
-    ><a href="/post/page/6/">6</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li
-    class="active"><a href="/post/page/7/">7</a></li>
-    
-    
-    <li
-    class="disabled">
-    <a href="" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-    </li>
-    
-    <li>
-        <a href="/post/page/7/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
-    </li>
-    
+<ul>
+<li>环境光</li>
+<li>散射光</li>
+<li>镜面光</li>
 </ul>
 
+<p>这三种光照是分别采用不同的数学模型独立计算的。</p>
+
+<h2 id="环境光-ambient">环境光 Ambient</h2>
+
+<p>环境光指的是从四面八方照射到物体上，全方位 360° 都均匀的光。它代表的是现实世界中从光源射出，经过多次反射后，各方向基本均匀的光。</p>
+
+<p>效果如下图所示：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532182413/code/embient_light_explained.png" alt="环境光效果" /></p>
+
+<p>环境光最大的特点是不依赖于光源的位置，而且没有方向性，而且环境光不但入射是均匀的，发射也是各项均匀的。</p>
+
+<p>用于计算环境光的数学模型非常简单：</p>
+
+<blockquote>
+<p>环境光照射结果 = 材质的反射系数 * 环境光强度</p>
+</blockquote>
+
+<p>环境光强度指的是环境光中 RGB（红、绿、蓝）3 个色彩通道的强度，材质的反射系数实际指的就是物体被照射处的颜色。</p>
+
+<h2 id="实践">实践</h2>
+
+<p>加入环境光对程序的影响就是着色器代码会有些不同。</p>
+
+<p>在着色器代码上的区别就是增加了接收环境光强度，以及使用环境光强度与片元本身颜色值加权计算产生最终片元颜色值的相关代码。</p>
+
+<p>以下是使用的顶点着色器代码：</p>
+
+<pre><code class="language-glsl">#version 300 es
+uniform mat4 uMVPMatrix; //总变换矩阵
+in vec3 aPosition;  //顶点位置
+out vec3 vPosition;//用于传递给片元着色器的顶点位置
+out vec4 vAmbient;//用于传递给片元着色器的环境光分量
+void main()
+{
+   //根据总变换矩阵计算此次绘制此顶点位置
+   gl_Position = uMVPMatrix * vec4(aPosition,1);
+   //将顶点的位置传给片元着色器,用于纹理采样
+   vPosition = aPosition;
+	//将环境光强度传给片元着色器
+   vAmbient = vec4(0.15,0.15,0.15,1.0);
+}
+</code></pre>
+
+<p>在顶点着色代码中，会多定义一个变量 <code>vAmbien</code>，它是由四个数组成的向量，代表环境光强度。</p>
+
+<p>我们需要把这个环境光强度传递给片段着色器，让片段着色器去根据环境光强度去生成最终的颜色。</p>
+
+<p>以下是片段着色器代码：</p>
+
+<pre><code class="language-glsl">#version 300 es
+precision mediump float;
+uniform float uR;
+in vec3 vPosition; //接收从顶点着色器过来的顶点位置
+in vec4 vAmbient;//接收从顶点着色器过来的环境光强度
+out vec4 fragColor;
+void main()
+{
+   // 省略一些代码
+   //最终颜色，代表经过采样或者是计算后的颜色
+   vec4 finalColor=vec4(color,0);
+	//根据环境光强度计算最终片元颜色值
+   fragColor=finalColor*vAmbient;
+}
+</code></pre>
+
+<p>可以看到代码中的 <code>fragColor</code> 就是物体经过环境光照射后的颜色，它也是根据上面的计算公式得来的，将物体的颜色与环境光强度相乘得到。</p>
+
+<p>以下是使用环境光照射的结果实例，环境光强度为 <code>vec4(0.15,0.15,0.15,1.0)</code>。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532182121/code/light_ambient.jpg" alt="环境光" /></p>
+
+<p>可以看到物体暗淡了一些，这就像是在黑夜中去观察物体一样，只有微弱的月光，而且月光又是均匀分布的，通过翻转球体的各个面，可以观察到明亮程度都是一样的。</p>
+
+<p>而在之前的所有绘制中，物体都不是这么暗淡的，其差别就是没有给最终的颜色乘以环境光强度，或者说，我们之前绘制的环境光强度设置是 <code>vec4(1.0,1.0,1.0,1.0)</code>。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532182121/code/light_ambient_1.jpg" alt="环境光为 1 的情况" /></p>
+
+<p>这种情况下就让其他的各种光照都显得无意义了，因为环境光是均匀分布的，而环境光都是这么亮了，照亮了每一个角落，还要其他光照干嘛呢。</p>
+
+<p>所以在实际开发中，要注意给环境光照设置合适的值。</p>
+
+<p>具体的示例代码可以参考我的 Github 项目，求一波 Star 。</p>
+
+<blockquote>
+<p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
+</blockquote>
+
+              
+                <p>
+
+                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
+
+                  <br/>
+
+                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+
+                  <br/>
+
+                 <a href="https://glumes.com/post/contact-and-reward/">  觉得文章对您有帮助，欢迎打赏，或者加微信交流</a>
+
+                <br />
+                <br />
+
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/">OpenGL 光照系列之环境光</a>
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/opengl/opengl-depth-test/" data-toggle="tooltip" data-placement="top" title="OpenGL 深度测试与精度值的那些事">&larr; Previous Post</a>
+          </li>
         
         
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/opengl/opengl-depth-test/">OpenGL 深度测试与精度值的那些事</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-face-culling-usage/">OpenGL 优化项之面剔除和注意点</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-vertex-array-object-usage/">OpenGL 顶点数组对象 VAO 的使用</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">OpenGL 顶点缓冲区 VBO 的使用</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-color-blend/">OpenGL 中的颜色混合和使用</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
         
         
-      </div>
+      
+
     </div>
   </div>
+</div>
 
     <footer>
   <div class="container">
@@ -414,7 +462,7 @@
               </li>
           
           <li>
-            <a href="https://glumes.com/post/index.xml" title="RSS">
+            <a href="" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>

@@ -8,10 +8,21 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 20 Jul 2018 14:50:22 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 21 Jul 2018 22:45:03 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 光照系列之环境光</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-ambient-light/</link>
+      <pubDate>Sat, 21 Jul 2018 22:45:03 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-ambient-light/</guid>
+      <description>&lt;p&gt;在 OpenGL 中使用光照。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 深度测试与精度值的那些事</title>
