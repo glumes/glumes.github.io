@@ -5,26 +5,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>OpenGL 光照系列之环境光</title>
-  <meta property="og:title" content="OpenGL 光照系列之环境光" />
-  <meta name="twitter:title" content="OpenGL 光照系列之环境光" />
-  <meta name="description" content="在 OpenGL 中使用光照。
+  <title> OpenGL 光照系列之散射光</title>
+  <meta property="og:title" content=" OpenGL 光照系列之散射光" />
+  <meta name="twitter:title" content=" OpenGL 光照系列之散射光" />
+  <meta name="description" content="在前面的文章中介绍了 OpenGL 中的环境光，现在就是散射光了。
 
 ">
-  <meta property="og:description" content="在 OpenGL 中使用光照。
+  <meta property="og:description" content="在前面的文章中介绍了 OpenGL 中的环境光，现在就是散射光了。
 
 ">
-  <meta name="twitter:description" content="在 OpenGL 中使用光照。
+  <meta name="twitter:description" content="在前面的文章中介绍了 OpenGL 中的环境光，现在就是散射光了。
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -176,7 +176,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1532184449/blog/pexels-photo-132340.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1532273404/blog/pexels-photo-401107.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -191,11 +191,11 @@
                 <div class="page-heading">
                 
                   
-                     <h1>OpenGL 光照系列之环境光</h1>
+                     <h1> OpenGL 光照系列之散射光</h1>
                      
                     <span class="post-meta">
   
-  Posted on July 21, 2018
+  Posted on July 22, 2018
   
   
 </span>
@@ -217,7 +217,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">OpenGL 光照系列之环境光</h1>
+                <h1 align="center"> OpenGL 光照系列之散射光</h1>
                 
                 
             </div>
@@ -239,9 +239,9 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Sat Jul 21, 2018</h4>
+        <h4 id="date"> Sun Jul 22, 2018</h4>
     </section>
-    <h5 id="wc">1200 Words|Read in about 3 Min</h5>
+    <h5 id="wc">1700 Words|Read in about 4 Min</h5>
     <h5 id="tags">Tags: 
         
         <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
@@ -252,99 +252,139 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在 OpenGL 中使用光照。</p>
+            <p>在前面的文章中介绍了 OpenGL 中的环境光，现在就是散射光了。</p>
 
 <p></p>
 
-<p>OpenGL 中的光照模型相对实现世界进行了很大的简化，将光照分成了 3 种组成元素。</p>
+<p>散射光指的是从物体表面向全方位 360° 均匀发射的光，如下图：</p>
 
-<ul>
-<li>环境光</li>
-<li>散射光</li>
-<li>镜面光</li>
-</ul>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532272829/code/diffuse_demo.png" alt="" /></p>
 
-<p>这三种光照是分别采用不同的数学模型独立计算的。</p>
+<p>散射光具体代表的是现实世界中粗糙的物体表面被光照射时，发射光在各个方向基本均匀的情况，如下图：</p>
 
-<h2 id="环境光-ambient">环境光 Ambient</h2>
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532272834/code/diffuse_demo2.png" alt="" /></p>
 
-<p>环境光指的是从四面八方照射到物体上，全方位 360° 都均匀的光。它代表的是现实世界中从光源射出，经过多次反射后，各方向基本均匀的光。</p>
+<p>虽然反射后的散射光在各个方向是均匀的，但散射光反射的强度与入射光的强度以及入射的角度密切相关。</p>
 
-<p>效果如下图所示：</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532182413/code/embient_light_explained.png" alt="环境光效果" /></p>
-
-<p>环境光最大的特点是不依赖于光源的位置，而且没有方向性，而且环境光不但入射是均匀的，发射也是各项均匀的。</p>
-
-<p>用于计算环境光的数学模型非常简单：</p>
+<p>因此，当光源的位置发生变化时，散射光的效果会发生明显变化，主要体现在当光垂直照射到物体表面时比斜照时要亮，其计算公式如下：</p>
 
 <blockquote>
-<p>环境光照射结果 = 材质的反射系数 * 环境光强度</p>
+<p>散射光照射结果 = 材质的反射系数 * 散射光强度 * max(cos(入射角)，0)</p>
 </blockquote>
 
-<p>环境光强度指的是环境光中 RGB（红、绿、蓝）3 个色彩通道的强度，材质的反射系数实际指的就是物体被照射处的颜色。</p>
+<p>在实际开发中，散射光照射结果分为两步进行：</p>
+
+<blockquote>
+<p>散射光最终强度 = 散射光强度 * max(cos(入射角)，0)
+散射光照射结果 = 材质的反射系数 * 散射光最终强度</p>
+</blockquote>
+
+<p>其中：材质的反射系数实际指的就是物体被照射处的颜色，散射光强度指的是散射光中 RGB（红、绿、蓝）3 个色彩通道的强度。</p>
+
+<p>从公式中可以看到，与环境光计算公式唯一的区别就是引入了最后一项 <code>max(cos(入射角)，0)</code>，这代表着入射角越大、发射强度越弱，当入射角的余弦值为负时（即入射角大于 90°），反射强度为 0 。</p>
+
+<p>由于入射角为入射光向量与法向量的夹角，因此，其余弦值并不需要调用三角函数进行计算，只需要将两个向量归一化，然后进行点积计算就可以得出余弦值。</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532272834/code/diffuse_cal.png" alt="" /></p>
+
+<p>图中的 N 代表被照射点表面的法向量，P 为被照射点，L 为从 P 点到光源的向量，N 与 L 的夹角即为入射角。</p>
+
+<blockquote>
+<p>关于点积：在数学中，两个向量的点乘为两个向量夹角的余弦值乘以两个向量的模</p>
+</blockquote>
 
 <h2 id="实践">实践</h2>
 
-<p>加入环境光对程序的影响就是着色器代码会有些不同。</p>
+<p>加入散射光对程序的影响主要还是在着色器代码上。</p>
 
-<p>在着色器代码上的区别就是增加了接收环境光强度，以及使用环境光强度与片元本身颜色值加权计算产生最终片元颜色值的相关代码。</p>
+<p>对于片段着色器，变化不会太大，因为最终的都是物体本身的颜色乘以散射光最终的照射结果，这个结果可以在顶点着色器中计算好，直接传递给片段着色器。</p>
 
-<p>以下是使用的顶点着色器代码：</p>
-
-<pre><code class="language-glsl">#version 300 es
-uniform mat4 uMVPMatrix; //总变换矩阵
-in vec3 aPosition;  //顶点位置
-out vec3 vPosition;//用于传递给片元着色器的顶点位置
-out vec4 vAmbient;//用于传递给片元着色器的环境光分量
-void main()
-{
-   //根据总变换矩阵计算此次绘制此顶点位置
-   gl_Position = uMVPMatrix * vec4(aPosition,1);
-   //将顶点的位置传给片元着色器,用于纹理采样
-   vPosition = aPosition;
-	//将环境光强度传给片元着色器
-   vAmbient = vec4(0.15,0.15,0.15,1.0);
-}
-</code></pre>
-
-<p>在顶点着色代码中，会多定义一个变量 <code>vAmbien</code>，它是由四个数组成的向量，代表环境光强度。</p>
-
-<p>我们需要把这个环境光强度传递给片段着色器，让片段着色器去根据环境光强度去生成最终的颜色。</p>
-
-<p>以下是片段着色器代码：</p>
-
-<pre><code class="language-glsl">#version 300 es
+<pre><code class="language-gls">#version 300 es
 precision mediump float;
 uniform float uR;
-in vec3 vPosition; //接收从顶点着色器过来的顶点位置
-in vec4 vAmbient;//接收从顶点着色器过来的环境光强度
+in vec3 vPosition;//接收从顶点着色器过来的顶点位置
+in vec4 vDiffuse;//接收从顶点着色器过来的散射光最终强度
 out vec4 fragColor;
 void main()
 {
    // 省略一些代码
-   //最终颜色，代表经过采样或者是计算后的颜色
+   //最终颜色
    vec4 finalColor=vec4(color,0);
-	//根据环境光强度计算最终片元颜色值
-   fragColor=finalColor*vAmbient;
+   //根据散射光最终强度计算片元的最终颜色值
+   fragColor=finalColor*vDiffuse;
 }
 </code></pre>
 
-<p>可以看到代码中的 <code>fragColor</code> 就是物体经过环境光照射后的颜色，它也是根据上面的计算公式得来的，将物体的颜色与环境光强度相乘得到。</p>
+<p>重点就在于顶点着色器里面了，除了以往的代码之外，根据散射光的计算公式，我们还需添加一些新的变量，比如：光源的位置。不同光源位置的照射结果不同。</p>
 
-<p>以下是使用环境光照射的结果实例，环境光强度为 <code>vec4(0.15,0.15,0.15,1.0)</code>。</p>
+<p>具体的着色器代码如下：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532182121/code/light_ambient.jpg" alt="环境光" /></p>
+<pre><code class="language-glsl">#version 300 es
+uniform mat4 uMVPMatrix; 						//总变换矩阵
+uniform mat4 uMMatrix; 							//变换矩阵(包括平移、旋转、缩放)
+uniform vec3 uLightLocation;						//光源位置
+in vec3 aPosition;  						//顶点位置
+in vec3 aNormal;    						//顶点法向量
+out vec3 vPosition;							//用于传递给片元着色器的顶点位置
+out vec4 vDiffuse;							//用于传递给片元着色器的散射光分量
+void pointLight (								//散射光光照计算的方法
+  in vec3 normal,								//法向量
+  inout vec4 diffuse,								//散射光计算结果
+  in vec3 lightLocation,							//光源位置
+  in vec4 lightDiffuse							//散射光强度
+){
+  vec3 normalTarget=aPosition+normal;					//计算变换后的法向量
+  vec3 newNormal=(uMMatrix*vec4(normalTarget,1)).xyz-(uMMatrix*vec4(aPosition,1)).xyz;
+  newNormal=normalize(newNormal);					//对法向量归一化
+//计算从表面点到光源位置的向量vp
+  vec3 vp= normalize(lightLocation-(uMMatrix*vec4(aPosition,1)).xyz);
+  vp=normalize(vp);									//归一化vp
+  float nDotViewPosition=max(0.0,dot(newNormal,vp)); 	//求法向量与vp向量的点积与0的最大值
+  diffuse=lightDiffuse*nDotViewPosition;			//计算散射光的最终强度
+}
+void main(){
+   gl_Position = uMVPMatrix * vec4(aPosition,1); 	//根据总变换矩阵计算此次绘制此顶点的位置
+   vec4 diffuseTemp=vec4(0.0,0.0,0.0,0.0);
+   pointLight(normalize(aNormal), diffuseTemp, uLightLocation, vec4(0.8,0.8,0.8,1.0));
+   vDiffuse=diffuseTemp;					//将散射光最终强度传给片元着色器
+   vPosition = aPosition; 					//将顶点的位置传给片元着色器
+}
+</code></pre>
 
-<p>可以看到物体暗淡了一些，这就像是在黑夜中去观察物体一样，只有微弱的月光，而且月光又是均匀分布的，通过翻转球体的各个面，可以观察到明亮程度都是一样的。</p>
+<p>首先，定义了一个函数，用来计算散射光的最终强度。</p>
 
-<p>而在之前的所有绘制中，物体都不是这么暗淡的，其差别就是没有给最终的颜色乘以环境光强度，或者说，我们之前绘制的环境光强度设置是 <code>vec4(1.0,1.0,1.0,1.0)</code>。</p>
+<p>散射光的最终强度 =  散射光强度 * max(cos(入射角)，0) 。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532182121/code/light_ambient_1.jpg" alt="环境光为 1 的情况" /></p>
+<p>根据此公式，散射光强度自己设定为 <code>vec4(0.8,0.8,0.8,1.0)</code>，那么接下来要做的就是计算入射光向量和法向量之间的夹角，根据点乘公式进行计算：</p>
 
-<p>这种情况下就让其他的各种光照都显得无意义了，因为环境光是均匀分布的，而环境光都是这么亮了，照亮了每一个角落，还要其他光照干嘛呢。</p>
+<p>由于在世界模型里，点的位置会发生移动，所以也要把法向量进行移动到当前的观察坐标下：</p>
 
-<p>所以在实际开发中，要注意给环境光照设置合适的值。</p>
+<pre><code class="language-glsl">  vec3 normalTarget=aPosition+normal;					//计算变换后的法向量
+  vec3 newNormal=(uMMatrix*vec4(normalTarget,1)).xyz-(uMMatrix*vec4(aPosition,1)).xyz;
+</code></pre>
+
+<p>然后把法向量进行归一化：</p>
+
+<pre><code class="language-glsl">  newNormal=normalize(newNormal);					//对法向量归一化
+</code></pre>
+
+<p>接下来就是用到光源的位置了，计算入射光向量并进行归一化。</p>
+
+<pre><code class="language-glsl">  vec3 vp= normalize(lightLocation-(uMMatrix*vec4(aPosition,1)).xyz);
+</code></pre>
+
+<p>最后就是计算余弦值。</p>
+
+<pre><code class="language-glsl">  float nDotViewPosition=max(0.0,dot(newNormal,vp)); 	//求法向量与vp向量的点积与0的最大值
+</code></pre>
+
+<p>得到了余弦值之后，就可以得到散射光的最终强度了，有了最终强度直接传递给片段着色器进行计算就方便多了。</p>
+
+<p>具体效果如下：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532273099/code/diffuse_use.gif" alt="" /></p>
+
+<p>可以拖滑动条改变光源的位置，明显看到光源不同得到的照射结果也是不同的。</p>
 
 <p>具体的示例代码可以参考我的 Github 项目，求一波 Star 。</p>
 
@@ -369,7 +409,7 @@ void main()
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/">OpenGL 光照系列之环境光</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/"> OpenGL 光照系列之散射光</a>
 
                 </p>
               
@@ -379,13 +419,9 @@ void main()
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/opengl/opengl-depth-test/" data-toggle="tooltip" data-placement="top" title="OpenGL 深度测试与精度值的那些事">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/" data-toggle="tooltip" data-placement="top" title="OpenGL 光照系列之环境光">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/" data-toggle="tooltip" data-placement="top" title=" OpenGL 光照系列之散射光">Next Post &rarr;</a>
-          </li>
         
       </ul>
             
@@ -394,6 +430,8 @@ void main()
                 <h2>See Also</h2>
                 <ul>
                     
+                    <li><a href="/post/opengl/opengl-tutorial-ambient-light/">OpenGL 光照系列之环境光</a></li>
+                    
                     <li><a href="/post/opengl/opengl-depth-test/">OpenGL 深度测试与精度值的那些事</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-face-culling-usage/">OpenGL 优化项之面剔除和注意点</a></li>
@@ -401,8 +439,6 @@ void main()
                     <li><a href="/post/opengl/opengl-tutorial-vertex-array-object-usage/">OpenGL 顶点数组对象 VAO 的使用</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">OpenGL 顶点缓冲区 VBO 的使用</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-color-blend/">OpenGL 中的颜色混合和使用</a></li>
                     
                 </ul>
                 
