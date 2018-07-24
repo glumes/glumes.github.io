@@ -8,10 +8,27 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Mon, 23 Jul 2018 23:11:20 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 24 Jul 2018 09:39:10 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/opengl/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 光照系列之效果混合</title>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-light-mix/</link>
+      <pubDate>Tue, 24 Jul 2018 09:39:10 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-light-mix/</guid>
+      <description>&lt;p&gt;在前面的系列文章中，分别介绍了 OpenGL 的环境光、散射光、镜面光。&lt;/p&gt;
+
+&lt;p&gt;现在尝试将这些光照效果混合起来，让整个场景显得更加逼真。&lt;/p&gt;
+
+&lt;p&gt;具体的效果如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1532360616/light_mix_xmv86l.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 光照系列之镜面光</title>

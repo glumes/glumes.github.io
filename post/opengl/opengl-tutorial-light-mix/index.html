@@ -5,26 +5,44 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>OpenGL 光照系列之镜面光</title>
-  <meta property="og:title" content="OpenGL 光照系列之镜面光" />
-  <meta name="twitter:title" content="OpenGL 光照系列之镜面光" />
-  <meta name="description" content="在前面的文章中介绍了 OpenGL 的环境光和散射光，现在就是最后一个镜面光了。
+  <title>OpenGL 光照系列之效果混合</title>
+  <meta property="og:title" content="OpenGL 光照系列之效果混合" />
+  <meta name="twitter:title" content="OpenGL 光照系列之效果混合" />
+  <meta name="description" content="在前面的系列文章中，分别介绍了 OpenGL 的环境光、散射光、镜面光。
+
+现在尝试将这些光照效果混合起来，让整个场景显得更加逼真。
+
+具体的效果如下：
+
+
 
 ">
-  <meta property="og:description" content="在前面的文章中介绍了 OpenGL 的环境光和散射光，现在就是最后一个镜面光了。
+  <meta property="og:description" content="在前面的系列文章中，分别介绍了 OpenGL 的环境光、散射光、镜面光。
+
+现在尝试将这些光照效果混合起来，让整个场景显得更加逼真。
+
+具体的效果如下：
+
+
 
 ">
-  <meta name="twitter:description" content="在前面的文章中介绍了 OpenGL 的环境光和散射光，现在就是最后一个镜面光了。
+  <meta name="twitter:description" content="在前面的系列文章中，分别介绍了 OpenGL 的环境光、散射光、镜面光。
+
+现在尝试将这些光照效果混合起来，让整个场景显得更加逼真。
+
+具体的效果如下：
+
+
 
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-specular-light/" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-light-mix/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.31.1" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-specular-light/" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-light-mix/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -176,7 +194,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1532358770/blog/pexels-photo-285173.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="http://ww1.sinaimg.cn/large/bc32fd77gy1ftkpri4lozj20zk0nodkj.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -191,11 +209,11 @@
                 <div class="page-heading">
                 
                   
-                     <h1>OpenGL 光照系列之镜面光</h1>
+                     <h1>OpenGL 光照系列之效果混合</h1>
                      
                     <span class="post-meta">
   
-  Posted on July 23, 2018
+  Posted on July 24, 2018
   
   
 </span>
@@ -217,7 +235,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">OpenGL 光照系列之镜面光</h1>
+                <h1 align="center">OpenGL 光照系列之效果混合</h1>
                 
                 
             </div>
@@ -239,9 +257,9 @@
           
 <div>
     <section id="datecount">
-        <h4 id="date"> Mon Jul 23, 2018</h4>
+        <h4 id="date"> Tue Jul 24, 2018</h4>
     </section>
-    <h5 id="wc">2100 Words|Read in about 5 Min</h5>
+    <h5 id="wc">1500 Words|Read in about 3 Min</h5>
     <h5 id="tags">Tags: 
         
         <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
@@ -252,171 +270,132 @@
         
 
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在前面的文章中介绍了 OpenGL 的<a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/">环境光</a>和<a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/">散射光</a>，现在就是最后一个镜面光了。</p>
+            <p>在前面的系列文章中，分别介绍了 OpenGL 的环境光、散射光、镜面光。</p>
+
+<p>现在尝试将这些光照效果混合起来，让整个场景显得更加逼真。</p>
+
+<p>具体的效果如下：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532360616/light_mix_xmv86l.gif" alt="" /></p>
 
 <p></p>
 
-<p>还是先理解一下什么是镜面光：</p>
+<p>在这个场景里有环境光、散射光和镜面光。拖动滑块的位置，可以改变光源的位置，不同位置的光源，看到的效果是不同的。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532358404/code/specular_demo.png" alt="" /></p>
-
-<p>就如同使用我们使用镜子反射太阳光一样，在现实世界中，当光滑表面被照射时会有方向很集中的反射光，这就是镜面光。</p>
-
-<p>与散射光最终强度仅依赖于入射光和被照射点法向量的夹角不同，镜面光的最终强度还依赖于观察者的位置，也就是说，如果从摄像机到被照射点的向量不在反射光方向集中的范围内，观察者将不会看到镜面光，就如上图所示。</p>
-
-<p>接下来就是镜面光的照射计算公式：</p>
+<p>要实现这样的效果，其实就是把之前文章的代码结合一下：</p>
 
 <blockquote>
-<p>镜面光照射结果 =</p>
-
-<p>$材质的反射系数 * 镜面光强度 * max（0，（cos（半向量与法向量的夹角）^{粗糙度}$）</p>
+<p>混合光照射结果 = 环境光照射结果 + 散射光照射结果 + 镜面光照射结果</p>
 </blockquote>
 
-<p>在实际开发中，镜面光照射结果分为两步进行：</p>
+<p>至于不同光照射结果计算，可以参考之前的文章了。</p>
 
-<blockquote>
-<p>镜面光最终强度 =</p>
-
-<p>$镜面光强度 * max（0，（cos（半向量与法向量的夹角）^{粗糙度}$）</p>
-
-<p>镜面光照射结果 = 材质反射系数 * 镜面光最终强度</p>
-</blockquote>
-
-<p>其中：材质的反射系数实际指的就是物体被照射处的颜色，镜面光强度指的是镜面光中 RGB（红、绿、蓝）3 个色彩通道的强度。</p>
-
-<p>与计算散射光公式不同的是，计算余弦值时对应的角不再是入射角，而是<code>半向量</code>和法向量的夹角。其中，半向量指的是从被照射点到光源的向量与从被照射点到观察点向量的平均向量。</p>
-
-<p><code>半向量</code>的图示如下：</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532358404/code/specular_cal.png" alt="" /></p>
-
-<p>其中，V 表示从被照射点到观察点的向量，N 为被照射点表面法向量，H 为半向量，L 为从被照射点到光源的向量。</p>
-
-<p>可以看到，向量 V 和向量 L 有共同交点 P ，所以它们在同一平面，而向量 H 是向量 V 和向量 L 的平均向量，所以向量 H 、V、L 共面，并且向量 H 和向量 V、L 的夹角相等。</p>
-
-<p>因此计算向量 H ，首先需要将向量 V 和向量 L 归一化，然后将归一化的向量 V 和 L 求和并再次归一化即可得到向量 H 。</p>
-
-<p>有了半向量 H 之后，计算其和法向量的余弦值就和在镜面光中提到的一样，进行点积就好了。</p>
-
-<p>除此之外，还有一个要考虑的就是物体的粗糙程度，物体越粗糙，镜面光面积越小，反之镜面光面积越大，这也挺符合现实世界的，毛毯的反射光肯定没有玻璃的反射光大。</p>
+<p>对于代码来说，重点还是在于着色器代码上的变化了。</p>
 
 <h2 id="实践">实践</h2>
 
-<p>加入镜面光对程序的影响主要还是在着色器代码上。</p>
+<p>片段着色器的改动依旧不大，不同光照射结果都还是在顶点着色器中进行了。</p>
 
-<p>对于片段着色器，依旧变化不大，主要的计算工作在顶点着色器，顶点着色器计算完最后镜面光照射强度之后，直接传递给片段着色器就好了。</p>
+<p>片段着色器代码如下：</p>
 
 <pre><code class="language-glsl">#version 300 es
 precision mediump float;
 uniform float uR;
 in vec3 vPosition;//接收从顶点着色器过来的顶点位置
-in vec4 vDiffuse;//接收从顶点着色器过来的镜面光最终强度
+in vec4 vAmbient;//接收从顶点着色器过来的环境光最终强度
+in vec4 vDiffuse;//接收从顶点着色器过来的散射光最终强度
+in vec4 vSpecular;//接收从顶点着色器过来的镜面反射光最终强度
 out vec4 fragColor;
 void main()
 {
    // 省略一些代码
    //最终颜色
    vec4 finalColor=vec4(color,0);
-   //根据镜面光最终强度计算片元的最终颜色值
-   fragColor=finalColor*vDiffuse;
+   //给此片元颜色值
+   fragColor=finalColor*vAmbient + finalColor*vDiffuse + finalColor*vSpecular;
 }
 </code></pre>
 
-<p>重点依旧是顶点着色器：</p>
+<p>由顶点着色器传递过来的环境光最终强度、散射光最终强度、镜面光最终强度，分别乘以物体的颜色，然后三者相加得到最后的颜色结果。</p>
+
+<p>其实，重点还是在于顶点着色器代码中：</p>
 
 <pre><code class="language-glsl">#version 300 es
-uniform mat4 uMVPMatrix; 	//总变换矩阵
-uniform mat4 uMMatrix; 		//变换矩阵
-uniform vec3 uLightLocation;	//光源位置
-uniform vec3 uCamera;		//摄像机位置
-in vec3 aPosition;  	//顶点位置
-in vec3 aNormal;   	//法向量
-out vec3 vPosition;		//用于传递给片元着色器的顶点位置
-out vec4 vSpecular;		//用于传递给片元着色器的镜面光最终强度
-
-void pointLight(				//定位光光照计算的方法
-  in vec3 normal,			//法向量
-  inout vec4 specular,		//镜面光最终强度
-  in vec3 lightLocation,		//光源位置
-  in vec4 lightSpecular		//镜面光强度
+uniform mat4 uMVPMatrix; 		//总变换矩阵
+uniform mat4 uMMatrix; 			//变换矩阵
+uniform vec3 uLightLocation;		//光源位置
+uniform vec3 uCamera;			//摄像机位置
+in vec3 aPosition;  		//顶点位置
+in vec3 aNormal;    		//法向量
+out vec3 vPosition;			//用于传递给片元着色器的顶点位置
+out vec4 vAmbient;			//用于传递给片元着色器的环境光最终强度
+out vec4 vDiffuse;			//用于传递给片元着色器的散射光最终强度
+out vec4 vSpecular;			//用于传递给片元着色器的镜面光最终强度
+void pointLight(					//定位光光照计算的方法
+  in vec3 normal,				//法向量
+  inout vec4 ambient,			//环境光最终强度
+  inout vec4 diffuse,				//散射光最终强度
+  inout vec4 specular,			//镜面光最终强度
+  in vec3 lightLocation,			//光源位置
+  in vec4 lightAmbient,			//环境光强度
+  in vec4 lightDiffuse,			//散射光强度
+  in vec4 lightSpecular			//镜面光强度
 ){
-  vec3 normalTarget=aPosition+normal; 	//计算变换后的法向量
+  ambient=lightAmbient;			//直接得出环境光的最终强度
+  vec3 normalTarget=aPosition+normal;	//计算变换后的法向量
   vec3 newNormal=(uMMatrix*vec4(normalTarget,1)).xyz-(uMMatrix*vec4(aPosition,1)).xyz;
-  newNormal=normalize(newNormal);  	//对法向量归一化
-  //计算从表面点到摄像机的向量
-  vec3 eye= normalize(uCamera-(uMMatrix*vec4(aPosition,1)).xyz);
-  //计算从表面点到光源位置的向量vp
-  vec3 vp= normalize(lightLocation-(uMMatrix*vec4(aPosition,1)).xyz);
-  vp=normalize(vp);//格式化vp
-  vec3 halfVector=normalize(vp+eye);	//求视线与光线的半向量
-  // 物体表面的光滑度，自己拟定为 50.0
-  float shininess=50.0;				//粗糙度，越小越光滑
-
-  float nDotViewHalfVector=dot(newNormal,halfVector);			//法线与半向量的点积
-  float powerFactor=max(0.0,pow(nDotViewHalfVector,shininess)); 	//镜面反射光强度因子
-
-  specular=lightSpecular*powerFactor;    //最终的镜面光强度
-}
-
-void main()  {
-   gl_Position = uMVPMatrix * vec4(aPosition,1); //根据总变换矩阵计算此次绘制此顶点的位置
-   vec4 specularTemp=vec4(0.0,0.0,0.0,0.0);
-   pointLight(normalize(aNormal), specularTemp, uLightLocation, vec4(0.7,0.7,0.7,1.0));//计算镜面光
-   vSpecular=specularTemp;	//将最终镜面光强度传给片元着色器
-   vPosition = aPosition; 		//将顶点的位置传给片元着色器
-}
-</code></pre>
-
-<p>在散射光，我们需要传递光源的位置，而在镜面光中，不仅仅是光源的位置，还需要把相机的位置传递给着色器代码用于计算。</p>
-
-<p>在顶点着色器代码中，还是定义了一个函数 pointLight 用于计算镜面光照射强度。</p>
-
-<p>由于法向量的基于物体模型空间定义的，首先还是要将法向量转换到世界模型空间中。</p>
-
-<pre><code class="language-glsl">  vec3 normalTarget=aPosition+normal; 	//计算变换后的法向量
-  vec3 newNormal=(uMMatrix*vec4(normalTarget,1)).xyz-(uMMatrix*vec4(aPosition,1)).xyz;
-</code></pre>
-
-<p>其次将法向量归一化，然后计算物体表面的点到观察点相机的向量、计算物体表面的点到光源位置的向量，并将这两个向量也进行归一化。</p>
-
-<pre><code class="language-glsl">  newNormal=normalize(newNormal);  	//对法向量归一化
+  newNormal=normalize(newNormal); 	//对法向量归一化
   //计算从表面点到摄像机的向量
   vec3 eye= normalize(uCamera-(uMMatrix*vec4(aPosition,1)).xyz);
   //计算从表面点到光源位置的向量vp
   vec3 vp= normalize(lightLocation-(uMMatrix*vec4(aPosition,1)).xyz);
   vp=normalize(vp);//归一化vp
-</code></pre>
-
-<p>得到这三个向量归一化之后的向量，相对于就是在为接下来的计算做准备了。</p>
-
-<p>首先是得到<code>半向量</code>，并将它归一化，接着就是求<code>半向量</code>和法向量的点积，得到余弦值。</p>
-
-<pre><code class="language-glsl">  vec3 halfVector=normalize(vp+eye);	//求视线与光线的半向量
-  float nDotViewHalfVector=dot(newNormal,halfVector);			//法线与半向量的点积
-</code></pre>
-
-<p>然后就是计算余弦值与物体表面粗糙因子的平方，并和 0 进行比较，若小于 0，则为 0 ，最后得到的是镜面反射光强度因子。</p>
-
-<pre><code class="language-glsl">  // 物体表面的光滑度，自己拟定为 50.0
+  vec3 halfVector=normalize(vp+eye);	//求视线与光线的半向量
   float shininess=50.0;				//粗糙度，越小越光滑
+  float nDotViewPosition=max(0.0,dot(newNormal,vp)); 	//求法向量与vp的点积与0的最大值
+  diffuse=lightDiffuse*nDotViewPosition;				//计算散射光的最终强度
+  float nDotViewHalfVector=dot(newNormal,halfVector);	//法线与半向量的点积
   float powerFactor=max(0.0,pow(nDotViewHalfVector,shininess)); 	//镜面反射光强度因子
+  specular=lightSpecular*powerFactor;    			//计算镜面光的最终强度
+}
+void main(){
+   gl_Position = uMVPMatrix * vec4(aPosition,1); //根据总变换矩阵计算此次绘制此顶点位置
+   vec4 ambientTemp,diffuseTemp,specularTemp;	  //用来接收三个通道最终强度的变量
+   pointLight(normalize(aNormal),ambientTemp,diffuseTemp,specularTemp,uLightLocation,
+   vec4(0.15,0.15,0.15,1.0),vec4(0.8,0.8,0.8,1.0),vec4(0.7,0.7,0.7,1.0));
+   vAmbient=ambientTemp; 		//将环境光最终强度传给片元着色器
+   vDiffuse=diffuseTemp; 		//将散射光最终强度传给片元着色器
+   vSpecular=specularTemp; 		//将镜面光最终强度传给片元着色器
+   vPosition = aPosition;  //将顶点的位置传给片元着色器
+}
 </code></pre>
 
-<p>将反射光强度因子和镜面光强度相乘，得到最终的镜面光强度，这个强度就是用来传递给片段着色器的最终镜面光强度。</p>
+<p>首先，顶点着色器需要在程序中传递光源的位置，也需要传递观察者，也就是相机的位置。</p>
 
-<p>使用效果如下：</p>
+<p>然后在 pointLight 函数里面计算最终的不同的光照强度。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532348436/code/specular_demo.gif" alt="镜面光使用" /></p>
+<p>在 pointLight 函数里面最先操作的还是将法向量进行相应的位移，然后就是准备在不同光照情况下需要用到的向量：</p>
 
-<p>如果我们改变自己拟定的物体粗糙度，粗糙度越大，会使得镜面光面积越小，粗糙度越小，会使得镜面光面积越大。</p>
+<ul>
+<li>法向量归一化之后的向量</li>
+<li>从观察点到相机的向量进行归一化之后的向量</li>
+<li>从观察点到光源位置的向量进行归一化之后的向量</li>
+<li>半向量归一化之后的向量</li>
+</ul>
 
-<p>同时，拖动滑块，改变光源的位置，也会影响镜面光反射的地方，镜面光也受光源的影响。</p>
+<p>有了这些个向量，要计算余弦值，只要调用 <code>dot</code> 函数计算两个向量的点积就好了，最后还是按照之前文章中的公式进行计算就好了。</p>
+
+<p>如果你对之前的光照比较熟悉了，那么对于光照混合效果也会很快上手，就是在着色器之间传递的变量多了一些，其他的按照公式计算就好了。</p>
 
 <p>具体的示例代码可以参考我的 Github 项目，求一波 Star 。</p>
 
 <blockquote>
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
 </blockquote>
+
+<p>欢迎关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif" alt="扫码关注" /></p>
 
               
                 <p>
@@ -435,7 +414,7 @@ void main()  {
                 <br />
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-specular-light/">OpenGL 光照系列之镜面光</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-light-mix/">OpenGL 光照系列之效果混合</a>
 
                 </p>
               
@@ -445,13 +424,9 @@ void main()  {
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/" data-toggle="tooltip" data-placement="top" title=" OpenGL 光照系列之散射光">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-specular-light/" data-toggle="tooltip" data-placement="top" title="OpenGL 光照系列之镜面光">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-light-mix/" data-toggle="tooltip" data-placement="top" title="OpenGL 光照系列之效果混合">Next Post &rarr;</a>
-          </li>
         
       </ul>
             
@@ -460,6 +435,8 @@ void main()  {
                 <h2>See Also</h2>
                 <ul>
                     
+                    <li><a href="/post/opengl/opengl-tutorial-specular-light/">OpenGL 光照系列之镜面光</a></li>
+                    
                     <li><a href="/post/opengl/opengl-tutorial-diffuse-light/"> OpenGL 光照系列之散射光</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-ambient-light/">OpenGL 光照系列之环境光</a></li>
@@ -467,8 +444,6 @@ void main()  {
                     <li><a href="/post/opengl/opengl-depth-test/">OpenGL 深度测试与精度值的那些事</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-face-culling-usage/">OpenGL 优化项之面剔除和注意点</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-vertex-array-object-usage/">OpenGL 顶点数组对象 VAO 的使用</a></li>
                     
                 </ul>
                 

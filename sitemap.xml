@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/opengl/opengl-tutorial-light-mix/</loc>
+    <lastmod>2018-07-24T09:39:10+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/opengl/opengl-tutorial-specular-light/</loc>
     <lastmod>2018-07-23T23:11:20+08:00</lastmod>
   </url>
@@ -329,7 +334,7 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-07-23T23:11:20+08:00</lastmod>
+    <lastmod>2018-07-24T09:39:10+08:00</lastmod>
   </url>
   
   <url>
@@ -448,19 +453,19 @@
   
   <url>
     <loc>https://glumes.com/tags/opengl/</loc>
-    <lastmod>2018-07-23T23:11:20+08:00</lastmod>
+    <lastmod>2018-07-24T09:39:10+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/opengl/</loc>
-    <lastmod>2018-07-23T23:11:20+08:00</lastmod>
+    <lastmod>2018-07-24T09:39:10+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-07-23T23:11:20+08:00</lastmod>
+    <lastmod>2018-07-24T09:39:10+08:00</lastmod>
     <priority>0</priority>
   </url>
   
