@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Android JNI 之 Bitmap 操作</title>
+  <meta property="og:title" content="Android JNI 之 Bitmap 操作" />
+  <meta name="twitter:title" content="Android JNI 之 Bitmap 操作" />
+  <meta name="description" content="在 Android 中通过 JNI 去操作 Bitmap。
+
+">
+  <meta property="og:description" content="在 Android 中通过 JNI 去操作 Bitmap。
+
+">
+  <meta name="twitter:description" content="在 Android 中通过 JNI 去操作 Bitmap。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/android/android-jni-bitmap-operation/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/android/android-jni-bitmap-operation/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1ftm1y4vr2dj20zk0npaig.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>Android JNI 之 Bitmap 操作</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on July 25, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">Android JNI 之 Bitmap 操作</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+        
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Wed Jul 25, 2018</h4>
+    </section>
+    <h5 id="wc">2400 Words|Read in about 5 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在 Android 中通过 JNI 去操作 Bitmap。</p>
+
+<p></p>
+
+<p>在 Android 通过 JNI 去调用 Bitmap，通过 CMake 去编 so 动态链接库的话，需要添加 jnigraphics 图像库。</p>
+
+<pre><code class="language-cmake">target_link_libraries( # Specifies the target library.
+                       native-operation
+                       jnigraphics
+                       ${log-lib} )
+</code></pre>
+
+<p>在 Android 中关于 JNI Bitmap 的操作，都定义在 <code>bitmap.h</code> 的头文件里面了，主要就三个函数，明白它们的含义之后就可以去实践体会了。</p>
+
+<h3 id="检索-bitmap-对象信息">检索 Bitmap 对象信息</h3>
+
+<p>AndroidBitmap_getInfo 函数允许原生代码检索 Bitmap 对象信息，如它的大小、像素格式等，函数签名如下：</p>
+
+<pre><code class="language-cpp">/**
+ * Given a java bitmap object, fill out the AndroidBitmapInfo struct for it.
+ * If the call fails, the info parameter will be ignored.
+ */
+int AndroidBitmap_getInfo(JNIEnv* env, jobject jbitmap,
+                          AndroidBitmapInfo* info);
+</code></pre>
+
+<p>其中，第一个参数就是 JNI 接口指针，第二个参数就是 Bitmap 对象的引用，第三个参数是指向 AndroidBitmapInfo 结构体的指针。</p>
+
+<p>AndroidBitmapInfo 结构体如下：</p>
+
+<pre><code class="language-cpp">/** Bitmap info, see AndroidBitmap_getInfo(). */
+typedef struct {
+    /** The bitmap width in pixels. */
+    uint32_t    width;
+    /** The bitmap height in pixels. */
+    uint32_t    height;
+    /** The number of byte per row. */
+    uint32_t    stride;
+    /** The bitmap pixel format. See {@link AndroidBitmapFormat} */
+    int32_t     format;
+    /** Unused. */
+    uint32_t    flags;      // 0 for now
+} AndroidBitmapInfo;
+</code></pre>
+
+<p>其中，width 就是 Bitmap 的宽，height 就是高，format 就是图像的格式，而 stride 就是每一行的字节数。</p>
+
+<p>图像的格式有如下支持：</p>
+
+<pre><code class="language-cpp">/** Bitmap pixel format. */
+enum AndroidBitmapFormat {
+    /** No format. */
+    ANDROID_BITMAP_FORMAT_NONE      = 0,
+    /** Red: 8 bits, Green: 8 bits, Blue: 8 bits, Alpha: 8 bits. **/
+    ANDROID_BITMAP_FORMAT_RGBA_8888 = 1,
+    /** Red: 5 bits, Green: 6 bits, Blue: 5 bits. **/
+    ANDROID_BITMAP_FORMAT_RGB_565   = 4,
+    /** Deprecated in API level 13. Because of the poor quality of this configuration, it is advised to use ARGB_8888 instead. **/
+    ANDROID_BITMAP_FORMAT_RGBA_4444 = 7,
+    /** Alpha: 8 bits. */
+    ANDROID_BITMAP_FORMAT_A_8       = 8,
+};
+</code></pre>
+
+<p>如果 AndroidBitmap_getInfo 执行成功的话，会返回 0 ，否则返回一个负数，代表执行的错误码列表如下：</p>
+
+<pre><code class="language-cpp">/** AndroidBitmap functions result code. */
+enum {
+    /** Operation was successful. */
+    ANDROID_BITMAP_RESULT_SUCCESS           = 0,
+    /** Bad parameter. */
+    ANDROID_BITMAP_RESULT_BAD_PARAMETER     = -1,
+    /** JNI exception occured. */
+    ANDROID_BITMAP_RESULT_JNI_EXCEPTION     = -2,
+    /** Allocation failed. */
+    ANDROID_BITMAP_RESULT_ALLOCATION_FAILED = -3,
+};
+</code></pre>
+
+<h3 id="访问原生像素缓存">访问原生像素缓存</h3>
+
+<p>AndroidBitmap_lockPixels 函数锁定了像素缓存以确保像素的内存不会被移动。</p>
+
+<p>如果 Native 层想要访问像素数据并操作它，该方法返回了像素缓存的一个原生指针，</p>
+
+<pre><code class="language-cpp">/**
+ * Given a java bitmap object, attempt to lock the pixel address.
+ * Locking will ensure that the memory for the pixels will not move
+ * until the unlockPixels call, and ensure that, if the pixels had been
+ * previously purged, they will have been restored.
+ *
+ * If this call succeeds, it must be balanced by a call to
+ * AndroidBitmap_unlockPixels, after which time the address of the pixels should
+ * no longer be used.
+ *
+ * If this succeeds, *addrPtr will be set to the pixel address. If the call
+ * fails, addrPtr will be ignored.
+ */
+int AndroidBitmap_lockPixels(JNIEnv* env, jobject jbitmap, void** addrPtr);
+</code></pre>
+
+<p>其中，第一个参数就是 JNI 接口指针，第二个参数就是 Bitmap 对象的引用，第三个参数是指向像素缓存地址的指针。</p>
+
+<p>AndroidBitmap_lockPixels 执行成功的话返回 0 ，否则返回一个负数，错误码列表就是上面提到的。</p>
+
+<h3 id="释放原生像素缓存">释放原生像素缓存</h3>
+
+<p>对 Bitmap 调用完 AndroidBitmap_lockPixels 之后都应该对应调用一次 AndroidBitmap_unlockPixels  用来释放原生像素缓存。</p>
+
+<p>当完成对原生像素缓存的读写之后，就应该释放它，一旦释放后，Bitmap Java 对象又可以在 Java 层使用了，函数签名如下：</p>
+
+<pre><code class="language-cpp">/**
+ * Call this to balance a successful call to AndroidBitmap_lockPixels.
+ */
+int AndroidBitmap_unlockPixels(JNIEnv* env, jobject jbitmap);
+</code></pre>
+
+<p>其中，第一个参数就是 JNI 接口指针，第二个参数就是 Bitmap 对象的引用，如果执行成功返回 0，否则返回 1。</p>
+
+<blockquote>
+<p>对 Bitmap 的操作，最重要的就是 AndroidBitmap_lockPixels 函数拿到所有像素的缓存地址，然后对每个像素值进行操作，从而更改 Bitmap 。</p>
+</blockquote>
+
+<h2 id="实践">实践</h2>
+
+<p>通过对 Bitmap 进行旋转，上下翻转，左右镜像来体验 JNI 的开发。</p>
+
+<p>效果如下：</p>
+
+<p><img src="https://ws1.sinaimg.cn/mw690/bc32fd77gy1ftl40fytkxj20u01hcdmh.jpg" alt="" /></p>
+
+<p>具体代码可以参考我的 Github 项目，欢迎 Star。</p>
+
+<blockquote>
+<p><a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a></p>
+</blockquote>
+
+<h3 id="通过-jni-将-bitmap-旋转">通过 JNI 将 Bitmap 旋转</h3>
+
+<p>首先定义一个这样的 native 函数：</p>
+
+<pre><code class="language-java">    // 顺时针旋转 90° 的操作
+    public native Bitmap rotateBitmap(Bitmap bitmap);
+</code></pre>
+
+<p>传入一个 Bitmap 对象，然后返回一个 Bitmap 对象。</p>
+
+<p>然后在 C++ 代码中，首先检索 Bitmap 的信息，看看是否成功。</p>
+
+<pre><code class="language-cpp">    AndroidBitmapInfo bitmapInfo;
+    int ret;
+    if ((ret = AndroidBitmap_getInfo(env, bitmap, &amp;bitmapInfo)) &lt; 0) {
+        LOGE(&quot;AndroidBitmap_getInfo() failed ! error=%d&quot;, ret);
+        return NULL;
+    }
+</code></pre>
+
+<p>接下来就是获得 Bitmap 的像素缓存指针：</p>
+
+<pre><code class="language-cpp">    // 读取 bitmap 的像素内容到 native 内存
+    void *bitmapPixels;
+    if ((ret = AndroidBitmap_lockPixels(env, bitmap, &amp;bitmapPixels)) &lt; 0) {
+        LOGE(&quot;AndroidBitmap_lockPixels() failed ! error=%d&quot;, ret);
+        return NULL;
+    }
+</code></pre>
+
+<p>这个指针指向的就是 Bitmap 像素内容，它是一个以一维数组的形式保存所有的像素点的值，但是我们在定义 Bitmap 图像时，都会定义宽和高，这就相对于是一个二维的了，那么就存在 Bitmap 的像素内容如何转成指针指向的一维内容，是按照行排列还是按照列排列呢？</p>
+
+<p>在这里是按照行进行排列的，而且行的排列是从左往右，列的排列是从上往下，起始点就和屏幕坐标原点一样，位于左上角。</p>
+
+<p>通过 AndroidBitmap_lockPixels 方法，bitmapPixels 指针就指向了 Bitmap 的像素内容，它的长度就是 Bitmap 的宽和高的乘积。</p>
+
+<p>要将 Bitmap 进行旋转，可以通过直接更改 bitmapPixels 指针指向的像素点的值，也可以通过创建一个新的 Bitmap 对象，然后将像素值填充到 Bitmap 对象中，这里选择后者的实现方式。</p>
+
+<p>首先创建一个新的 Bitmap 对象，参考之前文章中提到的方式：<a href="https://glumes.com/post/android/android-jni-access-field-and-method/">Android 通过 JNI 访问 Java 字段和方法调用</a>。</p>
+
+<p>在 Java 代码中，通过  createBitmap 方法可以创建一个 Bitmap，如下所示：</p>
+
+<pre><code class="language-java"> Bitmap.createBitmap(int width, int height, @NonNull Config config)`
+</code></pre>
+
+<p>所以在 JNI 中就需要调用 Bitmap 的静态方法来创建一个 Bitmap 对象。</p>
+
+<pre><code class="language-cpp">jobject generateBitmap(JNIEnv *env, uint32_t width, uint32_t height) {
+
+    jclass bitmapCls = env-&gt;FindClass(&quot;android/graphics/Bitmap&quot;);
+    jmethodID createBitmapFunction = env-&gt;GetStaticMethodID(bitmapCls,
+                                                            &quot;createBitmap&quot;,
+                                                            &quot;(IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;&quot;);
+    jstring configName = env-&gt;NewStringUTF(&quot;ARGB_8888&quot;);
+    jclass bitmapConfigClass = env-&gt;FindClass(&quot;android/graphics/Bitmap$Config&quot;);
+    jmethodID valueOfBitmapConfigFunction = env-&gt;GetStaticMethodID(
+            bitmapConfigClass, &quot;valueOf&quot;,
+            &quot;(Ljava/lang/String;)Landroid/graphics/Bitmap$Config;&quot;);
+
+    jobject bitmapConfig = env-&gt;CallStaticObjectMethod(bitmapConfigClass,
+                                                       valueOfBitmapConfigFunction, configName);
+
+    jobject newBitmap = env-&gt;CallStaticObjectMethod(bitmapCls,
+                                                    createBitmapFunction,
+                                                    width,
+                                                    height, bitmapConfig);
+    return newBitmap;
+}
+</code></pre>
+
+<p>首先通过 <code>FindClass</code> 方法找到 Config 类，得到一个 ARGB_8888 的配置，然后得到 Bitmap 类，调用它的静态方法 <code>createBitmap</code> 创建一个新的 Bitmap 对象，具体可以参考之前的文章。</p>
+
+<p>在这里要传入新 Bitmap 的宽高，这个宽高也是通过 <code>AndroidBitmap_getInfo</code> 方法得到原来的宽高之后，根据不同的操作计算后得到的。</p>
+
+<pre><code class="language-cpp">	// 旋转操作，新 Bitmap 的宽等于原来的高，新 Bitmap 的高等于原来的宽
+   uint32_t newWidth = bitmapInfo.height;
+    uint32_t newHeight = bitmapInfo.width;
+</code></pre>
+
+<p>有了新的 Bitmap 对象，又有了原有的 Bitmap 像素指针，接下来就是创建新的像素指针，并填充像素内容，然后把这个像素内容再填充到 Bitmap 上。</p>
+
+<pre><code class="language-cpp">    // 创建一个新的数组指针，把这个新的数组指针填充像素值
+	uint32_t *newBitmapPixels = new uint32_t[newWidth * newHeight];
+    int whereToGet = 0;
+    for (int y = 0; y &lt; newHeight; ++y) {
+        for (int x = newWidth - 1; x &gt;= 0; x--) {
+            uint32_t pixel = ((uint32_t *) bitmapPixels)[whereToGet++];
+            newBitmapPixels[newWidth * y + x] = pixel;
+        }
+    }
+</code></pre>
+
+<p>在这两个 <code>for</code>循环里面就是从原来的像素指针中取出像素值，然后把它按照特定的排列顺序填充到新的像素指针中对应位置的值，这里也就是前面强调的像素指针是按照行进行排列的，起点是 Bitmap 的左上角。</p>
+
+<pre><code class="language-cpp">    void *resultBitmapPixels;
+    if ((ret = AndroidBitmap_lockPixels(env, newBitmap, &amp;resultBitmapPixels)) &lt; 0) {
+        LOGE(&quot;AndroidBitmap_lockPixels() failed ! error=%d&quot;, ret);
+        return NULL;
+    }
+    int pixelsCount = newWidth * newHeight;
+    memcpy((uint32_t *) resultBitmapPixels, newBitmapPixels, sizeof(uint32_t) * pixelsCount);
+    AndroidBitmap_unlockPixels(env, newBitmap);
+</code></pre>
+
+<p>再次创建一个 resultBitmapPixels 指针，并调用 AndroidBitmap_lockPixels 方法获取新的 Bitmap 的像素指针缓存，然后调用 <code>memcpy</code> 方法，将待填充的像素指针填充到 resultBitmapPixels 上，这样就完成了像素的赋值，最后调用 <code>AndroidBitmap_unlockPixels</code> 方法释放像素指针缓存，完成整个赋值过程。</p>
+
+<p>就这样通过读取原有 Bitmap 的像素内容然后进行操作后再赋值给新的 Bitmap 对象就完成了 JNI 操作 Bitmap 。</p>
+
+<h3 id="通过-jni-将-bitmap-上下翻转和左右镜像">通过 JNI 将 Bitmap 上下翻转和左右镜像</h3>
+
+<p>将 Bitmap 进行上下翻转以及左右镜像和旋转操作类似了，只是针对像素指针的操作方式不同。</p>
+
+<p>上下翻转的操作：</p>
+
+<pre><code class="language-cpp">    int whereToGet = 0;
+    for (int y = 0; y &lt; newHeight; ++y) {
+        for (int x = 0; x &lt; newWidth; x++) {
+            uint32_t pixel = ((uint32_t *) bitmapPixels)[whereToGet++];
+            newBitmapPixels[newWidth * (newHeight - 1 - y) + x] = pixel;
+        }
+    }
+</code></pre>
+
+<p>左右镜像的操作：</p>
+
+<pre><code class="language-cpp">    int whereToGet = 0;
+    for (int y = 0; y &lt; newHeight; ++y) {
+        for (int x = newWidth - 1; x &gt;= 0; x--) {
+            uint32_t pixel = ((uint32_t *) bitmapPixels)[whereToGet++];
+            newBitmapPixels[newWidth * y + x] = pixel;
+        }
+    }
+</code></pre>
+
+<p>其他的操作都相同了，具体还是看项目代码吧。</p>
+
+              
+                <p>
+
+                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
+
+                  <br/>
+
+                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+
+                  <br/>
+
+                 <a href="https://glumes.com/post/contact-and-reward/">  觉得文章对您有帮助，欢迎打赏，或者加微信交流</a>
+
+                <br />
+                <br />
+
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-bitmap-operation/">Android JNI 之 Bitmap 操作</a>
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-light-mix/" data-toggle="tooltip" data-placement="top" title="OpenGL 光照系列之效果混合">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/android/android-jni-thread-operation/">Android JNI 中的线程操作</a></li>
+                    
+                    <li><a href="/post/android/android-jni-exception-handle/">Android JNI 调用时的异常处理</a></li>
+                    
+                    <li><a href="/post/android/android-jni-reference-manage-rules/">Android JNI 中的引用管理</a></li>
+                    
+                    <li><a href="/post/android/android-jni-cache-fieldid-and-methodid/">Android  JNI 调用时缓存字段和方法 ID</a></li>
+                    
+                    <li><a href="/post/android/android-jni-invoke-constructor-method-and-super-method/">Android 通过 JNI 调用 Java 类的构造方法和父类的方法</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+
