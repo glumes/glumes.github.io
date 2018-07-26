@@ -8,10 +8,21 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Tue, 24 Jul 2018 09:39:10 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 26 Jul 2018 12:47:49 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/opengl/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 碰撞检测之 AABB 包围盒</title>
+      <link>https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</link>
+      <pubDate>Thu, 26 Jul 2018 12:47:49 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</guid>
+      <description>&lt;p&gt;在 OpenGL 的世界模型中，同时绘制了多个物体，那么怎么去检测物体之间是否触碰了，不同于在平面之间的触碰，OpenGL 是在三维世界里面的触碰，接下来就继续深入理解 OpenGL 中的碰撞检测相关知识~~~&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 光照系列之效果混合</title>

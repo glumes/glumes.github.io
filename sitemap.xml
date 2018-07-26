@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</loc>
+    <lastmod>2018-07-26T12:47:49+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/android/android-jni-bitmap-operation/</loc>
     <lastmod>2018-07-25T13:36:50+08:00</lastmod>
   </url>
@@ -339,7 +344,7 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-07-25T13:36:50+08:00</lastmod>
+    <lastmod>2018-07-26T12:47:49+08:00</lastmod>
   </url>
   
   <url>
@@ -458,19 +463,19 @@
   
   <url>
     <loc>https://glumes.com/tags/opengl/</loc>
-    <lastmod>2018-07-24T09:39:10+08:00</lastmod>
+    <lastmod>2018-07-26T12:47:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/opengl/</loc>
-    <lastmod>2018-07-24T09:39:10+08:00</lastmod>
+    <lastmod>2018-07-26T12:47:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-07-25T13:36:50+08:00</lastmod>
+    <lastmod>2018-07-26T12:47:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>OpenGL 碰撞检测之 AABB 包围盒</title>
+  <meta property="og:title" content="OpenGL 碰撞检测之 AABB 包围盒" />
+  <meta name="twitter:title" content="OpenGL 碰撞检测之 AABB 包围盒" />
+  <meta name="description" content="在 OpenGL 的世界模型中，同时绘制了多个物体，那么怎么去检测物体之间是否触碰了，不同于在平面之间的触碰，OpenGL 是在三维世界里面的触碰，接下来就继续深入理解 OpenGL 中的碰撞检测相关知识~~~
+
+">
+  <meta property="og:description" content="在 OpenGL 的世界模型中，同时绘制了多个物体，那么怎么去检测物体之间是否触碰了，不同于在平面之间的触碰，OpenGL 是在三维世界里面的触碰，接下来就继续深入理解 OpenGL 中的碰撞检测相关知识~~~
+
+">
+  <meta name="twitter:description" content="在 OpenGL 的世界模型中，同时绘制了多个物体，那么怎么去检测物体之间是否触碰了，不同于在平面之间的触碰，OpenGL 是在三维世界里面的触碰，接下来就继续深入理解 OpenGL 中的碰撞检测相关知识~~~
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1ftn636nobej20zk0me7a8.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>OpenGL 碰撞检测之 AABB 包围盒</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on July 26, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">OpenGL 碰撞检测之 AABB 包围盒</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+        
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Thu Jul 26, 2018</h4>
+    </section>
+    <h5 id="wc">3300 Words|Read in about 7 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在 OpenGL 的世界模型中，同时绘制了多个物体，那么怎么去检测物体之间是否触碰了，不同于在平面之间的触碰，OpenGL 是在三维世界里面的触碰，接下来就继续深入理解 OpenGL 中的碰撞检测相关知识~~~</p>
+
+<p></p>
+
+<h2 id="碰撞检测实现原理">碰撞检测实现原理</h2>
+
+<p>进行碰撞检测时最直观和最精确的方式就是采用组成物体的三角形来进行，将待检测的两个物体的三角形组中的三角形两两进行相交性检测，若有任意一对三角形相交则物体构成碰撞，否则物体不构成碰撞。</p>
+
+<p>这样的思路很直观，但是计算量大，在一般设备上是难以实施的。</p>
+
+<p>通过一种简化的思路来间接实现碰撞检测，采用 <code>AABB （Axially Aligned Bounding Box）</code>包围盒的方式实现。</p>
+
+<p>AABB 包围盒就是采用一个长方体将物体包裹起来，进行两个物体的相交性检测时仅检测物体对应包围盒（包裹物体的长方体）的相交性。</p>
+
+<p>另外，AABB 包围盒有一个重要特性，那就是包围盒对应的长方体每一个面都是与某个坐标轴平面平行的，因此，AABB 包围盒又称了 <code>轴对齐包围盒</code> 。</p>
+
+<p>对于不同物体包围盒直接示例，如下图：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftn0tnab4pj209p03yweu.jpg" alt="不同物体的 AABB 包围盒" /></p>
+
+<p>有了上述约定后，确定 AABB 包围盒就简单多了，仅需要记录 6 个值即可，这 6 个值分别代表包围盒在每个坐标轴上的最小值与最大值，即 $x_{min}$、$x_{max}$、$y_{min}$、$y_{max}$、$z_{min}$、$z_{max}$。</p>
+
+<p>也就是说，实际物体上所有的点都必须满足以下条件：</p>
+
+<p>$$ x_{min}  \le x  \le x_{max} $$
+$$ y_{min}  \le y  \le y_{max} $$
+$$ z_{min}  \le z  \le z_{max} $$</p>
+
+<p>另外，可以将表示 AABB 包围盒的 6 个参数分为以下两组：</p>
+
+<p>$$P_{min} = [x_{min} , y_{min} , z_{min}]$$
+$$P_{max} = [x_{max} , y_{max} , z_{max}]$$</p>
+
+<p>其中，$P_{min}$ 是 3 个轴坐标最小值的集合，$P_{max} $ 是 3 个轴坐标最大值的集合。</p>
+
+<p>知道了表示 AABB 包围盒的 6 个参数后就可以非常方便地求得 AABB 包围盒的几何中心，公式如下：</p>
+
+<p>$$c=(P_{min} + P_{max})  /  2$$</p>
+
+<h2 id="aabb-包围盒计算">AABB 包围盒计算</h2>
+
+<p>了解了 AABB 包围盒的原理之后，求 AABB 包围盒 6 个参数的方法就简单多了，只需要对物体中的所有顶点坐标进行扫描，求出各个轴分量的最大值与最小值即可。</p>
+
+<p>首先引入一个辅助类 <code>Vector3f</code>，其对象可以记录 3 个浮点数组成的三元组，用来表示物体的位置、速度等。</p>
+
+<pre><code class="language-java">public class Vector3f {
+    float x;//三维变量中的x值
+    float y;//三维变量中的y值
+    float z;//三维变量中的z值
+    public Vector3f(float x,float y,float z)
+    {
+        this.x=x;
+        this.y=y;
+        this.z=z;
+    }
+    public void add(Vector3f temp)
+    {
+        this.x+=temp.x;
+        this.y+=temp.y;
+        this.z+=temp.z;
+    }
+}
+</code></pre>
+
+<p>有了此辅助类之后，物体的位置、速度等就可以直接用此类的对象表示了。</p>
+
+<p>接下来就是计算物体的 AABB 包围盒，定义一个对象 AABBBox 来表示包围盒。</p>
+
+<pre><code class="language-java">public class AABBBox {
+    float minX;//x轴最小位置
+    float maxX;//x轴最大位置
+    float minY;//y轴最小位置
+    float maxY;//y轴最大位置
+    float minZ;//z轴最小位置
+    float maxZ;//z轴最大位置
+
+    public AABBBox(float[] vertices)
+    {
+        init();
+        findMinAndMax(vertices);
+    }
+
+    public AABBBox(float minX,float maxX,float minY,float maxY,float minZ,float maxZ)
+    {
+        this.minX=minX;
+        this.maxX=maxX;
+        this.minY=minY;
+        this.maxY=maxY;
+        this.minZ=minZ;
+        this.maxZ=maxZ;
+    }
+    //初始化包围盒的最小以及最大顶点坐标
+    public void init()
+    {
+        minX=Float.POSITIVE_INFINITY;
+        maxX=Float.NEGATIVE_INFINITY;
+        minY=Float.POSITIVE_INFINITY;
+        maxY=Float.NEGATIVE_INFINITY;
+        minZ=Float.POSITIVE_INFINITY;
+        maxZ=Float.NEGATIVE_INFINITY;
+    }
+    //获取包围盒的实际最小以及最大顶点坐标
+    public void findMinAndMax(float[] vertices)
+    {
+        for(int i=0;i&lt;vertices.length/3;i++)
+        {
+            //判断X轴的最小和最大位置
+            if(vertices[i*3]&lt;minX)
+            {
+                minX=vertices[i*3];
+            }
+            if(vertices[i*3]&gt;maxX)
+            {
+                maxX=vertices[i*3];
+            }
+            //判断Y轴的最小和最大位置
+            if(vertices[i*3+1]&lt;minY)
+            {
+                minY=vertices[i*3+1];
+            }
+            if(vertices[i*3+1]&gt;maxY)
+            {
+                maxY=vertices[i*3+1];
+            }
+            //判断Z轴的最小和最大位置
+            if(vertices[i*3+2]&lt;minZ)
+            {
+                minZ=vertices[i*3+2];
+            }
+            if(vertices[i*3+2]&gt;maxZ)
+            {
+                maxZ=vertices[i*3+2];
+            }
+        }
+    }
+    //获得物体平移后的AABB包围盒
+    public AABBBox getCurrAABBBox(Vector3f currPosition)
+    {
+        AABBBox result=new AABBBox
+                (
+                        this.minX+currPosition.x,
+                        this.maxX+currPosition.x,
+                        this.minY+currPosition.y,
+                        this.maxY+currPosition.y,
+                        this.minZ+currPosition.z,
+                        this.maxZ+currPosition.z
+                );
+        return result;
+    }
+}
+</code></pre>
+
+<p>在 AABBBox 的构造函数中需要传入物体的顶点序列，在这些序列中分别找出 x 、y、z 坐标的最小值和最大值，也可以直接传入包围盒的 6 个顶点参数。</p>
+
+<p>如果在程序运行过程中，物体发生了移动，那就需要根据移动后的位置计算产生新包围盒对象，<code>getCurrAABBBox</code>方法需要传递物体移动后位置的 3 个坐标分量，用于与原始包围盒的 6 个 参数进行运算，产生移动后包围盒的 6 个参数。</p>
+
+<h2 id="aabb-包围盒的碰撞检测">AABB 包围盒的碰撞检测</h2>
+
+<p>在上面求得了物体的包围盒，求包围盒的目的就是为了简化物体运动过程中的碰撞检测，接下来就是介绍 AABB 包围盒碰撞检测的策略，原理如下图所示：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftn2ce177mj20ie04p0tu.jpg" alt="" /></p>
+
+<p>由于任何一个 AABB 包围盒的各个面都平行于坐标平面，因此判断两个 AABB 包围盒是否发生碰撞仅需要分别判断 3 个轴方向的交叠部分大小是否大于设定的阈值，若大于则发生了碰撞，否则没有发生碰撞。</p>
+
+<p>具体碰撞检测代码如下：</p>
+
+<pre><code class="language-java">    public boolean check(RigidBody ra, RigidBody rb)//true为撞上
+    {
+        float[] over = calOverTotal
+                (
+	                // 两个物体的 AABB 包围盒
+                        ra.collObject.getCurrAABBBox(ra.currLocation),
+                        rb.collObject.getCurrAABBBox(rb.currLocation)
+                );
+        // 三个方向的交叠值与设定的阈值进行比较
+        return over[0] &gt; V_UNIT &amp;&amp; over[1] &gt; V_UNIT &amp;&amp; over[2] &gt; V_UNIT;
+    }
+	
+	// 传入两个物体的 AABB 包围盒
+    public float[] calOverTotal(AABBBox a, AABBBox b) {
+        float xOver = calOverOne(a.maxX, a.minX, b.maxX, b.minX);
+        float yOver = calOverOne(a.maxY, a.minY, b.maxY, b.minY);
+        float zOver = calOverOne(a.maxZ, a.minZ, b.maxZ, b.minZ);
+        return new float[]{xOver, yOver, zOver};
+    }
+	// 计算每个轴方向的交叠值
+    public float calOverOne(float amax, float amin, float bmax, float bmin) {
+        float minMax = 0;
+        float maxMin = 0;
+        if (amax &lt; bmax)//a物体在b物体左侧
+        {
+            minMax = amax;
+            maxMin = bmin;
+        } else //a物体在b物体右侧
+        {
+            minMax = bmax;
+            maxMin = amin;
+        }
+
+        if (minMax &gt; maxMin) {
+            return minMax - maxMin;
+        } else {
+            return 0;
+        }
+    }
+</code></pre>
+
+<p>在 calOverTotal 方法里面要传入两个物体的 AABB 包围盒。</p>
+
+<p>然后在 calOverOne 方法里面分别计算两个包围盒 3 个轴的交叠值，思路就是先比较两个AABB 包围盒在对应轴的最大分量，此比较是为了得出两个物体的方位，哪个物体在此轴的正方向那一侧。然后用在轴正方向的那一侧物体的坐标最小值减去在轴负方向那一侧的物体的最大值，如果为负数，则说明没有发生交叠，如果其值为正数，则说明两个物体发生了交叠，交叠值和设定的阈值进行比较。</p>
+
+<h2 id="实践">实践</h2>
+
+<p>具体的实践效果如下：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532576353/code/collision_demo.gif" alt="碰撞检测示例" /></p>
+
+<p>在效果图中，有个两个静止不同的物体，一个来回运动碰撞的物体。</p>
+
+<p>在开发上述效果中，会定义一个 RigidBody 刚体类，它由两个重要的成员，就是我们的绘制物体和它的 AABB 包围盒，如下图所示：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftn452gxq7j20fa03rjs2.jpg" alt="" /></p>
+
+<p>渲染者指的就是用来渲染的物体，碰撞者指的就是物体的 AABB 包围盒，它们共同组成了刚体 RigidBody 。</p>
+
+<p>RigidBody 代码如下：</p>
+
+<pre><code class="language-java">public class RigidBody {
+    CollisionObject renderObject;//渲染者
+    AABBBox collObject;//碰撞者
+    boolean isStatic;//是否静止的标志位
+    Vector3f currLocation;//位置三维变量
+    Vector3f currV;//速度三维变量
+    final float V_UNIT = 0.02f;//阈值
+
+    public RigidBody(CollisionObject renderObject, boolean isStatic, Vector3f currLocation, Vector3f currV) {
+        this.renderObject = renderObject;
+        collObject = new AABBBox(renderObject.vertices);
+        this.isStatic = isStatic;
+        this.currLocation = currLocation;
+        this.currV = currV;
+    }
+
+    public void drawSelf() {
+        MatrixState.pushMatrix();//保护现场
+        MatrixState.translate(currLocation.x, currLocation.y, currLocation.z);
+        renderObject.drawSelf();//绘制物体
+        MatrixState.popMatrix();//恢复现场
+    }
+
+    public void go(ArrayList&lt;RigidBody&gt; al) {
+        if (isStatic) return;
+        currLocation.add(currV);
+        for (int i = 0; i &lt; al.size(); i++) {
+
+            RigidBody rb = al.get(i);
+            if (rb != this) {
+                if (check(this, rb))//检验碰撞
+                {
+                    this.currV.x = -this.currV.x;//哪个方向的有速度，该方向上的速度置反
+                }
+            }
+        }
+    }
+// 省略碰撞检测的代码，在上面已经有了。
+}
+</code></pre>
+
+<p>在 RigidBody 的构造函数中，需要传入用来渲染的物体对象，以及是否是静止的标志位，还有表示该物体的位置和移动的向量，向量类型都是之前提到的 <code>Vector3f</code>。</p>
+
+<p>当传入要绘制的对象时，会根据它的顶点计算对应的包围盒，当物体移动后，也会根据新的坐标位置重新计算包围盒。</p>
+
+<p>物体发生移动时，只需要将物体的位置向量加上物体的速度向量，然后调用 <code>Matrix.translateM</code> 方法就可以改变物体位置了。</p>
+
+<pre><code class="language-java">    Vector3f currLocation;//位置三维变量
+    Vector3f currV;//速度三维变量
+    // 位置向量加上速度向量，就改变了物体的位置
+    currLocation.add(currV);
+    // translate 方法让改变生效
+    MatrixState.translate(currLocation.x, currLocation.y, currLocation.z);
+</code></pre>
+
+<p>如果碰撞发生了，并且物体要反向移动，那么就改变速度向量的方向就好了。</p>
+
+<pre><code class="language-java">                if (check(this, rb))//检验碰撞，如果发生碰撞了，改变方向
+                {
+                    this.currV.x = -this.currV.x;//哪个方向的有速度，该方向上的速度置反
+                }
+</code></pre>
+
+<p>具体绘制时，在 GLSurfaceView.Renderer 方法里面就采用刚体 RigidBody 类来绘制就好了。</p>
+
+<pre><code class="language-java">    var aList = ArrayList&lt;RigidBody&gt;() // 定义刚体集合
+	    // onSurfaceCreated 方法里面添加要绘制的物体，
+        override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
+            aList.add(RigidBody(ch, true, Vector3f(-13f, 0f, 0f), Vector3f(0f, 0f, 0f)))
+            aList.add(RigidBody(ch, true, Vector3f(13f, 0f, 0f), Vector3f(0f, 0f, 0f)))
+            aList.add(RigidBody(ch, false, Vector3f(0f, 0f, 0f), Vector3f(0.1f, 0f, 0f)))
+			// 开启一个线程来改变刚体的移动
+            lgt = LovoGoThread(aList)
+            lgt.start()
+        }
+        // 绘制刚体
+        override fun onDrawFrame(gl: GL10?) {
+            GLES30.glClear(GLES30.GL_DEPTH_BUFFER_BIT or GLES30.GL_COLOR_BUFFER_BIT)
+            for (it in 0 until aList.size) {
+                aList[it].drawSelf()
+            }
+            pm.drawSelf()
+        }
+</code></pre>
+
+<p>在物体移动时，开启了一个线程去改变物体的坐标。</p>
+
+<pre><code class="language-java">public class LovoGoThread extends Thread {
+    ArrayList&lt;RigidBody&gt; al;//控制列表
+    boolean flag = true;//线程控制标志位
+    public LovoGoThread(ArrayList&lt;RigidBody&gt; al) {
+        this.al = al;
+    }
+    public void run() {
+        while (flag) {
+            int size = al.size();
+            for (int i = 0; i &lt; size; i++) {
+                al.get(i).go(al);
+            }
+            try {
+                sleep(20);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>具体的代码，可以参考我的 Github 项目：</p>
+
+<blockquote>
+<p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
+</blockquote>
+
+<h2 id="注意点">注意点</h2>
+
+<p>AABB 包围盒的碰撞检测其实还是一种间接检测方案，所以肯定还是会有误差的。</p>
+
+<p>AABB 包围盒对于本身横平竖直的物体在平行于坐标轴摆放的情况下下，计算碰撞检测的误差很小，但对于不规则形状的物体或本身横平竖直的物体在随意倾斜摆放时，计算碰撞检测的误差就会比较大，如下图所示：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftn5uds87ej20h604vt96.jpg" alt="" /></p>
+
+<p>从图中可以看到，对于同一物体在不同姿态下的 AABB 包围盒以及不同形状的物体的 AABB 包围盒，其物体本身区域占 AABB 包围盒区域的比例是大不相同的。</p>
+
+<p>物体本身区域所占比例越大，则碰撞检测的误差越小，因此在实际开发中应该尽量提高物体本身区域所在的比例，以降低计算误差。</p>
+
+              
+                <p>
+
+                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
+
+                  <br/>
+
+                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+
+                  <br/>
+
+                 <a href="https://glumes.com/post/contact-and-reward/">  觉得文章对您有帮助，欢迎打赏，或者加微信交流</a>
+
+                <br />
+                <br />
+
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/">OpenGL 碰撞检测之 AABB 包围盒</a>
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/android/android-jni-bitmap-operation/" data-toggle="tooltip" data-placement="top" title="Android JNI 之 Bitmap 操作">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-light-mix/">OpenGL 光照系列之效果混合</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-specular-light/">OpenGL 光照系列之镜面光</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-diffuse-light/"> OpenGL 光照系列之散射光</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-ambient-light/">OpenGL 光照系列之环境光</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-depth-test/">OpenGL 深度测试与精度值的那些事</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+
