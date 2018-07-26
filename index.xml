@@ -14,7 +14,7 @@
     
     
     <item>
-      <title>OpenGL 碰撞检测之 AABB 包围盒</title>
+      <title>《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</title>
       <link>https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</link>
       <pubDate>Thu, 26 Jul 2018 12:47:49 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -36,7 +36,7 @@
     </item>
     
     <item>
-      <title>OpenGL 光照系列之效果混合</title>
+      <title>《OpenGL ES 3.x 游戏开发》光照系列之效果混合</title>
       <link>https://glumes.com/post/opengl/opengl-tutorial-light-mix/</link>
       <pubDate>Tue, 24 Jul 2018 09:39:10 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -53,7 +53,7 @@
     </item>
     
     <item>
-      <title>OpenGL 光照系列之镜面光</title>
+      <title>《OpenGL ES 3.x 游戏开发》光照系列之镜面光</title>
       <link>https://glumes.com/post/opengl/opengl-tutorial-specular-light/</link>
       <pubDate>Mon, 23 Jul 2018 23:11:20 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -64,7 +64,7 @@
     </item>
     
     <item>
-      <title> OpenGL 光照系列之散射光</title>
+      <title> 《OpenGL ES 3.x 游戏开发》 光照系列之散射光</title>
       <link>https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/</link>
       <pubDate>Sun, 22 Jul 2018 23:27:04 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -75,7 +75,7 @@
     </item>
     
     <item>
-      <title>OpenGL 光照系列之环境光</title>
+      <title>《OpenGL ES 3.x 游戏开发》光照系列之环境光</title>
       <link>https://glumes.com/post/opengl/opengl-tutorial-ambient-light/</link>
       <pubDate>Sat, 21 Jul 2018 22:45:03 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -124,7 +124,7 @@
     </item>
     
     <item>
-      <title>OpenGL 顶点数组对象 VAO 的使用</title>
+      <title>《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用</title>
       <link>https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/</link>
       <pubDate>Wed, 18 Jul 2018 23:16:22 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -139,7 +139,7 @@
     </item>
     
     <item>
-      <title>OpenGL 顶点缓冲区 VBO 的使用</title>
+      <title>《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用</title>
       <link>https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/</link>
       <pubDate>Tue, 17 Jul 2018 22:28:37 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -152,7 +152,7 @@
     </item>
     
     <item>
-      <title>OpenGL 中的颜色混合和使用</title>
+      <title>《OpenGL ES 3.x 游戏开发》之颜色混合和使用</title>
       <link>https://glumes.com/post/opengl/opengl-tutorial-color-blend/</link>
       <pubDate>Mon, 16 Jul 2018 11:13:19 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -176,7 +176,7 @@
     </item>
     
     <item>
-      <title>OpenGL 利用 Alpha 透明度进行测试</title>
+      <title>《OpenGL ES 3.x 游戏开发》之利用 Alpha 透明度进行测试</title>
       <link>https://glumes.com/post/opengl/opengl-tutorial-alpha-test/</link>
       <pubDate>Fri, 13 Jul 2018 09:41:22 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -213,7 +213,7 @@
     </item>
     
     <item>
-      <title>OpenGL 裁剪测试及注意点</title>
+      <title>《OpenGL ES 3.x 游戏开发》 裁剪测试及注意点</title>
       <link>https://glumes.com/post/opengl/opengl-tutorial-scissor-test/</link>
       <pubDate>Tue, 03 Jul 2018 21:35:34 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -224,7 +224,7 @@
     </item>
     
     <item>
-      <title>OpenGL 3D 模型加载和渲染</title>
+      <title>《OpenGL ES 3.x 游戏开发》 3D 模型加载和渲染</title>
       <link>https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/</link>
       <pubDate>Mon, 02 Jul 2018 23:37:16 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -583,7 +583,7 @@ void main()
     </item>
     
     <item>
-      <title>OpenGL 学习系列---点的绘制流程</title>
+      <title>OpenGL 学习系列---基础的绘制流程</title>
       <link>https://glumes.com/post/opengl/opengl-tutorial-draw-point/</link>
       <pubDate>Fri, 22 Dec 2017 16:19:28 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -939,15 +939,6 @@ void main()
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/about/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>赞赏 &amp; 联系</title>
-      <link>https://glumes.com/post/contact-and-reward/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/post/contact-and-reward/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

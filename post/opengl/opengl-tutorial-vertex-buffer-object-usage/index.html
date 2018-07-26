@@ -5,24 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>OpenGL 顶点缓冲区 VBO 的使用</title>
-  <meta property="og:title" content="OpenGL 顶点缓冲区 VBO 的使用" />
-  <meta name="twitter:title" content="OpenGL 顶点缓冲区 VBO 的使用" />
-  <meta name="description" content="在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 glDrawArrays 或 glDrawElements 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。
-
-可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。
-
-">
-  <meta property="og:description" content="在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 glDrawArrays 或 glDrawElements 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。
-
-可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。
-
-">
-  <meta name="twitter:description" content="在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 glDrawArrays 或 glDrawElements 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。
-
-可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。
-
-">
+  <title>《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用</title>
+  <meta property="og:title" content="《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用" />
+  <meta name="twitter:title" content="《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用" />
+  <meta name="description" content="学习笔记内容摘录">
+  <meta property="og:description" content="学习笔记内容摘录">
+  <meta name="twitter:description" content="学习笔记内容摘录">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" />
@@ -197,8 +185,17 @@
                 <div class="page-heading">
                 
                   
-                     <h1>OpenGL 顶点缓冲区 VBO 的使用</h1>
+                     <h1>《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用</h1>
                      
+                     
+                  
+                  
+                  
+                    
+                      <h2 align="center" class="post-subheading">学习笔记内容摘录</h2>
+                    
+                  
+                  
                     <span class="post-meta">
   
   Posted on July 17, 2018
@@ -207,9 +204,8 @@
 </span>
 
 
-                    
                   
-                  
+                
               </div>
             </div>
           </div>
@@ -223,7 +219,11 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">OpenGL 顶点缓冲区 VBO 的使用</h1>
+                <h1 align="center">《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用</h1>
+                
+                  
+                    <h2 align="center" class="post-subheading">学习笔记内容摘录</h2>
+                  
                 
                 
             </div>
@@ -247,7 +247,7 @@
     <section id="datecount">
         <h4 id="date"> Tue Jul 17, 2018</h4>
     </section>
-    <h5 id="wc">2700 Words|Read in about 6 Min</h5>
+    <h5 id="wc">2800 Words|Read in about 6 Min</h5>
     <h5 id="tags">Tags: 
         
         <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
@@ -648,24 +648,19 @@
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
 </blockquote>
 
+<h2 id="参考">参考</h2>
+
+<ol>
+<li>《OpenGL ES 3.x 游戏开发》</li>
+</ol>
+
               
                 <p>
 
-                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
-
-                  <br/>
-
-                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
-
-                  <br/>
-
-                 <a href="https://glumes.com/post/contact-and-reward/">  觉得文章对您有帮助，欢迎打赏，或者加微信交流</a>
-
-                <br />
-                <br />
+                
 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">OpenGL 顶点缓冲区 VBO 的使用</a>
+                
 
                 </p>
               
@@ -675,12 +670,12 @@
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" data-toggle="tooltip" data-placement="top" title="OpenGL 中的颜色混合和使用">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" data-toggle="tooltip" data-placement="top" title="《OpenGL ES 3.x 游戏开发》之颜色混合和使用">&larr; Previous Post</a>
           </li>
         
         
           <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 顶点数组对象 VAO 的使用">Next Post &rarr;</a>
+            <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/" data-toggle="tooltip" data-placement="top" title="《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用">Next Post &rarr;</a>
           </li>
         
       </ul>
@@ -690,15 +685,15 @@
                 <h2>See Also</h2>
                 <ul>
                     
-                    <li><a href="/post/opengl/opengl-tutorial-color-blend/">OpenGL 中的颜色混合和使用</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-color-blend/">《OpenGL ES 3.x 游戏开发》之颜色混合和使用</a></li>
                     
-                    <li><a href="/post/opengl/opengl-tutorial-alpha-test/">OpenGL 利用 Alpha 透明度进行测试</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-alpha-test/">《OpenGL ES 3.x 游戏开发》之利用 Alpha 透明度进行测试</a></li>
                     
                     <li><a href="/post/opengl/opengl-handle-video-frame-and-replace-content/">用 OpenGL 对视频帧内容进行替换</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-share/">OpenGL ES 学习资源分享</a></li>
                     
-                    <li><a href="/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a></li>
+                    <li><a href="/post/opengl/opengl-tutorial-scissor-test/">《OpenGL ES 3.x 游戏开发》 裁剪测试及注意点</a></li>
                     
                 </ul>
                 
