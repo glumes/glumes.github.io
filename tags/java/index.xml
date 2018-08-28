@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on Glumes Blog</title>
+    <link>https://glumes.com/tags/java/</link>
+    <description>Recent content in Java on Glumes Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
+    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <lastBuildDate>Tue, 28 Aug 2018 22:55:49 +0800</lastBuildDate>
+    
+	<atom:link href="https://glumes.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java 中的静态代理和动态代理</title>
+      <link>https://glumes.com/post/android/java-proxy-design-pattern/</link>
+      <pubDate>Tue, 28 Aug 2018 22:55:49 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/java-proxy-design-pattern/</guid>
+      <description>&lt;p&gt;代理模式的使用场景如下：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

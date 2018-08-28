@@ -8,10 +8,25 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Thu, 26 Jul 2018 12:47:49 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 28 Aug 2018 22:55:49 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 中的静态代理和动态代理</title>
+      <link>https://glumes.com/post/android/java-proxy-design-pattern/</link>
+      <pubDate>Tue, 28 Aug 2018 22:55:49 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/java-proxy-design-pattern/</guid>
+      <description>&lt;p&gt;代理模式的使用场景如下：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</title>

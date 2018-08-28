@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/android/java-proxy-design-pattern/</loc>
+    <lastmod>2018-08-28T22:55:49+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</loc>
     <lastmod>2018-07-26T12:47:49+08:00</lastmod>
   </url>
@@ -344,7 +349,7 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-07-26T12:47:49+08:00</lastmod>
+    <lastmod>2018-08-28T22:55:49+08:00</lastmod>
   </url>
   
   <url>
@@ -355,7 +360,7 @@
   
   <url>
     <loc>https://glumes.com/categories/android/</loc>
-    <lastmod>2018-07-25T13:36:50+08:00</lastmod>
+    <lastmod>2018-08-28T22:55:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -373,7 +378,7 @@
   
   <url>
     <loc>https://glumes.com/categories/</loc>
-    <lastmod>2018-07-25T13:36:50+08:00</lastmod>
+    <lastmod>2018-08-28T22:55:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -422,6 +427,12 @@
   <url>
     <loc>https://glumes.com/tags/inflater/</loc>
     <lastmod>2017-12-22T15:55:08+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/java/</loc>
+    <lastmod>2018-08-28T22:55:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -475,7 +486,7 @@
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-07-26T12:47:49+08:00</lastmod>
+    <lastmod>2018-08-28T22:55:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   
