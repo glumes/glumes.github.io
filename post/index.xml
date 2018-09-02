@@ -8,10 +8,19 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Tue, 28 Aug 2018 22:55:49 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 02 Sep 2018 21:26:55 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 之 EGL 使用实践</title>
+      <link>https://glumes.com/post/opengl/opengl-egl-usage/</link>
+      <pubDate>Sun, 02 Sep 2018 21:26:55 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-egl-usage/</guid>
+      <description>OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。 而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 EGL 来完成这个</description>
+    </item>
     
     <item>
       <title>Java 中的静态代理和动态代理</title>

@@ -8,10 +8,19 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Thu, 26 Jul 2018 12:47:49 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 02 Sep 2018 21:26:55 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/opengl/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 之 EGL 使用实践</title>
+      <link>https://glumes.com/post/opengl/opengl-egl-usage/</link>
+      <pubDate>Sun, 02 Sep 2018 21:26:55 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-egl-usage/</guid>
+      <description>OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。 而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 EGL 来完成这个</description>
+    </item>
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</title>
