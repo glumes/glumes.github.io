@@ -42,6 +42,17 @@
     </item>
     
     <item>
+      <title>OpenGL 之 GPUImage 源码分析</title>
+      <link>https://glumes.com/post/opengl/opengl-gpuimage-analysis/</link>
+      <pubDate>Sun, 02 Sep 2018 21:14:09 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-gpuimage-analysis/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/BradLarson/GPUImage&#34;&gt;GPUImage&lt;/a&gt; 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 &lt;a href=&#34;https://github.com/CyberAgent/android-gpuimage&#34;&gt;GPUImage&lt;/a&gt; ，本文也主要对 Android 版本的 GPUImage 进行分析。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</title>
       <link>https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</link>
       <pubDate>Thu, 26 Jul 2018 12:47:49 +0800</pubDate>

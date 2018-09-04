@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>OpenGL 之 GPUImage 源码分析</title>
+  <meta property="og:title" content="OpenGL 之 GPUImage 源码分析" />
+  <meta name="twitter:title" content="OpenGL 之 GPUImage 源码分析" />
+  <meta name="description" content="GPUImage 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 GPUImage ，本文也主要对 Android 版本的 GPUImage 进行分析。
+
+">
+  <meta property="og:description" content="GPUImage 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 GPUImage ，本文也主要对 Android 版本的 GPUImage 进行分析。
+
+">
+  <meta name="twitter:description" content="GPUImage 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 GPUImage ，本文也主要对 Android 版本的 GPUImage 进行分析。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-gpuimage-analysis/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-gpuimage-analysis/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fuvigpdvurj20zk0c8772.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>OpenGL 之 GPUImage 源码分析</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on September 2, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">OpenGL 之 GPUImage 源码分析</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+        
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Sun Sep 2, 2018</h4>
+    </section>
+    <h5 id="wc">3400 Words|Read in about 7 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p><a href="https://github.com/BradLarson/GPUImage">GPUImage</a> 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 <a href="https://github.com/CyberAgent/android-gpuimage">GPUImage</a> ，本文也主要对 Android 版本的 GPUImage 进行分析。</p>
+
+<p></p>
+
+<h2 id="概要">概要</h2>
+
+<p>在 GPUImage 中既有对图像进行处理的，也有对相机内容进行处理的，这里主要以相机处理为例进行分析。</p>
+
+<p>大致会分为三个部分：</p>
+
+<ul>
+<li>相机数据的采集</li>
+<li>OpenGL 对图像的处理与显示</li>
+<li>相机的拍摄</li>
+</ul>
+
+<h3 id="相机数据采集">相机数据采集</h3>
+
+<blockquote>
+<p>相机数据采集实际上就是把相机的图像数据转换成 OpenGL 中的纹理。</p>
+</blockquote>
+
+<p>在相机的业务开发中，会给相机设置 <code>PreviewCallback</code> 回调方法，只要相机处于预览阶段，这个回调就会被重复调用，返回当前预览帧的内容。</p>
+
+<pre><code class="language-java">	camera.setPreviewCallback(GPUImageRenderer.this);
+    camera.startPreview();
+</code></pre>
+
+<p>默认情况下，相机返回的数据是 <code>NV21</code> 格式，也就是 <code>YCbCr_420_SP</code> 格式，而 OpenGL 使用的纹理是 RGB 格式，所以在每一次的回调方法中需要将 <code>YUV</code> 格式的数据转换成 <code>RGB</code> 格式数据。</p>
+
+<pre><code class="language-java">GPUImageNativeLibrary.YUVtoRBGA(data, previewSize.width, previewSize.height,
+						     mGLRgbBuffer.array());
+</code></pre>
+
+<p>有了图像的 RGB 数据，就可以使用 <code>glGenTextures</code> 生成纹理，并用 <code>glTexImage2D</code> 方法将图像数据作为纹理。</p>
+
+<p>另外，如果纹理已经生成了，当再有图像数据过来时，只需要更新数据就好了，无需重复创建纹理。</p>
+
+<pre><code class="language-java">	// 根据图像数据加载纹理
+    public static int loadTexture(final IntBuffer data, final Size size, final int usedTexId) {
+        int textures[] = new int[1];
+        if (usedTexId == NO_TEXTURE) {
+            GLES20.glGenTextures(1, textures, 0);
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0]);
+	        // 省略部分代码
+            GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, size.width, size.height,
+                    0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, data);
+        } else {
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, usedTexId);
+            // 更新纹理数据就好，无需重复创建纹理
+            GLES20.glTexSubImage2D(GLES20.GL_TEXTURE_2D, 0, 0, 0, size.width,
+                    size.height, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, data);
+            textures[0] = usedTexId;
+        }
+        return textures[0];
+    }
+</code></pre>
+
+<p>通过在 <code>PreviewCallback</code> 回调方法中的操作，就完成了将图像数据转换为 OpenGL 的纹理。</p>
+
+<p>接下来就是如何将纹理数据进行处理，并且显示到屏幕上。</p>
+
+<p>在相机数据采集中，还有一些小的细节问题，比如相机前置与后置摄像头的左右镜像翻转问题。</p>
+
+<p>对于前置摄像头，再把传感器内容作为纹理显示时，前置摄像头要做一个左右的翻转处理，因为我们看到的是一个镜像内容，符合正常的自拍流程。</p>
+
+<p>在 GPUImage 的 TextureRotationUtil 类中有定义了纹理坐标，这些纹理坐标系的原点不是位于左下角进行定义的，而是位于左上角。</p>
+
+<p>如果以左下角为纹理坐标系的坐标原点，那么除了要将纹理坐标向右顺时针旋转 90° 之外，还需要进行上下翻转才行，至于为什么要向右顺时针旋转 90° ，参考这篇文章：</p>
+
+<p>当我们把纹理坐标以左上角为原点，并相对于顶点坐标顺时针旋转 90 ° 之后，才能够正常的显示图像：</p>
+
+<pre><code class="language-java">	// 顶点坐标
+    static final float CUBE[] = {
+            -1.0f, -1.0f,
+            1.0f, -1.0f,
+            -1.0f, 1.0f,
+            1.0f, 1.0f,
+    };
+    // 以左上角为原点，并相对于顶点坐标顺时针旋转 90° 后的纹理坐标
+    public static final float TEXTURE_ROTATED_90[] = {
+            1.0f, 1.0f,
+            1.0f, 0.0f,
+            0.0f, 1.0f,
+            0.0f, 0.0f,
+    };
+</code></pre>
+
+<h2 id="图像处理与显示">图像处理与显示</h2>
+
+<p>在有了纹理之后，需要明确的是，这个纹理就是相机采集到的图像内容，我们要将纹理绘制到屏幕上，实际上是绘制一个矩形，然后纹理是贴在这个矩形上的。</p>
+
+<p>所以，这里可以回顾一下 OpenGL 是如何绘制矩形的，并且将纹理贴到矩形上。</p>
+
+<p><a href="https://glumes.com/post/opengl/opengl-tutorial-texture/">OpenGL 学习系列&mdash;纹理</a></p>
+
+<p>在 GPUImage 中，<code>GPUImageFilter</code> 类就完成了上述的操作，它是 OpenGL 中所有滤镜的基类。</p>
+
+<h3 id="解析-gpuimagefilter-的代码实现">解析 GPUImageFilter 的代码实现：</h3>
+
+<p>在 GPUImageFilter 的构造方法中会确定好需要使用的顶点着色器和片段着色器脚本内容。</p>
+
+<p>在 <code>init</code> 方法中会调用 <code>onInit</code> 方法和 <code>onInitialized</code> 方法。</p>
+
+<ul>
+<li><code>onInit</code> 方法会创建 OpenGL 中的 Program，并且会绑定到着色器脚本中声明的 <code>attribute</code> 和 <code>uniform</code> 变量字段。</li>
+<li><code>onInitialized</code> 方法会给一些 <code>uniform</code> 字段变量赋值，在 GPUImageFilter 类中还对不同类型的变量赋值进行了对应的方法，比如对 <code>float</code> 变量：</li>
+</ul>
+
+<pre><code class="language-java">    protected void setFloat(final int location, final float floatValue) {
+        runOnDraw(new Runnable() {
+            @Override
+            public void run() {
+                GLES20.glUniform1f(location, floatValue);
+            }
+        });
+    }
+</code></pre>
+
+<p>在 onDraw 方法中就是执行具体的绘制了，在绘制的时候会执行 <code>runPendingOnDrawTasks</code> 方法，这是因为我们在 <code>init</code> 方法去中给着色器语言中的变量赋值，并没有立即生效，而是添加到了一个链表中，所以需要把链表中的任务执行完了才接着执行绘制。</p>
+
+<pre><code class="language-java">    public void onDraw(final int textureId, final FloatBuffer cubeBuffer,
+                       final FloatBuffer textureBuffer) {
+        GLES20.glUseProgram(mGLProgId);
+        // 执行赋值的任务
+        runPendingOnDrawTasks();
+		// 顶点和纹理坐标数据
+        GLES20.glVertexAttribPointer(mGLAttribPosition, 2, GLES20.GL_FLOAT, false, 0, cubeBuffer);
+        GLES20.glEnableVertexAttribArray(mGLAttribPosition);
+        GLES20.glVertexAttribPointer(mGLAttribTextureCoordinate, 2, GLES20.GL_FLOAT, false, 0, textureBuffer);
+        GLES20.glEnableVertexAttribArray(mGLAttribTextureCoordinate);
+		// 在绘制前的最后一波操作
+        onDrawArraysPre();
+        // 最终绘制
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
+    }
+</code></pre>
+
+<p>在绘制时，还需要给顶点坐标赋值，给纹理坐标赋值，GPUImageFilter 并没有去管理顶点坐标和纹理坐标，而是通过传递参数的形式，这样就不用去处理在前置摄像头与后置前摄像头、手机竖立放置与横屏放置时的关系了。</p>
+
+<p>在执行具体的 <code>glDrawArrays</code> 方法之前，还提供了一个 <code>onDrawArraysPre</code> 方法，在这个方法里面还可以执行绘制前的最后一波操作，在某些滤镜的实现中有用到了。</p>
+
+<p>最后才是 <code>glDrawArrays</code> 方法去完成绘制。</p>
+
+<p>当我们不需要 GPUImageFilter 进行绘制时，需要将它销毁掉，在 destroy 方法去进行销毁，并且提供 onDestory 方法去为某些滤镜提供自定义的销毁。</p>
+
+<pre><code class="language-java">    public final void destroy() {
+        mIsInitialized = false;
+        GLES20.glDeleteProgram(mGLProgId);
+        onDestroy();
+    }
+
+    public void onDestroy() {
+    }
+</code></pre>
+
+<p>在 GPUImageFilter 方法中定义了片段着色器脚本，这个脚本是将图像内容原样贴到了矩形上，并没有做特殊的图像处理操作。</p>
+
+<p>而其他滤镜中，更改了着色器脚本，也就会对图像进行其他的处理，在整个 GPUImage 项目中，最精华的也就是那些着色器脚本内容了，如何通过着色器去做图像处理又是一门高深的学问了~~~</p>
+
+<h3 id="解析-gpuimagefiltergroup-的代码实现">解析 GPUImageFilterGroup 的代码实现</h3>
+
+<p>当想要对图像进行多次处理时，就得考虑使用 GPUImageFilterGroup 了。</p>
+
+<p>GPUImageFilterGroup 继承自 GPUImageFilter， 顾名思义就是一系列 GPUImageFilter 滤镜的组合，可以把它类比为 ViewGroup ，ViewGroup 即可以包含 View ，也可以包含 ViewGroup ，同样 GPUImageFilterGroup 即可以包含 GPUImageFilter，也可以包含 GPUImageFilterGroup。</p>
+
+<p>在用 GPUImageFilterGroup 进行绘制时，需要把所有的滤镜内容都进行一遍绘制，而对于 GPUImageFilterGroup 包含 GPUImageFilterGroup 的情况，就需要把子 GPUImageFilterGroup 内的滤镜内容拆分出来，最终是用 <code>mMergedFilters</code> 变量表示所有非 GPUImageFilterGroup 类型的 GPUImageFilter 。</p>
+
+<pre><code class="language-java">	// 拿到所有非 GPUImageFilterGroup 的 GPUImageFilter
+    public void updateMergedFilters() {
+        List&lt;GPUImageFilter&gt; filters;
+        for (GPUImageFilter filter : mFilters) {
+	        // 如果滤镜是 GPUImageFilterGroup 类型，就把它拆分了
+            if (filter instanceof GPUImageFilterGroup) {
+	            // 递归调用 updateMergedFilters 方法去拆分
+                ((GPUImageFilterGroup) filter).updateMergedFilters();
+                // 拿到所有非 GPUImageFilterGroup 的 GPUImageFilter
+                filters = ((GPUImageFilterGroup) filter).getMergedFilters();
+                if (filters == null || filters.isEmpty())
+                    continue;
+                // 把 GPUImageFilter 添加到 mMergedFilters 中
+                mMergedFilters.addAll(filters);
+                continue;
+            }
+            // 如果是非 GPUImageFilterGroup 直接添加了
+            mMergedFilters.add(filter);
+        }
+    }
+</code></pre>
+
+<p>在 GPUImageFilterGroup 执行具体的绘制之前，还创建了和滤镜数量一样多的 FrameBuffer 帧缓冲和 Texture 纹理。</p>
+
+<pre><code class="language-java">		// 遍历时，选择 mMergedFilters 的长度，因为 mMergedFilters 里面才是保存的所有的 滤镜的长度。
+        if (mMergedFilters != null &amp;&amp; mMergedFilters.size() &gt; 0) {
+            size = mMergedFilters.size();
+            // FrameBuffer 帧缓冲数量
+            mFrameBuffers = new int[size - 1];
+            // 纹理数量
+            mFrameBufferTextures = new int[size - 1];
+
+            for (int i = 0; i &lt; size - 1; i++) {
+				// 生成 FrameBuffer 帧缓冲
+                GLES20.glGenFramebuffers(1, mFrameBuffers, i);
+                // 生成纹理
+                GLES20.glGenTextures(1, mFrameBufferTextures, i);
+                GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mFrameBufferTextures[i]);
+                GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, width, height, 0,
+                        GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null);
+                // 省略部分代码
+                GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffers[i]);
+                // 纹理绑定到帧缓冲上
+                GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,
+                        GLES20.GL_TEXTURE_2D, mFrameBufferTextures[i], 0);
+                // 省略部分代码
+            }
+        }
+</code></pre>
+
+<p>如果对 FrameBuffer 的使用不熟悉的话，请参考这篇文章：</p>
+
+<p><a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/">OpenGL 之 帧缓冲 使用实践</a></p>
+
+<pre><code class="language-java">        if (mMergedFilters != null) {
+            int size = mMergedFilters.size();
+            // 相机原始图像转换的纹理 ID
+            int previousTexture = textureId;
+            for (int i = 0; i &lt; size; i++) {
+                GPUImageFilter filter = mMergedFilters.get(i);
+                boolean isNotLast = i &lt; size - 1;
+                // 如果不是最后一个滤镜，绘制到 FrameBuffer 上，如果是最后一个，就绘制到了屏幕上
+                if (isNotLast) {
+                    GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffers[i]);
+                    GLES20.glClearColor(0, 0, 0, 0);
+                }
+				// 滤镜绘制代码
+                if (i == 0) {
+	                // 第一个滤镜绘制使用相机的原始图像纹理 ID 和参数传递过来的顶点以及纹理坐标
+                    filter.onDraw(previousTexture, cubeBuffer, textureBuffer);
+                } else if (i == size - 1) {
+	                // 
+                    filter.onDraw(previousTexture, mGLCubeBuffer, (size % 2 == 0) ? mGLTextureFlipBuffer : mGLTextureBuffer);
+                } else {
+	                // 中间的滤镜绘制在之前纹理基础上继续绘制，使用 mGLTextureBuffer 纹理坐标
+                    filter.onDraw(previousTexture, mGLCubeBuffer, mGLTextureBuffer);
+                }
+
+                if (isNotLast) {
+	                // 绑定到屏幕上
+                    GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+                    previousTexture = mFrameBufferTextures[i];
+                }
+            }
+        }
+</code></pre>
+
+<p>在执行具体的绘制时，只要不是最后一个滤镜，那么就会先绑定到 FrameBuffer 上，然后在 FrameBuffer 上进行绘制，这时绘制是绘制到了 FrameBuffer 绑定的纹理上，绘制结束后再接着解绑，绑定到屏幕上。</p>
+
+<p>如果是最后一个滤镜，那么就不用绑定到 FrameBuffer 上了，直接绘制到屏幕上即可。</p>
+
+<p>在这里有个细节，就是如下的代码：</p>
+
+<pre><code class="language-java">    filter.onDraw(previousTexture, mGLCubeBuffer, (size % 2 == 0) ? mGLTextureFlipBuffer : mGLTextureBuffer);
+</code></pre>
+
+<p>如果是最后一个滤镜，并且滤镜个数为偶数，则使用 mGLTextureFlipBuffer 的纹理坐标，否则使用 mGLTextureBuffer 的纹理坐标。</p>
+
+<pre><code class="language-java">// 对应的纹理坐标为 TEXTURE_NO_ROTATION
+ mGLTextureBuffer.put(TEXTURE_NO_ROTATION).position(0);
+
+// 对应的纹理坐标为 TEXTURE_NO_ROTATION，并且 true 的参数表示进行垂直上下翻转
+float[] flipTexture = TextureRotationUtil.getRotation(Rotation.NORMAL, false, true);
+mGLTextureFlipBuffer.put(flipTexture).position(0);
+</code></pre>
+
+<p>在第一个滤镜绘制时，使用的是参数传递过来的顶点坐标和纹理坐标，中间部分的滤镜使用的是 mGLTextureBuffer 纹理坐标，它对应的纹理坐标数组为 <code>TEXTURE_NO_ROTATION</code>。</p>
+
+<p>在前面讲到过，GPUImage 的纹理坐标原点是位于左上角的，所以使用 <code>TEXTURE_NO_ROTATION</code> 的纹理坐标实质上是将图像进行了上下翻转，两次调用<code>TEXTURE_NO_ROTATION</code>纹理坐标时，又将图像复原了，这也就可以解释为什么滤镜个数为偶数时，需要使用 <code>mGLTextureFlipBuffer</code> 纹理坐标将图像再进行一次翻转，而 <code>mGLTextureBuffer</code> 纹理坐标不需要了。</p>
+
+<p>当明白了 GPUImageFilter 和 GPUImageFilterGroup 的实现之后，再去看具体的 Renderer 的代码就明了多了。</p>
+
+<p>在 <code>onSurfaceCreated</code> 和 <code>onSurfaceChanged</code> 方法中分别对滤镜进行初始化以及设定宽、高，在 onDrawFrame 方法中调用具体的绘制。</p>
+
+<p>当切换滤镜时，先将上一个滤镜销毁掉，然后初始化新的滤镜并设定宽、高。</p>
+
+<pre><code class="language-java">				final GPUImageFilter oldFilter = mFilter;
+                mFilter = filter;
+                if (oldFilter != null) {
+                    oldFilter.destroy();
+                }
+                mFilter.init();
+                GLES20.glUseProgram(mFilter.getProgram());
+                mFilter.onOutputSizeChanged(mOutputWidth, mOutputHeight);
+</code></pre>
+
+<h2 id="图像拍摄保存处理">图像拍摄保存处理</h2>
+
+<p>在 GPUImage 中相机的拍摄是调用 Camera 的 <code>takePicture</code> 方法，在该方法中返回相机采集的原始图像数据，然后再对该数据进行一遍滤镜处理后并保存。</p>
+
+<p>调用的最后都是通过 <code>glReadPixels</code> 方法将处理后的图像读取出来，并保存为 Bitmap 。</p>
+
+<pre><code class="language-java">    private void convertToBitmap() {
+        int[] iat = new int[mWidth * mHeight];
+        IntBuffer ib = IntBuffer.allocate(mWidth * mHeight);
+        mGL.glReadPixels(0, 0, mWidth, mHeight, GL_RGBA, GL_UNSIGNED_BYTE, ib);
+        int[] ia = ib.array();
+		// glReadPixels 读取的内容是上下翻转的，要处理一下
+        for (int i = 0; i &lt; mHeight; i++) {
+            for (int j = 0; j &lt; mWidth; j++) {
+                iat[(mHeight - i - 1) * mWidth + j] = ia[i * mWidth + j];
+            }
+        }
+        mBitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
+        mBitmap.copyPixelsFromBuffer(IntBuffer.wrap(iat));
+    }
+</code></pre>
+
+<h2 id="小结">小结</h2>
+
+<p>对 GPUImage 的分析以及滤镜架构的设计大致就是这样了，这些都还不是它的精华啦，重要的还是它的那些着色器脚本，从那些着色器脚本中学会如果通过 <code>GLSL</code> 去实现图像处理算法。</p>
+
+              
+                <p>
+
+                
+                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
+
+                  <br/>
+
+                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-gpuimage-analysis/">OpenGL 之 GPUImage 源码分析</a>
+
+                
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/android/java-proxy-design-pattern/" data-toggle="tooltip" data-placement="top" title="Java 中的静态代理和动态代理">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.com/post/opengl/opengl-egl-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 之 EGL 使用实践">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/opengl/opengl-axially-aligned-bounding-box/">《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-light-mix/">《OpenGL ES 3.x 游戏开发》光照系列之效果混合</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-specular-light/">《OpenGL ES 3.x 游戏开发》光照系列之镜面光</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-diffuse-light/"> 《OpenGL ES 3.x 游戏开发》 光照系列之散射光</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-ambient-light/">《OpenGL ES 3.x 游戏开发》光照系列之环境光</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+

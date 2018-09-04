@@ -42,6 +42,17 @@
     </item>
     
     <item>
+      <title>OpenGL 之 GPUImage 源码分析</title>
+      <link>https://glumes.com/post/opengl/opengl-gpuimage-analysis/</link>
+      <pubDate>Sun, 02 Sep 2018 21:14:09 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-gpuimage-analysis/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/BradLarson/GPUImage&#34;&gt;GPUImage&lt;/a&gt; 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 &lt;a href=&#34;https://github.com/CyberAgent/android-gpuimage&#34;&gt;GPUImage&lt;/a&gt; ，本文也主要对 Android 版本的 GPUImage 进行分析。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Java 中的静态代理和动态代理</title>
       <link>https://glumes.com/post/android/java-proxy-design-pattern/</link>
       <pubDate>Tue, 28 Aug 2018 22:55:49 +0800</pubDate>
