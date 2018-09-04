@@ -252,6 +252,45 @@ Scan the QRCode to …">
           
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/">
+                <h2 class="post-title">OpenGL 之 帧缓冲  使用实践</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on September 4, 2018
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>帧缓冲(Framebuffer Object)，简称 <code>FBO</code>，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。</p>
+
+<p>除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。</p>
+
+<p>FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                
+                  #<a href="https://glumes.com/tags/fbo/">FBO</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/opengl/opengl-egl-usage/">
                 <h2 class="post-title">OpenGL 之 EGL 使用实践</h2>
                 
@@ -268,7 +307,11 @@ Scan the QRCode to …">
 
               <div class="post-entry">
                 
-                  OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。 而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 EGL 来完成这个
+                  <p>OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。</p>
+
+<p>而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 <code>EGL</code> 来完成这个转换工作。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-egl-usage/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -578,45 +621,6 @@ Scan the QRCode to …">
 
 <p></p>
                   <a href="https://glumes.com/post/opengl/opengl-depth-test/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/">
-                <h2 class="post-title">OpenGL 优化项之面剔除和注意点</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on July 19, 2018
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>现在我们用 OpenGL 绘制了如下的立方体：</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif" alt="" /></p>
-
-<p>不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。</p>
-
-<p>那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" class="post-read-more">[Read More]</a>
                 
               </div>
 

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/opengl/opengl-framebuffer-object-usage/</loc>
+    <lastmod>2018-09-04T22:28:11+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/opengl/opengl-egl-usage/</loc>
     <lastmod>2018-09-02T21:26:55+08:00</lastmod>
   </url>
@@ -354,7 +359,7 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-09-02T21:26:55+08:00</lastmod>
+    <lastmod>2018-09-04T22:28:11+08:00</lastmod>
   </url>
   
   <url>
@@ -414,6 +419,12 @@
   <url>
     <loc>https://glumes.com/tags/egl/</loc>
     <lastmod>2018-09-02T21:26:55+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/fbo/</loc>
+    <lastmod>2018-09-04T22:28:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -485,19 +496,19 @@
   
   <url>
     <loc>https://glumes.com/tags/opengl/</loc>
-    <lastmod>2018-09-02T21:26:55+08:00</lastmod>
+    <lastmod>2018-09-04T22:28:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/opengl/</loc>
-    <lastmod>2018-09-02T21:26:55+08:00</lastmod>
+    <lastmod>2018-09-04T22:28:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-09-02T21:26:55+08:00</lastmod>
+    <lastmod>2018-09-04T22:28:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   

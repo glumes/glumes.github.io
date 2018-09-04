@@ -182,6 +182,41 @@
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">
+                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用</h2>
+
+                
+                  <h3 class="post-subtitle">
+                    学习笔记内容摘录
+                  </h3>
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on July 17, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 <code>glDrawArrays</code> 或 <code>glDrawElements</code> 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。</p>
+
+<p>可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/">
                 <h2 class="post-title">《OpenGL ES 3.x 游戏开发》之颜色混合和使用</h2>
 
@@ -507,53 +542,6 @@
 
 <p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-texture/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">
-                <h2 class="post-title">OpenGL 学习系列---投影矩阵</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 24, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate/">OpenGL 坐标系统</a> 文章中，根据点的坐标变换得出了如下的公式：</p>
-
-<div>$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$</div>
-
-<p>这个公式每左乘一个矩阵，都代表了一种坐标系的变换。</p>
-
-<p>转化为着色器脚本语言如下：</p>
-
-<pre><code class="language-glsl">attribute vec4 a_Position;
-uniform mat4 u_ModelMatrix;
-uniform mat4 u_ProjectionMatrix;
-uniform mat4 u_ViewMatrix;
-void main()
-{
-    gl_Position  = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
-}
-</code></pre>
-
-<p>本篇文章就主要是对投影矩阵来分析的。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/" class="post-read-more">[Read More]</a>
                 
               </div>
 
