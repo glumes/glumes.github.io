@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>OpenGL 之 帧缓冲  使用实践</title>
+  <meta property="og:title" content="OpenGL 之 帧缓冲  使用实践" />
+  <meta name="twitter:title" content="OpenGL 之 帧缓冲  使用实践" />
+  <meta name="description" content="帧缓冲(Framebuffer Object)，简称 FBO，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。
+
+除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。
+
+FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。
+
+">
+  <meta property="og:description" content="帧缓冲(Framebuffer Object)，简称 FBO，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。
+
+除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。
+
+FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。
+
+">
+  <meta name="twitter:description" content="帧缓冲(Framebuffer Object)，简称 FBO，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。
+
+除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。
+
+FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深 …">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.48" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fuxvv2w99zj20zk0njgof.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>OpenGL 之 帧缓冲  使用实践</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on September 4, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">OpenGL 之 帧缓冲  使用实践</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+        
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Tue Sep 4, 2018</h4>
+    </section>
+    <h5 id="wc">1400 Words|Read in about 3 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/fbo/">FBO</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>帧缓冲(Framebuffer Object)，简称 <code>FBO</code>，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。</p>
+
+<p>除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。</p>
+
+<p>FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。</p>
+
+<p></p>
+
+<p>渲染缓冲(Renderbuffer Object)，简称 <code>RBO</code>，由应用程序分配的 2D 图像缓冲区，可以用于分配和存储 <strong>深度</strong> 和 <strong>模板</strong> 值，也可以用作 FBO 的 <em>深度</em> 或者 <em>模板</em> 附件，另外，纹理也可以作为 FBO 的颜色和深度附件。</p>
+
+<p>帧缓冲与渲染缓冲和纹理的关系如下：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fuxlr1hxafj20a2081dg2.jpg" alt="" /></p>
+
+<h2 id="使用概述">使用概述</h2>
+
+<p>帧缓冲的使用，首先就创建对应的帧缓冲对象，然后给它添加对应的附件，比如颜色附件或者深度附件等。</p>
+
+<p>接着就是切换到帧缓冲渲染，在帧缓冲中进行绘制，此时绘制的内容都是记录在上一步添加的颜色附件或者深度附件上了。</p>
+
+<p>然后切换到屏幕的缓冲区，这时可以把帧缓冲中记录的颜色或者深度信息取出来，再把他们绘制到屏幕上。</p>
+
+<p>帧缓冲的使用看似很简单，但是用处却很普遍，使用帧缓冲可以在一些相机应用中做美颜处理、滤镜处理，也可以用来作贴纸等等效果。</p>
+
+<h2 id="使用步骤">使用步骤</h2>
+
+<h3 id="创建-fbo">创建 FBO</h3>
+
+<p>按照上面的步骤，首先是创建 FBO 。</p>
+
+<pre><code class="language-java">        int[] framebuffers = new int[1];
+        GLES20.glGenFramebuffers(1, framebuffers, 0);
+</code></pre>
+
+<p>和 OpenGL 中创建的大多对象相同，都是通过一个 <code>int</code> 型对象来表示的。</p>
+
+<p>接下来就可以给这个 FBO 添加一些附件了。</p>
+
+<h3 id="绑定纹理">绑定纹理</h3>
+
+<pre><code class="language-java">// 把纹理绑定到颜色附件
+GLES20.glFramebufferTexture2D(
+    GLES20.GL_FRAMEBUFFER, 
+    GLES20.GL_COLOR_ATTACHMENT0, // 作为颜色附件
+    GLES20.GL_TEXTURE_2D, 
+    fboTextureId, 
+    0);
+</code></pre>
+
+<p>通过 <code>glFramebufferTexture2D</code> 函数可以将纹理绑定到 FBO 上作为附件，在绑定时有多种附件选项可以选择。</p>
+
+<ul>
+<li>GL_COLOR_ATTACHMENT0<br />
+
+<ul>
+<li>颜色附件</li>
+</ul></li>
+<li>GL_DEPTH_ATTACHMENT<br />
+
+<ul>
+<li>深度附件</li>
+</ul></li>
+<li>GL_STENCIL_ATTACHMENT<br />
+
+<ul>
+<li>模板附件</li>
+</ul></li>
+</ul>
+
+<p>当然作为纹理，只有颜色和深度两种可以选择。</p>
+
+<p>如果是使用 OpenGL 3.x 版本，在绑定 FBO 时，还可以选择是绑定只读还是只写的 FBO。</p>
+
+<ul>
+<li>GL_READ_FRAMEBUFFER<br />
+
+<ul>
+<li>只读的 FBO</li>
+</ul></li>
+<li>GL_DRAW_FRAMEBUFFER<br />
+
+<ul>
+<li>只写的 FBO</li>
+</ul></li>
+</ul>
+
+<p>如果是使用 <code>GL_FRAMEBUFFER</code> 的话，那么读写皆可以。</p>
+
+<h3 id="绑定渲染缓冲">绑定渲染缓冲</h3>
+
+<p>除了纹理之外，还可以绑定到渲染缓冲。</p>
+
+<p>首先还是创建一个渲染缓冲对象：</p>
+
+<pre><code class="language-java">        int[] renderbuffers = new int[1];
+        GLES20.glGenRenderbuffers(1, renderbuffers, 0);
+</code></pre>
+
+<p>之后，要绑定到当前的渲染缓冲对象，并初始化渲染缓冲对象的数据存储，再把它添加到 FBO 上。</p>
+
+<pre><code class="language-java">// 绑定到当前渲染缓冲对象
+GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, renderbufferId);
+// 初始化渲染数据存储
+GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_ATTACHMENT, width, height);
+// 将渲染缓冲添加到 FBO 上
+GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT, GLES20.GL_RENDERBUFFER, renderbufferId);
+</code></pre>
+
+<p>绑定渲染缓冲对象，并且初始化数据存储这一步有点类似于创建纹理并且初始化的操作。</p>
+
+<pre><code class="language-java">        // 绑定纹理
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
+        // 初始化纹理数据
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGB, width, height,
+                0, GLES20.GL_RGB, GLES20.GL_UNSIGNED_SHORT_5_6_5, null);
+</code></pre>
+
+<h3 id="渲染">渲染</h3>
+
+<p>在渲染时，先渲染到 FBO 上，在渲染到屏幕上。</p>
+
+<p>首先要切换到 FBO 进行渲染：</p>
+
+<pre><code class="language-java">GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, fboId);
+</code></pre>
+
+<p>如果 <code>fboId</code> 参数为 0 ，则代表切换到默认的屏幕上进行绘制。</p>
+
+<p>此时就可以进行正常的绘制，由添加的附件去记录绘制的信息。</p>
+
+<pre><code class="language-java">// 加载纹理
+int textureId = TextureHelper.loadTexture(context, R.drawable.lgq);
+// 将纹理绘制到 FBO 上
+mTextureRect.drawSelf(textureId);
+</code></pre>
+
+<p>在 FBO 上绘制一张纹理贴图，此时 FBO 所绑定的颜色附件，会记录下纹理贴图的所有颜色内容。</p>
+
+<p>也就是说，FBO 所绑定的纹理作为颜色附件，此时它已经被渲染上了颜色，而这个颜色就是我们绘制的内容，那么接下来就可以使用 FBO 绑定的纹理继续用来绘制。</p>
+
+<pre><code class="language-java">        // 切换到屏幕的缓冲区
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+        // 使用 FBO 所绑定的纹理进行绘制
+        mTextureRect.drawSelf(fboTextureId);
+</code></pre>
+
+<p>切换到屏幕的缓冲区后，直接使用 FBO 绑定的纹理进行绘制，此时看到的效果和未使用 FBO 是相同的。</p>
+
+<p>但是内部的绘制就是完全不一样了。</p>
+
+<p>文章中具体代码部分，可以参考我的 Github 项目，欢迎 Star 。</p>
+
+<blockquote>
+<p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
+</blockquote>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li><a href="https://blog.csdn.net/cauchyweierstrass/article/details/53166940">https://blog.csdn.net/cauchyweierstrass/article/details/53166940</a></li>
+<li>《OpenGL ES 3.x 游戏开发下卷》</li>
+</ol>
+
+              
+                <p>
+
+                
+                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
+
+                  <br/>
+
+                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/">OpenGL 之 帧缓冲  使用实践</a>
+
+                
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/opengl/opengl-egl-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 之 EGL 使用实践">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/opengl/opengl-egl-usage/">OpenGL 之 EGL 使用实践</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-gpuimage-analysis/">OpenGL 之 GPUImage 源码分析</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-axially-aligned-bounding-box/">《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-light-mix/">《OpenGL ES 3.x 游戏开发》光照系列之效果混合</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-tutorial-specular-light/">《OpenGL ES 3.x 游戏开发》光照系列之镜面光</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.48</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+

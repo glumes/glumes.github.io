@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.48" />
   <link rel="canonical" href="https://glumes.com/post/" />
   <link rel="alternate" href="https://glumes.com/post/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -180,6 +180,101 @@
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
         <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-jni-basic-operation/">
+                <h2 class="post-title">Android JNI 基本操作 </h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on May 7, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C++ 方法，只要专注写好 C++ 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-jni-basic-operation/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-camrea-api-evolution/">
+                <h2 class="post-title">Android Camera 模型及 API 接口演变</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on April 12, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-camrea-api-evolution/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/camera/">Camera</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/">
+                <h2 class="post-title">Android 相机开发中的尺寸和方向问题</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on April 10, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <blockquote>
+<p>*本篇文章已授权微信公众号 guolin_blog （郭霖）独家发布</p>
+</blockquote>
+
+<p>在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/camera/">Camera</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/opengl/opengl-tutorial-texture/">
@@ -408,109 +503,6 @@ void main()
 
             </article>
           
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/">
-                <h2 class="post-title">OpenGL 学习系列---坐标系统</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    一个点的坐标转换的心路历程
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 23, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在前面绘制基本图形中，遇到了很明显的问题，圆形不像圆形，正多边形不像正多边形？就像下面图形一样：</p>
-
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png" /></p>
-
-<p>好好的正五边形却东倒西歪的，这就是因为我们前面的绘制都是把它当成 二维 的绘制，而在 OpenGL 中却是绘制 三维的。在二维和三维之间还有个转换，而之前为了方便学习则忽略了这个转换，现在就要开始理解它了 —— <code>坐标系统</code>！！</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/life/journey-with-lover/">
-                <h2 class="post-title">泸沽湖-丽江之行</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    甜蜜之旅
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 4, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>元旦假期和亲爱的去了趟 泸沽湖-丽江。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/life/journey-with-lover/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/life/">Life</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/docker/docker-summary/">
-                <h2 class="post-title">Docker 基础知识</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>可以简单地将 Docker 理解为一种沙盒 Sandbox 。每个容器内运行一个应用，不同的容器相互隔离，容器之间也可以建立通信机制。</p>
-
-<p>容器的创建和停止都十分快速，容器自身对资源的需求也十分有限，远远低于虚拟机，甚至把容器当做应用本身也没问题。</p>
-
-<p>Docker 容器在启动速度、硬盘使用、性能、系统支持量、隔离性等方面与传统的虚拟机相比都有明显的优势。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/docker/docker-summary/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/docker/">Docker</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
         </div>
         
           <ul class="pager main-pager">
@@ -532,13 +524,12 @@ void main()
 
 <ul class="pagination">
     
-    <li>
-        <a href="/post/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li class="page-item">
+        <a href="/post/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li
-    >
-    <a href="/post/page/3/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li class="page-item">
+    <a href="/post/page/3/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -550,8 +541,7 @@ void main()
         
     
     
-    <li
-    ><a href="/post/">1</a></li>
+    <li class="page-item"><a class="page-link" href="/post/">1</a></li>
     
     
     
@@ -562,8 +552,7 @@ void main()
         
     
     
-    <li
-    ><a href="/post/page/2/">2</a></li>
+    <li class="page-item"><a class="page-link" href="/post/page/2/">2</a></li>
     
     
     
@@ -574,8 +563,7 @@ void main()
         
     
     
-    <li
-    ><a href="/post/page/3/">3</a></li>
+    <li class="page-item"><a class="page-link" href="/post/page/3/">3</a></li>
     
     
     
@@ -586,8 +574,7 @@ void main()
         
     
     
-    <li
-    class="active"><a href="/post/page/4/">4</a></li>
+    <li class="page-item active"><a class="page-link" href="/post/page/4/">4</a></li>
     
     
     
@@ -598,8 +585,7 @@ void main()
         
     
     
-    <li
-    ><a href="/post/page/5/">5</a></li>
+    <li class="page-item"><a class="page-link" href="/post/page/5/">5</a></li>
     
     
     
@@ -610,7 +596,7 @@ void main()
         
     
     
-    <li class="disabled"><span aria-hidden="true">&hellip;</span></li>
+    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
     
     
     
@@ -621,17 +607,24 @@ void main()
         
     
     
-    <li
-    ><a href="/post/page/7/">7</a></li>
     
     
-    <li
-    >
-    <a href="/post/page/5/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/post/page/8/">8</a></li>
+    
+    
+    <li class="page-item">
+    <a href="/post/page/5/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li>
-        <a href="/post/page/7/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li class="page-item">
+        <a href="/post/page/8/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -701,7 +694,7 @@ void main()
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.48</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

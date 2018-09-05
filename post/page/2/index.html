@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.48" />
   <link rel="canonical" href="https://glumes.com/post/" />
   <link rel="alternate" href="https://glumes.com/post/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -180,6 +180,117 @@
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
         <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-depth-test/">
+                <h2 class="post-title">OpenGL 深度测试与精度值的那些事</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on July 20, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。</p>
+
+<p>直接看一个没有使用深度测试的绘制：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532052034/code/undepth_test.gif" alt="未开启深度测试的情况" /></p>
+
+<p>按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。</p>
+
+<p>这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。</p>
+
+<p>要解决这种问题，就得使用深度测试了。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/opengl/opengl-depth-test/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/">
+                <h2 class="post-title">OpenGL 优化项之面剔除和注意点</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on July 19, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>现在我们用 OpenGL 绘制了如下的立方体：</p>
+
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif" alt="" /></p>
+
+<p>不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。</p>
+
+<p>那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/">
+                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用</h2>
+
+                
+                  <h3 class="post-subtitle">
+                    学习笔记内容摘录
+                  </h3>
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on July 18, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>在之前使用 <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">OpenGL 顶点缓冲区 VBO 的使用</a> 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。</p>
+
+<p>这就存在了一些重复的操作。</p>
+
+<p>在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">
@@ -410,149 +521,6 @@
 
             </article>
           
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/">
-                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》 3D 模型加载和渲染</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    学习笔记内容摘录
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 2, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在使用 OpenGL 绘制时，我们最多绘制的是一些简单的图形，比如三角形、圆形、立方体等，因为这些图形的顶点数量不多，还是可以手动的写出那些顶点的，可要是绘制一些复杂图形该怎么办呢？</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/">
-                <h2 class="post-title">Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on June 29, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。</p>
-
-<p>再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/kotlin/">Kotlin</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/">
-                <h2 class="post-title">OpenGL 的 glDrawElements  绘制方法</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on May 25, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在之前的绘制中，我们都是通过 <code>glDrawArrays</code> 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。</p>
-
-<p>回顾一下之前提到的绘制类型：</p>
-
-<table>
-<thead>
-<tr>
-<th>绘制类型</th>
-<th>绘制方式</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>GL_POINTS</td>
-<td>将传入的顶点坐标作为单独的点绘制</td>
-</tr>
-
-<tr>
-<td>GL_LINES</td>
-<td>将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线</td>
-</tr>
-
-<tr>
-<td>GL_LINE_STRIP</td>
-<td>将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线</td>
-</tr>
-
-<tr>
-<td>GL_LINE_LOOP</td>
-<td>将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。</td>
-</tr>
-
-<tr>
-<td>GL_TRIANGLES</td>
-<td>将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形</td>
-</tr>
-
-<tr>
-<td>GL_TRIANGLE_STRIP</td>
-<td>将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形</td>
-</tr>
-
-<tr>
-<td>GL_TRIANGLE_FAN</td>
-<td>将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形</td>
-</tr>
-</tbody>
-</table>
-
-<p></p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
         </div>
         
           <ul class="pager main-pager">
@@ -574,13 +542,12 @@
 
 <ul class="pagination">
     
-    <li>
-        <a href="/post/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li class="page-item">
+        <a href="/post/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li
-    >
-    <a href="/post/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li class="page-item">
+    <a href="/post/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -592,8 +559,7 @@
         
     
     
-    <li
-    ><a href="/post/">1</a></li>
+    <li class="page-item"><a class="page-link" href="/post/">1</a></li>
     
     
     
@@ -604,8 +570,7 @@
         
     
     
-    <li
-    class="active"><a href="/post/page/2/">2</a></li>
+    <li class="page-item active"><a class="page-link" href="/post/page/2/">2</a></li>
     
     
     
@@ -616,8 +581,7 @@
         
     
     
-    <li
-    ><a href="/post/page/3/">3</a></li>
+    <li class="page-item"><a class="page-link" href="/post/page/3/">3</a></li>
     
     
     
@@ -628,16 +592,7 @@
         
     
     
-    <li class="disabled"><span aria-hidden="true">&hellip;</span></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
+    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
     
     
     
@@ -657,17 +612,33 @@
         
     
     
-    <li
-    ><a href="/post/page/7/">7</a></li>
     
     
-    <li
-    >
-    <a href="/post/page/3/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/post/page/8/">8</a></li>
+    
+    
+    <li class="page-item">
+    <a href="/post/page/3/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li>
-        <a href="/post/page/7/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li class="page-item">
+        <a href="/post/page/8/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -737,7 +708,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.48</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

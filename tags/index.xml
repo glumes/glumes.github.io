@@ -68,6 +68,24 @@
     </item>
     
     <item>
+      <title>Egl</title>
+      <link>https://glumes.com/tags/egl/</link>
+      <pubDate>Sun, 02 Sep 2018 21:26:55 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/egl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fbo</title>
+      <link>https://glumes.com/tags/fbo/</link>
+      <pubDate>Tue, 04 Sep 2018 22:28:11 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/fbo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Ffmpeg</title>
       <link>https://glumes.com/tags/ffmpeg/</link>
       <pubDate>Fri, 22 Dec 2017 16:05:30 +0800</pubDate>
@@ -142,7 +160,7 @@
     <item>
       <title>Opengl</title>
       <link>https://glumes.com/tags/opengl/</link>
-      <pubDate>Thu, 26 Jul 2018 12:47:49 +0800</pubDate>
+      <pubDate>Tue, 04 Sep 2018 22:28:11 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/tags/opengl/</guid>
       <description></description>

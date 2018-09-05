@@ -8,10 +8,49 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Tue, 28 Aug 2018 22:55:49 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 04 Sep 2018 22:28:11 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 之 帧缓冲  使用实践</title>
+      <link>https://glumes.com/post/opengl/opengl-framebuffer-object-usage/</link>
+      <pubDate>Tue, 04 Sep 2018 22:28:11 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-framebuffer-object-usage/</guid>
+      <description>&lt;p&gt;帧缓冲(Framebuffer Object)，简称 &lt;code&gt;FBO&lt;/code&gt;，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。&lt;/p&gt;
+
+&lt;p&gt;除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。&lt;/p&gt;
+
+&lt;p&gt;FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>OpenGL 之 EGL 使用实践</title>
+      <link>https://glumes.com/post/opengl/opengl-egl-usage/</link>
+      <pubDate>Sun, 02 Sep 2018 21:26:55 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-egl-usage/</guid>
+      <description>&lt;p&gt;OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。&lt;/p&gt;
+
+&lt;p&gt;而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 &lt;code&gt;EGL&lt;/code&gt; 来完成这个转换工作。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>OpenGL 之 GPUImage 源码分析</title>
+      <link>https://glumes.com/post/opengl/opengl-gpuimage-analysis/</link>
+      <pubDate>Sun, 02 Sep 2018 21:14:09 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-gpuimage-analysis/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/BradLarson/GPUImage&#34;&gt;GPUImage&lt;/a&gt; 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 &lt;a href=&#34;https://github.com/CyberAgent/android-gpuimage&#34;&gt;GPUImage&lt;/a&gt; ，本文也主要对 Android 版本的 GPUImage 进行分析。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Java 中的静态代理和动态代理</title>
@@ -445,7 +484,11 @@
       <pubDate>Tue, 10 Apr 2018 16:09:32 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/</guid>
-      <description>&lt;p&gt;在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。&lt;/p&gt;
+      <description>&lt;blockquote&gt;
+&lt;p&gt;*本篇文章已授权微信公众号 guolin_blog （郭霖）独家发布&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
