@@ -19,7 +19,7 @@
       <pubDate>Sun, 09 Sep 2018 15:20:42 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/post/opengl/opengl-glsl-3-mark/</guid>
-      <description>&lt;p&gt;在之前的文章中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。&lt;/p&gt;
+      <description>&lt;p&gt;在之前的&lt;a href=&#34;https://glumes.com/post/opengl/opengl-glsl-2-mark/&#34;&gt;文章&lt;/a&gt;中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。&lt;/p&gt;
 
 &lt;p&gt;本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。&lt;/p&gt;
 
