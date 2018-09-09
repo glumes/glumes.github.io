@@ -34,7 +34,7 @@ Scan the QRCode to …">
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.48" />
+  <meta name="generator" content="Hugo 0.31.1" />
   <link rel="canonical" href="https://glumes.com/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -250,6 +250,125 @@ Scan the QRCode to …">
 
         <div class="posts-list">
           
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-rxjava/">
+                <h2 class="post-title">安卓异步之RxJava</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on January 31, 2018
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-rxjava/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                
+                  #<a href="https://glumes.com/tags/rxjava/">RxJava</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/understand-state-machine/">
+                <h2 class="post-title">理解状态机</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on January 31, 2018
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>理解状态机的原理及使用。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/understand-state-machine/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/statemachine/">StateMachine</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">
+                <h2 class="post-title">OpenGL 学习系列---投影矩阵</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on January 24, 2018
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate/">OpenGL 坐标系统</a> 文章中，根据点的坐标变换得出了如下的公式：</p>
+
+<div>$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$</div>
+
+<p>这个公式每左乘一个矩阵，都代表了一种坐标系的变换。</p>
+
+<p>转化为着色器脚本语言如下：</p>
+
+<pre><code class="language-glsl">attribute vec4 a_Position;
+uniform mat4 u_ModelMatrix;
+uniform mat4 u_ProjectionMatrix;
+uniform mat4 u_ViewMatrix;
+void main()
+{
+    gl_Position  = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
+}
+</code></pre>
+
+<p>本篇文章就主要是对投影矩阵来分析的。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                
+                </span>
+              
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/">
@@ -500,121 +619,6 @@ Scan the QRCode to …">
               
             </article>
           
-            <article class="post-preview">
-              <a href="https://glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/">
-                <h2 class="post-title">FFmpeg 3.0 版本视频解码浅析 </h2>
-                
-                  <h3 class="post-subtitle">
-                  MPEG封装格式到PCM数据格式
-                  </h3>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on December 22, 2017
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>有了上一篇文章基础，这里就只关注 FFmpeg 如何解析的具体实践了。</p>
-
-<p>在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。</p>
-
-<p>在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/ffmpeg/">FFmpeg</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/ffmpeg/encode-and-decode-summary/">
-                <h2 class="post-title">音视频编解码的那些基础理论</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on December 22, 2017
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>最近在研究学习 FFmpeg，从网上参考了好多资料，其中最了不起的就当属——<a href="http://blog.csdn.net/leixiaohua1020">雷霄骅</a>大神了，若没有他的博文，别说入门了，可能连门在哪里都不知道，在此还是要表达一下对雷神的敬佩和敬仰。</p>
-
-<p>本文主要讲的是视频文件的解码，从视频文件的封装格式解码到原始数据格式，通过讲解涉及到的各种概念，从而理清整个思路和流程。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/ffmpeg/encode-and-decode-summary/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/ffmpeg/">FFmpeg</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/rxjava-wrapper-dialog/">
-                <h2 class="post-title">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on December 22, 2017
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>之前有写过一篇文章：<a href="http://www.glumes.com/wrapper-callback-by-rxjava/">用 RxJava 封装回调方法 CallBack</a>。</p>
-
-<p>RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。</p>
-
-<p>这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/rxjava-wrapper-dialog/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/rxjava/">RxJava</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
         </div>
 
         
@@ -637,12 +641,13 @@ Scan the QRCode to …">
 
 <ul class="pagination">
     
-    <li class="page-item">
-        <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li>
+        <a href="/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li class="page-item">
-    <a href="/page/4/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li
+    >
+    <a href="/page/4/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -654,7 +659,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/">1</a></li>
+    <li
+    ><a href="/">1</a></li>
     
     
     
@@ -665,7 +671,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/2/">2</a></li>
+    <li
+    ><a href="/page/2/">2</a></li>
     
     
     
@@ -676,7 +683,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/3/">3</a></li>
+    <li
+    ><a href="/page/3/">3</a></li>
     
     
     
@@ -687,7 +695,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/4/">4</a></li>
+    <li
+    ><a href="/page/4/">4</a></li>
     
     
     
@@ -698,7 +707,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item active"><a class="page-link" href="/page/5/">5</a></li>
+    <li
+    class="active"><a href="/page/5/">5</a></li>
     
     
     
@@ -709,7 +719,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/6/">6</a></li>
+    <li
+    ><a href="/page/6/">6</a></li>
     
     
     
@@ -720,7 +731,7 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
+    <li class="disabled"><span aria-hidden="true">&hellip;</span></li>
     
     
     
@@ -731,15 +742,17 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/8/">8</a></li>
+    <li
+    ><a href="/page/8/">8</a></li>
     
     
-    <li class="page-item">
-    <a href="/page/6/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    <li
+    >
+    <a href="/page/6/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li class="page-item">
-        <a href="/page/8/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li>
+        <a href="/page/8/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -809,7 +822,7 @@ Scan the QRCode to …">
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.48</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

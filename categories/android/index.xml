@@ -8,10 +8,21 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Tue, 28 Aug 2018 22:55:49 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 09 Sep 2018 14:54:57 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/android/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>开源库之 Retrofit 源码分析</title>
+      <link>https://glumes.com/post/android/retrofit-analysis/</link>
+      <pubDate>Sun, 09 Sep 2018 14:54:57 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/retrofit-analysis/</guid>
+      <description>&lt;p&gt;分析一波 Retrofit 的源码实现。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Java 中的静态代理和动态代理</title>

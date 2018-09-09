@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>OpenGL ES 3.0 着色器语言 GLSL 学习 Mark </title>
+  <meta property="og:title" content="OpenGL ES 3.0 着色器语言 GLSL 学习 Mark " />
+  <meta name="twitter:title" content="OpenGL ES 3.0 着色器语言 GLSL 学习 Mark " />
+  <meta name="description" content="在之前的[文章]()中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。
+
+本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。
+
+">
+  <meta property="og:description" content="在之前的[文章]()中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。
+
+本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。
+
+">
+  <meta name="twitter:description" content="在之前的[文章]()中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。
+
+本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-glsl-3-mark/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-glsl-3-mark/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fv3beohff0j20hs0bkdge.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>OpenGL ES 3.0 着色器语言 GLSL 学习 Mark </h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on September 9, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">OpenGL ES 3.0 着色器语言 GLSL 学习 Mark </h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+        
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Sun Sep 9, 2018</h4>
+    </section>
+    <h5 id="wc">4200 Words|Read in about 9 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/glsl/">GLSL</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>在之前的[文章]()中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。</p>
+
+<p>本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。</p>
+
+<p></p>
+
+<h2 id="数据类型">数据类型</h2>
+
+<h3 id="标量">标量</h3>
+
+<p>标量也被称为 &ldquo;无向量&rdquo;，其值只有大小，并不具有方向。</p>
+
+<p>OpenGL ES 着色器语言支持的标量类型如下：</p>
+
+<ul>
+<li>布尔型    bool</li>
+<li>有符号整型和无符号整型    int/uint</li>
+<li>浮点型   float</li>
+</ul>
+
+<blockquote>
+<p>相对于 OpenGL ES 2.0 ，多了无符号整型 uint 。</p>
+</blockquote>
+
+<h3 id="向量">向量</h3>
+
+<p>在 GLSL 中，向量可以看做是同样类型的标量组成的，其基本类型也分为 bool、int 、uint 及 float 4 种。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftsvggbzsej20ou06njsm.jpg" alt="" /></p>
+
+<h3 id="矩阵">矩阵</h3>
+
+<p>OpenGL ES 3.0 支持的矩阵类型比 OpenGL ES 2.0 多了一些。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftsvi91fqnj20ot06l0tq.jpg" alt="" /></p>
+
+<p>在 OpenGL 中，矩阵是按列的顺序组织的，也就是一个矩阵可以看作由几个列向量组成。</p>
+
+<h3 id="采样器">采样器</h3>
+
+<p>采样器是专门进行纹理采样的相关操作。一般情况下，一个采样器变量代表一幅或一套纹理贴图。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftsvkyfrhsj20ov08j412.jpg" alt="" /></p>
+
+<h3 id="结构体">结构体</h3>
+
+<p>使用 <code>struct</code> 关键字声明结构体。</p>
+
+<pre><code class="language-glsl">struct info{
+	vec3 color;
+	vec3 position;
+	vec2 textureCoor;
+}
+
+info CubeInfo;
+</code></pre>
+
+<h3 id="数组">数组</h3>
+
+<p>在 GLSL 中，可以声明任何类型的数组。声明数组的方式主要有两种，具体如下：</p>
+
+<ul>
+<li>在声明数组的同时，指定数组大小。</li>
+</ul>
+
+<pre><code class="language-glsl">vec3 position[20];
+
+</code></pre>
+
+<ul>
+<li>在声明数组并初始化的同时，可以不指定数组的大小。</li>
+</ul>
+
+<pre><code class="language-glsl">float x[] = float[2](1.0,2.0);
+float y[] = float[](1.0,2.0,3.0);
+</code></pre>
+
+<h3 id="空类型">空类型</h3>
+
+<p>空类型使用 <code>void</code> 表示，仅用来声明不返回任何值的函数，比如着色器中的 main 函数就是一个返回值为 <code>void</code> 类型的函数。</p>
+
+<h2 id="存储限定符">存储限定符</h2>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftsvoph5x8j20ow060q49.jpg" alt="" /></p>
+
+<p>限定符的使用应该放在变量前面，且使用 in、uniform 以及 out 限定符修饰的变量必须为全局变量。</p>
+
+<p>着色器语言中没有默认限定符的概念，因此如果有需要，必须为全局变量明确指定需要的限定符。</p>
+
+<h3 id="in-centroid-in-限定符">in / centroid in 限定符</h3>
+
+<p>in / centroid in 限定符修饰的全局变量又称为输入变量。</p>
+
+<p>对于顶点着色器的输入变量只能用 in 限定符来修饰，不能使用 centroid in 限定符和 imterpolation 限定符来修饰。</p>
+
+<p>in 修饰符有点类似于 OpenGL ES 2.0 中的 attribute 限定符。</p>
+
+<p>对于片元着色器可以使用 in 或 centroid in 限定符来修饰全局变量。</p>
+
+<h3 id="out-centroid-out-限定符">out / centroid out 限定符</h3>
+
+<p>out / centroid out 限定符修饰的全局变量又称为输出变量。使用情况分为如下两种情况：</p>
+
+<ul>
+<li>顶点着色器的输出变量</li>
+</ul>
+
+<p>顶点着色器中可以使用 out 或者 centroid out 限定符修饰全局变量，其变量用于向渲染管线后继阶段传递当前顶点的数据。</p>
+
+<ul>
+<li>片元着色器的输出变量</li>
+</ul>
+
+<p>在片元着色器中只能使用 out 限定符来修饰全局变量，而不能使用 centroid out 限定符。</p>
+
+<p>片元着色器中的 out 变量一般指的是由片元着色器写入计算完成片元颜色值的变量。</p>
+
+<blockquote>
+<p>对于顶点着色器而言，一般是既声明 out 变量，又对 out 变量进行赋值用以传递给片元着色器。而片元着色器中声明 in 变量用于接收顶点着色器传过来的值即可，是不可以对 in 变量赋值的。另外，在 OpenGL ES 3.0 中片元着色器内的内建输出变量 gl_FragColor 不存在了，需要自己声明 out (vec4) 变量，用声明的 out 变量替代 gl_FragColor 内建变量。</p>
+</blockquote>
+
+<h3 id="uniform-限定符">uniform 限定符</h3>
+
+<p>uniform 为一致变量限定符，一致变量指的是对于同一组顶点组成的单个 3D 物体中所有顶点都相同的量。</p>
+
+<h3 id="const-限定符">const 限定符</h3>
+
+<p>用 const 限定符修饰的变量其值是不可以变的，也就是常量，又称为编译时常量。</p>
+
+<h3 id="插值限定符">插值限定符</h3>
+
+<p>插值限定符，其主要用于控制顶点着色器传递到片元着色器数据的插值方式。</p>
+
+<p>插值限定符包含如下两种：</p>
+
+<ul>
+<li>smooth</li>
+<li>flat</li>
+</ul>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftsw70uh21j20ou02vdgc.jpg" alt="" /></p>
+
+<blockquote>
+<p>若使用插值限定符，则该限定符应该在 in、centroid in 、out 或者 centroid out 之前使用，且只能用来修饰顶点着色器的 out 变量与片元着色器中对应的 in 变量。当未使用任何插值限定符时，默认的插值方式为 smooth 。</p>
+</blockquote>
+
+<ul>
+<li>smooth 限定符</li>
+</ul>
+
+<p>如果顶点着色器中 out 变量之前含有 smooth 限定符或者不含有任何限定符，则传递到后继片元着色器对应的 in 变量的值，是在光栅化阶段由管线根据片元所属图元各个顶点对应的顶点着色器对此 out 变量的赋值情况，及片元与各顶点的位置关系插值产生。</p>
+
+<ul>
+<li>flat 限定符</li>
+</ul>
+
+<p>如果顶点着色器中 out 变量之前含有 flat 限定符，则传递到后继片元着色器中对应的 in 变量的值不是在光栅化阶段插值产生的，一般是由图元的最后一个顶点对应的顶点着色器对此 out 变量所赋的值决定的。此时，图元中每个片元的此项值均相同。</p>
+
+<p>若顶点着色器中的输出变量的类型为整型标量或者整型向量，则变量必须使用 flat 限定符修饰。与之对应，若片元着色器中的输入变量的类型为整型标量或整型向量，变量必须用 flat 限定符修饰。</p>
+
+<blockquote>
+<p>无论顶点着色器中的 out 全局变量被哪种插值限定符修饰，后继片元着色器中必须含有与之对应的修饰符修饰的 in 全局变量。</p>
+</blockquote>
+
+<h2 id="一致块">一致块</h2>
+
+<p>多个一致变量的声明可以通过类似结构体形式的接口块实现，该形式的接口块又称为一致块（uniform block）。</p>
+
+<p>一致块的数据是通过缓冲对象送入渲染管线的，以一致块的形式批量传送数据比单个传送效率高，其基本语法为：</p>
+
+<pre><code class="language-glsl">[&lt;layout 限定符&gt;] unifrom 一致块名称 {&lt;成员变量列表&gt;} [&lt;实例名&gt;]
+</code></pre>
+
+<p>声明一致块时可能包含 5 个组成部分，分别是：</p>
+
+<ul>
+<li>layout 限定符</li>
+<li>uniform 修饰符</li>
+<li>一致块名称</li>
+<li>成员变量列表</li>
+<li>实例名</li>
+</ul>
+
+<p>示例如下：</p>
+
+<pre><code class="language-glsl">uniform Transform{
+	float radius;
+	mat4 modelViewMatrix;
+	uniform mat3 normalMatrix;
+} block_Transform;
+</code></pre>
+
+<p>创建一致块时，可以声明实例名，也可以不声明实例名。</p>
+
+<ul>
+<li>未声明实例名</li>
+</ul>
+
+<p>如果在创建一致块时未声明实例名，则一致块的成员变量与在块外一样，其作用域是全局的，既可以通过一致块的成员变量名称访问对应变量，也可以通过 <code>&lt;一致块名称&gt;.&lt;成员变量名&gt;</code> 的形式访问一致块的成员变量。</p>
+
+<ul>
+<li>声明实例名</li>
+</ul>
+
+<p>如果在创建一致块时声明了实例名，则一致块内成员变量的作用域从声明开始到一致块结束，都通过<code>&lt;一致块名称&gt;.&lt;成员变量名&gt;</code> 访问成员变量，而着色器语言中需要通过<code>&lt;实例名&gt;.&lt;成员变量名&gt;</code>访问一致块的成员变量。</p>
+
+<h2 id="layout-限定符">layout 限定符</h2>
+
+<p>layout 限定符从 OpenGL ES 3.0 开始出现的，其主要用于设置变量的存储索引（即引用）值，声明有几种不同的形式。</p>
+
+<ul>
+<li>作为接口块定义的一部分或者接口块的成员</li>
+<li>可以仅仅修饰 uniform，用于建立其他一致变量声明的参照</li>
+</ul>
+
+<pre><code class="language-glsl">&lt;layout 限定符&gt; uniform
+</code></pre>
+
+<ul>
+<li>用于修饰被接口限定符修饰的单独变量</li>
+</ul>
+
+<pre><code class="language-glsl">&lt;layout 限定符&gt; &lt;接口限定符&gt; &lt;变量声明&gt;
+</code></pre>
+
+<p>接口限定符有 in、out、uniform 三种选择。</p>
+
+<p>着色器中的 layout 限定符必须在存储限定符之前使用，且 layout 限定符修饰的变量或接口块的作用域必须是全局的。</p>
+
+<ul>
+<li>layout 输入限定符</li>
+</ul>
+
+<p>顶点着色器允许 layout 输入限定符修饰输入变量的声明。</p>
+
+<pre><code class="language-glsl">layout (location = 0) in vec3 aPosition;
+layout (location = 1) in vec4 aColor;
+</code></pre>
+
+<p>在片元着色器中不允许有 layout 输入限定符。</p>
+
+<ul>
+<li>layout 输出限定符</li>
+</ul>
+
+<p>片元着色器中，layout 限定符通过 location 值将输出变量和指定编号的绘制缓冲绑定起来。每 一个输出变量的索引(引用)值都会对应到一个相应编号的绘制缓冲，而这个输出变量的值将写 入相应缓冲。</p>
+
+<blockquote>
+<p>layout 限定符的 location 值是有范围的，其范围为 [0, MAX_DRAW_BUFFERS-1]。 不同手持设备的范围有可能不同，最基本的范围是 [0,3] 。</p>
+</blockquote>
+
+<pre><code class="language-glsl">layout (location = 0) out vec4 fragColor;
+layout (location = 1) out vec4 colors[2];
+</code></pre>
+
+<p>在顶点着色器中不允许有 layout 输出限定符。</p>
+
+<blockquote>
+<p>顶点着色器不允许有 layout 输出限定符。如果在片元着色器中只有一个输出变 量，则不需要用 layout 修饰符说明其对应绘制缓冲，在这种情况下，默认值为 0。如 果片元着色器中有多个输出变量，则不允许重复使用相同的 location 值。</p>
+</blockquote>
+
+<h2 id="内建变量">内建变量</h2>
+
+<h3 id="顶点着色器中的内建变量">顶点着色器中的内建变量</h3>
+
+<h4 id="内建输入变量">内建输入变量</h4>
+
+<p>顶点着色器中的内建输入变量主要有 gl_VertexID 以及 gl_InstanceID，这两个变量分别为顶点整数索引和实例 ID，都只在顶点着色器中使用。</p>
+
+<h4 id="内建输出变量">内建输出变量</h4>
+
+<p>顶点着色器中的内建输出变量主要有 gl_Position 和 gl_PointSize 。</p>
+
+<h3 id="片元着色器中的内建变量">片元着色器中的内建变量</h3>
+
+<h4 id="内建输出变量-1">内建输出变量</h4>
+
+<p>内建输出变量指 gl_FragDepth，其值为片元深度值，从 OpenGL ES 3.0 开始，可以对其赋值，然后送进深度缓冲区内参与后续计算。</p>
+
+<h4 id="内建输入变量-1">内建输入变量</h4>
+
+<p>内建输入变量包括 gl_FragCoord、gl_FrontFacing 和 gl_PointCoord 。</p>
+
+<h2 id="用-invariant-修饰符避免值变问题">用 invariant 修饰符避免值变问题</h2>
+
+<p>值变问题是指在同样的着色器程序多次运行时，同一个表达式在同样输入值的情况下多次运行，结果不精确一致的现象，在大部分情况下，这并不影响最终效果的正确性。</p>
+
+<p>如果在某些特定情况下需要避免值变问题，可以用 invariant 修饰符来修饰变量。</p>
+
+<p>采用 invariant 修饰符修饰变量主要有如下两种方式：</p>
+
+<ul>
+<li>在声明变量时加上 invariant 修饰符</li>
+</ul>
+
+<pre><code class="language-glsl">invariant out vec3 color;
+</code></pre>
+
+<ul>
+<li>对已经声明的变量补充使用 invariant 修饰符进行修饰</li>
+</ul>
+
+<pre><code class="language-glsl">out vec3 color;
+invariant color;
+</code></pre>
+
+<p>若有多个已经声明的变量需要用 invariant 修饰符补充修饰，则可以在 invariant 修饰符后把这些变量名用逗号隔开，一次完成。另外，用 invariant 修饰符补充修饰变量必须在变量第一次被使用前完成。</p>
+
+<p>如果希望所有的输出变量都是 invariant 的，用如下语句完成：</p>
+
+<pre><code class="language-glsl">#pragma STDGL invariant(all)
+</code></pre>
+
+<p>上述代码只能添加在顶点着色器程序的最前面，不能用在片段着色器中。</p>
+
+<p>不是所有变量都可以用 invariant 修饰，只有如下几种才可以：</p>
+
+<ul>
+<li>顶点着色器的内建输出变量，如 gl_Position 。</li>
+<li>顶点着色器中声明的以 out 修饰符修饰的变量。</li>
+<li>片元着色器中内建的输出变量。</li>
+<li>片元着色器中声明的以 out 修饰符修饰的变量。</li>
+</ul>
+
+<p>invariant 使用时要注意放在其他的修饰符之前，同时，invariant 修饰符只能用来修饰全局变量。</p>
+
+<h2 id="函数">函数</h2>
+
+<p>OpenGL ES 着色器语言提供了很多内置函数，这些函数大都已经被重载，一般具有 4 种变体，分别用来接收和返回 <code>genType</code>、<code>genIType</code>、<code>genUType</code>和<code>genBType</code>类型的值。</p>
+
+<p>四种变体如下：</p>
+
+<table>
+<thead>
+<tr>
+<th>变体类型</th>
+<th>说明</th>
+<th>变体类型</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>genType</td>
+<td>float,vec2,vec3,vec4</td>
+<td>genUType</td>
+<td>uint,uvec2,uvec3,uvec4</td>
+</tr>
+
+<tr>
+<td>genIType</td>
+<td>int,ivec2,ivec3,ivec4</td>
+<td>genBType</td>
+<td>bool,bvec2,bvec4,bvec4</td>
+</tr>
+</tbody>
+</table>
+
+<p>从表中可以看到，genType、genIType、genUType、genBType 分别代表的是浮点型类型、整型类型、无符号整型类型和布尔型类型。</p>
+
+<p>内置函数通常是以最优的方式来实现的，有部分函数甚至由硬件直接支持。</p>
+
+<p>内置函数按照设计目的分为 3 个类别：</p>
+
+<ul>
+<li>提供独特硬件功能的访问接口，如纹理采样系列函数</li>
+<li>简单的数学函数，如 abs（求绝对值）、floor（向下取整） 等</li>
+<li>一些复杂的函数，如三角函数等</li>
+</ul>
+
+<h3 id="角度转换和三角函数">角度转换和三角函数</h3>
+
+<p>角度转换与三角函数同时适用于顶点着色器与片元着色器，并且每个角度转换与三角函数都有 4 种重载变体。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpatv2l1gj20x505itag.jpg" alt="" /></p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpauq1lk3j20qu0m8jxq.jpg" alt="" /></p>
+
+<p>上述表中 genType 代表的数据类型有 float、vec2、vec3 以及 vec4 。其中 float 指的是浮点数标量，vec2、vec3 和 vec4 指的是浮点数向量。</p>
+
+<h3 id="指数函数">指数函数</h3>
+
+<p>指数函数同样适用于顶点着色器和片段着色器。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpayhnwydj20r003djs4.jpg" alt="" /></p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpays9rloj20qz0c4adp.jpg" alt="" /></p>
+
+<p>上述表中 genType 代表的数据类型有 float、vec2、vec3 以及 vec4 。</p>
+
+<h3 id="常见函数">常见函数</h3>
+
+<p>常见函数也可同时用于顶点着色器和片段着色器。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpb0u5pf5j20r00i6tf2.jpg" alt="" /></p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpb13iad9j20qx0nywno.jpg" alt="" /></p>
+
+<p>genType 、 genIType 、genUType 代表的数据类型参考上面提到的类型。</p>
+
+<h3 id="几何函数">几何函数</h3>
+
+<p>几何函数适用于顶点着色器和片段着色器，主要用于对向量进行操作。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbecmyi6j20r20ijgqq.jpg" alt="" /></p>
+
+<h3 id="矩阵函数">矩阵函数</h3>
+
+<p>矩阵函数适用于顶点着色器和片段着色器，主要包括生成矩阵、矩阵的转置、求矩阵的行列式以及求逆矩阵等有关矩阵的操作。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbg27jyoj20r00e0n1f.jpg" alt="" /></p>
+
+<h3 id="向量关系函数">向量关系函数</h3>
+
+<p>向量关系函数主要功能为将向量的各分量进行关系比较运算。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbhepfflj20qw0k8jwh.jpg" alt="" /></p>
+
+<h3 id="纹理采样函数">纹理采样函数</h3>
+
+<p>纹理采样函数主要用于根据指定的纹理坐标从采样器对应的纹理中进行采样，返回采样得到的颜色值。</p>
+
+<p>大部分纹理采样函数即可以用于顶点着色器也可以用于片段着色器，但又个别的仅适用于片元着色器。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbm2irjuj20qw0dfte3.jpg" alt="" />
+<img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbm1wlrfj20qz09hjvc.jpg" alt="" />
+<img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbm2e3t9j20qv0kdqbe.jpg" alt="" />
+<img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbm1xhgxj20qz075who.jpg" alt="" />
+<img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbm27f72j20qx0ildn4.jpg" alt="" />
+<img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbpjnyahj20r006fwgo.jpg" alt="" /></p>
+
+<h3 id="微分函数">微分函数</h3>
+
+<p>微分函数仅能用于片段着色器，是从 OpenGL ES 3.0 开始正式支持的。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbqfuxhfj20qx04dq43.jpg" alt="" /></p>
+
+<h3 id="浮点数的打包与解包函数">浮点数的打包与解包函数</h3>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbrx38zwj20r00e3n2w.jpg" alt="" />
+<img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbrwvqx7j20r204rabo.jpg" alt="" /></p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li>《OpenGL ES 3.x 游戏开发 上卷》</li>
+</ol>
+
+              
+                <p>
+
+                
+                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
+
+                  <br/>
+
+                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-glsl-3-mark/">OpenGL ES 3.0 着色器语言 GLSL 学习 Mark </a>
+
+                
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/opengl/opengl-glsl-2-mark/" data-toggle="tooltip" data-placement="top" title="OpenGL ES 2.0 着色器语言 GLSL 学习 Mark ">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/opengl/opengl-glsl-2-mark/">OpenGL ES 2.0 着色器语言 GLSL 学习 Mark </a></li>
+                    
+                    <li><a href="/post/opengl/opengl-framebuffer-object-usage/">OpenGL 之 帧缓冲  使用实践</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-egl-usage/">OpenGL 之 EGL 使用实践</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-gpuimage-analysis/">OpenGL 之 GPUImage 源码分析</a></li>
+                    
+                    <li><a href="/post/opengl/opengl-axially-aligned-bounding-box/">《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+

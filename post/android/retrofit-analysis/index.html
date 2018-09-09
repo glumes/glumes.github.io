@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>开源库之 Retrofit 源码分析</title>
+  <meta property="og:title" content="开源库之 Retrofit 源码分析" />
+  <meta name="twitter:title" content="开源库之 Retrofit 源码分析" />
+  <meta name="description" content="分析一波 Retrofit 的源码实现。
+
+">
+  <meta property="og:description" content="分析一波 Retrofit 的源码实现。
+
+">
+  <meta name="twitter:description" content="分析一波 Retrofit 的源码实现。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/android/retrofit-analysis/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/android/retrofit-analysis/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Life" href="/categories/life">Life</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fv3arkum3dj20hs0bvmxt.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>开源库之 Retrofit 源码分析</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on September 9, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">开源库之 Retrofit 源码分析</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+        
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Sun Sep 9, 2018</h4>
+    </section>
+    <h5 id="wc">3200 Words|Read in about 7 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/retrofit/">Retrofit</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>分析一波 Retrofit 的源码实现。</p>
+
+<p></p>
+
+<h2 id="简单使用">简单使用</h2>
+
+<p>官方给出了使用例子，具体详情参看 <a href="https://square.github.io/retrofit/">官网</a>。</p>
+
+<p>如果加入 RxJava 和 Gson ,就需要添加对应的适配和转换工厂类。</p>
+
+<pre><code class="language-java">val retrofit = Retrofit.Builder()
+    .baseUrl(&quot;https://api.github.com/&quot;)
+    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+    .addConverterFactory(GsonConverterFactory.create())
+    .build()
+</code></pre>
+
+<p>围绕 Retrofit 的调用流程分析它的内部实现。</p>
+
+<h2 id="retrofit-类的构建">Retrofit 类的构建</h2>
+
+<p>首先是 Retrofit 类的构建，通过建造者模式来实现。</p>
+
+<p>在 <code>Retrofit.Builder</code> 类的调用方法中指定一些参数，就比如上面的 RxJava 和 Gson 对应的工厂类。</p>
+
+<p>在 <code>build</code> 方法里面可以看到全部的所需要的内容：</p>
+
+<pre><code class="language-java">    public Retrofit build() {
+      // HTTP 请求的 host 路径
+      if (baseUrl == null) {
+        throw new IllegalStateException(&quot;Base URL required.&quot;);
+      }
+      // 用来执行请求的工厂，若没有设置就是使用 OKHttpClient
+      okhttp3.Call.Factory callFactory = this.callFactory;
+      if (callFactory == null) {
+        callFactory = new OkHttpClient();
+      }
+      // 异步请求时回调线程切换的执行器
+      Executor callbackExecutor = this.callbackExecutor;
+      if (callbackExecutor == null) {
+        callbackExecutor = platform.defaultCallbackExecutor();
+      }
+      // 网络请求适配器的工厂集合
+      // Make a defensive copy of the adapters and add the default Call adapter.
+      List&lt;CallAdapter.Factory&gt; callAdapterFactories = new ArrayList&lt;&gt;(this.callAdapterFactories);
+      callAdapterFactories.add(platform.defaultCallAdapterFactory(callbackExecutor));
+      // 数据转换器的工厂
+      // Make a defensive copy of the converters.
+      List&lt;Converter.Factory&gt; converterFactories =
+          new ArrayList&lt;&gt;(1 + this.converterFactories.size());
+      // Add the built-in converter factory first. This prevents overriding its behavior but also
+      // ensures correct behavior when using converters that consume all types.
+      converterFactories.add(new BuiltInConverters());
+      converterFactories.addAll(this.converterFactories);
+      // 创建 Retrofit 实例
+      return new Retrofit(callFactory, baseUrl, unmodifiableList(converterFactories),
+          unmodifiableList(callAdapterFactories), callbackExecutor, validateEagerly);
+    }
+
+</code></pre>
+
+<p>在 Build 创建 Retrofit 时有如下要注意的东西：</p>
+
+<ul>
+<li>callFactory : 网络请求工厂</li>
+<li>adapterFactories : 网络请求适配器工厂的集合</li>
+<li>converterFactories : 数据转换器工厂的集合</li>
+<li>callbackExecutor : 回调方法执行器</li>
+</ul>
+
+<p>这四个东西可以说是 Retrofit 中很重要的内容了，它们在 Retrofit 类中都是接口或抽象类类型，将定义与实现进行分离，可以做到面向接口编程。</p>
+
+<p>Retrofit 是对网络请求的封装库，一个网络请求的过程大致可以抽象如下：</p>
+
+<pre><code>创建网络请求 --&gt; 发出网络请求 --&gt; 收到请求内容 --&gt; 对内容进行处理
+</code></pre>
+
+<p>而 Retrofit 可以说是对上面的流程都进行了抽象，抽象出一些类和接口，这些抽象类或者接口的调用就是实现上面的请求流程。</p>
+
+<p><code>adapterFactories</code> 就是对创建的网络请求适配的集合，比如默认请求是 <code>Call</code>，但是可以通过 <code>RxJavaCallAdapterFactory</code> 将网络请求适配到 RxJava 的 <code>Observable</code> 。</p>
+
+<p><code>callFactory</code> 就是用来执行网络请求的，将请求发出去，如果没有指定该变量，则默认使用 <code>OkHttpClient</code> 来完成该功能。</p>
+
+<p><code>converterFactories</code> 就是将请求后的内容转换成指定的格式的集合，如果服务器返回的是 GSON 格式，那么就可以指定 <code>GsonConverterFactory</code> 将 HTTP 的 Response 内容转换 GSON 对象。</p>
+
+<p><code>callbackExecutor</code> 就是在网络请求结束后，从子线程切换到对数据操作的线程，主要就是切换到主线程。</p>
+
+<p>依照网络请求流程，上面四个重点变量在请求中出现的先后顺序也是如下：</p>
+
+<pre><code>adapterFactories --&gt; callFactory --&gt; converterFactories --&gt; callbackExecutor
+</code></pre>
+
+<p>另外，Retrofit 还是支持多平台的，除了 Android 平台之外，还有 Java 等平台，在 <code>Retrofit.Builder</code> 的构造方法中就对当前平台做了一个判断，这里就只看 Android Platform 就好了。</p>
+
+<p>弄懂了大致的脉络，接着再来看实际代码。</p>
+
+<p>如果没有指定请求后的线程切换操作，那么就会使用 <code>defaultCallbackExecutor</code> 。 Android 下默认的就是 <code>MainThreadExecutor</code> ，通过主线程的 Handler 来实现线程切换。</p>
+
+<pre><code class="language-java">    static class MainThreadExecutor implements Executor {
+      private final Handler handler = new Handler(Looper.getMainLooper());
+      // 向主线程 post 一个 runnable 实现切换
+      @Override public void execute(Runnable r) {
+        handler.post(r);
+      }
+    }
+</code></pre>
+
+<p>如果没有添加网络请求适配器对象，那么就会使用默认的 <code>defaultCallAdapterFactory</code> 。Android 下默认的就是 <code>ExecutorCallAdapterFactory</code> ，</p>
+
+<p>它的主要代码如下：</p>
+
+<pre><code class="language-java">  @Override
+  public CallAdapter&lt;?, ?&gt; get(Type returnType, Annotation[] annotations, Retrofit retrofit) {
+    if (getRawType(returnType) != Call.class) {
+      return null;
+    }
+    final Type responseType = Utils.getCallResponseType(returnType);
+    // 返回 CallAdapter 对象进行适配
+    return new CallAdapter&lt;Object, Call&lt;?&gt;&gt;() {
+      @Override public Type responseType() {
+        return responseType;
+      }
+      // 具体适配函数
+      @Override public Call&lt;Object&gt; adapt(Call&lt;Object&gt; call) {
+        // 返回 ExecutorCallbackCall 函数，因为就是对 call 的一个委托
+        return new ExecutorCallbackCall&lt;&gt;(callbackExecutor, call);
+      }
+    };
+  }
+</code></pre>
+
+<p>重点在于返回 <code>CallAdapter</code> 对象，它将网络请求进行适配，如果没有使用 RxJava 的话，那么返回的就是 <code>ExecutorCallbackCall</code> 。</p>
+
+<p>如果没有指定请求结果转换对象，那么就会使用默认的 <code>BuiltInConverters</code> 类进行转换，<code>BuiltInConverters</code> 与请求适配和线程切换不同，它是和平台无关的。</p>
+
+<p>在 <code>adapterFactories</code> 和 <code>converterFactories</code> 中还用到了工厂模式，通过工厂模式对具体执行操作的 <code>CallAdapter</code> 和 <code>Converter</code> 进行封装。</p>
+
+<p>以上就完成了 Retrofit 对象的创建。</p>
+
+<h2 id="动态代理创建网络请求对象">动态代理创建网络请求对象</h2>
+
+<p>接下来就是使用 Retrofit 类通过动态代理创建一个代理对象实例。</p>
+
+<pre><code class="language-java">// 定义请求接口
+public interface GitHubService {
+  @GET(&quot;users/{user}/repos&quot;)
+  Call&lt;List&lt;Repo&gt;&gt; listRepos(@Path(&quot;user&quot;) String user);
+}
+// 动态代理创建实现了请求接口的类
+GitHubService service = retrofit.create(GitHubService.class);
+</code></pre>
+
+<p>动态代理的作用与实现，可以参考 <a href="https://glumes.com/post/android/java-proxy-design-pattern/">这篇文章</a>。</p>
+
+<p>请求接口定义的所有方法，都会通过 <code>InvocationHandler</code> 中的 <code>invoke</code> 方法去分发处理。</p>
+
+<p>也就是说，请求接口定义的返回类型是 <code>Call</code> ，那么 <code>invoke</code> 方法返回的也是 <code>Call</code> 类型。</p>
+
+<p>主要代码如下：</p>
+
+<pre><code class="language-java">        new InvocationHandler() {
+          private final Platform platform = Platform.get();
+
+          @Override public Object invoke(Object proxy, Method method, @Nullable Object[] args)
+              throws Throwable {
+            // If the method is a method from Object then defer to normal invocation.
+            if (method.getDeclaringClass() == Object.class) {
+              return method.invoke(this, args);
+            }
+            if (platform.isDefaultMethod(method)) {
+              return platform.invokeDefaultMethod(method, service, proxy, args);
+            }
+            ServiceMethod&lt;Object, Object&gt; serviceMethod =
+                (ServiceMethod&lt;Object, Object&gt;) loadServiceMethod(method);
+            OkHttpCall&lt;Object&gt; okHttpCall = new OkHttpCall&lt;&gt;(serviceMethod, args);
+            return serviceMethod.adapt(okHttpCall);
+          }
+        });
+</code></pre>
+
+<p>其中，<code>method</code> 就是对应接口中声明的方法，对每一个方法都会通过 <code>loadServiceMethod</code> 方法将它转换成 <code>ServiceMethod</code> 对象。</p>
+
+<p>serviceMethod 会先从缓存 <code>ConcurrentHashMap</code> 中查找，如果没有在通过 <code>ServiceMethod.Builder</code> 创建一个。</p>
+
+<p>创建时首先是如下两个方法：</p>
+
+<pre><code class="language-java">    // 通过 method 的返回类型和 注解 找到对应的 callAdapter
+    callAdapter = createCallAdapter();
+    // 通过 method 的 请求返回类型 和 注解 找到对应的 responseConverter
+    responseConverter = createResponseConverter();
+</code></pre>
+
+<p>这两个方法有点类似，在前面提到的 <code>adapterFactories</code> 适配器集合和 <code>converterFactories</code> 转换器集合都是列表。</p>
+
+<p>要通过方法的返回类型、请求结果的返回类型、方法注解，为当前方法找到合适的适配器和转换器。</p>
+
+<p>在这里可以看到，Retrofit 其实支持在请求接口中定义不同的返回类型，可以 <code>Call</code> 和 <code>Observable</code> 同时使用，也可以 <code>GSON</code> 和 <code>Response</code> 同时使用。</p>
+
+<p>确定了请求适配和结果转换类之后，就是处理接口方法中定义的那些注解，分别是为该方法定义的注解和为该方法参数定义的注解。</p>
+
+<pre><code class="language-java">      // 处理方法对应的注解
+      for (Annotation annotation : methodAnnotations) {
+        parseMethodAnnotation(annotation);
+      }
+      // 处理方法参数对应的注解
+      int parameterCount = parameterAnnotationsArray.length;
+      parameterHandlers = new ParameterHandler&lt;?&gt;[parameterCount];
+      for (int p = 0; p &lt; parameterCount; p++) {
+          parameterHandlers[p] = parseParameter(p, parameterType, parameterAnnotations);
+      }
+</code></pre>
+
+<p>关于注解处理这块比较冗长，文章篇幅有限，就不细写了，其实也主要是对那些 <code>GET</code>、<code>POST</code>、<code>HEAD</code> 等进行处理。</p>
+
+<p>对这些注解的处理在最后创建 <code>Call</code> 用来发起网络请求时会用到。</p>
+
+<p>当注解也处理完了之后，就创建了 serviceMethod 对象，接着创建 <code>OkHttpCall</code> 对象，这个对象就不是缓存的了，因为它就是用来执行请求的，每一次都要新建一个。</p>
+
+<p>OkHttpCall 实现了 <code>Call</code> 接口，可以看做是对它的封装。<code>Call</code> 接口在 OkHttp 中就是用来发起网络请求的，它主要方法就是 <code>execute</code> 和 <code>enqueue</code> ，</p>
+
+<p>然后 serviceMethod 对象通过 <code>adapt</code> 方法对 OkHttpCall 进行适配转换，并且返回了转换结果，如果在创建 Retrofit 时添加了 RxJava 的适配，那么返回的就是 Observable 类型。</p>
+
+<p>这个 <code>adapt</code> 方法的适配其实就是由 serviceMethod 的 <code>callAdapter</code> 来实现的。</p>
+
+<p>上面提到，默认是使用 <code>ExecutorCallAdapterFactory</code> 工厂来实现的。</p>
+
+<p>最后，<code>invoke</code> 函数返回的就是把 <code>OkHttpCall</code> 经过 <code>adapt</code> 适配后的对象，默认情况下返回 <code>ExecutorCallbackCall</code> 对象。</p>
+
+<h2 id="执行网络请求">执行网络请求</h2>
+
+<p>有了 <code>ExecutorCallbackCall</code> 对象之后，就可以像 OkHttp 那样去执行请求了。</p>
+
+<pre><code class="language-java">        // 异步请求
+        repos.enqueue(object : Callback&lt;MutableList&lt;Repo&gt;&gt; {
+            override fun onFailure(call: Call&lt;MutableList&lt;Repo&gt;&gt;?, t: Throwable?) {
+            }
+
+            override fun onResponse(call: Call&lt;MutableList&lt;Repo&gt;&gt;?, response: Response&lt;MutableList&lt;Repo&gt;&gt;?) {
+            }
+        })
+        // 同步请求
+        repos.execute()
+</code></pre>
+
+<p><code>ExecutorCallbackCall</code> 对象其实是对 <code>OkHttpCall</code> 的委托，具体的 <code>enqueue</code> 和 <code>execute</code> 方法都是由 OkHttpCall 来实现的。</p>
+
+<p>先看一下同步调用</p>
+
+<pre><code class="language-java">   private @Nullable okhttp3.Call rawCall;
+   @Override public Response&lt;T&gt; execute() throws IOException {
+    okhttp3.Call call;
+    synchronized (this) {
+      if (executed) throw new IllegalStateException(&quot;Already executed.&quot;);
+      executed = true;
+      call = rawCall;
+      if (call == null) {
+        try {
+        // createRawCall 方法创建 call 
+          call = rawCall = createRawCall();
+        } catch (IOException | RuntimeException | Error e) {
+        }
+      }
+    }
+    // 取消请求
+    if (canceled) {
+      call.cancel();
+    }
+    // 解析请求内容
+    return parseResponse(call.execute());
+  }
+</code></pre>
+
+<p>实际是通过 <code>createRawCall</code> 方法来创建 <code>Call</code> 的，在 <code>createRawCall</code> 里面又主要是通过 <code>serviceMethod.toCall</code> 方法来完成的。</p>
+
+<pre><code class="language-java">  okhttp3.Call toCall(@Nullable Object... args) throws IOException {
+    // 用上了之前解析注解得到的结果
+    RequestBuilder requestBuilder = new RequestBuilder(httpMethod, baseUrl, relativeUrl, headers,
+        contentType, hasBody, isFormEncoded, isMultipart);
+    // 处理请求的参数
+    @SuppressWarnings(&quot;unchecked&quot;) // It is an error to invoke a method with the wrong arg types.
+    ParameterHandler&lt;Object&gt;[] handlers = (ParameterHandler&lt;Object&gt;[]) parameterHandlers;
+
+    int argumentCount = args != null ? args.length : 0;
+    if (argumentCount != handlers.length) {
+      throw new IllegalArgumentException(&quot;Argument count (&quot; + argumentCount
+          + &quot;) doesn't match expected count (&quot; + handlers.length + &quot;)&quot;);
+    }
+    // 把注解和参数对应上
+    for (int p = 0; p &lt; argumentCount; p++) {
+      handlers[p].apply(requestBuilder, args[p]);
+    }
+    // 最后还是通过 callFactory 来创建 Call 
+    return callFactory.newCall(requestBuilder.build());
+  }
+</code></pre>
+
+<p>在 <code>toCall</code> 方法里就用到了之前解析的注解内容，依然通过建造者模式创建请求，并且把请求的参数和对应的注解内容对应上，也就是 <code>ParameterHandler</code> 的 <code>apply</code> 方法。</p>
+
+<p>最后是通过 callFactory 网络请求工厂来创建请求，默认就是使用 OkHttp 来创建。</p>
+
+<p><code>parseResponse</code> 方法会处理 <code>Call</code> 执行的结果，最终也是通过 <code>serviceMethod.toResponse</code> 方法来处理。</p>
+
+<pre><code class="language-java">  R toResponse(ResponseBody body) throws IOException {
+    return responseConverter.convert(body);
+  }
+</code></pre>
+
+<p>在该方法里，用到之前提到的数据转换器 <code>responseConverter</code> 来实现数据的转换,最终就得到了请求的结果 <code>Response</code> 。</p>
+
+<p>异步请求和同步请求大致相同，不同点在于异步请求要切换到主线程，这也是用之前提到的 <code>callbackExecutor</code> 来实现线程切换。</p>
+
+<pre><code class="language-java">      delegate.enqueue(new Callback&lt;T&gt;() {
+        @Override public void onResponse(Call&lt;T&gt; call, final Response&lt;T&gt; response) {
+          // 切换线程
+          callbackExecutor.execute(new Runnable() {
+            @Override public void run() {
+              if (delegate.isCanceled()) {
+                // Emulate OkHttp's behavior of throwing/delivering an IOException on cancellation.
+                callback.onFailure(ExecutorCallbackCall.this, new IOException(&quot;Canceled&quot;));
+              } else {
+                callback.onResponse(ExecutorCallbackCall.this, response);
+              }
+            }
+          });
+        }
+        //...
+      }
+</code></pre>
+
+<p><code>enqueue</code> 请求的回调方法通过 <code>callbackExecutor</code> 实现了线程切换。</p>
+
+<p>以上，就分析了 Retrofit 从创建到发起网络请求的过程。</p>
+
+<h2 id="小结">小结</h2>
+
+<p>Retrofit 的设计思想非常值得学习，事实上直接使用 OkHttp 同样可以实现功能，但是 Retrofit 对 OkHttp 的封装却更加方便了。</p>
+
+<p>首先，是把网络请求的类型和参数，通过注解来处理了，用注解标注，可以简化不少代码，在 Retrofit 内部去实现注解的解析，并且通过动态代理去创建实现了注解方法接口的对象实例。</p>
+
+<p>其次，大量设计模式的运用让 Retrofit 更容易去拓展，添加不同的适配和转换，把网络请求的每一个环节都进行拆分，面向接口的编程，网络请求适配和数据转换，每一个部分都可以独立开。</p>
+
+<p>接着，基于对 OkHttp 的封装，能够利用 OkHttp 去实现最重要的网络请求功能。</p>
+
+<p>最后，学习 Retrofit 的设计思想，并把它们用到我们的代码中去。</p>
+
+              
+                <p>
+
+                
+                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
+
+                  <br/>
+
+                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/retrofit-analysis/">开源库之 Retrofit 源码分析</a>
+
+                
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 之 帧缓冲  使用实践">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.com/post/opengl/opengl-glsl-2-mark/" data-toggle="tooltip" data-placement="top" title="OpenGL ES 2.0 着色器语言 GLSL 学习 Mark ">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+            
+            <div>
+                 
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+
