@@ -1039,12 +1039,12 @@ void main()
     </item>
     
     <item>
-      <title>About Me</title>
+      <title>关于</title>
       <link>https://glumes.com/about/</link>
       <pubDate>Wed, 20 Dec 2017 15:23:52 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/about/</guid>
-      <description></description>
+      <description>你好，我是 glumes，欢迎访问我的博客！ 🎉🎉🎉 毕业于西安电子科技大学🏫，曾就职于魅族📱，现来到了广州搬砖🍭。 近期技术聚焦在 OpenGL ES 和音视频领域</description>
     </item>
     
   </channel>
