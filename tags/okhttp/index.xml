@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Okhttp on Glumes Blog</title>
+    <link>https://glumes.com/tags/okhttp/</link>
+    <description>Recent content in Okhttp on Glumes Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
+    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <lastBuildDate>Tue, 11 Sep 2018 22:13:45 +0800</lastBuildDate>
+    
+	<atom:link href="https://glumes.com/tags/okhttp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>开源库之 OkHttp 源码分析</title>
+      <link>https://glumes.com/post/android/okhttp-analysis/</link>
+      <pubDate>Tue, 11 Sep 2018 22:13:45 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/okhttp-analysis/</guid>
+      <description>&lt;p&gt;分析一波 OkHttp 的源码实现。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
