@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.48" />
   <link rel="canonical" href="https://glumes.com/post/" />
   <link rel="alternate" href="https://glumes.com/post/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -180,6 +180,41 @@
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
         <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-start-activity-from-launcher-1/">
+                <h2 class="post-title">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。</p>
+
+<p>这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。</p>
+
+<p>而当我们点击应用程序图标时，也就开启了从 Launcher 启动 Activity 的过程。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-start-activity-from-launcher-1/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/framework/">Framework</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/android/rxjava-wrapper-callback/">
@@ -355,13 +390,12 @@
 
 <ul class="pagination">
     
-    <li>
-        <a href="/post/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li class="page-item">
+        <a href="/post/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li
-    >
-    <a href="/post/page/7/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li class="page-item">
+    <a href="/post/page/7/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -373,8 +407,7 @@
         
     
     
-    <li
-    ><a href="/post/">1</a></li>
+    <li class="page-item"><a class="page-link" href="/post/">1</a></li>
     
     
     
@@ -385,8 +418,7 @@
         
     
     
-    <li
-    ><a href="/post/page/2/">2</a></li>
+    <li class="page-item"><a class="page-link" href="/post/page/2/">2</a></li>
     
     
     
@@ -397,8 +429,7 @@
         
     
     
-    <li
-    ><a href="/post/page/3/">3</a></li>
+    <li class="page-item"><a class="page-link" href="/post/page/3/">3</a></li>
     
     
     
@@ -409,16 +440,7 @@
         
     
     
-    <li class="disabled"><span aria-hidden="true">&hellip;</span></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
+    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
     
     
     
@@ -438,8 +460,16 @@
         
     
     
-    <li
-    ><a href="/post/page/7/">7</a></li>
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/post/page/7/">7</a></li>
     
     
     
@@ -450,21 +480,20 @@
         
     
     
-    <li
-    class="active"><a href="/post/page/8/">8</a></li>
+    <li class="page-item active"><a class="page-link" href="/post/page/8/">8</a></li>
     
     
-    <li
-    class="disabled">
-    <a href="" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    <li class="page-item disabled">
+    <a href="" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li>
-        <a href="/post/page/8/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li class="page-item">
+        <a href="/post/page/8/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
 
+        
         
         
         
@@ -525,7 +554,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.48</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

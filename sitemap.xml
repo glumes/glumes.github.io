@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/android/cmake-best-practices/</loc>
+    <lastmod>2018-09-12T09:19:09+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/android/okhttp-analysis/</loc>
     <lastmod>2018-09-11T22:13:45+08:00</lastmod>
   </url>
@@ -384,7 +389,7 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-09-11T22:13:45+08:00</lastmod>
+    <lastmod>2018-09-12T09:19:09+08:00</lastmod>
   </url>
   
   <url>
@@ -395,7 +400,7 @@
   
   <url>
     <loc>https://glumes.com/categories/android/</loc>
-    <lastmod>2018-09-11T22:13:45+08:00</lastmod>
+    <lastmod>2018-09-12T09:19:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -413,7 +418,13 @@
   
   <url>
     <loc>https://glumes.com/categories/</loc>
-    <lastmod>2018-09-11T22:13:45+08:00</lastmod>
+    <lastmod>2018-09-12T09:19:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/cmake/</loc>
+    <lastmod>2018-09-12T09:19:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -514,6 +525,12 @@
   </url>
   
   <url>
+    <loc>https://glumes.com/tags/ndk/</loc>
+    <lastmod>2018-09-12T09:19:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/tags/okhttp/</loc>
     <lastmod>2018-09-11T22:13:45+08:00</lastmod>
     <priority>0</priority>
@@ -545,7 +562,7 @@
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-09-11T22:13:45+08:00</lastmod>
+    <lastmod>2018-09-12T09:19:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
