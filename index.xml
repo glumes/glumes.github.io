@@ -14,7 +14,7 @@
     
     
     <item>
-      <title>Android NDK 开发之 CMake 最佳实践</title>
+      <title>Android NDK 开发之 CMake 必知必会</title>
       <link>https://glumes.com/post/android/cmake-best-practices/</link>
       <pubDate>Wed, 12 Sep 2018 09:19:09 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -1052,7 +1052,7 @@ void main()
     </item>
     
     <item>
-      <title>关于</title>
+      <title>关于我</title>
       <link>https://glumes.com/about/</link>
       <pubDate>Wed, 20 Dec 2017 15:23:52 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
