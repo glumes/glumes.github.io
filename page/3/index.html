@@ -34,7 +34,7 @@ Scan the QRCode to …">
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.48" />
+  <meta name="generator" content="Hugo 0.31.1" />
   <link rel="canonical" href="https://glumes.com/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -250,6 +250,84 @@ Scan the QRCode to …">
 
         <div class="posts-list">
           
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">
+                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用</h2>
+                
+                  <h3 class="post-subtitle">
+                  学习笔记内容摘录
+                  </h3>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on July 17, 2018
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 <code>glDrawArrays</code> 或 <code>glDrawElements</code> 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。</p>
+
+<p>可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/">
+                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》之颜色混合和使用</h2>
+                
+                  <h3 class="post-subtitle">
+                  学习笔记内容摘录
+                  </h3>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on July 16, 2018
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。</p>
+
+<p>在 OpenGL 中同样有这样颜色混合的问题。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                
+                </span>
+              
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/android/android-jni-thread-operation/">
@@ -585,87 +663,6 @@ Scan the QRCode to …">
               
             </article>
           
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/">
-                <h2 class="post-title">OpenGL 学习系列---观察矩阵</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on May 22, 2018
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 投影矩阵</a> 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。</p>
-
-<p>这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：<a href="https://glumpy.github.io/modern-gl.html">https://glumpy.github.io/modern-gl.html</a>）</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526483191/ViewFrustum_gvy6aq.png" alt="" /></p>
-
-<p>当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于<code>视点</code>的，视点也就是我们这篇文章要讲到的摄像机。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/camera/">Camera</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-jni-exception-handle/">
-                <h2 class="post-title">Android JNI 调用时的异常处理</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on May 16, 2018
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>Android JNI 调用时的异常主要有如下两种：</p>
-
-<ul>
-<li>Native 代码调用 Java 层代码时发生了异常要处理</li>
-<li>Native 代码自己抛出了一个异常让 Java 层去处理</li>
-</ul>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-jni-exception-handle/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
         </div>
 
         
@@ -688,12 +685,13 @@ Scan the QRCode to …">
 
 <ul class="pagination">
     
-    <li class="page-item">
-        <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li>
+        <a href="/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li class="page-item">
-    <a href="/page/2/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li
+    >
+    <a href="/page/2/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -705,7 +703,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/">1</a></li>
+    <li
+    ><a href="/">1</a></li>
     
     
     
@@ -716,7 +715,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/2/">2</a></li>
+    <li
+    ><a href="/page/2/">2</a></li>
     
     
     
@@ -727,7 +727,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item active"><a class="page-link" href="/page/3/">3</a></li>
+    <li
+    class="active"><a href="/page/3/">3</a></li>
     
     
     
@@ -738,7 +739,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/4/">4</a></li>
+    <li
+    ><a href="/page/4/">4</a></li>
     
     
     
@@ -749,16 +751,7 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
+    <li class="disabled"><span aria-hidden="true">&hellip;</span></li>
     
     
     
@@ -778,15 +771,26 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/8/">8</a></li>
     
     
-    <li class="page-item">
-    <a href="/page/4/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    
+    
+    
+        
+        
+    
+    
+    <li
+    ><a href="/page/8/">8</a></li>
+    
+    
+    <li
+    >
+    <a href="/page/4/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li class="page-item">
-        <a href="/page/8/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li>
+        <a href="/page/8/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -856,7 +860,7 @@ Scan the QRCode to …">
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.48</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

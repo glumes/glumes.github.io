@@ -8,10 +8,21 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 22 Dec 2017 16:05:30 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 19 Sep 2018 23:12:45 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/ffmpeg/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>一文读懂 YUV 的采样与格式</title>
+      <link>https://glumes.com/post/ffmpeg/understand-yuv-format/</link>
+      <pubDate>Wed, 19 Sep 2018 23:12:45 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/ffmpeg/understand-yuv-format/</guid>
+      <description>&lt;p&gt;YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>FFmpeg 3.0 版本视频解码浅析 </title>

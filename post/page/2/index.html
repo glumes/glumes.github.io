@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.48" />
+  <meta name="generator" content="Hugo 0.31.1" />
   <link rel="canonical" href="https://glumes.com/post/" />
   <link rel="alternate" href="https://glumes.com/post/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -180,6 +180,72 @@
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
         <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/java-proxy-design-pattern/">
+                <h2 class="post-title">Java 中的静态代理和动态代理</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on August 28, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>代理模式的使用场景如下：</p>
+
+<blockquote>
+<p>当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。</p>
+</blockquote>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/java-proxy-design-pattern/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/java/">Java</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/">
+                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</h2>
+
+                
+                  <h3 class="post-subtitle">
+                    学习笔记内容摘录
+                  </h3>
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on July 26, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>在 OpenGL 的世界模型中，同时绘制了多个物体，那么怎么去检测物体之间是否触碰了，不同于在平面之间的触碰，OpenGL 是在三维世界里面的触碰，接下来就继续深入理解 OpenGL 中的碰撞检测相关知识~~~</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/android/android-jni-bitmap-operation/">
@@ -461,76 +527,6 @@
 
             </article>
           
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">
-                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    学习笔记内容摘录
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 17, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 <code>glDrawArrays</code> 或 <code>glDrawElements</code> 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。</p>
-
-<p>可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/">
-                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》之颜色混合和使用</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    学习笔记内容摘录
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 16, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。</p>
-
-<p>在 OpenGL 中同样有这样颜色混合的问题。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
         </div>
         
           <ul class="pager main-pager">
@@ -552,12 +548,13 @@
 
 <ul class="pagination">
     
-    <li class="page-item">
-        <a href="/post/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li>
+        <a href="/post/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li class="page-item">
-    <a href="/post/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li
+    >
+    <a href="/post/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -569,7 +566,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="/post/">1</a></li>
+    <li
+    ><a href="/post/">1</a></li>
     
     
     
@@ -580,7 +578,8 @@
         
     
     
-    <li class="page-item active"><a class="page-link" href="/post/page/2/">2</a></li>
+    <li
+    class="active"><a href="/post/page/2/">2</a></li>
     
     
     
@@ -591,7 +590,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="/post/page/3/">3</a></li>
+    <li
+    ><a href="/post/page/3/">3</a></li>
     
     
     
@@ -602,16 +602,7 @@
         
     
     
-    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
+    <li class="disabled"><span aria-hidden="true">&hellip;</span></li>
     
     
     
@@ -640,15 +631,26 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="/post/page/8/">8</a></li>
     
     
-    <li class="page-item">
-    <a href="/post/page/3/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    
+    
+    
+        
+        
+    
+    
+    <li
+    ><a href="/post/page/8/">8</a></li>
+    
+    
+    <li
+    >
+    <a href="/post/page/3/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li class="page-item">
-        <a href="/post/page/8/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li>
+        <a href="/post/page/8/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -718,7 +720,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.48</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/</loc>
+    <lastmod>2018-09-19T23:39:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/ffmpeg/understand-yuv-format/</loc>
+    <lastmod>2018-09-19T23:12:45+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/android/cmake-best-practices/</loc>
     <lastmod>2018-09-12T09:19:09+08:00</lastmod>
   </url>
@@ -389,7 +399,7 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-09-12T09:19:09+08:00</lastmod>
+    <lastmod>2018-09-19T23:39:28+08:00</lastmod>
   </url>
   
   <url>
@@ -400,7 +410,7 @@
   
   <url>
     <loc>https://glumes.com/categories/android/</loc>
-    <lastmod>2018-09-12T09:19:09+08:00</lastmod>
+    <lastmod>2018-09-19T23:39:28+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -412,13 +422,13 @@
   
   <url>
     <loc>https://glumes.com/tags/camera/</loc>
-    <lastmod>2018-05-22T12:04:10+08:00</lastmod>
+    <lastmod>2018-09-19T23:39:28+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/</loc>
-    <lastmod>2018-09-12T09:19:09+08:00</lastmod>
+    <lastmod>2018-09-19T23:39:28+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -472,7 +482,7 @@
   
   <url>
     <loc>https://glumes.com/categories/ffmpeg/</loc>
-    <lastmod>2017-12-22T16:05:30+08:00</lastmod>
+    <lastmod>2018-09-19T23:12:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -485,6 +495,12 @@
   <url>
     <loc>https://glumes.com/tags/glsl/</loc>
     <lastmod>2018-09-09T15:20:42+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/h264/</loc>
+    <lastmod>2018-09-19T23:39:28+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -521,6 +537,12 @@
   <url>
     <loc>https://glumes.com/categories/life/</loc>
     <lastmod>2018-01-04T14:20:04+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/mediacodec/</loc>
+    <lastmod>2018-09-19T23:39:28+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -562,7 +584,7 @@
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-09-12T09:19:09+08:00</lastmod>
+    <lastmod>2018-09-19T23:39:28+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -585,6 +607,12 @@
   </url>
   
   <url>
+    <loc>https://glumes.com/tags/rgb/</loc>
+    <lastmod>2018-09-19T23:12:45+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/tags/rxjava/</loc>
     <lastmod>2018-01-31T15:26:16+08:00</lastmod>
     <priority>0</priority>
@@ -599,6 +627,12 @@
   <url>
     <loc>https://glumes.com/tags/</loc>
     <lastmod>2018-07-25T13:36:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/yuv/</loc>
+    <lastmod>2018-09-19T23:39:28+08:00</lastmod>
     <priority>0</priority>
   </url>
   

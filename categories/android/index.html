@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.48" />
+  <meta name="generator" content="Hugo 0.31.1" />
   <link rel="canonical" href="https://glumes.com/categories/android/" />
   <link rel="alternate" href="https://glumes.com/categories/android/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -180,6 +180,45 @@
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
         <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/">
+                <h2 class="post-title">MediaCodec 硬编码之相机内容编码成 H264 文件</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on September 19, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>在 Android 4.1 版本提供了 MediaCodec 接口来访问设备的编解码器，不同于 FFmpeg 的软件编解码，它采用的是硬件编解码能力，因此在速度上会比软解更具有优势，但是由于 Android 的碎片化问题，机型众多，版本各异，导致 MediaCodec 在机型兼容性上需要花精力去适配，并且编解码流程不可控，全交由厂商的底层硬件去实现，最终得到的视频质量不一定很理想。</p>
+
+<p>虽然 MediaCodec 仍然存在一定的弊端，但是对于快速实现编解码需求，还是很值得参考的。</p>
+
+<p>以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/mediacodec/">MediaCodec</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/yuv/">YUV</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/h264/">H264</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/camera/">Camera</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/android/cmake-best-practices/">
@@ -469,41 +508,6 @@
 
             </article>
           
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/">
-                <h2 class="post-title">Android  JNI 调用时缓存字段和方法 ID</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on May 7, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。</p>
-
-<p>事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。</p>
-
-<p>缓存有两种方式，分别是使用时缓存和初始化时缓存。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
         </div>
         
           <ul class="pager main-pager">
@@ -521,12 +525,13 @@
 
 <ul class="pagination">
     
-    <li class="page-item">
-        <a href="/categories/android/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li>
+        <a href="/categories/android/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li class="page-item disabled">
-    <a href="" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li
+    class="disabled">
+    <a href="" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -538,7 +543,8 @@
         
     
     
-    <li class="page-item active"><a class="page-link" href="/categories/android/">1</a></li>
+    <li
+    class="active"><a href="/categories/android/">1</a></li>
     
     
     
@@ -549,7 +555,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="/categories/android/page/2/">2</a></li>
+    <li
+    ><a href="/categories/android/page/2/">2</a></li>
     
     
     
@@ -560,7 +567,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="/categories/android/page/3/">3</a></li>
+    <li
+    ><a href="/categories/android/page/3/">3</a></li>
     
     
     
@@ -571,7 +579,7 @@
         
     
     
-    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
+    <li class="disabled"><span aria-hidden="true">&hellip;</span></li>
     
     
     
@@ -582,15 +590,17 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="/categories/android/page/5/">5</a></li>
+    <li
+    ><a href="/categories/android/page/5/">5</a></li>
     
     
-    <li class="page-item">
-    <a href="/categories/android/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    <li
+    >
+    <a href="/categories/android/page/2/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li class="page-item">
-        <a href="/categories/android/page/5/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li>
+        <a href="/categories/android/page/5/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -660,7 +670,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.48</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

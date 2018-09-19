@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>一文读懂 YUV 的采样与格式</title>
+  <meta property="og:title" content="一文读懂 YUV 的采样与格式" />
+  <meta name="twitter:title" content="一文读懂 YUV 的采样与格式" />
+  <meta name="description" content="YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。
+
+">
+  <meta property="og:description" content="YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。
+
+">
+  <meta name="twitter:description" content="YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/ffmpeg/understand-yuv-format/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/ffmpeg/understand-yuv-format/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">目录</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">Android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="生活" href="/categories/life">生活</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于我" href="/about">关于我</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fvf9wxdg2bj20zk0npter.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>一文读懂 YUV 的采样与格式</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on September 19, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">一文读懂 YUV 的采样与格式</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+        
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Wed Sep 19, 2018</h4>
+    </section>
+    <h5 id="wc">3100 Words|Read in about 7 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/yuv/">YUV</a> &nbsp;
+        
+        <a href="https://glumes.com/tags/rgb/">RGB</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。</p>
+
+<p></p>
+
+<h2 id="rgb-颜色编码">RGB 颜色编码</h2>
+
+<p>RGB 三个字母分别代表了 红（Red）、绿（Green）、蓝（Blue），这三种颜色称为 <strong>三原色</strong>，将它们以不同的比例相加，可以产生多种多样的颜色。</p>
+
+<p>在图像显示中，一张 1280 * 720 大小的图片，就代表着它有 1280 * 720 个像素点。其中每一个像素点的颜色显示都采用 RGB 编码方法，将 RGB 分别取不同的值，就会展示不同的颜色。</p>
+
+<p><img src="https://ws1.sinaimg.cn/mw690/bc32fd77gy1fvf996wfvaj20l00gy772.jpg" alt="" /></p>
+
+<p>RGB 图像中，每个像素点都有红、绿、蓝三个原色，其中每种原色都占用 8 bit，也就是一个字节，那么一个像素点也就占用 24 bit，也就是三个字节。</p>
+
+<p>一张 1280 * 720 大小的图片，就占用 1280 * 720 * 3 / 1024 / 1024 = 2.63 MB 存储空间。</p>
+
+<h2 id="yuv-颜色编码">YUV 颜色编码</h2>
+
+<p>YUV 颜色编码采用的是 <strong>明亮度</strong> 和 <strong>色度</strong> 来指定像素的颜色。</p>
+
+<p>其中，Y 表示明亮度（Luminance、Luma），而 U 和 V 表示色度（Chrominance、Chroma）。</p>
+
+<p>而色度又定义了颜色的两个方面：色调和饱和度。</p>
+
+<p>使用 YUV 颜色编码表示一幅图像，它应该下面这样的：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fvf98qd1g9j20ks0gu76y.jpg" alt="" /></p>
+
+<p>和 RGB 表示图像类似，每个像素点都包含 Y、U、V 分量。但是它的 Y 和 UV 分量是可以分离的，如果没有 UV 分量一样可以显示完整的图像，只不过是黑白的。</p>
+
+<p>对于 YUV 图像来说，并不是每个像素点都需要包含了 Y、U、V 三个分量，根据不同的采样格式，可以每个 Y 分量都对应自己的 UV 分量，也可以几个 Y 分量共用 UV 分量。</p>
+
+<h3 id="rgb-到-yuv-的转换">RGB 到 YUV 的转换</h3>
+
+<p>对于图像显示器来说，它是通过 RGB 模型来显示图像的，而在传输图像数据时又是使用 YUV 模型，这是因为 YUV 模型可以节省带宽。因此就需要采集图像时将 RGB 模型转换到 YUV 模型，显示时再将 YUV 模型转换为 RGB 模型。</p>
+
+<p>RGB 到 YUV 的转换，就是将图像所有像素点的 R、G、B 分量转换到 Y、U、V 分量。</p>
+
+<p>有如下公式进行转换：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fvf9sa62zhj20ke046jre.jpg" alt="" /></p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fvf9tdm65jj20f1046746.jpg" alt="" /></p>
+
+<p>此时的转换结束后，每个像素点都有完整的 Y、U、V 分量。而之前提到 Y 和 UV 分量是可以分离的，接下来通过不同的采样方式，可以将图像的 Y、U、V 分量重新组合。</p>
+
+<p>接下来的不同采样格式都是在一张图像所有像素的 RGB 转换到 YUV 基础上进行的。</p>
+
+<h2 id="yuv-采样格式">YUV 采样格式</h2>
+
+<p>YUV 图像的主流采样方式有如下三种：</p>
+
+<ul>
+<li>YUV 4:4:4 采样</li>
+<li>YUV 4:2:2 采样</li>
+<li>YUV 4:2:0 采样</li>
+</ul>
+
+<h3 id="yuv-4-4-4-采样">YUV 4:4:4 采样</h3>
+
+<p>YUV 4:4:4 采样，意味着 Y、U、V 三个分量的采样比例相同，因此在生成的图像里，每个像素的三个分量信息完整，都是 8 bit，也就是一个字节。</p>
+
+<p>如下图所示：</p>
+
+<p><img src="https://i-msdn.sec.s-msft.com/dynimg/IC130499.gif" alt="" /></p>
+
+<p>其中，Y 分量用叉表示，UV 分量用圆圈表示。</p>
+
+<pre><code>举个例子 ：
+
+假如图像像素为：[Y0 U0 V0]、[Y1 U1 V1]、[Y2 U2 V2]、[Y3 U3 V3]
+
+那么采样的码流为：Y0 U0 V0 Y1 U1 V1 Y2 U2 V2 Y3 U3 V3 
+
+最后映射出的像素点依旧为 [Y0 U0 V0]、[Y1 U1 V1]、[Y2 U2 V2]、[Y3 U3 V3] 
+</code></pre>
+
+<p>可以看到这种采样方式的图像和 RGB 颜色模型的图像大小是一样，并没有达到节省带宽的目的，当将 RGB 图像转换为 YUV 图像时，也是先转换为 YUV 4:4:4 采样的图像。</p>
+
+<h3 id="yuv-4-2-2-采样">YUV 4:2:2 采样</h3>
+
+<p>YUV 4:2:2 采样，意味着 UV 分量是 Y 分量采样的一半，Y 分量和 UV 分量按照 2 : 1 的比例采样。如果水平方向有 10 个像素点，那么采样了 10 个 Y 分量，而只采样了 5 个 UV 分量。</p>
+
+<p>如下图所示：</p>
+
+<p><img src="https://i-msdn.sec.s-msft.com/dynimg/IC84769.gif" alt="" /></p>
+
+<p>其中，Y 分量用叉表示，UV 分量用圆圈表示。</p>
+
+<pre><code> 举个例子 ：
+  
+ 假如图像像素为：[Y0 U0 V0]、[Y1 U1 V1]、[Y2 U2 V2]、[Y3 U3 V3]
+
+ 那么采样的码流为：Y0 U0 Y1 V1 Y2 U2 Y3 V3 
+
+ 其中，每采样过一个像素点，都会采样其 Y 分量，而 U、V 分量就会间隔一个采集一个。
+
+ 最后映射出的像素点为 [Y0 U0 V1]、[Y1 U0 V1]、[Y2 U2 V3]、[Y3 U2 V3]
+</code></pre>
+
+<p>采样的码流映射为像素点，还是要满足每个像素点有 Y、U、V 三个分量。但是可以看到，第一和第二像素点公用了 U0、V1 分量，第三和第四个像素点公用了 U2、V3 分量，这样就节省了图像空间。</p>
+
+<p>一张 1280 * 720 大小的图片，在 YUV 4:2:2 采样时的大小为：</p>
+
+<blockquote>
+<p>（1280 * 720 * 8 + 1280 * 720 * 0.5 * 8 * 2）/ 8 / 1024 / 1024 = 1.76 MB 。</p>
+</blockquote>
+
+<p>可以看到 YUV 4:2:2 采样的图像比 RGB 模型图像节省了三分之一的存储空间，在传输时占用的带宽也会随之减少。</p>
+
+<h3 id="yuv-4-2-0-采样">YUV 4:2:0 采样</h3>
+
+<p>YUV 4:2:0 采样，并不是指只采样 U 分量而不采样 V 分量。而是指，在每一行扫描时，只扫描一种色度分量（U 或者 V），和 Y 分量按照 2 : 1 的方式采样。比如，第一行扫描时，YU 按照 2 : 1 的方式采样，那么第二行扫描时，YV 分量按照 2:1 的方式采样。对于每个色度分量来说，它的水平方向和竖直方向的采样和 Y 分量相比都是 2:1 。</p>
+
+<p>如下图所示：</p>
+
+<p><img src="https://i-msdn.sec.s-msft.com/dynimg/IC173152.gif" alt="" /></p>
+
+<p>其中，Y 分量用叉表示，UV 分量用圆圈表示。</p>
+
+<p>假设第一行扫描了 U 分量，第二行扫描了 V 分量，那么需要扫描两行才能够组成完整的 UV 分量。</p>
+
+<pre><code>举个例子 ：
+ 
+假设图像像素为：
+ 
+[Y0 U0 V0]、[Y1 U1 V1]、 [Y2 U2 V2]、 [Y3 U3 V3]
+[Y5 U5 V5]、[Y6 U6 V6]、 [Y7 U7 V7] 、[Y8 U8 V8]
+ 
+那么采样的码流为：Y0 U0 Y1 Y2 U2 Y3 Y5 V5 Y6 Y7 V7 Y8
+ 
+其中，每采样过一个像素点，都会采样其 Y 分量，而 U、V 分量就会间隔一行按照 2 : 1 进行采样。
+ 
+最后映射出的像素点为：
+
+[Y0 U0 V5]、[Y1 U0 V5]、[Y2 U2 V7]、[Y3 U2 V7]
+[Y5 U0 V5]、[Y6 U0 V6]、[Y7 U2 V7]、[Y8 U2 V8]
+</code></pre>
+
+<p>从映射出的像素点中可以看到，四个 Y 分量是共用了一套 UV 分量，而且是按照 2*2 的小方格的形式分布的，相比 YUV 4:2:2 采样中两个 Y 分量共用一套 UV 分量，这样更能够节省空间。</p>
+
+<p>一张 1280 * 720 大小的图片，在 YUV 4:2:0 采样时的大小为：</p>
+
+<blockquote>
+<p>（1280 * 720 * 8 + 1280 * 720 * 0.25 * 8 * 2）/ 8 / 1024 / 1024 = 1.32 MB 。</p>
+</blockquote>
+
+<p>可以看到 YUV 4:2:0 采样的图像比 RGB 模型图像节省了一半的存储空间，因此它也是比较主流的采样方式。</p>
+
+<h2 id="yuv-存储格式">YUV 存储格式</h2>
+
+<p>说完了采样，接下来就是如何把采样的数据存储起来。</p>
+
+<p>YUV 的存储格式，有两种：</p>
+
+<ul>
+<li>planar  平面格式
+
+<ul>
+<li>指先连续存储所有像素点的 Y 分量，然后存储 U 分量，最后是 V 分量。</li>
+</ul></li>
+<li>packed  打包模式
+
+<ul>
+<li>指每个像素点的 Y、U、V 分量是连续交替存储的。</li>
+</ul></li>
+</ul>
+
+<p>根据采样方式和存储格式的不同，就有了多种 YUV 格式。这些格式主要是基于 YUV 4:2:2 和 YUV 4:2:0 采样。</p>
+
+<p>常见的基于 YUV 4:2:2 采样的格式如下表：</p>
+
+<table>
+<thead>
+<tr>
+<th>YUV 4:2:2 采样</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>YUYV 格式</td>
+</tr>
+
+<tr>
+<td>UYVY 格式</td>
+</tr>
+
+<tr>
+<td>YUV 422P 格式</td>
+</tr>
+</tbody>
+</table>
+
+<p>常见的基于 YUV 4:2:0 采样的格式如下表：</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>YUV 4:2:0 采样</th>
+<th>YUV 4:2:0 采样</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>YUV 420P 类型</td>
+<td>YV12 格式</td>
+<td>YU12 格式</td>
+</tr>
+
+<tr>
+<td>YUV 420SP 类型</td>
+<td>NV12 格式</td>
+<td>NV21 格式</td>
+</tr>
+</tbody>
+</table>
+
+<p>更多的 YUV 格式信息参考这里：<a href="https://www.fourcc.org/yuv.php">YUV pixel formats</a></p>
+
+<h3 id="基于-yuv-4-2-2-采样的格式">基于 YUV 4:2:2  采样的格式</h3>
+
+<p>YUV 4:2:2 采样规定了 Y 和 UV 分量按照 2: 1 的比例采样，两个 Y 分量公用一组 UV 分量。</p>
+
+<h3 id="yuyv-格式">YUYV 格式</h3>
+
+<p>YUYV 格式是采用打包格式进行存储的，指每个像素点都采用 Y 分量，但是每隔一个像素采样它的 UV 分量，排列顺序如下：</p>
+
+<blockquote>
+<p>Y0 UO Y1 V0  Y2 U2 Y3 V2</p>
+</blockquote>
+
+<p>Y0 和 Y1 公用 U0 V0 分量，Y2 和 Y3 公用 U2 V2 分量&hellip;.</p>
+
+<p><img src="https://www.fourcc.org/images/yuy2.gif" alt="" /></p>
+
+<h3 id="uyvy-格式">UYVY 格式</h3>
+
+<p>UYVY 格式也是采用打包格式进行存储，它的顺序和 YUYV 相反，先采用 U 分量再采样 Y 分量，排列顺序如下：</p>
+
+<blockquote>
+<p>U0 Y0 V0 Y1 U2 Y2 V2 Y3</p>
+</blockquote>
+
+<p>Y0 和 Y1 公用 U0 V0 分量，Y2 和 Y3 公用 U2 V2 分量&hellip;.</p>
+
+<p>根据 UV 和 Y 的顺序还有其他格式，比如，YVYU 格式，VYUY 格式等等，原理大致一样了。</p>
+
+<p><img src="https://www.fourcc.org/images/uyvy.gif" alt="" /></p>
+
+<h3 id="yuv-422p-格式">YUV 422P 格式</h3>
+
+<p>YUV 422P 格式，又叫做 I422，采用的是平面格式进行存储，先存储所有的 Y 分量，再存储所有的 U 分量，再存储所有的 V 分量。</p>
+
+<h2 id="基于-yuv-4-2-0-采样的格式">基于 YUV 4:2:0  采样的格式</h2>
+
+<p>基于 YUV 4:2:0 采样的格式主要有 YUV 420P 和 YUV 420SP 两种类型，每个类型又对应其他具体格式。</p>
+
+<ul>
+<li>YUV 420P 类型
+
+<ul>
+<li>YU12 格式</li>
+<li>YV12 格式</li>
+</ul></li>
+<li>YUV 420SP 类型
+
+<ul>
+<li>NV12 格式</li>
+<li>NV21 格式</li>
+</ul></li>
+</ul>
+
+<p>YUV 420P 和 YUV 420SP 都是基于  Planar 平面模式 进行存储的，先存储所有的 Y 分量后， YUV420P 类型就会先存储所有的 U 分量或者 V 分量，而 YUV420SP 则是按照 UV 或者 VU 的交替顺序进行存储了，具体查看看下图：</p>
+
+<p>YUV420SP 的格式：</p>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/2048812-642a69d2ad1004cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/370" alt="" /></p>
+
+<p>YUV420P 的格式：</p>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/2048812-0bc7e7b5c86556ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/371" alt="" /></p>
+
+<h3 id="yu12-和-yv12-格式">YU12 和 YV12 格式</h3>
+
+<p>YU12 和 YV12 格式都属于 YUV 420P 类型，即先存储 Y 分量，再存储 U、V 分量，区别在于：YU12 是先 Y 再 U 后 V，而 YV12 是先 Y 再 V 后 U 。</p>
+
+<p>YV 12 的存储格式如下图所示：</p>
+
+<p><img src="https://i-msdn.sec.s-msft.com/dynimg/IC78671.gif" alt="" /></p>
+
+<p>YU 12 又称作 I420 格式，它的存储格式就是把 V 和 U 反过来了。</p>
+
+<h3 id="nv12-和-nv21-格式">NV12 和 NV21 格式</h3>
+
+<p>NV12 和 NV21 格式都属于 YUV420SP 类型。它也是先存储了 Y 分量，但接下来并不是再存储所有的 U 或者 V 分量，而是把 UV 分量交替连续存储。</p>
+
+<p>NV12 是 IOS 中有的模式，它的存储顺序是先存 Y 分量，再 UV 进行交替存储。</p>
+
+<p><img src="https://i-msdn.sec.s-msft.com/dynimg/IC101759.gif" alt="" /></p>
+
+<p>NV21 是 安卓 中有的模式，它的存储顺序是先存 Y 分量，在 VU 交替存储。</p>
+
+<h2 id="小结">小结</h2>
+
+<p>以上就是关于 YUV 的知识总结，你有看明白了嘛？</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li><a href="https://blog.csdn.net/grow_mature/article/details/9004548">https://blog.csdn.net/grow_mature/article/details/9004548</a></li>
+<li><a href="http://www.cnblogs.com/azraelly/archive/2013/01/01/2841269.html">http://www.cnblogs.com/azraelly/archive/2013/01/01/2841269.html</a></li>
+<li><a href="https://blog.csdn.net/MrJonathan/article/details/17718761">https://blog.csdn.net/MrJonathan/article/details/17718761</a></li>
+<li><a href="https://blog.csdn.net/wudebao5220150/article/details/13295603">https://blog.csdn.net/wudebao5220150/article/details/13295603</a></li>
+<li><a href="https://msdn.microsoft.com/zh-cn/library/ms867704.aspx">https://msdn.microsoft.com/zh-cn/library/ms867704.aspx</a></li>
+<li><a href="https://www.fourcc.org/yuv.php">https://www.fourcc.org/yuv.php</a></li>
+</ol>
+
+              
+                <p>
+
+                
+                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
+
+                  <br/>
+
+                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/understand-yuv-format/">一文读懂 YUV 的采样与格式</a>
+
+                
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/android/cmake-best-practices/" data-toggle="tooltip" data-placement="top" title="Android NDK 开发之 CMake 必知必会">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/" data-toggle="tooltip" data-placement="top" title="MediaCodec 硬编码之相机内容编码成 H264 文件">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+            
+            <div>
+                 
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+

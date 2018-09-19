@@ -34,7 +34,7 @@
     <item>
       <title>Camera</title>
       <link>https://glumes.com/tags/camera/</link>
-      <pubDate>Tue, 22 May 2018 12:04:10 +0800</pubDate>
+      <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/tags/camera/</guid>
       <description></description>
@@ -122,6 +122,15 @@
     </item>
     
     <item>
+      <title>H264</title>
+      <link>https://glumes.com/tags/h264/</link>
+      <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/h264/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Inflater</title>
       <link>https://glumes.com/tags/inflater/</link>
       <pubDate>Fri, 22 Dec 2017 15:55:08 +0800</pubDate>
@@ -163,6 +172,15 @@
       <pubDate>Thu, 04 Jan 2018 14:20:04 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/tags/life/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mediacodec</title>
+      <link>https://glumes.com/tags/mediacodec/</link>
+      <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/mediacodec/</guid>
       <description></description>
     </item>
     
@@ -221,6 +239,15 @@
     </item>
     
     <item>
+      <title>Rgb</title>
+      <link>https://glumes.com/tags/rgb/</link>
+      <pubDate>Wed, 19 Sep 2018 23:12:45 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/rgb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Rxjava</title>
       <link>https://glumes.com/tags/rxjava/</link>
       <pubDate>Wed, 31 Jan 2018 15:26:16 +0800</pubDate>
@@ -235,6 +262,15 @@
       <pubDate>Wed, 31 Jan 2018 15:20:14 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/tags/statemachine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yuv</title>
+      <link>https://glumes.com/tags/yuv/</link>
+      <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/yuv/</guid>
       <description></description>
     </item>
     
