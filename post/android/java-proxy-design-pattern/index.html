@@ -12,22 +12,16 @@
 
 
 当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。
-
-
 ">
   <meta property="og:description" content="代理模式的使用场景如下：
 
 
 当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。
-
-
 ">
   <meta name="twitter:description" content="代理模式的使用场景如下：
 
 
 当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。
-
-
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
@@ -35,7 +29,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.51" />
   <link rel="canonical" href="https://glumes.com/post/android/java-proxy-design-pattern/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -270,8 +264,6 @@
 <p>当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。</p>
 </blockquote>
 
-<p></p>
-
 <p>在 Android 代码中经常会看见代理模式的存在，尤其是在 Binder 跨进程通信方面。比如 Activity 与 ActivityManagerService 的通信，Activity 拿到的就是 ActivityManagerService 的代理对象 ActivityManagerProxy ，由这个代理对象去执行跨进程通信。</p>
 
 <p>而 ActivityManagerProxy 和 ActivityManagerService 又实现了同样的接口 <code>IActivityManager</code>。ActivityManagerService 是抽象类 ActivityManagerNative 的子类，ActivityManagerNative 实现了 <code>IActivityManager</code>接口。</p>
@@ -447,7 +439,7 @@ public class SampleInvocationHandler implements InvocationHandler {
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -525,7 +517,7 @@ public class SampleInvocationHandler implements InvocationHandler {
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

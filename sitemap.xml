@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/java/java-multithread-overview/</loc>
+    <lastmod>2018-11-19T15:58:17+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/</loc>
+    <lastmod>2018-11-19T10:23:00+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/</loc>
     <lastmod>2018-09-19T23:39:28+08:00</lastmod>
   </url>
@@ -198,7 +208,7 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/</loc>
+    <loc>https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</loc>
     <lastmod>2018-04-10T16:09:32+08:00</lastmod>
   </url>
   
@@ -399,7 +409,7 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-09-19T23:39:28+08:00</lastmod>
+    <lastmod>2018-11-19T15:58:17+08:00</lastmod>
   </url>
   
   <url>
@@ -410,13 +420,19 @@
   
   <url>
     <loc>https://glumes.com/categories/android/</loc>
-    <lastmod>2018-09-19T23:39:28+08:00</lastmod>
+    <lastmod>2018-11-19T15:58:17+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/tags/architecture/</loc>
     <lastmod>2018-01-31T15:42:28+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/c&#43;&#43;/</loc>
+    <lastmod>2018-11-19T10:23:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -428,7 +444,7 @@
   
   <url>
     <loc>https://glumes.com/categories/</loc>
-    <lastmod>2018-09-19T23:39:28+08:00</lastmod>
+    <lastmod>2018-11-19T15:58:17+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -512,7 +528,7 @@
   
   <url>
     <loc>https://glumes.com/tags/java/</loc>
-    <lastmod>2018-08-28T22:55:49+08:00</lastmod>
+    <lastmod>2018-11-19T15:58:17+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -584,7 +600,7 @@
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-09-19T23:39:28+08:00</lastmod>
+    <lastmod>2018-11-19T15:58:17+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -621,6 +637,12 @@
   <url>
     <loc>https://glumes.com/tags/statemachine/</loc>
     <lastmod>2018-01-31T15:20:14+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/stl/</loc>
+    <lastmod>2018-11-19T10:23:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   

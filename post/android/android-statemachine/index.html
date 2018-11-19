@@ -10,26 +10,20 @@
   <meta name="twitter:title" content="Android StateMachine 状态机分析" />
   <meta name="description" content="之前就有写过一篇文章来学习状态机：状态机学习。
 
-在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。
-
-">
+在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。">
   <meta property="og:description" content="之前就有写过一篇文章来学习状态机：状态机学习。
 
-在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。
-
-">
+在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。">
   <meta name="twitter:description" content="之前就有写过一篇文章来学习状态机：状态机学习。
 
-在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。
-
-">
+在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/android/android-statemachine/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.51" />
   <link rel="canonical" href="https://glumes.com/post/android/android-statemachine/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -230,8 +224,6 @@
 
 <p>在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。</p>
 
-<p></p>
-
 <p>StateMachine 类位于 Android 源码中的，路径是<code>frameworks/base/core/java/com/android/internal/util/StateMachine.java</code>，从路径名可以看出，这是一个工具类，该类对状态机进行了封装，方便使用。</p>
 
 <p>在安卓源码中进行搜索，会发现很多类用到了状态机，比如：<code>WifiStateMachine</code>、<code>A2dpStateMachine</code>、<code>NsdStateMachine</code>、<code>P2dStateMachine</code>等等，它们都直接或间接的继承了 StateMachine 类。可见，状态机的思想在安卓源码中得到了广泛使用。</p>
@@ -399,7 +391,7 @@
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -477,7 +469,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

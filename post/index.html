@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.51" />
   <link rel="canonical" href="https://glumes.com/post/" />
   <link rel="alternate" href="https://glumes.com/post/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -182,6 +182,91 @@
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/java/java-multithread-overview/">
+                <h2 class="post-title">Java 显式锁 Lock 与条件队列</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on November 19, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>在 Java 5.0 之前，在协调对共享对象的访问时可以使用的机制只有 <code>synchronized</code> 内置锁和 <code>volatile</code> 关键字。</p>
+
+<p>Java 5.0 增加了一种新的机制：<code>Lock</code>  显式锁，当内置锁 <code>synchronized</code> 不适用时，它就可以作为一种新的选择。</p>
+
+<p>回顾一下内置锁 synchronized 的使用：</p>
+
+<pre><code class="language-java">// synchronized关键字用法示例
+public synchronized void add(int t){// 同步方法
+    this.v += t;
+}
+
+public static synchronized void sub(int t){// 同步静态方法
+    value -= t;
+}
+public int decrementAndGet(){
+    synchronized(obj){// 同步代码块
+        return --v;
+    }
+}
+</code></pre>
+
+<p>内置锁不需要显式的获取和释放，任何一个对象都能作为一把内置锁。</p>
+
+<ul>
+<li>当 synchronized 作用于普通方法时，锁对象是 this 。</li>
+<li>当 synchronized 作用于静态方法时，锁对象是当前类的 Class 对象。</li>
+<li>当 synchronized 作用于代码块时，锁对象是 synchronized(obj) 中的这个 obj 对象。</li>
+</ul>
+
+<hr />
+                  <a href="https://glumes.com/post/java/java-multithread-overview/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/java/">Java</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/">
+                <h2 class="post-title">C&#43;&#43; 标准容器库小结</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on November 19, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>《C++ Primer》 第五版笔记摘录~~~</p>
+                  <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/c&#43;&#43;/">C&#43;&#43;</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/stl/">STL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/">
                 <h2 class="post-title">MediaCodec 硬编码之相机内容编码成 H264 文件</h2>
 
@@ -198,8 +283,6 @@
 <p>虽然 MediaCodec 仍然存在一定的弊端，但是对于快速实现编解码需求，还是很值得参考的。</p>
 
 <p>以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -233,8 +316,6 @@
               <div class="post-entry">
                 
                   <p>YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/ffmpeg/understand-yuv-format/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -266,8 +347,6 @@
                   <p>Android Studio 从 2.2 版本起开始支持 CMake ,可以通过 CMake 和 NDK 将 C/C++ 代码编译成底层的库，然后再配合 Gradle 的编译将库打包到 APK 中。</p>
 
 <p>这意味就不需要再编写 <code>.mk</code> 文件来编译 <code>so</code> 动态库了。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/cmake-best-practices/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -297,8 +376,6 @@
               <div class="post-entry">
                 
                   <p>分析一波 OkHttp 的源码实现。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/okhttp-analysis/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -328,8 +405,6 @@
                   <p>在之前的<a href="https://glumes.com/post/opengl/opengl-glsl-2-mark/">文章</a>中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。</p>
 
 <p>本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-glsl-3-mark/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -361,8 +436,6 @@
                   <p>要想发挥 OpenGL ES 自定义渲染管线的功能，就得学会写 GLSL 着色器脚本。</p>
 
 <p>本文中的内容来自于 《Android 3D 游戏开发技术宝典 OpenGL ES 2.0》。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-glsl-2-mark/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -392,8 +465,6 @@
               <div class="post-entry">
                 
                   <p>分析一波 Retrofit 的源码实现。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/retrofit-analysis/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -425,8 +496,6 @@
 <p>除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。</p>
 
 <p>FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -437,68 +506,6 @@
                     #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
                   
                     #<a href="https://glumes.com/tags/fbo/">FBO</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-egl-usage/">
-                <h2 class="post-title">OpenGL 之 EGL 使用实践</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 2, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。</p>
-
-<p>而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 <code>EGL</code> 来完成这个转换工作。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opengl/opengl-egl-usage/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/egl/">EGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-gpuimage-analysis/">
-                <h2 class="post-title">OpenGL 之 GPUImage 源码分析</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 2, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p><a href="https://github.com/BradLarson/GPUImage">GPUImage</a> 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 <a href="https://github.com/CyberAgent/android-gpuimage">GPUImage</a> ，本文也主要对 Android 版本的 GPUImage 进行分析。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/opengl/opengl-gpuimage-analysis/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
                   
                 </span>
               
@@ -522,13 +529,12 @@
 
 <ul class="pagination">
     
-    <li>
-        <a href="/post/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li class="page-item">
+        <a href="/post/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li
-    class="disabled">
-    <a href="" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li class="page-item disabled">
+    <a href="" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -540,8 +546,7 @@
         
     
     
-    <li
-    class="active"><a href="/post/">1</a></li>
+    <li class="page-item active"><a class="page-link" href="/post/">1</a></li>
     
     
     
@@ -552,8 +557,7 @@
         
     
     
-    <li
-    ><a href="/post/page/2/">2</a></li>
+    <li class="page-item"><a class="page-link" href="/post/page/2/">2</a></li>
     
     
     
@@ -564,8 +568,7 @@
         
     
     
-    <li
-    ><a href="/post/page/3/">3</a></li>
+    <li class="page-item"><a class="page-link" href="/post/page/3/">3</a></li>
     
     
     
@@ -576,16 +579,7 @@
         
     
     
-    <li class="disabled"><span aria-hidden="true">&hellip;</span></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
+    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
     
     
     
@@ -614,17 +608,24 @@
         
     
     
-    <li
-    ><a href="/post/page/8/">8</a></li>
     
     
-    <li
-    >
-    <a href="/post/page/2/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/post/page/8/">8</a></li>
+    
+    
+    <li class="page-item">
+    <a href="/post/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li>
-        <a href="/post/page/8/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li class="page-item">
+        <a href="/post/page/8/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -694,7 +695,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

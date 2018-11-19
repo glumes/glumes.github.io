@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.51" />
   <link rel="canonical" href="https://glumes.com/tags/java/" />
   <link rel="alternate" href="https://glumes.com/tags/java/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -182,6 +182,62 @@
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/java/java-multithread-overview/">
+                <h2 class="post-title">Java 显式锁 Lock 与条件队列</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on November 19, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>在 Java 5.0 之前，在协调对共享对象的访问时可以使用的机制只有 <code>synchronized</code> 内置锁和 <code>volatile</code> 关键字。</p>
+
+<p>Java 5.0 增加了一种新的机制：<code>Lock</code>  显式锁，当内置锁 <code>synchronized</code> 不适用时，它就可以作为一种新的选择。</p>
+
+<p>回顾一下内置锁 synchronized 的使用：</p>
+
+<pre><code class="language-java">// synchronized关键字用法示例
+public synchronized void add(int t){// 同步方法
+    this.v += t;
+}
+
+public static synchronized void sub(int t){// 同步静态方法
+    value -= t;
+}
+public int decrementAndGet(){
+    synchronized(obj){// 同步代码块
+        return --v;
+    }
+}
+</code></pre>
+
+<p>内置锁不需要显式的获取和释放，任何一个对象都能作为一把内置锁。</p>
+
+<ul>
+<li>当 synchronized 作用于普通方法时，锁对象是 this 。</li>
+<li>当 synchronized 作用于静态方法时，锁对象是当前类的 Class 对象。</li>
+<li>当 synchronized 作用于代码块时，锁对象是 synchronized(obj) 中的这个 obj 对象。</li>
+</ul>
+
+<hr />
+                  <a href="https://glumes.com/post/java/java-multithread-overview/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/java/">Java</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/android/java-proxy-design-pattern/">
                 <h2 class="post-title">Java 中的静态代理和动态代理</h2>
 
@@ -198,8 +254,6 @@
 <blockquote>
 <p>当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。</p>
 </blockquote>
-
-<p></p>
                   <a href="https://glumes.com/post/android/java-proxy-design-pattern/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -220,6 +274,7 @@
       <div align="center" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
 
+        
         
         
       </div>
@@ -276,7 +331,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

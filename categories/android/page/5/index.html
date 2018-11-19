@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.51" />
   <link rel="canonical" href="https://glumes.com/categories/android/" />
   <link rel="alternate" href="https://glumes.com/categories/android/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -182,6 +182,68 @@
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-start-activity-from-launcher-1/">
+                <h2 class="post-title">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。</p>
+
+<p>这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。</p>
+
+<p>而当我们点击应用程序图标时，也就开启了从 Launcher 启动 Activity 的过程。</p>
+                  <a href="https://glumes.com/post/android/android-start-activity-from-launcher-1/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/framework/">Framework</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/rxjava-wrapper-callback/">
+                <h2 class="post-title">用 RxJava 封装回调方法 CallBack</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>在知乎上看到这样一个问题：<a href="https://www.zhihu.com/question/39492234">RxJava正确的封装callback的方式应该是怎么样的？</a>。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。</p>
+                  <a href="https://glumes.com/post/android/rxjava-wrapper-callback/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/rxjava/">RxJava</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/android/android-hal-summary/">
                 <h2 class="post-title">Android 硬件抽象层调用流程小结</h2>
 
@@ -196,8 +258,6 @@
                   <p>Android 从 5.0 开始使用新的相机 API Camera2 来代替之前的旧版本，从而支持更多的特性。</p>
 
 <p>在学习新的 API 调用之外，也还是要了解一下 Android 底层发生了哪些变化，从而能够让我们对 API 的调用流程更加的清晰，知其所以然。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/android-hal-summary/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -227,8 +287,6 @@
                   <p>之前讲到了如何在 <a href="http://www.glumes.com/kotlin-anko-usage/">Kotlin 开发中使用 Anko 构建布局</a>。</p>
 
 <p>这一篇将是分析其原理。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/kotlin-functional-programming-whth-anko/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -260,8 +318,6 @@
                   <p>学习 Kotlin 应该都或多或少听过 Anko 这个开源库。</p>
 
 <p>使用 Anko 来构建界面会更加简单、快捷。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/kotlin-with-anko/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -295,13 +351,12 @@
 
 <ul class="pagination">
     
-    <li>
-        <a href="/categories/android/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li class="page-item">
+        <a href="/categories/android/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li
-    >
-    <a href="/categories/android/page/4/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li class="page-item">
+    <a href="/categories/android/page/4/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -313,8 +368,7 @@
         
     
     
-    <li
-    ><a href="/categories/android/">1</a></li>
+    <li class="page-item"><a class="page-link" href="/categories/android/">1</a></li>
     
     
     
@@ -325,8 +379,7 @@
         
     
     
-    <li
-    ><a href="/categories/android/page/2/">2</a></li>
+    <li class="page-item"><a class="page-link" href="/categories/android/page/2/">2</a></li>
     
     
     
@@ -337,8 +390,7 @@
         
     
     
-    <li
-    ><a href="/categories/android/page/3/">3</a></li>
+    <li class="page-item"><a class="page-link" href="/categories/android/page/3/">3</a></li>
     
     
     
@@ -349,8 +401,7 @@
         
     
     
-    <li
-    ><a href="/categories/android/page/4/">4</a></li>
+    <li class="page-item"><a class="page-link" href="/categories/android/page/4/">4</a></li>
     
     
     
@@ -361,21 +412,21 @@
         
     
     
-    <li
-    class="active"><a href="/categories/android/page/5/">5</a></li>
+    <li class="page-item active"><a class="page-link" href="/categories/android/page/5/">5</a></li>
     
     
-    <li
-    class="disabled">
-    <a href="" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    <li class="page-item disabled">
+    <a href="" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li>
-        <a href="/categories/android/page/5/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li class="page-item">
+        <a href="/categories/android/page/5/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
 
+        
+        
         
         
         
@@ -434,7 +485,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>
