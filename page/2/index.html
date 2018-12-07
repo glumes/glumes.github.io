@@ -34,7 +34,7 @@ Scan the QRCode to …">
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.51" />
+  <meta name="generator" content="Hugo 0.31.1" />
   <link rel="canonical" href="https://glumes.com/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -252,6 +252,78 @@ Scan the QRCode to …">
           
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/android/retrofit-analysis/">
+                <h2 class="post-title">开源库之 Retrofit 源码分析</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on September 9, 2018
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>分析一波 Retrofit 的源码实现。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/retrofit-analysis/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/retrofit/">Retrofit</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/">
+                <h2 class="post-title">OpenGL 之 帧缓冲  使用实践</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on September 4, 2018
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>帧缓冲(Framebuffer Object)，简称 <code>FBO</code>，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。</p>
+
+<p>除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。</p>
+
+<p>FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                
+                  #<a href="https://glumes.com/tags/fbo/">FBO</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/opengl/opengl-egl-usage/">
                 <h2 class="post-title">OpenGL 之 EGL 使用实践</h2>
                 
@@ -271,6 +343,8 @@ Scan the QRCode to …">
                   <p>OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。</p>
 
 <p>而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 <code>EGL</code> 来完成这个转换工作。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-egl-usage/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -304,6 +378,8 @@ Scan the QRCode to …">
               <div class="post-entry">
                 
                   <p><a href="https://github.com/BradLarson/GPUImage">GPUImage</a> 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 <a href="https://github.com/CyberAgent/android-gpuimage">GPUImage</a> ，本文也主要对 Android 版本的 GPUImage 进行分析。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-gpuimage-analysis/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -339,6 +415,8 @@ Scan the QRCode to …">
 <blockquote>
 <p>当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。</p>
 </blockquote>
+
+<p></p>
                   <a href="https://glumes.com/post/android/java-proxy-design-pattern/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -374,6 +452,8 @@ Scan the QRCode to …">
               <div class="post-entry">
                 
                   <p>在 OpenGL 的世界模型中，同时绘制了多个物体，那么怎么去检测物体之间是否触碰了，不同于在平面之间的触碰，OpenGL 是在三维世界里面的触碰，接下来就继续深入理解 OpenGL 中的碰撞检测相关知识~~~</p>
+
+<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -405,6 +485,8 @@ Scan the QRCode to …">
               <div class="post-entry">
                 
                   <p>在 Android 中通过 JNI 去操作 Bitmap。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/android-jni-bitmap-operation/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -448,6 +530,8 @@ Scan the QRCode to …">
 <p>具体的效果如下：</p>
 
 <p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532360616/light_mix_xmv86l.gif" alt="" /></p>
+
+<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-light-mix/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -483,6 +567,8 @@ Scan the QRCode to …">
               <div class="post-entry">
                 
                   <p>在前面的文章中介绍了 OpenGL 的<a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/">环境光</a>和<a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/">散射光</a>，现在就是最后一个镜面光了。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-specular-light/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -518,83 +604,9 @@ Scan the QRCode to …">
               <div class="post-entry">
                 
                   <p>在前面的文章中介绍了 OpenGL 中的环境光，现在就是散射光了。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/">
-                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》光照系列之环境光</h2>
-                
-                  <h3 class="post-subtitle">
-                  学习笔记内容摘录
-                  </h3>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on July 21, 2018
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>在 OpenGL 中使用光照。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-depth-test/">
-                <h2 class="post-title">OpenGL 深度测试与精度值的那些事</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on July 20, 2018
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。</p>
-
-<p>直接看一个没有使用深度测试的绘制：</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532052034/code/undepth_test.gif" alt="未开启深度测试的情况" /></p>
-
-<p>按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。</p>
-
-<p>这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。</p>
-
-<p>要解决这种问题，就得使用深度测试了。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-depth-test/" class="post-read-more">[Read More]</a>
                 
               </div>
 
@@ -629,12 +641,13 @@ Scan the QRCode to …">
 
 <ul class="pagination">
     
-    <li class="page-item">
-        <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li>
+        <a href="/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li class="page-item">
-    <a href="/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li
+    >
+    <a href="/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -646,7 +659,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/">1</a></li>
+    <li
+    ><a href="/">1</a></li>
     
     
     
@@ -657,7 +671,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item active"><a class="page-link" href="/page/2/">2</a></li>
+    <li
+    class="active"><a href="/page/2/">2</a></li>
     
     
     
@@ -668,7 +683,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/3/">3</a></li>
+    <li
+    ><a href="/page/3/">3</a></li>
     
     
     
@@ -679,16 +695,7 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
+    <li class="disabled"><span aria-hidden="true">&hellip;</span></li>
     
     
     
@@ -717,15 +724,35 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/8/">8</a></li>
     
     
-    <li class="page-item">
-    <a href="/page/3/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li
+    ><a href="/page/9/">9</a></li>
+    
+    
+    <li
+    >
+    <a href="/page/3/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li class="page-item">
-        <a href="/page/8/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li>
+        <a href="/page/9/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -795,7 +822,7 @@ Scan the QRCode to …">
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

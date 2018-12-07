@@ -10,10 +10,14 @@
   <meta name="twitter:title" content="Android 6.0 Service 启动过程源码分析（一）" />
   <meta name="description" content="Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。
 
-Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。">
+Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。
+
+">
   <meta property="og:description" content="Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。
 
-Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。">
+Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。
+
+">
   <meta name="twitter:description" content="Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。
 
 Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在 …">
@@ -23,7 +27,7 @@ Service 组件可以被 Activity 组件启动，也可以被其他的 Service �
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.51" />
+  <meta name="generator" content="Hugo 0.31.1" />
   <link rel="canonical" href="https://glumes.com/post/android/android-start-service/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -225,6 +229,8 @@ Service 组件可以被 Activity 组件启动，也可以被其他的 Service �
             <p>Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。</p>
 
 <p>Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。</p>
+
+<p></p>
 
 <h2 id="service-组件在新进程中的启动过程">Service 组件在新进程中的启动过程</h2>
 
@@ -900,7 +906,7 @@ Service 组件可以被 Activity 组件启动，也可以被其他的 Service �
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script type="application/javascript">
+<script>
     var disqus_config = function () {
     
     
@@ -978,7 +984,7 @@ Service 组件可以被 Activity 组件启动，也可以被其他的 Service �
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

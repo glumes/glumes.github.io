@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.51" />
+  <meta name="generator" content="Hugo 0.31.1" />
   <link rel="canonical" href="https://glumes.com/tags/android/" />
   <link rel="alternate" href="https://glumes.com/tags/android/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -194,6 +194,8 @@
               <div class="post-entry">
                 
                   <p>要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/android-camrea-api-evolution/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -223,6 +225,8 @@
               <div class="post-entry">
                 
                   <p>在 MAC 上搭建 Android 反编译环境主要就是三个东西：<code>apktool</code> 、<code>dex2jar</code> 、<code>jd-gui</code> 。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/setup-android-crack-environment/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -252,6 +256,8 @@
               <div class="post-entry">
                 
                   <p>在安卓开发中使用 MVP 模式已经非常普遍了，网上关于 MVP 的讲解也相当多了，不过看得再多还是自己写一遍比较熟练。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/understand-mvp-architecture/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -281,6 +287,8 @@
               <div class="post-entry">
                 
                   <p>花了一两天时间终于在 Mac 上成功编译了 Android 主线最新代码，中间遇到了不少问题，也查阅了好多资料，总算是成功了，看到模拟器启动的那一刻还是挺激动的。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/build-android-source-code/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -308,6 +316,8 @@
               <div class="post-entry">
                 
                   <p>不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/android-rxjava/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -341,6 +351,8 @@
 <p>RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。</p>
 
 <p>这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/rxjava-wrapper-dialog/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -372,6 +384,8 @@
                   <p>Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。</p>
 
 <p>LayoutInflater 实例的获取有多种方式，但最终是通过<code>(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)</code>来得到的，也就是说加载布局的 <code>LayoutInflater</code> 是来自于系统服务的。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/android-layout-inflater/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -401,6 +415,8 @@
               <div class="post-entry">
                 
                   <p>在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/android-change-skin-by-plugin/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -430,6 +446,8 @@
                   <p>Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。</p>
 
 <p>Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/android-start-service/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -461,6 +479,8 @@
                   <p>之前就有写过一篇文章来学习状态机：<a href="http://www.glumes.com/statemachine_learn/">状态机学习</a>。</p>
 
 <p>在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/android-statemachine/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -496,12 +516,13 @@
 
 <ul class="pagination">
     
-    <li class="page-item">
-        <a href="/tags/android/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li>
+        <a href="/tags/android/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li class="page-item">
-    <a href="/tags/android/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li
+    >
+    <a href="/tags/android/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -513,7 +534,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="/tags/android/">1</a></li>
+    <li
+    ><a href="/tags/android/">1</a></li>
     
     
     
@@ -524,7 +546,8 @@
         
     
     
-    <li class="page-item active"><a class="page-link" href="/tags/android/page/2/">2</a></li>
+    <li
+    class="active"><a href="/tags/android/page/2/">2</a></li>
     
     
     
@@ -535,7 +558,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="/tags/android/page/3/">3</a></li>
+    <li
+    ><a href="/tags/android/page/3/">3</a></li>
     
     
     
@@ -546,15 +570,17 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="/tags/android/page/4/">4</a></li>
+    <li
+    ><a href="/tags/android/page/4/">4</a></li>
     
     
-    <li class="page-item">
-    <a href="/tags/android/page/3/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    <li
+    >
+    <a href="/tags/android/page/3/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li class="page-item">
-        <a href="/tags/android/page/4/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li>
+        <a href="/tags/android/page/4/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -624,7 +650,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

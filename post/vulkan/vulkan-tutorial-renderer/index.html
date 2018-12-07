@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解</title>
+  <meta property="og:title" content="进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解" />
+  <meta name="twitter:title" content="进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解" />
+  <meta name="description" content="都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。
+
+">
+  <meta property="og:description" content="都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。
+
+">
+  <meta name="twitter:description" content="都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/vulkan/vulkan-tutorial-renderer/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.31.1" />
+  <link rel="canonical" href="https://glumes.com/post/vulkan/vulkan-tutorial-renderer/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">目录</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">Android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="生活" href="/categories/life">生活</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于我" href="/about">关于我</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fxd7qunbo9j20zk0m8jtx.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on December 7, 2018
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+        
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Fri Dec 7, 2018</h4>
+    </section>
+    <h5 id="wc">2800 Words|Read in about 6 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/vulkan/">Vulkan</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <p>都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。</p>
+
+<p></p>
+
+<h2 id="从泥巴到工艺品">从泥巴到工艺品</h2>
+
+<p>先来举一个 <code>玩泥巴</code> 的例子，也就是我国的传统工艺 —— <code>陶瓷工艺</code> 。</p>
+
+<p>以我国传统的陶瓷工艺为例，先看看伟大的工匠们是如何把泥巴变成了精美的艺术品。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx7nt75c4qj222k0i8hdt.jpg" alt="" /></p>
+
+<p>上面是一张粗略的示意图，详细的陶瓷制作流程可以自行网上搜索，或者 <a href="https://www.toutiao.com/a6457289342741119502/">参考这里</a>。</p>
+
+<p>小时候大家肯定都玩过泥巴啦，沾一点水之后可以捏成各种各样的形状，没玩过的话，橡皮泥也行。</p>
+
+<p>现假设我们要用泥巴做一个陶瓷的彩色方块。</p>
+
+<p>那么首先就得从一堆稀泥里面捏出一个方方正正的小块，注意把小块的六个面都打磨均匀了。</p>
+
+<p>然后再放在火窑经过高温烧制，七七四十九小时之后，就可以出炉了，此时小方块就已经变硬了，而且它的形状就是我们捏完后的样子。</p>
+
+<p>待冷却之后就可以给它上色了，掏出画笔，涂上代表自己心情的颜色，这样就制作完成了一个陶瓷的彩色方块（是不是很简单呢(づ｡◕‿‿◕｡)づ）。</p>
+
+<h2 id="opengl-的渲染">OpenGL 的渲染</h2>
+
+<p>OpenGL 的渲染流程和陶瓷工艺在某些地方是有着相同之处的。</p>
+
+<p>首先，OpenGL 的渲染是讲究先有形后有色。也就是说用 OpenGL 去渲染绘制二维或三维的物体，你得先把物体给勾勒描绘出来。就好比上面提到的陶瓷小方块，在进行高温烧制之前，也是要先把物体的形状给捏出来的。</p>
+
+<p>在 OpenGL 中提供了几种基本的绘制图形，比如点、线、三角形等，就是使用这几个基本图元去描绘这万千世界，比如绘制一个矩形，可以用两个三角形拼接起来。</p>
+
+<p>在陶瓷小方块的例子中，捏完形状之后就可以高温烧制了，然后再涂色。在 OpenGL 中也有类似高温烧制的一步，叫做 <code>光栅化</code> 。</p>
+
+<p>强调一下这只是类似的对比，因为这两者还是有差别的。</p>
+
+<p>当我们在构建定义物体形状时，是在三维的坐标系里面，而显示的屏幕确实二维坐标系，这里还涉及到一个三维坐标到二维坐标的转换，待会再说。</p>
+
+<p>假设现在已经执行完了坐标转换，物体的坐标转换成了二维的，那么就需要通过 <code>光栅化</code> 来映射到屏幕的二维坐标上。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx7or6vctjj20hg09z3yv.jpg" alt="" /></p>
+
+<p>以上图作为示例，先定义了三个顶点代表三角形基本图元，再把经过坐标转换之后的三角形映射到屏幕上。而屏幕是由一个一个像素点组成的，光栅化的过程就是要把三角形分解成许多个小的片段，再把这些片段映射到屏幕对应位置上，这样就可以让屏幕显示坐标转换后的物体了。</p>
+
+<p>给三角形显示来个特写如下：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx7tn3qte2j2060056q2w.jpg" alt="" /></p>
+
+<p>光栅化之后的三角形与屏幕显示的关系。实际上屏幕像素并不是小方格而是像素点，肯定不会有这么夸张的锯齿。</p>
+
+<p>当光栅化操作之后，就可以对它进行着色了。这又回到了上面的例子，陶瓷小方块的涂色阶段，在这个阶段，数字图像处理学科开始发挥它巨大的作用了，各种各样的滤镜、图像效果都是在这个阶段进行的。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx7twah2rwj20nh06nn1c.jpg" alt="" /></p>
+
+<p>用上面的图总结一下目前的渲染流程，这个流程比较简化，理解起来就和上面的陶瓷制作相似，也比较形象的阐述了 OpenGL 渲染从 <code>有形</code> 到 <code>有色</code> 的过程。</p>
+
+<p>现在再来看看坐标转换，坐标转换是在光栅化之前的，如下图：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx7uicbuccj20qg0c2n3l.jpg" alt="" /></p>
+
+<p>这里会经过几个坐标的转换，分别是局部坐标、世界坐标、观察坐标、裁剪坐标。最后才是显示到屏幕的坐标。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx7uw2xzydj20m80aydgo.jpg" alt="" /></p>
+
+<p>具体的详细分析可以参考之前写过的相关 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/">博客文章</a>。</p>
+
+<p>简单说就是我们有了一个立方体形状，那么我们在不同地方、不同角度看到的物体的不一样的，这是人相对于物体的移动变化。另外还有物体相对人的移动变化，物体移出了我们的视线、物体侧放着、物体反过来对着我们，得到的观察结果也是不一样的。</p>
+
+<p>而坐标转换就是约定好观察者与被观察者之间的位置、角度，这样才能确定看到的结果是什么，对这个结果进行光栅化处理，再映射到屏幕上。</p>
+
+<p>写到这，你以为你就懂了 OpenGL 的渲染流程了嘛？想要更好地发挥 OpenGL 的作用，还需要了解它的各种 <code>测试</code> 和 <code>颜色混合</code> 。</p>
+
+<ul>
+<li>裁剪测试（Scissor Test）</li>
+</ul>
+
+<p>在经过光栅化和片段着色器处理之后，通过裁剪测试可以选择只在某一个矩形区域内进行绘制，不需要绘制整个屏幕范围。这样的话，就可以在同一屏内分别绘制不同的内容。</p>
+
+<ul>
+<li>模板测试（Stencil Test）</li>
+</ul>
+
+<p>模板测试能够让我们预先定义一个任意模板范围，然后在指定的任意范围内绘制。相比裁剪测试只能在矩形范围内，模板测试更加灵活了。对于某些场合实现效果还是很有帮助的。</p>
+
+<ul>
+<li>深度测试（Depth Test）</li>
+</ul>
+
+<p>深度测试是指在三维坐标里面，距离观察点较远的片段会被前面较近的片段挡住，因此就不需要绘制那些被遮挡看不到的内容了，优化绘制。如果只是绘制平面二维的内容，那么深度测试开不开都没太大影响。</p>
+
+<ul>
+<li>混合测试（Alpha Blending）</li>
+</ul>
+
+<p>混合测试指定就是在原有颜色的基础上用另外的颜色绘制时，如何确定这两种颜色混合后的最终颜色。如果是做贴纸相关应用，要特别注意透明度的问题，看到过一些同学透明度没处理好导致贴纸效果不理想。</p>
+
+<p>经过这些个步骤之后，绘制的内容就会映射到指定的大小范围内，也就是 <code>视口（ViewPort）</code> 的大小，一般都是通过代码来指定这个大小。</p>
+
+<p>而装载绘制内容的就是 <code>帧缓冲（FrameBuffer）</code>，绘制的结果就是输出到这了。通过绑定到不同的帧缓冲，可以将绘制结果输出到不同的帧缓冲里。而 OpenGL 中，屏幕就是那个默认的帧缓冲，所以一般就直接输出显示到屏幕上了。当然也可以自己创建一个帧缓冲，用来做离屏渲染等操作。</p>
+
+<p>用 <a href="https://www.khronos.org/opengl/wiki/Rendering_Pipeline_Overview">维基百科</a> 上的图来做个总结：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77ly1fx8181dkhaj207j0gqdgq.jpg" alt="" /></p>
+
+<p>这个流程图就和上文内容提到的大致相同了，如果你明白了渲染流程，那么看懂这个图应该也不是难事了~</p>
+
+<p>以上就是关于 OpenGL 渲染流程的一个看法和理解，如果有什么不足之处欢迎指出~~</p>
+
+<h2 id="vulkan-的渲染">Vulkan 的渲染</h2>
+
+<p>接下来看看 Vulkan 的渲染。</p>
+
+<p>先上一张 英伟达（NVIDIA） 公司给出的 Vulkan 组件图。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx80mwln17j21to110woq.jpg" alt="" /></p>
+
+<p>由于本篇只关注渲染流程，所以组件图中很多是现在不用太过关心的，比如 Image、Command-buffer 等，后面的文章会再做讲解。</p>
+
+<p>看到图中有一个 <code>Graphics pipeline</code> 的组件，这个组件里面就包含 Vulkan 的渲染流程。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx80qkqyanj21ts10qqdc.jpg" alt="" /></p>
+
+<p>Pipeline 组件里面都有哪些操作？看下图~</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx80vj91g4j20vn0ojtft.jpg" alt="" /></p>
+
+<p>看到图中中的左边内容是不是有似曾相识的感觉，就和 OpenGL 的渲染流程一样的，也是从顶点 -&gt; 到光栅化 -&gt; 到着色器 -&gt; 到帧缓冲，再加上各种测试。</p>
+
+<p>Vulkan 的 Pipeline 组件就是对应了 OpenGL 的渲染流程，或者说就是图形学里面的渲染流程，因为这个流程、这个原理是不会变的，Vulkan 也没有改变它，只是调用的逻辑结构发生了变化，但万变不离其宗，这也是为什么说要先学会 OpenGL 再来看 Vulkan 。</p>
+
+<p>在 Vulkan 中，Pipeline 组件是可以复用的，通过绑定不同的资源而实现。可以预先创建几个 Pipeline ，在使用时选择对应的 Pipeline ，另外 Pipeline 还可以缓存起来，关于 Pipeline 的具体细节等到使用时再详细阐述。</p>
+
+<p>渲染和 Vulkan 的调用是分开的。Vulkan 的调用很复杂，但是很多和图形学并没有关系，比如多线程、比如资源分配等。</p>
+
+<p>只节选了组件图的一小部分来讲解，更多讲解敬请期待后续文章。</p>
+
+<p>当然，这只是个人的学习经验，仅供参考，有讲的不对之处，欢迎指出，也可以加我微信一起交流学习: <code>zh_ying_13</code> 。</p>
+
+<p>系列文章的代码地址：</p>
+
+<blockquote>
+<p><a href="https://github.com/glumes/vulkan_tutorial">https://github.com/glumes/vulkan_tutorial</a></p>
+</blockquote>
+
+<h2 id="参考">参考</h2>
+
+<p>这里有一些不错的参考链接：</p>
+
+<ol>
+<li><a href="https://www.toutiao.com/a6457289342741119502/">https://www.toutiao.com/a6457289342741119502/</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20712354">https://zhuanlan.zhihu.com/p/20712354</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/49112352">https://zhuanlan.zhihu.com/p/49112352</a></li>
+<li><a href="https://www.khronos.org/opengl/wiki/Rendering_Pipeline_Overview">https://www.khronos.org/opengl/wiki/Rendering_Pipeline_Overview</a></li>
+</ol>
+
+              
+                <p>
+
+                
+                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
+
+                  <br/>
+
+                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/vulkan/vulkan-tutorial-renderer/">进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解</a>
+
+                
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/vulkan/vulkan-tutorial-concept/" data-toggle="tooltip" data-placement="top" title="进击的 Vulkan 移动开发（一）之今生前世">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/vulkan/vulkan-tutorial-concept/">进击的 Vulkan 移动开发（一）之今生前世</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+

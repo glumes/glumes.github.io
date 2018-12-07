@@ -34,7 +34,7 @@ Scan the QRCode to …">
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.51" />
+  <meta name="generator" content="Hugo 0.31.1" />
   <link rel="canonical" href="https://glumes.com/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -252,6 +252,74 @@ Scan the QRCode to …">
           
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-material-design-summary-1/">
+                <h2 class="post-title">Android Material Desing 控件小结-1</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on December 22, 2017
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>总结一下 Material Design 控件使用。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-material-design-summary-1/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-binder-summary/">
+                <h2 class="post-title">Android Binder Summary</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  
+  Posted on December 22, 2017
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。</p>
+
+<p>它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 <code>/dev/binder</code>。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-binder-summary/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/android/android-dagger-use/">
                 <h2 class="post-title">Dagger2 在 Android 中的使用</h2>
                 
@@ -269,6 +337,8 @@ Scan the QRCode to …">
               <div class="post-entry">
                 
                   <p>Dagger2 是一个进行依赖注入的框架，早先是由 Square 公司写的，后来由 Google 来维护了，能由 Google 亲自维护的东西，肯定值得学习。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/android-dagger-use/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -312,6 +382,8 @@ Scan the QRCode to …">
 <p>然而， 即使看过了多遍代码流程依旧有点云里雾里的感觉。不从整体上来把握，光抓住细节代码会始终不得要领。</p>
 
 <p>由于是从 Launcher 组件启动一个 Activity 组件，其中还需要与 ActivityManagerService 通信，而这三个部分都是位于不同的进程内，涉及进程间通信，因此可以将整个过程划分为三个不同的部分来分析，在 Launcher 进程内的操作，在 ActivityManagerService 进程内的操作，在创建的应用程序进程内的操作。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/android-start-activity-from-launcher-4/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -345,6 +417,8 @@ Scan the QRCode to …">
               <div class="post-entry">
                 
                   <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-2/"> Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a> 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 <code>Resumed</code>状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 <code>startSpecificActivityLocked</code>方法创建进程。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/android-start-activity-from-launcher-3/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -380,6 +454,8 @@ Scan the QRCode to …">
                   <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a> 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。</p>
 
 <p>通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/android-start-activity-from-launcher-2/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -417,6 +493,8 @@ Scan the QRCode to …">
 <p>这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。</p>
 
 <p>而当我们点击应用程序图标时，也就开启了从 Launcher 启动 Activity 的过程。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/android-start-activity-from-launcher-1/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -450,6 +528,8 @@ Scan the QRCode to …">
               <div class="post-entry">
                 
                   <p>在知乎上看到这样一个问题：<a href="https://www.zhihu.com/question/39492234">RxJava正确的封装callback的方式应该是怎么样的？</a>。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/rxjava-wrapper-callback/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -485,6 +565,8 @@ Scan the QRCode to …">
                   <p>Android 从 5.0 开始使用新的相机 API Camera2 来代替之前的旧版本，从而支持更多的特性。</p>
 
 <p>在学习新的 API 调用之外，也还是要了解一下 Android 底层发生了哪些变化，从而能够让我们对 API 的调用流程更加的清晰，知其所以然。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/android-hal-summary/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -518,6 +600,8 @@ Scan the QRCode to …">
                   <p>之前讲到了如何在 <a href="http://www.glumes.com/kotlin-anko-usage/">Kotlin 开发中使用 Anko 构建布局</a>。</p>
 
 <p>这一篇将是分析其原理。</p>
+
+<p></p>
                   <a href="https://glumes.com/post/android/kotlin-functional-programming-whth-anko/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -533,72 +617,6 @@ Scan the QRCode to …">
               
             </article>
           
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/kotlin-with-anko/">
-                <h2 class="post-title">Kotlin 使用 Anko 布局那些事</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on December 22, 2017
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>学习 Kotlin 应该都或多或少听过 Anko 这个开源库。</p>
-
-<p>使用 Anko 来构建界面会更加简单、快捷。</p>
-                  <a href="https://glumes.com/post/android/kotlin-with-anko/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/kotlin/">Kotlin</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opencv/setup_opencv_environment/">
-                <h2 class="post-title">Python、C&#43;&#43;、Android OpenCV 开发环境的配置</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  Posted on December 22, 2017
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。</p>
-                  <a href="https://glumes.com/post/opencv/setup_opencv_environment/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/opencv/">Opencv</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
         </div>
 
         
@@ -609,6 +627,10 @@ Scan the QRCode to …">
               </li>
             
             
+              <li class="next">
+                <a href="/page/9/">Older Posts &rarr;</a>
+              </li>
+            
           </ul>
         
       </div>
@@ -617,12 +639,13 @@ Scan the QRCode to …">
 
 <ul class="pagination">
     
-    <li class="page-item">
-        <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li>
+        <a href="/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li class="page-item">
-    <a href="/page/7/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li
+    >
+    <a href="/page/7/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -634,7 +657,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/">1</a></li>
+    <li
+    ><a href="/">1</a></li>
     
     
     
@@ -645,7 +669,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/2/">2</a></li>
+    <li
+    ><a href="/page/2/">2</a></li>
     
     
     
@@ -656,7 +681,8 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/3/">3</a></li>
+    <li
+    ><a href="/page/3/">3</a></li>
     
     
     
@@ -667,16 +693,7 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
+    <li class="disabled"><span aria-hidden="true">&hellip;</span></li>
     
     
     
@@ -696,7 +713,17 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/7/">7</a></li>
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li
+    ><a href="/page/7/">7</a></li>
     
     
     
@@ -707,15 +734,29 @@ Scan the QRCode to …">
         
     
     
-    <li class="page-item active"><a class="page-link" href="/page/8/">8</a></li>
+    <li
+    class="active"><a href="/page/8/">8</a></li>
     
     
-    <li class="page-item disabled">
-    <a href="" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    
+    
+    
+    
+        
+        
+    
+    
+    <li
+    ><a href="/page/9/">9</a></li>
+    
+    
+    <li
+    >
+    <a href="/page/9/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li class="page-item">
-        <a href="/page/8/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li>
+        <a href="/page/9/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -785,7 +826,7 @@ Scan the QRCode to …">
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

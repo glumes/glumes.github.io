@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vulkan on Glumes Blog</title>
+    <link>https://glumes.com/categories/vulkan/</link>
+    <description>Recent content in Vulkan on Glumes Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
+    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <lastBuildDate>Fri, 07 Dec 2018 22:39:51 +0800</lastBuildDate>
+    
+	<atom:link href="https://glumes.com/categories/vulkan/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解</title>
+      <link>https://glumes.com/post/vulkan/vulkan-tutorial-renderer/</link>
+      <pubDate>Fri, 07 Dec 2018 22:39:51 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/vulkan/vulkan-tutorial-renderer/</guid>
+      <description>&lt;p&gt;都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>进击的 Vulkan 移动开发（一）之今生前世</title>
+      <link>https://glumes.com/post/vulkan/vulkan-tutorial-concept/</link>
+      <pubDate>Fri, 07 Dec 2018 22:31:49 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/vulkan/vulkan-tutorial-concept/</guid>
+      <description>&lt;p&gt;捋一捋 Vulkan 。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

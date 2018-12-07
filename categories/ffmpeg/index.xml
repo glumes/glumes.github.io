@@ -19,7 +19,9 @@
       <pubDate>Wed, 19 Sep 2018 23:12:45 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/post/ffmpeg/understand-yuv-format/</guid>
-      <description>&lt;p&gt;YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。&lt;/p&gt;</description>
+      <description>&lt;p&gt;YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -32,7 +34,9 @@
 
 &lt;p&gt;在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。&lt;/p&gt;
 
-&lt;p&gt;在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。&lt;/p&gt;</description>
+&lt;p&gt;在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -43,7 +47,9 @@
       <guid>https://glumes.com/post/ffmpeg/encode-and-decode-summary/</guid>
       <description>&lt;p&gt;最近在研究学习 FFmpeg，从网上参考了好多资料，其中最了不起的就当属——&lt;a href=&#34;http://blog.csdn.net/leixiaohua1020&#34;&gt;雷霄骅&lt;/a&gt;大神了，若没有他的博文，别说入门了，可能连门在哪里都不知道，在此还是要表达一下对雷神的敬佩和敬仰。&lt;/p&gt;
 
-&lt;p&gt;本文主要讲的是视频文件的解码，从视频文件的封装格式解码到原始数据格式，通过讲解涉及到的各种概念，从而理清整个思路和流程。&lt;/p&gt;</description>
+&lt;p&gt;本文主要讲的是视频文件的解码，从视频文件的封装格式解码到原始数据格式，通过讲解涉及到的各种概念，从而理清整个思路和流程。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

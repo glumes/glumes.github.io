@@ -13,18 +13,24 @@
 
 Native 代码调用 Java 层代码时发生了异常要处理
 Native 代码自己抛出了一个异常让 Java 层去处理
+
+
 ">
   <meta property="og:description" content="Android JNI 调用时的异常主要有如下两种：
 
 
 Native 代码调用 Java 层代码时发生了异常要处理
 Native 代码自己抛出了一个异常让 Java 层去处理
+
+
 ">
   <meta name="twitter:description" content="Android JNI 调用时的异常主要有如下两种：
 
 
 Native 代码调用 Java 层代码时发生了异常要处理
 Native 代码自己抛出了一个异常让 Java 层去处理
+
+
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
@@ -32,7 +38,7 @@ Native 代码自己抛出了一个异常让 Java 层去处理
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.51" />
+  <meta name="generator" content="Hugo 0.31.1" />
   <link rel="canonical" href="https://glumes.com/post/android/android-jni-exception-handle/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -270,6 +276,8 @@ Native 代码自己抛出了一个异常让 Java 层去处理
 <li>Native 代码自己抛出了一个异常让 Java 层去处理</li>
 </ul>
 
+<p></p>
+
 <p>可以看到异常的发生和处理基本都需要 Native 和 Java 交互，而对于 Native 自身出了异常，也就是 C/C++ 代码有问题，导致应用崩溃的又是另一回事了。</p>
 
 <h2 id="native-调用-java-方法时的异常">Native 调用 Java 方法时的异常</h2>
@@ -441,7 +449,7 @@ Java_com_glumes_cppso_jnioperations_ExceptionOps_nativeThrowException(JNIEnv *en
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script type="application/javascript">
+<script>
     var disqus_config = function () {
     
     
@@ -519,7 +527,7 @@ Java_com_glumes_cppso_jnioperations_ExceptionOps_nativeThrowException(JNIEnv *en
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

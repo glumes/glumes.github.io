@@ -14,14 +14,18 @@
 
 
 
-当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于视点的，视点也就是我们这篇文章要讲到的摄像机。">
+当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于视点的，视点也就是我们这篇文章要讲到的摄像机。
+
+">
   <meta property="og:description" content="在 OpenGL 投影矩阵 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。
 
 这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：https://glumpy.github.io/modern-gl.html）
 
 
 
-当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于视点的，视点也就是我们这篇文章要讲到的摄像机。">
+当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于视点的，视点也就是我们这篇文章要讲到的摄像机。
+
+">
   <meta name="twitter:description" content="在 OpenGL 投影矩阵 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。
 
 这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：https://glumpy.github.io/modern-gl.html）
@@ -35,7 +39,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.51" />
+  <meta name="generator" content="Hugo 0.31.1" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -274,6 +278,8 @@
 
 <p>当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于<code>视点</code>的，视点也就是我们这篇文章要讲到的摄像机。</p>
 
+<p></p>
+
 <p>在上面的图片中，我们可以把投影矩阵的视景体的四条虚线边看成是以摄像机为起始点发出的射线。</p>
 
 <p>这样一来，当起始点也就是摄像机位置发生改变时，它所发出的射线也会随之改变，那么视景体的形状也就改变了，在其内部所观察到的内容也会发生变化。</p>
@@ -478,7 +484,7 @@
                     
                     <li><a href="/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></li>
                     
-                    <li><a href="/post/android/android-camera-aspect-ratio-and-orientation/">Android 相机开发中的尺寸和方向问题</a></li>
+                    <li><a href="/post/android/android-camera-aspect-ratio--and-orientation/">Android 相机开发中的尺寸和方向问题</a></li>
                     
                     <li><a href="/post/opengl/opengl-tutorial-texture/">OpenGL 学习系列---纹理</a></li>
                     
@@ -496,7 +502,7 @@
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script type="application/javascript">
+<script>
     var disqus_config = function () {
     
     
@@ -574,7 +580,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

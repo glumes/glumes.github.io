@@ -12,24 +12,30 @@
 
 事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。
 
-缓存有两种方式，分别是使用时缓存和初始化时缓存。">
+缓存有两种方式，分别是使用时缓存和初始化时缓存。
+
+">
   <meta property="og:description" content="在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。
 
 事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。
 
-缓存有两种方式，分别是使用时缓存和初始化时缓存。">
+缓存有两种方式，分别是使用时缓存和初始化时缓存。
+
+">
   <meta name="twitter:description" content="在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。
 
 事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。
 
-缓存有两种方式，分别是使用时缓存和初始化时缓存。">
+缓存有两种方式，分别是使用时缓存和初始化时缓存。
+
+">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.51" />
+  <meta name="generator" content="Hugo 0.31.1" />
   <link rel="canonical" href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -266,6 +272,8 @@
 
 <p>缓存有两种方式，分别是使用时缓存和初始化时缓存。</p>
 
+<p></p>
+
 <h2 id="使用时缓存">使用时缓存</h2>
 
 <hr />
@@ -422,7 +430,7 @@ Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_callCacheMethod(JNIEn
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script type="application/javascript">
+<script>
     var disqus_config = function () {
     
     
@@ -500,7 +508,7 @@ Java_com_glumes_cppso_jnioperations_CacheFieldAndMethodOps_callCacheMethod(JNIEn
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>
