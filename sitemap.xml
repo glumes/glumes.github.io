@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/vulkan/vulkan-turotial-instance-device-queue/</loc>
+    <lastmod>2019-01-07T11:03:18+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/vulkan/vulkan-tutorial-renderer/</loc>
     <lastmod>2018-12-07T22:39:51+08:00</lastmod>
   </url>
@@ -218,7 +223,7 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/</loc>
+    <loc>https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</loc>
     <lastmod>2018-04-10T16:09:32+08:00</lastmod>
   </url>
   
@@ -419,7 +424,7 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2018-12-07T22:39:51+08:00</lastmod>
+    <lastmod>2019-01-07T11:03:18+08:00</lastmod>
   </url>
   
   <url>
@@ -610,7 +615,7 @@
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2018-12-07T22:39:51+08:00</lastmod>
+    <lastmod>2019-01-07T11:03:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -664,13 +669,13 @@
   
   <url>
     <loc>https://glumes.com/tags/vulkan/</loc>
-    <lastmod>2018-12-07T22:39:51+08:00</lastmod>
+    <lastmod>2019-01-07T11:03:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/vulkan/</loc>
-    <lastmod>2018-12-07T22:39:51+08:00</lastmod>
+    <lastmod>2019-01-07T11:03:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   

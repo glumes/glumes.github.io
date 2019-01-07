@@ -56,8 +56,6 @@ GL_TRIANGLE_FAN
 将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形
 
 
-
-
 ">
   <meta property="og:description" content="在之前的绘制中，我们都是通过 glDrawArrays 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。
 
@@ -107,8 +105,6 @@ GL_TRIANGLE_FAN
 将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形
 
 
-
-
 ">
   <meta name="twitter:description" content="在之前的绘制中，我们都是通过 glDrawArrays 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。
 
@@ -142,7 +138,7 @@ GL_LINE_STRIP
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.51" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -421,8 +417,6 @@ GL_LINE_STRIP
 </tbody>
 </table>
 
-<p></p>
-
 <p>假设要绘制一个立方体，以 <code>GL_TRIANGLES</code> 的类型进行绘制，那么六个面，每个面由两个三角形组成，就得向渲染管线传入 36 个顶点，36 个顶点按照顺序进行绘制，而实际上，一个矩形也就才 8 个顶点而已。</p>
 
 <p>为了优化绘制的效率，减少数据的传递，于是就有了 <code>glDrawElements</code> 绘制方法。</p>
@@ -573,7 +567,7 @@ GL_LINE_STRIP
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -642,7 +636,7 @@ GL_LINE_STRIP
           
 
           &nbsp;&bull;&nbsp;
-          2018
+          2019
 
           
             &nbsp;&bull;&nbsp;
@@ -651,7 +645,7 @@ GL_LINE_STRIP
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

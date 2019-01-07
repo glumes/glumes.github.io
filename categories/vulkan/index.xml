@@ -8,10 +8,33 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 07 Dec 2018 22:39:51 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 07 Jan 2019 11:03:18 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/vulkan/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</title>
+      <link>https://glumes.com/post/vulkan/vulkan-turotial-instance-device-queue/</link>
+      <pubDate>Mon, 07 Jan 2019 11:03:18 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/vulkan/vulkan-turotial-instance-device-queue/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;在 Vulkan 的系列文章中出现过如下的图片：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/bc32fd77gy1fx80mwln17j21to110woq.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这张图片很详细的概括了 Vulkan 中的重要组件以及它们的工作流程，接下来的文章中会针对每个组件进行学习讲解并配上相关的示例代码，首先是 Instance、Device 和 Queue 组件。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解</title>
@@ -19,9 +42,7 @@
       <pubDate>Fri, 07 Dec 2018 22:39:51 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/post/vulkan/vulkan-tutorial-renderer/</guid>
-      <description>&lt;p&gt;都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -30,9 +51,7 @@
       <pubDate>Fri, 07 Dec 2018 22:31:49 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/post/vulkan/vulkan-tutorial-concept/</guid>
-      <description>&lt;p&gt;捋一捋 Vulkan 。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;捋一捋 Vulkan 。&lt;/p&gt;</description>
     </item>
     
   </channel>

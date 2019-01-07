@@ -26,9 +26,7 @@ void main()
 }
 
 
-本篇文章就主要是对投影矩阵来分析的。
-
-">
+本篇文章就主要是对投影矩阵来分析的。">
   <meta property="og:description" content="在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
 
 $$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$
@@ -47,9 +45,7 @@ void main()
 }
 
 
-本篇文章就主要是对投影矩阵来分析的。
-
-">
+本篇文章就主要是对投影矩阵来分析的。">
   <meta name="twitter:description" content="在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
 
 $$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$
@@ -66,7 +62,7 @@ uniform mat4 …">
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.51" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/" />
   <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -283,8 +279,6 @@ void main()
 
 <p>本篇文章就主要是对投影矩阵来分析的。</p>
 
-<p></p>
-
 <p>OpenGL 在观察空间转换到裁剪空间时，需要用到投影矩阵。而在着色器脚本中，也需要提供一个投影矩阵给对应的 <code>u_ProjectionMatrix</code>变量。</p>
 
 <p>首先要在程序里绑定到对应的变量，然后再给变量赋值。</p>
@@ -498,7 +492,7 @@ glUniformMatrix4fv(uProMatrixLocation,1,false,projectionMatrix,0)
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -567,7 +561,7 @@ glUniformMatrix4fv(uProMatrixLocation,1,false,projectionMatrix,0)
           
 
           &nbsp;&bull;&nbsp;
-          2018
+          2019
 
           
             &nbsp;&bull;&nbsp;
@@ -576,7 +570,7 @@ glUniformMatrix4fv(uProMatrixLocation,1,false,projectionMatrix,0)
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

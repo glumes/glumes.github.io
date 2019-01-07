@@ -23,9 +23,7 @@
 
 &lt;p&gt;虽然 MediaCodec 仍然存在一定的弊端，但是对于快速实现编解码需求，还是很值得参考的。&lt;/p&gt;
 
-&lt;p&gt;以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -40,9 +38,7 @@
 
 &lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1526483191/ViewFrustum_gvy6aq.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于&lt;code&gt;视点&lt;/code&gt;的，视点也就是我们这篇文章要讲到的摄像机。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于&lt;code&gt;视点&lt;/code&gt;的，视点也就是我们这篇文章要讲到的摄像机。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -51,24 +47,20 @@
       <pubDate>Thu, 12 Apr 2018 13:13:57 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/post/android/android-camrea-api-evolution/</guid>
-      <description>&lt;p&gt;要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 相机开发中的尺寸和方向问题</title>
-      <link>https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/</link>
+      <link>https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</link>
       <pubDate>Tue, 10 Apr 2018 16:09:32 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/</guid>
+      <guid>https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;*本篇文章已授权微信公众号 guolin_blog （郭霖）独家发布&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。&lt;/p&gt;</description>
     </item>
     
   </channel>
