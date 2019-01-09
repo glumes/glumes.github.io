@@ -8,17 +8,40 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Mon, 07 Jan 2019 11:03:18 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 09 Jan 2019 09:50:20 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>进击的 Vulkan 移动开发之 Command Buffer</title>
+      <link>https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/</link>
+      <pubDate>Wed, 09 Jan 2019 09:50:20 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/&#34;&gt;进击的 Vulkan 移动开发之 Instance &amp;amp; Device &amp;amp; Queue&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;此篇文章继续学习 Vulkan 中的组件：Command-Buffer 。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/bc32fd77gy1fytl33ku2vj21c40r4n49.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</title>
-      <link>https://glumes.com/post/vulkan/vulkan-turotial-instance-device-queue/</link>
+      <link>https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/</link>
       <pubDate>Mon, 07 Jan 2019 11:03:18 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/post/vulkan/vulkan-turotial-instance-device-queue/</guid>
+      <guid>https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
 

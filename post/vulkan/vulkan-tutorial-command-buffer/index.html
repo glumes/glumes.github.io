@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>进击的 Vulkan 移动开发之 Command Buffer</title>
+  <meta property="og:title" content="进击的 Vulkan 移动开发之 Command Buffer" />
+  <meta name="twitter:title" content="进击的 Vulkan 移动开发之 Command Buffer" />
+  <meta name="description" content="
+Vulkan 开发的系列文章：
+
+
+进击的 Vulkan 移动开发（一）之今生前世
+
+进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解
+
+进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue
+
+
+
+此篇文章继续学习 Vulkan 中的组件：Command-Buffer 。
+
+">
+  <meta property="og:description" content="
+Vulkan 开发的系列文章：
+
+
+进击的 Vulkan 移动开发（一）之今生前世
+
+进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解
+
+进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue
+
+
+
+此篇文章继续学习 Vulkan 中的组件：Command-Buffer 。
+
+">
+  <meta name="twitter:description" content="
+Vulkan 开发的系列文章：
+
+
+进击的 Vulkan 移动开发（一）之今生前世
+
+进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解
+
+进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue
+
+
+
+此篇文章继续学习 Vulkan 中的组件：Command-Buffer 。
+
+">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.51" />
+  <link rel="canonical" href="https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/" />
+  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">目录</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">Android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="生活" href="/categories/life">生活</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于我" href="/about">关于我</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fz03j7xdslj22n01rcb29.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>进击的 Vulkan 移动开发之 Command Buffer</h1>
+                     
+                    <span class="post-meta">
+  
+  Posted on January 9, 2019
+  
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">进击的 Vulkan 移动开发之 Command Buffer</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+
+        
+          
+          
+<div>
+    <section id="datecount">
+        <h4 id="date"> Wed Jan 9, 2019</h4>
+    </section>
+    <h5 id="wc">2600 Words|Read in about 6 Min</h5>
+    <h5 id="tags">Tags: 
+        
+        <a href="https://glumes.com/tags/vulkan/">Vulkan</a> &nbsp;
+    </h5>
+</div>
+
+          
+        
+
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+            <blockquote>
+<p>Vulkan 开发的系列文章：</p>
+
+<ol>
+<li><p><a href="https://glumes.com/post/vulkan/vulkan-tutorial-concept/">进击的 Vulkan 移动开发（一）之今生前世</a></p></li>
+
+<li><p><a href="https://glumes.com/post/vulkan/vulkan-tutorial-renderer/">进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解</a></p></li>
+
+<li><p><a href="https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/">进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</a></p></li>
+</ol>
+</blockquote>
+
+<p>此篇文章继续学习 Vulkan 中的组件：Command-Buffer 。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fytl33ku2vj21c40r4n49.jpg" alt="" /></p>
+
+<p>在前面的文章中，我们已经创建了 <code>Instance</code>、<code>Device</code>、<code>Queue</code> 三个组件，并且知道了 <code>Queue</code> 组件是用来和物理设备沟通的桥梁，而具体的沟通过程就需要 <code>Command-Buffer</code> （命令缓冲区）组件，它是若干命令的集合，我们向 <code>Queue</code> 提交 <code>Command-Buffer</code>，然后才交由物理设备 GPU 进行处理。</p>
+
+<h2 id="command-pool-组件">Command-Pool 组件</h2>
+
+<p>在创建  <code>Command-Buffer</code> 之前，需要创建 <code>Command-Pool</code> 组件，从 <code>Command-Pool</code> 中去分配 <code>Command-Buffer</code> 。</p>
+
+<p>还是老套路，我们需要先创建一个 <code>VkXXXXCreateInfo</code> 的结构体，结构体每个参数的释义还是要多看官方的文档。</p>
+
+<pre><code class="language-cpp">    // 创建 Command-Pool 组件
+    VkCommandPool command_pool;
+    VkCommandPoolCreateInfo poolCreateInfo = {};
+    poolCreateInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+    // 可以看到 Command-Pool 还和 Queue 相关联
+    poolCreateInfo.queueFamilyIndex = info.graphics_queue_family_index;
+    // 标识命令缓冲区的一些行为
+    poolCreateInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+    // 具体创建函数的调用
+    vkCreateCommandPool(info.device, &amp;poolCreateInfo, nullptr, &amp;command_pool);
+</code></pre>
+
+<p>有几个参数需要注意：</p>
+
+<ol>
+<li><code>queueFamilyIndex</code> 参数为创建 <code>Queue</code> 时选择的那个 <code>queueFlags</code> 为 <code>VK_QUEUE_GRAPHICS_BIT</code> 的索引，从 <code>Command-Pool</code> 中分配的的 <code>Command-Buffer</code> 必须提交到同一个 <code>Queue</code> 中。</li>
+<li><code>flags</code> 有如下的选项，分别指定了 <code>Command-Buffer</code> 的不同特性：</li>
+</ol>
+
+<pre><code class="language-cpp">typedef enum VkCommandPoolCreateFlagBits {
+    VK_COMMAND_POOL_CREATE_TRANSIENT_BIT = 0x00000001,
+    VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT = 0x00000002,
+    VK_COMMAND_POOL_CREATE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
+} VkCommandPoolCreateFlagBits;
+</code></pre>
+
+<ul>
+<li><p>VK_COMMAND_POOL_CREATE_TRANSIENT_BIT</p>
+
+<ul>
+<li>表示该 <code>Command-Buffer</code> 的寿命很短，可能在短时间内被重置或释放</li>
+</ul></li>
+
+<li><p>VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT</p>
+
+<ul>
+<li>表示从 <code>Command-Pool</code> 中分配的 <code>Command-Buffer</code> 可以通过 <code>vkResetCommandBuffer</code> 或者 <code>vkBeginCommandBuffer</code> 方法进行重置，如果没有设置该标识位，就不能调用 <code>vkResetCommandBuffer</code> 方法进行重置。</li>
+</ul></li>
+</ul>
+
+<h2 id="command-buffer-组件">Command-Buffer 组件</h2>
+
+<p>接下来就是从 <code>Command-Pool</code> 中分配 <code>Command-Buffer</code>，通过 <code>VkCommandBufferAllocateInfo</code> 函数。</p>
+
+<p>首先需要一个 <code>VkCommandBufferAllocateInfo</code> 结构体表示分配所需要的信息。</p>
+
+<pre><code class="language-cpp">typedef struct VkCommandBufferAllocateInfo {
+    VkStructureType         sType;
+    const void*             pNext;
+    VkCommandPool           commandPool;    // 对应上面创建的 command-pool
+    VkCommandBufferLevel    level;
+    uint32_t                commandBufferCount; // 创建的个数
+} VkCommandBufferAllocateInfo;
+</code></pre>
+
+<p>这里有个参数也要注意：</p>
+
+<ul>
+<li><code>VkCommandBufferLevel</code> 指定 <code>Command-Buffer</code> 的级别。</li>
+</ul>
+
+<p>有如下级别可以使用：</p>
+
+<pre><code class="language-cpp">typedef enum VkCommandBufferLevel {
+    VK_COMMAND_BUFFER_LEVEL_PRIMARY = 0,
+    VK_COMMAND_BUFFER_LEVEL_SECONDARY = 1,
+    VK_COMMAND_BUFFER_LEVEL_BEGIN_RANGE = VK_COMMAND_BUFFER_LEVEL_PRIMARY,
+    VK_COMMAND_BUFFER_LEVEL_END_RANGE = VK_COMMAND_BUFFER_LEVEL_SECONDARY,
+    VK_COMMAND_BUFFER_LEVEL_RANGE_SIZE = (VK_COMMAND_BUFFER_LEVEL_SECONDARY - VK_COMMAND_BUFFER_LEVEL_PRIMARY + 1),
+    VK_COMMAND_BUFFER_LEVEL_MAX_ENUM = 0x7FFFFFFF
+} VkCommandBufferLevel;
+</code></pre>
+
+<p>一般来说，使用 <code>VK_COMMAND_BUFFER_LEVEL_PRIMARY</code> 就好了。</p>
+
+<p>具体创建代码如下：</p>
+
+<pre><code class="language-cpp">    VkCommandBuffer commandBuffer[2];
+    VkCommandBufferAllocateInfo command_buffer_allocate_info{};
+    command_buffer_allocate_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+    command_buffer_allocate_info.commandPool = command_pool;
+    command_buffer_allocate_info.commandBufferCount = 2;
+    command_buffer_allocate_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+    vkAllocateCommandBuffers(info.device, &amp;command_buffer_allocate_info, commandBuffer);
+</code></pre>
+
+<h2 id="command-buffer-的生命周期">Command-Buffer 的生命周期</h2>
+
+<p>创建了 <code>Command-Buffer</code> 之后，来了解一下它的生命周期，如下图：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fytmcwfgywj20wl0e5myz.jpg" alt="" /></p>
+
+<ul>
+<li>Initial 状态</li>
+</ul>
+
+<p>在 <code>Command-Buffer</code> 刚刚创建时，它就是处于初始化的状态。从此状态，可以达到 <code>Recording</code> 状态，另外，如果重置之后，也会回到该状态。</p>
+
+<ul>
+<li>Recording 状态</li>
+</ul>
+
+<p>调用 <code>vkBeginCommandBuffer</code> 方法从 <code>Initial</code> 状态进入到该状态。一旦进入该状态后，就可以调用 <code>vkCmd*</code> 等系列方法记录命令。</p>
+
+<ul>
+<li>Executable 状态</li>
+</ul>
+
+<p>调用 <code>vkEndCommandBuffer</code> 方法从 <code>Recording</code> 状态进入到该状态，此状态下，<code>Command-Buffer</code> 可以提交或者重置。</p>
+
+<ul>
+<li>Pending 状态</li>
+</ul>
+
+<p>把 <code>Command-Buffer</code> 提交到 <code>Queue</code> 之后，就会进入到该状态。此状态下，物理设备可能正在处理记录的命令，因此不要在此时更改 <code>Command-Buffer</code>，当处理结束后，<code>Command-Buffer</code> 可能会回到 <code>Executable</code> 状态或者 <code>Invalid</code> 状态。</p>
+
+<ul>
+<li>Invalid 状态</li>
+</ul>
+
+<p>一些操作会使得 <code>Command-Buffer</code> 进入到此状态，该状态下，<code>Command-Buffer</code> 只能重置、或者释放。</p>
+
+<h2 id="command-buffer-的记录与提交">Command-Buffer 的记录与提交</h2>
+
+<p>现在可以尝试着记录一些命令，提交到 <code>Queue</code> 上了，命令记录的调用过程如下图：</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fytn1nbd2gj20q30fgah3.jpg" alt="" /></p>
+
+<p>在 <code>vkBeginCommandBuffer</code> 和 <code>vkEndCommandBuffer</code> 方法之间可以记录和渲染相关的命令，这里先不考虑中间的过程，直接创建提交。</p>
+
+<h4 id="begin-阶段">begin 阶段</h4>
+
+<pre><code class="language-cpp">        VkCommandBufferBeginInfo beginInfo = {};
+        beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+        beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+        vkBeginCommandBuffer(commandBuffer[0], &amp;beginInfo);
+</code></pre>
+
+<p>首先，还是需要创建一个 <code>VkCommandBufferBeginInfo</code> 结构体用来表示 <code>Command-Buffer</code> 开始的信息。</p>
+
+<p>这里要注意的参数是 <code>flags</code> ，表示 <code>Command-Buffer</code> 的用途，</p>
+
+<pre><code class="language-cpp">typedef enum VkCommandBufferUsageFlagBits {
+    VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT = 0x00000001,
+    VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT = 0x00000002,
+    VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT = 0x00000004,
+    VK_COMMAND_BUFFER_USAGE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
+} VkCommandBufferUsageFlagBits;
+</code></pre>
+
+<ul>
+<li>VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT
+
+<ul>
+<li>表示该 Command-Buffer 只使用提交一次，用完之后就会被重置，并且每次提交时都需要重新记录</li>
+</ul></li>
+</ul>
+
+<h4 id="end-阶段">end 阶段</h4>
+
+<p>直接调用 <code>vkEndCommandBuffer</code> 方法就可以结束记录，此时就可以提交了。</p>
+
+<pre><code class="language-cpp">    vkEndCommandBuffer(commandBuffer[0]);
+</code></pre>
+
+<h4 id="buffer-提交">buffer 提交</h4>
+
+<p>通过 <code>vkQueueSubmit</code> 方法将 <code>Command-Buffer</code> 提交到 <code>Queue</code> 上。</p>
+
+<p>同样的还是需要创建一个 <code>VkSubmitInfo</code> 结构体：</p>
+
+<pre><code class="language-cpp">typedef struct VkSubmitInfo {
+    VkStructureType                sType;
+    const void*                    pNext;
+    uint32_t                       waitSemaphoreCount;  // 等待的 Semaphore 数量
+    const VkSemaphore*             pWaitSemaphores;     // 等待的 Semaphore 数组指针
+    const VkPipelineStageFlags*    pWaitDstStageMask;       // 在哪个阶段进行等待
+    uint32_t                       commandBufferCount;  // 提交的 Command-Buffer 数量
+    const VkCommandBuffer*         pCommandBuffers;      // 具体的 Command-Buffer 数组指针
+    uint32_t                       signalSemaphoreCount;    //执行结束后通知的 Semaphore 数量
+    const VkSemaphore*             pSignalSemaphores;       //执行结束后通知的 Semaphore 数组指针
+} VkSubmitInfo;
+</code></pre>
+
+<p>它的参数比较多，并且涉及到 <code>Command-Buffer</code> 之间的同步关系了，这里简单说一下，后面再细说这一块。</p>
+
+<p>如下图，Vulkan 中有 <code>Semaphore</code>、<code>Fences</code>、<code>Event</code>、<code>Barrier</code> 四种机制来保证同步。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fyubwo7iaqj21is0umjzo.jpg" alt="" /></p>
+
+<p>简单说一下 <code>Semaphore</code> 和 <code>Fence</code> 。</p>
+
+<ul>
+<li><p><code>Semaphore</code></p>
+
+<ul>
+<li><code>Semaphore</code>  的作用主要是用来向 <code>Queue</code> 中提交 <code>Command-Buffer</code> 时实现同步。比如说某个 <code>Command-Buffer-B</code> 在执行的某个阶段中需要等待另一个 <code>Command-Buffer-A</code> 执行成功后的结果，同时 <code>Command-Buffer-C</code> 在某阶段又要要等待 <code>Command-Buffer-B</code> 的执行结果，那么就应该使用 <code>Semaphore</code> 机制实现同步；</li>
+<li>此时 <code>Command-Buffer-B</code> 提交到 <code>Queue</code> 时就需要两个 <code>VkSemaphor</code> ，一个表示它需要等待的 <code>Semaphore</code>，并且指定在哪个阶段等待；一个是它执行结束后发出通知的 <code>Semaphore</code>。</li>
+</ul></li>
+
+<li><p><code>Fence</code></p>
+
+<ul>
+<li><code>Fence</code> 的作用主要是用来保证物理设备和应用程序之间的同步，比如说向 <code>Queue</code> 中提交了 <code>Command-Buffer</code> 后，具体的执行交由物理设备去完成了，这是一个异步的过程，而应用程序如果要等待执行结束，就要使用 <code>Fence</code> 机制。</li>
+</ul></li>
+</ul>
+
+<p><code>Semaphore</code> 和 <code>Fence</code> 有相同之处，但是使用场景却不一样，就如图所示。</p>
+
+<p><code>Semaphore</code> 和 <code>Fence</code> 的创建过程如下，和以往的 Vulkan 创建对象的调用方式没有太大区别：</p>
+
+<pre><code class="language-cpp">    // 创建 Semaphore
+    VkSemaphore imageAcquiredSemaphore;
+    VkSemaphoreCreateInfo semaphoreCreateInfo = {};
+    semaphoreCreateInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+    vkCreateSemaphore(info.device, &amp;semaphoreCreateInfo, nullptr, &amp;imageAcquiredSemaphore);
+
+    // 创建 Fence
+    VkFence drawFence;
+    VkFenceCreateInfo fenceCreateInfo = {};
+    fenceCreateInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+    // 该参数表示 Fence 的状态，如果不设置或者为 0 表示 unsignaled state
+    fence_info.flags = 0; 
+    vkCreateFence(info.device, &amp;fenceCreateInfo, nullptr, &amp;drawFence);
+</code></pre>
+
+<p>继续回到 <code>VkSubmitInfo</code> 结构体中，如果只是简单的提交 <code>Command-Buffer</code>，那就不需要考虑 <code>Semaphore</code> 这些同步机制了，把相应的参数都设置为 <code>nullptr</code>，或者直接不设置也行，最后提交就好了，代码如下:</p>
+
+<pre><code class="language-cpp">    // 简单的提交过程
+    // 开始记录
+    VkCommandBufferBeginInfo beginInfo1 = {};
+    beginInfo1.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+    beginInfo1.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+    vkBeginCommandBuffer(commandBuffer[0], &amp;beginInfo1);
+
+    // 省略中间的 vkCmdXXXX 系列方法
+    // 结束记录
+    vkEndCommandBuffer(commandBuffer[0]);
+
+    VkSubmitInfo submitInfo1 = {};
+    submitInfo1.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+    // pWaitSemaphores 和 pSignalSemaphores 都不设置，只是提交
+    submitInfo1.commandBufferCount = 1;
+    submitInfo1.pCommandBuffers = &amp;commandBuffer[0];
+
+    // 注意最后的参数 临时设置为 VK_NULL_HANDLE，也可以设置为  Fence 来同步
+    vkQueueSubmit(info.queue, 1, &amp;submitInfo1, VK_NULL_HANDLE);
+</code></pre>
+
+<p>以上就完成了 <code>Command-Buffer</code> 提交到 <code>Queue</code> 的过程，省略了 <code>Semaphores</code> 和 <code>Fences</code> 的同步机制，当然也可以把它们加上。</p>
+
+<p>在 <code>vkQueueSubmit</code> 的最后一个参数设置为了 <code>VK_NULL_HANDLE</code> ，这是 Vulkan 中设置为 <code>NULL</code> 的一个方法（其实是设置了一个整数 0 ），也可以设置了 <code>Fence</code> ，表示我们要等待该 <code>Command-Buffer</code> 在 <code>Queue</code> 执行结束，虽说 <code>Command-Buffer</code> 也可以通过 <code>Semaphore</code> 来表示执行结束，但这两种方式的使用场景不一样。</p>
+
+<p>回到 <code>Fence</code> 的创建过程，其中有一个 <code>flags</code> 参数表示 <code>Fence</code> 的状态，有如下两种状态：</p>
+
+<ul>
+<li>signaled state
+
+<ul>
+<li>如果 flags 参数为 VK_FENCE_CREATE_SIGNALED_BIT 则表示创建后处于该状态。</li>
+</ul></li>
+<li>unsignaled state
+
+<ul>
+<li>默认的状态。</li>
+</ul></li>
+</ul>
+
+<p>当 <code>vkQueueSubmit</code> 的最后参数传入 <code>Fence</code> 后，就可以通过 <code>Fence</code> 等待该 <code>Command-Buffer</code> 执行结束。</p>
+
+<pre><code class="language-cpp">// wait fence to enter the signaled state on the host
+//  错误的 waitForFences 使用，因为它并不是一个阻塞的方法
+//  VkResult res = vkWaitForFences(info.device, 1, &amp;fence, VK_TRUE, UINT64_MAX);
+    VkResult res;
+    do {
+        res = vkWaitForFences(info.device, 1, &amp;fence, VK_TRUE, UINT64_MAX);
+    } while (res == VK_TIMEOUT);
+</code></pre>
+
+<p><code>vkWaitForFences</code> 方法会等待 <code>Fence</code> 进入 <code>signaled state</code> 状态，该方法的调用要放在 <code>while</code> 循环中，因为它并不是一个阻塞的方法，可以理解成一个状态查询，如果结果不对，返回的是 <code>VK_TIMEOUT</code>，结果满足要求才返回 <code>VK_SUCCESS</code> 。</p>
+
+<p>当  <code>Command-Buffer</code> 执行结束后，传入的 <code>Fence</code> 参数就会从 <code>unsignaled state</code> 进入到 <code>signaled state</code> ，从而触发 <code>vkWaitForFences</code> 调用结束循环，表明执行结束了。</p>
+
+<p>这就是 <code>Fence</code> 的使用，至于 <code>Command-Buffer</code> 之间通过 <code>Semaphore</code> 来同步的示例，详见后续文章。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>本篇文章主要讲解了 <code>Command-Buffer</code> 的使用和提交，并且涉及到了 Vulkan 的一些同步机制。</p>
+
+<p>具体和渲染有关的操作，都要在 <code>Command-Buffer</code> 之间记录，结束记录之后提交给 <code>Queue</code> ，让 GPU 去执行具体的操作，当然具体执行是一个异步的过程，需要用到同步机制。</p>
+
+<p><code>Semaphore</code>  和  <code>Fence</code> 都可以实现同步，但使用场景不同。</p>
+
+              
+                <p>
+
+                
+                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
+
+                  <br/>
+
+                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/">进击的 Vulkan 移动开发之 Command Buffer</a>
+
+                
+
+                </p>
+              
+        </article>
+
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/" data-toggle="tooltip" data-placement="top" title="进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+            
+            <div>
+                 
+                <h2>See Also</h2>
+                <ul>
+                    
+                    <li><a href="/post/vulkan/vulkan-tutorial-instance-device-queue/">进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</a></li>
+                    
+                    <li><a href="/post/vulkan/vulkan-tutorial-renderer/">进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解</a></li>
+                    
+                    <li><a href="/post/vulkan/vulkan-tutorial-concept/">进击的 Vulkan 移动开发（一）之今生前世</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2019
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
+
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+
+
+
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
+
