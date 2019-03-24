@@ -33,7 +33,9 @@
 
 &lt;p&gt;此篇文章继续学习 Vulkan 中的组件：Command-Buffer 。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/bc32fd77gy1fytl33ku2vj21c40r4n49.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/bc32fd77gy1fytl33ku2vj21c40r4n49.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -56,7 +58,9 @@
 
 &lt;p&gt;&lt;img src=&#34;https://ws1.sinaimg.cn/large/bc32fd77gy1fx80mwln17j21to110woq.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;这张图片很详细的概括了 Vulkan 中的重要组件以及它们的工作流程，接下来的文章中会针对每个组件进行学习讲解并配上相关的示例代码，首先是 Instance、Device 和 Queue 组件。&lt;/p&gt;</description>
+&lt;p&gt;这张图片很详细的概括了 Vulkan 中的重要组件以及它们的工作流程，接下来的文章中会针对每个组件进行学习讲解并配上相关的示例代码，首先是 Instance、Device 和 Queue 组件。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -65,7 +69,9 @@
       <pubDate>Fri, 07 Dec 2018 22:39:51 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/post/vulkan/vulkan-tutorial-renderer/</guid>
-      <description>&lt;p&gt;都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。&lt;/p&gt;</description>
+      <description>&lt;p&gt;都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -74,7 +80,9 @@
       <pubDate>Fri, 07 Dec 2018 22:31:49 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/post/vulkan/vulkan-tutorial-concept/</guid>
-      <description>&lt;p&gt;捋一捋 Vulkan 。&lt;/p&gt;</description>
+      <description>&lt;p&gt;捋一捋 Vulkan 。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

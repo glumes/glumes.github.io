@@ -5,9 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
+
   <title>《OpenGL ES 3.x 游戏开发》之颜色混合和使用</title>
   <meta property="og:title" content="《OpenGL ES 3.x 游戏开发》之颜色混合和使用" />
   <meta name="twitter:title" content="《OpenGL ES 3.x 游戏开发》之颜色混合和使用" />
+
   <meta name="description" content="学习笔记内容摘录">
   <meta property="og:description" content="学习笔记内容摘录">
   <meta name="twitter:description" content="学习笔记内容摘录">
@@ -17,14 +19,21 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.51" />
+  <meta name="generator" content="Hugo 0.31.1" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" />
-  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  
+  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
+  <script>
 	var _hmt = _hmt || [];
 	(function() {
 	  var hm = document.createElement("script");
@@ -36,56 +45,6 @@
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
 
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
-
-
-
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-<div class="pswp__bg"></div>
-
-<div class="pswp__scroll-wrap">
-    
-    <div class="pswp__container">
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-    </div>
-    
-    <div class="pswp__ui pswp__ui--hidden">
-    <div class="pswp__top-bar">
-      
-      <div class="pswp__counter"></div>
-      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-      <button class="pswp__button pswp__button--share" title="Share"></button>
-      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-      
-      
-      <div class="pswp__preloader">
-        <div class="pswp__preloader__icn">
-          <div class="pswp__preloader__cut">
-            <div class="pswp__preloader__donut"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-      <div class="pswp__share-tooltip"></div>
-    </div>
-    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-    </button>
-    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-    </button>
-    <div class="pswp__caption">
-      <div class="pswp__caption__center"></div>
-    </div>
-    </div>
-    </div>
-</div>
 
 </head>
 
@@ -146,17 +105,15 @@
         
 
         
-      </ul>
-    </div>
 
-    <div class="avatar-container">
-      <div class="avatar-img-border">
         
-      </div>
+
+      </ul>
     </div>
 
   </div>
 </nav>
+
 
 
 
@@ -177,35 +134,24 @@
     
       <div class="intro-header big-img">
         
-        
         <div class="container">
           <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
-                  
-                     <h1>《OpenGL ES 3.x 游戏开发》之颜色混合和使用</h1>
-                     
-                     
-                  
-                  
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>《OpenGL ES 3.x 游戏开发》之颜色混合和使用</h1>
                   
                     
-                      <h2 align="center" class="post-subheading">学习笔记内容摘录</h2>
+                      <h2 class="post-subheading">学习笔记内容摘录</h2>
                     
                   
                   
                     <span class="post-meta">
-  
   Posted on July 16, 2018
-  
   
 </span>
 
 
                   
-                
               </div>
             </div>
           </div>
@@ -217,14 +163,21 @@
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">《OpenGL ES 3.x 游戏开发》之颜色混合和使用</h1>
+              <h1>《OpenGL ES 3.x 游戏开发》之颜色混合和使用</h1>
                 
                   
-                    <h2 align="center" class="post-subheading">学习笔记内容摘录</h2>
+                    <h2 class="post-subheading">学习笔记内容摘录</h2>
                   
                 
+                
+                  <span class="post-meta">
+  Posted on July 16, 2018
+  
+</span>
+
+
                 
             </div>
           </div>
@@ -238,29 +191,51 @@
 <div class="container" role="main">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
+
+
 
         
+      <div>
           
           
-<div>
-    <section id="datecount">
-        <h4 id="date"> Mon Jul 16, 2018</h4>
-    </section>
-    <h5 id="wc">2600 Words|Read in about 6 Min</h5>
-    <h5 id="tags">Tags: 
-        
-        <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
-    </h5>
-</div>
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+            
+          </h5>
+          
+      </div>
 
-          
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
         
+          
+<aside class="toc">
+  <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#颜色混合基础知识">颜色混合基础知识</a>
+<ul>
+<li><a href="#混合因子">混合因子</a></li>
+<li><a href="#混合方程式">混合方程式</a></li>
+<li><a href="#源因子和目标因子">源因子和目标因子</a></li>
+<li><a href="#设置混合的方法">设置混合的方法</a></li>
+<li><a href="#常用混合组合">常用混合组合</a></li>
+</ul></li>
+<li><a href="#具体使用">具体使用</a></li>
+<li><a href="#参考">参考</a></li>
+<li><a href="#最后">最后</a></li>
+</ul></li>
+</ul>
+</nav>
+</aside>
 
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。</p>
+        
+        <p>在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。</p>
 
 <p>在 OpenGL 中同样有这样颜色混合的问题。</p>
+
+<p></p>
 
 <p>在 OpenGL 的世界模型中是有深度的概念的，也就是由 z 轴坐标值来决定物体距离坐标原地的远近，但到最后世界模型里的物体都要投影到近平面，最后映射到视口上。而且，距离相机也就是视口越近的物体，就会遮住后面的物体，就和用肉眼去观察物体一下，后面的形状会被前面的形状挡住。</p>
 
@@ -576,20 +551,100 @@
 <p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531710558/code/WechatIMG434.jpg" alt="加群讨论" /></p>
 
 <p>要是二维码过期了，加微信 ezglume 好友，备注 OpenGL ，拉你入群~</p>
+        
+          <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+        
 
-              
-                <p>
+
+    
 
                 
 
 
                 
 
-                </p>
-              
-        </article>
+                
 
 
+        
+        <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        
+      </article>
+
+      
+        
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/opengl/opengl-tutorial-alpha-test/">《OpenGL ES 3.x 游戏开发》之利用 Alpha 透明度进行测试</a></li>
+    
+    <li><a href="/post/opengl/opengl-handle-video-frame-and-replace-content/">用 OpenGL 对视频帧内容进行替换</a></li>
+    
+    <li><a href="/post/opengl/opengl-tutorial-share/">OpenGL ES 学习资源分享</a></li>
+    
+    <li><a href="/post/opengl/opengl-tutorial-scissor-test/">《OpenGL ES 3.x 游戏开发》 裁剪测试及注意点</a></li>
+    
+    <li><a href="/post/opengl/opengl-tutorial-import-3d-object/">《OpenGL ES 3.x 游戏开发》 3D 模型加载和渲染</a></li>
+    
+    <li><a href="/post/opengl/opengl-tutorial-gldrawelements-method/">OpenGL 的 glDrawElements  绘制方法</a></li>
+    
+    <li><a href="/post/opengl/opengl-tutorial-view-matrix/">OpenGL 学习系列---观察矩阵</a></li>
+    
+    <li><a href="/post/opengl/opengl-tutorial-texture/">OpenGL 学习系列---纹理</a></li>
+    
+    <li><a href="/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 学习系列---投影矩阵</a></li>
+    
+    <li><a href="/post/opengl/opengl-tutorial-coordinate-system/">OpenGL 学习系列---坐标系统</a></li>
+    
+</ul>
+
+      
+
+      
       <ul class="pager blog-pager">
         
           <li class="previous">
@@ -602,33 +657,13 @@
           </li>
         
       </ul>
-            
-            <div>
-                 
-                <h2>See Also</h2>
-                <ul>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-alpha-test/">《OpenGL ES 3.x 游戏开发》之利用 Alpha 透明度进行测试</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-handle-video-frame-and-replace-content/">用 OpenGL 对视频帧内容进行替换</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-share/">OpenGL ES 学习资源分享</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-scissor-test/">《OpenGL ES 3.x 游戏开发》 裁剪测试及注意点</a></li>
-                    
-                    <li><a href="/post/opengl/opengl-tutorial-import-3d-object/">《OpenGL ES 3.x 游戏开发》 3D 模型加载和渲染</a></li>
-                    
-                </ul>
-                
-            </div>
-            
-
+      
 
       
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script type="application/javascript">
+<script>
     var disqus_config = function () {
     
     
@@ -649,8 +684,9 @@
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
           </div>
         
-        
       
+
+
 
     </div>
   </div>
@@ -661,15 +697,19 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
+          
           
               <li>
-                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                <a href="mailto:zhaoying9402@outlook.com" title="Email me">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
                   </span>
                 </a>
               </li>
+          
               <li>
                 <a href="https://github.com/glumes" title="GitHub">
                   <span class="fa-stack fa-lg">
@@ -679,8 +719,18 @@
                 </a>
               </li>
           
+              <li>
+                <a href="https://weibo.com/u/3157458295" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
           <li>
-            <a href="" title="RSS">
+            <a href="https://glumes.com/index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -702,11 +752,13 @@
           
             &nbsp;&bull;&nbsp;
             <a href="https://glumes.com/">Glumes Blog</a>
+            &nbsp;&bull;&nbsp;
+            <a href="/sitemap.xml">网站地图</a>
           
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak-blog">qikqiak-blog</a>
           
         </p>
       </div>
@@ -714,22 +766,19 @@
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
 
-<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
-<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
-<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://glumes.com/js/bootstrap.min.js"></script>
+<script src="https://glumes.com/js/main.min.js"></script>
+<script src="https://glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://glumes.com/js/prism.js?t=123"></script>
+
+<script src="https://glumes.com/js/reward.js"></script>
 
 
 
-<script> renderMathInElement(document.body); </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
-<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
 
 <script type="text/javascript"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
@@ -749,6 +798,9 @@ MathJax.Hub.Config({
   }
 });
 </script>
+
+
+
 
 
 

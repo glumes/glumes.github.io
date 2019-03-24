@@ -48,7 +48,9 @@ public int decrementAndGet(){
 &lt;li&gt;当 synchronized 作用于代码块时，锁对象是 synchronized(obj) 中的这个 obj 对象。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;hr /&gt;</description>
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -61,7 +63,9 @@ public int decrementAndGet(){
 
 &lt;blockquote&gt;
 &lt;p&gt;当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

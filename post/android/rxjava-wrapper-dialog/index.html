@@ -5,19 +5,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
+
   <title>用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</title>
   <meta property="og:title" content="用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析" />
   <meta name="twitter:title" content="用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析" />
+
   <meta name="description" content="之前有写过一篇文章：用 RxJava 封装回调方法 CallBack。
 
 RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。
 
-这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。">
+这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。
+
+">
   <meta property="og:description" content="之前有写过一篇文章：用 RxJava 封装回调方法 CallBack。
 
 RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。
 
-这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。">
+这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。
+
+">
   <meta name="twitter:description" content="之前有写过一篇文章：用 RxJava 封装回调方法 CallBack。
 
 RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。
@@ -29,14 +35,21 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.51" />
+  <meta name="generator" content="Hugo 0.31.1" />
   <link rel="canonical" href="https://glumes.com/post/android/rxjava-wrapper-dialog/" />
-  <link rel="alternate" href="" type="application/rss+xml" title="Glumes Blog">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><script>
+  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  
+  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
+  <script>
 	var _hmt = _hmt || [];
 	(function() {
 	  var hm = document.createElement("script");
@@ -48,56 +61,6 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
 
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
-
-
-
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-<div class="pswp__bg"></div>
-
-<div class="pswp__scroll-wrap">
-    
-    <div class="pswp__container">
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-    </div>
-    
-    <div class="pswp__ui pswp__ui--hidden">
-    <div class="pswp__top-bar">
-      
-      <div class="pswp__counter"></div>
-      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-      <button class="pswp__button pswp__button--share" title="Share"></button>
-      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-      
-      
-      <div class="pswp__preloader">
-        <div class="pswp__preloader__icn">
-          <div class="pswp__preloader__cut">
-            <div class="pswp__preloader__donut"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-      <div class="pswp__share-tooltip"></div>
-    </div>
-    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-    </button>
-    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-    </button>
-    <div class="pswp__caption">
-      <div class="pswp__caption__center"></div>
-    </div>
-    </div>
-    </div>
-</div>
 
 </head>
 
@@ -158,17 +121,15 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
         
 
         
-      </ul>
-    </div>
 
-    <div class="avatar-container">
-      <div class="avatar-img-border">
         
-      </div>
+
+      </ul>
     </div>
 
   </div>
 </nav>
+
 
 
 
@@ -189,10 +150,17 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</h1>
+              <h1>用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</h1>
                 
+                
+                  <span class="post-meta">
+  Posted on December 22, 2017
+  
+</span>
+
+
                 
             </div>
           </div>
@@ -206,33 +174,46 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
 <div class="container" role="main">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
+
+
 
         
+      <div>
           
           
-<div>
-    <section id="datecount">
-        <h4 id="date"> Fri Dec 22, 2017</h4>
-    </section>
-    <h5 id="wc">1600 Words|Read in about 4 Min</h5>
-    <h5 id="tags">Tags: 
-        
-        <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
-        
-        <a href="https://glumes.com/tags/rxjava/">RxJava</a> &nbsp;
-    </h5>
-</div>
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
+            
+                <a href="https://glumes.com/tags/rxjava/">RxJava</a> &nbsp;
+            
+          </h5>
+          
+      </div>
 
-          
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
         
+          
+<aside class="toc">
+  <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#rxbinding-实现简要分析">RxBinding 实现简要分析</a></li>
+<li><a href="#参考">参考</a></li>
+</ul></li>
+</ul>
+</nav>
+</aside>
 
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-            <p>之前有写过一篇文章：<a href="http://www.glumes.com/wrapper-callback-by-rxjava/">用 RxJava 封装回调方法 CallBack</a>。</p>
+        
+        <p>之前有写过一篇文章：<a href="http://www.glumes.com/wrapper-callback-by-rxjava/">用 RxJava 封装回调方法 CallBack</a>。</p>
 
 <p>RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。</p>
 
 <p>这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。</p>
+
+<p></p>
 
 <p>下来展示具体代码的操作，用的是 RxJava 2.x 的版本：</p>
 
@@ -336,9 +317,41 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
 <h2 id="参考">参考</h2>
 
 <p>1、<a href="http://adelnizamutdinov.github.io/blog/2014/11/23/advanced-rxjava-on-android-popupmenus-and-dialogs/">http://adelnizamutdinov.github.io/blog/2014/11/23/advanced-rxjava-on-android-popupmenus-and-dialogs/</a></p>
+        
+          <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+        
 
-              
-                <p>
+
+    
 
                 
                   <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
@@ -358,11 +371,59 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
 
                 
 
-                </p>
-              
-        </article>
+                
 
 
+        
+        <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        
+      </article>
+
+      
+        
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/android/rxjava-wrapper-callback/">用 RxJava 封装回调方法 CallBack</a></li>
+    
+    <li><a href="/post/android/android-layout-inflater/">Android 布局加载之 LayoutInflater</a></li>
+    
+    <li><a href="/post/android/android-change-skin-by-plugin/">Android 插件换肤原理及源码分析</a></li>
+    
+    <li><a href="/post/android/android-start-service/">Android 6.0 Service 启动过程源码分析（一）</a></li>
+    
+    <li><a href="/post/android/android-statemachine/">Android StateMachine 状态机分析</a></li>
+    
+    <li><a href="/post/android/android-lrucache/">Android LruCache实现分析</a></li>
+    
+    <li><a href="/post/android/android-window-and-view/">Android Activity 创建 Window 及添加 View 流程分析</a></li>
+    
+    <li><a href="/post/android/android-system-server/">Android 系统服务启动 SystemServer</a></li>
+    
+    <li><a href="/post/android/android-service-manager/">Android 系统服务管理 ServiceManager</a></li>
+    
+    <li><a href="/post/android/android-material-design-summary-2/">Android Material Desing 控件小结-2</a></li>
+    
+</ul>
+
+      
+
+      
       <ul class="pager blog-pager">
         
           <li class="previous">
@@ -375,33 +436,13 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
           </li>
         
       </ul>
-            
-            <div>
-                 
-                <h2>See Also</h2>
-                <ul>
-                    
-                    <li><a href="/post/android/rxjava-wrapper-callback/">用 RxJava 封装回调方法 CallBack</a></li>
-                    
-                    <li><a href="/post/android/android-layout-inflater/">Android 布局加载之 LayoutInflater</a></li>
-                    
-                    <li><a href="/post/android/android-change-skin-by-plugin/">Android 插件换肤原理及源码分析</a></li>
-                    
-                    <li><a href="/post/android/android-start-service/">Android 6.0 Service 启动过程源码分析（一）</a></li>
-                    
-                    <li><a href="/post/android/android-statemachine/">Android StateMachine 状态机分析</a></li>
-                    
-                </ul>
-                
-            </div>
-            
-
+      
 
       
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script type="application/javascript">
+<script>
     var disqus_config = function () {
     
     
@@ -422,8 +463,9 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
           </div>
         
-        
       
+
+
 
     </div>
   </div>
@@ -434,15 +476,19 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
+          
           
               <li>
-                <a href="mailto:zhaoying9402@gmail.com" title="Email me">
+                <a href="mailto:zhaoying9402@outlook.com" title="Email me">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
                   </span>
                 </a>
               </li>
+          
               <li>
                 <a href="https://github.com/glumes" title="GitHub">
                   <span class="fa-stack fa-lg">
@@ -452,8 +498,18 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
                 </a>
               </li>
           
+              <li>
+                <a href="https://weibo.com/u/3157458295" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
           <li>
-            <a href="" title="RSS">
+            <a href="https://glumes.com/index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -475,11 +531,13 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
           
             &nbsp;&bull;&nbsp;
             <a href="https://glumes.com/">Glumes Blog</a>
+            &nbsp;&bull;&nbsp;
+            <a href="/sitemap.xml">网站地图</a>
           
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.51</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak-blog">qikqiak-blog</a>
           
         </p>
       </div>
@@ -487,22 +545,19 @@ RxJava 封装回调方法的大体思路就是：使用 Observable 的 create �
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/main.js"></script>
 
-<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/highlight.min.js"></script>
-<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/prism.js"></script>
-<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/auto-render.min.js"></script>
+<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://glumes.com/js/bootstrap.min.js"></script>
+<script src="https://glumes.com/js/main.min.js"></script>
+<script src="https://glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://glumes.com/js/prism.js?t=123"></script>
+
+<script src="https://glumes.com/js/reward.js"></script>
 
 
 
-<script> renderMathInElement(document.body); </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
-<script src="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/js/load-photoswipe.js"></script>
+
 
 <script type="text/javascript"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
@@ -522,6 +577,9 @@ MathJax.Hub.Config({
   }
 });
 </script>
+
+
+
 
 
 

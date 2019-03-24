@@ -23,7 +23,9 @@
 
 &lt;p&gt;虽然 MediaCodec 仍然存在一定的弊端，但是对于快速实现编解码需求，还是很值得参考的。&lt;/p&gt;
 
-&lt;p&gt;以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。&lt;/p&gt;</description>
+&lt;p&gt;以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -32,7 +34,9 @@
       <pubDate>Wed, 19 Sep 2018 23:12:45 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/post/ffmpeg/understand-yuv-format/</guid>
-      <description>&lt;p&gt;YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。&lt;/p&gt;</description>
+      <description>&lt;p&gt;YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -21,7 +21,9 @@
       <guid>https://glumes.com/post/android/android-layout-inflater/</guid>
       <description>&lt;p&gt;Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。&lt;/p&gt;
 
-&lt;p&gt;LayoutInflater 实例的获取有多种方式，但最终是通过&lt;code&gt;(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)&lt;/code&gt;来得到的，也就是说加载布局的 &lt;code&gt;LayoutInflater&lt;/code&gt; 是来自于系统服务的。&lt;/p&gt;</description>
+&lt;p&gt;LayoutInflater 实例的获取有多种方式，但最终是通过&lt;code&gt;(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)&lt;/code&gt;来得到的，也就是说加载布局的 &lt;code&gt;LayoutInflater&lt;/code&gt; 是来自于系统服务的。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>
