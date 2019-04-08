@@ -139,6 +139,39 @@
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-system-server/">
+                <h2 class="post-title">Android 系统服务启动 SystemServer</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on December 22, 2017
+              </p>
+              <div class="post-entry">
+                
+                  <p>在之前 <a href="http://www.glumes.com/android-servicemanager/">Android 系统服务管理 ServiceManager</a> 中学习了各种系统服务 Service 都是通过 <code>ServiceManager</code> 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 <code>ContextImpl</code> 类、<code>SystemServiceRegistry</code> 类、<code>ServiceManager</code> 类、<code>ServiceManagerNative</code> 类等等。</p>
+
+<p>那么问题就来了，ServiceManager 所管理的那些 Service 的 Binder 对象引用又是何时注册添加的呢？</p>
+
+<p>事实上这些服务 Service 是 SystemServer 进程中启动的。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/android/android-system-server/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/android/android-service-manager/">
                 <h2 class="post-title">Android 系统服务管理 ServiceManager</h2>
 
@@ -421,37 +454,6 @@
                     #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
                   
                     #<a href="https://glumes.com/tags/framework/">Framework</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/rxjava-wrapper-callback/">
-                <h2 class="post-title">用 RxJava 封装回调方法 CallBack</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>在知乎上看到这样一个问题：<a href="https://www.zhihu.com/question/39492234">RxJava正确的封装callback的方式应该是怎么样的？</a>。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/rxjava-wrapper-callback/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/rxjava/">RxJava</a>&nbsp;
                   
                 </span>
               

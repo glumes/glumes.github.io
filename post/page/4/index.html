@@ -139,6 +139,43 @@
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/">
+                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》之利用 Alpha 透明度进行测试</h2>
+
+                
+                  <h3 class="post-subtitle">
+                    学习笔记内容摘录
+                  </h3>
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on July 13, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>在前面的博客文章中有提到 <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a>，并且裁剪测试只能裁剪一个矩形区域，相当于就是把整个内容都绘制上去了，但是透过一个小矩形区域来看绘制的物体。</p>
+
+<p>除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。</p>
+
+<p>关于 Alpha 透明度测试，在 用 <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">OpenGL 对视频帧内容进行替换</a> 也用实践用到过。</p>
+
+<p></p>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">
                 <h2 class="post-title">用 OpenGL 对视频帧内容进行替换</h2>
 
@@ -463,41 +500,6 @@
 
 <p></p>
                   <a href="https://glumes.com/post/android/android-jni-reference-manage-rules/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/">
-                <h2 class="post-title">Android  JNI 调用时缓存字段和方法 ID</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on May 7, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。</p>
-
-<p>事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。</p>
-
-<p>缓存有两种方式，分别是使用时缓存和初始化时缓存。</p>
-
-<p></p>
-                  <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" class="post-read-more">[Read More]</a>
                 
               </div>
 
