@@ -10,22 +10,16 @@
   <meta property="og:title" content="安卓异步之RxJava" />
   <meta name="twitter:title" content="安卓异步之RxJava" />
 
-  <meta name="description" content="不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。
-
-">
-  <meta property="og:description" content="不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。
-
-">
-  <meta name="twitter:description" content="不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。
-
-">
+  <meta name="description" content="不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。">
+  <meta property="og:description" content="不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。">
+  <meta name="twitter:description" content="不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/android/android-rxjava/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/android/android-rxjava/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -220,8 +214,6 @@
         
         <p>不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。</p>
 
-<p></p>
-
 <h2 id="添加-rxjava">添加 RxJava</h2>
 
 <p>RxJava 的 Github 地址是 ： <a href="https://github.com/ReactiveX/RxJava">https://github.com/ReactiveX/RxJava</a></p>
@@ -341,14 +333,13 @@ Observer&lt;Integer&gt; observer = new Observer&lt;Integer&gt;() {
 };
 </code></pre>
 
-<p><code>Observer</code> 也是一个接口类型，声明了如上的三个方法：
-*    onNext()：Observable 每发送一次事件都会调用一次该方法消费事件。
+<pre><code class="language-Observer```">*    onNext()：Observable 每发送一次事件都会调用一次该方法消费事件。
 *    onCompleted()：当 Observabel 的事件发送完毕后，就会调用该方法。
-*    onError()：如果 Observable 发送事件的过程中出现了错误，则会调用该方法。</p>
+*    onError()：如果 Observable 发送事件的过程中出现了错误，则会调用该方法。
 
-<p>有了被观察者 Observable 和观察者 Observer 之后，就可以进行事件的订阅了。</p>
-
-<pre><code class="language-java">/**
+有了被观察者 Observable 和观察者 Observer 之后，就可以进行事件的订阅了。
+```java
+/**
  * Observable 订阅 Observer
  */
 observable.subscribe(observer);
@@ -658,7 +649,7 @@ asyncSubject.onCompleted();
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -750,7 +741,7 @@ asyncSubject.onCompleted();
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -847,7 +838,7 @@ asyncSubject.onCompleted();
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -877,8 +868,8 @@ asyncSubject.onCompleted();
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -893,6 +884,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

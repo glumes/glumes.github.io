@@ -20,9 +20,7 @@
 
 这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。
 
-要解决这种问题，就得使用深度测试了。
-
-">
+要解决这种问题，就得使用深度测试了。">
   <meta property="og:description" content="在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。
 
 直接看一个没有使用深度测试的绘制：
@@ -33,9 +31,7 @@
 
 这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。
 
-要解决这种问题，就得使用深度测试了。
-
-">
+要解决这种问题，就得使用深度测试了。">
   <meta name="twitter:description" content="在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。
 
 直接看一个没有使用深度测试的绘制：
@@ -46,16 +42,14 @@
 
 这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。
 
-要解决这种问题，就得使用深度测试了。
-
-">
+要解决这种问题，就得使用深度测试了。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/opengl/opengl-depth-test/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-depth-test/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -163,7 +157,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1532069624/blog/pexels-photo-137132.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/pexels-photo-137132.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -262,8 +256,6 @@
 <p>这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。</p>
 
 <p>要解决这种问题，就得使用深度测试了。</p>
-
-<p></p>
 
 <p>值得一提的是：在没有开启深度测试的情况下，假设绘制了多个不同远近的物体，那么对于最后的景象来说，哪怕是距离最远的，只要它的最后绘制的，都会显示在景象的前面。</p>
 
@@ -382,7 +374,7 @@ glDepthFunc(GL_ALWAYS);
 
 <p>对于这种转换，可以看到，当物体非常接近近平面时，深度值会接近 0.0，当物体非常接近远平面时，深度值会接近 1.0 ，这种转换是一种线性的深度缓冲转换。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532068155/code/depth_linear_graph.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/depth_linear_graph.png" alt="" /></p>
 
 <p>而在实践中，几乎不可能是这样的线性转换。</p>
 
@@ -396,7 +388,7 @@ glDepthFunc(GL_ALWAYS);
 
 <p>它的效果如下：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532068512/code/depth_non_linear_graph.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/depth_non_linear_graph.png" alt="" /></p>
 
 <p>可以看到在 z 值位于 1.0 和 2.0 之间时，对应的深度值为 0.0 到 0.5 的区间，这就占据了深度值区间范围的 50 %。而 2.0 之后的范围也才占据了 50 %。</p>
 
@@ -455,7 +447,7 @@ glDepthFunc(GL_ALWAYS);
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -543,7 +535,7 @@ glDepthFunc(GL_ALWAYS);
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -640,7 +632,7 @@ glDepthFunc(GL_ALWAYS);
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -670,8 +662,8 @@ glDepthFunc(GL_ALWAYS);
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -686,6 +678,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

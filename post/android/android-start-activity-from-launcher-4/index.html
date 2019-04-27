@@ -20,9 +20,7 @@
 
 然而， 即使看过了多遍代码流程依旧有点云里雾里的感觉。不从整体上来把握，光抓住细节代码会始终不得要领。
 
-由于是从 Launcher 组件启动一个 Activity 组件，其中还需要与 ActivityManagerService 通信，而这三个部分都是位于不同的进程内，涉及进程间通信，因此可以将整个过程划分为三个不同的部分来分析，在 Launcher 进程内的操作，在 ActivityManagerService 进程内的操作，在创建的应用程序进程内的操作。
-
-">
+由于是从 Launcher 组件启动一个 Activity 组件，其中还需要与 ActivityManagerService 通信，而这三个部分都是位于不同的进程内，涉及进程间通信，因此可以将整个过程划分为三个不同的部分来分析，在 Launcher 进程内的操作，在 ActivityManagerService 进程内的操作，在创建的应用程序进程内的操作。">
   <meta property="og:description" content="在如下三篇文章中过了一遍 Launcher 启动 Activity 的代码流程。
 
 
@@ -33,9 +31,7 @@
 
 然而， 即使看过了多遍代码流程依旧有点云里雾里的感觉。不从整体上来把握，光抓住细节代码会始终不得要领。
 
-由于是从 Launcher 组件启动一个 Activity 组件，其中还需要与 ActivityManagerService 通信，而这三个部分都是位于不同的进程内，涉及进程间通信，因此可以将整个过程划分为三个不同的部分来分析，在 Launcher 进程内的操作，在 ActivityManagerService 进程内的操作，在创建的应用程序进程内的操作。
-
-">
+由于是从 Launcher 组件启动一个 Activity 组件，其中还需要与 ActivityManagerService 通信，而这三个部分都是位于不同的进程内，涉及进程间通信，因此可以将整个过程划分为三个不同的部分来分析，在 Launcher 进程内的操作，在 ActivityManagerService 进程内的操作，在创建的应用程序进程内的操作。">
   <meta name="twitter:description" content="在如下三篇文章中过了一遍 Launcher 启动 Activity 的代码流程。
 
 
@@ -51,7 +47,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/android/android-start-activity-from-launcher-4/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -237,8 +233,6 @@
 
 <p>由于是从 Launcher 组件启动一个 Activity 组件，其中还需要与 ActivityManagerService 通信，而这三个部分都是位于不同的进程内，涉及进程间通信，因此可以将整个过程划分为三个不同的部分来分析，在 Launcher 进程内的操作，在 ActivityManagerService 进程内的操作，在创建的应用程序进程内的操作。</p>
 
-<p></p>
-
 <h2 id="launcher-进程内的操作">Launcher 进程内的操作</h2>
 
 <p>在 Launcher 进程内执行函数：</p>
@@ -394,7 +388,7 @@
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -480,7 +474,7 @@
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -577,7 +571,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -607,8 +601,8 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -623,6 +617,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

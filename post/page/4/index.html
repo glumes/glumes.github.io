@@ -16,7 +16,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -159,8 +159,6 @@
 <p>除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。</p>
 
 <p>关于 Alpha 透明度测试，在 用 <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">OpenGL 对视频帧内容进行替换</a> 也用实践用到过。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -188,8 +186,6 @@
               <div class="post-entry">
                 
                   <p>在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -217,8 +213,6 @@
               <div class="post-entry">
                 
                   <p>学习了一段时间的 OpenGL ES，并在公司的项目中得到了运用，也算是有了一些积累，现在分享一些当初学习的资源，大家一起来学习，共同交流进步。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-share/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -250,8 +244,6 @@
               <div class="post-entry">
                 
                   <p>在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -283,8 +275,6 @@
               <div class="post-entry">
                 
                   <p>在使用 OpenGL 绘制时，我们最多绘制的是一些简单的图形，比如三角形、圆形、立方体等，因为这些图形的顶点数量不多，还是可以手动的写出那些顶点的，可要是绘制一些复杂图形该怎么办呢？</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -314,8 +304,6 @@
                   <p>在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。</p>
 
 <p>再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -393,8 +381,6 @@
 </tr>
 </tbody>
 </table>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -425,11 +411,9 @@
 
 <p>这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：<a href="https://glumpy.github.io/modern-gl.html">https://glumpy.github.io/modern-gl.html</a>）</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526483191/ViewFrustum_gvy6aq.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/ViewFrustum_gvy6aq.png" alt="" /></p>
 
 <p>当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于<code>视点</code>的，视点也就是我们这篇文章要讲到的摄像机。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -464,8 +448,6 @@
 <li>Native 代码调用 Java 层代码时发生了异常要处理</li>
 <li>Native 代码自己抛出了一个异常让 Java 层去处理</li>
 </ul>
-
-<p></p>
                   <a href="https://glumes.com/post/android/android-jni-exception-handle/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -497,8 +479,6 @@
                   <p>在 Native 代码中有时候会接收 Java 传入的引用类型参数，有时候也会通过 NewObject 方法来创建一个 Java 的引用类型变量。</p>
 
 <p>在编写 Native 代码时，要注意这个代表 Java 数据结构类型的引用在使用时会被 GC 回收的可能性。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/android-jni-reference-manage-rules/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -600,7 +580,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -630,8 +610,8 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -646,6 +626,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Egl on Glumes Blog</title>
+    <title>EGL on Glumes Blog</title>
     <link>https://glumes.com/tags/egl/</link>
-    <description>Recent content in Egl on Glumes Blog</description>
+    <description>Recent content in EGL on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
@@ -21,9 +21,7 @@
       <guid>https://glumes.com/post/opengl/opengl-egl-usage/</guid>
       <description>&lt;p&gt;OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。&lt;/p&gt;
 
-&lt;p&gt;而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 &lt;code&gt;EGL&lt;/code&gt; 来完成这个转换工作。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 &lt;code&gt;EGL&lt;/code&gt; 来完成这个转换工作。&lt;/p&gt;</description>
     </item>
     
   </channel>

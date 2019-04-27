@@ -10,22 +10,16 @@
   <meta property="og:title" content="进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解" />
   <meta name="twitter:title" content="进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解" />
 
-  <meta name="description" content="都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。
-
-">
-  <meta property="og:description" content="都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。
-
-">
-  <meta name="twitter:description" content="都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。
-
-">
+  <meta name="description" content="都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。">
+  <meta property="og:description" content="都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。">
+  <meta name="twitter:description" content="都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/vulkan/vulkan-tutorial-renderer/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/vulkan/vulkan-tutorial-renderer/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -133,7 +127,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fxd7qunbo9j20zk0m8jtx.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd7qunbo9j20zk0m8jtx.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -224,15 +218,13 @@
         
         <p>都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。</p>
 
-<p></p>
-
 <h2 id="从泥巴到工艺品">从泥巴到工艺品</h2>
 
 <p>先来举一个 <code>玩泥巴</code> 的例子，也就是我国的传统工艺 —— <code>陶瓷工艺</code> 。</p>
 
 <p>以我国传统的陶瓷工艺为例，先看看伟大的工匠们是如何把泥巴变成了精美的艺术品。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx7nt75c4qj222k0i8hdt.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx7nt75c4qj222k0i8hdt.jpg" alt="" /></p>
 
 <p>上面是一张粗略的示意图，详细的陶瓷制作流程可以自行网上搜索，或者 <a href="https://www.toutiao.com/a6457289342741119502/">参考这里</a>。</p>
 
@@ -262,29 +254,29 @@
 
 <p>假设现在已经执行完了坐标转换，物体的坐标转换成了二维的，那么就需要通过 <code>光栅化</code> 来映射到屏幕的二维坐标上。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx7or6vctjj20hg09z3yv.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx7or6vctjj20hg09z3yv.jpg" alt="" /></p>
 
 <p>以上图作为示例，先定义了三个顶点代表三角形基本图元，再把经过坐标转换之后的三角形映射到屏幕上。而屏幕是由一个一个像素点组成的，光栅化的过程就是要把三角形分解成许多个小的片段，再把这些片段映射到屏幕对应位置上，这样就可以让屏幕显示坐标转换后的物体了。</p>
 
 <p>给三角形显示来个特写如下：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx7tn3qte2j2060056q2w.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx7tn3qte2j2060056q2w.jpg" alt="" /></p>
 
 <p>光栅化之后的三角形与屏幕显示的关系。实际上屏幕像素并不是小方格而是像素点，肯定不会有这么夸张的锯齿。</p>
 
 <p>当光栅化操作之后，就可以对它进行着色了。这又回到了上面的例子，陶瓷小方块的涂色阶段，在这个阶段，数字图像处理学科开始发挥它巨大的作用了，各种各样的滤镜、图像效果都是在这个阶段进行的。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx7twah2rwj20nh06nn1c.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx7twah2rwj20nh06nn1c.jpg" alt="" /></p>
 
 <p>用上面的图总结一下目前的渲染流程，这个流程比较简化，理解起来就和上面的陶瓷制作相似，也比较形象的阐述了 OpenGL 渲染从 <code>有形</code> 到 <code>有色</code> 的过程。</p>
 
 <p>现在再来看看坐标转换，坐标转换是在光栅化之前的，如下图：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx7uicbuccj20qg0c2n3l.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx7uicbuccj20qg0c2n3l.jpg" alt="" /></p>
 
 <p>这里会经过几个坐标的转换，分别是局部坐标、世界坐标、观察坐标、裁剪坐标。最后才是显示到屏幕的坐标。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx7uw2xzydj20m80aydgo.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx7uw2xzydj20m80aydgo.jpg" alt="" /></p>
 
 <p>具体的详细分析可以参考之前写过的相关 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/">博客文章</a>。</p>
 
@@ -324,7 +316,7 @@
 
 <p>用 <a href="https://www.khronos.org/opengl/wiki/Rendering_Pipeline_Overview">维基百科</a> 上的图来做个总结：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77ly1fx8181dkhaj207j0gqdgq.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77ly1fx8181dkhaj207j0gqdgq.jpg" alt="" /></p>
 
 <p>这个流程图就和上文内容提到的大致相同了，如果你明白了渲染流程，那么看懂这个图应该也不是难事了~</p>
 
@@ -336,17 +328,17 @@
 
 <p>先上一张 英伟达（NVIDIA） 公司给出的 Vulkan 组件图。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx80mwln17j21to110woq.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx80mwln17j21to110woq.jpg" alt="" /></p>
 
 <p>由于本篇只关注渲染流程，所以组件图中很多是现在不用太过关心的，比如 Image、Command-buffer 等，后面的文章会再做讲解。</p>
 
 <p>看到图中有一个 <code>Graphics pipeline</code> 的组件，这个组件里面就包含 Vulkan 的渲染流程。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx80qkqyanj21ts10qqdc.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx80qkqyanj21ts10qqdc.jpg" alt="" /></p>
 
 <p>Pipeline 组件里面都有哪些操作？看下图~</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx80vj91g4j20vn0ojtft.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx80vj91g4j20vn0ojtft.jpg" alt="" /></p>
 
 <p>看到图中中的左边内容是不是有似曾相识的感觉，就和 OpenGL 的渲染流程一样的，也是从顶点 -&gt; 到光栅化 -&gt; 到着色器 -&gt; 到帧缓冲，再加上各种测试。</p>
 
@@ -414,7 +406,7 @@
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -488,7 +480,7 @@
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -585,7 +577,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -615,8 +607,8 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -631,6 +623,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

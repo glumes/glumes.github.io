@@ -10,22 +10,16 @@
   <meta property="og:title" content="开源库之 OkHttp 源码分析" />
   <meta name="twitter:title" content="开源库之 OkHttp 源码分析" />
 
-  <meta name="description" content="分析一波 OkHttp 的源码实现。
-
-">
-  <meta property="og:description" content="分析一波 OkHttp 的源码实现。
-
-">
-  <meta name="twitter:description" content="分析一波 OkHttp 的源码实现。
-
-">
+  <meta name="description" content="分析一波 OkHttp 的源码实现。">
+  <meta property="og:description" content="分析一波 OkHttp 的源码实现。">
+  <meta name="twitter:description" content="分析一波 OkHttp 的源码实现。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/android/okhttp-analysis/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/android/okhttp-analysis/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -133,7 +127,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fv5z250xs7j20zk0npjvg.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fv5z250xs7j20zk0npjvg.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -207,8 +201,6 @@
       <article role="main" class="blog-post" itemprop="articleBody" id="content">
         
         <p>分析一波 OkHttp 的源码实现。</p>
-
-<p></p>
 
 <h2 id="简单使用">简单使用</h2>
 
@@ -650,7 +642,7 @@ synchronized void executed(RealCall call) {
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -717,7 +709,7 @@ synchronized void executed(RealCall call) {
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -814,7 +806,7 @@ synchronized void executed(RealCall call) {
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -844,8 +836,8 @@ synchronized void executed(RealCall call) {
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -860,6 +852,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

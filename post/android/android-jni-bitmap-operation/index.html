@@ -10,22 +10,16 @@
   <meta property="og:title" content="Android JNI 之 Bitmap 操作" />
   <meta name="twitter:title" content="Android JNI 之 Bitmap 操作" />
 
-  <meta name="description" content="在 Android 中通过 JNI 去操作 Bitmap。
-
-">
-  <meta property="og:description" content="在 Android 中通过 JNI 去操作 Bitmap。
-
-">
-  <meta name="twitter:description" content="在 Android 中通过 JNI 去操作 Bitmap。
-
-">
+  <meta name="description" content="在 Android 中通过 JNI 去操作 Bitmap。">
+  <meta property="og:description" content="在 Android 中通过 JNI 去操作 Bitmap。">
+  <meta name="twitter:description" content="在 Android 中通过 JNI 去操作 Bitmap。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/android/android-jni-bitmap-operation/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/android/android-jni-bitmap-operation/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -133,7 +127,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1ftm1y4vr2dj20zk0npaig.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftm1y4vr2dj20zk0npaig.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -232,8 +226,6 @@
 
         
         <p>在 Android 中通过 JNI 去操作 Bitmap。</p>
-
-<p></p>
 
 <p>在 Android 通过 JNI 去调用 Bitmap，通过 CMake 去编 so 动态链接库的话，需要添加 jnigraphics 图像库。</p>
 
@@ -360,7 +352,7 @@ int AndroidBitmap_unlockPixels(JNIEnv* env, jobject jbitmap);
 
 <p>效果如下：</p>
 
-<p><img src="https://ws1.sinaimg.cn/mw690/bc32fd77gy1ftl40fytkxj20u01hcdmh.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftl40fytkxj20u01hcdmh.jpg" alt="" /></p>
 
 <p>具体代码可以参考我的 Github 项目，欢迎 Star。</p>
 
@@ -547,7 +539,7 @@ int AndroidBitmap_unlockPixels(JNIEnv* env, jobject jbitmap);
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -639,7 +631,7 @@ int AndroidBitmap_unlockPixels(JNIEnv* env, jobject jbitmap);
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -736,7 +728,7 @@ int AndroidBitmap_unlockPixels(JNIEnv* env, jobject jbitmap);
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -766,8 +758,8 @@ int AndroidBitmap_unlockPixels(JNIEnv* env, jobject jbitmap);
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -782,6 +774,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

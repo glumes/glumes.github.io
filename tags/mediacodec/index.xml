@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Mediacodec on Glumes Blog</title>
+    <title>MediaCodec on Glumes Blog</title>
     <link>https://glumes.com/tags/mediacodec/</link>
-    <description>Recent content in Mediacodec on Glumes Blog</description>
+    <description>Recent content in MediaCodec on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
@@ -23,9 +23,7 @@
 
 &lt;p&gt;虽然 MediaCodec 仍然存在一定的弊端，但是对于快速实现编解码需求，还是很值得参考的。&lt;/p&gt;
 
-&lt;p&gt;以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。&lt;/p&gt;</description>
     </item>
     
   </channel>

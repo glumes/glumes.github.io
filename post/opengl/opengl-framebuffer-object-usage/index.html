@@ -14,16 +14,12 @@
 
 除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。
 
-FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。
-
-">
+FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。">
   <meta property="og:description" content="帧缓冲(Framebuffer Object)，简称 FBO，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。
 
 除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。
 
-FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。
-
-">
+FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。">
   <meta name="twitter:description" content="帧缓冲(Framebuffer Object)，简称 FBO，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。
 
 除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。
@@ -35,7 +31,7 @@ FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为�
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -143,7 +139,7 @@ FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为�
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fuxvv2w99zj20zk0njgof.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fuxvv2w99zj20zk0njgof.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -245,13 +241,11 @@ FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为�
 
 <p>FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。</p>
 
-<p></p>
-
 <p>渲染缓冲(Renderbuffer Object)，简称 <code>RBO</code>，由应用程序分配的 2D 图像缓冲区，可以用于分配和存储 <strong>深度</strong> 和 <strong>模板</strong> 值，也可以用作 FBO 的 <em>深度</em> 或者 <em>模板</em> 附件，另外，纹理也可以作为 FBO 的颜色和深度附件。</p>
 
 <p>帧缓冲与渲染缓冲和纹理的关系如下：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fuxlr1hxafj20a2081dg2.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fuxlr1hxafj20a2081dg2.jpg" alt="" /></p>
 
 <h2 id="使用概述">使用概述</h2>
 
@@ -439,7 +433,7 @@ mTextureRect.drawSelf(textureId);
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -531,7 +525,7 @@ mTextureRect.drawSelf(textureId);
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -628,7 +622,7 @@ mTextureRect.drawSelf(textureId);
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -658,8 +652,8 @@ mTextureRect.drawSelf(textureId);
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -674,6 +668,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

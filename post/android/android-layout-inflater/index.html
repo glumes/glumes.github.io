@@ -12,14 +12,10 @@
 
   <meta name="description" content="Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。
 
-LayoutInflater 实例的获取有多种方式，但最终是通过(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)来得到的，也就是说加载布局的 LayoutInflater 是来自于系统服务的。
-
-">
+LayoutInflater 实例的获取有多种方式，但最终是通过(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)来得到的，也就是说加载布局的 LayoutInflater 是来自于系统服务的。">
   <meta property="og:description" content="Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。
 
-LayoutInflater 实例的获取有多种方式，但最终是通过(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)来得到的，也就是说加载布局的 LayoutInflater 是来自于系统服务的。
-
-">
+LayoutInflater 实例的获取有多种方式，但最终是通过(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)来得到的，也就是说加载布局的 LayoutInflater 是来自于系统服务的。">
   <meta name="twitter:description" content="Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。
 
 LayoutInflater 实例的获取有多种方式， …">
@@ -29,7 +25,7 @@ LayoutInflater 实例的获取有多种方式， …">
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/android/android-layout-inflater/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -205,8 +201,6 @@ LayoutInflater 实例的获取有多种方式， …">
         <p>Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。</p>
 
 <p>LayoutInflater 实例的获取有多种方式，但最终是通过<code>(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)</code>来得到的，也就是说加载布局的 <code>LayoutInflater</code> 是来自于系统服务的。</p>
-
-<p></p>
 
 <p>由于 Android 系统源码中关于 Content 部分采用的是装饰模式，Context 的具体功能都是由 <code>ContextImpl</code> 来实现的。通过在 ContextImpl 中找到<code>getSystemService</code>的代码，一路跟进，得知最后返回的实例是<code>PhoneLayoutInflater</code>。</p>
 
@@ -445,7 +439,7 @@ public final View createView(String name, String prefix, AttributeSet attrs)
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -537,7 +531,7 @@ public final View createView(String name, String prefix, AttributeSet attrs)
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -634,7 +628,7 @@ public final View createView(String name, String prefix, AttributeSet attrs)
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -664,8 +658,8 @@ public final View createView(String name, String prefix, AttributeSet attrs)
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -680,6 +674,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

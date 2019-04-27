@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -127,7 +127,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1531447145/blog/forest-tree-tree-trunk-bark.jpg" data-img-desc-1="Tree"></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/forest-tree-tree-trunk-bark.jpg" data-img-desc-1="Tree"></div>
   
 
   <header class="header-section has-img">
@@ -229,23 +229,21 @@
 
 <p>关于 Alpha 透明度测试，在 用 <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">OpenGL 对视频帧内容进行替换</a> 也用实践用到过。</p>
 
-<p></p>
-
 <p>在 OpenGL 中，每个颜色都有四个色彩通道 &mdash; RGBA，其中 A 就是 Alpha 透明度通道，可以利用它的值进行检测。</p>
 
 <p>Alpha 测试的基本原理为，当绘制一个片元时，首先检测其 Alpha 值，若 Alpha 值满足要求，就通过测试，绘制此片元，否则丢弃此片元，不进行绘制。</p>
 
 <p>比如如下的场景：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_500/v1530807546/code/WechatIMG27.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/WechatIMG27.jpg" alt="" /></p>
 
 <p>如果是裁剪测试，只能屏幕上透过一个矩形区域来观察实际场景。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_500/v1530807545/code/WechatIMG26.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/WechatIMG26.jpg" alt="" /></p>
 
 <p>而换成 Alpha 测试，就可以实现透过任意形状的观察，效果如下：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_500/v1530807540/code/WechatIMG28.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/WechatIMG28.jpg" alt="" /></p>
 
 <p>图上的内容实际由三部分组成，树、地形、中间带透明度的边框。</p>
 
@@ -377,7 +375,7 @@ aTexCoorp[1] = 0.12;
 
 <p>学习的路上是需要交流和分享的，这里有个二维码，如果你对 OpenGL ES 感兴趣欢迎一起来交流讨论。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531382740/code/WechatIMG432.jpg" alt="加群讨论" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/WechatIMG432.jpg" alt="加群讨论" /></p>
 
 <p>要是二维码过期了，加微信 ezglume 好友，备注 OpenGL ，拉你入群~</p>
         
@@ -418,7 +416,7 @@ aTexCoorp[1] = 0.12;
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -506,7 +504,7 @@ aTexCoorp[1] = 0.12;
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -603,7 +601,7 @@ aTexCoorp[1] = 0.12;
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -633,8 +631,8 @@ aTexCoorp[1] = 0.12;
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -649,6 +647,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

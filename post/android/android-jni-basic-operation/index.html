@@ -10,22 +10,16 @@
   <meta property="og:title" content="Android JNI 基本操作 " />
   <meta name="twitter:title" content="Android JNI 基本操作 " />
 
-  <meta name="description" content="自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C&#43;&#43; 方法，只要专注写好 C&#43;&#43; 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。
-
-">
-  <meta property="og:description" content="自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C&#43;&#43; 方法，只要专注写好 C&#43;&#43; 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。
-
-">
-  <meta name="twitter:description" content="自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C&#43;&#43; 方法，只要专注写好 C&#43;&#43; 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。
-
-">
+  <meta name="description" content="自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C&#43;&#43; 方法，只要专注写好 C&#43;&#43; 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。">
+  <meta property="og:description" content="自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C&#43;&#43; 方法，只要专注写好 C&#43;&#43; 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。">
+  <meta name="twitter:description" content="自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C&#43;&#43; 方法，只要专注写好 C&#43;&#43; 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/android/android-jni-basic-operation/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/android/android-jni-basic-operation/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -133,7 +127,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_630,w_1920/v1525659533/life/WechatIMG357.jpg" data-img-desc-1="天空云"></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/WechatIMG357.jpg" data-img-desc-1="天空云"></div>
   
 
   <header class="header-section has-img">
@@ -244,8 +238,6 @@
         
         <p>自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C++ 方法，只要专注写好 C++ 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。</p>
 
-<p></p>
-
 <h2 id="jni-和-ndk-的区别">JNI 和 NDK 的区别</h2>
 
 <hr />
@@ -294,7 +286,7 @@ Java_com_glumes_myapplication_NativeClass_plus(JNIEnv *env, jobject instance, ji
 
 <p>结构如下图所示：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1522421221/JNIEnv-Pointer_pjzwm1.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/JNIEnv-Pointer_pjzwm1.png" alt="" /></p>
 
 <p>可以看到这里面涉及了三类指针，JNIEnv * 本身就是指针，而它指向的也是指针，在 JVM 函数表里面的每一项又都是指针。</p>
 
@@ -656,7 +648,7 @@ Java_com_glumes_cppso_SampleNativeMethod_getNativeString(JNIEnv *env, jclass typ
 
 <p>选择合适的 JNI 函数</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1523550495/code/choose-right-jni-string-function.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/choose-right-jni-string-function.png" alt="" /></p>
 
 <p>对于 JNI String 操作，要选择合适的函数，上表可以作为参考。</p>
 
@@ -708,7 +700,7 @@ Java_com_glumes_cppso_SampleNativeMethod_getNativeString(JNIEnv *env, jclass typ
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -800,7 +792,7 @@ Java_com_glumes_cppso_SampleNativeMethod_getNativeString(JNIEnv *env, jclass typ
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -897,7 +889,7 @@ Java_com_glumes_cppso_SampleNativeMethod_getNativeString(JNIEnv *env, jclass typ
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -927,8 +919,8 @@ Java_com_glumes_cppso_SampleNativeMethod_getNativeString(JNIEnv *env, jclass typ
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -943,6 +935,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

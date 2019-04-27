@@ -10,22 +10,16 @@
   <meta property="og:title" content="进击的 Vulkan 移动开发（一）之今生前世" />
   <meta name="twitter:title" content="进击的 Vulkan 移动开发（一）之今生前世" />
 
-  <meta name="description" content="捋一捋 Vulkan 。
-
-">
-  <meta property="og:description" content="捋一捋 Vulkan 。
-
-">
-  <meta name="twitter:description" content="捋一捋 Vulkan 。
-
-">
+  <meta name="description" content="捋一捋 Vulkan 。">
+  <meta property="og:description" content="捋一捋 Vulkan 。">
+  <meta name="twitter:description" content="捋一捋 Vulkan 。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/vulkan/vulkan-tutorial-concept/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/vulkan/vulkan-tutorial-concept/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -133,7 +127,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fxd7qunbo9j20zk0m8jtx.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd7qunbo9j20zk0m8jtx.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -224,8 +218,6 @@
         
         <p>捋一捋 Vulkan 。</p>
 
-<p></p>
-
 <h2 id="vulkan-是什么">Vulkan 是什么 ？</h2>
 
 <p>文章开始之前先来讲一讲《王者荣耀》，作为曾经珠海市香洲区第五十号鲁班七号，可是有着辉煌的战绩。</p>
@@ -256,7 +248,7 @@
 
 <p>视频截图一张，作为示例：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx6jfgkeqcj227y0moqv5.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx6jfgkeqcj227y0moqv5.jpg" alt="" /></p>
 
 <p>在 ARM 平台上作为对比，可以看到，渲染同样的场景，OpenGL ES 的 CPU 使用率达到了 50%，并且是单核在高速运行，类似于一核有难，三核围观；反观 Vulkan 版本的绘制，CPU 的使用率目测不到 20%，而且是四核都参与了运算，这样一来，Vulkan 当然更加省电、功耗低了。</p>
 
@@ -302,7 +294,7 @@
 
 <p>还有，在 Youtube 上有一些关于 Vulkan 的系列视频，推荐这个<a href="https://www.youtube.com/user/Nigo40/videos">系列视频</a>。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fx6odtsb5wj211v0dnq6m.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx6odtsb5wj211v0dnq6m.jpg" alt="" /></p>
 
 <p>对照着中文字幕，多看几遍还是能够理解的。</p>
 
@@ -399,7 +391,7 @@
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -466,7 +458,7 @@
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -563,7 +555,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -593,8 +585,8 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -609,6 +601,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

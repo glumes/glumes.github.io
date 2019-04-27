@@ -10,12 +10,8 @@
   <meta property="og:title" content="Android 6.0 Launcher 启动 Activity 过程源码分析（三）" />
   <meta name="twitter:title" content="Android 6.0 Launcher 启动 Activity 过程源码分析（三）" />
 
-  <meta name="description" content="在  Android 6.0 Launcher 启动 Activity 过程源码分析（二） 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 Resumed状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 startSpecificActivityLocked方法创建进程。
-
-">
-  <meta property="og:description" content="在  Android 6.0 Launcher 启动 Activity 过程源码分析（二） 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 Resumed状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 startSpecificActivityLocked方法创建进程。
-
-">
+  <meta name="description" content="在  Android 6.0 Launcher 启动 Activity 过程源码分析（二） 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 Resumed状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 startSpecificActivityLocked方法创建进程。">
+  <meta property="og:description" content="在  Android 6.0 Launcher 启动 Activity 过程源码分析（二） 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 Resumed状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 startSpecificActivityLocked方法创建进程。">
   <meta name="twitter:description" content="在  Android 6.0 Launcher 启动 Activity 过程源码分析（二） 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 Resumed状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动， …">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
@@ -23,7 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/android/android-start-activity-from-launcher-3/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -212,8 +208,6 @@
 
         
         <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-2/"> Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a> 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 <code>Resumed</code>状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 <code>startSpecificActivityLocked</code>方法创建进程。</p>
-
-<p></p>
 
 <h3 id="activitystacksupervisor-类的-startspecificactivitylocked-方法">ActivityStackSupervisor 类的 startSpecificActivityLocked() 方法</h3>
 
@@ -944,7 +938,7 @@ public final void bindApplication(String processName, ApplicationInfo appInfo,
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -1028,7 +1022,7 @@ public final void bindApplication(String processName, ApplicationInfo appInfo,
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -1125,7 +1119,7 @@ public final void bindApplication(String processName, ApplicationInfo appInfo,
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -1155,8 +1149,8 @@ public final void bindApplication(String processName, ApplicationInfo appInfo,
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -1171,6 +1165,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

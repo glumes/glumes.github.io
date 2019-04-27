@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ndk on Glumes Blog</title>
+    <title>NDK on Glumes Blog</title>
     <link>https://glumes.com/tags/ndk/</link>
-    <description>Recent content in Ndk on Glumes Blog</description>
+    <description>Recent content in NDK on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
@@ -21,9 +21,7 @@
       <guid>https://glumes.com/post/android/cmake-best-practices/</guid>
       <description>&lt;p&gt;Android Studio 从 2.2 版本起开始支持 CMake ,可以通过 CMake 和 NDK 将 C/C++ 代码编译成底层的库，然后再配合 Gradle 的编译将库打包到 APK 中。&lt;/p&gt;
 
-&lt;p&gt;这意味就不需要再编写 &lt;code&gt;.mk&lt;/code&gt; 文件来编译 &lt;code&gt;so&lt;/code&gt; 动态库了。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;这意味就不需要再编写 &lt;code&gt;.mk&lt;/code&gt; 文件来编译 &lt;code&gt;so&lt;/code&gt; 动态库了。&lt;/p&gt;</description>
     </item>
     
   </channel>

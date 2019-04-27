@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -127,7 +127,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1531710914/blog/pexels-photo-1231023.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/pexels-photo-1231023.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -234,8 +234,6 @@
         <p>在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。</p>
 
 <p>在 OpenGL 中同样有这样颜色混合的问题。</p>
-
-<p></p>
 
 <p>在 OpenGL 的世界模型中是有深度的概念的，也就是由 z 轴坐标值来决定物体距离坐标原地的远近，但到最后世界模型里的物体都要投影到近平面，最后映射到视口上。而且，距离相机也就是视口越近的物体，就会遮住后面的物体，就和用肉眼去观察物体一下，后面的形状会被前面的形状挡住。</p>
 
@@ -488,11 +486,11 @@
 
 <p>先假设有这样的场景：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531707676/code/blend_scene.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/blend_scene.jpg" alt="" /></p>
 
 <p>通过这样的图片经过混合后去查看后面的内容，类似于刺激战场上开镜效果，</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531707815/code/lgq.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/lgq.png" alt="" /></p>
 
 <p>显然，图片的黑色区域是要可以透过看到后面内容的，绿色区域也是一样，不然就全遮盖住后面内容了。</p>
 
@@ -520,7 +518,7 @@
 
 <p>最后效果如下：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531709868/code/blend_src_color.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/blend_src_color.jpg" alt="" /></p>
 
 <p>当然，还可以使用另外一种混合因子组合 GL_SRC_ALPHA 和 GL_ONE_MINUS_SRC_ALPHA，根据源因子的透明度来设置混合因子。</p>
 
@@ -548,7 +546,7 @@
 
 <p>学习的路上是需要交流和分享的，这里有个二维码，如果你对 OpenGL ES 感兴趣欢迎一起来交流讨论。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531710558/code/WechatIMG434.jpg" alt="加群讨论" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/WechatIMG434.jpg" alt="加群讨论" /></p>
 
 <p>要是二维码过期了，加微信 ezglume 好友，备注 OpenGL ，拉你入群~</p>
         
@@ -589,7 +587,7 @@
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -677,7 +675,7 @@
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -774,7 +772,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -804,8 +802,8 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -820,6 +818,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

@@ -12,26 +12,20 @@
 
   <meta name="description" content="在之前的文章中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。
 
-本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。
-
-">
+本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。">
   <meta property="og:description" content="在之前的文章中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。
 
-本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。
-
-">
+本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。">
   <meta name="twitter:description" content="在之前的文章中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。
 
-本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。
-
-">
+本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/opengl/opengl-glsl-3-mark/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-glsl-3-mark/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -139,7 +133,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fv3beohff0j20hs0bkdge.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fv3beohff0j20hs0bkdge.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -277,8 +271,6 @@
 
 <p>本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。</p>
 
-<p></p>
-
 <h2 id="数据类型">数据类型</h2>
 
 <h3 id="标量">标量</h3>
@@ -301,13 +293,13 @@
 
 <p>在 GLSL 中，向量可以看做是同样类型的标量组成的，其基本类型也分为 bool、int 、uint 及 float 4 种。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftsvggbzsej20ou06njsm.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftsvggbzsej20ou06njsm.jpg" alt="" /></p>
 
 <h3 id="矩阵">矩阵</h3>
 
 <p>OpenGL ES 3.0 支持的矩阵类型比 OpenGL ES 2.0 多了一些。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftsvi91fqnj20ot06l0tq.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftsvi91fqnj20ot06l0tq.jpg" alt="" /></p>
 
 <p>在 OpenGL 中，矩阵是按列的顺序组织的，也就是一个矩阵可以看作由几个列向量组成。</p>
 
@@ -315,7 +307,7 @@
 
 <p>采样器是专门进行纹理采样的相关操作。一般情况下，一个采样器变量代表一幅或一套纹理贴图。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftsvkyfrhsj20ov08j412.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftsvkyfrhsj20ov08j412.jpg" alt="" /></p>
 
 <h3 id="结构体">结构体</h3>
 
@@ -356,7 +348,7 @@ float y[] = float[](1.0,2.0,3.0);
 
 <h2 id="存储限定符">存储限定符</h2>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftsvoph5x8j20ow060q49.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftsvoph5x8j20ow060q49.jpg" alt="" /></p>
 
 <p>限定符的使用应该放在变量前面，且使用 in、uniform 以及 out 限定符修饰的变量必须为全局变量。</p>
 
@@ -413,7 +405,7 @@ float y[] = float[](1.0,2.0,3.0);
 <li>flat</li>
 </ul>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftsw70uh21j20ou02vdgc.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftsw70uh21j20ou02vdgc.jpg" alt="" /></p>
 
 <blockquote>
 <p>若使用插值限定符，则该限定符应该在 in、centroid in 、out 或者 centroid out 之前使用，且只能用来修饰顶点着色器的 out 变量与片元着色器中对应的 in 变量。当未使用任何插值限定符时，默认的插值方式为 smooth 。</p>
@@ -648,9 +640,9 @@ invariant color;
 
 <p>角度转换与三角函数同时适用于顶点着色器与片元着色器，并且每个角度转换与三角函数都有 4 种重载变体。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpatv2l1gj20x505itag.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpatv2l1gj20x505itag.jpg" alt="" /></p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpauq1lk3j20qu0m8jxq.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpauq1lk3j20qu0m8jxq.jpg" alt="" /></p>
 
 <p>上述表中 genType 代表的数据类型有 float、vec2、vec3 以及 vec4 。其中 float 指的是浮点数标量，vec2、vec3 和 vec4 指的是浮点数向量。</p>
 
@@ -658,9 +650,9 @@ invariant color;
 
 <p>指数函数同样适用于顶点着色器和片段着色器。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpayhnwydj20r003djs4.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpayhnwydj20r003djs4.jpg" alt="" /></p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpays9rloj20qz0c4adp.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpays9rloj20qz0c4adp.jpg" alt="" /></p>
 
 <p>上述表中 genType 代表的数据类型有 float、vec2、vec3 以及 vec4 。</p>
 
@@ -668,9 +660,9 @@ invariant color;
 
 <p>常见函数也可同时用于顶点着色器和片段着色器。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpb0u5pf5j20r00i6tf2.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpb0u5pf5j20r00i6tf2.jpg" alt="" /></p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpb13iad9j20qx0nywno.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpb13iad9j20qx0nywno.jpg" alt="" /></p>
 
 <p>genType 、 genIType 、genUType 代表的数据类型参考上面提到的类型。</p>
 
@@ -678,19 +670,19 @@ invariant color;
 
 <p>几何函数适用于顶点着色器和片段着色器，主要用于对向量进行操作。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbecmyi6j20r20ijgqq.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpbecmyi6j20r20ijgqq.jpg" alt="" /></p>
 
 <h3 id="矩阵函数">矩阵函数</h3>
 
 <p>矩阵函数适用于顶点着色器和片段着色器，主要包括生成矩阵、矩阵的转置、求矩阵的行列式以及求逆矩阵等有关矩阵的操作。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbg27jyoj20r00e0n1f.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpbg27jyoj20r00e0n1f.jpg" alt="" /></p>
 
 <h3 id="向量关系函数">向量关系函数</h3>
 
 <p>向量关系函数主要功能为将向量的各分量进行关系比较运算。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbhepfflj20qw0k8jwh.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpbhepfflj20qw0k8jwh.jpg" alt="" /></p>
 
 <h3 id="纹理采样函数">纹理采样函数</h3>
 
@@ -698,23 +690,23 @@ invariant color;
 
 <p>大部分纹理采样函数即可以用于顶点着色器也可以用于片段着色器，但又个别的仅适用于片元着色器。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbm2irjuj20qw0dfte3.jpg" alt="" />
-<img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbm1wlrfj20qz09hjvc.jpg" alt="" />
-<img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbm2e3t9j20qv0kdqbe.jpg" alt="" />
-<img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbm1xhgxj20qz075who.jpg" alt="" />
-<img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbm27f72j20qx0ildn4.jpg" alt="" />
-<img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbpjnyahj20r006fwgo.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpbm2irjuj20qw0dfte3.jpg" alt="" />
+<img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpbm1wlrfj20qz09hjvc.jpg" alt="" />
+<img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpbm2e3t9j20qv0kdqbe.jpg" alt="" />
+<img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpbm1xhgxj20qz075who.jpg" alt="" />
+<img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpbm27f72j20qx0ildn4.jpg" alt="" />
+<img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpbpjnyahj20r006fwgo.jpg" alt="" /></p>
 
 <h3 id="微分函数">微分函数</h3>
 
 <p>微分函数仅能用于片段着色器，是从 OpenGL ES 3.0 开始正式支持的。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbqfuxhfj20qx04dq43.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpbqfuxhfj20qx04dq43.jpg" alt="" /></p>
 
 <h3 id="浮点数的打包与解包函数">浮点数的打包与解包函数</h3>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbrx38zwj20r00e3n2w.jpg" alt="" />
-<img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftpbrwvqx7j20r204rabo.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpbrx38zwj20r00e3n2w.jpg" alt="" />
+<img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftpbrwvqx7j20r204rabo.jpg" alt="" /></p>
 
 <h2 id="参考">参考</h2>
 
@@ -759,7 +751,7 @@ invariant color;
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -851,7 +843,7 @@ invariant color;
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -948,7 +940,7 @@ invariant color;
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -978,8 +970,8 @@ invariant color;
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -994,6 +986,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

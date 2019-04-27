@@ -12,26 +12,20 @@
 
   <meta name="description" content="之前就有写过一篇文章来学习状态机：状态机学习。
 
-在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。
-
-">
+在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。">
   <meta property="og:description" content="之前就有写过一篇文章来学习状态机：状态机学习。
 
-在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。
-
-">
+在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。">
   <meta name="twitter:description" content="之前就有写过一篇文章来学习状态机：状态机学习。
 
-在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。
-
-">
+在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/android/android-statemachine/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/android/android-statemachine/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -208,8 +202,6 @@
 
 <p>在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。</p>
 
-<p></p>
-
 <p>StateMachine 类位于 Android 源码中的，路径是<code>frameworks/base/core/java/com/android/internal/util/StateMachine.java</code>，从路径名可以看出，这是一个工具类，该类对状态机进行了封装，方便使用。</p>
 
 <p>在安卓源码中进行搜索，会发现很多类用到了状态机，比如：<code>WifiStateMachine</code>、<code>A2dpStateMachine</code>、<code>NsdStateMachine</code>、<code>P2dStateMachine</code>等等，它们都直接或间接的继承了 StateMachine 类。可见，状态机的思想在安卓源码中得到了广泛使用。</p>
@@ -350,7 +342,7 @@
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -442,7 +434,7 @@
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -539,7 +531,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -569,8 +561,8 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -585,6 +577,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

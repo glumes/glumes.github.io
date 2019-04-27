@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Crack on Glumes Blog</title>
+    <title>crack on Glumes Blog</title>
     <link>https://glumes.com/tags/crack/</link>
-    <description>Recent content in Crack on Glumes Blog</description>
+    <description>Recent content in crack on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
@@ -19,9 +19,7 @@
       <pubDate>Wed, 31 Jan 2018 15:47:59 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/post/android/setup-android-crack-environment/</guid>
-      <description>&lt;p&gt;在 MAC 上搭建 Android 反编译环境主要就是三个东西：&lt;code&gt;apktool&lt;/code&gt; 、&lt;code&gt;dex2jar&lt;/code&gt; 、&lt;code&gt;jd-gui&lt;/code&gt; 。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;在 MAC 上搭建 Android 反编译环境主要就是三个东西：&lt;code&gt;apktool&lt;/code&gt; 、&lt;code&gt;dex2jar&lt;/code&gt; 、&lt;code&gt;jd-gui&lt;/code&gt; 。&lt;/p&gt;</description>
     </item>
     
   </channel>

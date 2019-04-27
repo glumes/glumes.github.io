@@ -16,7 +16,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -153,8 +153,6 @@
                   <p>正如标题所言，docopt 是一个用来解析命令行参数的工具，当想要在 Python 程序后面附加参数时，就不需要再为此而发愁了。</p>
 
 <p>docopt 是一个开源的库，代码地址：<a href="https://github.com/docopt/docopt">https://github.com/docopt/docopt</a>。它在 README 中就已经做了详细的介绍，并且还附带了很多例子可供学习，这篇文章也是翻译一下 README 中内容&hellip;&hellip;</p>
-
-<p></p>
                   <a href="https://glumes.com/post/python/python-docopt/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -190,8 +188,6 @@
 <p>在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。</p>
 
 <p>在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -221,8 +217,6 @@
                   <p>最近在研究学习 FFmpeg，从网上参考了好多资料，其中最了不起的就当属——<a href="http://blog.csdn.net/leixiaohua1020">雷霄骅</a>大神了，若没有他的博文，别说入门了，可能连门在哪里都不知道，在此还是要表达一下对雷神的敬佩和敬仰。</p>
 
 <p>本文主要讲的是视频文件的解码，从视频文件的封装格式解码到原始数据格式，通过讲解涉及到的各种概念，从而理清整个思路和流程。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/ffmpeg/encode-and-decode-summary/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -254,8 +248,6 @@
 <p>RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。</p>
 
 <p>这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/rxjava-wrapper-dialog/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -287,8 +279,6 @@
                   <p>Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。</p>
 
 <p>LayoutInflater 实例的获取有多种方式，但最终是通过<code>(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)</code>来得到的，也就是说加载布局的 <code>LayoutInflater</code> 是来自于系统服务的。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/android-layout-inflater/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -318,8 +308,6 @@
               <div class="post-entry">
                 
                   <p>在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/android-change-skin-by-plugin/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -349,8 +337,6 @@
                   <p>Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。</p>
 
 <p>Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/android-start-service/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -382,8 +368,6 @@
                   <p>之前就有写过一篇文章来学习状态机：<a href="http://www.glumes.com/statemachine_learn/">状态机学习</a>。</p>
 
 <p>在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/android-statemachine/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -411,8 +395,6 @@
               <div class="post-entry">
                 
                   <p>LruCache 是安卓开发中常用到的缓存技术，LRU 的全名是 Least Recently Used，表示最近最少使用算法，也就是说当内存快到达阈值时，若某个对象最近很少使用的，那么它就会被回收掉以释放内存。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/android-lrucache/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -447,8 +429,6 @@
 <li><a href="http://www.glumes.com/start-activity-from-launcher-in-android-3/">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a></li>
 <li><a href="http://www.glumes.com/start-activity-from-launcher-in-android-4/">Android 6.0 Launcher 启动 Activity 过程源码分析（四）</a></li>
 </ol>
-
-<p></p>
                   <a href="https://glumes.com/post/android/android-window-and-view/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -548,7 +528,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -578,8 +558,8 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -594,6 +574,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

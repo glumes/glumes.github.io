@@ -24,8 +24,6 @@ Vulkan 开发的系列文章：
 
 此篇文章继续学习 Vulkan 中的组件：Command-Buffer 。
 
-
-
 ">
   <meta property="og:description" content="
 Vulkan 开发的系列文章：
@@ -40,8 +38,6 @@ Vulkan 开发的系列文章：
 
 
 此篇文章继续学习 Vulkan 中的组件：Command-Buffer 。
-
-
 
 ">
   <meta name="twitter:description" content="
@@ -58,8 +54,6 @@ Vulkan 开发的系列文章：
 
 此篇文章继续学习 Vulkan 中的组件：Command-Buffer 。
 
-
-
 ">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
@@ -67,7 +61,7 @@ Vulkan 开发的系列文章：
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -175,7 +169,7 @@ Vulkan 开发的系列文章：
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fz03j7xdslj22n01rcb29.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fz03j7xdslj22n01rcb29.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -288,9 +282,7 @@ Vulkan 开发的系列文章：
 
 <p>此篇文章继续学习 Vulkan 中的组件：Command-Buffer 。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fytl33ku2vj21c40r4n49.jpg" alt="" /></p>
-
-<p></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fytl33ku2vj21c40r4n49.jpg" alt="" /></p>
 
 <p>在前面的文章中，我们已经创建了 <code>Instance</code>、<code>Device</code>、<code>Queue</code> 三个组件，并且知道了 <code>Queue</code> 组件是用来和物理设备沟通的桥梁，而具体的沟通过程就需要 <code>Command-Buffer</code> （命令缓冲区）组件，它是若干命令的集合，我们向 <code>Queue</code> 提交 <code>Command-Buffer</code>，然后才交由物理设备 GPU 进行处理。</p>
 
@@ -390,7 +382,7 @@ Vulkan 开发的系列文章：
 
 <p>创建了 <code>Command-Buffer</code> 之后，来了解一下它的生命周期，如下图：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fytmcwfgywj20wl0e5myz.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fytmcwfgywj20wl0e5myz.jpg" alt="" /></p>
 
 <ul>
 <li>Initial 状态</li>
@@ -426,7 +418,7 @@ Vulkan 开发的系列文章：
 
 <p>现在可以尝试着记录一些命令，提交到 <code>Queue</code> 上了，命令记录的调用过程如下图：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fytn1nbd2gj20q30fgah3.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fytn1nbd2gj20q30fgah3.jpg" alt="" /></p>
 
 <p>在 <code>vkBeginCommandBuffer</code> 和 <code>vkEndCommandBuffer</code> 方法之间可以记录和渲染相关的命令，这里先不考虑中间的过程，直接创建提交。</p>
 
@@ -488,7 +480,7 @@ Vulkan 开发的系列文章：
 
 <p>如下图，Vulkan 中有 <code>Semaphore</code>、<code>Fences</code>、<code>Event</code>、<code>Barrier</code> 四种机制来保证同步。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fyubwo7iaqj21is0umjzo.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fyubwo7iaqj21is0umjzo.jpg" alt="" /></p>
 
 <p>简单说一下 <code>Semaphore</code> 和 <code>Fence</code> 。</p>
 
@@ -638,7 +630,7 @@ Vulkan 开发的系列文章：
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -716,7 +708,7 @@ Vulkan 开发的系列文章：
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -813,7 +805,7 @@ Vulkan 开发的系列文章：
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -843,8 +835,8 @@ Vulkan 开发的系列文章：
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -859,6 +851,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

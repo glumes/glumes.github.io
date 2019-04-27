@@ -26,8 +26,6 @@ Vulkan 开发的系列文章：
 
 在之前的文章中，讲到了 Command-Buffer 提交给 Queue 去执行，也提到了 Vulkan 实现跨平台机制，是有一些拓展的，这里就讲讲 Vulkan 窗口系统的拓展（Vulkan Window System Integration WSI），如下图所示：
 
-
-
 ">
   <meta property="og:description" content="
 Vulkan 开发的系列文章：
@@ -44,8 +42,6 @@ Vulkan 开发的系列文章：
 
 
 在之前的文章中，讲到了 Command-Buffer 提交给 Queue 去执行，也提到了 Vulkan 实现跨平台机制，是有一些拓展的，这里就讲讲 Vulkan 窗口系统的拓展（Vulkan Window System Integration WSI），如下图所示：
-
-
 
 ">
   <meta name="twitter:description" content="
@@ -69,7 +65,7 @@ Vulkan 开发的系列文章：
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/vulkan/vulkan-tutorial-swap-chain/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -177,7 +173,7 @@ Vulkan 开发的系列文章：
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1g1u4eowfwbj21hc0zk79f.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1u4eowfwbj21hc0zk79f.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -295,9 +291,7 @@ Vulkan 开发的系列文章：
 
 <p>在之前的文章中，讲到了 <code>Command-Buffer</code> 提交给 <code>Queue</code> 去执行，也提到了 Vulkan 实现跨平台机制，是有一些拓展的，这里就讲讲 Vulkan 窗口系统的拓展（Vulkan Window System Integration WSI），如下图所示：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fyuhrs5xlwj21j00uywl8.jpg" alt="" /></p>
-
-<p></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fyuhrs5xlwj21j00uywl8.jpg" alt="" /></p>
 
 <p>回顾一下在 Android 中我们是需要 <code>EGL</code> 机制为 OpenGL ES 建立渲染环境，好让 OpenGL ES 渲染后的结果可以呈现在 Surface 上，而 iOS 上肯定是没有 <code>EGL</code> 机制的，当然它肯定也有其他方法呈现 OpenGL ES 渲染结果。</p>
 
@@ -821,7 +815,7 @@ Vulkan 开发的系列文章：
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -897,7 +891,7 @@ Vulkan 开发的系列文章：
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -994,7 +988,7 @@ Vulkan 开发的系列文章：
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -1024,8 +1018,8 @@ Vulkan 开发的系列文章：
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -1040,6 +1034,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

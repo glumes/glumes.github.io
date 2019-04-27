@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -127,7 +127,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1532184449/blog/pexels-photo-132340.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/pexels-photo-132340.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -225,8 +225,6 @@
         
         <p>在 OpenGL 中使用光照。</p>
 
-<p></p>
-
 <p>OpenGL 中的光照模型相对实现世界进行了很大的简化，将光照分成了 3 种组成元素。</p>
 
 <ul>
@@ -243,7 +241,7 @@
 
 <p>效果如下图所示：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532182413/code/embient_light_explained.png" alt="环境光效果" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/embient_light_explained.png" alt="环境光效果" /></p>
 
 <p>环境光最大的特点是不依赖于光源的位置，而且没有方向性，而且环境光不但入射是均匀的，发射也是各项均匀的。</p>
 
@@ -305,13 +303,13 @@ void main()
 
 <p>以下是使用环境光照射的结果实例，环境光强度为 <code>vec4(0.15,0.15,0.15,1.0)</code>。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532182121/code/light_ambient.jpg" alt="环境光" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/light_ambient.jpg" alt="环境光" /></p>
 
 <p>可以看到物体暗淡了一些，这就像是在黑夜中去观察物体一样，只有微弱的月光，而且月光又是均匀分布的，通过翻转球体的各个面，可以观察到明亮程度都是一样的。</p>
 
 <p>而在之前的所有绘制中，物体都不是这么暗淡的，其差别就是没有给最终的颜色乘以环境光强度，或者说，我们之前绘制的环境光强度设置是 <code>vec4(1.0,1.0,1.0,1.0)</code>。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532182121/code/light_ambient_1.jpg" alt="环境光为 1 的情况" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/light_ambient_1.jpg" alt="环境光为 1 的情况" /></p>
 
 <p>这种情况下就让其他的各种光照都显得无意义了，因为环境光是均匀分布的，而环境光都是这么亮了，照亮了每一个角落，还要其他光照干嘛呢。</p>
 
@@ -366,7 +364,7 @@ void main()
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -454,7 +452,7 @@ void main()
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -551,7 +549,7 @@ void main()
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -581,8 +579,8 @@ void main()
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -597,6 +595,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -127,7 +127,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1ftn636nobej20zk0me7a8.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftn636nobej20zk0me7a8.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -228,8 +228,6 @@
         
         <p>在 OpenGL 的世界模型中，同时绘制了多个物体，那么怎么去检测物体之间是否触碰了，不同于在平面之间的触碰，OpenGL 是在三维世界里面的触碰，接下来就继续深入理解 OpenGL 中的碰撞检测相关知识~~~</p>
 
-<p></p>
-
 <h2 id="碰撞检测实现原理">碰撞检测实现原理</h2>
 
 <p>进行碰撞检测时最直观和最精确的方式就是采用组成物体的三角形来进行，将待检测的两个物体的三角形组中的三角形两两进行相交性检测，若有任意一对三角形相交则物体构成碰撞，否则物体不构成碰撞。</p>
@@ -244,7 +242,7 @@
 
 <p>对于不同物体包围盒直接示例，如下图：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftn0tnab4pj209p03yweu.jpg" alt="不同物体的 AABB 包围盒" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftn0tnab4pj209p03yweu.jpg" alt="不同物体的 AABB 包围盒" /></p>
 
 <p>有了上述约定后，确定 AABB 包围盒就简单多了，仅需要记录 6 个值即可，这 6 个值分别代表包围盒在每个坐标轴上的最小值与最大值，即 $x_{min}$、$x_{max}$、$y_{min}$、$y_{max}$、$z_{min}$、$z_{max}$。</p>
 
@@ -386,7 +384,7 @@ $$P_{max} = [x_{max} , y_{max} , z_{max}]$$</p>
 
 <p>在上面求得了物体的包围盒，求包围盒的目的就是为了简化物体运动过程中的碰撞检测，接下来就是介绍 AABB 包围盒碰撞检测的策略，原理如下图所示：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftn2ce177mj20ie04p0tu.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftn2ce177mj20ie04p0tu.jpg" alt="" /></p>
 
 <p>由于任何一个 AABB 包围盒的各个面都平行于坐标平面，因此判断两个 AABB 包围盒是否发生碰撞仅需要分别判断 3 个轴方向的交叠部分大小是否大于设定的阈值，若大于则发生了碰撞，否则没有发生碰撞。</p>
 
@@ -447,7 +445,7 @@ $$P_{max} = [x_{max} , y_{max} , z_{max}]$$</p>
 
 <p>在开发上述效果中，会定义一个 RigidBody 刚体类，它由两个重要的成员，就是我们的绘制物体和它的 AABB 包围盒，如下图所示：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftn452gxq7j20fa03rjs2.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftn452gxq7j20fa03rjs2.jpg" alt="" /></p>
 
 <p>渲染者指的就是用来渲染的物体，碰撞者指的就是物体的 AABB 包围盒，它们共同组成了刚体 RigidBody 。</p>
 
@@ -574,7 +572,7 @@ $$P_{max} = [x_{max} , y_{max} , z_{max}]$$</p>
 
 <p>AABB 包围盒对于本身横平竖直的物体在平行于坐标轴摆放的情况下下，计算碰撞检测的误差很小，但对于不规则形状的物体或本身横平竖直的物体在随意倾斜摆放时，计算碰撞检测的误差就会比较大，如下图所示：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1ftn5uds87ej20h604vt96.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftn5uds87ej20h604vt96.jpg" alt="" /></p>
 
 <p>从图中可以看到，对于同一物体在不同姿态下的 AABB 包围盒以及不同形状的物体的 AABB 包围盒，其物体本身区域占 AABB 包围盒区域的比例是大不相同的。</p>
 
@@ -623,7 +621,7 @@ $$P_{max} = [x_{max} , y_{max} , z_{max}]$$</p>
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -711,7 +709,7 @@ $$P_{max} = [x_{max} , y_{max} , z_{max}]$$</p>
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -808,7 +806,7 @@ $$P_{max} = [x_{max} , y_{max} , z_{max}]$$</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -838,8 +836,8 @@ $$P_{max} = [x_{max} , y_{max} , z_{max}]$$</p>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -854,6 +852,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

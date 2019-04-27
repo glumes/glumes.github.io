@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -211,11 +211,9 @@
 
 <p>好好的正五边形却东倒西歪的，这就是因为我们前面的绘制都是把它当成 二维 的绘制，而在 OpenGL 中却是绘制 三维的。在二维和三维之间还有个转换，而之前为了方便学习则忽略了这个转换，现在就要开始理解它了 —— <code>坐标系统</code>！！</p>
 
-<p></p>
-
 <h2 id="坐标系统">坐标系统</h2>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516603056/code/3d_coordinate.jpg" alt="3d-coordinate" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/3d_coordinate.jpg" alt="3d-coordinate" /></p>
 
 <p>在立体几何的坐标系里面定义一个点的位置，需要 x、y、z 三个坐标轴的值，而在 OpenGL 中绘制 3D 物体也是需要的。</p>
 
@@ -255,7 +253,7 @@
 
 <p>OpenGL 是一个右手坐标系，正 X 轴在右手边，正 Y 轴朝上，正 Z 轴穿过屏幕朝向你。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516695925/code/opengl_coordinate_systems_right_handed.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_coordinate_systems_right_handed.png" alt="" /></p>
 
 <p>与之相对的就是左手坐标系，其正 Z 轴穿过屏幕朝向里面了。</p>
 
@@ -304,7 +302,7 @@
 <li>指向摄像机上方的向量</li>
 </ul>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516610022/code/camera_axes.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/camera_axes.png" alt="" /></p>
 
 <p>如图，最终建立了一个以摄像机位置为原点的坐标系。</p>
 
@@ -334,33 +332,33 @@
 
 <h3 id="正交投影">正交投影</h3>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516615886/code/opengl_ortho.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_ortho.png" alt="" /></p>
 
 <p>正交投影会创建一个类似立方体的视景体。它由左、上、右、下 四个方向距离和近平面距离、远平面距离组成。四个方向距离定义了近平面和远平面的大小。而在近平面和远平面之外的坐标点就会被裁剪掉了。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516623682/code/opengl_ortho_2.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_ortho_2.png" alt="" /></p>
 
 <p>在场景中处于视景体内的物体会被投影到近平面上，然后再将近平面上投影出的内容映射到屏幕上。</p>
 
 <p>它所用到的矩阵是正交投影矩阵。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516633713/code/opengl_ortho_result.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_ortho_result.png" alt="" /></p>
 
 <p>由于正交投影是平行投影的一种，其投影线是平行的，所以投影到近平面上的图形不会产生真实世界中的<code>近大远小</code>的效果。因为正交投影没有把透视考虑进去，所以，远处的物体不会变小，这适用于一些特定的场合。</p>
 
 <h3 id="透视投影">透视投影</h3>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516634352/code/perspective_frustum.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/perspective_frustum.png" alt="" /></p>
 
 <p>透视投影是能够产生<code>近大远小</code>效果的，就像我们人眼一样，看远处的物体就变得很小了。</p>
 
 <p>它所用到的矩阵就是透视投影矩阵。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516634355/code/opengl_frustum.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_frustum.png" alt="" /></p>
 
 <p>透视投影也会创建一个视景体，类似于锥形。它同样也有着近平面距离和远平面距离，而且也是将近平面的内容映射到屏幕视口中，但不同与正交投影近平面和远平面大小相同，所以它的左、上、右、下距离都是相对于近平面的。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516634355/code/opengl_frustum_analysis.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_frustum_analysis.png" alt="" /></p>
 
 <p>可以看到，透视投影的投影线互不平行，都相交于视点。因此，同样尺寸的物体，才会近处的投影出来大，远处的投影出来小。</p>
 
@@ -392,7 +390,7 @@
 
 <p>用一张图总结如下：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516764111/opengl_coordinate_exchange_pmgaoa.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_coordinate_exchange_pmgaoa.png" alt="" /></p>
 
 <h2 id="坐标的矩阵操作">坐标的矩阵操作</h2>
 
@@ -422,7 +420,7 @@ void main(){
 
 <p>而归一化设备坐标假定的坐标空间是一个正方形，但手机屏幕的视口却是一个长方形，这样的话，就会有一个方向被拉伸。同样的份数，但长度越长，导致每一份的长度也增加了，所以也就被拉伸了。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516693872/code/opengl_aspect.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_aspect.png" alt="" /></p>
 
 <p>要解决这种问题，可以在归一化设备坐标上进行操作，将较长的一边乘以相应的比例系数，转化到同样的长度比上。</p>
 
@@ -432,7 +430,7 @@ x = x * aspect
 y = y 
 </code></pre>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1516694723/code/opengl_aspect_cube.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_aspect_cube.png" alt="" /></p>
 
 <p>这样一来，将较长的一边的比例放大了，取较短的那一边作为 1 的标准。</p>
 
@@ -499,7 +497,7 @@ void main(){
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -575,7 +573,7 @@ void main(){
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -672,7 +670,7 @@ void main(){
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -702,8 +700,8 @@ void main(){
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -718,6 +716,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

@@ -10,22 +10,16 @@
   <meta property="og:title" content="C&#43;&#43; 标准容器库小结" />
   <meta name="twitter:title" content="C&#43;&#43; 标准容器库小结" />
 
-  <meta name="description" content="《C&#43;&#43; Primer》 第五版笔记摘录~~~
-
-">
-  <meta property="og:description" content="《C&#43;&#43; Primer》 第五版笔记摘录~~~
-
-">
-  <meta name="twitter:description" content="《C&#43;&#43; Primer》 第五版笔记摘录~~~
-
-">
+  <meta name="description" content="《C&#43;&#43; Primer》 第五版笔记摘录~~~">
+  <meta property="og:description" content="《C&#43;&#43; Primer》 第五版笔记摘录~~~">
+  <meta name="twitter:description" content="《C&#43;&#43; Primer》 第五版笔记摘录~~~">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -133,7 +127,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fxd6ebghm1j20zk0k0dqt.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd6ebghm1j20zk0k0dqt.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -258,8 +252,6 @@
         
         <p>《C++ Primer》 第五版笔记摘录~~~</p>
 
-<p></p>
-
 <p>C++ 容器的种类如下：</p>
 
 <ul>
@@ -356,7 +348,7 @@
 
 <p>容器定义和初始化方法见下图：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fwovi7exigj20pj0fnwp1.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwovi7exigj20pj0fnwp1.jpg" alt="" /></p>
 
 <h4 id="将一个容器初始化为另一个容器的拷贝">将一个容器初始化为另一个容器的拷贝</h4>
 
@@ -444,7 +436,7 @@
 
 <p>以下是向顺序容器中添加元素的操作。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fwo8b7wyadj20k30g4wlt.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwo8b7wyadj20k30g4wlt.jpg" alt="" /></p>
 
 <p>当使用如上的操作时，必须记得不同容器使用不同的策略来分配元素空间，这些策略直接影响性能。</p>
 
@@ -480,7 +472,7 @@
 
 <p>删除主要操作函数如下：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fwoydkugt2j20t10il4b7.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwoydkugt2j20t10il4b7.jpg" alt="" /></p>
 
 <ul>
 <li>pop_front 和 pop_back
@@ -551,7 +543,7 @@
 
 <p>所有容器适配器都支持的操作如下：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fxd77po68vj20ib090whe.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd77po68vj20ib090whe.jpg" alt="" /></p>
 
 <h3 id="定义适配器">定义适配器</h3>
 
@@ -582,7 +574,7 @@ stack&lt;string, vector&lt;string&gt;&gt; str_stk2(svec);
 
 <p>stack 类型定义在 stack 头文件中，支持的操作如下表：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fxd78arzj4j20ig04rwga.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd78arzj4j20ig04rwga.jpg" alt="" /></p>
 
 <p>代码示例如下：</p>
 
@@ -602,9 +594,9 @@ while(!intStack.empty()){
 
 <p>queue 和 priority_queue 适配器定义在 queue 头文件中，支持的操作如下表：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fxd78arzj4j20ig04rwga.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd78arzj4j20ig04rwga.jpg" alt="" /></p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fxd7dnqwazj20ib02smxx.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd7dnqwazj20ib02smxx.jpg" alt="" /></p>
 
 <p>标准库 queue 使用先进先出的存储和访问策略。进入队列的对象被放置到队尾，而离开队列的对象从队首删除。</p>
 
@@ -634,7 +626,7 @@ while(!intStack.empty()){
 
 <p>标准库提供了 8 个关联容器，如下图：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fwoym8cn2ij20t50cfn4e.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwoym8cn2ij20t50cfn4e.jpg" alt="" /></p>
 
 <p>这 8 个关联容器间的不同体现在三个维度上：</p>
 
@@ -697,7 +689,7 @@ pair&lt;string,string&gt; author{&quot;James&quot;,&quot;Joyce&quot;};
 
 <p>具体 pair 上的一些操作如下：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fwr9pwm1vdj21fo0w21hy.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwr9pwm1vdj21fo0w21hy.jpg" alt="" /></p>
 
 <h3 id="关联容器迭代器">关联容器迭代器</h3>
 
@@ -745,7 +737,7 @@ pair&lt;string,string&gt; author{&quot;James&quot;,&quot;Joyce&quot;};
 
 <p>关联容器的 insert 操作如下表：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fwpbcg2ekoj20re0e67cn.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpbcg2ekoj20re0e67cn.jpg" alt="" /></p>
 
 <p>insert （或 emplace）返回的值依赖于容器类型和参数。对于不包含重复关键字的容器，添加单一元素的 insert 和 emplace 版本返回一个 pair ，告诉我们插入操作是否成功。</p>
 
@@ -794,7 +786,7 @@ pair&lt;string,string&gt; author{&quot;James&quot;,&quot;Joyce&quot;};
 
 <p>关联容器定义了三个版本的 <code>earse</code> 。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fwpc64o9buj20re07l79v.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpc64o9buj20re07l79v.jpg" alt="" /></p>
 
 <p>与顺序容器一样，我们可以通过传递给 erase 一个迭代器或一个迭代器对来删除一个元素或者一个元素范围。另外还有一个额外的 earse 操作，它接受一个 <code>key_type</code> 参数，它会删除所有匹配给定关键字的元素（如果存在的话），返回实际删除的元素的数量。</p>
 
@@ -806,7 +798,7 @@ pair&lt;string,string&gt; author{&quot;James&quot;,&quot;Joyce&quot;};
 
 <p>map 和 unordered_map 容器提供了下标运算符和一个对应的 <code>at</code> 函数。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fwpiihxamnj20vi06s0xa.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpiihxamnj20vi06s0xa.jpg" alt="" /></p>
 
 <p>set 类型不支持下标操作，因为 set 中没有与关键字相关联的 “值” ，元素本身就是关键字，因此 “获取与一个关键字相关联的值” 的操作就没意义了。</p>
 
@@ -829,9 +821,9 @@ pair&lt;string,string&gt; author{&quot;James&quot;,&quot;Joyce&quot;};
 
 <p>关联容器提供多种查找一个指定元素的方法。</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fwpj7wig23j20yu04kn11.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpj7wig23j20yu04kn11.jpg" alt="" /></p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fwpj82iljyj20yw0ai44z.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpj82iljyj20yw0ai44z.jpg" alt="" /></p>
 
 <p>应该使用哪个操作依赖于我们要解决什么问题：</p>
 
@@ -1017,7 +1009,7 @@ void word_transform(ifstream &amp;map_file, ifstream &amp;input) {
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -1080,7 +1072,7 @@ void word_transform(ifstream &amp;map_file, ifstream &amp;input) {
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -1177,7 +1169,7 @@ void word_transform(ifstream &amp;map_file, ifstream &amp;input) {
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -1207,8 +1199,8 @@ void word_transform(ifstream &amp;map_file, ifstream &amp;input) {
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -1223,6 +1215,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

@@ -10,22 +10,16 @@
   <meta property="og:title" content="一文读懂 YUV 的采样与格式" />
   <meta name="twitter:title" content="一文读懂 YUV 的采样与格式" />
 
-  <meta name="description" content="YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。
-
-">
-  <meta property="og:description" content="YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。
-
-">
-  <meta name="twitter:description" content="YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。
-
-">
+  <meta name="description" content="YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。">
+  <meta property="og:description" content="YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。">
+  <meta name="twitter:description" content="YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/ffmpeg/understand-yuv-format/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/ffmpeg/understand-yuv-format/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -133,7 +127,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ws1.sinaimg.cn/large/bc32fd77gy1fvf9wxdg2bj20zk0npter.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fvf9wxdg2bj20zk0npter.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -247,15 +241,13 @@
         
         <p>YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。</p>
 
-<p></p>
-
 <h2 id="rgb-颜色编码">RGB 颜色编码</h2>
 
 <p>RGB 三个字母分别代表了 红（Red）、绿（Green）、蓝（Blue），这三种颜色称为 <strong>三原色</strong>，将它们以不同的比例相加，可以产生多种多样的颜色。</p>
 
 <p>在图像显示中，一张 1280 * 720 大小的图片，就代表着它有 1280 * 720 个像素点。其中每一个像素点的颜色显示都采用 RGB 编码方法，将 RGB 分别取不同的值，就会展示不同的颜色。</p>
 
-<p><img src="https://ws1.sinaimg.cn/mw690/bc32fd77gy1fvf996wfvaj20l00gy772.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fvf996wfvaj20l00gy772.jpg" alt="" /></p>
 
 <p>RGB 图像中，每个像素点都有红、绿、蓝三个原色，其中每种原色都占用 8 bit，也就是一个字节，那么一个像素点也就占用 24 bit，也就是三个字节。</p>
 
@@ -271,7 +263,7 @@
 
 <p>使用 YUV 颜色编码表示一幅图像，它应该下面这样的：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fvf98qd1g9j20ks0gu76y.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fvf98qd1g9j20ks0gu76y.jpg" alt="" /></p>
 
 <p>和 RGB 表示图像类似，每个像素点都包含 Y、U、V 分量。但是它的 Y 和 UV 分量是可以分离的，如果没有 UV 分量一样可以显示完整的图像，只不过是黑白的。</p>
 
@@ -285,9 +277,9 @@
 
 <p>有如下公式进行转换：</p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fvf9sa62zhj20ke046jre.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fvf9sa62zhj20ke046jre.jpg" alt="" /></p>
 
-<p><img src="https://ws1.sinaimg.cn/large/bc32fd77gy1fvf9tdm65jj20f1046746.jpg" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fvf9tdm65jj20f1046746.jpg" alt="" /></p>
 
 <p>此时的转换结束后，每个像素点都有完整的 Y、U、V 分量。而之前提到 Y 和 UV 分量是可以分离的，接下来通过不同的采样方式，可以将图像的 Y、U、V 分量重新组合。</p>
 
@@ -602,7 +594,7 @@
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -669,7 +661,7 @@
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -766,7 +758,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -796,8 +788,8 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -812,6 +804,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

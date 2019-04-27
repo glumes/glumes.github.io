@@ -16,34 +16,28 @@
 
 不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。
 
-那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。
-
-">
+那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。">
   <meta property="og:description" content="现在我们用 OpenGL 绘制了如下的立方体：
 
 
 
 不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。
 
-那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。
-
-">
+那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。">
   <meta name="twitter:description" content="现在我们用 OpenGL 绘制了如下的立方体：
 
 
 
 不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。
 
-那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。
-
-">
+那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -151,7 +145,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1531972138/blog/pexels-photo-220182.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/pexels-photo-220182.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -249,8 +243,6 @@
 
 <p>那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。</p>
 
-<p></p>
-
 <h2 id="面剔除">面剔除</h2>
 
 <p>既然现在要把看不到的面丢弃，那么问题就来了：</p>
@@ -267,7 +259,7 @@
 
 <p>当我们通过三角形来绘制形状时，会定义顶点连接的顺序，它可能是顺时针或逆时针。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531966617/code/faceculling_windingorder.png" alt="顶点连接顺序" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/faceculling_windingorder.png" alt="顶点连接顺序" /></p>
 
 <p>上图中，左侧三角形就是顺时针方向，右侧就是逆时针方向。</p>
 
@@ -289,7 +281,7 @@
 
 <p>如下图：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531967122/code/faceculling_frontback.png" alt="逆时针和顺时针三角形的观察" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/faceculling_frontback.png" alt="逆时针和顺时针三角形的观察" /></p>
 
 <p>三角形的顶点顺序都 1 -&gt; 2 -&gt; 3，当我们定义这个顺序时，都是假设观察者正面向这个三角形呢，所以都是逆时针定义的。</p>
 
@@ -409,7 +401,7 @@
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -497,7 +489,7 @@
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -594,7 +586,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -624,8 +616,8 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -640,6 +632,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

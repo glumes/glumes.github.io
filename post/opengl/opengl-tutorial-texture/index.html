@@ -10,22 +10,16 @@
   <meta property="og:title" content="OpenGL 学习系列---纹理" />
   <meta name="twitter:title" content="OpenGL 学习系列---纹理" />
 
-  <meta name="description" content="接下来探索纹理了。
-
-">
-  <meta property="og:description" content="接下来探索纹理了。
-
-">
-  <meta name="twitter:description" content="接下来探索纹理了。
-
-">
+  <meta name="description" content="接下来探索纹理了。">
+  <meta property="og:description" content="接下来探索纹理了。">
+  <meta name="twitter:description" content="接下来探索纹理了。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-texture/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-texture/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -205,8 +199,6 @@
         
         <p>接下来探索纹理了。</p>
 
-<p></p>
-
 <p>纹理，简单的理解就是一副图像。而把一副图像映射到图形上的过程，叫做<code>纹理映射</code>。</p>
 
 <p>比如有如下图形和三角形，想要把图形中的一部分映射到三角形上。</p>
@@ -220,10 +212,10 @@
 <link rel="stylesheet" href="/css/hugo-easy-gallery.css" />
 <div class="box" >
   <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <div class="img" style="background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1517477894/code/S80201-17371719.jpg');">
-      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1517477894/code/S80201-17371719.jpg" />
+    <div class="img" style="background-image: url('https://image.glumes.com/images/2019/04/27/S80201-17371719.jpg');">
+      <img itemprop="thumbnail" src="https://image.glumes.com/images/2019/04/27/S80201-17371719.jpg" />
     </div>
-    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1517477894/code/S80201-17371719.jpg" itemprop="contentUrl"></a>
+    <a href="https://image.glumes.com/images/2019/04/27/S80201-17371719.jpg" itemprop="contentUrl"></a>
   </figure>
 </div>
 
@@ -239,10 +231,10 @@
 
 <div class="box" >
   <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <div class="img" style="background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1517477147/code/2044035O6-2.jpg');">
-      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1517477147/code/2044035O6-2.jpg" />
+    <div class="img" style="background-image: url('https://image.glumes.com/images/2019/04/27/2044035O6-2.jpg');">
+      <img itemprop="thumbnail" src="https://image.glumes.com/images/2019/04/27/2044035O6-2.jpg" />
     </div>
-    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1517477147/code/2044035O6-2.jpg" itemprop="contentUrl"></a>
+    <a href="https://image.glumes.com/images/2019/04/27/2044035O6-2.jpg" itemprop="contentUrl"></a>
   </figure>
 </div>
 
@@ -260,10 +252,10 @@
 
 <div class="box" >
   <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <div class="img" style="background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1517477896/code/S80201-17321771.jpg');">
-      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1517477896/code/S80201-17321771.jpg" />
+    <div class="img" style="background-image: url('https://image.glumes.com/images/2019/04/27/S80201-17321771.jpg');">
+      <img itemprop="thumbnail" src="https://image.glumes.com/images/2019/04/27/S80201-17321771.jpg" />
     </div>
-    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1517477896/code/S80201-17321771.jpg" itemprop="contentUrl"></a>
+    <a href="https://image.glumes.com/images/2019/04/27/S80201-17321771.jpg" itemprop="contentUrl"></a>
   </figure>
 </div>
 
@@ -280,7 +272,7 @@
 
 <p>纹理的坐标，叫做<code>纹理坐标系</code>。它的范围只有 $[0,0]$ 到 $[1,1]$ 。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1517481677/code/opengl_texture_coordinate.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_texture_coordinate.png" alt="" /></p>
 
 <p>它的坐标原点位于左下角，水平向右为 S 轴，竖直向上为 Y 轴。不论实际的纹理图片尺寸大小如何，横向、纵向坐标最大值都是 1 。</p>
 
@@ -455,10 +447,10 @@ void main(){
 
 <div class="box" >
   <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <div class="img" style="background-image: url('https://res.cloudinary.com/glumes-com/image/upload/v1517477896/code/S80201-17321771.jpg');">
-      <img itemprop="thumbnail" src="https://res.cloudinary.com/glumes-com/image/upload/v1517477896/code/S80201-17321771.jpg" />
+    <div class="img" style="background-image: url('https://image.glumes.com/images/2019/04/27/S80201-17321771.jpg');">
+      <img itemprop="thumbnail" src="https://image.glumes.com/images/2019/04/27/S80201-17321771.jpg" />
     </div>
-    <a href="https://res.cloudinary.com/glumes-com/image/upload/v1517477896/code/S80201-17321771.jpg" itemprop="contentUrl"></a>
+    <a href="https://image.glumes.com/images/2019/04/27/S80201-17321771.jpg" itemprop="contentUrl"></a>
   </figure>
 </div>
 
@@ -527,7 +519,7 @@ void main(){
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -597,7 +589,7 @@ void main(){
         
         
           <li class="next">
-            <a href="https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/" data-toggle="tooltip" data-placement="top" title="Android 相机开发中的尺寸和方向问题">Next Post &rarr;</a>
+            <a href="https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/" data-toggle="tooltip" data-placement="top" title="Android 相机开发中的尺寸和方向问题">Next Post &rarr;</a>
           </li>
         
       </ul>
@@ -607,7 +599,7 @@ void main(){
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -704,7 +696,7 @@ void main(){
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -734,8 +726,8 @@ void main(){
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -750,6 +742,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

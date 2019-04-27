@@ -16,7 +16,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -161,8 +161,6 @@
 <p>具体的效果如下：</p>
 
 <p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532360616/light_mix_xmv86l.gif" alt="" /></p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-light-mix/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -194,8 +192,6 @@
               <div class="post-entry">
                 
                   <p>在前面的文章中介绍了 OpenGL 的<a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/">环境光</a>和<a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/">散射光</a>，现在就是最后一个镜面光了。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-specular-light/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -227,8 +223,6 @@
               <div class="post-entry">
                 
                   <p>在前面的文章中介绍了 OpenGL 中的环境光，现在就是散射光了。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -260,8 +254,6 @@
               <div class="post-entry">
                 
                   <p>在 OpenGL 中使用光照。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -299,8 +291,6 @@
 <p>这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。</p>
 
 <p>要解决这种问题，就得使用深度测试了。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-depth-test/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -334,8 +324,6 @@
 <p>不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。</p>
 
 <p>那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -371,8 +359,6 @@
 <p>这就存在了一些重复的操作。</p>
 
 <p>在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -406,8 +392,6 @@
                   <p>在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 <code>glDrawArrays</code> 或 <code>glDrawElements</code> 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。</p>
 
 <p>可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -441,8 +425,6 @@
                   <p>在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。</p>
 
 <p>在 OpenGL 中同样有这样颜色混合的问题。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -470,8 +452,6 @@
               <div class="post-entry">
                 
                   <p>学习一下如何在 Native 代码中使用线程。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/android/android-jni-thread-operation/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -573,7 +553,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -603,8 +583,8 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -619,6 +599,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Opengl</title>
-  <meta property="og:title" content="Opengl" />
-  <meta name="twitter:title" content="Opengl" />
+  <title>OpenGL</title>
+  <meta property="og:title" content="OpenGL" />
+  <meta name="twitter:title" content="OpenGL" />
 
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/tags/opengl/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -122,7 +122,7 @@
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="page-heading">
-              <h1>#Opengl</h1>
+              <h1>#OpenGL</h1>
               <hr class="small">
             </div>
           </div>
@@ -199,8 +199,6 @@
 </tr>
 </tbody>
 </table>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -231,11 +229,9 @@
 
 <p>这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：<a href="https://glumpy.github.io/modern-gl.html">https://glumpy.github.io/modern-gl.html</a>）</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526483191/ViewFrustum_gvy6aq.png" alt="" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/ViewFrustum_gvy6aq.png" alt="" /></p>
 
 <p>当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于<code>视点</code>的，视点也就是我们这篇文章要讲到的摄像机。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -265,8 +261,6 @@
               <div class="post-entry">
                 
                   <p>接下来探索纹理了。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-texture/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -312,8 +306,6 @@ void main()
 </code></pre>
 
 <p>本篇文章就主要是对投影矩阵来分析的。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -349,8 +341,6 @@ void main()
 <p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png" /></p>
 
 <p>好好的正五边形却东倒西歪的，这就是因为我们前面的绘制都是把它当成 二维 的绘制，而在 OpenGL 中却是绘制 三维的。在二维和三维之间还有个转换，而之前为了方便学习则忽略了这个转换，现在就要开始理解它了 —— <code>坐标系统</code>！！</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -378,8 +368,6 @@ void main()
               <div class="post-entry">
                 
                   <p>在之前的一篇博客中，讲述了 OpenGL 绘制一个点的流程及相关的代码，其中关于 OpenGL 程序编译部分都是可以在其他项目中接着复用的，接下来会讲到如何去绘制其他的基本图元。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -407,8 +395,6 @@ void main()
               <div class="post-entry">
                 
                   <p>终于要开始探索奇妙的 3D 世界了，OpenGL 搞起。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-draw-point/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -504,7 +490,7 @@ void main()
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -534,8 +520,8 @@ void main()
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -550,6 +536,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

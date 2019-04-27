@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Opengl</title>
-  <meta property="og:title" content="Opengl" />
-  <meta name="twitter:title" content="Opengl" />
+  <title>OpenGL</title>
+  <meta property="og:title" content="OpenGL" />
+  <meta name="twitter:title" content="OpenGL" />
 
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/tags/opengl/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -122,7 +122,7 @@
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="page-heading">
-              <h1>#Opengl</h1>
+              <h1>#OpenGL</h1>
               <hr class="small">
             </div>
           </div>
@@ -161,8 +161,6 @@
 <p>这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。</p>
 
 <p>要解决这种问题，就得使用深度测试了。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-depth-test/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -196,8 +194,6 @@
 <p>不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。</p>
 
 <p>那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -233,8 +229,6 @@
 <p>这就存在了一些重复的操作。</p>
 
 <p>在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -268,8 +262,6 @@
                   <p>在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 <code>glDrawArrays</code> 或 <code>glDrawElements</code> 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。</p>
 
 <p>可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -303,8 +295,6 @@
                   <p>在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。</p>
 
 <p>在 OpenGL 中同样有这样颜色混合的问题。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -340,8 +330,6 @@
 <p>除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。</p>
 
 <p>关于 Alpha 透明度测试，在 用 <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">OpenGL 对视频帧内容进行替换</a> 也用实践用到过。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -369,8 +357,6 @@
               <div class="post-entry">
                 
                   <p>在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -398,8 +384,6 @@
               <div class="post-entry">
                 
                   <p>学习了一段时间的 OpenGL ES，并在公司的项目中得到了运用，也算是有了一些积累，现在分享一些当初学习的资源，大家一起来学习，共同交流进步。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-share/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -431,8 +415,6 @@
               <div class="post-entry">
                 
                   <p>在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -464,8 +446,6 @@
               <div class="post-entry">
                 
                   <p>在使用 OpenGL 绘制时，我们最多绘制的是一些简单的图形，比如三角形、圆形、立方体等，因为这些图形的顶点数量不多，还是可以手动的写出那些顶点的，可要是绘制一些复杂图形该怎么办呢？</p>
-
-<p></p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -565,7 +545,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -595,8 +575,8 @@
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -611,6 +591,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 

@@ -10,22 +10,16 @@
   <meta property="og:title" content="用 OpenGL 对视频帧内容进行替换" />
   <meta name="twitter:title" content="用 OpenGL 对视频帧内容进行替换" />
 
-  <meta name="description" content="在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？
-
-">
-  <meta property="og:description" content="在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？
-
-">
-  <meta name="twitter:description" content="在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？
-
-">
+  <meta name="description" content="在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？">
+  <meta property="og:description" content="在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？">
+  <meta name="twitter:description" content="在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <link rel="canonical" href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -133,7 +127,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1531388956/code/sunset-boat-sea-ship-37730.jpg" data-img-desc-1="ship"></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/sunset-boat-sea-ship-37730.jpg" data-img-desc-1="ship"></div>
   
 
   <header class="header-section has-img">
@@ -228,8 +222,6 @@
         
         <p>在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？</p>
 
-<p></p>
-
 <p>首先要明确的是，视频是由一帧一帧图像组成的，它利用了人眼的视觉暂留效应，一秒内播放足够帧数的图片才会感觉到是连续的。</p>
 
 <p>而想要对视频的内容进行替换，也就是要将每一帧图像的内容都进行替换了，一般来说这应该是属于视频后期处理了，用专业的 AE （Adobe After Effects）软件来处理会比较好。</p>
@@ -250,11 +242,11 @@
 
 <p>效果如下：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531377132/code/frame_replace.png" alt="Sketch 设计图" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/frame_replace.png" alt="Sketch 设计图" /></p>
 
 <p>代码实现的效果，左上方的内容被右上方内容替换了，最后成了右下角的图片。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531384765/code/WechatIMG57.jpg" alt="软件实现图" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/WechatIMG57.jpg" alt="软件实现图" /></p>
 
 <h2 id="准备工作">准备工作</h2>
 
@@ -266,11 +258,11 @@
 
 <p>准备一张待替换内容：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531377368/code/replace_origin.png" alt="待替换图片" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/replace_origin.png" alt="待替换图片" /></p>
 
 <p>然后再切一张同等大小，并把中间圆形位置的图片替换成想要的图片，其他周边内容设置透明度为 0 。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/c_scale,h_600/v1531377364/code/replace_shape.png" alt="带透明度的遮罩图" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/replace_shape.png" alt="带透明度的遮罩图" /></p>
 
 <p>接下来的事情就是将两张图片融合，分别介绍基于着色器和颜色混合来替换内容。</p>
 
@@ -406,7 +398,7 @@ void main() {
 
 <p>学习的路上是需要交流和分享的，这里有个二维码，如果你对 OpenGL ES 感兴趣欢迎一起来交流讨论。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1531382740/code/WechatIMG432.jpg" alt="加群讨论" /></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/WechatIMG432.jpg" alt="加群讨论" /></p>
 
 <p>要是二维码过期了，加微信 ezglume 好友，备注 OpenGL ，拉你入群~</p>
         
@@ -447,7 +439,7 @@ void main() {
 
                   <h4>加入知识星球，一起交流学习，答疑解惑~~~</h4>
 
-                  <img  width = 780px; height = 352px; src="https://ws1.sinaimg.cn/large/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
+                  <img  width = 780px; height = 352px; src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1g1r2rhpc1uj210q0ggwnf.jpg">
 
                  
 
@@ -539,7 +531,7 @@ void main() {
         
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -636,7 +628,7 @@ void main() {
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.31.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -666,8 +658,8 @@ void main() {
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -682,6 +674,12 @@ MathJax.Hub.Config({
 
 
 
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
 
 
 
