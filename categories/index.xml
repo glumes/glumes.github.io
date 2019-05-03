@@ -8,10 +8,19 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Sun, 07 Apr 2019 15:39:14 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 02 May 2019 21:21:40 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Life</title>
+      <link>https://glumes.com/categories/life/</link>
+      <pubDate>Thu, 02 May 2019 21:21:40 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/categories/life/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Vulkan</title>
@@ -32,7 +41,7 @@
     </item>
     
     <item>
-      <title>ffmpeg</title>
+      <title>FFmpeg</title>
       <link>https://glumes.com/categories/ffmpeg/</link>
       <pubDate>Wed, 19 Sep 2018 23:12:45 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -46,15 +55,6 @@
       <pubDate>Sun, 09 Sep 2018 15:20:42 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/categories/opengl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Life</title>
-      <link>https://glumes.com/categories/life/</link>
-      <pubDate>Thu, 04 Jan 2018 14:20:04 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/categories/life/</guid>
       <description></description>
     </item>
     
