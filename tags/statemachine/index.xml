@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>StateMachine on Glumes Blog</title>
+    <title>Statemachine on Glumes Blog</title>
     <link>https://glumes.com/tags/statemachine/</link>
-    <description>Recent content in StateMachine on Glumes Blog</description>
+    <description>Recent content in Statemachine on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
