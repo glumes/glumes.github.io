@@ -443,14 +443,14 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/android/</loc>
-    <lastmod>2018-11-19T15:58:17+08:00</lastmod>
+    <loc>https://glumes.com/tags/android/</loc>
+    <lastmod>2018-07-25T13:36:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/android/</loc>
-    <lastmod>2018-07-25T13:36:50+08:00</lastmod>
+    <loc>https://glumes.com/categories/android/</loc>
+    <lastmod>2018-11-19T15:58:17+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -497,13 +497,13 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/docker/</loc>
+    <loc>https://glumes.com/tags/docker/</loc>
     <lastmod>2017-12-22T16:24:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/docker/</loc>
+    <loc>https://glumes.com/categories/docker/</loc>
     <lastmod>2017-12-22T16:24:03+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -521,14 +521,14 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/ffmpeg/</loc>
-    <lastmod>2018-09-19T23:12:45+08:00</lastmod>
+    <loc>https://glumes.com/tags/ffmpeg/</loc>
+    <lastmod>2017-12-22T16:05:30+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/ffmpeg/</loc>
-    <lastmod>2017-12-22T16:05:30+08:00</lastmod>
+    <loc>https://glumes.com/categories/ffmpeg/</loc>
+    <lastmod>2018-09-19T23:12:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -575,14 +575,14 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/life/</loc>
-    <lastmod>2019-05-02T21:21:40+08:00</lastmod>
+    <loc>https://glumes.com/tags/life/</loc>
+    <lastmod>2018-01-04T14:20:04+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/life/</loc>
-    <lastmod>2018-01-04T14:20:04+08:00</lastmod>
+    <loc>https://glumes.com/categories/life/</loc>
+    <lastmod>2019-05-02T21:21:40+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -605,25 +605,25 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/opencv/</loc>
-    <lastmod>2017-12-22T09:53:04+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://glumes.com/tags/opencv/</loc>
     <lastmod>2017-12-22T09:53:04+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/opengl/</loc>
-    <lastmod>2018-09-09T15:20:42+08:00</lastmod>
+    <loc>https://glumes.com/categories/opencv/</loc>
+    <lastmod>2017-12-22T09:53:04+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/tags/opengl/</loc>
+    <lastmod>2018-09-09T15:20:42+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/opengl/</loc>
     <lastmod>2018-09-09T15:20:42+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -635,14 +635,14 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/python/</loc>
-    <lastmod>2017-12-22T16:10:57+08:00</lastmod>
+    <loc>https://glumes.com/tags/python/</loc>
+    <lastmod>2019-05-02T21:21:40+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/python/</loc>
-    <lastmod>2019-05-02T21:21:40+08:00</lastmod>
+    <loc>https://glumes.com/categories/python/</loc>
+    <lastmod>2017-12-22T16:10:57+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -683,13 +683,13 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/vulkan/</loc>
+    <loc>https://glumes.com/tags/vulkan/</loc>
     <lastmod>2019-04-07T15:39:14+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/vulkan/</loc>
+    <loc>https://glumes.com/categories/vulkan/</loc>
     <lastmod>2019-04-07T15:39:14+08:00</lastmod>
     <priority>0</priority>
   </url>

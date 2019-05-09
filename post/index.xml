@@ -746,7 +746,7 @@ void main()
       <guid>https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/</guid>
       <description>&lt;p&gt;在前面绘制基本图形中，遇到了很明显的问题，圆形不像圆形，正多边形不像正多边形？就像下面图形一样：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png&#34; alt=&#34;http://7xqe3m.com1.z0.glb.clouddn.com/blog_opengl_result_five.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/08/blog_opengl_five_start.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;好好的正五边形却东倒西歪的，这就是因为我们前面的绘制都是把它当成 二维 的绘制，而在 OpenGL 中却是绘制 三维的。在二维和三维之间还有个转换，而之前为了方便学习则忽略了这个转换，现在就要开始理解它了 —— &lt;code&gt;坐标系统&lt;/code&gt;！！&lt;/p&gt;</description>
     </item>
