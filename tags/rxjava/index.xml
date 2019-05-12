@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rxjava on Glumes Blog</title>
+    <title>RxJava on Glumes Blog</title>
     <link>https://glumes.com/tags/rxjava/</link>
-    <description>Recent content in Rxjava on Glumes Blog</description>
+    <description>Recent content in RxJava on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>

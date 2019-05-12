@@ -8,143 +8,26 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Wed, 25 Jul 2018 13:36:50 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 02 May 2019 21:21:40 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Android</title>
-      <link>https://glumes.com/tags/android/</link>
-      <pubDate>Wed, 25 Jul 2018 13:36:50 +0800</pubDate>
+      <title>Python</title>
+      <link>https://glumes.com/tags/python/</link>
+      <pubDate>Thu, 02 May 2019 21:21:40 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/android/</guid>
+      <guid>https://glumes.com/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Architecture</title>
-      <link>https://glumes.com/tags/architecture/</link>
-      <pubDate>Wed, 31 Jan 2018 15:42:28 +0800</pubDate>
+      <title>Vulkan</title>
+      <link>https://glumes.com/tags/vulkan/</link>
+      <pubDate>Sun, 07 Apr 2019 15:39:14 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/architecture/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>C&#43;&#43;</title>
-      <link>https://glumes.com/tags/c&#43;&#43;/</link>
-      <pubDate>Mon, 19 Nov 2018 10:23:00 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/c&#43;&#43;/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Camera</title>
-      <link>https://glumes.com/tags/camera/</link>
-      <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/camera/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Cmake</title>
-      <link>https://glumes.com/tags/cmake/</link>
-      <pubDate>Wed, 12 Sep 2018 09:19:09 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/cmake/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Crack</title>
-      <link>https://glumes.com/tags/crack/</link>
-      <pubDate>Wed, 31 Jan 2018 15:47:59 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/crack/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dagger2</title>
-      <link>https://glumes.com/tags/dagger2/</link>
-      <pubDate>Fri, 22 Dec 2017 10:47:52 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/dagger2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Docker</title>
-      <link>https://glumes.com/tags/docker/</link>
-      <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/docker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Egl</title>
-      <link>https://glumes.com/tags/egl/</link>
-      <pubDate>Sun, 02 Sep 2018 21:26:55 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/egl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Fbo</title>
-      <link>https://glumes.com/tags/fbo/</link>
-      <pubDate>Tue, 04 Sep 2018 22:28:11 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/fbo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ffmpeg</title>
-      <link>https://glumes.com/tags/ffmpeg/</link>
-      <pubDate>Fri, 22 Dec 2017 16:05:30 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/ffmpeg/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Framework</title>
-      <link>https://glumes.com/tags/framework/</link>
-      <pubDate>Fri, 22 Dec 2017 15:40:19 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/framework/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Glsl</title>
-      <link>https://glumes.com/tags/glsl/</link>
-      <pubDate>Sun, 09 Sep 2018 15:20:42 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/glsl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>H264</title>
-      <link>https://glumes.com/tags/h264/</link>
-      <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/h264/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Inflater</title>
-      <link>https://glumes.com/tags/inflater/</link>
-      <pubDate>Fri, 22 Dec 2017 15:55:08 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/inflater/</guid>
+      <guid>https://glumes.com/tags/vulkan/</guid>
       <description></description>
     </item>
     
@@ -158,7 +41,151 @@
     </item>
     
     <item>
-      <title>Jni</title>
+      <title>C&#43;&#43;</title>
+      <link>https://glumes.com/tags/c&#43;&#43;/</link>
+      <pubDate>Mon, 19 Nov 2018 10:23:00 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>STL</title>
+      <link>https://glumes.com/tags/stl/</link>
+      <pubDate>Mon, 19 Nov 2018 10:23:00 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/stl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Camera</title>
+      <link>https://glumes.com/tags/camera/</link>
+      <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/camera/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>H264</title>
+      <link>https://glumes.com/tags/h264/</link>
+      <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/h264/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MediaCodec</title>
+      <link>https://glumes.com/tags/mediacodec/</link>
+      <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/mediacodec/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>YUV</title>
+      <link>https://glumes.com/tags/yuv/</link>
+      <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/yuv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RGB</title>
+      <link>https://glumes.com/tags/rgb/</link>
+      <pubDate>Wed, 19 Sep 2018 23:12:45 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/rgb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CMake</title>
+      <link>https://glumes.com/tags/cmake/</link>
+      <pubDate>Wed, 12 Sep 2018 09:19:09 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/cmake/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NDK</title>
+      <link>https://glumes.com/tags/ndk/</link>
+      <pubDate>Wed, 12 Sep 2018 09:19:09 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/ndk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OkHttp</title>
+      <link>https://glumes.com/tags/okhttp/</link>
+      <pubDate>Tue, 11 Sep 2018 22:13:45 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/okhttp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GLSL</title>
+      <link>https://glumes.com/tags/glsl/</link>
+      <pubDate>Sun, 09 Sep 2018 15:20:42 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/glsl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OpenGL</title>
+      <link>https://glumes.com/tags/opengl/</link>
+      <pubDate>Sun, 09 Sep 2018 15:20:42 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/opengl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Retrofit</title>
+      <link>https://glumes.com/tags/retrofit/</link>
+      <pubDate>Sun, 09 Sep 2018 14:54:57 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/retrofit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>FBO</title>
+      <link>https://glumes.com/tags/fbo/</link>
+      <pubDate>Tue, 04 Sep 2018 22:28:11 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/fbo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EGL</title>
+      <link>https://glumes.com/tags/egl/</link>
+      <pubDate>Sun, 02 Sep 2018 21:26:55 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/egl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Android</title>
+      <link>https://glumes.com/tags/android/</link>
+      <pubDate>Wed, 25 Jul 2018 13:36:50 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JNI</title>
       <link>https://glumes.com/tags/jni/</link>
       <pubDate>Wed, 25 Jul 2018 13:36:50 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -176,6 +203,42 @@
     </item>
     
     <item>
+      <title>crack</title>
+      <link>https://glumes.com/tags/crack/</link>
+      <pubDate>Wed, 31 Jan 2018 15:47:59 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/crack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>architecture</title>
+      <link>https://glumes.com/tags/architecture/</link>
+      <pubDate>Wed, 31 Jan 2018 15:42:28 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/architecture/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RxJava</title>
+      <link>https://glumes.com/tags/rxjava/</link>
+      <pubDate>Wed, 31 Jan 2018 15:26:16 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/rxjava/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>StateMachine</title>
+      <link>https://glumes.com/tags/statemachine/</link>
+      <pubDate>Wed, 31 Jan 2018 15:20:14 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/statemachine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Life</title>
       <link>https://glumes.com/tags/life/</link>
       <pubDate>Thu, 04 Jan 2018 14:20:04 +0800</pubDate>
@@ -185,29 +248,47 @@
     </item>
     
     <item>
-      <title>Mediacodec</title>
-      <link>https://glumes.com/tags/mediacodec/</link>
-      <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
+      <title>Docker</title>
+      <link>https://glumes.com/tags/docker/</link>
+      <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/mediacodec/</guid>
+      <guid>https://glumes.com/tags/docker/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Ndk</title>
-      <link>https://glumes.com/tags/ndk/</link>
-      <pubDate>Wed, 12 Sep 2018 09:19:09 +0800</pubDate>
+      <title>FFmpeg</title>
+      <link>https://glumes.com/tags/ffmpeg/</link>
+      <pubDate>Fri, 22 Dec 2017 16:05:30 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/ndk/</guid>
+      <guid>https://glumes.com/tags/ffmpeg/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Okhttp</title>
-      <link>https://glumes.com/tags/okhttp/</link>
-      <pubDate>Tue, 11 Sep 2018 22:13:45 +0800</pubDate>
+      <title>Inflater</title>
+      <link>https://glumes.com/tags/inflater/</link>
+      <pubDate>Fri, 22 Dec 2017 15:55:08 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/okhttp/</guid>
+      <guid>https://glumes.com/tags/inflater/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Framework</title>
+      <link>https://glumes.com/tags/framework/</link>
+      <pubDate>Fri, 22 Dec 2017 15:40:19 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/framework/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dagger2</title>
+      <link>https://glumes.com/tags/dagger2/</link>
+      <pubDate>Fri, 22 Dec 2017 10:47:52 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/dagger2/</guid>
       <description></description>
     </item>
     
@@ -217,87 +298,6 @@
       <pubDate>Fri, 22 Dec 2017 09:53:04 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/tags/opencv/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Opengl</title>
-      <link>https://glumes.com/tags/opengl/</link>
-      <pubDate>Sun, 09 Sep 2018 15:20:42 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/opengl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://glumes.com/tags/python/</link>
-      <pubDate>Thu, 02 May 2019 21:21:40 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Retrofit</title>
-      <link>https://glumes.com/tags/retrofit/</link>
-      <pubDate>Sun, 09 Sep 2018 14:54:57 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/retrofit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rgb</title>
-      <link>https://glumes.com/tags/rgb/</link>
-      <pubDate>Wed, 19 Sep 2018 23:12:45 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/rgb/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rxjava</title>
-      <link>https://glumes.com/tags/rxjava/</link>
-      <pubDate>Wed, 31 Jan 2018 15:26:16 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/rxjava/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Statemachine</title>
-      <link>https://glumes.com/tags/statemachine/</link>
-      <pubDate>Wed, 31 Jan 2018 15:20:14 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/statemachine/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Stl</title>
-      <link>https://glumes.com/tags/stl/</link>
-      <pubDate>Mon, 19 Nov 2018 10:23:00 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/stl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Vulkan</title>
-      <link>https://glumes.com/tags/vulkan/</link>
-      <pubDate>Sun, 07 Apr 2019 15:39:14 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/vulkan/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Yuv</title>
-      <link>https://glumes.com/tags/yuv/</link>
-      <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/yuv/</guid>
       <description></description>
     </item>
     

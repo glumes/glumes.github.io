@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ffmpeg on Glumes Blog</title>
+    <title>FFmpeg on Glumes Blog</title>
     <link>https://glumes.com/categories/ffmpeg/</link>
-    <description>Recent content in Ffmpeg on Glumes Blog</description>
+    <description>Recent content in FFmpeg on Glumes Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
