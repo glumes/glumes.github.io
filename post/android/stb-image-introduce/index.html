@@ -6,55 +6,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>博客图床迁移记</title>
-  <meta property="og:title" content="博客图床迁移记" />
-  <meta name="twitter:title" content="博客图床迁移记" />
+  <title>简单易用的图像解码库介绍 —— stb_image</title>
+  <meta property="og:title" content="简单易用的图像解码库介绍 —— stb_image" />
+  <meta name="twitter:title" content="简单易用的图像解码库介绍 —— stb_image" />
 
-  <meta name="description" content="
-微博图床一时爽，迁移火葬场
+  <meta name="description" content="说到图像解码库，最容易想起的就是 libpng 和 libjpeg 这两个老牌图像解码库了。
 
+libpng 和 libjpeg 分别各自对应 png 和 jpeg 两种图像格式。这两种格式的区别如下：
 
-前几天在群里看到说新浪微博图床挂掉了，图床上的图片链接单独访问还可以，但是在博客文章上就显示不出来了。
+png 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。
 
-去自己网站上看一下，果然，连博客首页图片都加载不出来了，极大地影响了阅读体验呀。
+jpg 不支持透明度，有损压缩的图片格式，有损压缩会使得原始图片数据质量下载，也因此它占用的内存小，在网页应用中加速速度快。
 
-还好图片链接是可以访问的，这就意味着图片还在，还来得及做迁移和备份。
+要想在工程中同时解码 png 和 jpeg 格式图片，就必须同时引用这两种库，而且还得经过一系列编译步骤才行。
 
-回顾之前用了好多免(hao)费(yang)图(mao)床，从最早的 七牛，到 Cloudinary，再到 微博图床。七牛由于是临时域名，没有及时备份图片，导致图都没了，而 Cloudinary 和 微博图床 倒还是可以继续访问的。不过这种薅羊毛总不是个办法，万一服务商政策变了，又得再迁移图片了。
+在这里，介绍一个简单易用的图像库：stb_image 。Github 地址为：https://github.com/nothings/stb ，目前已经有了 9600&#43; Star 。它的使用非常简单，看看 README 可能你就会了。">
+  <meta property="og:description" content="说到图像解码库，最容易想起的就是 libpng 和 libjpeg 这两个老牌图像解码库了。
 
-果然，免费的才是最贵的。">
-  <meta property="og:description" content="
-微博图床一时爽，迁移火葬场
+libpng 和 libjpeg 分别各自对应 png 和 jpeg 两种图像格式。这两种格式的区别如下：
 
+png 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。
 
-前几天在群里看到说新浪微博图床挂掉了，图床上的图片链接单独访问还可以，但是在博客文章上就显示不出来了。
+jpg 不支持透明度，有损压缩的图片格式，有损压缩会使得原始图片数据质量下载，也因此它占用的内存小，在网页应用中加速速度快。
 
-去自己网站上看一下，果然，连博客首页图片都加载不出来了，极大地影响了阅读体验呀。
+要想在工程中同时解码 png 和 jpeg 格式图片，就必须同时引用这两种库，而且还得经过一系列编译步骤才行。
 
-还好图片链接是可以访问的，这就意味着图片还在，还来得及做迁移和备份。
+在这里，介绍一个简单易用的图像库：stb_image 。Github 地址为：https://github.com/nothings/stb ，目前已经有了 9600&#43; Star 。它的使用非常简单，看看 README 可能你就会了。">
+  <meta name="twitter:description" content="说到图像解码库，最容易想起的就是 libpng 和 libjpeg 这两个老牌图像解码库了。
 
-回顾之前用了好多免(hao)费(yang)图(mao)床，从最早的 七牛，到 Cloudinary，再到 微博图床。七牛由于是临时域名，没有及时备份图片，导致图都没了，而 Cloudinary 和 微博图床 倒还是可以继续访问的。不过这种薅羊毛总不是个办法，万一服务商政策变了，又得再迁移图片了。
+libpng 和 libjpeg 分别各自对应 png 和 jpeg 两种图像格式。这两种格式的区别如下：
 
-果然，免费的才是最贵的。">
-  <meta name="twitter:description" content="
-微博图床一时爽，迁移火葬场
+png 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。
 
-
-前几天在群里看到说新浪微博图床挂掉了，图床上的图片链接单独访问还可以，但是在博客文章上就显示不出来了。
-
-去自己网站上看一下，果然，连博客首页图片都加载不出来了，极大地影响了阅读体验呀。
-
-还好图片链接是可以访问的，这就意味着图片还在，还来得及做迁移和备份。
-
-回顾之前用了好多免(hao)费(yang)图(mao)床，从最早的 七牛，到 Cloudinary， …">
+jpg 不支持透明度，有损压缩的图片格 …">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/life/blog-image-migrate/" />
+  <meta property="og:url" content="https://glumes.com/post/android/stb-image-introduce/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.55.0" />
-  <link rel="canonical" href="https://glumes.com/post/life/blog-image-migrate/" />
+  <link rel="canonical" href="https://glumes.com/post/android/stb-image-introduce/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
@@ -168,7 +160,7 @@
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/05/02/WechatIMG513.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/05/12/beautiful-environment-high-2246822.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -179,11 +171,11 @@
           <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
               <div class="post-heading">
-                <h1>博客图床迁移记</h1>
+                <h1>简单易用的图像解码库介绍 —— stb_image</h1>
                   
                   
                     <span class="post-meta">
-  Posted on May 2, 2019
+  Posted on May 12, 2019
   
 </span>
 
@@ -202,11 +194,11 @@
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-              <h1>博客图床迁移记</h1>
+              <h1>简单易用的图像解码库介绍 —— stb_image</h1>
                 
                 
                   <span class="post-meta">
-  Posted on May 2, 2019
+  Posted on May 12, 2019
   
 </span>
 
@@ -233,7 +225,7 @@
           
           <h5 id="tags" style="margin-top: 0px;">标签:
             
-                <a href="https://glumes.com/tags/python/">Python</a> &nbsp;
+                <a href="https://glumes.com/tags/stb_image/">stb_image</a> &nbsp;
             
           </h5>
           
@@ -247,195 +239,203 @@
 <ul>
 <li>
 <ul>
-<li><a href="#利用-vps-搭建图床">利用 VPS 搭建图床</a></li>
-<li><a href="#自动迁移图片到-chevernote-图床">自动迁移图片到 Chevernote 图床</a></li>
-<li><a href="#不足之处">不足之处</a></li>
+<li><a href="#stb-image">stb_image</a></li>
+<li><a href="#sbt-image-resize">sbt_image_resize</a></li>
+<li><a href="#stb-image-write">stb_image_write</a></li>
+<li><a href="#总结">总结</a></li>
+<li><a href="#参考">参考</a></li>
 </ul></li>
 </ul>
 </nav>
 </aside>
 
         
-        <blockquote>
-<p>微博图床一时爽，迁移火葬场</p>
+        <p>说到图像解码库，最容易想起的就是 <code>libpng</code> 和 <code>libjpeg</code> 这两个老牌图像解码库了。</p>
+
+<p><code>libpng</code> 和 <code>libjpeg</code> 分别各自对应 <code>png</code> 和 <code>jpeg</code> 两种图像格式。这两种格式的区别如下：</p>
+
+<p><code>png</code> 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。</p>
+
+<p><code>jpg</code> 不支持透明度，有损压缩的图片格式，有损压缩会使得原始图片数据质量下载，也因此它占用的内存小，在网页应用中加速速度快。</p>
+
+<p>要想在工程中同时解码 <code>png</code> 和 <code>jpeg</code> 格式图片，就必须同时引用这两种库，而且还得经过一系列编译步骤才行。</p>
+
+<p>在这里，介绍一个简单易用的图像库：<code>stb_image</code> 。Github 地址为：<a href="https://github.com/nothings/stb">https://github.com/nothings/stb</a> ，目前已经有了 9600+ Star 。它的使用非常简单，看看 README 可能你就会了。</p>
+
+<p>看看它的源码，你会发现全是 <code>.h</code> 头文件。这就是它的强大之处了，仅需在工程中加入头文件就可以解析图像了（实际上是函数实现等内容都放在头文件了而已）。</p>
+
+<p>重点关注如下三个头文件：</p>
+
+<ul>
+<li>stb_image.h
+
+<ul>
+<li>用于图像加载</li>
+</ul></li>
+<li>stb_image_write.h
+
+<ul>
+<li>用于写入图像文件</li>
+</ul></li>
+<li>stb_image_resize.h
+
+<ul>
+<li>用于改变图像尺寸</li>
+</ul></li>
+</ul>
+
+<p>下面就开始实践吧，先给出一个完整的例子：</p>
+
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+#define STB_IMAGE_IMPLEMENTATION
+#include &quot;stb_image.h&quot;
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include &quot;stb_image_write.h&quot;
+#define STB_IMAGE_RESIZE_IMPLEMENTATION
+#include &quot;stb_image_resize.h&quot;
+#include &lt;string&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int main() {
+    std::cout &lt;&lt; &quot;Hello, STB_Image&quot; &lt;&lt; std::endl;
+
+    string inputPath = &quot;/Users/glumes/Pictures/input.png&quot;;
+    int iw, ih, n;
+    
+    // 加载图片获取宽、高、颜色通道信息
+    unsigned char *idata = stbi_load(inputPath.c_str(), &amp;iw, &amp;ih, &amp;n, 0);
+
+    int ow = iw / 2;
+    int oh = ih / 2;
+    auto *odata = (unsigned char *) malloc(ow * oh * n);
+    
+    // 改变图片尺寸
+    stbir_resize(idata, iw, ih, 0, odata, ow, oh, 0, STBIR_TYPE_UINT8, n, STBIR_ALPHA_CHANNEL_NONE, 0,
+                 STBIR_EDGE_CLAMP, STBIR_EDGE_CLAMP,
+                 STBIR_FILTER_BOX, STBIR_FILTER_BOX,
+                 STBIR_COLORSPACE_SRGB, nullptr
+    );
+
+    string outputPath = &quot;/Users/glumes/Pictures/output.png&quot;;
+    // 写入图片
+    stbi_write_png(outputPath.c_str(), ow, oh, n, odata, 0);
+
+    stbi_image_free(idata);
+    stbi_image_free(odata);
+    return 0;
+}
+</code></pre>
+
+<p>这个例子很简单也很全面，主要就是加载了一张图片，并将它的宽高都缩小一倍，并保存缩小后图片。</p>
+
+<h2 id="stb-image">stb_image</h2>
+
+<p>首先是调用 <code>stbi_load</code> 方法去加载图像数据，并获取相关信息。传入的参数除了图片文件地址，还有宽、高、颜色通道信息的引用。</p>
+
+<p>变量 <code>n</code> 就代表图片的颜色通道值，通常有如下的情况：</p>
+
+<ul>
+<li>1 ： 灰度图</li>
+<li>2 ： 灰度图加透明度<br /></li>
+<li>3 ： 红绿蓝 RGB 三色图</li>
+<li>4 ： 红绿蓝加透明度 RGBA 图</li>
+</ul>
+
+<p>返回的结果就是图片像素数据的指针了。</p>
+
+<p><code>stbi_load</code> 不仅仅支持 <code>png</code> 格式，把上面例子中的图片改成 <code>jpg</code> 格式后缀的依旧可行。</p>
+
+<p>它支持的所有格式如下：</p>
+
+<ul>
+<li>png</li>
+<li>jpg</li>
+<li>tga</li>
+<li>bmp</li>
+<li>psd</li>
+<li>gif</li>
+<li>hdr</li>
+<li>pic</li>
+</ul>
+
+<p>格式虽多，不过一般用到 png 和 jpg 就好了。</p>
+
+<p>除了从文件加载图片，stb_image 还支持从内存中加载图片，通过该方法 <code>stbi_load_from_memory</code> ，在后续文章中会用到它的。</p>
+
+<p>加载完图片之后，stb_image 还提供了相应的释放方法 <code>stbi_image_free</code>，实际上就是把 <code>free</code> 封装了一下而已。</p>
+
+<h2 id="sbt-image-resize">sbt_image_resize</h2>
+
+<p>加载完图片像素数据之后，就可以通过 <code>stbir_resize</code> 方法改变图片的尺寸。</p>
+
+<p><code>stbir_resize</code> 方法参数有很多：</p>
+
+<pre><code class="language-cpp">STBIRDEF int stbir_resize(const void *input_pixels , int input_w , int input_h , int input_stride_in_bytes,
+                             void *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
+                             stbir_datatype datatype,
+                             int num_channels, int alpha_channel, int flags,
+                             // stb 中提供了多种模式，但是修改后并没有见很明显的效果
+                             stbir_edge edge_mode_horizontal, stbir_edge edge_mode_vertical, 
+                             stbir_filter filter_horizontal,  stbir_filter filter_vertical,
+                             stbir_colorspace space, void *alloc_context)
+</code></pre>
+
+<p><code>stbir_edge</code> 和 <code>stbir_filter</code> 类型的参数，stb_image_resize 提供了多种类型:</p>
+
+<pre><code class="language-cpp">typedef enum
+{
+    STBIR_EDGE_CLAMP   = 1,
+    STBIR_EDGE_REFLECT = 2,
+    STBIR_EDGE_WRAP    = 3,
+    STBIR_EDGE_ZERO    = 4,
+} stbir_edge;
+
+typedef enum
+{
+    STBIR_FILTER_DEFAULT      = 0,  // use same filter type that easy-to-use API chooses
+    STBIR_FILTER_BOX          = 1,  // A trapezoid w/1-pixel wide ramps, same result as box for integer scale ratios
+    STBIR_FILTER_TRIANGLE     = 2,  // On upsampling, produces same results as bilinear texture filtering
+    STBIR_FILTER_CUBICBSPLINE = 3,  // The cubic b-spline (aka Mitchell-Netrevalli with B=1,C=0), gaussian-esque
+    STBIR_FILTER_CATMULLROM   = 4,  // An interpolating cubic spline
+    STBIR_FILTER_MITCHELL     = 5,  // Mitchell-Netrevalli filter with B=1/3, C=1/3
+} stbir_filter;
+</code></pre>
+
+<p>但实际上调整不同类型组合得到的图片并没有太多的变化 ┑(￣Д ￣)┍。</p>
+
+<p>真正有用的可能还是前面那几个参数，指定了要将图片缩放后的宽高数据。</p>
+
+<h2 id="stb-image-write">stb_image_write</h2>
+
+<p>最后就是调用 <code>stbi_write_png</code> 方法将像素数据写入文件中，除此之外，stb_image_write 还提供了 <code>stbi_write_jpg</code> 方法来保存 jpg 格式图片。</p>
+
+<p>根据两者格式的不同，方法调用的参数也是不一样的。</p>
+
+<pre><code class="language-cpp">int stbi_write_jpg(char const *filename, int x, int y, int comp, const void *data, int quality)
+
+int stbi_write_png(char const *filename, int x, int y, int comp, const void *data, int stride_bytes)
+</code></pre>
+
+<h2 id="总结">总结</h2>
+
+<p>以上就是关于 stb_image 图像解码库的小介绍。</p>
+
+<p>总的来说，它还是挺简单易用的，在平常做一些 Demo 以及需要快速实现、验证功能的情况下都可以考虑考虑。</p>
+
+<p>但是在一些大型的项目中，还是要深思熟虑一些，从性能方面考虑，它肯定不如老牌的图像解码库了，像 <code>libjpeg-turbo</code> 解码用到了 <code>NEON</code> 这样 SIMD （单指令流多数据流）的操作，才是大型项目的首选了。</p>
+
+<h2 id="参考">参考</h2>
+
+<p>关于 stb_image 在 Android 中的使用实践，可以参考我的项目：</p>
+
+<blockquote>
+<p><a href="https://github.com/glumes/InstantGLSL">https://github.com/glumes/InstantGLSL</a></p>
 </blockquote>
-
-<p>前几天在群里看到说新浪微博图床挂掉了，图床上的图片链接单独访问还可以，但是在博客文章上就显示不出来了。</p>
-
-<p>去自己网站上看一下，果然，连博客首页图片都加载不出来了，极大地影响了阅读体验呀。</p>
-
-<p>还好图片链接是可以访问的，这就意味着图片还在，还来得及做迁移和备份。</p>
-
-<p>回顾之前用了好多免(hao)费(yang)图(mao)床，从最早的 <a href="https://www.qiniu.com/">七牛</a>，到 <a href="https://cloudinary.com/">Cloudinary</a>，再到 微博图床。七牛由于是临时域名，没有及时备份图片，导致图都没了，而 <a href="https://cloudinary.com/">Cloudinary</a> 和 微博图床 倒还是可以继续访问的。不过这种薅羊毛总不是个办法，万一服务商政策变了，又得再迁移图片了。</p>
-
-<p>果然，免费的才是最贵的。</p>
-
-<h2 id="利用-vps-搭建图床">利用 VPS 搭建图床</h2>
-
-<p>考虑到还有个 VPS 主机每个月都在续费呢，并且 15 G 的存储空间和 1T 的流量也完全够用了，就在 VPS 上面搭建 <a href="https://image.glumes.com/">自己的图床</a> 。</p>
-
-<p>正式搭建之前，还有一些准备工作，首先就是要有自己的 VPS ，如果你也想使用 <a href="https://www.vultr.com/">Vultr</a> 的主机，可以通过如下的链接进行注册，获得 $50 的优惠~~~</p>
-
-<pre><code class="language-sh">https://www.vultr.com/?ref=7845784-4F
-</code></pre>
-
-<p>将自己的域名解析到服务器地址，同时还需要安装配置好 <code>Nginx</code>、<code>PHP</code> 等环境。</p>
-
-<p>服务器的配置可以使用 <a href="https://lnmp.org/">LNMP一键安装包</a> 一键安装包。</p>
-
-<p>域名的话，我在万网注册的，但是 DSN 解析使用的是 <a href="https://www.cloudflare.com/">cloudflare</a> ，这样就可以使用 <code>HTTPS</code> 了，由于我是在子域名上搭建的图床程序，所以还得在 <a href="https://www.cloudflare.com/">cloudflare</a> 中添加子域名的解析才行。</p>
-
-<p>完成以上工作，就可以利用 <a href="https://chevereto.com/">Chevernote</a> 程序来搭建图床了。</p>
-
-<p>Chevernote 的安装过程还是比较简单的，基本上按照步骤就好了，中间可能要设置一些权限问题和 <code>Nginx</code> 配置。</p>
-
-<h2 id="自动迁移图片到-chevernote-图床">自动迁移图片到 Chevernote 图床</h2>
-
-<p>安装好 Chevernote 之后就可以开始将图片迁移到图床上了。</p>
-
-<p>Chevernote 有个 API 接口，正好可以通过图片链接，将图片上传到图床上，通过这个接口就能搞定迁移了，前提的要拿到自己的 api key 。</p>
-
-<pre><code class="language-sh">// 通过该接口上传图片
-GET http://mysite.com/api/1/upload/?key=12345&amp;source=http://somewebsite/someimage.jpg&amp;format=json
-</code></pre>
-
-<p>简单地写了个 Python 脚本来实现自动替换：</p>
-
-<pre><code class="language-python">import os
-import re
-import requests
-
-class ReplaceImage:
-
-    path = ''
-    lineNum = 0
-    s = r'http[s]?://(?:ws1.sinaimg.cn|res.cloudinary.com)/.*?(?:jpg|png)'
-    subpath = ''
-    key=''
-    upload_url = ''
-    failednum = 0
-    payload = {'key': key, 'source': upload_url, 'format': 'json'}
-
-    website = 'https://image.glumes.com/api/1/upload/'
-
-    def __init__(self):
-        self.url_re = re.compile(self.s)
-
-    def search(self, path,key):
-        self.path = path
-        self.handleDir(path)
-        self.key = key
-
-    def handleDir(self, path):
-        dirs = os.listdir(path)
-        for d in dirs:
-            subpath = os.path.join(path, d)
-            if os.path.isfile(subpath) and subpath.endswith(&quot;.md&quot;):
-                self.handleFile(subpath)
-            elif os.path.isdir(subpath):
-                self.handleDir(subpath)
-
-        print(&quot;program end&quot;)
-
-    def handleFile(self, fileName):
-        print(&quot;\n&quot;)
-        print(&quot;start read file %s...&quot; % fileName)
-        self.subpath = fileName
-
-        f = open(fileName, 'r+')
-        self.lineNum = 1
-        data = &quot;&quot;
-        while True:
-            line = f.readline()
-            if not line:
-                break
-            line = self.replaceImage(line)
-            self.lineNum = self.lineNum + 1
-            data += line
-        f.close()
-
-        with open(fileName, &quot;w+&quot;) as f:
-            f.writelines(data)
-
-    def replaceImage(self, line):
-
-        searchResult = self.searchImage(line)
-
-        if not searchResult:
-            return line
-        oldline = line
-
-        for result in searchResult:
-            replace_url = self.uploadImage(result)
-            line = self.replaceLine(line, result, replace_url)
-
-        print(&quot;before replace is %s&quot; % oldline)
-        print(&quot;after replace is %s&quot; % line)
-
-        return line
-
-    def searchImage(self, line):
-        if self.url_re.search(line):
-            all_search = search.url_re.findall(line)
-            return all_search
-        else:
-            return []
-
-    def replaceLine(self, line, search, url):
-        return line.replace(search, url)
-
-    def uploadImage(self, url):
-
-        print(&quot;start uploadImage and file name is %s line num is %d...&quot; % (self.subpath, self.lineNum))
-
-        self.payload['source'] = url
-        r = requests.get(self.website, self.payload)
-        res = r.json()
-
-        statuscode = res['status_code']
-
-        if statuscode == 400:
-            print(&quot;upload failed and code is %d and msg is %s&quot; % (statuscode,res['error']['message']))
-            print(&quot;upload image failed is %s and linenum is %d&quot; % (url, self.lineNum))
-            self.failednum += 1
-            return url
-        else:
-            print(&quot;upload success and code is %d&quot; % statuscode)
-            print(&quot;upload img %s to %s&quot; % (url, res['image']['url']))
-            return res['image']['url']
-
-if __name__ == &quot;__main__&quot;:
-    search = ReplaceImage()
-    print(&quot;please input dir path and api key:\n&quot;)
-    dir = input(&quot;dir:&quot;)
-    key = input(&quot;key:&quot;)
-    search.search(dir, key)
-</code></pre>
-
-<p>实现思路也比较简单：</p>
-
-<ol>
-<li>首先是要遍历给定目录中的所有文件夹和文件。</li>
-<li>逐行读取文件内容，然后利用正则表达式匹配 Cloudinary 和微博图床的图片链接，找到该行中符合条件的链接。</li>
-<li>再使用 <code>requests</code> 库做网络请求，向 Chevernote 的 API 发送 GET 请求，解析返回的 JSON 数据，得到上传图床后的链接。</li>
-<li>将该行中匹配的图片链接替换成上传图床后得到的链接，并写入文件中。</li>
-<li>读取完当前文件后，重复步骤二，继续读取文件，直到读取结束。</li>
-</ol>
-
-<p>代码的实现也比较简单，主要就是一个正则表达式的匹配了：</p>
-
-<pre><code class="language-python">    s = r'http[s]?://(?:ws1.sinaimg.cn|res.cloudinary.com)/.*?(?:jpg|png)'
-</code></pre>
-
-<p>使用上面的表达式，就可以匹配到想要的内容，要注意在括号 <code>()</code> 表示或的匹配前面有 <code>?:</code> ，否则拿到的匹配内容不对。</p>
-
-<p>执行上述的代码，输入正确的文件地址和 api key，然后等待一段时间，就完成了上传到图床并自动转换的功能。</p>
-
-<h2 id="不足之处">不足之处</h2>
-
-<p>用自己的图床也有不足之处，除了访问速度没有国内的图床速度快，还有就是万一 VPS 挂了，那图床又 GG 了，一个方案就是：把 GitHub 当做备份的图床。</p>
-
-<p>因为图片是存储在 VPS 具体目录下的，可以把图片所在目录当做工程，然后上传到 Github ，万一哪天 VPS 挂了，就把文章中的链接替换成 Github 上的链接就好了。</p>
         
           <div class="entry-shang text-center">
     <p>「真诚赞赏，手留余香」</p>
@@ -491,7 +491,7 @@ if __name__ == &quot;__main__&quot;:
 
                 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/life/blog-image-migrate/">博客图床迁移记</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/stb-image-introduce/">简单易用的图像解码库介绍 —— stb_image</a>
 
                 
 
@@ -520,28 +520,15 @@ if __name__ == &quot;__main__&quot;:
       
         
 
-<h3>相关文章</h3>
-<ul style="margin-bottom: 25px;">
-    
-    <li><a href="/post/python/python-functional-programming/">Python 函数式编程</a></li>
-    
-    <li><a href="/post/python/python-docopt/">Python 命令行参数解析工具 docopt</a></li>
-    
-</ul>
-
       
 
       
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/vulkan/vulkan-tutorial-swap-chain/" data-toggle="tooltip" data-placement="top" title="进击的 Vulkan 移动开发之 SwapChain">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/life/blog-image-migrate/" data-toggle="tooltip" data-placement="top" title="博客图床迁移记">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/stb-image-introduce/" data-toggle="tooltip" data-placement="top" title="简单易用的图像解码库介绍 —— stb_image">Next Post &rarr;</a>
-          </li>
         
       </ul>
       

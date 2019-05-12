@@ -4,14 +4,43 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2019-05-02T21:21:40+08:00</lastmod>
+    <lastmod>2019-05-12T21:57:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/</loc>
-    <lastmod>2019-05-02T21:21:40+08:00</lastmod>
+    <lastmod>2019-05-12T21:57:07+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/</loc>
+    <lastmod>2019-05-12T21:57:07+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/</loc>
+    <lastmod>2019-05-12T21:57:07+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/android/</loc>
+    <lastmod>2019-05-12T21:57:07+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/stb_image/</loc>
+    <lastmod>2019-05-12T21:57:07+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/android/stb-image-introduce/</loc>
+    <lastmod>2019-05-12T21:57:07+08:00</lastmod>
   </url>
   
   <url>
@@ -21,19 +50,7 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/post/</loc>
-    <lastmod>2019-05-02T21:21:40+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://glumes.com/tags/python/</loc>
-    <lastmod>2019-05-02T21:21:40+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/tags/</loc>
     <lastmod>2019-05-02T21:21:40+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -89,12 +106,6 @@
   <url>
     <loc>https://glumes.com/post/java/java-multithread-overview/</loc>
     <lastmod>2018-11-19T15:58:17+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/categories/android/</loc>
-    <lastmod>2018-11-19T15:58:17+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
