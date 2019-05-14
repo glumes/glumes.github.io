@@ -6,47 +6,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>简单易用的图像解码库介绍 —— stb_image</title>
-  <meta property="og:title" content="简单易用的图像解码库介绍 —— stb_image" />
-  <meta name="twitter:title" content="简单易用的图像解码库介绍 —— stb_image" />
+  <title>Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</title>
+  <meta property="og:title" content="Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理" />
+  <meta name="twitter:title" content="Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理" />
 
-  <meta name="description" content="说到图像解码库，最容易想起的就是 libpng 和 libjpeg 这两个老牌图像解码库了。
+  <meta name="description" content="在 OpenGL 开发中，我们要渲染一张图片，通常先是得到一张图片对应的 Bitmap ,然后将该 Bitmap 作为纹理上传到 OpenGL 中。在 Android 中有封装好的 GLUtils 类的 texImage2D 方法供我们调用。
 
-libpng 和 libjpeg 分别各自对应 png 和 jpeg 两种图像格式。这两种格式的区别如下：
+    public static void texImage2D(int target, int level, int internalformat,
+            Bitmap bitmap, int type, int border)
 
-png 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。
 
-jpg 不支持透明度，有损压缩的图片格式，有损压缩会使得原始图片数据质量下载，也因此它占用的内存小，在网页应用中加速速度快。
+该方法的底层原理实际上也是解析了该 Bitmap ，得到了 Bitmap 所有的像素数据，类似于 Android NDK 关于 Bitmap 操作的 AndroidBitmap_lockPixels 方法，如果你不太了解该方法，可以参考这篇文章：Android JNI 之 Bitmap 操作。
 
-要想在工程中同时解码 png 和 jpeg 格式图片，就必须同时引用这两种库，而且还得经过一系列编译步骤才行。
+得到了所有像素数据之后，实际最终还是调用了 OpenGL 的 glTexImage2D 来实现纹理上传。当然，如果可以直接得到所有数据，也不需要走解析 Bitmap 这一步了，这种场景最常见的就是把相机作为输入了。">
+  <meta property="og:description" content="在 OpenGL 开发中，我们要渲染一张图片，通常先是得到一张图片对应的 Bitmap ,然后将该 Bitmap 作为纹理上传到 OpenGL 中。在 Android 中有封装好的 GLUtils 类的 texImage2D 方法供我们调用。
 
-在这里，介绍一个简单易用的图像库：stb_image 。Github 地址为：https://github.com/nothings/stb ，目前已经有了 9600&#43; Star 。它的使用非常简单，看看 README 可能你就会了。">
-  <meta property="og:description" content="说到图像解码库，最容易想起的就是 libpng 和 libjpeg 这两个老牌图像解码库了。
+    public static void texImage2D(int target, int level, int internalformat,
+            Bitmap bitmap, int type, int border)
 
-libpng 和 libjpeg 分别各自对应 png 和 jpeg 两种图像格式。这两种格式的区别如下：
 
-png 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。
+该方法的底层原理实际上也是解析了该 Bitmap ，得到了 Bitmap 所有的像素数据，类似于 Android NDK 关于 Bitmap 操作的 AndroidBitmap_lockPixels 方法，如果你不太了解该方法，可以参考这篇文章：Android JNI 之 Bitmap 操作。
 
-jpg 不支持透明度，有损压缩的图片格式，有损压缩会使得原始图片数据质量下载，也因此它占用的内存小，在网页应用中加速速度快。
+得到了所有像素数据之后，实际最终还是调用了 OpenGL 的 glTexImage2D 来实现纹理上传。当然，如果可以直接得到所有数据，也不需要走解析 Bitmap 这一步了，这种场景最常见的就是把相机作为输入了。">
+  <meta name="twitter:description" content="在 OpenGL 开发中，我们要渲染一张图片，通常先是得到一张图片对应的 Bitmap ,然后将该 Bitmap 作为纹理上传到 OpenGL 中。在 Android 中有封装好的 GLUtils 类的 texImage2D 方法供我们调用。
 
-要想在工程中同时解码 png 和 jpeg 格式图片，就必须同时引用这两种库，而且还得经过一系列编译步骤才行。
-
-在这里，介绍一个简单易用的图像库：stb_image 。Github 地址为：https://github.com/nothings/stb ，目前已经有了 9600&#43; Star 。它的使用非常简单，看看 README 可能你就会了。">
-  <meta name="twitter:description" content="说到图像解码库，最容易想起的就是 libpng 和 libjpeg 这两个老牌图像解码库了。
-
-libpng 和 libjpeg 分别各自对应 png 和 jpeg 两种图像格式。这两种格式的区别如下：
-
-png 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。
-
-jpg 不支持透明度，有损压缩的图片格 …">
+    public static void texImage2D(int target, int level, int internalformat, …">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/stb-image-introduce/" />
+  <meta property="og:url" content="https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
   <meta name="generator" content="Hugo 0.55.0" />
-  <link rel="canonical" href="https://glumes.com/post/android/stb-image-introduce/" />
+  <link rel="canonical" href="https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
@@ -160,7 +152,7 @@ jpg 不支持透明度，有损压缩的图片格 …">
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/05/12/beautiful-environment-high-2246822.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/05/14/aerial-view-architectural-design-buildings-2228123.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -171,11 +163,11 @@ jpg 不支持透明度，有损压缩的图片格 …">
           <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
               <div class="post-heading">
-                <h1>简单易用的图像解码库介绍 —— stb_image</h1>
+                <h1>Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</h1>
                   
                   
                     <span class="post-meta">
-  Posted on May 12, 2019
+  Posted on May 14, 2019
   
 </span>
 
@@ -194,11 +186,11 @@ jpg 不支持透明度，有损压缩的图片格 …">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-              <h1>简单易用的图像解码库介绍 —— stb_image</h1>
+              <h1>Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</h1>
                 
                 
                   <span class="post-meta">
-  Posted on May 12, 2019
+  Posted on May 14, 2019
   
 </span>
 
@@ -225,7 +217,7 @@ jpg 不支持透明度，有损压缩的图片格 …">
           
           <h5 id="tags" style="margin-top: 0px;">标签:
             
-                <a href="https://glumes.com/tags/stb_image/">stb_image</a> &nbsp;
+                <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
             
           </h5>
           
@@ -235,203 +227,52 @@ jpg 不支持透明度，有损压缩的图片格 …">
         
           
 <aside class="toc">
-  <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#stb-image">stb_image</a></li>
-<li><a href="#sbt-image-resize">sbt_image_resize</a></li>
-<li><a href="#stb-image-write">stb_image_write</a></li>
-<li><a href="#总结">总结</a></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul>
-</nav>
+  
 </aside>
 
         
-        <p>说到图像解码库，最容易想起的就是 <code>libpng</code> 和 <code>libjpeg</code> 这两个老牌图像解码库了。</p>
+        <p>在 OpenGL 开发中，我们要渲染一张图片，通常先是得到一张图片对应的 Bitmap ,然后将该 Bitmap 作为纹理上传到 OpenGL 中。在 Android 中有封装好的 <code>GLUtils</code> 类的 <code>texImage2D</code> 方法供我们调用。</p>
 
-<p><code>libpng</code> 和 <code>libjpeg</code> 分别各自对应 <code>png</code> 和 <code>jpeg</code> 两种图像格式。这两种格式的区别如下：</p>
-
-<p><code>png</code> 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。</p>
-
-<p><code>jpg</code> 不支持透明度，有损压缩的图片格式，有损压缩会使得原始图片数据质量下载，也因此它占用的内存小，在网页应用中加速速度快。</p>
-
-<p>要想在工程中同时解码 <code>png</code> 和 <code>jpeg</code> 格式图片，就必须同时引用这两种库，而且还得经过一系列编译步骤才行。</p>
-
-<p>在这里，介绍一个简单易用的图像库：<code>stb_image</code> 。Github 地址为：<a href="https://github.com/nothings/stb">https://github.com/nothings/stb</a> ，目前已经有了 9600+ Star 。它的使用非常简单，看看 README 可能你就会了。</p>
-
-<p>看看它的源码，你会发现全是 <code>.h</code> 头文件。这就是它的强大之处了，仅需在工程中加入头文件就可以解析图像了（实际上是函数实现等内容都放在头文件了而已）。</p>
-
-<p>重点关注如下三个头文件：</p>
-
-<ul>
-<li>stb_image.h
-
-<ul>
-<li>用于图像加载</li>
-</ul></li>
-<li>stb_image_write.h
-
-<ul>
-<li>用于写入图像文件</li>
-</ul></li>
-<li>stb_image_resize.h
-
-<ul>
-<li>用于改变图像尺寸</li>
-</ul></li>
-</ul>
-
-<p>下面就开始实践吧，先给出一个完整的例子：</p>
-
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-
-#define STB_IMAGE_IMPLEMENTATION
-#include &quot;stb_image.h&quot;
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include &quot;stb_image_write.h&quot;
-#define STB_IMAGE_RESIZE_IMPLEMENTATION
-#include &quot;stb_image_resize.h&quot;
-#include &lt;string&gt;
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;vector&gt;
-
-using namespace std;
-
-int main() {
-    std::cout &lt;&lt; &quot;Hello, STB_Image&quot; &lt;&lt; std::endl;
-
-    string inputPath = &quot;/Users/glumes/Pictures/input.png&quot;;
-    int iw, ih, n;
-    
-    // 加载图片获取宽、高、颜色通道信息
-    unsigned char *idata = stbi_load(inputPath.c_str(), &amp;iw, &amp;ih, &amp;n, 0);
-
-    int ow = iw / 2;
-    int oh = ih / 2;
-    auto *odata = (unsigned char *) malloc(ow * oh * n);
-    
-    // 改变图片尺寸
-    stbir_resize(idata, iw, ih, 0, odata, ow, oh, 0, STBIR_TYPE_UINT8, n, STBIR_ALPHA_CHANNEL_NONE, 0,
-                 STBIR_EDGE_CLAMP, STBIR_EDGE_CLAMP,
-                 STBIR_FILTER_BOX, STBIR_FILTER_BOX,
-                 STBIR_COLORSPACE_SRGB, nullptr
-    );
-
-    string outputPath = &quot;/Users/glumes/Pictures/output.png&quot;;
-    // 写入图片
-    stbi_write_png(outputPath.c_str(), ow, oh, n, odata, 0);
-
-    stbi_image_free(idata);
-    stbi_image_free(odata);
-    return 0;
-}
+<pre><code class="language-java">    public static void texImage2D(int target, int level, int internalformat,
+            Bitmap bitmap, int type, int border)
 </code></pre>
 
-<p>这个例子很简单也很全面，主要就是加载了一张图片，并将它的宽高都缩小一倍，并保存缩小后图片。</p>
+<p>该方法的底层原理实际上也是解析了该 Bitmap ，得到了 Bitmap 所有的像素数据，类似于 Android NDK 关于 Bitmap 操作的 <code>AndroidBitmap_lockPixels</code> 方法，如果你不太了解该方法，可以参考这篇文章：<a href="https://glumes.com/post/android/android-jni-bitmap-operation/">Android JNI 之 Bitmap 操作</a>。</p>
 
-<h2 id="stb-image">stb_image</h2>
+<p>得到了所有像素数据之后，实际最终还是调用了 OpenGL 的 <code>glTexImage2D</code> 来实现纹理上传。当然，如果可以直接得到所有数据，也不需要走解析 Bitmap 这一步了，这种场景最常见的就是把相机作为输入了。</p>
 
-<p>首先是调用 <code>stbi_load</code> 方法去加载图像数据，并获取相关信息。传入的参数除了图片文件地址，还有宽、高、颜色通道信息的引用。</p>
+<p>接下来我们会通过 Android NDK 开发中去渲染一张图片，步骤还是如上，从图像解析到纹理上传，不同的是我们将会解析 Assets 文件夹中的图片，而不是一张已经保存在手机 SDCard 上的图片。</p>
 
-<p>变量 <code>n</code> 就代表图片的颜色通道值，通常有如下的情况：</p>
+<p>相比于前者，SDCard 上的图片已经有了绝对地址了，直接把地址传到 <code>stb_image</code> 库就可以完成解析了（参考之前的文章 []()），而 <code>Assets</code> 文件夹的内容在手机上可没有绝对地址哦，不信你仔细回想，可曾在看到过 APK 安装后 Assets 文件夹对应的内容？</p>
 
-<ul>
-<li>1 ： 灰度图</li>
-<li>2 ： 灰度图加透明度<br /></li>
-<li>3 ： 红绿蓝 RGB 三色图</li>
-<li>4 ： 红绿蓝加透明度 RGBA 图</li>
-</ul>
+<p>一开始陷入了误区，想着怎么去获得文件的绝对地址，看到了 AssetManager 的 AAsset_openFileDescriptor 方法以为拿到文件描述符就万事大吉了，结果打印的地址是这样的 <code>/proc/9941/fd/79</code> ，这基本的不可用了。</p>
 
-<p>返回的结果就是图片像素数据的指针了。</p>
+<p>换个思路，在 Java 中去加载 Assets 目录下的图片：</p>
 
-<p><code>stbi_load</code> 不仅仅支持 <code>png</code> 格式，把上面例子中的图片改成 <code>jpg</code> 格式后缀的依旧可行。</p>
-
-<p>它支持的所有格式如下：</p>
-
-<ul>
-<li>png</li>
-<li>jpg</li>
-<li>tga</li>
-<li>bmp</li>
-<li>psd</li>
-<li>gif</li>
-<li>hdr</li>
-<li>pic</li>
-</ul>
-
-<p>格式虽多，不过一般用到 png 和 jpg 就好了。</p>
-
-<p>除了从文件加载图片，stb_image 还支持从内存中加载图片，通过该方法 <code>stbi_load_from_memory</code> ，在后续文章中会用到它的。</p>
-
-<p>加载完图片之后，stb_image 还提供了相应的释放方法 <code>stbi_image_free</code>，实际上就是把 <code>free</code> 封装了一下而已。</p>
-
-<h2 id="sbt-image-resize">sbt_image_resize</h2>
-
-<p>加载完图片像素数据之后，就可以通过 <code>stbir_resize</code> 方法改变图片的尺寸。</p>
-
-<p><code>stbir_resize</code> 方法参数有很多：</p>
-
-<pre><code class="language-cpp">STBIRDEF int stbir_resize(const void *input_pixels , int input_w , int input_h , int input_stride_in_bytes,
-                             void *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
-                             stbir_datatype datatype,
-                             int num_channels, int alpha_channel, int flags,
-                             // stb 中提供了多种模式，但是修改后并没有见很明显的效果
-                             stbir_edge edge_mode_horizontal, stbir_edge edge_mode_vertical, 
-                             stbir_filter filter_horizontal,  stbir_filter filter_vertical,
-                             stbir_colorspace space, void *alloc_context)
+<pre><code class="language-java">InputStream is = getAssets().open(fileName); 
 </code></pre>
 
-<p><code>stbir_edge</code> 和 <code>stbir_filter</code> 类型的参数，stb_image_resize 提供了多种类型:</p>
+<p>通过 AssertManager 的 open 方法直接拿到文件的输入流了。</p>
 
-<pre><code class="language-cpp">typedef enum
-{
-    STBIR_EDGE_CLAMP   = 1,
-    STBIR_EDGE_REFLECT = 2,
-    STBIR_EDGE_WRAP    = 3,
-    STBIR_EDGE_ZERO    = 4,
-} stbir_edge;
+<p>而在 NDK 开发中同样的方式是行不通的，这里要采用另外一种方式，但其实意思都差不多的：</p>
 
-typedef enum
-{
-    STBIR_FILTER_DEFAULT      = 0,  // use same filter type that easy-to-use API chooses
-    STBIR_FILTER_BOX          = 1,  // A trapezoid w/1-pixel wide ramps, same result as box for integer scale ratios
-    STBIR_FILTER_TRIANGLE     = 2,  // On upsampling, produces same results as bilinear texture filtering
-    STBIR_FILTER_CUBICBSPLINE = 3,  // The cubic b-spline (aka Mitchell-Netrevalli with B=1,C=0), gaussian-esque
-    STBIR_FILTER_CATMULLROM   = 4,  // An interpolating cubic spline
-    STBIR_FILTER_MITCHELL     = 5,  // Mitchell-Netrevalli filter with B=1/3, C=1/3
-} stbir_filter;
+<pre><code class="language-cpp">    // NDK 中是 AssetManager
+    AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
+    // 打开 Asset 文件夹下的文件
+    AAsset *pathAsset = AAssetManager_open(mgr, assetPath, AASSET_MODE_UNKNOWN);
+    // 得到文件的长度
+    off_t assetLength = AAsset_getLength(pathAsset);
+    // 得到文件对应的 Buffer
+    unsigned char *fileData = (unsigned char *) AAsset_getBuffer(pathAsset);
+    // stb_image 的方法，从内存中加载图片
+    unsigned char *contnet = stbi_load_from_memory(fileData, assetLength, &amp;w, &amp;h, &amp;n, 0);
 </code></pre>
 
-<p>但实际上调整不同类型组合得到的图片并没有太多的变化 ┑(￣Д ￣)┍。</p>
+<p>NDK 中可拿不到像 Java 那样的输入流，但是可以通过 AssetManager 的 AAsset_getBuffer 或者是 AAsset_read 方法去获取文件内容。</p>
 
-<p>真正有用的可能还是前面那几个参数，指定了要将图片缩放后的宽高数据。</p>
+<p>看到上面那两个 API 基本就稳了，再配合 <code>stb_image</code> 介绍过的方法，<code>stbi_load_from_memory</code> 从内存中加载图片的像素数据，最后就是 glTexImage2D 方法实现纹理上传。</p>
 
-<h2 id="stb-image-write">stb_image_write</h2>
-
-<p>最后就是调用 <code>stbi_write_png</code> 方法将像素数据写入文件中，除此之外，stb_image_write 还提供了 <code>stbi_write_jpg</code> 方法来保存 jpg 格式图片。</p>
-
-<p>根据两者格式的不同，方法调用的参数也是不一样的。</p>
-
-<pre><code class="language-cpp">int stbi_write_jpg(char const *filename, int x, int y, int comp, const void *data, int quality)
-
-int stbi_write_png(char const *filename, int x, int y, int comp, const void *data, int stride_bytes)
-</code></pre>
-
-<h2 id="总结">总结</h2>
-
-<p>以上就是关于 stb_image 图像解码库的小介绍。</p>
-
-<p>总的来说，它还是挺简单易用的，在平常做一些 Demo 以及需要快速实现、验证功能的情况下都可以考虑考虑。</p>
-
-<p>但是在一些大型的项目中，还是要深思熟虑一些，从性能方面考虑，它肯定不如老牌的图像解码库了，像 <code>libjpeg-turbo</code> 解码用到了 <code>NEON</code> 这样 SIMD （单指令流多数据流）的操作，才是大型项目的首选了。</p>
-
-<h2 id="参考">参考</h2>
-
-<p>关于 stb_image 在 Android 中的使用实践，可以参考我的项目：</p>
+<p>具体的代码实践参考项目：</p>
 
 <blockquote>
 <p><a href="https://github.com/glumes/InstantGLSL">https://github.com/glumes/InstantGLSL</a></p>
@@ -491,7 +332,7 @@ int stbi_write_png(char const *filename, int x, int y, int comp, const void *dat
 
                 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/stb-image-introduce/">简单易用的图像解码库介绍 —— stb_image</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/">Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</a>
 
                 
 
@@ -520,19 +361,38 @@ int stbi_write_png(char const *filename, int x, int y, int comp, const void *dat
       
         
 
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/android/android-jni-bitmap-operation/">Android JNI 之 Bitmap 操作</a></li>
+    
+    <li><a href="/post/android/android-jni-thread-operation/">Android JNI 中的线程操作</a></li>
+    
+    <li><a href="/post/android/android-jni-exception-handle/">Android JNI 调用时的异常处理</a></li>
+    
+    <li><a href="/post/android/android-jni-reference-manage-rules/">Android JNI 中的引用管理</a></li>
+    
+    <li><a href="/post/android/android-jni-cache-fieldid-and-methodid/">Android  JNI 调用时缓存字段和方法 ID</a></li>
+    
+    <li><a href="/post/android/android-jni-invoke-constructor-method-and-super-method/">Android 通过 JNI 调用 Java 类的构造方法和父类的方法</a></li>
+    
+    <li><a href="/post/android/android-jni-access-field-and-method/">Android 通过 JNI 访问 Java 字段和方法调用</a></li>
+    
+    <li><a href="/post/android/android-jni-array-operation/">Android JNI 数组 操作</a></li>
+    
+    <li><a href="/post/android/android-jni-basic-operation/">Android JNI 基本操作 </a></li>
+    
+</ul>
+
       
 
       
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/life/blog-image-migrate/" data-toggle="tooltip" data-placement="top" title="博客图床迁移记">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/android/stb-image-introduce/" data-toggle="tooltip" data-placement="top" title="简单易用的图像解码库介绍 —— stb_image">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/" data-toggle="tooltip" data-placement="top" title="Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理">Next Post &rarr;</a>
-          </li>
         
       </ul>
       

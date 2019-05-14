@@ -8,10 +8,19 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Sun, 12 May 2019 21:57:07 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 14 May 2019 23:16:45 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JNI</title>
+      <link>https://glumes.com/tags/jni/</link>
+      <pubDate>Tue, 14 May 2019 23:16:45 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/jni/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>stb_image</title>
@@ -190,15 +199,6 @@
       <pubDate>Wed, 25 Jul 2018 13:36:50 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/tags/android/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>JNI</title>
-      <link>https://glumes.com/tags/jni/</link>
-      <pubDate>Wed, 25 Jul 2018 13:36:50 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/jni/</guid>
       <description></description>
     </item>
     

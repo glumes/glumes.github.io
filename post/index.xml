@@ -8,10 +8,27 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Sun, 12 May 2019 21:57:07 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 14 May 2019 23:16:45 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</title>
+      <link>https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/</link>
+      <pubDate>Tue, 14 May 2019 23:16:45 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/</guid>
+      <description>&lt;p&gt;在 OpenGL 开发中，我们要渲染一张图片，通常先是得到一张图片对应的 Bitmap ,然后将该 Bitmap 作为纹理上传到 OpenGL 中。在 Android 中有封装好的 &lt;code&gt;GLUtils&lt;/code&gt; 类的 &lt;code&gt;texImage2D&lt;/code&gt; 方法供我们调用。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    public static void texImage2D(int target, int level, int internalformat,
+            Bitmap bitmap, int type, int border)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;该方法的底层原理实际上也是解析了该 Bitmap ，得到了 Bitmap 所有的像素数据，类似于 Android NDK 关于 Bitmap 操作的 &lt;code&gt;AndroidBitmap_lockPixels&lt;/code&gt; 方法，如果你不太了解该方法，可以参考这篇文章：&lt;a href=&#34;https://glumes.com/post/android/android-jni-bitmap-operation/&#34;&gt;Android JNI 之 Bitmap 操作&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;得到了所有像素数据之后，实际最终还是调用了 OpenGL 的 &lt;code&gt;glTexImage2D&lt;/code&gt; 来实现纹理上传。当然，如果可以直接得到所有数据，也不需要走解析 Bitmap 这一步了，这种场景最常见的就是把相机作为输入了。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>简单易用的图像解码库介绍 —— stb_image</title>
