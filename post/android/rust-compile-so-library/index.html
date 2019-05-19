@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>rust 开发编译 Android 动态库实践</title>
+  <meta property="og:title" content="rust 开发编译 Android 动态库实践" />
+  <meta name="twitter:title" content="rust 开发编译 Android 动态库实践" />
+
+  <meta name="description" content="
+
+最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：
+
+
+https://www.rust-lang.org/
+
+
+rust 的学习曲线比较陡峭，在开始学习之前建议看看王垠的这篇文章 《如何掌握所有的编程语言》，地址如下:
+
+
+https://www.yinwang.org/blog-cn/2017/07/06/master-pl
+
+
+学习语言，重要的是掌握其语言特性。
+
+王垠举了一些语言特性的例子：
+
+
+变量定义
+算术运算
+for 循环语句，while 循环语句
+函数定义，函数调用
+递归
+静态类型系统
+类型推导
+lambda 函数
+面向对象
+垃圾回收
+指针算术
+goto 语句
+
+
+看着这些特性是不是很像一些编程语言书的目录🤔
+
+在学习 rust 的时候也可以照着这些语言特性去对比自己是否掌握了。">
+  <meta property="og:description" content="
+
+最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：
+
+
+https://www.rust-lang.org/
+
+
+rust 的学习曲线比较陡峭，在开始学习之前建议看看王垠的这篇文章 《如何掌握所有的编程语言》，地址如下:
+
+
+https://www.yinwang.org/blog-cn/2017/07/06/master-pl
+
+
+学习语言，重要的是掌握其语言特性。
+
+王垠举了一些语言特性的例子：
+
+
+变量定义
+算术运算
+for 循环语句，while 循环语句
+函数定义，函数调用
+递归
+静态类型系统
+类型推导
+lambda 函数
+面向对象
+垃圾回收
+指针算术
+goto 语句
+
+
+看着这些特性是不是很像一些编程语言书的目录🤔
+
+在学习 rust 的时候也可以照着这些语言特性去对比自己是否掌握了。">
+  <meta name="twitter:description" content="
+
+最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：
+
+
+https://www.rust-lang.org/
+
+
+rust 的学习曲线比较陡峭，在开始学习之前建议看看王垠的这篇文章 《如何掌握所有的编程语言》，地址如下:
+
+
+https://www.yinwang.org/blog-cn/2017/07/06/master-pl
+
+
+学习语言，重要的是掌握其语言特 …">
+  <meta name="author" content="Glumes"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/android/rust-compile-so-library/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Glumes Blog" />
+
+  <meta name="generator" content="Hugo 0.55.0" />
+  <link rel="canonical" href="https://glumes.com/post/android/rust-compile-so-library/" />
+  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
+  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  
+  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
+  <script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4260372210024819",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">Glumes Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">目录</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/android">Android</a>
+                
+                  <a href="/categories/opencv">opencv</a>
+                
+                  <a href="/categories/opengl">opengl</a>
+                
+                  <a href="/categories/ffmpeg">ffmpeg</a>
+                
+                  <a href="/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="生活" href="/categories/life">生活</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于我" href="/about">关于我</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>rust 开发编译 Android 动态库实践</h1>
+                
+                
+                  <span class="post-meta">
+  Posted on May 19, 2019
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+
+
+        
+      <div>
+          
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://glumes.com/tags/rust/">rust</a> &nbsp;
+            
+                <a href="https://glumes.com/tags/so/">so</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
+<aside class="toc">
+  <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#rust-编译-so-实践">rust 编译 so 实践</a>
+<ul>
+<li><a href="#安装-rust">安装 rust</a></li>
+<li><a href="#配置-rust-交叉编译">配置 rust 交叉编译</a></li>
+<li><a href="#rust-开发及编译">rust 开发及编译</a></li>
+</ul></li>
+<li><a href="#问题和思考">问题和思考</a></li>
+<li><a href="#参考">参考</a></li>
+</ul></li>
+</ul>
+</nav>
+</aside>
+
+        
+        <p><img src="https://image.glumes.com/images/2019/05/19/rust-mm.png" alt="" /></p>
+
+<p>最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：</p>
+
+<blockquote>
+<p><a href="https://www.rust-lang.org/">https://www.rust-lang.org/</a></p>
+</blockquote>
+
+<p>rust 的学习曲线比较陡峭，在开始学习之前建议看看王垠的这篇文章 《如何掌握所有的编程语言》，地址如下:</p>
+
+<blockquote>
+<p><a href="https://www.yinwang.org/blog-cn/2017/07/06/master-pl">https://www.yinwang.org/blog-cn/2017/07/06/master-pl</a></p>
+</blockquote>
+
+<p>学习语言，重要的是掌握其语言特性。</p>
+
+<p>王垠举了一些语言特性的例子：</p>
+
+<ul>
+<li>变量定义</li>
+<li>算术运算</li>
+<li>for 循环语句，while 循环语句</li>
+<li>函数定义，函数调用</li>
+<li>递归</li>
+<li>静态类型系统</li>
+<li>类型推导</li>
+<li>lambda 函数</li>
+<li>面向对象</li>
+<li>垃圾回收</li>
+<li>指针算术</li>
+<li>goto 语句</li>
+</ul>
+
+<p>看着这些特性是不是很像一些编程语言书的目录🤔</p>
+
+<p>在学习 rust 的时候也可以照着这些语言特性去对比自己是否掌握了。</p>
+
+<p>那么 rust 到底强大在哪里？在 Kotlin 刚出的时候宣传的点就是空安全 ，弥补 Java 在这方面的不足。而 rust 可以说对比的是 C++，弥补 C++ 在空指针和野指针（悬垂指针）方面的不足，当然 rust 的优势还不足如此。</p>
+
+<p>以下是来自维基百科的介绍，有些特性我暂时还没体验过，先摘录一波：</p>
+
+<blockquote>
+<p>Rust 是由 Mozilla 主导开发的通用、编译型编程语言。。设计准则为“安全、并发、实用”，支持函数式、并发式、过程式以及面向对象的编程风格。</p>
+</blockquote>
+
+<p>目前国内也已经有一些团队在用 rust 进行开发了，可以在观望一波后，再决定是否投入精力入坑~~~</p>
+
+<hr />
+
+<h2 id="rust-编译-so-实践">rust 编译 so 实践</h2>
+
+<p>下面是用 rust 编译 Android 动态库实践，主要参考了 Mozilla 给的例子，具体链接在后面。</p>
+
+<h3 id="安装-rust">安装 rust</h3>
+
+<p>首先是安装 rust ，通过如下命令安装：</p>
+
+<pre><code class="language-sh">curl https://sh.rustup.rs -sSf | sh
+</code></pre>
+
+<p>然后通过如下命令输出 rust 版本以及验证是否安装成功。</p>
+
+<pre><code class="language-sh">rustc --version
+</code></pre>
+
+<h3 id="配置-rust-交叉编译">配置 rust 交叉编译</h3>
+
+<p>确保 Android 的 sdk 目录配置到了系统环境中。</p>
+
+<pre><code class="language-sh">export ANDROID_HOME=/Users/$USER/Library/Android/sdk
+export NDK_HOME=$ANDROID_HOME/ndk-bundle
+</code></pre>
+
+<p>然后执行如下命令：</p>
+
+<pre><code class="language-sh">mkdir NDK
+${NDK_HOME}/build/tools/make_standalone_toolchain.py --api 26 --arch arm64 --install-dir NDK/arm64
+${NDK_HOME}/build/tools/make_standalone_toolchain.py --api 26 --arch arm --install-dir NDK/arm
+${NDK_HOME}/build/tools/make_standalone_toolchain.py --api 26 --arch x86 --install-dir NDK/x86
+</code></pre>
+
+<p>主要是执行 ndk-bundle 目录下的 python 脚本，该脚本在 NDK 目录中去创建 arm64、arm、x86 架构平台的编译环境。</p>
+
+<p>在把环境添加到 rust 的配置中。</p>
+
+<p>创建 <code>cargo-config.toml</code> 文件，输入如下内容：</p>
+
+<pre><code class="language-sh">[target.aarch64-linux-android]
+ar = &quot;&lt;path&gt;/NDK/arm64/bin/aarch64-linux-android-ar&quot;
+linker = &quot;&lt;path&gt;/NDK/arm64/bin/aarch64-linux-android-clang&quot;
+
+[target.armv7-linux-androideabi]
+ar = &quot;&lt;path&gt;/NDK/arm/bin/arm-linux-androideabi-ar&quot;
+linker = &quot;&lt;path&gt;/NDK/arm/bin/arm-linux-androideabi-clang&quot;
+
+[target.i686-linux-android]
+ar = &quot;&lt;path&gt;/NDK/x86/bin/i686-linux-android-ar&quot;
+linker = &quot;&lt;path&gt;/NDK/x86/bin/i686-linux-android-clang&quot;
+</code></pre>
+
+<p>记得把 <path> 替换成 NDK 文件夹所在的路径。</p>
+
+<p>然后执行：</p>
+
+<pre><code class="language-sh">cp cargo-config.toml ~/.cargo/config
+</code></pre>
+
+<p>把 cargo-config.toml 移动到 <code>~/.cargo/</code> 目录下。</p>
+
+<p>再执行如下命令：</p>
+
+<pre><code class="language-sh">rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android
+</code></pre>
+
+<p>以上就完成了交叉编译环境的配置。</p>
+
+<h3 id="rust-开发及编译">rust 开发及编译</h3>
+
+<p>现在要涉及到具体的 rust 开发了，推荐使用 JetBrains 系列的 IntelliJ IDEA ，无需激活，使用社区版就行，安装 rust 插件就可以愉快地编写代码了。</p>
+
+<p>执行以下命令创建工程目录：</p>
+
+<pre><code class="language-sh">mkdir rust-android
+cd rust-android
+</code></pre>
+
+<p>然后创建 rust 项目：</p>
+
+<pre><code class="language-sh">cargo new rust --lib
+cd rust
+</code></pre>
+
+<p><code>rust</code> 代表创建的项目所在文件夹名字。</p>
+
+<p><code>--lib</code> 代表我们创建的是一个库项目，而不是一个执行的二进制文件。</p>
+
+<p>项目结构图如下：</p>
+
+<p><img src="https://image.glumes.com/images/2019/05/18/-2019-05-18-4.32.01.png" alt="" /></p>
+
+<p>结构很简单，就两个文件，本篇文章也不会自己去新增文件，当然肯定是会有编译文件出现的。</p>
+
+<p><code>Cargo.toml</code> 就相当于 Android 中的 build.gradle ，一些第三方库都是通过这里去引用的。</p>
+
+<p><code>lib.rs</code> 就是具体编写代码的地方了。</p>
+
+<p>首先要在 Cargo.toml 中去添加一些内容：</p>
+
+<pre><code class="language-sh">[dependencies]
+# 添加 jni 依赖，并指定版本
+jni = { version = &quot;0.10.2&quot;, default-features = false }
+
+[profile.release]
+lto = true
+
+[lib]
+# 编译的动态库名字
+name = &quot;rust&quot;
+# 编译类型 cdylib 指定为动态库
+crate-type = [&quot;cdylib&quot;]
+</code></pre>
+
+<p>关于添加的内容含义如上注释，主要是添加了 jni 依赖和指定编译，有了 jni 依赖才能够让 Android 项目代码调用到 so 动态库的内容。</p>
+
+<p>接下来就是编写 rust 代码了。</p>
+
+<pre><code class="language-rust">// 指定 os 类型
+#![cfg(target_os = &quot;android&quot;)]
+// 允许不是 snake_case 的命令方式
+#![allow(non_snake_case)]
+
+// 引用标准库的一些内容
+use std::ffi::{CString, CStr};
+// 引用 jni 库的一些内容，就是上面添加的 jni 依赖
+use jni::JNIEnv;
+use jni::objects::{JObject, JString};
+use jni::sys::jstring;
+
+#[no_mangle]
+// jni 函数调用的头
+pub unsafe extern fn Java_com_glumes_rust_MainActivity_hello(
+    env: JNIEnv, _: JObject, j_recipient: JString) -&gt; jstring {
+    // 将 Android 上层传来的字符串转出 rust 中的字符串变量
+    let recipient = CString::from(
+        CStr::from_ptr(
+            env.get_string(j_recipient).unwrap().as_ptr()
+        )
+    );
+    // 返回一个新的字符串
+    let output = env.new_string(&quot;hello&quot;.to_owned() + recipient.to_str().unwrap()).unwrap();
+    output.into_inner()
+}
+</code></pre>
+
+<p>抛开 rust 具体语法不看，代码内容也很简单，传一个字符串，返回一个新的字符串。</p>
+
+<p>接下来就是执行具体的编译：</p>
+
+<pre><code class="language-sh">cargo build --target aarch64-linux-android --release
+cargo build --target armv7-linux-androideabi --release
+cargo build --target i686-linux-android --release
+</code></pre>
+
+<p>分别执行上面三个命令，会分别构建三个不同平台的 so 库。</p>
+
+<p>然后把 so 库替换到 Android 项目的 jniLibs 具体文件夹就好了。</p>
+
+<p><img src="https://image.glumes.com/images/2019/05/18/-2019-05-18-4.56.37.png" alt="" /></p>
+
+<p>这样就完成了用 rust 编译 Android 平台的 so 动态库，并且每次编译后的时候就要进行 so 的替换，当然也可以想办法把 rust so 的编译放在 Android gradle 的编译过程中，就和用 CMake 编译一样。</p>
+
+<h2 id="问题和思考">问题和思考</h2>
+
+<p>以上只是一个小小的例子，想用 rust 实现像 C++ 那样去开发动态库，可能还一些坑要去探索。仅仅是实现 jni 的调用还是远不够的，在 NDK 开发里面还有很多头文件，如何去在 rust 里面去实现调用？</p>
+
+<p>如果想要 rust 去打印 Android NDK 中的 log ，倒是可以参考 <a href="https://github.com/Nercury/android_logger-rs">android_logger-rs</a> 项目，至于其他的慢慢摸索中。</p>
+
+<p>另外还有个问题，如何在 Android 中去断点调试 rust 的代码，在网上搜索了一番，还没找到合适的答案，有知道的朋友可以指点我一二 🥺</p>
+
+<h2 id="参考">参考</h2>
+
+<p>具体的例子可以参考我的 GitHub 项目：</p>
+
+<blockquote>
+<p><a href="https://github.com/glumes/rust-android-example">https://github.com/glumes/rust-android-example</a></p>
+</blockquote>
+
+<ol>
+<li><a href="https://www.yinwang.org/blog-cn/2017/07/06/master-pl">https://www.yinwang.org/blog-cn/2017/07/06/master-pl</a></li>
+<li><a href="https://mozilla.github.io/firefox-browser-architecture/experiments/2017-09-21-rust-on-android.html">https://mozilla.github.io/firefox-browser-architecture/experiments/2017-09-21-rust-on-android.html</a></li>
+</ol>
+        
+          <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+        
+
+                 
+
+
+                  <h4>一起交流学习，答疑解惑，有问题，我们星球见~~~</h4>
+
+                  <img  width = 750px; height = 409px; src="https://image.glumes.com/images/2019/05/08/WechatIMG32.png">
+
+                 
+
+                
+
+                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
+
+                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/rust-compile-so-library/">rust 开发编译 Android 动态库实践</a>
+
+                
+
+                
+
+
+        
+        <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        
+      </article>
+
+      
+        
+
+      
+
+      
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/" data-toggle="tooltip" data-placement="top" title="Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+      
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+      
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          
+          
+              <li>
+                <a href="mailto:zhaoying9402@outlook.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/u/3157458295" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="https://glumes.com/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.glumes.com">Glumes</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2019
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">Glumes Blog</a>
+            &nbsp;&bull;&nbsp;
+            <a href="/sitemap.xml">网站地图</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://glumes.com/js/bootstrap.min.js"></script>
+<script src="https://glumes.com/js/main.min.js"></script>
+<script src="https://glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://glumes.com/js/prism.js?t=123"></script>
+
+<script src="https://glumes.com/js/reward.js"></script>
+
+
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  
+  <script src="https://mermaidjs.github.io/scripts/mermaid.min.js"></script>
+  <script>
+        mermaid.initialize({ startOnLoad: true });
+  </script>
+
+
+
+
+  </body>
+</html>
+

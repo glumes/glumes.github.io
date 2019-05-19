@@ -8,10 +8,28 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Tue, 14 May 2019 23:16:45 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 19 May 2019 23:25:31 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>rust</title>
+      <link>https://glumes.com/tags/rust/</link>
+      <pubDate>Sun, 19 May 2019 23:25:31 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/rust/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>so</title>
+      <link>https://glumes.com/tags/so/</link>
+      <pubDate>Sun, 19 May 2019 23:25:31 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/so/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>JNI</title>
