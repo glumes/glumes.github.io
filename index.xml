@@ -8,10 +8,41 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Sun, 19 May 2019 23:25:31 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 23 May 2019 08:50:23 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Google Jetpack 新组件 CameraX 介绍与实践</title>
+      <link>https://glumes.com/post/android/google-jetpack-camerax/</link>
+      <pubDate>Thu, 23 May 2019 08:50:23 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/google-jetpack-camerax/</guid>
+      <description>&lt;p&gt;近期，Google 的 Jetpack 组件又出了新的库：CameraX 。&lt;/p&gt;
+
+&lt;p&gt;顾名思义：CameraX 就是用来进行 Camera 开发的官方库了，而且后续会有 Google 进行维护和升级。这对于广大 Camera 开发工程师和即将成为 Camera 的程序员来说，真是个好消息~~~&lt;/p&gt;
+
+&lt;h2 id=&#34;camerax-介绍&#34;&gt;CameraX 介绍&lt;/h2&gt;
+
+&lt;p&gt;官方有给出一个示例的工程，我 fork 了之后，加入使用 OpenGL 黑白滤镜渲染的操作，具体地址如下：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/glumes/camera&#34;&gt;https://github.com/glumes/camera&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;官方并没有提到 CameraX 库具体如何进行 OpenGL 线程渲染的， 继续往下看，你会找到答案的~~~&lt;/p&gt;
+
+&lt;p&gt;关于 CameraX 更多的介绍，建议看看 Google I/O 大会上的视频记录，比看文档能了解更多内容~~~&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=kuv8uK-5CLY&#34;&gt;https://www.youtube.com/watch?v=kuv8uK-5CLY&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;在视频中提到，目前有很多应用都开始接入了 CameraX，比如 Camera360、Tik Tok 等。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/22/-2019-05-23-8.35.08.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>rust 开发编译 Android 动态库实践</title>
