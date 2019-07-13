@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.55.0" />
+  <meta name="generator" content="Hugo 0.55.6" />
   <link rel="canonical" href="https://glumes.com/post/android/build-android-source-code/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -323,19 +323,20 @@ repo sync # 正常同步一遍即可得到完整目录# 或 repo sync -l 仅chec
 <p>下载好了 Android 源码就可以进行编译了，整个编译过程就三个命令：</p>
 
 <ul>
-<li>   脚本环境初始化
-<code>sh
-source build/envsetup.sh
-</code>
-*   选择要编译的目标
-<code>sh
-lunch // 根据提示的选项用数字来选择
-</code></li>
-<li>   执行编译
-<code>sh
-make -j4// 数字4代表执行的线程，根据个人电脑情况所定
-</code></li>
-</ul>
+<li><p>   脚本环境初始化</p>
+
+<pre><code class="language-sh">source build/envsetup.sh
+</code></pre>
+
+<p>*   选择要编译的目标</p>
+
+<pre><code class="language-sh">lunch // 根据提示的选项用数字来选择
+</code></pre></li>
+
+<li><p>   执行编译</p>
+
+<pre><code class="language-sh">make -j4// 数字4代表执行的线程，根据个人电脑情况所定
+</code></pre>
 
 <p>然后要顺利执行完这三个命令，中间还会遇到很多问题&hellip;&hellip;</p>
 
@@ -344,7 +345,8 @@ make -j4// 数字4代表执行的线程，根据个人电脑情况所定
 <p>在执行</p>
 
 <pre><code class="language-sh">source build/envsetup.sh
-</code></pre>
+</code></pre></li>
+</ul>
 
 <p>命令时，使用 zsh 并不能把所有的内容都初始化，有些命令还是需要 bash 来完成的。</p>
 
@@ -438,7 +440,7 @@ $  brew link curl --force
 
                   <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
 
-                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+                  <img  width = 780px; height = 568px; src="https://image.glumes.com/images/2019/06/09/multimedia.gif">
 
                   <br/>
 
@@ -619,7 +621,7 @@ $  brew link curl --force
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>

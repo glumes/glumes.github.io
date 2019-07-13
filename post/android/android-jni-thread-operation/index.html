@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.55.0" />
+  <meta name="generator" content="Hugo 0.55.6" />
   <link rel="canonical" href="https://glumes.com/post/android/android-jni-thread-operation/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -274,8 +274,7 @@ if (!doNotTrack) {
 <li><p>第三个参数为该线程启动程序的函数指针，也就是线程启动时要执行的那个方法，类似于 Java Runnable 中的 run 方法，它的函数签名格式如下：</p>
 
 <pre><code class="language-cpp">void* start_routine(void* args)
-</code></pre></li>
-</ul>
+</code></pre>
 
 <p>启动程序将线程参数看成 void 指针，返回 void 指针类型结果。</p>
 
@@ -291,11 +290,12 @@ if (!doNotTrack) {
 
 <pre><code class="language-cpp">void *printThreadHello(void *);
 void *printThreadHello(void *) {
-    LOGD(&quot;hello thread&quot;);
-    // 切记要有返回值
-    return NULL;
+LOGD(&quot;hello thread&quot;);
+// 切记要有返回值
+return NULL;
 }
-</code></pre>
+</code></pre></li>
+</ul>
 
 <p>要注意线程启动函数是要有返回值的，没有返回值就直接崩溃了。</p>
 
@@ -476,7 +476,7 @@ void *run(void *args) {
 
                   <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
 
-                  <img  width = 780px; height = 568px; src="https://res.cloudinary.com/glumes-com/image/upload/v1527910926/wechat-focus_s9z3xy.gif">
+                  <img  width = 780px; height = 568px; src="https://image.glumes.com/images/2019/06/09/multimedia.gif">
 
                   <br/>
 
@@ -657,7 +657,7 @@ void *run(void *args) {
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>

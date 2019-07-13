@@ -18,7 +18,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Glumes Blog" />
 
-  <meta name="generator" content="Hugo 0.55.0" />
+  <meta name="generator" content="Hugo 0.55.6" />
   <link rel="canonical" href="https://glumes.com/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="Glumes Blog">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
@@ -197,6 +197,41 @@ if (!doNotTrack) {
 
         <div class="posts-list">
           
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/">
+                <h2 class="post-title">OpenGL 之 帧缓冲  使用实践</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  Posted on September 4, 2018
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>帧缓冲(Framebuffer Object)，简称 <code>FBO</code>，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。</p>
+
+<p>除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。</p>
+
+<p>FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。</p>
+                  <a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                
+                  #<a href="https://glumes.com/tags/fbo/">FBO</a>&nbsp;
+                
+                </span>
+              
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/opengl/opengl-egl-usage/">
@@ -495,45 +530,6 @@ if (!doNotTrack) {
               
             </article>
           
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-depth-test/">
-                <h2 class="post-title">OpenGL 深度测试与精度值的那些事</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on July 20, 2018
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。</p>
-
-<p>直接看一个没有使用深度测试的绘制：</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532052034/code/undepth_test.gif" alt="未开启深度测试的情况" /></p>
-
-<p>按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。</p>
-
-<p>这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。</p>
-
-<p>要解决这种问题，就得使用深度测试了。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-depth-test/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
         </div>
 
         
@@ -656,7 +652,16 @@ if (!doNotTrack) {
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/9/">9</a></li>
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/10/">10</a></li>
     
     
     <li class="page-item">
@@ -664,7 +669,7 @@ if (!doNotTrack) {
     </li>
     
     <li class="page-item">
-        <a href="/page/9/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/page/10/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -750,7 +755,7 @@ if (!doNotTrack) {
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>

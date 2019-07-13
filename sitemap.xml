@@ -4,14 +4,43 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2019-05-23T08:50:23+08:00</lastmod>
+    <lastmod>2019-07-12T23:26:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/</loc>
-    <lastmod>2019-05-23T08:50:23+08:00</lastmod>
+    <lastmod>2019-07-12T23:26:58+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/opengl/</loc>
+    <lastmod>2019-07-12T23:26:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/</loc>
+    <lastmod>2019-07-12T23:26:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/</loc>
+    <lastmod>2019-07-12T23:26:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/libpng/</loc>
+    <lastmod>2019-07-12T23:26:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/opengl/libpng-compile-and-practice/</loc>
+    <lastmod>2019-07-12T23:26:58+08:00</lastmod>
   </url>
   
   <url>
@@ -20,20 +49,8 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/post/</loc>
-    <lastmod>2019-05-23T08:50:23+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://glumes.com/categories/android/</loc>
     <lastmod>2019-05-23T08:50:23+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/tags/</loc>
-    <lastmod>2019-05-19T23:25:31+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -61,12 +78,6 @@
   
   <url>
     <loc>https://glumes.com/tags/jni/</loc>
-    <lastmod>2019-05-14T23:16:45+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/categories/opengl/</loc>
     <lastmod>2019-05-14T23:16:45+08:00</lastmod>
     <priority>0</priority>
   </url>
