@@ -8,10 +8,28 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 12 Jul 2019 23:26:58 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jul 2019 00:08:18 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>image</title>
+      <link>https://glumes.com/tags/image/</link>
+      <pubDate>Sat, 13 Jul 2019 00:08:18 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/image/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>libjpeg-turbo</title>
+      <link>https://glumes.com/tags/libjpeg-turbo/</link>
+      <pubDate>Sat, 13 Jul 2019 00:08:18 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/libjpeg-turbo/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>libpng</title>

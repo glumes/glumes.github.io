@@ -8,10 +8,41 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 12 Jul 2019 23:26:58 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jul 2019 00:08:18 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>图像库 libjpeg turbo 编译与实践</title>
+      <link>https://glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</link>
+      <pubDate>Sat, 13 Jul 2019 00:08:18 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</guid>
+      <description>&lt;p&gt;在之前的文章中已经陆续介绍了 stb_image、libpng 的使用，相关链接如下：&lt;/p&gt;
+
+&lt;p&gt;【&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;简单易用的图像解码库介绍 —— stb_image&lt;/a&gt;】&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;https://glumes.com/post/android/stb-image-introduce/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;【&lt;a href=&#34;https://glumes.com/post/opengl/libpng-compile-and-practice/&#34;&gt;图像库 libpng 编译与实践&lt;/a&gt;】&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/opengl/libpng-compile-and-practice/&#34;&gt;https://glumes.com/post/opengl/libpng-compile-and-practice/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;而今天的主题就是 libjpeg-turbo ，&lt;/p&gt;
+
+&lt;p&gt;它的官网地址如下：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://libjpeg-turbo.org/&#34;&gt;https://libjpeg-turbo.org/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;它的 github 地址如下：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/libjpeg-turbo/libjpeg-turbo&#34;&gt;https://github.com/libjpeg-turbo/libjpeg-turbo&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
     
     <item>
       <title>图像库 libpng 编译与实践</title>
@@ -19,9 +50,9 @@
       <pubDate>Fri, 12 Jul 2019 23:26:58 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/post/opengl/libpng-compile-and-practice/</guid>
-      <description>&lt;p&gt;在之前的文章 【&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;简单易用的图像解码库介绍 —— stb_image&lt;/a&gt;】中介绍了 &lt;code&gt;stb_image&lt;/code&gt; 图像库，还顺带提到了 libpng 和 libjpeg ，这篇文章就是介绍如何在 Android 平台上用 CMake 编译 libpng 动态库以及 libpng 使用实践。&lt;/p&gt;
+      <description>&lt;p&gt;在之前的文章中介绍了 &lt;code&gt;stb_image&lt;/code&gt; 图像库，还顺带提到了 libpng 和 libjpeg ，这篇文章就是介绍如何在 Android 平台上用 CMake 编译 libpng 动态库以及 libpng 使用实践。&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;stb_image&lt;/code&gt; 介绍文章链接如下：&lt;/p&gt;
+&lt;p&gt;【&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;简单易用的图像解码库介绍 —— stb_image&lt;/a&gt;】&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;https://glumes.com/post/android/stb-image-introduce/&lt;/a&gt;&lt;/p&gt;</description>
     </item>

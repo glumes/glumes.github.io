@@ -164,6 +164,51 @@ if (!doNotTrack) {
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">
+                <h2 class="post-title">OpenGL 学习系列---投影矩阵</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on January 24, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate/">OpenGL 坐标系统</a> 文章中，根据点的坐标变换得出了如下的公式：</p>
+
+<div>$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$</div>
+
+<p>这个公式每左乘一个矩阵，都代表了一种坐标系的变换。</p>
+
+<p>转化为着色器脚本语言如下：</p>
+
+<pre><code class="language-glsl">attribute vec4 a_Position;
+uniform mat4 u_ModelMatrix;
+uniform mat4 u_ProjectionMatrix;
+uniform mat4 u_ViewMatrix;
+void main()
+{
+    gl_Position  = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
+}
+</code></pre>
+
+<p>本篇文章就主要是对投影矩阵来分析的。</p>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/">
                 <h2 class="post-title">OpenGL 学习系列---坐标系统</h2>
 
@@ -428,39 +473,6 @@ if (!doNotTrack) {
                 <span class="post-meta">
                   
                     #<a href="https://glumes.com/tags/ffmpeg/">FFmpeg</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/rxjava-wrapper-dialog/">
-                <h2 class="post-title">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>之前有写过一篇文章：<a href="http://www.glumes.com/wrapper-callback-by-rxjava/">用 RxJava 封装回调方法 CallBack</a>。</p>
-
-<p>RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。</p>
-
-<p>这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。</p>
-                  <a href="https://glumes.com/post/android/rxjava-wrapper-dialog/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/rxjava/">RxJava</a>&nbsp;
                   
                 </span>
               
