@@ -15,12 +15,6 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/opengl/</loc>
-    <lastmod>2019-07-13T00:08:18+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://glumes.com/post/</loc>
     <lastmod>2019-07-13T00:08:18+08:00</lastmod>
     <priority>0</priority>
@@ -40,6 +34,12 @@
   
   <url>
     <loc>https://glumes.com/tags/libjpeg-turbo/</loc>
+    <lastmod>2019-07-13T00:08:18+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/opengl/</loc>
     <lastmod>2019-07-13T00:08:18+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -222,13 +222,13 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/rgb/</loc>
+    <loc>https://glumes.com/categories/ffmpeg/</loc>
     <lastmod>2018-09-19T23:12:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/ffmpeg/</loc>
+    <loc>https://glumes.com/tags/rgb/</loc>
     <lastmod>2018-09-19T23:12:45+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -337,14 +337,14 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/post/android/android-jni-bitmap-operation/</loc>
-    <lastmod>2018-07-25T13:36:50+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://glumes.com/tags/android/</loc>
     <lastmod>2018-07-25T13:36:50+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/android/android-jni-bitmap-operation/</loc>
+    <lastmod>2018-07-25T13:36:50+08:00</lastmod>
   </url>
   
   <url>
