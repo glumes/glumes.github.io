@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
   <head>
+    <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -70,6 +71,7 @@ if (!doNotTrack) {
 
 </head>
 
+  </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
   <div class="container-fluid">
@@ -119,7 +121,13 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="关于我" href="/about">关于我</a>
+              <a title="关于" href="/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Archive" href="/post/">Archive</a>
             </li>
           
         
@@ -147,7 +155,7 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="page-heading">
-              <h1>Posts</h1>
+              <h1>archives</h1>
               <hr class="small">
             </div>
           </div>
@@ -160,345 +168,132 @@ if (!doNotTrack) {
   <div class="container" role="main">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
         <div class="posts-list">
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/vulkan/vulkan-tutorial-renderer/">
-                <h2 class="post-title">进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 7, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>都说 OpenGL 、Vulkan 是用来绘制二维、三维图形的，那么这个绘制渲染的流程到底是怎么样的呢？这里，谈谈我自己对它的理解。</p>
-                  <a href="https://glumes.com/post/vulkan/vulkan-tutorial-renderer/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+            <section id="archive" class="archive">
                   
-                    #<a href="https://glumes.com/tags/vulkan/">Vulkan</a>&nbsp;
+                    <div class="collection-title">
+                        <h2 class="archive-year">2018</h2>
+                    </div>
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          12-07
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/vulkan/vulkan-tutorial-renderer/" class="archive-post-link">
+                              进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/vulkan/vulkan-tutorial-concept/">
-                <h2 class="post-title">进击的 Vulkan 移动开发（一）之今生前世</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 7, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>捋一捋 Vulkan 。</p>
-                  <a href="https://glumes.com/post/vulkan/vulkan-tutorial-concept/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          12-07
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/vulkan/vulkan-tutorial-concept/" class="archive-post-link">
+                              进击的 Vulkan 移动开发（一）之今生前世
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/vulkan/">Vulkan</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          11-19
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/java/java-multithread-overview/" class="archive-post-link">
+                              Java 显式锁 Lock 与条件队列
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/java/java-multithread-overview/">
-                <h2 class="post-title">Java 显式锁 Lock 与条件队列</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on November 19, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 Java 5.0 之前，在协调对共享对象的访问时可以使用的机制只有 <code>synchronized</code> 内置锁和 <code>volatile</code> 关键字。</p>
-
-<p>Java 5.0 增加了一种新的机制：<code>Lock</code>  显式锁，当内置锁 <code>synchronized</code> 不适用时，它就可以作为一种新的选择。</p>
-
-<p>回顾一下内置锁 synchronized 的使用：</p>
-
-<pre><code class="language-java">// synchronized关键字用法示例
-public synchronized void add(int t){// 同步方法
-    this.v += t;
-}
-
-public static synchronized void sub(int t){// 同步静态方法
-    value -= t;
-}
-public int decrementAndGet(){
-    synchronized(obj){// 同步代码块
-        return --v;
-    }
-}
-</code></pre>
-
-<p>内置锁不需要显式的获取和释放，任何一个对象都能作为一把内置锁。</p>
-
-<ul>
-<li>当 synchronized 作用于普通方法时，锁对象是 this 。</li>
-<li>当 synchronized 作用于静态方法时，锁对象是当前类的 Class 对象。</li>
-<li>当 synchronized 作用于代码块时，锁对象是 synchronized(obj) 中的这个 obj 对象。</li>
-</ul>
-
-<hr />
-                  <a href="https://glumes.com/post/java/java-multithread-overview/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          11-19
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/" class="archive-post-link">
+                              C&#43;&#43; 标准容器库小结
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/java/">Java</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          09-19
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/android/mediacodec-encode-yuv-to-h264/" class="archive-post-link">
+                              MediaCodec 硬编码之相机内容编码成 H264 文件
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/">
-                <h2 class="post-title">C&#43;&#43; 标准容器库小结</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on November 19, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>《C++ Primer》 第五版笔记摘录~~~</p>
-                  <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          09-19
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/ffmpeg/understand-yuv-format/" class="archive-post-link">
+                              一文读懂 YUV 的采样与格式
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/c&#43;&#43;/">C&#43;&#43;</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          09-12
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/android/cmake-best-practices/" class="archive-post-link">
+                              Android NDK 开发之 CMake 必知必会
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/stl/">STL</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          09-11
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/android/okhttp-analysis/" class="archive-post-link">
+                              开源库之 OkHttp 源码分析
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/">
-                <h2 class="post-title">MediaCodec 硬编码之相机内容编码成 H264 文件</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 19, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 Android 4.1 版本提供了 MediaCodec 接口来访问设备的编解码器，不同于 FFmpeg 的软件编解码，它采用的是硬件编解码能力，因此在速度上会比软解更具有优势，但是由于 Android 的碎片化问题，机型众多，版本各异，导致 MediaCodec 在机型兼容性上需要花精力去适配，并且编解码流程不可控，全交由厂商的底层硬件去实现，最终得到的视频质量不一定很理想。</p>
-
-<p>虽然 MediaCodec 仍然存在一定的弊端，但是对于快速实现编解码需求，还是很值得参考的。</p>
-
-<p>以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。</p>
-                  <a href="https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          09-09
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-glsl-3-mark/" class="archive-post-link">
+                              OpenGL ES 3.0 着色器语言 GLSL 学习 Mark 
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/mediacodec/">MediaCodec</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/yuv/">YUV</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/h264/">H264</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/camera/">Camera</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/ffmpeg/understand-yuv-format/">
-                <h2 class="post-title">一文读懂 YUV 的采样与格式</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 19, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。</p>
-                  <a href="https://glumes.com/post/ffmpeg/understand-yuv-format/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/yuv/">YUV</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/rgb/">RGB</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/cmake-best-practices/">
-                <h2 class="post-title">Android NDK 开发之 CMake 必知必会</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 12, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>Android Studio 从 2.2 版本起开始支持 CMake ,可以通过 CMake 和 NDK 将 C/C++ 代码编译成底层的库，然后再配合 Gradle 的编译将库打包到 APK 中。</p>
-
-<p>这意味就不需要再编写 <code>.mk</code> 文件来编译 <code>so</code> 动态库了。</p>
-                  <a href="https://glumes.com/post/android/cmake-best-practices/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/cmake/">CMake</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/ndk/">NDK</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/okhttp-analysis/">
-                <h2 class="post-title">开源库之 OkHttp 源码分析</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 11, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>分析一波 OkHttp 的源码实现。</p>
-                  <a href="https://glumes.com/post/android/okhttp-analysis/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/okhttp/">OkHttp</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-glsl-3-mark/">
-                <h2 class="post-title">OpenGL ES 3.0 着色器语言 GLSL 学习 Mark </h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 9, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在之前的<a href="https://glumes.com/post/opengl/opengl-glsl-2-mark/">文章</a>中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。</p>
-
-<p>本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-glsl-3-mark/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/glsl/">GLSL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-glsl-2-mark/">
-                <h2 class="post-title">OpenGL ES 2.0 着色器语言 GLSL 学习 Mark </h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 9, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>要想发挥 OpenGL ES 自定义渲染管线的功能，就得学会写 GLSL 着色器脚本。</p>
-
-<p>本文中的内容来自于 《Android 3D 游戏开发技术宝典 OpenGL ES 2.0》。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-glsl-2-mark/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/glsl/">GLSL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          09-09
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-glsl-2-mark/" class="archive-post-link">
+                              OpenGL ES 2.0 着色器语言 GLSL 学习 Mark 
+                          </a>
+                      </span>
+                  </div></section>
         </div>
         
           <ul class="pager main-pager">
             
               <li class="previous">
-                <a href="/post/page/1">&larr; Newer Posts</a>
+                <a href="/post/page/1/">&larr; Newer Posts</a>
               </li>
             
             
               <li class="next">
-                <a href="/post/page/3">Older Posts &rarr;</a>
+                <a href="/post/page/3/">Older Posts &rarr;</a>
               </li>
             
           </ul>

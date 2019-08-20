@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
   <head>
+    <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -70,6 +71,7 @@ if (!doNotTrack) {
 
 </head>
 
+  </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
   <div class="container-fluid">
@@ -119,7 +121,13 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="关于我" href="/about">关于我</a>
+              <a title="关于" href="/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Archive" href="/post/">Archive</a>
             </li>
           
         
@@ -147,7 +155,7 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="page-heading">
-              <h1>Posts</h1>
+              <h1>archives</h1>
               <hr class="small">
             </div>
           </div>
@@ -160,328 +168,132 @@ if (!doNotTrack) {
   <div class="container" role="main">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
         <div class="posts-list">
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/retrofit-analysis/">
-                <h2 class="post-title">开源库之 Retrofit 源码分析</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 9, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>分析一波 Retrofit 的源码实现。</p>
-                  <a href="https://glumes.com/post/android/retrofit-analysis/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+            <section id="archive" class="archive">
                   
-                    #<a href="https://glumes.com/tags/retrofit/">Retrofit</a>&nbsp;
+                    <div class="collection-title">
+                        <h2 class="archive-year">2018</h2>
+                    </div>
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          09-09
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/android/retrofit-analysis/" class="archive-post-link">
+                              开源库之 Retrofit 源码分析
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/">
-                <h2 class="post-title">OpenGL 之 帧缓冲  使用实践</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 4, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>帧缓冲(Framebuffer Object)，简称 <code>FBO</code>，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。</p>
-
-<p>除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。</p>
-
-<p>FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          09-04
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-framebuffer-object-usage/" class="archive-post-link">
+                              OpenGL 之 帧缓冲  使用实践
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          09-02
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-egl-usage/" class="archive-post-link">
+                              OpenGL 之 EGL 使用实践
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/fbo/">FBO</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          09-02
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-gpuimage-analysis/" class="archive-post-link">
+                              OpenGL 之 GPUImage 源码分析
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-egl-usage/">
-                <h2 class="post-title">OpenGL 之 EGL 使用实践</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 2, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。</p>
-
-<p>而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 <code>EGL</code> 来完成这个转换工作。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-egl-usage/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          08-28
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/android/java-proxy-design-pattern/" class="archive-post-link">
+                              Java 中的静态代理和动态代理
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-26
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-axially-aligned-bounding-box/" class="archive-post-link">
+                              《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/egl/">EGL</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-25
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/android/android-jni-bitmap-operation/" class="archive-post-link">
+                              Android JNI 之 Bitmap 操作
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-gpuimage-analysis/">
-                <h2 class="post-title">OpenGL 之 GPUImage 源码分析</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 2, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p><a href="https://github.com/BradLarson/GPUImage">GPUImage</a> 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 <a href="https://github.com/CyberAgent/android-gpuimage">GPUImage</a> ，本文也主要对 Android 版本的 GPUImage 进行分析。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-gpuimage-analysis/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-24
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-light-mix/" class="archive-post-link">
+                              《OpenGL ES 3.x 游戏开发》光照系列之效果混合
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-23
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-specular-light/" class="archive-post-link">
+                              《OpenGL ES 3.x 游戏开发》光照系列之镜面光
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/java-proxy-design-pattern/">
-                <h2 class="post-title">Java 中的静态代理和动态代理</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on August 28, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>代理模式的使用场景如下：</p>
-
-<blockquote>
-<p>当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。</p>
-</blockquote>
-                  <a href="https://glumes.com/post/android/java-proxy-design-pattern/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/java/">Java</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/">
-                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    学习笔记内容摘录
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 26, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 OpenGL 的世界模型中，同时绘制了多个物体，那么怎么去检测物体之间是否触碰了，不同于在平面之间的触碰，OpenGL 是在三维世界里面的触碰，接下来就继续深入理解 OpenGL 中的碰撞检测相关知识~~~</p>
-                  <a href="https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-jni-bitmap-operation/">
-                <h2 class="post-title">Android JNI 之 Bitmap 操作</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 25, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 Android 中通过 JNI 去操作 Bitmap。</p>
-                  <a href="https://glumes.com/post/android/android-jni-bitmap-operation/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-light-mix/">
-                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》光照系列之效果混合</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    学习笔记内容摘录
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 24, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在前面的系列文章中，分别介绍了 OpenGL 的环境光、散射光、镜面光。</p>
-
-<p>现在尝试将这些光照效果混合起来，让整个场景显得更加逼真。</p>
-
-<p>具体的效果如下：</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532360616/light_mix_xmv86l.gif" alt="" /></p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-light-mix/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-specular-light/">
-                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》光照系列之镜面光</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    学习笔记内容摘录
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 23, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在前面的文章中介绍了 OpenGL 的<a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/">环境光</a>和<a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/">散射光</a>，现在就是最后一个镜面光了。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-specular-light/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/">
-                <h2 class="post-title"> 《OpenGL ES 3.x 游戏开发》 光照系列之散射光</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    学习笔记内容摘录
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 22, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在前面的文章中介绍了 OpenGL 中的环境光，现在就是散射光了。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-22
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-diffuse-light/" class="archive-post-link">
+                               《OpenGL ES 3.x 游戏开发》 光照系列之散射光
+                          </a>
+                      </span>
+                  </div></section>
         </div>
         
           <ul class="pager main-pager">
             
               <li class="previous">
-                <a href="/post/page/2">&larr; Newer Posts</a>
+                <a href="/post/page/2/">&larr; Newer Posts</a>
               </li>
             
             
               <li class="next">
-                <a href="/post/page/4">Older Posts &rarr;</a>
+                <a href="/post/page/4/">Older Posts &rarr;</a>
               </li>
             
           </ul>

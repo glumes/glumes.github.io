@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
   <head>
+    <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -70,6 +71,7 @@ if (!doNotTrack) {
 
 </head>
 
+  </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
   <div class="container-fluid">
@@ -119,7 +121,13 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="关于我" href="/about">关于我</a>
+              <a title="关于" href="/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Archive" href="/post/">Archive</a>
             </li>
           
         
@@ -147,7 +155,7 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="page-heading">
-              <h1>Posts</h1>
+              <h1>archives</h1>
               <hr class="small">
             </div>
           </div>
@@ -160,336 +168,135 @@ if (!doNotTrack) {
   <div class="container" role="main">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
         <div class="posts-list">
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">
-                <h2 class="post-title">OpenGL 学习系列---投影矩阵</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 24, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate/">OpenGL 坐标系统</a> 文章中，根据点的坐标变换得出了如下的公式：</p>
-
-<div>$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$</div>
-
-<p>这个公式每左乘一个矩阵，都代表了一种坐标系的变换。</p>
-
-<p>转化为着色器脚本语言如下：</p>
-
-<pre><code class="language-glsl">attribute vec4 a_Position;
-uniform mat4 u_ModelMatrix;
-uniform mat4 u_ProjectionMatrix;
-uniform mat4 u_ViewMatrix;
-void main()
-{
-    gl_Position  = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
-}
-</code></pre>
-
-<p>本篇文章就主要是对投影矩阵来分析的。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+            <section id="archive" class="archive">
                   
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                    <div class="collection-title">
+                        <h2 class="archive-year">2018</h2>
+                    </div>
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          01-24
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-projection-matrix/" class="archive-post-link">
+                              OpenGL 学习系列---投影矩阵
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/">
-                <h2 class="post-title">OpenGL 学习系列---坐标系统</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    一个点的坐标转换的心路历程
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 23, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在前面绘制基本图形中，遇到了很明显的问题，圆形不像圆形，正多边形不像正多边形？就像下面图形一样：</p>
-
-<p><img src="https://image.glumes.com/images/2019/05/12/opengl_16.png" alt="" /></p>
-
-<p>好好的正五边形却东倒西歪的，这就是因为我们前面的绘制都是把它当成 二维 的绘制，而在 OpenGL 中却是绘制 三维的。在二维和三维之间还有个转换，而之前为了方便学习则忽略了这个转换，现在就要开始理解它了 —— <code>坐标系统</code>！！</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          01-23
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-coordinate-system/" class="archive-post-link">
+                              OpenGL 学习系列---坐标系统
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          01-04
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/life/journey-with-lover/" class="archive-post-link">
+                              泸沽湖-丽江之行
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/life/journey-with-lover/">
-                <h2 class="post-title">泸沽湖-丽江之行</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    甜蜜之旅
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 4, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>元旦假期和亲爱的去了趟 泸沽湖-丽江。</p>
-                  <a href="https://glumes.com/post/life/journey-with-lover/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                    <div class="collection-title">
+                        <h2 class="archive-year">2017</h2>
+                    </div>
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          12-22
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/docker/docker-summary/" class="archive-post-link">
+                              Docker 基础知识
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/life/">Life</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          12-22
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-draw-basic-shape/" class="archive-post-link">
+                              OpenGL 学习系列---基本形状的绘制
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/docker/docker-summary/">
-                <h2 class="post-title">Docker 基础知识</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>可以简单地将 Docker 理解为一种沙盒 Sandbox 。每个容器内运行一个应用，不同的容器相互隔离，容器之间也可以建立通信机制。</p>
-
-<p>容器的创建和停止都十分快速，容器自身对资源的需求也十分有限，远远低于虚拟机，甚至把容器当做应用本身也没问题。</p>
-
-<p>Docker 容器在启动速度、硬盘使用、性能、系统支持量、隔离性等方面与传统的虚拟机相比都有明显的优势。</p>
-                  <a href="https://glumes.com/post/docker/docker-summary/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          12-22
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-draw-point/" class="archive-post-link">
+                              OpenGL 学习系列---基础的绘制流程
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/docker/">Docker</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          12-22
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/python/python-functional-programming/" class="archive-post-link">
+                              Python 函数式编程
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/">
-                <h2 class="post-title">OpenGL 学习系列---基本形状的绘制</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>在之前的一篇博客中，讲述了 OpenGL 绘制一个点的流程及相关的代码，其中关于 OpenGL 程序编译部分都是可以在其他项目中接着复用的，接下来会讲到如何去绘制其他的基本图元。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          12-22
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/python/python-docopt/" class="archive-post-link">
+                              Python 命令行参数解析工具 docopt
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          12-22
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/" class="archive-post-link">
+                              FFmpeg 3.0 版本视频解码浅析 
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-draw-point/">
-                <h2 class="post-title">OpenGL 学习系列---基础的绘制流程</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>终于要开始探索奇妙的 3D 世界了，OpenGL 搞起。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-draw-point/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/python/python-functional-programming/">
-                <h2 class="post-title">Python 函数式编程</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>函数式编程是一种编程范式，不同于之前的面向对象编程。它是面向数学的抽象，也就是说，这里的<code>函数</code>二字不再是我们编程语言中的函数，而是数学中的<code>函数</code>了。</p>
-                  <a href="https://glumes.com/post/python/python-functional-programming/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/python/">Python</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/python/python-docopt/">
-                <h2 class="post-title">Python 命令行参数解析工具 docopt</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>正如标题所言，docopt 是一个用来解析命令行参数的工具，当想要在 Python 程序后面附加参数时，就不需要再为此而发愁了。</p>
-
-<p>docopt 是一个开源的库，代码地址：<a href="https://github.com/docopt/docopt">https://github.com/docopt/docopt</a>。它在 README 中就已经做了详细的介绍，并且还附带了很多例子可供学习，这篇文章也是翻译一下 README 中内容&hellip;&hellip;</p>
-                  <a href="https://glumes.com/post/python/python-docopt/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/python/">Python</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/">
-                <h2 class="post-title">FFmpeg 3.0 版本视频解码浅析 </h2>
-
-                
-                  <h3 class="post-subtitle">
-                    MPEG封装格式到PCM数据格式
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>有了上一篇文章基础，这里就只关注 FFmpeg 如何解析的具体实践了。</p>
-
-<p>在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。</p>
-
-<p>在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。</p>
-                  <a href="https://glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/ffmpeg/">FFmpeg</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/ffmpeg/encode-and-decode-summary/">
-                <h2 class="post-title">音视频编解码的那些基础理论</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on December 22, 2017
-              </p>
-              <div class="post-entry">
-                
-                  <p>最近在研究学习 FFmpeg，从网上参考了好多资料，其中最了不起的就当属——<a href="http://blog.csdn.net/leixiaohua1020">雷霄骅</a>大神了，若没有他的博文，别说入门了，可能连门在哪里都不知道，在此还是要表达一下对雷神的敬佩和敬仰。</p>
-
-<p>本文主要讲的是视频文件的解码，从视频文件的封装格式解码到原始数据格式，通过讲解涉及到的各种概念，从而理清整个思路和流程。</p>
-                  <a href="https://glumes.com/post/ffmpeg/encode-and-decode-summary/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/ffmpeg/">FFmpeg</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          12-22
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/ffmpeg/encode-and-decode-summary/" class="archive-post-link">
+                              音视频编解码的那些基础理论
+                          </a>
+                      </span>
+                  </div></section>
         </div>
         
           <ul class="pager main-pager">
             
               <li class="previous">
-                <a href="/post/page/6">&larr; Newer Posts</a>
+                <a href="/post/page/6/">&larr; Newer Posts</a>
               </li>
             
             
               <li class="next">
-                <a href="/post/page/8">Older Posts &rarr;</a>
+                <a href="/post/page/8/">Older Posts &rarr;</a>
               </li>
             
           </ul>

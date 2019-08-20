@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
   <head>
+    <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -70,6 +71,7 @@ if (!doNotTrack) {
 
 </head>
 
+  </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
   <div class="container-fluid">
@@ -119,7 +121,13 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="关于我" href="/about">关于我</a>
+              <a title="关于" href="/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Archive" href="/post/">Archive</a>
             </li>
           
         
@@ -147,7 +155,7 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="page-heading">
-              <h1>Posts</h1>
+              <h1>archives</h1>
               <hr class="small">
             </div>
           </div>
@@ -160,340 +168,132 @@ if (!doNotTrack) {
   <div class="container" role="main">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
         <div class="posts-list">
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/">
-                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》光照系列之环境光</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    学习笔记内容摘录
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 21, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 OpenGL 中使用光照。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+            <section id="archive" class="archive">
                   
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                    <div class="collection-title">
+                        <h2 class="archive-year">2018</h2>
+                    </div>
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-21
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-ambient-light/" class="archive-post-link">
+                              《OpenGL ES 3.x 游戏开发》光照系列之环境光
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-depth-test/">
-                <h2 class="post-title">OpenGL 深度测试与精度值的那些事</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 20, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。</p>
-
-<p>直接看一个没有使用深度测试的绘制：</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532052034/code/undepth_test.gif" alt="未开启深度测试的情况" /></p>
-
-<p>按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。</p>
-
-<p>这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。</p>
-
-<p>要解决这种问题，就得使用深度测试了。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-depth-test/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-20
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-depth-test/" class="archive-post-link">
+                              OpenGL 深度测试与精度值的那些事
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-19
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-face-culling-usage/" class="archive-post-link">
+                              OpenGL 优化项之面剔除和注意点
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/">
-                <h2 class="post-title">OpenGL 优化项之面剔除和注意点</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 19, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>现在我们用 OpenGL 绘制了如下的立方体：</p>
-
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif" alt="" /></p>
-
-<p>不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。</p>
-
-<p>那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-18
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-vertex-array-object-usage/" class="archive-post-link">
+                              《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-17
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" class="archive-post-link">
+                              《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/">
-                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    学习笔记内容摘录
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 18, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在之前使用 <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">OpenGL 顶点缓冲区 VBO 的使用</a> 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。</p>
-
-<p>这就存在了一些重复的操作。</p>
-
-<p>在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-16
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-color-blend/" class="archive-post-link">
+                              《OpenGL ES 3.x 游戏开发》之颜色混合和使用
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-15
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/android/android-jni-thread-operation/" class="archive-post-link">
+                              Android JNI 中的线程操作
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">
-                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    学习笔记内容摘录
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 17, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 <code>glDrawArrays</code> 或 <code>glDrawElements</code> 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。</p>
-
-<p>可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-13
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-alpha-test/" class="archive-post-link">
+                              《OpenGL ES 3.x 游戏开发》之利用 Alpha 透明度进行测试
+                          </a>
+                      </span>
+                  </div>
                   
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-12
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-handle-video-frame-and-replace-content/" class="archive-post-link">
+                              用 OpenGL 对视频帧内容进行替换
+                          </a>
+                      </span>
+                  </div>
                   
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/">
-                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》之颜色混合和使用</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    学习笔记内容摘录
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 16, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。</p>
-
-<p>在 OpenGL 中同样有这样颜色混合的问题。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-jni-thread-operation/">
-                <h2 class="post-title">Android JNI 中的线程操作</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 15, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>学习一下如何在 Native 代码中使用线程。</p>
-                  <a href="https://glumes.com/post/android/android-jni-thread-operation/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                  
-                    #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/">
-                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》之利用 Alpha 透明度进行测试</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    学习笔记内容摘录
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 13, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在前面的博客文章中有提到 <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a>，并且裁剪测试只能裁剪一个矩形区域，相当于就是把整个内容都绘制上去了，但是透过一个小矩形区域来看绘制的物体。</p>
-
-<p>除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。</p>
-
-<p>关于 Alpha 透明度测试，在 用 <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">OpenGL 对视频帧内容进行替换</a> 也用实践用到过。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">
-                <h2 class="post-title">用 OpenGL 对视频帧内容进行替换</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 12, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？</p>
-                  <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-share/">
-                <h2 class="post-title">OpenGL ES 学习资源分享</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 11, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>学习了一段时间的 OpenGL ES，并在公司的项目中得到了运用，也算是有了一些积累，现在分享一些当初学习的资源，大家一起来学习，共同交流进步。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-share/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
+                  <div class="archive-post">
+                      <span class="archive-post-time">
+                          07-11
+                      </span>
+                      <span class="archive-post-title">
+                          <a href="/post/opengl/opengl-tutorial-share/" class="archive-post-link">
+                              OpenGL ES 学习资源分享
+                          </a>
+                      </span>
+                  </div></section>
         </div>
         
           <ul class="pager main-pager">
             
               <li class="previous">
-                <a href="/post/page/3">&larr; Newer Posts</a>
+                <a href="/post/page/3/">&larr; Newer Posts</a>
               </li>
             
             
               <li class="next">
-                <a href="/post/page/5">Older Posts &rarr;</a>
+                <a href="/post/page/5/">Older Posts &rarr;</a>
               </li>
             
           </ul>

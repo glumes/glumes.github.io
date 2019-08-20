@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
   <head>
+    <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -73,6 +74,7 @@ if (!doNotTrack) {
 
 </head>
 
+  </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
   <div class="container-fluid">
@@ -122,7 +124,13 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="关于我" href="/about">关于我</a>
+              <a title="关于" href="/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Archive" href="/post/">Archive</a>
             </li>
           
         
@@ -208,26 +216,7 @@ if (!doNotTrack) {
 <div class="container" role="main">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
-            
-                <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
-            
-                <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
-            
-          </h5>
-          
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+      
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -240,7 +229,7 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
+      <article role="main" class="blog-post">
         <p>Android 还可以通过 JNI 来调用 Java 一个类的构造方法，从而创建一个 Java 类。</p>
 
 <h2 id="调用构造方法">调用构造方法</h2>
@@ -450,134 +439,41 @@ Java_com_glumes_cppso_jnioperations_InvokeConstructorOps_callSuperMethod(JNIEnv 
 <p>由此，通过 JNI 来调用 Java 算是基本完成了。</p>
 
 <p>具体示例代码可参考我的 Github 项目 <a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a>，欢迎 Star。</p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
-</div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
-        
-
-                 
-
-
-                  <h4>一起交流学习，答疑解惑，有问题，我们星球见~~~</h4>
-
-                  <img  width = 750px; height = 409px; src="https://image.glumes.com/images/2019/05/24/WechatIMG515.png">
-
-                 
-
-                
-
-                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
-
-                  <img  width = 780px; height = 568px; src="https://image.glumes.com/images/2019/06/09/multimedia.gif">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/">Android 通过 JNI 调用 Java 类的构造方法和父类的方法</a>
-
-                
-
-                
-
 
         
-        <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
+          <div class="blog-tags">
+            
+              <a href="/tags/android">Android</a>&nbsp;
+            
+              <a href="/tags/jni">JNI</a>&nbsp;
+            
+          </div>
+        
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+        
 
         
       </article>
 
       
-        
-
-<h3>相关文章</h3>
-<ul style="margin-bottom: 25px;">
-    
-    <li><a href="/post/android/android-jni-access-field-and-method/">Android 通过 JNI 访问 Java 字段和方法调用</a></li>
-    
-    <li><a href="/post/android/android-jni-array-operation/">Android JNI 数组 操作</a></li>
-    
-    <li><a href="/post/android/android-jni-basic-operation/">Android JNI 基本操作 </a></li>
-    
-    <li><a href="/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></li>
-    
-    <li><a href="/post/android/build-android-source-code/">编译安卓源码</a></li>
-    
-    <li><a href="/post/android/android-rxjava/">安卓异步之RxJava</a></li>
-    
-    <li><a href="/post/android/rxjava-wrapper-dialog/">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</a></li>
-    
-    <li><a href="/post/android/android-layout-inflater/">Android 布局加载之 LayoutInflater</a></li>
-    
-    <li><a href="/post/android/android-change-skin-by-plugin/">Android 插件换肤原理及源码分析</a></li>
-    
-    <li><a href="/post/android/android-start-service/">Android 6.0 Service 启动过程源码分析（一）</a></li>
-    
-</ul>
-
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://glumes.com/post/android/android-jni-access-field-and-method/" data-toggle="tooltip" data-placement="top" title="Android 通过 JNI 访问 Java 字段和方法调用">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" data-toggle="tooltip" data-placement="top" title="Android  JNI 调用时缓存字段和方法 ID">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
       
 
-      
-      <ul class="pager blog-pager">
-        
-          <li class="previous">
-            <a href="https://glumes.com/post/android/android-jni-access-field-and-method/" data-toggle="tooltip" data-placement="top" title="Android 通过 JNI 访问 Java 字段和方法调用">&larr; Previous Post</a>
-          </li>
-        
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/" data-toggle="tooltip" data-placement="top" title="Android  JNI 调用时缓存字段和方法 ID">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
       
         
+          
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
 <script type="application/javascript">
@@ -600,12 +496,10 @@ Java_com_glumes_cppso_jnioperations_InvokeConstructorOps_callSuperMethod(JNIEnv 
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
           </div>
+          
+        
         
       
-
-
-
-
 
     </div>
   </div>

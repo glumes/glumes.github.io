@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
   <head>
+    <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -101,6 +102,7 @@ if (!doNotTrack) {
 
 </head>
 
+  </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
   <div class="container-fluid">
@@ -150,7 +152,13 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="关于我" href="/about">关于我</a>
+              <a title="关于" href="/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Archive" href="/post/">Archive</a>
             </li>
           
         
@@ -211,26 +219,7 @@ if (!doNotTrack) {
 <div class="container" role="main">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
-            
-                <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
-            
-                <a href="https://glumes.com/tags/framework/">Framework</a> &nbsp;
-            
-          </h5>
-          
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+      
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -245,7 +234,7 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
+      <article role="main" class="blog-post">
         <p>在如下三篇文章中过了一遍 Launcher 启动 Activity 的代码流程。</p>
 
 <ul>
@@ -375,128 +364,41 @@ if (!doNotTrack) {
 <p>开启一个 Activity 组件的生命周期当然是在应用程序进程内了，此时又是 ActivityManagerService 的跨进程通信，执行 ApplicationThread 的 <code>scheduleLaunchActivity</code>，ActivityThread 的消息循环响应方法为 <code>handleLaunchActivity</code>。在该方法内又继续执行 <code>performLaunchActivity</code>将 Activity 组件启动起来。通过反射创建了一个 Activity 对象，并且创建了 Activity 的运行环境上下文，通过 <code>Instrumentation</code> 执行了 Activity 的 onCreate 方法、onStart 方法。接着又执行了<code>handleResumeActivity</code>方法让 Activity 运行到 <code>Resumed</code>状态，真正执行操作的是<code>performResumeActivity</code>方法，而最终还是调用 <code>Instrumentation</code>类的<code>callActivityOnResume</code>方法。</p>
 
 <p>至此，一个 Activity 组件就已经创建成功了，里面具体的代码细节暂不深入讨论了，比如 Activity 的加载之类的。</p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
-</div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
-        
-
-                 
-
-
-                  <h4>一起交流学习，答疑解惑，有问题，我们星球见~~~</h4>
-
-                  <img  width = 750px; height = 409px; src="https://image.glumes.com/images/2019/05/24/WechatIMG515.png">
-
-                 
-
-                
-
-                  <h4>欢迎扫描关注微信公众号：【纸上浅谈】，获得最新文章推送~~~</h4>
-
-                  <img  width = 780px; height = 568px; src="https://image.glumes.com/images/2019/06/09/multimedia.gif">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-start-activity-from-launcher-4/"> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</a>
-
-                
-
-                
-
 
         
-        <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
+          <div class="blog-tags">
+            
+              <a href="/tags/android">Android</a>&nbsp;
+            
+              <a href="/tags/framework">Framework</a>&nbsp;
+            
+          </div>
+        
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+        
 
         
       </article>
 
       
-        
-
-<h3>相关文章</h3>
-<ul style="margin-bottom: 25px;">
-    
-    <li><a href="/post/android/android-start-activity-from-launcher-3/">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a></li>
-    
-    <li><a href="/post/android/android-start-activity-from-launcher-2/">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a></li>
-    
-    <li><a href="/post/android/android-start-activity-from-launcher-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a></li>
-    
-    <li><a href="/post/android/rxjava-wrapper-callback/">用 RxJava 封装回调方法 CallBack</a></li>
-    
-    <li><a href="/post/android/android-hal-summary/">Android 硬件抽象层调用流程小结</a></li>
-    
-    <li><a href="/post/android/kotlin-functional-programming-whth-anko/">Kotlin 函数式编程与 Anko 构建布局实现原理分析</a></li>
-    
-    <li><a href="/post/android/kotlin-with-anko/">Kotlin 使用 Anko 布局那些事</a></li>
-    
-</ul>
-
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://glumes.com/post/android/android-start-activity-from-launcher-3/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（三）">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://glumes.com/post/android/android-dagger-use/" data-toggle="tooltip" data-placement="top" title="Dagger2 在 Android 中的使用">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
       
 
-      
-      <ul class="pager blog-pager">
-        
-          <li class="previous">
-            <a href="https://glumes.com/post/android/android-start-activity-from-launcher-3/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（三）">&larr; Previous Post</a>
-          </li>
-        
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/android-dagger-use/" data-toggle="tooltip" data-placement="top" title="Dagger2 在 Android 中的使用">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
       
         
+          
           <div class="disqus-comments">
             <div id="disqus_thread"></div>
 <script type="application/javascript">
@@ -519,12 +421,10 @@ if (!doNotTrack) {
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
           </div>
+          
+        
         
       
-
-
-
-
 
     </div>
   </div>
