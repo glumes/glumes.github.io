@@ -8,10 +8,33 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Sat, 13 Jul 2019 00:08:18 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 20 Aug 2019 23:51:59 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenGL 实践之贝塞尔曲线绘制</title>
+      <link>https://glumes.com/post/opengl/opengl-draw-bezier-line/</link>
+      <pubDate>Tue, 20 Aug 2019 23:51:59 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-draw-bezier-line/</guid>
+      <description>&lt;p&gt;说到贝塞尔曲线，大家肯定都不陌生，网上有很多关于介绍和理解贝塞尔曲线的优秀文章和动态图。&lt;/p&gt;
+
+&lt;p&gt;以下两个是比较经典的动图了。&lt;/p&gt;
+
+&lt;p&gt;二阶贝塞尔曲线：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://yalantis.com/uploads/ckeditor/pictures/502/content_image04.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;三阶贝塞尔曲线：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://yalantis.com/uploads/ckeditor/pictures/503/content_image06.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;由于在工作中经常要和贝塞尔曲线打交道，所以简单说一下自己的理解：&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>图像库 libjpeg-turbo 编译与实践</title>
