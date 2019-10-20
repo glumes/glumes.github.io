@@ -4,12 +4,47 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2019-08-20T23:51:59+08:00</lastmod>
+    <lastmod>2019-10-20T22:49:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/</loc>
+    <lastmod>2019-10-20T22:49:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/opengl/</loc>
+    <lastmod>2019-10-20T22:49:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/opengl/opengl-transition/</loc>
+    <lastmod>2019-10-20T22:49:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/</loc>
+    <lastmod>2019-10-20T22:49:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/</loc>
+    <lastmod>2019-10-20T22:49:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/android/</loc>
+    <lastmod>2019-10-20T22:49:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/opengl/</loc>
     <lastmod>2019-08-20T23:51:59+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -20,18 +55,6 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/post/</loc>
-    <lastmod>2019-08-20T23:51:59+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/tags/</loc>
-    <lastmod>2019-08-20T23:51:59+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://glumes.com/tags/bezier/</loc>
     <lastmod>2019-08-20T23:51:59+08:00</lastmod>
     <priority>0</priority>
@@ -39,12 +62,6 @@
   
   <url>
     <loc>https://glumes.com/tags/oepngl/</loc>
-    <lastmod>2019-08-20T23:51:59+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/categories/opengl/</loc>
     <lastmod>2019-08-20T23:51:59+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -80,12 +97,6 @@
   <url>
     <loc>https://glumes.com/post/android/google-jetpack-camerax/</loc>
     <lastmod>2019-05-23T08:50:23+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/categories/android/</loc>
-    <lastmod>2019-05-23T08:50:23+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -290,12 +301,6 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/opengl/</loc>
-    <lastmod>2018-09-09T15:20:42+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://glumes.com/post/opengl/opengl-glsl-3-mark/</loc>
     <lastmod>2018-09-09T15:20:42+08:00</lastmod>
   </url>
@@ -354,14 +359,14 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/post/android/android-jni-bitmap-operation/</loc>
-    <lastmod>2018-07-25T13:36:50+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://glumes.com/tags/android/</loc>
     <lastmod>2018-07-25T13:36:50+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/android/android-jni-bitmap-operation/</loc>
+    <lastmod>2018-07-25T13:36:50+08:00</lastmod>
   </url>
   
   <url>

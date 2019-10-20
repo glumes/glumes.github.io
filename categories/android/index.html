@@ -170,6 +170,55 @@ if (!doNotTrack) {
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-transition/">
+                <h2 class="post-title">OpenGL 实现视频编辑中的转场效果</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on October 20, 2019
+              </p>
+              <div class="post-entry">
+                
+                  <h2 id="转场介绍">转场介绍</h2>
+
+<p>转场效果是什么？</p>
+
+<p>转场效果，简单来说就是两段视频之间的衔接过渡效果。</p>
+
+<p>现在拍摄 vlog 的玩家越来越多，要是视频没有一两个炫酷的转场效果，都不好意思拿出来炫酷了。</p>
+
+<p><img src="https://image.glumes.com/images/2019/09/24/9e3df8dcd100baa14d7645fb4a10b912c8fc2e13.gif" alt="" /></p>
+
+<p>那么如何在视频编辑软件中实现转场效果呢？</p>
+
+<p>这里提供使用 OpenGL 实现视频转场的一个小示例，我们可以通过自定义 GLSL 来实现不同的转场效果。</p>
+
+<p>以在 Android 平台上作为演示，但其实不管是 Android 还是 iOS，实现的原理都是一样的。</p>
+
+<p>首先要有两段视频，视频 A 和视频 B，先播放视频 A 后播放视频 B，中间有一段过程称为 C ，C 就是视频 A、B 做转场动画的时间段。</p>
+
+<p>如下所示：</p>
+
+<p><img src="https://image.glumes.com/images/2019/10/14/transition_model.jpg" alt="transition_model.jpg" /></p>
+
+<p>播放器按照时间顺序，从 A -&gt; C -&gt; B 的播放，这样就有了转场的效果。</p>
+                  <a href="https://glumes.com/post/opengl/opengl-transition/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/android/google-jetpack-camerax/">
                 <h2 class="post-title">Google Jetpack 新组件 CameraX 介绍与实践</h2>
 
@@ -514,37 +563,6 @@ public int decrementAndGet(){
                 <span class="post-meta">
                   
                     #<a href="https://glumes.com/tags/retrofit/">Retrofit</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/java-proxy-design-pattern/">
-                <h2 class="post-title">Java 中的静态代理和动态代理</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on August 28, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>代理模式的使用场景如下：</p>
-
-<blockquote>
-<p>当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。</p>
-</blockquote>
-                  <a href="https://glumes.com/post/android/java-proxy-design-pattern/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/java/">Java</a>&nbsp;
                   
                 </span>
               

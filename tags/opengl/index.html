@@ -170,6 +170,55 @@ if (!doNotTrack) {
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-transition/">
+                <h2 class="post-title">OpenGL 实现视频编辑中的转场效果</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on October 20, 2019
+              </p>
+              <div class="post-entry">
+                
+                  <h2 id="转场介绍">转场介绍</h2>
+
+<p>转场效果是什么？</p>
+
+<p>转场效果，简单来说就是两段视频之间的衔接过渡效果。</p>
+
+<p>现在拍摄 vlog 的玩家越来越多，要是视频没有一两个炫酷的转场效果，都不好意思拿出来炫酷了。</p>
+
+<p><img src="https://image.glumes.com/images/2019/09/24/9e3df8dcd100baa14d7645fb4a10b912c8fc2e13.gif" alt="" /></p>
+
+<p>那么如何在视频编辑软件中实现转场效果呢？</p>
+
+<p>这里提供使用 OpenGL 实现视频转场的一个小示例，我们可以通过自定义 GLSL 来实现不同的转场效果。</p>
+
+<p>以在 Android 平台上作为演示，但其实不管是 Android 还是 iOS，实现的原理都是一样的。</p>
+
+<p>首先要有两段视频，视频 A 和视频 B，先播放视频 A 后播放视频 B，中间有一段过程称为 C ，C 就是视频 A、B 做转场动画的时间段。</p>
+
+<p>如下所示：</p>
+
+<p><img src="https://image.glumes.com/images/2019/10/14/transition_model.jpg" alt="transition_model.jpg" /></p>
+
+<p>播放器按照时间顺序，从 A -&gt; C -&gt; B 的播放，这样就有了转场的效果。</p>
+                  <a href="https://glumes.com/post/opengl/opengl-transition/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/opengl/opengl-glsl-3-mark/">
                 <h2 class="post-title">OpenGL ES 3.0 着色器语言 GLSL 学习 Mark </h2>
 
@@ -439,37 +488,6 @@ if (!doNotTrack) {
                 
                   <p>在前面的文章中介绍了 OpenGL 中的环境光，现在就是散射光了。</p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/">
-                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》光照系列之环境光</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    学习笔记内容摘录
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 21, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在 OpenGL 中使用光照。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/" class="post-read-more">[Read More]</a>
                 
               </div>
 
