@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Glumes Blog</title>
+    <title>Tags on 纸上浅谈</title>
     <link>https://glumes.com/tags/</link>
-    <description>Recent content in Tags on Glumes Blog</description>
+    <description>Recent content in Tags on 纸上浅谈</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
@@ -257,7 +257,7 @@
     </item>
     
     <item>
-      <title>android</title>
+      <title>Android</title>
       <link>https://glumes.com/tags/android/</link>
       <pubDate>Wed, 25 Jul 2018 13:36:50 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
