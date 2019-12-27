@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>年终总结 on 纸上浅谈</title>
+    <link>https://glumes.com/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</link>
+    <description>Recent content in 年终总结 on 纸上浅谈</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
+    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <lastBuildDate>Fri, 27 Dec 2019 15:40:54 +0800</lastBuildDate>
+    
+	<atom:link href="https://glumes.com/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2019 年终总结与回顾</title>
+      <link>https://glumes.com/post/life/2019-review/</link>
+      <pubDate>Fri, 27 Dec 2019 15:40:54 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/life/2019-review/</guid>
+      <description>&lt;p&gt;时光荏苒，岁月如梭。&lt;/p&gt;
+
+&lt;p&gt;又到了回顾过去，展望未来的(chui)高(niu)光(bi)时刻了~~&lt;/p&gt;
+
+&lt;h2 id=&#34;职业回顾&#34;&gt;职业回顾&lt;/h2&gt;
+
+&lt;p&gt;去年年底准备跑路，然后年前面试，拿了头条的 offer，年后就入职了~~~&lt;/p&gt;
+
+&lt;p&gt;应聘的岗位是 Android-多媒体开发工程师，具体招聘岗位见官网：&lt;a href=&#34;https://job.bytedance.com/job/detail/26456&#34;&gt;多媒体平台研发工程师-Android — 抖音火山&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;工作内容简单说就是做音视频 SDK，支持头条的一些业务。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
