@@ -8,10 +8,19 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 27 Dec 2019 15:40:54 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 04 Jan 2020 22:53:52 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>android</title>
+      <link>https://glumes.com/categories/android/</link>
+      <pubDate>Sat, 04 Jan 2020 22:53:52 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/categories/android/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Life</title>
@@ -19,15 +28,6 @@
       <pubDate>Fri, 27 Dec 2019 15:40:54 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/categories/life/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>android</title>
-      <link>https://glumes.com/categories/android/</link>
-      <pubDate>Sun, 20 Oct 2019 22:49:00 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/categories/android/</guid>
       <description></description>
     </item>
     

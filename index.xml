@@ -8,10 +8,37 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 27 Dec 2019 15:40:54 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 04 Jan 2020 22:53:52 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LearnOpenGL 源码在 MAC 上的编译与调试</title>
+      <link>https://glumes.com/post/opengl/run-learnopengl-code-on-xcode/</link>
+      <pubDate>Sat, 04 Jan 2020 22:53:52 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/run-learnopengl-code-on-xcode/</guid>
+      <description>&lt;p&gt;学习 OpenGL ，相信肯定有不少人看过这个网站：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://learnopengl.com/&#34;&gt;https://learnopengl.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2020/01/04/WechatIMG585.jpg&#34; alt=&#34;https://learnopengl.com/&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这是它的英文原版网站，后来又有了不同语言的翻译版本，对应中文就是：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://learnopengl-cn.github.io/&#34;&gt;https://learnopengl-cn.github.io/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2020/01/04/WechatIMG586.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这两个网站对于学习 OpenGL 帮助非常大，既可以用作入门的教材，也可以作为工具书，后续进行查漏补缺。&lt;/p&gt;
+
+&lt;p&gt;并且它的内容很全面，除了 OpenGL 基础知识、坐标系统、纹理、Shader、模型加载等，还有高级光照、PBR 等渲染技巧，这些在渲染引擎的开发中都是会用到的，后面会继续和大家分享。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>2019 年终总结与回顾</title>
