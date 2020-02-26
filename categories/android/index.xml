@@ -8,10 +8,33 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Sat, 04 Jan 2020 22:53:52 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 26 Feb 2020 23:33:35 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/android/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</title>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-001/</link>
+      <pubDate>Wed, 26 Feb 2020 23:33:35 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-001/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/8ob0zrHs9_2pmQTOHXPfjg&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。&lt;/p&gt;
+
+&lt;h3 id=&#34;sdl-简介&#34;&gt;SDL 简介&lt;/h3&gt;
+
+&lt;p&gt;SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。&lt;/p&gt;
+
+&lt;p&gt;SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件的低级别访问接口，我们利用这些接口就能在不同系统上播放出音频、视频内容，而无需懂得系统特定的音视频接口。&lt;/p&gt;
+
+&lt;p&gt;这种跨平台特性和 OpenGL 是一样的，差别在与 OpenGL 是真·跨平台，它是 Khronos Group 组织开发维护的一个接口规范，具体的实现是由驱动厂商完成。而 SDL 是把要兼容平台的相关接口都给封装好了，然后才对外提供统一的接口。&lt;/p&gt;
+
+&lt;p&gt;由此可见，高下立判。一个跨平台是写了接口就行，不管实现；另一个是写好了实现，才能跨平台（貌似跑题了）。&lt;/p&gt;
+
+&lt;p&gt;由于 SDL 的跨平台特性，在后续学习 FFmpeg 时就可以利用 SDL 进行音视频的播放操作，而不用像在 Android 平台上搞 FFmpeg 还得编译 so、写 JNI 、写界面那么麻烦，另外 ffplay 源码里面也是用的 SDL 进行播放的，可以从中进行借鉴。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>LearnOpenGL 源码在 MAC 上的编译与调试</title>

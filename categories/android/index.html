@@ -170,6 +170,41 @@ if (!doNotTrack) {
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/ffmpeg/av-beginner-001/">
+                <h2 class="post-title">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on February 26, 2020
+              </p>
+              <div class="post-entry">
+                
+                  <p><a href="https://mp.weixin.qq.com/s/8ob0zrHs9_2pmQTOHXPfjg">技术开发故事会连载</a></p>
+
+<p>这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。</p>
+
+<h3 id="sdl-简介">SDL 简介</h3>
+
+<p>SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。</p>
+
+<p>SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件的低级别访问接口，我们利用这些接口就能在不同系统上播放出音频、视频内容，而无需懂得系统特定的音视频接口。</p>
+
+<p>这种跨平台特性和 OpenGL 是一样的，差别在与 OpenGL 是真·跨平台，它是 Khronos Group 组织开发维护的一个接口规范，具体的实现是由驱动厂商完成。而 SDL 是把要兼容平台的相关接口都给封装好了，然后才对外提供统一的接口。</p>
+
+<p>由此可见，高下立判。一个跨平台是写了接口就行，不管实现；另一个是写好了实现，才能跨平台（貌似跑题了）。</p>
+
+<p>由于 SDL 的跨平台特性，在后续学习 FFmpeg 时就可以利用 SDL 进行音视频的播放操作，而不用像在 Android 平台上搞 FFmpeg 还得编译 so、写 JNI 、写界面那么麻烦，另外 ffplay 源码里面也是用的 SDL 进行播放的，可以从中进行借鉴。</p>
+                  <a href="https://glumes.com/post/ffmpeg/av-beginner-001/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/opengl/run-learnopengl-code-on-xcode/">
                 <h2 class="post-title">LearnOpenGL 源码在 MAC 上的编译与调试</h2>
 
@@ -548,33 +583,6 @@ public int decrementAndGet(){
                     #<a href="https://glumes.com/tags/cmake/">CMake</a>&nbsp;
                   
                     #<a href="https://glumes.com/tags/ndk/">NDK</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/okhttp-analysis/">
-                <h2 class="post-title">开源库之 OkHttp 源码分析</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 11, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>分析一波 OkHttp 的源码实现。</p>
-                  <a href="https://glumes.com/post/android/okhttp-analysis/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/okhttp/">OkHttp</a>&nbsp;
                   
                 </span>
               

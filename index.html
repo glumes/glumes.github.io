@@ -204,7 +204,7 @@ if (!doNotTrack) {
                 
                 
                   <span class="post-meta">
-  Posted on January 4, 2020
+  Posted on February 26, 2020
   
 </span>
 
@@ -226,6 +226,43 @@ if (!doNotTrack) {
 
         <div class="posts-list">
           
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/ffmpeg/av-beginner-001/">
+                <h2 class="post-title">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  Posted on February 26, 2020
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p><a href="https://mp.weixin.qq.com/s/8ob0zrHs9_2pmQTOHXPfjg">技术开发故事会连载</a></p>
+
+<p>这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。</p>
+
+<h3 id="sdl-简介">SDL 简介</h3>
+
+<p>SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。</p>
+
+<p>SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件的低级别访问接口，我们利用这些接口就能在不同系统上播放出音频、视频内容，而无需懂得系统特定的音视频接口。</p>
+
+<p>这种跨平台特性和 OpenGL 是一样的，差别在与 OpenGL 是真·跨平台，它是 Khronos Group 组织开发维护的一个接口规范，具体的实现是由驱动厂商完成。而 SDL 是把要兼容平台的相关接口都给封装好了，然后才对外提供统一的接口。</p>
+
+<p>由此可见，高下立判。一个跨平台是写了接口就行，不管实现；另一个是写好了实现，才能跨平台（貌似跑题了）。</p>
+
+<p>由于 SDL 的跨平台特性，在后续学习 FFmpeg 时就可以利用 SDL 进行音视频的播放操作，而不用像在 Android 平台上搞 FFmpeg 还得编译 so、写 JNI 、写界面那么麻烦，另外 ffplay 源码里面也是用的 SDL 进行播放的，可以从中进行借鉴。</p>
+                  <a href="https://glumes.com/post/ffmpeg/av-beginner-001/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/opengl/run-learnopengl-code-on-xcode/">
@@ -642,43 +679,6 @@ if (!doNotTrack) {
                   #<a href="https://glumes.com/tags/rust/">rust</a>&nbsp;
                 
                   #<a href="https://glumes.com/tags/so/">so</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/">
-                <h2 class="post-title">Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on May 14, 2019
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>在 OpenGL 开发中，我们要渲染一张图片，通常先是得到一张图片对应的 Bitmap ,然后将该 Bitmap 作为纹理上传到 OpenGL 中。在 Android 中有封装好的 <code>GLUtils</code> 类的 <code>texImage2D</code> 方法供我们调用。</p>
-
-<pre><code class="language-java">    public static void texImage2D(int target, int level, int internalformat,
-            Bitmap bitmap, int type, int border)
-</code></pre>
-
-<p>该方法的底层原理实际上也是解析了该 Bitmap ，得到了 Bitmap 所有的像素数据，类似于 Android NDK 关于 Bitmap 操作的 <code>AndroidBitmap_lockPixels</code> 方法，如果你不太了解该方法，可以参考这篇文章：<a href="https://glumes.com/post/android/android-jni-bitmap-operation/">Android JNI 之 Bitmap 操作</a>。</p>
-
-<p>得到了所有像素数据之后，实际最终还是调用了 OpenGL 的 <code>glTexImage2D</code> 来实现纹理上传。当然，如果可以直接得到所有数据，也不需要走解析 Bitmap 这一步了，这种场景最常见的就是把相机作为输入了。</p>
-                  <a href="https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
                 
                 </span>
               
