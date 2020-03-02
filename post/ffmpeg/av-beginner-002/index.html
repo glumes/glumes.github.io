@@ -6,57 +6,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</title>
-  <meta property="og:title" content="【音视频连载-001】基础学习篇- SDL 介绍以及工程配置" />
-  <meta name="twitter:title" content="【音视频连载-001】基础学习篇- SDL 介绍以及工程配置" />
+  <title>【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</title>
+  <meta property="og:title" content="【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色" />
+  <meta name="twitter:title" content="【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色" />
 
-  <meta name="description" content="技术开发故事会连载
+  <meta name="description" content="音视频技术文章连载：
 
-这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。
 
-SDL 简介
+技术开发故事会连载
+【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
 
-SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。
 
-SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件的低级别访问接口，我们利用这些接口就能在不同系统上播放出音频、视频内容，而无需懂得系统特定的音视频接口。
+在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。
 
-这种跨平台特性和 OpenGL 是一样的，差别在与 OpenGL 是真·跨平台，它是 Khronos Group 组织开发维护的一个接口规范，具体的实现是由驱动厂商完成。而 SDL 是把要兼容平台的相关接口都给封装好了，然后才对外提供统一的接口。
+本篇文章主要是创建一个应用程序窗口并显示。">
+  <meta property="og:description" content="音视频技术文章连载：
 
-由此可见，高下立判。一个跨平台是写了接口就行，不管实现；另一个是写好了实现，才能跨平台（貌似跑题了）。
 
-由于 SDL 的跨平台特性，在后续学习 FFmpeg 时就可以利用 SDL 进行音视频的播放操作，而不用像在 Android 平台上搞 FFmpeg 还得编译 so、写 JNI 、写界面那么麻烦，另外 ffplay 源码里面也是用的 SDL 进行播放的，可以从中进行借鉴。">
-  <meta property="og:description" content="技术开发故事会连载
+技术开发故事会连载
+【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
 
-这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。
 
-SDL 简介
+在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。
 
-SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。
+本篇文章主要是创建一个应用程序窗口并显示。">
+  <meta name="twitter:description" content="音视频技术文章连载：
 
-SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件的低级别访问接口，我们利用这些接口就能在不同系统上播放出音频、视频内容，而无需懂得系统特定的音视频接口。
 
-这种跨平台特性和 OpenGL 是一样的，差别在与 OpenGL 是真·跨平台，它是 Khronos Group 组织开发维护的一个接口规范，具体的实现是由驱动厂商完成。而 SDL 是把要兼容平台的相关接口都给封装好了，然后才对外提供统一的接口。
+技术开发故事会连载
+【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
 
-由此可见，高下立判。一个跨平台是写了接口就行，不管实现；另一个是写好了实现，才能跨平台（貌似跑题了）。
 
-由于 SDL 的跨平台特性，在后续学习 FFmpeg 时就可以利用 SDL 进行音视频的播放操作，而不用像在 Android 平台上搞 FFmpeg 还得编译 so、写 JNI 、写界面那么麻烦，另外 ffplay 源码里面也是用的 SDL 进行播放的，可以从中进行借鉴。">
-  <meta name="twitter:description" content="技术开发故事会连载
+在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。
 
-这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。
-
-SDL 简介
-
-SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。
-
-SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件 …">
+本篇文章主要是创建一个应用程序窗口并显示。">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-001/" />
+  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-002/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="纸上浅谈" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-001/" />
+  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-002/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="纸上浅谈">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
@@ -194,7 +185,7 @@ if (!doNotTrack) {
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://cdn.pixabay.com/photo/2019/06/20/12/33/geranium-4287012_960_720.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ae01.alicdn.com/kf/Ua7d5a4cdf8ba4286a43d0af24ebd23a5j.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -209,10 +200,10 @@ if (!doNotTrack) {
                 <div class="page-heading">
                 
                   
-                     <h1>【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</h1>
+                     <h1>【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</h1>
                      
                     <span class="post-meta">
-  Posted on February 26, 2020
+  Posted on March 2, 2020
   
 </span>
 
@@ -233,7 +224,7 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</h1>
+                <h1 align="center">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</h1>
                 
                 
             </div>
@@ -273,11 +264,10 @@ if (!doNotTrack) {
 <ul>
 <li>
 <ul>
-<li><a href="#sdl-简介">SDL 简介</a></li>
-<li><a href="#sdl-下载安装">SDL 下载安装</a></li>
-<li><a href="#clion-新建工程">CLion 新建工程</a></li>
-<li><a href="#c-工程关联-sdl-库">C++ 工程关联 SDL 库</a></li>
-<li><a href="#代码实践">代码实践</a></li>
+<li><a href="#创建-sdl-窗口">创建 SDL 窗口</a></li>
+<li><a href="#展示-sdl-窗口">展示 SDL 窗口</a></li>
+<li><a href="#渲染-sdl-窗口">渲染 SDL 窗口</a></li>
+<li><a href="#销毁-sdl-窗口">销毁 SDL 窗口</a></li>
 <li><a href="#总结">总结</a></li>
 </ul></li>
 </ul></li>
@@ -286,130 +276,118 @@ if (!doNotTrack) {
 </aside>
 
         
-        <p><a href="https://mp.weixin.qq.com/s/8ob0zrHs9_2pmQTOHXPfjg">技术开发故事会连载</a></p>
+        <p>音视频技术文章连载：</p>
 
-<p>这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
+</ul>
 
-<h3 id="sdl-简介">SDL 简介</h3>
+<p>在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。</p>
 
-<p>SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。</p>
+<p>本篇文章主要是创建一个应用程序窗口并显示。</p>
 
-<p>SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件的低级别访问接口，我们利用这些接口就能在不同系统上播放出音频、视频内容，而无需懂得系统特定的音视频接口。</p>
+<h3 id="创建-sdl-窗口">创建 SDL 窗口</h3>
 
-<p>这种跨平台特性和 OpenGL 是一样的，差别在与 OpenGL 是真·跨平台，它是 Khronos Group 组织开发维护的一个接口规范，具体的实现是由驱动厂商完成。而 SDL 是把要兼容平台的相关接口都给封装好了，然后才对外提供统一的接口。</p>
+<p>通过 SDL 中的 <code>SDL_CreateWindow</code> 函数就能够创建了，</p>
 
-<p>由此可见，高下立判。一个跨平台是写了接口就行，不管实现；另一个是写好了实现，才能跨平台（貌似跑题了）。</p>
-
-<p>由于 SDL 的跨平台特性，在后续学习 FFmpeg 时就可以利用 SDL 进行音视频的播放操作，而不用像在 Android 平台上搞 FFmpeg 还得编译 so、写 JNI 、写界面那么麻烦，另外 ffplay 源码里面也是用的 SDL 进行播放的，可以从中进行借鉴。</p>
-
-<h3 id="sdl-下载安装">SDL 下载安装</h3>
-
-<p>在 Mac 上下载 SDL 很简单，直接</p>
-
-<pre><code class="language-sh">brew install sdl2
+<pre><code class="language-cpp">extern DECLSPEC SDL_Window * SDLCALL SDL_CreateWindow(
+        const char *title,
+        int x, int y, int w,
+        int h, Uint32 flags);
 </code></pre>
 
-<p>注意，这里下载的是 SDL 2.0 版本，如果用如下的命令</p>
+<p>其中，<code>title</code> 就是窗口的标题，<code>x</code>,<code>y</code>,<code>width</code>,<code>height</code> 就是窗口的左上角坐标点和宽高值。</p>
 
-<pre><code class="language-sh">brew install sdl
+<p>最后的 <code>flags</code> 参数有很多类型，不同的类型对应不同的窗口功能，比如窗口全屏、是否可见等，具体可以在 SDL 源码中找到。</p>
+
+<p>这里简单设置成如下：</p>
+
+<pre><code class="language-cpp">    int width = 400;
+    int height = 400;
+    SDL_Window *window = SDL_CreateWindow(&quot;Hello SDL&quot;,
+            SDL_WINDOWPOS_CENTERED,
+            SDL_WINDOWPOS_CENTERED,
+            width,height,
+            SDL_WINDOW_ALLOW_HIGHDPI);
 </code></pre>
 
-<p>下载的就是 SDL 1.0 版本了，区别就是版本后面数字 <code>2</code> 的后缀。</p>
+<p>对于窗口的左上角坐标点使用 SDL 默认的宏 <code>SDL_WINDOWPOS_CENTERED</code> 让它居中显示就好了，flags 使用 <code>SDL_WINDOW_ALLOW_HIGHDPI</code>。</p>
 
-<p>采用最新的 2.0 ，我当前使用的版本号就是 <strong>2.0.10</strong> 。</p>
+<h3 id="展示-sdl-窗口">展示 SDL 窗口</h3>
 
-<p>如果是 Windows 系统，参考下其他文章的下载配置吧，没有电脑也没办法了。</p>
+<p>SDL_Window 并没有什么 <code>show</code> 的方法，看到网上的文章应该一创建就可以显示出来了，如果出现随着程序退出，窗口一闪而过的情况加个 <code>SDL_Delay</code> 延时一段时间也行。</p>
 
-<p>SDL 下载之后位于 MAC 系统的如下目录，这个目录后续会用到的。</p>
+<p>不过可能是由于 MAC 系统或者 SDL 版本的问题，实际上并没有窗口弹出来，倒是在任务栏中确实能看到有个程序在运行。</p>
 
-<blockquote>
-<p>/usr/local/Cellar/sdl2/2.0.10</p>
-</blockquote>
+<p>后来在创建窗口之后，加上如下的代码就好了：</p>
 
-<h3 id="clion-新建工程">CLion 新建工程</h3>
-
-<p>接下来就开始打开 CLion ，新建一个 C++ 工程。</p>
-
-<p>这里用到 CLion 是因为它确实好用，自动补全、代码提示、断点调试等功能非常好用，只是没有社区免费版的，有 30 天的免费试用期，之后就得靠激活码激活了。</p>
-
-<p>好在是用 CMake 进行编译的，如果下载了工程源码，并且配置好了 CMake 的关联库和头文件，直接用 CMake 命令行也可以进行编译的，这个后面会讲到。</p>
-
-<h3 id="c-工程关联-sdl-库">C++ 工程关联 SDL 库</h3>
-
-<p>接下来就是在 C++ 工程中关联 SDL 库，便于在工程中引用 SDL 相关头文件。</p>
-
-<p>之前提到 SDL 的安装路径如下：</p>
-
-<pre><code class="language-sh">/usr/local/Cellar/sdl2/2.0.10
+<pre><code class="language-cpp">    SDL_Event windowEvent;
+    while (true){
+        if (SDL_PollEvent(&amp;windowEvent)){
+            if (SDL_QUIT == windowEvent.type){
+                break;
+            }
+        }
+    }
 </code></pre>
 
-<p>该目录如下图：</p>
+<p>在程序中创建一个死循环，当做消息循环机制，只有当满足特定条件时才退出循环结束程序。</p>
 
-<p><img src="https://images.xiaozhuanlan.com/photo/2020/650c10feacc111f9a09d873711bdf0cb.png" alt="" /></p>
+<p>添加这段代码之后在运行，就能看到窗口了。</p>
 
-<p>其中 include 就是头文件的路径，lib 就是库的路径。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2020/1d025b77a1530eedbf0782e26e233bf6.png" alt="" /></p>
 
-<p>这里要用到 <code>include_directories</code> 和 <code>link_directories</code> 两个命令。</p>
+<h3 id="渲染-sdl-窗口">渲染 SDL 窗口</h3>
 
-<p>其中：</p>
+<p>现在还是一个黑漆漆的窗口，那是因为还没有给它渲染上颜色。</p>
 
-<blockquote>
-<p><code>include_directories</code> 是将头文件所在文件夹添加在搜索路径中，这样就能通过 <code>include</code> 去加载头文件了。</p>
+<p>渲染窗口，首先要创建一个渲染器，并设置渲染颜色，然后开始渲染。</p>
 
-<p><code>link_directories</code> 是将库所在的文件夹添加在路径中去，这样在编译时就能链接到这个库。</p>
-</blockquote>
+<p>如下代码所示：</p>
 
-<p>具体代码如下：</p>
-
-<pre><code class="language-cpp"># 声明一个变量 SDL_DIR 为 SDL 安装路径
-set(SDL_DIR &quot;/usr/local/Cellar/sdl2/2.0.10&quot;)
-# 设置要包含的头文件的路径
-include_directories(${SDL_DIR}/include)
-# 设置要关联的库的路径
-link_directories(${SDL_DIR}/lib)
+<pre><code class="language-cpp">    SDL_Renderer* pRenderer = NULL;
+    // 创建渲染器
+    pRenderer = SDL_CreateRenderer(window, -1, 0);
+    // 指定渲染颜色
+    SDL_SetRenderDrawColor(pRenderer,0,255,0,255);
+    // 清空当前窗口的颜色
+    SDL_RenderClear(pRenderer);
+    // 执行渲染操作，更新窗口
+    SDL_RenderPresent(pRenderer);
 </code></pre>
 
-<p>代码中声明了一个变量 <code>SDL_DIR</code> 作为安装路径，如果你的系统上路径有所不同，只需要修改路径就行了。</p>
+<p>调用 <code>SDL_CreateRenderer</code> 方法来创建渲染器，并通过 <code>SDL_SetRenderDrawColor</code> 来指定颜色，颜色参数都是 <code>red</code>、<code>green</code>、<code>blue</code>、<code>alpha</code> 四个，这里指定了渲染为绿色。</p>
 
-<blockquote>
-<p>在 MAC 上也可以把路径设置成 <code>/usr/local</code>，所有的库安装时在这个目录的 <code>lib</code> 和 <code>include</code> 目录下也有一份索引。</p>
-</blockquote>
+<p>然后通过 <code>SDL_RenderClear</code> 方法清空一下当前窗口上的颜色，避免和要渲染的颜色混在一起了，最后就可以执行渲染了。</p>
 
-<p>最后将我们要编译的程序关联上 SDL 这个库。</p>
+<p>这个流程和 OpenGL 的渲染操作有点类似了：</p>
 
-<p>你可以通过 <code>link_directories</code> 命令将很多库所在文件夹都添加到路径中，但是只有 <code>target_link_libraries</code> 命令才会最终决定关联什么库，如果你添加的文件夹路径没有对应库的话，反而要报错的。</p>
-
-<p>实现代码如下：</p>
-
-<pre><code class="language-cpp">target_link_libraries(av-beginner SDL2)
+<pre><code class="language-cpp">glClearColor()
+glClear()
+glDrawArrays() 
 </code></pre>
 
-<p><code>target_link_libraries</code> 方法会优先链接动态库，也可以显示指定动态库或者静态库。MAC 上动态库的后缀是 <code>dylib</code> 。在上面的图片可以看到 <code>libSDL2.dylib</code> 其实是一个索引，真正的库是 <code>libSDL2-2.0.0.dylib</code>，索引忽略了它的版本号。</p>
+<p>也是先清空后渲染，实际效果如下：</p>
 
-<p>完成了 SDL 库的关联，就可以开始真正编写代码了。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2020/26c7c7f2bd4a2135d668ff898352fd3f.png" alt="" /></p>
 
-<h3 id="代码实践">代码实践</h3>
+<p>这样就创建了一个窗口，并且显示指定颜色。</p>
 
-<p>代码实践主要是验证我们的环境配置有没有问题，运行一个 SDL 函数来试试。</p>
+<h3 id="销毁-sdl-窗口">销毁 SDL 窗口</h3>
 
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;SDL2/SDL.h&gt;
-using namespace std;
+<p>最后，当退出循环时，要执行销毁操作，把创建的 SDL_Window 和 SDL_Renderer 都释放了。</p>
 
-int main(){
-    cout &lt;&lt; &quot;hello av-beginner&quot; &lt;&lt; endl;
-    SDL_Init(SDL_INIT_EVERYTHING);
-    return 0;
-}
+<pre><code class="language-cpp">    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(pRenderer);
+    SDL_Quit();
 </code></pre>
 
-<p><code>SDL_Init</code> 是 SDL 的初始化函数，可以根据所需功能选择性的初始化也可以全部初始化。</p>
-
-<p>如果程序正常输出并且正常退出，那么说明环境配置 OK 了，后面就可以进行功能开发了。</p>
+<p>这样就完成了整个程序。</p>
 
 <h3 id="总结">总结</h3>
 
-<p>以上就是音视频基础学习连载的 <code>001</code> 篇。</p>
+<p>以上就是音视频基础学习连载的 <code>002</code> 篇。</p>
 
 <p>具体代码见仓库：</p>
 
@@ -417,7 +395,9 @@ int main(){
 <p><a href="https://github.com/glumes/av-beginner">https://github.com/glumes/av-beginner</a></p>
 </blockquote>
 
-<p>本篇文章对应的提交 <code>tag</code> 为 <code>av-beginner-001</code>，可切换至对应源码查看。</p>
+<p>本篇文章对应的提交 <code>tag</code> 为 <code>av-beginner-002</code>，可切换至对应源码查看。</p>
+
+<p>能力有限，文中有不对之处，欢迎加我微信 ezgluems 进行交流~~</p>
         
           <div class="entry-shang text-center">
     <p>「真诚赞赏，手留余香」</p>
@@ -465,7 +445,7 @@ int main(){
 
                 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-001/">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-002/">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a>
 
                 
 
@@ -494,19 +474,22 @@ int main(){
       
         
 
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/ffmpeg/av-beginner-001/">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</a></li>
+    
+</ul>
+
       
 
       
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/opengl/run-learnopengl-code-on-xcode/" data-toggle="tooltip" data-placement="top" title="LearnOpenGL 源码在 MAC 上的编译与调试">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/ffmpeg/av-beginner-001/" data-toggle="tooltip" data-placement="top" title="【音视频连载-001】基础学习篇- SDL 介绍以及工程配置">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-002/" data-toggle="tooltip" data-placement="top" title="【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色">Next Post &rarr;</a>
-          </li>
         
       </ul>
       
