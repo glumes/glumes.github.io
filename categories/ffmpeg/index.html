@@ -170,6 +170,53 @@ if (!doNotTrack) {
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/ffmpeg/av-beginner-003/">
+                <h2 class="post-title">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on March 3, 2020
+              </p>
+              <div class="post-entry">
+                
+                  <p>音视频学习入门技术文章连载：</p>
+
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
+</ul>
+
+<p>在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。</p>
+
+<p>为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。</p>
+
+<pre><code class="language-cpp">    SDL_Event windowEvent;
+    while (true){
+        if (SDL_PollEvent(&amp;windowEvent)){
+            if (SDL_QUIT == windowEvent.type){
+                break;
+            }
+        }
+    }
+</code></pre>
+                  <a href="https://glumes.com/post/ffmpeg/av-beginner-003/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/sdl/">SDL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/ffmpeg/av-beginner-002/">
                 <h2 class="post-title">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</h2>
 

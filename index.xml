@@ -8,10 +8,39 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Mon, 02 Mar 2020 20:40:02 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 03 Mar 2020 22:54:26 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</title>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-003/</link>
+      <pubDate>Tue, 03 Mar 2020 22:54:26 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-003/</guid>
+      <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA&#34;&gt;【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。&lt;/p&gt;
+
+&lt;p&gt;为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;    SDL_Event windowEvent;
+    while (true){
+        if (SDL_PollEvent(&amp;amp;windowEvent)){
+            if (SDL_QUIT == windowEvent.type){
+                break;
+            }
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
     
     <item>
       <title>【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</title>

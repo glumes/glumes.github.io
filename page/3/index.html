@@ -158,7 +158,7 @@ if (!doNotTrack) {
 
 
   
-    <div id="header-big-imgs" data-num-img=3 data-img-src-1="https://res.cloudinary.com/glumes-com/image/upload/v1516345959/WechatIMG9337_jhk6yp.jpg" data-img-desc-1="广州 · 老城区"data-img-src-2="https://res.cloudinary.com/glumes-com/image/upload/v1517475212/life/WechatIMG309.jpg" data-img-desc-2="凤凰古城"data-img-src-3="https://res.cloudinary.com/glumes-com/image/upload/v1517475393/life/WechatIMG310.jpg" data-img-desc-3="张家界"></div>
+    <div id="header-big-imgs" data-num-img=3 data-img-src-1="https://ae01.alicdn.com/kf/U8e416f129f5040ec903a219b08d4ffcdl.jpg" data-img-desc-1="广州 · 老城区"data-img-src-2="https://ae01.alicdn.com/kf/U18dc68030de44ec1939bd785e5049c284.jpg" data-img-desc-2="凤凰古城"data-img-src-3="https://ae01.alicdn.com/kf/U14a2f76ec4624c71996a1b1bacbcda56L.jpg" data-img-desc-3="张家界"></div>
   
 
   <header class="header-section has-img">
@@ -204,7 +204,7 @@ if (!doNotTrack) {
                 
                 
                   <span class="post-meta">
-  Posted on March 2, 2020
+  Posted on March 3, 2020
   
 </span>
 
@@ -226,6 +226,64 @@ if (!doNotTrack) {
 
         <div class="posts-list">
           
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/java/java-multithread-overview/">
+                <h2 class="post-title">Java 显式锁 Lock 与条件队列</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  Posted on November 19, 2018
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>在 Java 5.0 之前，在协调对共享对象的访问时可以使用的机制只有 <code>synchronized</code> 内置锁和 <code>volatile</code> 关键字。</p>
+
+<p>Java 5.0 增加了一种新的机制：<code>Lock</code>  显式锁，当内置锁 <code>synchronized</code> 不适用时，它就可以作为一种新的选择。</p>
+
+<p>回顾一下内置锁 synchronized 的使用：</p>
+
+<pre><code class="language-java">// synchronized关键字用法示例
+public synchronized void add(int t){// 同步方法
+    this.v += t;
+}
+
+public static synchronized void sub(int t){// 同步静态方法
+    value -= t;
+}
+public int decrementAndGet(){
+    synchronized(obj){// 同步代码块
+        return --v;
+    }
+}
+</code></pre>
+
+<p>内置锁不需要显式的获取和释放，任何一个对象都能作为一把内置锁。</p>
+
+<ul>
+<li>当 synchronized 作用于普通方法时，锁对象是 this 。</li>
+<li>当 synchronized 作用于静态方法时，锁对象是当前类的 Class 对象。</li>
+<li>当 synchronized 作用于代码块时，锁对象是 synchronized(obj) 中的这个 obj 对象。</li>
+</ul>
+
+<hr />
+                  <a href="https://glumes.com/post/java/java-multithread-overview/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/java/">Java</a>&nbsp;
+                
+                </span>
+              
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/">
@@ -515,39 +573,6 @@ if (!doNotTrack) {
                   #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
                 
                   #<a href="https://glumes.com/tags/fbo/">FBO</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-egl-usage/">
-                <h2 class="post-title">OpenGL 之 EGL 使用实践</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on September 2, 2018
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。</p>
-
-<p>而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 <code>EGL</code> 来完成这个转换工作。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-egl-usage/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/egl/">EGL</a>&nbsp;
                 
                 </span>
               

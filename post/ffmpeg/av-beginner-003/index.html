@@ -6,48 +6,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</title>
-  <meta property="og:title" content="【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色" />
-  <meta name="twitter:title" content="【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色" />
+  <title>【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</title>
+  <meta property="og:title" content="【音视频连载-003】基础学习篇-SDL 消息循环和事件响应" />
+  <meta name="twitter:title" content="【音视频连载-003】基础学习篇-SDL 消息循环和事件响应" />
 
-  <meta name="description" content="音视频技术文章连载：
-
-
-技术开发故事会连载
-【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
-
-
-在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。
-
-本篇文章主要是创建一个应用程序窗口并显示。">
-  <meta property="og:description" content="音视频技术文章连载：
+  <meta name="description" content="音视频学习入门技术文章连载：
 
 
 技术开发故事会连载
 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
+【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
 
 
-在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。
+在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
 
-本篇文章主要是创建一个应用程序窗口并显示。">
-  <meta name="twitter:description" content="音视频技术文章连载：
+为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。
+
+    SDL_Event windowEvent;
+    while (true){
+        if (SDL_PollEvent(&amp;windowEvent)){
+            if (SDL_QUIT == windowEvent.type){
+                break;
+            }
+        }
+    }
+">
+  <meta property="og:description" content="音视频学习入门技术文章连载：
 
 
 技术开发故事会连载
 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
+【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
 
 
-在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。
+在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
 
-本篇文章主要是创建一个应用程序窗口并显示。">
+为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。
+
+    SDL_Event windowEvent;
+    while (true){
+        if (SDL_PollEvent(&amp;windowEvent)){
+            if (SDL_QUIT == windowEvent.type){
+                break;
+            }
+        }
+    }
+">
+  <meta name="twitter:description" content="音视频学习入门技术文章连载：
+
+
+技术开发故事会连载
+【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
+【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
+
+
+在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
+
+为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。
+
+    SDL_Event …">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-002/" />
+  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-003/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="纸上浅谈" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-002/" />
+  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-003/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="纸上浅谈">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
@@ -185,7 +210,7 @@ if (!doNotTrack) {
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ae01.alicdn.com/kf/Ua7d5a4cdf8ba4286a43d0af24ebd23a5j.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ae01.alicdn.com/kf/Uc2811317b9fb451aa4e7ddccde55aed2b.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -200,10 +225,10 @@ if (!doNotTrack) {
                 <div class="page-heading">
                 
                   
-                     <h1>【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</h1>
+                     <h1>【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</h1>
                      
                     <span class="post-meta">
-  Posted on March 2, 2020
+  Posted on March 3, 2020
   
 </span>
 
@@ -224,7 +249,7 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</h1>
+                <h1 align="center">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</h1>
                 
                 
             </div>
@@ -264,63 +289,29 @@ if (!doNotTrack) {
 <ul>
 <li>
 <ul>
-<li><a href="#创建-sdl-窗口">创建 SDL 窗口</a></li>
-<li><a href="#展示-sdl-窗口">展示 SDL 窗口</a></li>
-<li><a href="#渲染-sdl-窗口">渲染 SDL 窗口</a></li>
-<li><a href="#销毁-sdl-窗口">销毁 SDL 窗口</a></li>
-<li><a href="#总结">总结</a></li>
+<li><a href="#sdl-消息循环和事件响应">SDL 消息循环和事件响应</a></li>
 </ul></li>
+<li><a href="#键盘响应">键盘响应</a></li>
+<li><a href="#鼠标响应">鼠标响应</a></li>
+<li><a href="#自定义事件响应">自定义事件响应</a></li>
+<li><a href="#总结">总结</a></li>
 </ul></li>
 </ul>
 </nav>
 </aside>
 
         
-        <p>音视频技术文章连载：</p>
+        <p>音视频学习入门技术文章连载：</p>
 
 <ul>
 <li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
 <li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
 </ul>
 
-<p>在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。</p>
+<p>在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。</p>
 
-<p>本篇文章主要是创建一个应用程序窗口并显示。</p>
-
-<h3 id="创建-sdl-窗口">创建 SDL 窗口</h3>
-
-<p>通过 SDL 中的 <code>SDL_CreateWindow</code> 函数就能够创建了，</p>
-
-<pre><code class="language-cpp">extern DECLSPEC SDL_Window * SDLCALL SDL_CreateWindow(
-        const char *title,
-        int x, int y, int w,
-        int h, Uint32 flags);
-</code></pre>
-
-<p>其中，<code>title</code> 就是窗口的标题，<code>x</code>,<code>y</code>,<code>width</code>,<code>height</code> 就是窗口的左上角坐标点和宽高值。</p>
-
-<p>最后的 <code>flags</code> 参数有很多类型，不同的类型对应不同的窗口功能，比如窗口全屏、是否可见等，具体可以在 SDL 源码中找到。</p>
-
-<p>这里简单设置成如下：</p>
-
-<pre><code class="language-cpp">    int width = 400;
-    int height = 400;
-    SDL_Window *window = SDL_CreateWindow(&quot;Hello SDL&quot;,
-            SDL_WINDOWPOS_CENTERED,
-            SDL_WINDOWPOS_CENTERED,
-            width,height,
-            SDL_WINDOW_ALLOW_HIGHDPI);
-</code></pre>
-
-<p>对于窗口的左上角坐标点使用 SDL 默认的宏 <code>SDL_WINDOWPOS_CENTERED</code> 让它居中显示就好了，flags 使用 <code>SDL_WINDOW_ALLOW_HIGHDPI</code>。</p>
-
-<h3 id="展示-sdl-窗口">展示 SDL 窗口</h3>
-
-<p>SDL_Window 并没有什么 <code>show</code> 的方法，看到网上的文章应该一创建就可以显示出来了，如果出现随着程序退出，窗口一闪而过的情况加个 <code>SDL_Delay</code> 延时一段时间也行。</p>
-
-<p>不过可能是由于 MAC 系统或者 SDL 版本的问题，实际上并没有窗口弹出来，倒是在任务栏中确实能看到有个程序在运行。</p>
-
-<p>后来在创建窗口之后，加上如下的代码就好了：</p>
+<p>为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。</p>
 
 <pre><code class="language-cpp">    SDL_Event windowEvent;
     while (true){
@@ -332,72 +323,203 @@ if (!doNotTrack) {
     }
 </code></pre>
 
-<p>在程序中创建一个死循环，当做消息循环机制，只有当满足特定条件时才退出循环结束程序。</p>
+<h3 id="sdl-消息循环和事件响应">SDL 消息循环和事件响应</h3>
 
-<p>添加这段代码之后在运行，就能看到窗口了。</p>
+<p>和 Android 中的 Handler 机制有些类似，Handler 会关联一个线程，线程内部维护一个消息队列 MessageQueue，通过 Handler 像 MessageQueue 发送消息，然后再从 MessageQueue 中取出 Message 进行处理。</p>
 
-<p><img src="https://images.xiaozhuanlan.com/photo/2020/1d025b77a1530eedbf0782e26e233bf6.png" alt="" /></p>
+<p>在 SDL 中通过 <code>SDL_PollEvent</code> 从消息队列取出消息，如果有则返回 1，没用则返回 0。</p>
 
-<h3 id="渲染-sdl-窗口">渲染 SDL 窗口</h3>
+<p><code>SDL_Event</code> 结构体代表消息事件，其中的 <code>type</code> 指定具体的事件类型，在 <code>SDL_events.h</code> 文件中能看到所有的事件类型，抄录一些比较典型的：</p>
 
-<p>现在还是一个黑漆漆的窗口，那是因为还没有给它渲染上颜色。</p>
+<pre><code class="language-cpp">typedef enum
+{
+   /* Application events */
+    SDL_QUIT           = 0x100, /**&lt; User-requested quit */
+    
+   /* Keyboard events */
+    SDL_KEYDOWN        = 0x300, /**&lt; Key pressed */
+    SDL_KEYUP,                  /**&lt; Key released */
 
-<p>渲染窗口，首先要创建一个渲染器，并设置渲染颜色，然后开始渲染。</p>
-
-<p>如下代码所示：</p>
-
-<pre><code class="language-cpp">    SDL_Renderer* pRenderer = NULL;
-    // 创建渲染器
-    pRenderer = SDL_CreateRenderer(window, -1, 0);
-    // 指定渲染颜色
-    SDL_SetRenderDrawColor(pRenderer,0,255,0,255);
-    // 清空当前窗口的颜色
-    SDL_RenderClear(pRenderer);
-    // 执行渲染操作，更新窗口
-    SDL_RenderPresent(pRenderer);
+    /* Mouse events */
+    SDL_MOUSEMOTION    = 0x400, /**&lt; Mouse moved */
+    SDL_MOUSEBUTTONDOWN,        /**&lt; Mouse button pressed */
+    SDL_MOUSEBUTTONUP,          /**&lt; Mouse button released */
+    SDL_MOUSEWHEEL,             /**&lt; Mouse wheel motion */
+    
+    /* Window events */
+    SDL_WINDOWEVENT    = 0x200, /**&lt; Window state change */
+    SDL_SYSWMEVENT,             /**&lt; System specific event */
+} SDL_EventType;
 </code></pre>
 
-<p>调用 <code>SDL_CreateRenderer</code> 方法来创建渲染器，并通过 <code>SDL_SetRenderDrawColor</code> 来指定颜色，颜色参数都是 <code>red</code>、<code>green</code>、<code>blue</code>、<code>alpha</code> 四个，这里指定了渲染为绿色。</p>
+<p>如上所示，有键盘、鼠标事件还有窗口事件和应用退出的事件，基本上也就用到这些了。</p>
 
-<p>然后通过 <code>SDL_RenderClear</code> 方法清空一下当前窗口上的颜色，避免和要渲染的颜色混在一起了，最后就可以执行渲染了。</p>
+<p>当用户点击了窗口左上角 <code>叉</code> 的时候，对应 SDL_Event 的 type 就是 <code>SDL_QUIT</code> ，这个 type 是一定要添加处理的，不然点叉就关闭不了窗口了。</p>
 
-<p>这个流程和 OpenGL 的渲染操作有点类似了：</p>
-
-<pre><code class="language-cpp">glClearColor()
-glClear()
-glDrawArrays() 
+<pre><code class="language-cpp">    bool bQuit = false;
+    while (!bQuit){
+        while (SDL_PollEvent(&amp;windowEvent)){
+            switch (windowEvent.type){
+                case SDL_QUIT:
+                    bQuit = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 </code></pre>
 
-<p>也是先清空后渲染，实际效果如下：</p>
+<p>除了 <code>SDL_PollEvent</code> 方法去取消息外，还有 <code>SDL_WaitEvent</code> 方法。顾名思义，该方法会阻塞当前调用的线程，直到取出一个消息为止。</p>
 
-<p><img src="https://images.xiaozhuanlan.com/photo/2020/26c7c7f2bd4a2135d668ff898352fd3f.png" alt="" /></p>
-
-<p>这样就创建了一个窗口，并且显示指定颜色。</p>
-
-<h3 id="销毁-sdl-窗口">销毁 SDL 窗口</h3>
-
-<p>最后，当退出循环时，要执行销毁操作，把创建的 SDL_Window 和 SDL_Renderer 都释放了。</p>
-
-<pre><code class="language-cpp">    SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(pRenderer);
-    SDL_Quit();
+<pre><code class="language-cpp">    bool bQuit = false;
+    while (!bQuit){
+        SDL_WaitEvent(&amp;windowEvent);
+        if (windowEvent.type == SDL_QUIT){
+            bQuit = true;
+            break;
+        } else{
+            cout &lt;&lt; &quot;get event&quot; &lt;&lt; endl;
+        }
+    }
 </code></pre>
 
-<p>这样就完成了整个程序。</p>
+<p>使用方法如上所示，但实际上程序不会一直卡在 <code>SDL_WaitEvent</code> 上，因为它没有限制监听的事件类型，所以只要有窗口在运行显示，哪怕你鼠标在窗口上滑过、或者按下了键盘，都能算是收到了消息事件，<code>cout</code> 方法打印的 log 日志会不断出现的。</p>
 
-<h3 id="总结">总结</h3>
+<p>同样的，在 <code>SDL_WaitEvent</code> 方法中监听了 <code>SDL_QUIT</code> 类型的事件，当点击窗口左上角的叉时，也要退出循环，结束程序。</p>
 
-<p>以上就是音视频基础学习连载的 <code>002</code> 篇。</p>
+<h2 id="键盘响应">键盘响应</h2>
 
-<p>具体代码见仓库：</p>
+<p>现在可以通过 <code>SDL_Event</code> 的事件类型来监听特定的键盘事件了。</p>
+
+<p>键盘事件有 <code>SDL_KEYDOWN</code> 按下和 <code>SDL_KEYUP</code> 抬起两种类型，按需监听。</p>
+
+<p>而具体用户点击键盘上什么按键，这个信息就在 SDL_Event 的 <code>SDL_KeyboardEvent</code> 中。</p>
+
+<p>对于不同类型的事件所包含的具体信息，SDL_Event 都有对应的结构体去存储。</p>
+
+<pre><code class="language-cpp">typedef union SDL_Event
+{
+    Uint32 type;                    /**&lt; Event type, shared with all events */
+    SDL_CommonEvent common;         /**&lt; Common event data */
+    SDL_DisplayEvent display;       /**&lt; Window event data */
+    SDL_WindowEvent window;         /**&lt; Window event data */
+    // 键盘事件的信息
+    SDL_KeyboardEvent key;          /**&lt; Keyboard event data */
+    // 鼠标事件的信息
+    SDL_MouseButtonEvent button;    /**&lt; Mouse button event data */
+    SDL_MouseMotionEvent motion;    /**&lt; Mouse motion event data */
+}
+</code></pre>
+
+<p>所以想要知道用户点击了哪个按键，去找 <code>SDL_KeyboardEvent</code> 对应的信息就好了。</p>
+
+<pre><code class="language-cpp">    bool bQuit = false;
+    while (!bQuit){
+        while (SDL_PollEvent(&amp;windowEvent)){
+            switch (windowEvent.type){
+                case SDL_QUIT:
+                    bQuit = true;
+                    break;
+                case SDL_KEYDOWN:
+                    if (windowEvent.key.keysym.sym == SDLK_SPACE){
+                        cout &lt;&lt; &quot;user click space \n&quot; ;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+</code></pre>
+
+<p>以上代码监听用户是否点击空格键，如果是就输出对应的 log 。</p>
+
+<h2 id="鼠标响应">鼠标响应</h2>
+
+<p>除此之外还可以监听鼠标事件，比如鼠标是否按下、抬起、移动和坐标之类的。</p>
+
+<p>对应的事件类型是 <code>SDL_MOUSEMOTION</code> 、<code>SDL_MOUSEBUTTONDOWN</code> 、<code>SDL_MOUSEBUTTONUP</code> 、<code>SDL_MOUSEBUTTONUP</code> ，按自己的需求去监听了。</p>
+
+<p>事件包含的具体信息在 <code>SDL_MouseMotionEvent</code> 、<code>SDL_MouseButtonEvent</code> 和 <code>SDL_MouseWheelEvent</code> 里面。</p>
+
+<pre><code class="language-cpp">    bool bQuit = false;
+    while (!bQuit){
+        while (SDL_PollEvent(&amp;windowEvent)){
+            switch (windowEvent.type){
+                case SDL_QUIT:
+                    bQuit = true;
+                    break;
+                case SDL_MOUSEBUTTONDOWN:
+                    printf(&quot;button index  is %d\n&quot;,windowEvent.button.button);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+</code></pre>
+
+<p>以上代码就是监听鼠标点击事件，并且打印出点击按键的 index ,鼠标的左键、右键和中间滚轮按下去对应的 index 不同。</p>
+
+<h2 id="自定义事件响应">自定义事件响应</h2>
+
+<p>除了系统事件，还可以自定义事件。</p>
+
+<p>首先定义一个事件类型的宏：</p>
+
+<pre><code class="language-cpp">#define SDL_CUSTOM_EVENT  (SDL_USEREVENT + 1)
+</code></pre>
+
+<p>其次，要创建一个线程，让它延时五秒后，发送自定义事件，在主线程中去接收到这个事件。</p>
+
+<pre><code class="language-cpp">// 线程运行函数
+int sdl_thread_custom_event(void *){
+    // 延时 5 秒
+    SDL_Delay(5000);
+    // 创建自定义事件并发送到消息队列中去
+    SDL_Event sdlEvent;
+    sdlEvent.type = SDL_CUSTOM_EVENT;
+    SDL_PushEvent(&amp;sdlEvent);
+}
+// 创建线程并运行
+SDL_CreateThread(sdl_thread_custom_event, &quot;custom_event&quot;, nullptr);
+</code></pre>
+
+<p>线程运行函数如上所示，定义一个 SDL_Event ，把它的 type 赋值为自定义的类型，然后通过 <code>SDL_PushEvent</code> 方法把该消息事件放到消息队列中去。</p>
+
+<pre><code class="language-cpp">    bool bQuit = false;
+    while (!bQuit){
+        while (SDL_PollEvent(&amp;windowEvent)){
+            switch (windowEvent.type){
+                case SDL_QUIT:
+                    bQuit = true;
+                    break;
+                case SDL_CUSTOM_EVENT:
+                    cout &lt;&lt; &quot;receive user custom event\n&quot;;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+</code></pre>
+
+<p>SDL_PollEvent 方法会从消息队列中取到我们自定义的消息事件，这时候就能做一些想要的操作呢，比如打印 log 之类的。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>以上就是关于 SDL 消息循环和事件响应的学习连载 <code>003</code> 篇。基本上后续所有的 SDL 代码都会有这样一个消息循环作为程序的主框架，所以这个时候弄明白了，方面后面代码的学习。</p>
+
+<p>具体的代码见仓库：</p>
 
 <blockquote>
 <p><a href="https://github.com/glumes/av-beginner">https://github.com/glumes/av-beginner</a></p>
 </blockquote>
 
-<p>本篇文章对应的提交 <code>tag</code> 为 <code>av-beginner-002</code>，可切换至对应源码查看。</p>
+<p>本篇文章对应的提交 <code>tag</code> 为 <code>av-beginner-003</code>，可切换至对应源码查看。</p>
 
-<p>能力有限，文中有不对之处，欢迎加我微信 ezgluems 进行交流~~</p>
+<p>能力有限，文中有不对之处，欢迎加我微信 ezglumes 进行交流~~</p>
         
           <div class="entry-shang text-center">
     <p>「真诚赞赏，手留余香」</p>
@@ -445,7 +567,7 @@ glDrawArrays()
 
                 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-002/">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-003/">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a>
 
                 
 
@@ -477,6 +599,8 @@ glDrawArrays()
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
+    <li><a href="/post/ffmpeg/av-beginner-002/">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
+    
     <li><a href="/post/ffmpeg/av-beginner-001/">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</a></li>
     
 </ul>
@@ -487,13 +611,9 @@ glDrawArrays()
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-001/" data-toggle="tooltip" data-placement="top" title="【音视频连载-001】基础学习篇- SDL 介绍以及工程配置">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/ffmpeg/av-beginner-002/" data-toggle="tooltip" data-placement="top" title="【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-003/" data-toggle="tooltip" data-placement="top" title="【音视频连载-003】基础学习篇-SDL 消息循环和事件响应">Next Post &rarr;</a>
-          </li>
         
       </ul>
       
