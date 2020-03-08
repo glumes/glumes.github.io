@@ -8,7 +8,7 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Tue, 03 Mar 2020 22:54:26 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 08 Mar 2020 21:44:09 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,7 +16,7 @@
     <item>
       <title>ffmpeg</title>
       <link>https://glumes.com/categories/ffmpeg/</link>
-      <pubDate>Tue, 03 Mar 2020 22:54:26 +0800</pubDate>
+      <pubDate>Sun, 08 Mar 2020 21:44:09 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/categories/ffmpeg/</guid>
       <description></description>
@@ -41,7 +41,7 @@
     </item>
     
     <item>
-      <title>opengl</title>
+      <title>OpenGL</title>
       <link>https://glumes.com/categories/opengl/</link>
       <pubDate>Tue, 20 Aug 2019 23:51:59 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>

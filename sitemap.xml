@@ -4,38 +4,43 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2020-03-03T22:54:26+08:00</lastmod>
+    <lastmod>2020-03-08T21:44:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/</loc>
-    <lastmod>2020-03-03T22:54:26+08:00</lastmod>
+    <lastmod>2020-03-08T21:44:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/post/</loc>
-    <lastmod>2020-03-03T22:54:26+08:00</lastmod>
+    <lastmod>2020-03-08T21:44:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/tags/sdl/</loc>
-    <lastmod>2020-03-03T22:54:26+08:00</lastmod>
+    <lastmod>2020-03-08T21:44:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/tags/</loc>
-    <lastmod>2020-03-03T22:54:26+08:00</lastmod>
+    <lastmod>2020-03-08T21:44:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/ffmpeg/</loc>
-    <lastmod>2020-03-03T22:54:26+08:00</lastmod>
+    <lastmod>2020-03-08T21:44:09+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/ffmpeg/av-beginner-004/</loc>
+    <lastmod>2020-03-08T21:44:09+08:00</lastmod>
   </url>
   
   <url>
@@ -110,6 +115,12 @@
   </url>
   
   <url>
+    <loc>https://glumes.com/categories/opengl/</loc>
+    <lastmod>2019-08-20T23:51:59+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/opengl/opengl-draw-bezier-line/</loc>
     <lastmod>2019-08-20T23:51:59+08:00</lastmod>
   </url>
@@ -122,12 +133,6 @@
   
   <url>
     <loc>https://glumes.com/tags/oepngl/</loc>
-    <lastmod>2019-08-20T23:51:59+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/categories/opengl/</loc>
     <lastmod>2019-08-20T23:51:59+08:00</lastmod>
     <priority>0</priority>
   </url>

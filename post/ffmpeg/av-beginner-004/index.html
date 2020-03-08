@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</title>
-  <meta property="og:title" content="【音视频连载-003】基础学习篇-SDL 消息循环和事件响应" />
-  <meta name="twitter:title" content="【音视频连载-003】基础学习篇-SDL 消息循环和事件响应" />
+  <title>【音视频连载-004】基础学习篇-SDL 加载图片并显示</title>
+  <meta property="og:title" content="【音视频连载-004】基础学习篇-SDL 加载图片并显示" />
+  <meta name="twitter:title" content="【音视频连载-004】基础学习篇-SDL 加载图片并显示" />
 
   <meta name="description" content="音视频学习入门技术文章连载：
 
@@ -16,63 +16,44 @@
 技术开发故事会连载
 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
 【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
+【音视频连载-003】基础学习篇-SDL 消息循环和事件响应
 
 
-在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
+在前面的文章中已经介绍完 SDL 显示窗口、消息循环和事件响应这些基础内容，有了这些基础就可以进行功能性开发了。
 
-为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。
-
-    SDL_Event windowEvent;
-    while (true){
-        if (SDL_PollEvent(&amp;windowEvent)){
-            if (SDL_QUIT == windowEvent.type){
-                break;
-            }
-        }
-    }
-">
+本篇的主要内容是利用 SDL 加载并显示一张图片，然后再去进行更多的音视频操作。">
   <meta property="og:description" content="音视频学习入门技术文章连载：
 
 
 技术开发故事会连载
 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
 【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
+【音视频连载-003】基础学习篇-SDL 消息循环和事件响应
 
 
-在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
+在前面的文章中已经介绍完 SDL 显示窗口、消息循环和事件响应这些基础内容，有了这些基础就可以进行功能性开发了。
 
-为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。
-
-    SDL_Event windowEvent;
-    while (true){
-        if (SDL_PollEvent(&amp;windowEvent)){
-            if (SDL_QUIT == windowEvent.type){
-                break;
-            }
-        }
-    }
-">
+本篇的主要内容是利用 SDL 加载并显示一张图片，然后再去进行更多的音视频操作。">
   <meta name="twitter:description" content="音视频学习入门技术文章连载：
 
 
 技术开发故事会连载
 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
 【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
+【音视频连载-003】基础学习篇-SDL 消息循环和事件响应
 
 
-在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
+在前面的文章中已经介绍完 SDL 显示窗口、消息循环和事件响应这些基础内容，有了这些基础就可以进行功能性开发了。
 
-为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。
-
-    SDL_Event …">
+本篇的主要内容是利用 SDL 加载并显示一 …">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-003/" />
+  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-004/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="纸上浅谈" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-003/" />
+  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-004/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="纸上浅谈">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
@@ -210,7 +191,7 @@ if (!doNotTrack) {
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ae01.alicdn.com/kf/Uc2811317b9fb451aa4e7ddccde55aed2b.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://s2.ax1x.com/2020/03/08/3x591J.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -225,10 +206,10 @@ if (!doNotTrack) {
                 <div class="page-heading">
                 
                   
-                     <h1>【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</h1>
+                     <h1>【音视频连载-004】基础学习篇-SDL 加载图片并显示</h1>
                      
                     <span class="post-meta">
-  Posted on March 3, 2020
+  Posted on March 8, 2020
   
 </span>
 
@@ -249,7 +230,7 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</h1>
+                <h1 align="center">【音视频连载-004】基础学习篇-SDL 加载图片并显示</h1>
                 
                 
             </div>
@@ -289,12 +270,11 @@ if (!doNotTrack) {
 <ul>
 <li>
 <ul>
-<li><a href="#sdl-消息循环和事件响应">SDL 消息循环和事件响应</a></li>
-</ul></li>
-<li><a href="#键盘响应">键盘响应</a></li>
-<li><a href="#鼠标响应">鼠标响应</a></li>
-<li><a href="#自定义事件响应">自定义事件响应</a></li>
+<li><a href="#sdl2-image-配置">SDL2_Image 配置</a></li>
+<li><a href="#cmake-工程配置">CMake 工程配置</a></li>
+<li><a href="#sdl-image-加载-图片并显示">SDL_Image 加载 图片并显示</a></li>
 <li><a href="#总结">总结</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -307,56 +287,101 @@ if (!doNotTrack) {
 <li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
 <li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
 <li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
+<li><a href="https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
 </ul>
 
-<p>在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。</p>
+<p>在前面的文章中已经介绍完 SDL 显示窗口、消息循环和事件响应这些基础内容，有了这些基础就可以进行功能性开发了。</p>
 
-<p>为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。</p>
+<p>本篇的主要内容是利用 SDL 加载并显示一张图片，然后再去进行更多的音视频操作。</p>
 
-<pre><code class="language-cpp">    SDL_Event windowEvent;
-    while (true){
-        if (SDL_PollEvent(&amp;windowEvent)){
-            if (SDL_QUIT == windowEvent.type){
-                break;
-            }
-        }
-    }
+<h3 id="sdl2-image-配置">SDL2_Image 配置</h3>
+
+<p>之前写过两篇 libpng 和 libjpeg-turbo 编译与实践的文章：</p>
+
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/rVhm5BD2cPR9h7rsW0xiQA">图像库 libpng 编译与实践</a></li>
+<li><a href="https://mp.weixin.qq.com/s/x-dTLowXcqysnLxZ0BGA2g">图像库 libjpeg-turbo 编译与实践</a></li>
+</ul>
+
+<p>有需要的可以去翻阅一下。</p>
+
+<p>在 SDL 中加载 png 或者 jpeg 图片用不到上面两个库了，需要用到 SDL 特定的图片库 SDL_Image ，执行以下命令去下载：</p>
+
+<pre><code class="language-cpp">brew install sdl2_image
 </code></pre>
 
-<h3 id="sdl-消息循环和事件响应">SDL 消息循环和事件响应</h3>
+<p>我用的版本是 <code>2.0.5</code> ，也是目前最新的版本，之后我们要在 CMake 中去配置它。</p>
 
-<p>和 Android 中的 Handler 机制有些类似，Handler 会关联一个线程，线程内部维护一个消息队列 MessageQueue，通过 Handler 像 MessageQueue 发送消息，然后再从 MessageQueue 中取出 Message 进行处理。</p>
+<h3 id="cmake-工程配置">CMake 工程配置</h3>
 
-<p>在 SDL 中通过 <code>SDL_PollEvent</code> 从消息队列取出消息，如果有则返回 1，没用则返回 0。</p>
+<p>对 <code>av-beginner</code> 项目的 CMake 配置做了一些改动，创建了一个 <code>cmake_utils</code> 的目录，在该目录下创建了一个 <code>CMakeLists.txt</code> ，里面存放一些自定义的函数，专门用来做开源库的链接加载工作，如下图红框内容所示：</p>
 
-<p><code>SDL_Event</code> 结构体代表消息事件，其中的 <code>type</code> 指定具体的事件类型，在 <code>SDL_events.h</code> 文件中能看到所有的事件类型，抄录一些比较典型的：</p>
+<p><img src="https://ae01.alicdn.com/kf/Ue4fe40bf8e5b4255918707a022680d99H.jpg" alt="" /></p>
 
-<pre><code class="language-cpp">typedef enum
-{
-   /* Application events */
-    SDL_QUIT           = 0x100, /**&lt; User-requested quit */
-    
-   /* Keyboard events */
-    SDL_KEYDOWN        = 0x300, /**&lt; Key pressed */
-    SDL_KEYUP,                  /**&lt; Key released */
+<p>定义了一个 <code>init_path</code> 的宏，宏的功能和函数是有些类似的，在里面定义了不同开源库的路径变量，后续只要引用这些变量就好了。如果你的电脑上路径不同，修改这里的宏定义就行。</p>
 
-    /* Mouse events */
-    SDL_MOUSEMOTION    = 0x400, /**&lt; Mouse moved */
-    SDL_MOUSEBUTTONDOWN,        /**&lt; Mouse button pressed */
-    SDL_MOUSEBUTTONUP,          /**&lt; Mouse button released */
-    SDL_MOUSEWHEEL,             /**&lt; Mouse wheel motion */
-    
-    /* Window events */
-    SDL_WINDOWEVENT    = 0x200, /**&lt; Window state change */
-    SDL_SYSWMEVENT,             /**&lt; System specific event */
-} SDL_EventType;
+<blockquote>
+<p>如果对 CMake 的操作不熟悉的话，建议阅读之前写过的文章，涵盖了很多基础操作。
+<a href="https://mp.weixin.qq.com/s/7pBjoVGDl_zGDwWWBOhkmg">Android NDK 开发之 CMake 必知必会</a></p>
+</blockquote>
+
+<p>当下载了 SDL_Image 之后，找到它的路径，把它的库加载到 CMake 链接目录中来，也就是要调用 <code>link_directories</code> 方法，这里同样可以定义一个宏：</p>
+
+<pre><code class="language-cpp">macro(link_sdl_image)
+    message(&quot;link sdl image library and path is ${sdl_image_dir}&quot;)
+    include_directories(${sdl_image_dir}/include/SDL2)
+    link_directories(${sdl_image_dir}/lib)
+endmacro()
 </code></pre>
 
-<p>如上所示，有键盘、鼠标事件还有窗口事件和应用退出的事件，基本上也就用到这些了。</p>
+<p>之后就需要把目标执行文件或者目标库与 SDL_Image 开源库关联起来，也就是 <code>target_link_libraries</code> 方法，同样定义一个宏：</p>
 
-<p>当用户点击了窗口左上角 <code>叉</code> 的时候，对应 SDL_Event 的 type 就是 <code>SDL_QUIT</code> ，这个 type 是一定要添加处理的，不然点叉就关闭不了窗口了。</p>
+<pre><code class="language-cpp">macro(target_link_sdl_image name)
+    message(&quot;${name} link sdl image&quot;)
+    target_link_libraries(${name}
+            SDL2_image
+            )
+endmacro()
+</code></pre>
 
-<pre><code class="language-cpp">    bool bQuit = false;
+<p>这个宏有个参数 <code>name</code> ，它就是要链接的目标文件 target 。</p>
+
+<blockquote>
+<p>对于 SDL 库或者其他库，也可以创建类似的宏，具体在源码中能看到。</p>
+</blockquote>
+
+<p>在完成了 SDL_Image 的 CMake 配置之后，就需要在工程的主 <code>CMakeLists.txt</code> 文件中把它包含进去，现在还只是在 <code>cmake_utils</code> 目录中，这样是引用不到宏的。</p>
+
+<p>通过 <code>add_subdirectory</code> 方法将定义的功能添加进来，接下来就可以使用了。</p>
+
+<p><img src="https://ae01.alicdn.com/kf/U8741a1d307cf451eba3265c18a4f8347L.jpg" alt="" /></p>
+
+<p>同时，对于 SDL 项目代码，单独创建一个文件夹去存放，再根据每个小项又划分文件夹：</p>
+
+<p><img src="https://ae01.alicdn.com/kf/U689dc973b5a44c32a785fc6318d56c214.jpg" alt="" /></p>
+
+<p>如上图所示，针对每个小项又有单独的 <code>CMakeLists.txt</code> 配置文件，在里面按需执行动态库的关联就好了。</p>
+
+<p>经过以上的工程配置整改，对于后续的开发模块划分是很有帮助的，不仅便于添加各种开源库，更利于去单个编译项目。</p>
+
+<p>后续添加的库都会按照这个模式进行添加。</p>
+
+<h3 id="sdl-image-加载-图片并显示">SDL_Image 加载 图片并显示</h3>
+
+<p>完成了配置之后，就可以进行 SDL_Image 的开发了，整个开发流程比较简单。</p>
+
+<p>前面的文章中我们创建并展示了 <code>SDL_Window</code>，SDL_Window 内有一个叫做 <code>SDL_Surface</code> 的结构，实际上它才是最终渲染展示的。</p>
+
+<p>我们加载一张图片，并将图片转换成 <code>SDL_Surface</code> ，然后把图片对应的 SDL_Surface 转换到 SDL_Window 对应的 SDL_Surface ，再更新一下 SDL_Window 的 SDL_Surface 内容，渲染到屏幕就好了。</p>
+
+<p>核心代码如下所示：</p>
+
+<pre><code class="language-cpp">    // 得到 SDL_Window 的 SDL_Surface
+    SDL_Surface *pWindowSurface = SDL_GetWindowSurface(pWindow);
+    // 根据图片创建一个 SDL_Surface
+    SDL_Surface *pImageSurface = IMG_Load(image_path.c_str());
+    bool bQuit = false;
+    SDL_Event windowEvent;
     while (!bQuit){
         while (SDL_PollEvent(&amp;windowEvent)){
             switch (windowEvent.type){
@@ -367,157 +392,30 @@ if (!doNotTrack) {
                     break;
             }
         }
+        // 将 pImageSurface 的内容传输到 上
+        SDL_BlitSurface(pImageSurface, nullptr,pWindowSurface,nullptr);
+        // 上屏操作，将 Surface 内容显示到屏幕上
+        SDL_UpdateWindowSurface(pWindow);
     }
 </code></pre>
 
-<p>除了 <code>SDL_PollEvent</code> 方法去取消息外，还有 <code>SDL_WaitEvent</code> 方法。顾名思义，该方法会阻塞当前调用的线程，直到取出一个消息为止。</p>
+<p>最终结果如下：</p>
 
-<pre><code class="language-cpp">    bool bQuit = false;
-    while (!bQuit){
-        SDL_WaitEvent(&amp;windowEvent);
-        if (windowEvent.type == SDL_QUIT){
-            bQuit = true;
-            break;
-        } else{
-            cout &lt;&lt; &quot;get event&quot; &lt;&lt; endl;
-        }
-    }
-</code></pre>
+<p><img src="https://ae01.alicdn.com/kf/Ube8bd81e3da0444e82d90bdd24dc8b3d9.jpg" alt="" /></p>
 
-<p>使用方法如上所示，但实际上程序不会一直卡在 <code>SDL_WaitEvent</code> 上，因为它没有限制监听的事件类型，所以只要有窗口在运行显示，哪怕你鼠标在窗口上滑过、或者按下了键盘，都能算是收到了消息事件，<code>cout</code> 方法打印的 log 日志会不断出现的。</p>
+<h3 id="总结">总结</h3>
 
-<p>同样的，在 <code>SDL_WaitEvent</code> 方法中监听了 <code>SDL_QUIT</code> 类型的事件，当点击窗口左上角的叉时，也要退出循环，结束程序。</p>
+<p>以上就是音视频基础学习连载的 <code>004</code> 篇。</p>
 
-<h2 id="键盘响应">键盘响应</h2>
+<p>完成了 SDL 加载图片并显示的流程，整体代码比较简单，很多东西都是之前文章提到过的，反而重点更侧重于工程的 CMake 配置，有兴趣的可以看看代码。</p>
 
-<p>现在可以通过 <code>SDL_Event</code> 的事件类型来监听特定的键盘事件了。</p>
-
-<p>键盘事件有 <code>SDL_KEYDOWN</code> 按下和 <code>SDL_KEYUP</code> 抬起两种类型，按需监听。</p>
-
-<p>而具体用户点击键盘上什么按键，这个信息就在 SDL_Event 的 <code>SDL_KeyboardEvent</code> 中。</p>
-
-<p>对于不同类型的事件所包含的具体信息，SDL_Event 都有对应的结构体去存储。</p>
-
-<pre><code class="language-cpp">typedef union SDL_Event
-{
-    Uint32 type;                    /**&lt; Event type, shared with all events */
-    SDL_CommonEvent common;         /**&lt; Common event data */
-    SDL_DisplayEvent display;       /**&lt; Window event data */
-    SDL_WindowEvent window;         /**&lt; Window event data */
-    // 键盘事件的信息
-    SDL_KeyboardEvent key;          /**&lt; Keyboard event data */
-    // 鼠标事件的信息
-    SDL_MouseButtonEvent button;    /**&lt; Mouse button event data */
-    SDL_MouseMotionEvent motion;    /**&lt; Mouse motion event data */
-}
-</code></pre>
-
-<p>所以想要知道用户点击了哪个按键，去找 <code>SDL_KeyboardEvent</code> 对应的信息就好了。</p>
-
-<pre><code class="language-cpp">    bool bQuit = false;
-    while (!bQuit){
-        while (SDL_PollEvent(&amp;windowEvent)){
-            switch (windowEvent.type){
-                case SDL_QUIT:
-                    bQuit = true;
-                    break;
-                case SDL_KEYDOWN:
-                    if (windowEvent.key.keysym.sym == SDLK_SPACE){
-                        cout &lt;&lt; &quot;user click space \n&quot; ;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-</code></pre>
-
-<p>以上代码监听用户是否点击空格键，如果是就输出对应的 log 。</p>
-
-<h2 id="鼠标响应">鼠标响应</h2>
-
-<p>除此之外还可以监听鼠标事件，比如鼠标是否按下、抬起、移动和坐标之类的。</p>
-
-<p>对应的事件类型是 <code>SDL_MOUSEMOTION</code> 、<code>SDL_MOUSEBUTTONDOWN</code> 、<code>SDL_MOUSEBUTTONUP</code> 、<code>SDL_MOUSEBUTTONUP</code> ，按自己的需求去监听了。</p>
-
-<p>事件包含的具体信息在 <code>SDL_MouseMotionEvent</code> 、<code>SDL_MouseButtonEvent</code> 和 <code>SDL_MouseWheelEvent</code> 里面。</p>
-
-<pre><code class="language-cpp">    bool bQuit = false;
-    while (!bQuit){
-        while (SDL_PollEvent(&amp;windowEvent)){
-            switch (windowEvent.type){
-                case SDL_QUIT:
-                    bQuit = true;
-                    break;
-                case SDL_MOUSEBUTTONDOWN:
-                    printf(&quot;button index  is %d\n&quot;,windowEvent.button.button);
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-</code></pre>
-
-<p>以上代码就是监听鼠标点击事件，并且打印出点击按键的 index ,鼠标的左键、右键和中间滚轮按下去对应的 index 不同。</p>
-
-<h2 id="自定义事件响应">自定义事件响应</h2>
-
-<p>除了系统事件，还可以自定义事件。</p>
-
-<p>首先定义一个事件类型的宏：</p>
-
-<pre><code class="language-cpp">#define SDL_CUSTOM_EVENT  (SDL_USEREVENT + 1)
-</code></pre>
-
-<p>其次，要创建一个线程，让它延时五秒后，发送自定义事件，在主线程中去接收到这个事件。</p>
-
-<pre><code class="language-cpp">// 线程运行函数
-int sdl_thread_custom_event(void *){
-    // 延时 5 秒
-    SDL_Delay(5000);
-    // 创建自定义事件并发送到消息队列中去
-    SDL_Event sdlEvent;
-    sdlEvent.type = SDL_CUSTOM_EVENT;
-    SDL_PushEvent(&amp;sdlEvent);
-}
-// 创建线程并运行
-SDL_CreateThread(sdl_thread_custom_event, &quot;custom_event&quot;, nullptr);
-</code></pre>
-
-<p>线程运行函数如上所示，定义一个 SDL_Event ，把它的 type 赋值为自定义的类型，然后通过 <code>SDL_PushEvent</code> 方法把该消息事件放到消息队列中去。</p>
-
-<pre><code class="language-cpp">    bool bQuit = false;
-    while (!bQuit){
-        while (SDL_PollEvent(&amp;windowEvent)){
-            switch (windowEvent.type){
-                case SDL_QUIT:
-                    bQuit = true;
-                    break;
-                case SDL_CUSTOM_EVENT:
-                    cout &lt;&lt; &quot;receive user custom event\n&quot;;
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-</code></pre>
-
-<p>SDL_PollEvent 方法会从消息队列中取到我们自定义的消息事件，这时候就能做一些想要的操作呢，比如打印 log 之类的。</p>
-
-<h2 id="总结">总结</h2>
-
-<p>以上就是关于 SDL 消息循环和事件响应的学习连载 <code>003</code> 篇。基本上后续所有的 SDL 代码都会有这样一个消息循环作为程序的主框架，所以这个时候弄明白了，方面后面代码的学习。</p>
-
-<p>具体的代码见仓库：</p>
+<p>具体代码见仓库：</p>
 
 <blockquote>
 <p><a href="https://github.com/glumes/av-beginner">https://github.com/glumes/av-beginner</a></p>
 </blockquote>
 
-<p>本篇文章对应的提交 <code>tag</code> 为 <code>av-beginner-003</code>，可切换至对应源码查看。</p>
+<p>本篇文章对应的提交 <code>tag</code> 为 <code>av-beginner-004</code>，可切换至对应源码查看。</p>
 
 <p>能力有限，文中有不对之处，欢迎加我微信 ezglumes 进行交流~~</p>
         
@@ -567,7 +465,7 @@ SDL_CreateThread(sdl_thread_custom_event, &quot;custom_event&quot;, nullptr);
 
                 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-003/">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-004/">【音视频连载-004】基础学习篇-SDL 加载图片并显示</a>
 
                 
 
@@ -599,6 +497,8 @@ SDL_CreateThread(sdl_thread_custom_event, &quot;custom_event&quot;, nullptr);
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
+    <li><a href="/post/ffmpeg/av-beginner-003/">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
+    
     <li><a href="/post/ffmpeg/av-beginner-002/">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
     
     <li><a href="/post/ffmpeg/av-beginner-001/">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</a></li>
@@ -611,13 +511,9 @@ SDL_CreateThread(sdl_thread_custom_event, &quot;custom_event&quot;, nullptr);
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-002/" data-toggle="tooltip" data-placement="top" title="【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/ffmpeg/av-beginner-003/" data-toggle="tooltip" data-placement="top" title="【音视频连载-003】基础学习篇-SDL 消息循环和事件响应">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-004/" data-toggle="tooltip" data-placement="top" title="【音视频连载-004】基础学习篇-SDL 加载图片并显示">Next Post &rarr;</a>
-          </li>
         
       </ul>
       
