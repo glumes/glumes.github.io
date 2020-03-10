@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>【音视频连载-004】基础学习篇-SDL 加载图片并显示</title>
-  <meta property="og:title" content="【音视频连载-004】基础学习篇-SDL 加载图片并显示" />
-  <meta name="twitter:title" content="【音视频连载-004】基础学习篇-SDL 加载图片并显示" />
+  <title>【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</title>
+  <meta property="og:title" content="【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示" />
+  <meta name="twitter:title" content="【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示" />
 
   <meta name="description" content="音视频学习入门技术文章连载：
 
@@ -17,11 +17,35 @@
 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
 【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
 【音视频连载-003】基础学习篇-SDL 消息循环和事件响应
+【音视频连载-004】基础学习篇-SDL 加载图片并显示
 
 
-在前面的文章中已经介绍完 SDL 显示窗口、消息循环和事件响应这些基础内容，有了这些基础就可以进行功能性开发了。
+在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。
 
-本篇的主要内容是利用 SDL 加载并显示一张图片，然后再去进行更多的音视频操作。">
+YUV 文件素材准备
+
+做这个功能点比较麻烦的是素材问题，上哪去找一个 YUV 文件出来，谷歌和百度搜索都不好使，其实直接使用 FFmpeg 生成文件就好了。
+
+使用如下命令将图片文件转成 YUV 文件：
+
+// 把 filename 改为图片对应的文件名
+ffmpeg -i image_filename.png -pix_fmt yuv420p yuv_filename.yuv
+
+
+在这里将 YUV 文件格式固定为 YUV420P 了，如果你对 YUV 格式不懂的话，强烈建议看看我之前写过的文章，图文并茂，清晰易懂，使用谷歌搜索 YUV 关键字，搜索结果排名前五的必有我这篇文章。
+
+
+一文读懂 YUV 的采样与格式
+
+
+顺便可以使用 FFplay 验证生成的 YUV 文件是否有效，使用如下命令：
+
+// 100x100 代表图片的宽高，这里只是举例，换成实际的宽高
+// 把 filename 改为 YUV 对应的文件名
+ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
+
+
+以上命令会打开一个窗口去展示图片，如果该图片和未转换成 YUV 的图片内容一致，那说明把图片转换成 YUV 格式文件是成功了，这样就有了实验素材。">
   <meta property="og:description" content="音视频学习入门技术文章连载：
 
 
@@ -29,11 +53,35 @@
 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
 【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
 【音视频连载-003】基础学习篇-SDL 消息循环和事件响应
+【音视频连载-004】基础学习篇-SDL 加载图片并显示
 
 
-在前面的文章中已经介绍完 SDL 显示窗口、消息循环和事件响应这些基础内容，有了这些基础就可以进行功能性开发了。
+在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。
 
-本篇的主要内容是利用 SDL 加载并显示一张图片，然后再去进行更多的音视频操作。">
+YUV 文件素材准备
+
+做这个功能点比较麻烦的是素材问题，上哪去找一个 YUV 文件出来，谷歌和百度搜索都不好使，其实直接使用 FFmpeg 生成文件就好了。
+
+使用如下命令将图片文件转成 YUV 文件：
+
+// 把 filename 改为图片对应的文件名
+ffmpeg -i image_filename.png -pix_fmt yuv420p yuv_filename.yuv
+
+
+在这里将 YUV 文件格式固定为 YUV420P 了，如果你对 YUV 格式不懂的话，强烈建议看看我之前写过的文章，图文并茂，清晰易懂，使用谷歌搜索 YUV 关键字，搜索结果排名前五的必有我这篇文章。
+
+
+一文读懂 YUV 的采样与格式
+
+
+顺便可以使用 FFplay 验证生成的 YUV 文件是否有效，使用如下命令：
+
+// 100x100 代表图片的宽高，这里只是举例，换成实际的宽高
+// 把 filename 改为 YUV 对应的文件名
+ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
+
+
+以上命令会打开一个窗口去展示图片，如果该图片和未转换成 YUV 的图片内容一致，那说明把图片转换成 YUV 格式文件是成功了，这样就有了实验素材。">
   <meta name="twitter:description" content="音视频学习入门技术文章连载：
 
 
@@ -41,19 +89,20 @@
 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
 【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
 【音视频连载-003】基础学习篇-SDL 消息循环和事件响应
+【音视频连载-004】基础学习篇-SDL 加载图片并显示
 
 
-在前面的文章中已经介绍完 SDL 显示窗口、消息循环和事件响应这些基础内容，有了这些基础就可以进行功能性开发了。
+在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。
 
-本篇的主要内容是利用 SDL 加载并显示一 …">
+YUV 文件 …">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-004/" />
+  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-005/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="纸上浅谈" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-004/" />
+  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-005/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="纸上浅谈">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
@@ -191,7 +240,7 @@ if (!doNotTrack) {
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://s2.ax1x.com/2020/03/08/3x591J.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://s2.ax1x.com/2020/03/10/8CrHyt.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -206,10 +255,10 @@ if (!doNotTrack) {
                 <div class="page-heading">
                 
                   
-                     <h1>【音视频连载-004】基础学习篇-SDL 加载图片并显示</h1>
+                     <h1>【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</h1>
                      
                     <span class="post-meta">
-  Posted on March 8, 2020
+  Posted on March 10, 2020
   
 </span>
 
@@ -230,7 +279,7 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">【音视频连载-004】基础学习篇-SDL 加载图片并显示</h1>
+                <h1 align="center">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</h1>
                 
                 
             </div>
@@ -252,12 +301,6 @@ if (!doNotTrack) {
       <div>
           
           
-          <h5 id="tags" style="margin-top: 0px;">标签:
-            
-                <a href="https://glumes.com/tags/sdl/">SDL</a> &nbsp;
-            
-          </h5>
-          
       </div>
 
       <article role="main" class="blog-post" itemprop="articleBody" id="content">
@@ -268,13 +311,14 @@ if (!doNotTrack) {
 <ul>
 <li>
 <ul>
-<li>
+<li><a href="#yuv-文件素材准备">YUV 文件素材准备</a></li>
+<li><a href="#代码实践">代码实践</a>
 <ul>
-<li><a href="#sdl2-image-配置">SDL2_Image 配置</a></li>
-<li><a href="#cmake-工程配置">CMake 工程配置</a></li>
-<li><a href="#sdl-image-加载-图片并显示">SDL_Image 加载 图片并显示</a></li>
-<li><a href="#总结">总结</a></li>
+<li><a href="#创建纹理-sdl-texture">创建纹理 SDL_Texture</a></li>
+<li><a href="#打开文件并读取内容">打开文件并读取内容</a></li>
 </ul></li>
+<li><a href="#渲染纹理上屏">渲染纹理上屏</a></li>
+<li><a href="#总结">总结</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -288,128 +332,139 @@ if (!doNotTrack) {
 <li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
 <li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
 <li><a href="https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
+<li><a href="https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw">【音视频连载-004】基础学习篇-SDL 加载图片并显示</a></li>
 </ul>
 
-<p>在前面的文章中已经介绍完 SDL 显示窗口、消息循环和事件响应这些基础内容，有了这些基础就可以进行功能性开发了。</p>
+<p>在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。</p>
 
-<p>本篇的主要内容是利用 SDL 加载并显示一张图片，然后再去进行更多的音视频操作。</p>
+<h2 id="yuv-文件素材准备">YUV 文件素材准备</h2>
 
-<h3 id="sdl2-image-配置">SDL2_Image 配置</h3>
+<p>做这个功能点比较麻烦的是素材问题，上哪去找一个 YUV 文件出来，谷歌和百度搜索都不好使，其实直接使用 FFmpeg 生成文件就好了。</p>
 
-<p>之前写过两篇 libpng 和 libjpeg-turbo 编译与实践的文章：</p>
+<p>使用如下命令将图片文件转成 YUV 文件：</p>
 
-<ul>
-<li><a href="https://mp.weixin.qq.com/s/rVhm5BD2cPR9h7rsW0xiQA">图像库 libpng 编译与实践</a></li>
-<li><a href="https://mp.weixin.qq.com/s/x-dTLowXcqysnLxZ0BGA2g">图像库 libjpeg-turbo 编译与实践</a></li>
-</ul>
-
-<p>有需要的可以去翻阅一下。</p>
-
-<p>在 SDL 中加载 png 或者 jpeg 图片用不到上面两个库了，需要用到 SDL 特定的图片库 SDL_Image ，执行以下命令去下载：</p>
-
-<pre><code class="language-cpp">brew install sdl2_image
+<pre><code class="language-cpp">// 把 filename 改为图片对应的文件名
+ffmpeg -i image_filename.png -pix_fmt yuv420p yuv_filename.yuv
 </code></pre>
 
-<p>我用的版本是 <code>2.0.5</code> ，也是目前最新的版本，之后我们要在 CMake 中去配置它。</p>
-
-<h3 id="cmake-工程配置">CMake 工程配置</h3>
-
-<p>对 <code>av-beginner</code> 项目的 CMake 配置做了一些改动，创建了一个 <code>cmake_utils</code> 的目录，在该目录下创建了一个 <code>CMakeLists.txt</code> ，里面存放一些自定义的函数，专门用来做开源库的链接加载工作，如下图红框内容所示：</p>
-
-<p><img src="https://ae01.alicdn.com/kf/Ue4fe40bf8e5b4255918707a022680d99H.jpg" alt="" /></p>
-
-<p>定义了一个 <code>init_path</code> 的宏，宏的功能和函数是有些类似的，在里面定义了不同开源库的路径变量，后续只要引用这些变量就好了。如果你的电脑上路径不同，修改这里的宏定义就行。</p>
+<p>在这里将 YUV 文件格式固定为 <code>YUV420P</code> 了，如果你对 YUV 格式不懂的话，强烈建议看看我之前写过的文章，图文并茂，清晰易懂，使用谷歌搜索 YUV 关键字，搜索结果排名前五的必有我这篇文章。</p>
 
 <blockquote>
-<p>如果对 CMake 的操作不熟悉的话，建议阅读之前写过的文章，涵盖了很多基础操作。
-<a href="https://mp.weixin.qq.com/s/7pBjoVGDl_zGDwWWBOhkmg">Android NDK 开发之 CMake 必知必会</a></p>
+<p><a href="https://mp.weixin.qq.com/s/taMHYFZunxQ3XNZwR_U-Cg">一文读懂 YUV 的采样与格式</a></p>
 </blockquote>
 
-<p>当下载了 SDL_Image 之后，找到它的路径，把它的库加载到 CMake 链接目录中来，也就是要调用 <code>link_directories</code> 方法，这里同样可以定义一个宏：</p>
+<p>顺便可以使用 FFplay 验证生成的 YUV 文件是否有效，使用如下命令：</p>
 
-<pre><code class="language-cpp">macro(link_sdl_image)
-    message(&quot;link sdl image library and path is ${sdl_image_dir}&quot;)
-    include_directories(${sdl_image_dir}/include/SDL2)
-    link_directories(${sdl_image_dir}/lib)
-endmacro()
+<pre><code class="language-cpp">// 100x100 代表图片的宽高，这里只是举例，换成实际的宽高
+// 把 filename 改为 YUV 对应的文件名
+ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
 </code></pre>
 
-<p>之后就需要把目标执行文件或者目标库与 SDL_Image 开源库关联起来，也就是 <code>target_link_libraries</code> 方法，同样定义一个宏：</p>
+<p>以上命令会打开一个窗口去展示图片，如果该图片和未转换成 YUV 的图片内容一致，那说明把图片转换成 YUV 格式文件是成功了，这样就有了实验素材。</p>
 
-<pre><code class="language-cpp">macro(target_link_sdl_image name)
-    message(&quot;${name} link sdl image&quot;)
-    target_link_libraries(${name}
-            SDL2_image
-            )
-endmacro()
+<h2 id="代码实践">代码实践</h2>
+
+<p>有了素材，接下来就是代码实践环节：</p>
+
+<h3 id="创建纹理-sdl-texture">创建纹理 SDL_Texture</h3>
+
+<p>与 SDL 显示图片的方式有些不同，显示图片是将图片转换成了 SDL_Surface，然后将这个 SDL_Surface 的内容转换到 SDL_Window 对应的 SDL_Surface 上，最后上屏就显示图片了。</p>
+
+<p>显示 YUV 文件需要创建一个纹理，然后将纹理内容渲染上屏，这类似于 OpenGL 的操作了。</p>
+
+<p>首先通过 <code>SDL_CreateTexture</code> 方法创建 <code>SDL_Texture</code>：</p>
+
+<pre><code class="language-cpp">SDL_CreateTexture(SDL_Renderer * renderer,
+                Uint32 format,
+                int access, int w,
+                int h);
 </code></pre>
 
-<p>这个宏有个参数 <code>name</code> ，它就是要链接的目标文件 target 。</p>
+<p>参数 <code>renderer</code> 是之前文章提到的创建渲染器，<code>w</code> 和 <code>h</code> 是纹理的宽高，重点是 <code>format</code> 参数。</p>
 
-<blockquote>
-<p>对于 SDL 库或者其他库，也可以创建类似的宏，具体在源码中能看到。</p>
-</blockquote>
+<p>根据文件格式的不同，<code>format</code> 参数也不同，比如这里文件是 <code>YUV420P</code>，那么对应的就是 <code>IYUV</code>.</p>
 
-<p>在完成了 SDL_Image 的 CMake 配置之后，就需要在工程的主 <code>CMakeLists.txt</code> 文件中把它包含进去，现在还只是在 <code>cmake_utils</code> 目录中，这样是引用不到宏的。</p>
+<p>更多格式可以参考 <code>SDL_pixels.h</code> 文件中定义，摘录部分如下：</p>
 
-<p>通过 <code>add_subdirectory</code> 方法将定义的功能添加进来，接下来就可以使用了。</p>
+<pre><code class="language-cpp">    SDL_PIXELFORMAT_UYVY =      /**&lt; Packed mode: U0+Y0+V0+Y1 (1 plane) */
+        SDL_DEFINE_PIXELFOURCC('U', 'Y', 'V', 'Y'),
+    SDL_PIXELFORMAT_YVYU =      /**&lt; Packed mode: Y0+V0+Y1+U0 (1 plane) */
+        SDL_DEFINE_PIXELFOURCC('Y', 'V', 'Y', 'U'),
+    SDL_PIXELFORMAT_NV12 =      /**&lt; Planar mode: Y + U/V interleaved  (2 planes) */
+        SDL_DEFINE_PIXELFOURCC('N', 'V', '1', '2'),
+    SDL_PIXELFORMAT_NV21 =      /**&lt; Planar mode: Y + V/U interleaved  (2 planes) */
+        SDL_DEFINE_PIXELFOURCC('N', 'V', '2', '1'),
+    SDL_PIXELFORMAT_EXTERNAL_OES =      /**&lt; Android video texture format */
+        SDL_DEFINE_PIXELFOURCC('O', 'E', 'S', ' ')
+</code></pre>
 
-<p><img src="https://ae01.alicdn.com/kf/U8741a1d307cf451eba3265c18a4f8347L.jpg" alt="" /></p>
+<h3 id="打开文件并读取内容">打开文件并读取内容</h3>
 
-<p>同时，对于 SDL 项目代码，单独创建一个文件夹去存放，再根据每个小项又划分文件夹：</p>
+<p>接下来就是打开文件操作了，直接根据 C 语言里面相关方法调用就行。</p>
 
-<p><img src="https://ae01.alicdn.com/kf/U689dc973b5a44c32a785fc6318d56c214.jpg" alt="" /></p>
+<pre><code class="language-cpp">    // 打开文件
+    FILE *pFile = fopen(path.c_str(), &quot;rb&quot;);
+    // 读取文件内容到 buffer 中
+    unsigned char *yuv_data;
+    // yuv420p 格式的文件大小
+    int frameSize = width * height * 3 / 2;
+    yuv_data = static_cast&lt;unsigned char *&gt;(malloc(frameSize * sizeof(unsigned char)));
+    fread(yuv_data,1,frameSize,pFile);
+    // 关闭文件
+    fclose(pFile);
+</code></pre>
 
-<p>如上图所示，针对每个小项又有单独的 <code>CMakeLists.txt</code> 配置文件，在里面按需执行动态库的关联就好了。</p>
+<p>打开文件，读取文件内容，注意 <code>YUV420P</code> 格式文件大小的计算方式是 <code>width * height * 3 / 2</code> ，它比正常的 <code>RGBA</code> 格式文件要小一点的。</p>
 
-<p>经过以上的工程配置整改，对于后续的开发模块划分是很有帮助的，不仅便于添加各种开源库，更利于去单个编译项目。</p>
+<p>因为读取了文件内容之后，后续也就用不到了，直接 fclose 关闭掉。</p>
 
-<p>后续添加的库都会按照这个模式进行添加。</p>
+<h2 id="渲染纹理上屏">渲染纹理上屏</h2>
 
-<h3 id="sdl-image-加载-图片并显示">SDL_Image 加载 图片并显示</h3>
+<p>有了纹理，也有了 YUV 文件内容，接下来就是把 YUV 文件内容转换到纹理上，在把纹理渲染上屏。</p>
 
-<p>完成了配置之后，就可以进行 SDL_Image 的开发了，整个开发流程比较简单。</p>
-
-<p>前面的文章中我们创建并展示了 <code>SDL_Window</code>，SDL_Window 内有一个叫做 <code>SDL_Surface</code> 的结构，实际上它才是最终渲染展示的。</p>
-
-<p>我们加载一张图片，并将图片转换成 <code>SDL_Surface</code> ，然后把图片对应的 SDL_Surface 转换到 SDL_Window 对应的 SDL_Surface ，再更新一下 SDL_Window 的 SDL_Surface 内容，渲染到屏幕就好了。</p>
-
-<p>核心代码如下所示：</p>
-
-<pre><code class="language-cpp">    // 得到 SDL_Window 的 SDL_Surface
-    SDL_Surface *pWindowSurface = SDL_GetWindowSurface(pWindow);
-    // 根据图片创建一个 SDL_Surface
-    SDL_Surface *pImageSurface = IMG_Load(image_path.c_str());
-    bool bQuit = false;
-    SDL_Event windowEvent;
-    while (!bQuit){
-        while (SDL_PollEvent(&amp;windowEvent)){
-            switch (windowEvent.type){
-                case SDL_QUIT:
-                    bQuit = true;
+<pre><code class="language-cpp">    if (texture != nullptr){
+        SDL_Event windowEvent;
+        while (true){
+            if (SDL_PollEvent(&amp;windowEvent)){
+                if (SDL_QUIT == windowEvent.type){
                     break;
-                default:
-                    break;
+                }
             }
+            // 更新纹理内容，就是把读取的 YUV 数据转换成纹理
+            SDL_UpdateTexture(texture, nullptr,yuv_data,width);
+            // 清屏操作
+            SDL_RenderClear(renderer);
+            // 将指定纹理复制到要渲染的地方
+            SDL_RenderCopy(renderer,texture, nullptr, nullptr);
+            // 上屏操作
+            SDL_RenderPresent(renderer);
         }
-        // 将 pImageSurface 的内容传输到 上
-        SDL_BlitSurface(pImageSurface, nullptr,pWindowSurface,nullptr);
-        // 上屏操作，将 Surface 内容显示到屏幕上
-        SDL_UpdateWindowSurface(pWindow);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
     }
 </code></pre>
 
-<p>最终结果如下：</p>
+<p>首先调用 <code>SDL_UpdateTexture</code> 方法将 YUV 内容转换成纹理，然后 <code>SDL_RenderClear</code> 清屏操作，OpenGL 相关的渲染也是要清屏操作的。</p>
 
-<p><img src="https://ae01.alicdn.com/kf/Ube8bd81e3da0444e82d90bdd24dc8b3d9.jpg" alt="" /></p>
+<p>接下来将 <code>SDL_Texture</code> 拷贝到要渲染的地方，然后 <code>SDL_RenderPresent</code> 执行上屏操作就行了。</p>
 
-<h3 id="总结">总结</h3>
+<p>渲染纹理上屏的操作流程基本都是这样了，根据文件格式的不同，转换成纹理的方式也有不同，除了 <code>SDL_UpdateTexture</code> 方法之外，还有 <code>SDL_UpdateYUVTexture</code> 方法，后面会遇到的。</p>
 
-<p>以上就是音视频基础学习连载的 <code>004</code> 篇。</p>
+<p>最后别忘了释放和销毁相应的指针和变量。</p>
 
-<p>完成了 SDL 加载图片并显示的流程，整体代码比较简单，很多东西都是之前文章提到过的，反而重点更侧重于工程的 CMake 配置，有兴趣的可以看看代码。</p>
+<p>运行程序就会看到打开一个窗口，显示一张图片，和之前用 FFmpeg 显示的图片内容一致。</p>
 
-<p>具体代码见仓库：</p>
+<p><img src="https://ae01.alicdn.com/kf/U8ba2831c2a6f498e944fc48bbb3f4e6bE.jpg" alt="" /></p>
+
+<h2 id="总结">总结</h2>
+
+<p>以上就是音视频基础学习连载的 <code>005</code> 篇。</p>
+
+<p>内容相对比较简单，对于 SDL 接口的一些调用也不算难。实际上并不用太深究 SDL 的接口机制和实现原理，做一些实验性入门基础功能会用好了，毕竟在实际工作中不太会用到。</p>
+
+<p>另外，既然已经可以显示一张 YUV 帧内容了，那么假如是一个 YUV 视频文件又该如何显示了？想知后事如何，请看下回分解。</p>
+
+<p>本文具体代码见仓库：</p>
 
 <blockquote>
 <p><a href="https://github.com/glumes/av-beginner">https://github.com/glumes/av-beginner</a></p>
@@ -465,7 +520,7 @@ endmacro()
 
                 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-004/">【音视频连载-004】基础学习篇-SDL 加载图片并显示</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-005/">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</a>
 
                 
 
@@ -494,30 +549,15 @@ endmacro()
       
         
 
-<h3>相关文章</h3>
-<ul style="margin-bottom: 25px;">
-    
-    <li><a href="/post/ffmpeg/av-beginner-003/">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
-    
-    <li><a href="/post/ffmpeg/av-beginner-002/">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
-    
-    <li><a href="/post/ffmpeg/av-beginner-001/">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</a></li>
-    
-</ul>
-
       
 
       
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-003/" data-toggle="tooltip" data-placement="top" title="【音视频连载-003】基础学习篇-SDL 消息循环和事件响应">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/ffmpeg/av-beginner-004/" data-toggle="tooltip" data-placement="top" title="【音视频连载-004】基础学习篇-SDL 加载图片并显示">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-005/" data-toggle="tooltip" data-placement="top" title="【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示">Next Post &rarr;</a>
-          </li>
         
       </ul>
       

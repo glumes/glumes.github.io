@@ -8,10 +8,54 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Sun, 08 Mar 2020 21:44:09 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 10 Mar 2020 00:05:03 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</title>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-005/</link>
+      <pubDate>Tue, 10 Mar 2020 00:05:03 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-005/</guid>
+      <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA&#34;&gt;【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw&#34;&gt;【音视频连载-003】基础学习篇-SDL 消息循环和事件响应&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw&#34;&gt;【音视频连载-004】基础学习篇-SDL 加载图片并显示&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。&lt;/p&gt;
+
+&lt;h2 id=&#34;yuv-文件素材准备&#34;&gt;YUV 文件素材准备&lt;/h2&gt;
+
+&lt;p&gt;做这个功能点比较麻烦的是素材问题，上哪去找一个 YUV 文件出来，谷歌和百度搜索都不好使，其实直接使用 FFmpeg 生成文件就好了。&lt;/p&gt;
+
+&lt;p&gt;使用如下命令将图片文件转成 YUV 文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;// 把 filename 改为图片对应的文件名
+ffmpeg -i image_filename.png -pix_fmt yuv420p yuv_filename.yuv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在这里将 YUV 文件格式固定为 &lt;code&gt;YUV420P&lt;/code&gt; 了，如果你对 YUV 格式不懂的话，强烈建议看看我之前写过的文章，图文并茂，清晰易懂，使用谷歌搜索 YUV 关键字，搜索结果排名前五的必有我这篇文章。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/taMHYFZunxQ3XNZwR_U-Cg&#34;&gt;一文读懂 YUV 的采样与格式&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;顺便可以使用 FFplay 验证生成的 YUV 文件是否有效，使用如下命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;// 100x100 代表图片的宽高，这里只是举例，换成实际的宽高
+// 把 filename 改为 YUV 对应的文件名
+ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上命令会打开一个窗口去展示图片，如果该图片和未转换成 YUV 的图片内容一致，那说明把图片转换成 YUV 格式文件是成功了，这样就有了实验素材。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>【音视频连载-004】基础学习篇-SDL 加载图片并显示</title>
