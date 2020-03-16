@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</title>
-  <meta property="og:title" content="【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示" />
-  <meta name="twitter:title" content="【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示" />
+  <title>【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</title>
+  <meta property="og:title" content="【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）" />
+  <meta name="twitter:title" content="【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）" />
 
   <meta name="description" content="音视频学习入门技术文章连载：
 
@@ -18,34 +18,19 @@
 【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
 【音视频连载-003】基础学习篇-SDL 消息循环和事件响应
 【音视频连载-004】基础学习篇-SDL 加载图片并显示
+【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示
+【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件】)
 
 
-在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。
+在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。
 
-YUV 文件素材准备
+SDL 播放音频文件有两种方法，可以理解成 推(push)和拉(pull)两种模式。
 
-做这个功能点比较麻烦的是素材问题，上哪去找一个 YUV 文件出来，谷歌和百度搜索都不好使，其实直接使用 FFmpeg 生成文件就好了。
+推 就是我们主动向设备缓冲区填充 Buffer ，而 拉 就是由设备拉取 Buffer 填充到缓冲区。
 
-使用如下命令将图片文件转成 YUV 文件：
+在一些开发模型中，如果数据传递能够抽象成流的形式，那么肯定就会有推和拉两种模式。
 
-// 把 filename 改为图片对应的文件名
-ffmpeg -i image_filename.png -pix_fmt yuv420p yuv_filename.yuv
-
-
-在这里将 YUV 文件格式固定为 YUV420P 了，如果你对 YUV 格式不懂的话，强烈建议看看我之前写过的文章，图文并茂，清晰易懂，使用谷歌搜索 YUV 关键字，搜索结果排名前五的必有我这篇文章。
-
-
-一文读懂 YUV 的采样与格式
-
-
-顺便可以使用 FFplay 验证生成的 YUV 文件是否有效，使用如下命令：
-
-// 100x100 代表图片的宽高，这里只是举例，换成实际的宽高
-// 把 filename 改为 YUV 对应的文件名
-ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
-
-
-以上命令会打开一个窗口去展示图片，如果该图片和未转换成 YUV 的图片内容一致，那说明把图片转换成 YUV 格式文件是成功了，这样就有了实验素材。">
+本篇文章主要是讲解 SDL 以推的形式播放音频文件。">
   <meta property="og:description" content="音视频学习入门技术文章连载：
 
 
@@ -54,34 +39,19 @@ ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
 【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
 【音视频连载-003】基础学习篇-SDL 消息循环和事件响应
 【音视频连载-004】基础学习篇-SDL 加载图片并显示
+【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示
+【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件】)
 
 
-在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。
+在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。
 
-YUV 文件素材准备
+SDL 播放音频文件有两种方法，可以理解成 推(push)和拉(pull)两种模式。
 
-做这个功能点比较麻烦的是素材问题，上哪去找一个 YUV 文件出来，谷歌和百度搜索都不好使，其实直接使用 FFmpeg 生成文件就好了。
+推 就是我们主动向设备缓冲区填充 Buffer ，而 拉 就是由设备拉取 Buffer 填充到缓冲区。
 
-使用如下命令将图片文件转成 YUV 文件：
+在一些开发模型中，如果数据传递能够抽象成流的形式，那么肯定就会有推和拉两种模式。
 
-// 把 filename 改为图片对应的文件名
-ffmpeg -i image_filename.png -pix_fmt yuv420p yuv_filename.yuv
-
-
-在这里将 YUV 文件格式固定为 YUV420P 了，如果你对 YUV 格式不懂的话，强烈建议看看我之前写过的文章，图文并茂，清晰易懂，使用谷歌搜索 YUV 关键字，搜索结果排名前五的必有我这篇文章。
-
-
-一文读懂 YUV 的采样与格式
-
-
-顺便可以使用 FFplay 验证生成的 YUV 文件是否有效，使用如下命令：
-
-// 100x100 代表图片的宽高，这里只是举例，换成实际的宽高
-// 把 filename 改为 YUV 对应的文件名
-ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
-
-
-以上命令会打开一个窗口去展示图片，如果该图片和未转换成 YUV 的图片内容一致，那说明把图片转换成 YUV 格式文件是成功了，这样就有了实验素材。">
+本篇文章主要是讲解 SDL 以推的形式播放音频文件。">
   <meta name="twitter:description" content="音视频学习入门技术文章连载：
 
 
@@ -90,19 +60,16 @@ ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
 【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
 【音视频连载-003】基础学习篇-SDL 消息循环和事件响应
 【音视频连载-004】基础学习篇-SDL 加载图片并显示
-
-
-在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。
-
-YUV 文件 …">
+【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示
+【音视频连载-006】基础学习 …">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-005/" />
+  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-007/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="纸上浅谈" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-005/" />
+  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-007/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="纸上浅谈">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
@@ -234,7 +201,7 @@ if (!doNotTrack) {
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://s2.ax1x.com/2020/03/10/8CrHyt.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ae01.alicdn.com/kf/U63974cc923674332ab8751e2b18d9b9fd.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -249,10 +216,10 @@ if (!doNotTrack) {
                 <div class="page-heading">
                 
                   
-                     <h1>【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</h1>
+                     <h1>【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</h1>
                      
                     <span class="post-meta">
-  Posted on March 10, 2020
+  Posted on March 16, 2020
   
 </span>
 
@@ -273,7 +240,7 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</h1>
+                <h1 align="center">【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</h1>
                 
                 
             </div>
@@ -295,6 +262,12 @@ if (!doNotTrack) {
       <div>
           
           
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://glumes.com/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a> &nbsp;
+            
+          </h5>
+          
       </div>
 
       <article role="main" class="blog-post" itemprop="articleBody" id="content">
@@ -305,13 +278,8 @@ if (!doNotTrack) {
 <ul>
 <li>
 <ul>
-<li><a href="#yuv-文件素材准备">YUV 文件素材准备</a></li>
-<li><a href="#代码实践">代码实践</a>
-<ul>
-<li><a href="#创建纹理-sdl-texture">创建纹理 SDL_Texture</a></li>
-<li><a href="#打开文件并读取内容">打开文件并读取内容</a></li>
-</ul></li>
-<li><a href="#渲染纹理上屏">渲染纹理上屏</a></li>
+<li><a href="#pcm-文件素材准备">PCM 文件素材准备</a></li>
+<li><a href="#代码实践">代码实践</a></li>
 <li><a href="#总结">总结</a></li>
 </ul></li>
 </ul>
@@ -327,136 +295,162 @@ if (!doNotTrack) {
 <li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
 <li><a href="https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
 <li><a href="https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw">【音视频连载-004】基础学习篇-SDL 加载图片并显示</a></li>
+<li><a href="https://mp.weixin.qq.com/s/nCidtYLmB8_LtAzbW14skg">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</a></li>
+<li><a href="https://mp.weixin.qq.com/s/9FSIVhd1TE3dDCIFmU02tw">【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件】</a>)</li>
 </ul>
 
-<p>在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。</p>
+<p>在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。</p>
 
-<h2 id="yuv-文件素材准备">YUV 文件素材准备</h2>
+<p>SDL 播放音频文件有两种方法，可以理解成 <code>推(push)</code>和<code>拉(pull)</code>两种模式。</p>
 
-<p>做这个功能点比较麻烦的是素材问题，上哪去找一个 YUV 文件出来，谷歌和百度搜索都不好使，其实直接使用 FFmpeg 生成文件就好了。</p>
+<p><code>推</code> 就是我们主动向设备缓冲区填充 Buffer ，而 <code>拉</code> 就是由设备拉取 Buffer 填充到缓冲区。</p>
 
-<p>使用如下命令将图片文件转成 YUV 文件：</p>
+<p>在一些开发模型中，如果数据传递能够抽象成<code>流</code>的形式，那么肯定就会有<code>推</code>和<code>拉</code>两种模式。</p>
 
-<pre><code class="language-cpp">// 把 filename 改为图片对应的文件名
-ffmpeg -i image_filename.png -pix_fmt yuv420p yuv_filename.yuv
+<p>本篇文章主要是讲解 SDL 以推的形式播放音频文件。</p>
+
+<h2 id="pcm-文件素材准备">PCM 文件素材准备</h2>
+
+<p>首先还是得准备素材，做音视频相关实验就是这么麻烦~~</p>
+
+<p>找一个 mp3 文件，使用 FFmpeg 命令将它转换成 pcm 文件，方便的话可以直接使用代码仓库提供的 mp3 文件。</p>
+
+<p>不像在视频播放中准备素材那样简单，音频文件对于参数的信息要求多一点。首先要使用 ffmpeg 查看 mp3 文件的一些信息，比如采样率、声道数等。</p>
+
+<pre><code class="language-cpp">ffmpeg -i file_name.mp3
 </code></pre>
 
-<p>在这里将 YUV 文件格式固定为 <code>YUV420P</code> 了，如果你对 YUV 格式不懂的话，强烈建议看看我之前写过的文章，图文并茂，清晰易懂，使用谷歌搜索 YUV 关键字，搜索结果排名前五的必有我这篇文章。</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2020/7d7d871258164b1d1b6d211ca6d961a2.jpg" alt="" /></p>
 
-<blockquote>
-<p><a href="https://mp.weixin.qq.com/s/taMHYFZunxQ3XNZwR_U-Cg">一文读懂 YUV 的采样与格式</a></p>
-</blockquote>
+<p>得到如图所示的信息，可以看到 mp3 文件采样率是 44100 Hz，双声道，再使用 FFmpeg 转换时要用到上面的信息。</p>
 
-<p>顺便可以使用 FFplay 验证生成的 YUV 文件是否有效，使用如下命令：</p>
-
-<pre><code class="language-cpp">// 100x100 代表图片的宽高，这里只是举例，换成实际的宽高
-// 把 filename 改为 YUV 对应的文件名
-ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
+<pre><code class="language-cpp">ffmpeg -i file_name.mp3 -acodec pcm_s16le -f s16le -ac 2 -ar 44100 file_name.pcm
 </code></pre>
 
-<p>以上命令会打开一个窗口去展示图片，如果该图片和未转换成 YUV 的图片内容一致，那说明把图片转换成 YUV 格式文件是成功了，这样就有了实验素材。</p>
+<p>其中：</p>
+
+<ul>
+<li><p>-acodec pcm_s16le</p>
+
+<ul>
+<li>指定编码器</li>
+</ul></li>
+
+<li><p>-f s16le</p>
+
+<ul>
+<li>指定文件格式，是大端模式还是小端模式</li>
+</ul></li>
+
+<li><p>-ac 2</p>
+
+<ul>
+<li>指定通道数，2 代表双通道</li>
+</ul></li>
+
+<li><p>-ar 44100</p>
+
+<ul>
+<li>指定采样率，这里是 44100 Hz</li>
+</ul></li>
+</ul>
+
+<p>在转换时要根据原文件的采样率和声道数进行转换，否则转换后的 pcm 文件播放声音不对了。</p>
+
+<pre><code class="language-cpp">ffplay -ar 44100 -channels 2 -f s16le -i file_name.pcm
+</code></pre>
+
+<p>通过上面的命令可以验证转换是否正确，还是要注意声道数和采样率的设置，如果没问题的话，说明 PCM 文件素材就准备完毕，可以进行代码实践了。</p>
 
 <h2 id="代码实践">代码实践</h2>
 
-<p>有了素材，接下来就是代码实践环节：</p>
+<p>首先要通过 <code>SDL_OpenAudioDevice</code> 方法打开一个音频设备。</p>
 
-<h3 id="创建纹理-sdl-texture">创建纹理 SDL_Texture</h3>
-
-<p>与 SDL 显示图片的方式有些不同，显示图片是将图片转换成了 SDL_Surface，然后将这个 SDL_Surface 的内容转换到 SDL_Window 对应的 SDL_Surface 上，最后上屏就显示图片了。</p>
-
-<p>显示 YUV 文件需要创建一个纹理，然后将纹理内容渲染上屏，这类似于 OpenGL 的操作了。</p>
-
-<p>首先通过 <code>SDL_CreateTexture</code> 方法创建 <code>SDL_Texture</code>：</p>
-
-<pre><code class="language-cpp">SDL_CreateTexture(SDL_Renderer * renderer,
-                Uint32 format,
-                int access, int w,
-                int h);
+<pre><code class="language-cpp">SDL_OpenAudioDevice(const char
+                 *device,
+                 int iscapture,
+                 const SDL_AudioSpec * desired,
+                 SDL_AudioSpec *obtained,
+                 int allowed_changes);
 </code></pre>
 
-<p>参数 <code>renderer</code> 是之前文章提到的创建渲染器，<code>w</code> 和 <code>h</code> 是纹理的宽高，重点是 <code>format</code> 参数。</p>
+<p>其中结构体 <code>SDL_AudioSpec</code> 指定了一系列音频相关的参数，具体如下：</p>
 
-<p>根据文件格式的不同，<code>format</code> 参数也不同，比如这里文件是 <code>YUV420P</code>，那么对应的就是 <code>IYUV</code>.</p>
-
-<p>更多格式可以参考 <code>SDL_pixels.h</code> 文件中定义，摘录部分如下：</p>
-
-<pre><code class="language-cpp">    SDL_PIXELFORMAT_UYVY =      /**&lt; Packed mode: U0+Y0+V0+Y1 (1 plane) */
-        SDL_DEFINE_PIXELFOURCC('U', 'Y', 'V', 'Y'),
-    SDL_PIXELFORMAT_YVYU =      /**&lt; Packed mode: Y0+V0+Y1+U0 (1 plane) */
-        SDL_DEFINE_PIXELFOURCC('Y', 'V', 'Y', 'U'),
-    SDL_PIXELFORMAT_NV12 =      /**&lt; Planar mode: Y + U/V interleaved  (2 planes) */
-        SDL_DEFINE_PIXELFOURCC('N', 'V', '1', '2'),
-    SDL_PIXELFORMAT_NV21 =      /**&lt; Planar mode: Y + V/U interleaved  (2 planes) */
-        SDL_DEFINE_PIXELFOURCC('N', 'V', '2', '1'),
-    SDL_PIXELFORMAT_EXTERNAL_OES =      /**&lt; Android video texture format */
-        SDL_DEFINE_PIXELFOURCC('O', 'E', 'S', ' ')
+<pre><code class="language-cpp">typedef struct SDL_AudioSpec
+{
+    int freq;                   /**&lt; DSP frequency -- samples per second */
+    SDL_AudioFormat format;     /**&lt; Audio data format */
+    Uint8 channels;             /**&lt; Number of channels: 1 mono, 2 stereo */
+    Uint8 silence;              /**&lt; Audio buffer silence value (calculated) */
+    Uint16 samples;             /**&lt; Audio buffer size in sample FRAMES (total samples divided by channel count) */
+    Uint16 padding;             /**&lt; Necessary for some compile environments */
+    Uint32 size;                /**&lt; Audio buffer size in bytes (calculated) */
+    SDL_AudioCallback callback; /**&lt; Callback that feeds the audio device (NULL to use SDL_QueueAudio()). */
+    void *userdata;             /**&lt; Userdata passed to callback (ignored for NULL callbacks). */
+} SDL_AudioSpec;
 </code></pre>
 
-<h3 id="打开文件并读取内容">打开文件并读取内容</h3>
+<p>这些参数和音频是息息相关的，比如采样率、声道、音频数据格式、采样个数等，后面会专门去介绍它们。</p>
 
-<p>接下来就是打开文件操作了，直接根据 C 语言里面相关方法调用就行。</p>
+<p><code>SDL_OpenAudioDevice</code> 方法有两个参数 <code>desired</code> 和 <code>obtained</code> 都是 <code>SDL_AudioSpec</code> 类型的。</p>
 
-<pre><code class="language-cpp">    // 打开文件
-    FILE *pFile = fopen(path.c_str(), &quot;rb&quot;);
-    // 读取文件内容到 buffer 中
-    unsigned char *yuv_data;
-    // yuv420p 格式的文件大小
-    int frameSize = width * height * 3 / 2;
-    yuv_data = static_cast&lt;unsigned char *&gt;(malloc(frameSize * sizeof(unsigned char)));
-    fread(yuv_data,1,frameSize,pFile);
-    // 关闭文件
-    fclose(pFile);
-</code></pre>
+<p>这里的意思是我们传入 <code>desired</code> 指定的音频参数，但不一定是 SDL 支持的，所以 SDL 会返回一个它支持的参数信息放在 <code>obtained</code> 里面。</p>
 
-<p>打开文件，读取文件内容，注意 <code>YUV420P</code> 格式文件大小的计算方式是 <code>width * height * 3 / 2</code> ，它比正常的 <code>RGBA</code> 格式文件要小一点的。</p>
+<p>不过为了简单就先把它写死好了，但即使写死了有些信息还是要和你的 PCM 文件对应上才行，比如 <code>freg</code> 采样率和 <code>channels</code> 通道数等。</p>
 
-<p>因为读取了文件内容之后，后续也就用不到了，直接 fclose 关闭掉。</p>
+<pre><code class="language-cpp">    SDL_AudioSpec audioSpec;
+    audioSpec.freq = 44100;
+    audioSpec.format = AUDIO_S16SYS;
+    audioSpec.channels = 2;
+    audioSpec.silence = 0;
+    audioSpec.samples = 1024;
+    // 因为是推模式，所以这里为 nullptr
+    audioSpec.callback = nullptr;
 
-<h2 id="渲染纹理上屏">渲染纹理上屏</h2>
-
-<p>有了纹理，也有了 YUV 文件内容，接下来就是把 YUV 文件内容转换到纹理上，在把纹理渲染上屏。</p>
-
-<pre><code class="language-cpp">    if (texture != nullptr){
-        SDL_Event windowEvent;
-        while (true){
-            if (SDL_PollEvent(&amp;windowEvent)){
-                if (SDL_QUIT == windowEvent.type){
-                    break;
-                }
-            }
-            // 更新纹理内容，就是把读取的 YUV 数据转换成纹理
-            SDL_UpdateTexture(texture, nullptr,yuv_data,width);
-            // 清屏操作
-            SDL_RenderClear(renderer);
-            // 将指定纹理复制到要渲染的地方
-            SDL_RenderCopy(renderer,texture, nullptr, nullptr);
-            // 上屏操作
-            SDL_RenderPresent(renderer);
-        }
-        SDL_DestroyWindow(window);
-        SDL_Quit();
+    SDL_AudioDeviceID deviceId;
+    if ((deviceId = SDL_OpenAudioDevice(nullptr,0,&amp;audioSpec, nullptr,SDL_AUDIO_ALLOW_ANY_CHANGE)) &lt; 2){
+        cout &lt;&lt; &quot;open audio device failed &quot; &lt;&lt; endl;
+        return -1;
     }
 </code></pre>
 
-<p>首先调用 <code>SDL_UpdateTexture</code> 方法将 YUV 内容转换成纹理，然后 <code>SDL_RenderClear</code> 清屏操作，OpenGL 相关的渲染也是要清屏操作的。</p>
+<p>注意到 <code>SDL_AudioSpec</code> 有个参数 <code>callback</code> 设置为了 nullptr 。这个回调是为了在 <code>拉</code> 模式中从回调取数据的，因为这里暂时用不到就写成了 nullptr ，下一篇文章就会用到了。</p>
 
-<p>接下来将 <code>SDL_Texture</code> 拷贝到要渲染的地方，然后 <code>SDL_RenderPresent</code> 执行上屏操作就行了。</p>
+<p>这样就打开了音频设备，返回一个文件 Id，如果结果小于 2 说明打开失败了。</p>
 
-<p>渲染纹理上屏的操作流程基本都是这样了，根据文件格式的不同，转换成纹理的方式也有不同，除了 <code>SDL_UpdateTexture</code> 方法之外，还有 <code>SDL_UpdateYUVTexture</code> 方法，后面会遇到的。</p>
+<p>接下来通过 <code>SDL_PauseAudioDevice</code> 方法去播放或者暂停音乐。</p>
 
-<p>最后别忘了释放和销毁相应的指针和变量。</p>
+<pre><code class="language-cpp">SDL_PauseAudioDevice(SDL_AudioDeviceID dev,
+                   int pause_on);
+</code></pre>
 
-<p>运行程序就会看到打开一个窗口，显示一张图片，和之前用 FFmpeg 显示的图片内容一致。</p>
+<p><code>SDL_AudioDeviceID</code> 参数就是上面返回的文件 Id，<code>pause_on</code> 为 0 的话代表播放，1 代表暂停。</p>
 
-<p><img src="https://ae01.alicdn.com/kf/U8ba2831c2a6f498e944fc48bbb3f4e6bE.jpg" alt="" /></p>
+<p>最后就要开始主动向设备缓冲区填充 Buffer 了。</p>
+
+<p>就向 SDL 播放 YUV 视频那样，要从 PCM 文件中读取一块 Buffer ，然后通过 <code>SDL_QueueAudio</code> 方法进行填充。</p>
+
+<pre><code class="language-cpp">    int bufferSize = 4096;
+    char* buffer = (char *)malloc(bufferSize);
+    // 省略中间代码
+    num =  fread(buffer,1,bufferSize,pFile);
+    if (num){
+        // 填充
+        SDL_QueueAudio(deviceId,buffer,bufferSize);
+    }
+</code></pre>
+
+<p>如上代码，首先定义了缓冲区的大小 4096，然后 fread 方法读取这么大的内容，最后把它填充进去。</p>
+
+<p>此时运行程序，就会听到和原来 mp3 文件一样的声音了。</p>
+
+<p>不过这里有要注意的地方，并不是填充了一下 Buffer 就马上会有声音播放出来的，要多填充一些才会有声音播放。</p>
+
+<p>另外，当播放声音时，必须要让程序不能退出，因为音频播放并不是一个阻塞当前主线程的方法，填充完数据就不管了的话，是听不到声音的。要么加个 SDL_Delay 方法要么就把 <code>SDL_QueueAudio</code> 方法放在接受消息队列信息的循环中，我采用的就是后者。</p>
 
 <h2 id="总结">总结</h2>
 
-<p>以上就是音视频基础学习连载的 <code>005</code> 篇。</p>
-
-<p>内容相对比较简单，对于 SDL 接口的一些调用也不算难。实际上并不用太深究 SDL 的接口机制和实现原理，做一些实验性入门基础功能会用好了，毕竟在实际工作中不太会用到。</p>
-
-<p>另外，既然已经可以显示一张 YUV 帧内容了，那么假如是一个 YUV 视频文件又该如何显示了？想知后事如何，请看下回分解。</p>
+<p>以上就是音视频基础学习连载的 <code>007</code> 篇。</p>
 
 <p>本文具体代码见仓库：</p>
 
@@ -514,7 +508,7 @@ ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
 
                 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-005/">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-007/">【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</a>
 
                 
 
@@ -549,13 +543,9 @@ ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-004/" data-toggle="tooltip" data-placement="top" title="【音视频连载-004】基础学习篇-SDL 加载图片并显示">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/ffmpeg/av-beginner-005/" data-toggle="tooltip" data-placement="top" title="【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-007/" data-toggle="tooltip" data-placement="top" title="【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）">Next Post &rarr;</a>
-          </li>
         
       </ul>
       

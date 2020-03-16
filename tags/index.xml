@@ -8,10 +8,19 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Sun, 08 Mar 2020 21:44:09 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Mar 2020 09:47:30 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>音视频</title>
+      <link>https://glumes.com/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/</link>
+      <pubDate>Mon, 16 Mar 2020 09:47:30 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>SDL</title>

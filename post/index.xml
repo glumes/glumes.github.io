@@ -8,10 +8,39 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Tue, 10 Mar 2020 00:05:03 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Mar 2020 09:47:30 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</title>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-007/</link>
+      <pubDate>Mon, 16 Mar 2020 09:47:30 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-007/</guid>
+      <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA&#34;&gt;【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw&#34;&gt;【音视频连载-003】基础学习篇-SDL 消息循环和事件响应&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw&#34;&gt;【音视频连载-004】基础学习篇-SDL 加载图片并显示&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/nCidtYLmB8_LtAzbW14skg&#34;&gt;【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/9FSIVhd1TE3dDCIFmU02tw&#34;&gt;【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件】&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。&lt;/p&gt;
+
+&lt;p&gt;SDL 播放音频文件有两种方法，可以理解成 &lt;code&gt;推(push)&lt;/code&gt;和&lt;code&gt;拉(pull)&lt;/code&gt;两种模式。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;推&lt;/code&gt; 就是我们主动向设备缓冲区填充 Buffer ，而 &lt;code&gt;拉&lt;/code&gt; 就是由设备拉取 Buffer 填充到缓冲区。&lt;/p&gt;
+
+&lt;p&gt;在一些开发模型中，如果数据传递能够抽象成&lt;code&gt;流&lt;/code&gt;的形式，那么肯定就会有&lt;code&gt;推&lt;/code&gt;和&lt;code&gt;拉&lt;/code&gt;两种模式。&lt;/p&gt;
+
+&lt;p&gt;本篇文章主要是讲解 SDL 以推的形式播放音频文件。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</title>
