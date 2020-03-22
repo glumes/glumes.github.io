@@ -91,7 +91,7 @@ if (!doNotTrack) {
                 
                   <a href="/categories/opengl">opengl</a>
                 
-                  <a href="/categories/ffmpeg">ffmpeg</a>
+                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
                   <a href="/categories/python">python</a>
                 
@@ -162,6 +162,215 @@ if (!doNotTrack) {
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
         <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/ffmpeg/av-beginner-008/">
+                <h2 class="post-title">【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on March 22, 2020
+              </p>
+              <div class="post-entry">
+                
+                  <p>音视频学习入门技术文章连载：</p>
+
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
+<li><a href="https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
+<li><a href="https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw">【音视频连载-004】基础学习篇-SDL 加载图片并显示</a></li>
+<li><a href="https://mp.weixin.qq.com/s/nCidtYLmB8_LtAzbW14skg">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</a></li>
+<li><a href="https://mp.weixin.qq.com/s/9FSIVhd1TE3dDCIFmU02tw">【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件</a></li>
+<li><a href="https://mp.weixin.qq.com/s/VuWqZIG_HhghEsUYxnLwSw">【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</a></li>
+</ul>
+
+<p>接上篇 SDL 播放 PCM 音频文件，已经实现了 <code>推</code> 的模式去播放，接下来看看 <code>拉</code> 的模式如何实现。</p>
+                  <a href="https://glumes.com/post/ffmpeg/av-beginner-008/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/sdl/">SDL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/ffmpeg/av-beginner-007/">
+                <h2 class="post-title">【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on March 16, 2020
+              </p>
+              <div class="post-entry">
+                
+                  <p>音视频学习入门技术文章连载：</p>
+
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
+<li><a href="https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
+<li><a href="https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw">【音视频连载-004】基础学习篇-SDL 加载图片并显示</a></li>
+<li><a href="https://mp.weixin.qq.com/s/nCidtYLmB8_LtAzbW14skg">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</a></li>
+<li><a href="https://mp.weixin.qq.com/s/9FSIVhd1TE3dDCIFmU02tw">【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件】</a>)</li>
+</ul>
+
+<p>在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。</p>
+
+<p>SDL 播放音频文件有两种方法，可以理解成 <code>推(push)</code>和<code>拉(pull)</code>两种模式。</p>
+
+<p><code>推</code> 就是我们主动向设备缓冲区填充 Buffer ，而 <code>拉</code> 就是由设备拉取 Buffer 填充到缓冲区。</p>
+
+<p>在一些开发模型中，如果数据传递能够抽象成<code>流</code>的形式，那么肯定就会有<code>推</code>和<code>拉</code>两种模式。</p>
+
+<p>本篇文章主要是讲解 SDL 以推的形式播放音频文件。</p>
+                  <a href="https://glumes.com/post/ffmpeg/av-beginner-007/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/sdl/">SDL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/ffmpeg/av-beginner-006/">
+                <h2 class="post-title">【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on March 15, 2020
+              </p>
+              <div class="post-entry">
+                
+                  <p>音视频学习入门技术文章连载：</p>
+
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
+<li><a href="https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
+<li><a href="https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw">【音视频连载-004】基础学习篇-SDL 加载图片并显示</a></li>
+<li><a href="https://mp.weixin.qq.com/s/nCidtYLmB8_LtAzbW14skg">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</a></li>
+</ul>
+
+<p>在前面的文章中，我们已经能够加载 YUV 帧并显示了，那是把一张图片转换成 YUV 帧得到的素材。</p>
+
+<p>如果是一个 YUV 视频文件的话，那就是很多 YUV 帧连续在一起，既然能展示一帧，那肯定可以连续展示多帧。</p>
+
+<p>接下来就要这样的操作。</p>
+
+<h2 id="yuv-视频文件素材">YUV 视频文件素材</h2>
+
+<p>还是要准备一下 YUV 视频素材，不用网上到处去下载，用 FFmpeg 命令将 <code>mp4</code> 文件转换成 <code>yuv</code> 文件就好了。</p>
+
+<pre><code class="language-cpp">ffmpeg -i file_name.mp4 filename.yuv
+</code></pre>
+
+<p>命令很简单，其中 <code>file_name</code> 是文件的名称，使用时记得替换。</p>
+
+<p>由于生成的 yuv 文件是未经过压缩的，文件过大不方便传 Github ，所以在程序运行前要自己去生成一下文件。</p>
+
+<p>同样，也可以用 <code>ffplay</code> 验证一下 yuv 文件转换是否正确。</p>
+
+<pre><code class="language-cpp">ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
+</code></pre>
+
+<p>以上命令会打开一个窗口去播放视频内容，如果播放的和原来 mp4 文件内容一致，说明转换是成功的，YUV 文件可用。</p>
+                  <a href="https://glumes.com/post/ffmpeg/av-beginner-006/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/sdl/">SDL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/ffmpeg/av-beginner-005/">
+                <h2 class="post-title">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on March 10, 2020
+              </p>
+              <div class="post-entry">
+                
+                  <p>音视频学习入门技术文章连载：</p>
+
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
+<li><a href="https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
+<li><a href="https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw">【音视频连载-004】基础学习篇-SDL 加载图片并显示</a></li>
+</ul>
+
+<p>在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。</p>
+
+<h2 id="yuv-文件素材准备">YUV 文件素材准备</h2>
+
+<p>做这个功能点比较麻烦的是素材问题，上哪去找一个 YUV 文件出来，谷歌和百度搜索都不好使，其实直接使用 FFmpeg 生成文件就好了。</p>
+
+<p>使用如下命令将图片文件转成 YUV 文件：</p>
+
+<pre><code class="language-cpp">// 把 filename 改为图片对应的文件名
+ffmpeg -i image_filename.png -pix_fmt yuv420p yuv_filename.yuv
+</code></pre>
+
+<p>在这里将 YUV 文件格式固定为 <code>YUV420P</code> 了，如果你对 YUV 格式不懂的话，强烈建议看看我之前写过的文章，图文并茂，清晰易懂，使用谷歌搜索 YUV 关键字，搜索结果排名前五的必有我这篇文章。</p>
+
+<blockquote>
+<p><a href="https://mp.weixin.qq.com/s/taMHYFZunxQ3XNZwR_U-Cg">一文读懂 YUV 的采样与格式</a></p>
+</blockquote>
+
+<p>顺便可以使用 FFplay 验证生成的 YUV 文件是否有效，使用如下命令：</p>
+
+<pre><code class="language-cpp">// 100x100 代表图片的宽高，这里只是举例，换成实际的宽高
+// 把 filename 改为 YUV 对应的文件名
+ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
+</code></pre>
+
+<p>以上命令会打开一个窗口去展示图片，如果该图片和未转换成 YUV 的图片内容一致，那说明把图片转换成 YUV 格式文件是成功了，这样就有了实验素材。</p>
+                  <a href="https://glumes.com/post/ffmpeg/av-beginner-005/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/sdl/">SDL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/ffmpeg/av-beginner-004/">

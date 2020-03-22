@@ -8,10 +8,32 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Mon, 16 Mar 2020 09:47:30 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 22 Mar 2020 18:38:09 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</title>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-008/</link>
+      <pubDate>Sun, 22 Mar 2020 18:38:09 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-008/</guid>
+      <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA&#34;&gt;【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw&#34;&gt;【音视频连载-003】基础学习篇-SDL 消息循环和事件响应&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw&#34;&gt;【音视频连载-004】基础学习篇-SDL 加载图片并显示&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/nCidtYLmB8_LtAzbW14skg&#34;&gt;【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/9FSIVhd1TE3dDCIFmU02tw&#34;&gt;【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/VuWqZIG_HhghEsUYxnLwSw&#34;&gt;【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;接上篇 SDL 播放 PCM 音频文件，已经实现了 &lt;code&gt;推&lt;/code&gt; 的模式去播放，接下来看看 &lt;code&gt;拉&lt;/code&gt; 的模式如何实现。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</title>
@@ -40,6 +62,48 @@
 &lt;p&gt;在一些开发模型中，如果数据传递能够抽象成&lt;code&gt;流&lt;/code&gt;的形式，那么肯定就会有&lt;code&gt;推&lt;/code&gt;和&lt;code&gt;拉&lt;/code&gt;两种模式。&lt;/p&gt;
 
 &lt;p&gt;本篇文章主要是讲解 SDL 以推的形式播放音频文件。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件</title>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-006/</link>
+      <pubDate>Sun, 15 Mar 2020 18:38:03 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-006/</guid>
+      <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA&#34;&gt;【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw&#34;&gt;【音视频连载-003】基础学习篇-SDL 消息循环和事件响应&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw&#34;&gt;【音视频连载-004】基础学习篇-SDL 加载图片并显示&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/nCidtYLmB8_LtAzbW14skg&#34;&gt;【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在前面的文章中，我们已经能够加载 YUV 帧并显示了，那是把一张图片转换成 YUV 帧得到的素材。&lt;/p&gt;
+
+&lt;p&gt;如果是一个 YUV 视频文件的话，那就是很多 YUV 帧连续在一起，既然能展示一帧，那肯定可以连续展示多帧。&lt;/p&gt;
+
+&lt;p&gt;接下来就要这样的操作。&lt;/p&gt;
+
+&lt;h2 id=&#34;yuv-视频文件素材&#34;&gt;YUV 视频文件素材&lt;/h2&gt;
+
+&lt;p&gt;还是要准备一下 YUV 视频素材，不用网上到处去下载，用 FFmpeg 命令将 &lt;code&gt;mp4&lt;/code&gt; 文件转换成 &lt;code&gt;yuv&lt;/code&gt; 文件就好了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;ffmpeg -i file_name.mp4 filename.yuv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;命令很简单，其中 &lt;code&gt;file_name&lt;/code&gt; 是文件的名称，使用时记得替换。&lt;/p&gt;
+
+&lt;p&gt;由于生成的 yuv 文件是未经过压缩的，文件过大不方便传 Github ，所以在程序运行前要自己去生成一下文件。&lt;/p&gt;
+
+&lt;p&gt;同样，也可以用 &lt;code&gt;ffplay&lt;/code&gt; 验证一下 yuv 文件转换是否正确。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上命令会打开一个窗口去播放视频内容，如果播放的和原来 mp4 文件内容一致，说明转换是成功的，YUV 文件可用。&lt;/p&gt;</description>
     </item>
     
     <item>
