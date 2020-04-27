@@ -8,10 +8,19 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Sun, 22 Mar 2020 18:38:09 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 27 Apr 2020 23:37:03 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>FFmpeg</title>
+      <link>https://glumes.com/categories/ffmpeg/</link>
+      <pubDate>Mon, 27 Apr 2020 23:37:03 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/categories/ffmpeg/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>音视频开发</title>
@@ -41,7 +50,7 @@
     </item>
     
     <item>
-      <title>OpenGL</title>
+      <title>opengl</title>
       <link>https://glumes.com/categories/opengl/</link>
       <pubDate>Tue, 20 Aug 2019 23:51:59 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
@@ -55,15 +64,6 @@
       <pubDate>Sun, 07 Apr 2019 15:39:14 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/categories/vulkan/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ffmpeg</title>
-      <link>https://glumes.com/categories/ffmpeg/</link>
-      <pubDate>Wed, 19 Sep 2018 23:12:45 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/categories/ffmpeg/</guid>
       <description></description>
     </item>
     

@@ -8,10 +8,19 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Sun, 22 Mar 2020 18:38:09 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 27 Apr 2020 23:37:03 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>FFmpeg</title>
+      <link>https://glumes.com/tags/ffmpeg/</link>
+      <pubDate>Mon, 27 Apr 2020 23:37:03 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/tags/ffmpeg/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>SDL</title>
@@ -352,15 +361,6 @@
       <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/tags/docker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>FFmpeg</title>
-      <link>https://glumes.com/tags/ffmpeg/</link>
-      <pubDate>Fri, 22 Dec 2017 16:05:30 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/tags/ffmpeg/</guid>
       <description></description>
     </item>
     

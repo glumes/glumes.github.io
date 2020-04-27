@@ -8,10 +8,19 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Sun, 22 Mar 2020 18:38:09 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 27 Apr 2020 23:37:03 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【音视频连载-010】第二季 FFmpeg 日志打印</title>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-010/</link>
+      <pubDate>Mon, 27 Apr 2020 23:37:03 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-010/</guid>
+      <description>音视频学习入门技术文章连载： 技术开发故事会连载 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置 【音视频连载-002】基础学习篇-SD</description>
+    </item>
     
     <item>
       <title>【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</title>

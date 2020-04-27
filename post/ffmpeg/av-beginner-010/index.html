@@ -6,56 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</title>
-  <meta property="og:title" content="【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）" />
-  <meta name="twitter:title" content="【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）" />
+  <title>【音视频连载-010】第二季 FFmpeg 日志打印</title>
+  <meta property="og:title" content="【音视频连载-010】第二季 FFmpeg 日志打印" />
+  <meta name="twitter:title" content="【音视频连载-010】第二季 FFmpeg 日志打印" />
 
-  <meta name="description" content="音视频学习入门技术文章连载：
-
-
-技术开发故事会连载
-【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
-【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
-【音视频连载-003】基础学习篇-SDL 消息循环和事件响应
-【音视频连载-004】基础学习篇-SDL 加载图片并显示
-【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示
-【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件
-【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）
-
-
-接上篇 SDL 播放 PCM 音频文件，已经实现了 推 的模式去播放，接下来看看 拉 的模式如何实现。">
-  <meta property="og:description" content="音视频学习入门技术文章连载：
-
-
-技术开发故事会连载
-【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
-【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
-【音视频连载-003】基础学习篇-SDL 消息循环和事件响应
-【音视频连载-004】基础学习篇-SDL 加载图片并显示
-【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示
-【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件
-【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）
-
-
-接上篇 SDL 播放 PCM 音频文件，已经实现了 推 的模式去播放，接下来看看 拉 的模式如何实现。">
-  <meta name="twitter:description" content="音视频学习入门技术文章连载：
-
-
-技术开发故事会连载
-【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
-【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
-【音视频连载-003】基础学习篇-SDL 消息循环和事件响应
-【音视频连载-004】基础学习篇-SDL 加载图片并显示
-【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示
-【音视频连载-006】基础学习 …">
+  <meta name="description" content="音视频学习入门技术文章连载： 技术开发故事会连载 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置 【音视频连载-002】基础学习篇-SD">
+  <meta property="og:description" content="音视频学习入门技术文章连载： 技术开发故事会连载 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置 【音视频连载-002】基础学习篇-SD">
+  <meta name="twitter:description" content="音视频学习入门技术文章连载： 技术开发故事会连载 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置 【音视频连载-002】基础学习篇-SD">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-008/" />
+  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-010/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="纸上浅谈" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-008/" />
+  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-010/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="纸上浅谈">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
@@ -187,7 +152,7 @@ if (!doNotTrack) {
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ae01.alicdn.com/kf/U0d90ed6069554297bec5112bed73109aN.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ae01.alicdn.com/kf/U63974cc923674332ab8751e2b18d9b9fd.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -202,10 +167,10 @@ if (!doNotTrack) {
                 <div class="page-heading">
                 
                   
-                     <h1>【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</h1>
+                     <h1>【音视频连载-010】第二季 FFmpeg 日志打印</h1>
                      
                     <span class="post-meta">
-  Posted on March 22, 2020
+  Posted on April 27, 2020
   
 </span>
 
@@ -226,7 +191,7 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</h1>
+                <h1 align="center">【音视频连载-010】第二季 FFmpeg 日志打印</h1>
                 
                 
             </div>
@@ -250,7 +215,7 @@ if (!doNotTrack) {
           
           <h5 id="tags" style="margin-top: 0px;">标签:
             
-                <a href="https://glumes.com/tags/sdl/">SDL</a> &nbsp;
+                <a href="https://glumes.com/tags/ffmpeg/">FFmpeg</a> &nbsp;
             
           </h5>
           
@@ -264,8 +229,13 @@ if (!doNotTrack) {
 <ul>
 <li>
 <ul>
-<li><a href="#pcm-文件素材准备">PCM 文件素材准备</a></li>
-<li><a href="#代码实践">代码实践</a></li>
+<li>
+<ul>
+<li><a href="#日志打印基础使用">日志打印基础使用</a></li>
+<li><a href="#日志打印级别设置">日志打印级别设置</a></li>
+<li><a href="#自定义日志打印">自定义日志打印</a></li>
+<li><a href="#自定义日志打印颜色">自定义日志打印颜色</a></li>
+</ul></li>
 <li><a href="#总结">总结</a></li>
 </ul></li>
 </ul>
@@ -273,7 +243,9 @@ if (!doNotTrack) {
 </aside>
 
         
-        <p>音视频学习入门技术文章连载：</p>
+        
+
+<p>音视频学习入门技术文章连载：</p>
 
 <ul>
 <li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
@@ -284,138 +256,176 @@ if (!doNotTrack) {
 <li><a href="https://mp.weixin.qq.com/s/nCidtYLmB8_LtAzbW14skg">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</a></li>
 <li><a href="https://mp.weixin.qq.com/s/9FSIVhd1TE3dDCIFmU02tw">【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件</a></li>
 <li><a href="https://mp.weixin.qq.com/s/VuWqZIG_HhghEsUYxnLwSw">【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</a></li>
+<li><a href="https://mp.weixin.qq.com/s/8faeLClht2kfKqfA8Vizug">【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</a></li>
+<li><a href="https://mp.weixin.qq.com/s/iQwIpxUKr0qWvejrGVA3Uw">【音视频连载-009】第二季 FFmpeg 打造简易播放器</a></li>
 </ul>
 
-<p>接上篇 SDL 播放 PCM 音频文件，已经实现了 <code>推</code> 的模式去播放，接下来看看 <code>拉</code> 的模式如何实现。</p>
+<p>音视频连载系列已经停更一段时间，再这么停下去估计就要掉粉了，捡起来继续更新~~~</p>
 
-<h2 id="pcm-文件素材准备">PCM 文件素材准备</h2>
+<p>接下来主要是讲解 FFmpeg 相关的内容，比如这篇就从简单的日志打印开始说起。</p>
 
-<p>前面的文章中已经准备好了相关素材，这里就不重复了，还是用同样的 PCM 文件作为这次实验素材。</p>
+<h3 id="日志打印基础使用">日志打印基础使用</h3>
 
-<h2 id="代码实践">代码实践</h2>
+<p>在 FFmpeg 中提供了 av_log() 方法去打印日志，它的函数声明如下：</p>
 
-<p>首先还是要通过 <code>SDL_OpenAudioDevice</code> 方法打开一个音频设备。</p>
-
-<pre><code class="language-cpp">    SDL_AudioSpec audioSpec;
-    audioSpec.freq = 44100;
-    audioSpec.format = AUDIO_S16SYS;
-    audioSpec.channels = 2;
-    audioSpec.silence = 0;
-    audioSpec.samples = 1024;
-    // 拉的模式，这里要传一个函数
-    audioSpec.callback = fill_audio;
-
-    SDL_AudioDeviceID deviceId;
-    if ((deviceId = SDL_OpenAudioDevice(nullptr, 0, &amp;audioSpec, nullptr, SDL_AUDIO_ALLOW_ANY_CHANGE)) &lt; 2) {
-        cout &lt;&lt; &quot;open audio device failed &quot; &lt;&lt; endl;
-        return -1;
-    }
+<pre><code class="language-cpp">void av_log(void *avcl, int level, const char *fmt, ...)
 </code></pre>
 
-<p>不同的是，这里 <code>callback</code> 参数不能是 nullptr 了，要传一个函数指针。这个函数在 <code>拉</code> 模式下会不断回调，从而将音频数据填充给设备缓冲区。</p>
+<p>其中 <code>level</code> 参数指的是日志级别，后面的 <code>fmt</code> 和 <code>...</code> 代表日志内容，和调用 <code>print</code> 打印信息一样。</p>
 
-<p>函数声明如下：</p>
+<p>具体使用如下：</p>
 
-<pre><code class="language-cpp">typedef void (SDLCALL * SDL_AudioCallback) (
-    // 传用户自定义的数据
-    void *userdata, 
-    // 指向要填充给设备缓冲区的音频数据Buffer的指针
-    Uint8 * stream,
-    // 音频数据Buffer的长度
-    int len);
+<pre><code class="language-cpp">av_log(nullptr,AV_LOG_INFO,&quot;this is INFO log color&quot;);
+av_log(nullptr,AV_LOG_DEBUG,&quot;this is DEBUG log color&quot;);
+av_log(nullptr,AV_LOG_WARNING,&quot;this is WARNING log color&quot;);
+av_log(nullptr,AV_LOG_ERROR,&quot;this is ERROR log color&quot;);
 </code></pre>
 
-<p>参数 <code>stream</code> 是个指针类型，它指向要填充给设备缓冲区的音频数据 Buffer ，而 len 就是 Buffer 的长度。<code>userdata</code> 是我们自定义的数据，需要的时候可以用到。</p>
+<p>与 Android 日志类似，FFmpeg 也有多种级别的日志。</p>
 
-<p>在这个函数中我们要做的就是将读取的 PCM 音频数据传给 <code>stream</code> 指向的 Buffer ，而且还不能超出 len 的长度，如果超出了截断一下，下次回调时传剩下的部分。</p>
+<pre><code class="language-cpp">#define AV_LOG_FATAL     8
+#define AV_LOG_ERROR    16
+#define AV_LOG_WARNING  24
+#define AV_LOG_INFO     32
+#define AV_LOG_VERBOSE  40
+#define AV_LOG_DEBUG    48
+#define AV_LOG_TRACE    56
+</code></pre>
 
-<p>因此就有了如下的实现：</p>
+<p>看到 <code>INFO</code>、<code>DEBUG</code>、<code>ERROR</code> 这些级别是不是有似曾相识的感觉。</p>
 
-<pre><code class="language-cpp">// 读取出 pcm 数据长度
-static Uint32 audio_len;
-// 读取出的音频数据 Buffer
-static Uint8 *audio_pos;
+<p>这些数值都是 8 的倍数，按照从小到大的顺序递增。</p>
 
-// 函数实现
-void fill_audio(void *udata, Uint8 *stream, int len) {
-    SDL_memset(stream, 0, len);
-    if (audio_len == 0) {
-        return;
-    }
-    // 数据大小不能超过 len
-    len = len &gt; audio_len ? audio_len : len;
-    
-    // 将 stream 和 audio_pos 进行混合播放
-//    SDL_MixAudio(stream, audio_pos, len, SDL_MIX_MAXVOLUME);
+<h3 id="日志打印级别设置">日志打印级别设置</h3>
 
-    // 单独播放 audio_pos,也就是解码出来的音频数据
-    memcpy(stream, audio_pos, len);
+<p>在 FFmpeg 中可以设置和获取当前日志打印的级别。</p>
 
-    audio_pos += len;
-    audio_len -= len;
+<pre><code class="language-cpp">// 设置日志打印级别
+void av_log_set_level(int level);
+// 获取日志打印级别
+int av_log_get_level(void);
+</code></pre>
 
-    if (audio_len &lt;= 0){
-        // 读取完了，通知继续读取数据
-        notifyGetAudioFrame();
+<p>比如设置了当前级别是 <code>AV_LOG_INFO</code> ，那么凡是级别低于它的都不会打印出来了。</p>
+
+<p>那么什么级别算是更低的呢？数字越小的级别越高，数字越大的级别越低。</p>
+
+<p>比如设置了 <code>AV_LOG_INFO</code> 级别，它的值是 32 ，那么 <code>AV_LOG_DEBUG</code> 级别的日志就不会打印，它的值是 48 ，级别更低。而 <code>AV_LOG_ERROR</code> 就会被打印，它的值是 16 ，级别更高。</p>
+
+<h3 id="自定义日志打印">自定义日志打印</h3>
+
+<p>在 FFmpeg 中可以通过 <code>av_log_set_callback</code> 函数来注册一个日志回调，在回调中自定义日志打印方式。</p>
+
+<p><code>av_log_set_callback</code> 的函数声明如下：</p>
+
+<pre><code class="language-cpp">void av_log_set_callback(void (*callback)(void*, int level, const char* fmt, va_list));
+</code></pre>
+
+<p>它的参数是传一个函数指针，其中 <code>level</code> 指定了日志回调的级别，根据不同级别做不同操作，<code>fmt</code> 和 <code>va_list</code> 就是回调的日志内容了，和 <code>print</code> 函数相似。</p>
+
+<p>以下就是具体的操作：</p>
+
+<pre><code class="language-cpp">static void log_callback(void *ptr, int level, const char *fmt, va_list vaList) {
+    switch (level) {
+        case AV_LOG_DEBUG:
+            logD(fmt, vaList);
+            break;
+        case AV_LOG_VERBOSE:
+            logV(LOG_MAGENTA, fmt, vaList);
+            break;
+        case AV_LOG_INFO:
+            logI(fmt, vaList);
+            break;
+        case AV_LOG_WARNING:
+            logW(fmt, vaList);
+            break;
+        case AV_LOG_ERROR:
+            logE(fmt, vaList);
+            break;
+        default:
+            log(fmt, vaList);
+            break;
     }
 }
 </code></pre>
 
-<p>首先将 <code>stream</code> 数据清空。然后比较读出的 pcm 数据长度 <code>audio_len</code> 和 <code>len</code> 的大小，保证数据大小不超过 <code>len</code> 的要求。</p>
+<p>在 <code>switch</code> 做日志级别的分发处理，具体的打印方法教给宏定义的函数。</p>
 
-<p>在播放时，也就是给 <code>stream</code> 写数据时有两种方式。一种是直接 <code>memcpy</code> 将音频数据 <code>audio_pos</code> 拷贝到 Buffer 上就好了。另一种是通过 <code>SDL_MixAudio</code> 方法。</p>
+<p>在这里主要是根据不同级别，调整日志打印输出的颜色，如下图所示：</p>
 
-<p><code>SDL_MixAudio</code> 方法顾名思义就是混音了，将 <code>stream</code> 和音频数据 <code>audio_pos</code> 混合播放，由于一开始就将 <code>stream</code> 数据清空为 0 了，所以看似混音，实际上和直接播放音频数据效果一致的。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2020/4/27/171b9e8714fe442e?w=571&amp;h=271&amp;f=png&amp;s=53129" alt="" /></p>
 
-<p>最后，如果读出的 pcm 数据长度大于 <code>len</code>，那说明数据还没有全部填充完，下一次回调把剩下的填充到缓冲区，同时移动相应的指针位置。</p>
+<blockquote>
+<p>注意的是，如果注册了自定义日志打印，那么除了我们调用 <code>av_log</code> 方法会打印日志之外，FFmpeg 内部的一些日志信息也会通过自定义的方法打印出来。</p>
+</blockquote>
 
-<p>如果小于，就得通知继续读取数据了，这里自定义了一个事件去通知应用读取音频数据。</p>
+<h3 id="自定义日志打印颜色">自定义日志打印颜色</h3>
 
-<pre><code class="language-cpp">// 自定义事件，通知读取音频数据
-void notifyGetAudioFrame(){
-    SDL_Event sdlEvent;
-    sdlEvent.type = SDL_EVENT_BUFFER_END;
-    SDL_PushEvent(&amp;sdlEvent);
-}
+<p>一般来说，日志打印都是通过宏函数来定义的。</p>
 
-// 在程序事件循环中去响应事件，读取音频 Buffer
- while (!bQuit) {
-        while (SDL_PollEvent(&amp;windowEvent)) {
-            switch (windowEvent.type) {
-                case SDL_EVENT_BUFFER_END:
-                    // 读取音频数据
-                    if (fread(buffer, 1, bufferSize, pFile)) {
-                        data_count += bufferSize;
-                        audio_chunk = reinterpret_cast&lt;Uint8 *&gt;(buffer);
-                        audio_len = bufferSize;
-                        audio_pos = audio_chunk;
-                    }
-                default:
-                    break;
-            }
-        }
-    }
+<pre><code class="language-cpp">#define logD(format,...)        \
+logging(LOG_GREEN,format,##__VA_ARGS__)     
 </code></pre>
 
-<p>在事件的消息循环中进行响应，读取音频 Buffer 。如果读取的到的长度等于 0 了，也可以通过 <code>fseek</code> 方法将指针 seek 到 0，循环读取。</p>
+<p>其中 <code>##__VA_ARGS__</code> 意思就是可变参数宏，对应函数里面的三个点可变参数 <code>...</code> 。</p>
 
-<p>最后运行一下程序，就会播放出和原来 mp3 一样的音乐了。</p>
+<p>具体的函数实现如下：</p>
+
+<pre><code class="language-cpp">static void logging(const char * color ,const char *fmt, va_list vaList)
+{
+    // 设置日志打印颜色
+    printf(&quot;%s [av-beginner]: &quot;,color);
+    // 打印内容
+    vprintf( fmt, vaList );
+    // 结束日志颜色设定
+    printf(LOG_NONE &quot;\n&quot; );
+}
+
+static void logging(const char * color ,const char *fmt, ...)
+{
+    va_list vaList;
+    va_start( vaList, fmt );
+    logging(color,fmt,vaList);
+    va_end(vaList);
+}
+</code></pre>
+
+<p>这里面涉及到可变参数以及日志颜色打印的内容，展开说一下日志颜色打印。</p>
+
+<p>在终端的字符颜色是由转义序列控制的，比如终端中要换行，那么转义序列就是 <code>\n</code> 操作，对于颜色控制同样如此。</p>
+
+<p>具体的显示格式如下：</p>
+
+<blockquote>
+<p>\033[显示方式;前景色;背景色m输出字符串\033[0m</p>
+
+<p>或</p>
+
+<p>\e[显示方式;前景色;背景色m输出字符串\e[0m</p>
+</blockquote>
+
+<p>在调用 print 函数打印信息时，就按照以上的方式即可，比如：</p>
+
+<pre><code class="language-cpp">// 打印红色的日志内容
+printf(&quot;\033[0;31m print red color log \033[0m\n&quot;) ;
+</code></pre>
+
+<p>以上就可以打印出红色的日志信息，具体的关于显示方式、前景色、背景色这些内容，后续的文章再接着说了。</p>
 
 <h2 id="总结">总结</h2>
 
-<p>以上就是音视频基础学习连载的 <code>008</code> 篇。</p>
+<p>以上就是音视频基础学习连载的 010 篇。</p>
 
-<p>通过两篇文章讲解了 SDL 播放音频的两种方式，后续会主要以 <code>拉</code> 的模式进行开发。</p>
-
-<p>本文具体代码见仓库：</p>
+<p>简单讲解了 FFmpeg 中的日志打印内容，本文具体代码见仓库：</p>
 
 <blockquote>
 <p><a href="https://github.com/glumes/av-beginner">https://github.com/glumes/av-beginner</a></p>
 </blockquote>
 
-<p>本篇文章对应的提交 <code>tag</code> 为 <code>av-beginner-004</code>，可切换至对应源码查看。</p>
+<p>仓库的代码会比文章提前更新，想要抢先知道后续内容，就关注代码吧，欢迎 star 。</p>
 
 <p>能力有限，文中有不对之处，欢迎加我微信 ezglumes 进行交流~~</p>
+
         
           <div class="entry-shang text-center">
     <p>「真诚赞赏，手留余香」</p>
@@ -463,7 +473,7 @@ void notifyGetAudioFrame(){
 
                 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-008/">【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-010/">【音视频连载-010】第二季 FFmpeg 日志打印</a>
 
                 
 
@@ -495,19 +505,9 @@ void notifyGetAudioFrame(){
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/ffmpeg/av-beginner-007/">【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</a></li>
+    <li><a href="/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/">FFmpeg 3.0 版本视频解码浅析 </a></li>
     
-    <li><a href="/post/ffmpeg/av-beginner-006/">【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件</a></li>
-    
-    <li><a href="/post/ffmpeg/av-beginner-005/">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</a></li>
-    
-    <li><a href="/post/ffmpeg/av-beginner-004/">【音视频连载-004】基础学习篇-SDL 加载图片并显示</a></li>
-    
-    <li><a href="/post/ffmpeg/av-beginner-003/">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
-    
-    <li><a href="/post/ffmpeg/av-beginner-002/">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
-    
-    <li><a href="/post/ffmpeg/av-beginner-001/">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</a></li>
+    <li><a href="/post/ffmpeg/encode-and-decode-summary/">音视频编解码的那些基础理论</a></li>
     
 </ul>
 
@@ -517,13 +517,9 @@ void notifyGetAudioFrame(){
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-007/" data-toggle="tooltip" data-placement="top" title="【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/ffmpeg/av-beginner-008/" data-toggle="tooltip" data-placement="top" title="【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）">&larr; Previous Post</a>
           </li>
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-010/" data-toggle="tooltip" data-placement="top" title="【音视频连载-010】第二季 FFmpeg 日志打印">Next Post &rarr;</a>
-          </li>
         
       </ul>
       
