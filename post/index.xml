@@ -8,10 +8,25 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Mon, 27 Apr 2020 23:37:03 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 May 2020 23:10:48 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>推荐几个堪称教科书级别的 Android 音视频入门项目</title>
+      <link>https://glumes.com/post/android/android-av-beginner-resource/</link>
+      <pubDate>Wed, 06 May 2020 23:10:48 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/android/android-av-beginner-resource/</guid>
+      <description>&lt;p&gt;在 &lt;strong&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/HlbGGOyfixc8wgoDjTY0Qw&#34;&gt;直播&lt;/a&gt;&lt;/strong&gt; 中有提到几个不错的开源项目，这里再重点推荐一下：&lt;/p&gt;
+
+&lt;p&gt;目前，市面上关于音视频学习的相关书籍并不多，而且即使看了书籍学了理论，最终还是要回归到代码上来。&lt;/p&gt;
+
+&lt;p&gt;毕竟 IT 行业实践性要求高，强调动手能力，音视频这方面就更得多操作和探索了。&lt;/p&gt;
+
+&lt;p&gt;推荐下面几个项目会各有侧重，分别涵盖了 Android 音视频录制 API 、OpenGL 渲染和综合运用的例子。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>【音视频连载-010】第二季 FFmpeg 日志打印</title>
