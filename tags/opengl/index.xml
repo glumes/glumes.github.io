@@ -8,10 +8,39 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Sun, 20 Oct 2019 22:49:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 18 May 2020 11:39:56 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/opengl/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>KodeLife | Shader 实时编辑预览的强大工具使用实践</title>
+      <link>https://glumes.com/post/opengl/shader-tool-kodelife-introduce/</link>
+      <pubDate>Mon, 18 May 2020 11:39:56 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/shader-tool-kodelife-introduce/</guid>
+      <description>&lt;p&gt;经常有朋友在群里面问想学习 Shader 有什么工具可以推荐？&lt;/p&gt;
+
+&lt;p&gt;今天它来了~~~&lt;/p&gt;
+
+&lt;p&gt;推荐一款强大的 Shader 实时编辑预览的工具 —— &lt;code&gt;KodeLife&lt;/code&gt; 。&lt;/p&gt;
+
+&lt;p&gt;对，它的名字就叫做 &lt;code&gt;KodeLife&lt;/code&gt; ，可别看成 &lt;code&gt;KobeLife&lt;/code&gt; 了，一个字母之差完全就是两个概念。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;KodeLife&lt;/code&gt; 的官网地址如下：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://hexler.net/products/kodelife&#34;&gt;https://hexler.net/products/kodelife&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;贴一张主页封面图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://images.xiaozhuanlan.com/photo/2020/7d112ef33beccfe4fbf62e4879eabb25.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;有需要的同学可以去官网下载安装，它是需要购买 &lt;strong&gt;License&lt;/strong&gt; 的，不过可以免费使用两个月。&lt;/p&gt;
+
+&lt;hr /&gt;</description>
+    </item>
     
     <item>
       <title>OpenGL 实现视频编辑中的转场效果</title>

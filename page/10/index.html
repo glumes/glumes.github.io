@@ -204,7 +204,7 @@ if (!doNotTrack) {
                 
                 
                   <span class="post-meta">
-  Posted on May 6, 2020
+  Posted on May 18, 2020
   
 </span>
 
@@ -237,6 +237,70 @@ if (!doNotTrack) {
 
         <div class="posts-list">
           
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-start-service/">
+                <h2 class="post-title">Android 6.0 Service 启动过程源码分析（一）</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  Posted on December 22, 2017
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。</p>
+
+<p>Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。</p>
+                  <a href="https://glumes.com/post/android/android-start-service/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                
+                  #<a href="https://glumes.com/tags/framework/">Framework</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/android-statemachine/">
+                <h2 class="post-title">Android StateMachine 状态机分析</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  Posted on December 22, 2017
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>之前就有写过一篇文章来学习状态机：<a href="http://www.glumes.com/statemachine_learn/">状态机学习</a>。</p>
+
+<p>在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。</p>
+                  <a href="https://glumes.com/post/android/android-statemachine/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
+                
+                </span>
+              
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/android/android-lrucache/">
@@ -481,70 +545,6 @@ if (!doNotTrack) {
 
 <p>由于是从 Launcher 组件启动一个 Activity 组件，其中还需要与 ActivityManagerService 通信，而这三个部分都是位于不同的进程内，涉及进程间通信，因此可以将整个过程划分为三个不同的部分来分析，在 Launcher 进程内的操作，在 ActivityManagerService 进程内的操作，在创建的应用程序进程内的操作。</p>
                   <a href="https://glumes.com/post/android/android-start-activity-from-launcher-4/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/framework/">Framework</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-start-activity-from-launcher-3/">
-                <h2 class="post-title">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on December 22, 2017
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-2/"> Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a> 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 <code>Resumed</code>状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 <code>startSpecificActivityLocked</code>方法创建进程。</p>
-                  <a href="https://glumes.com/post/android/android-start-activity-from-launcher-3/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/framework/">Framework</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-start-activity-from-launcher-2/">
-                <h2 class="post-title">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on December 22, 2017
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a> 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。</p>
-
-<p>通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。</p>
-                  <a href="https://glumes.com/post/android/android-start-activity-from-launcher-2/" class="post-read-more">[Read More]</a>
                 
               </div>
 

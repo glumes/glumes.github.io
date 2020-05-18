@@ -6,39 +6,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>推荐几个堪称教科书级别的 Android 音视频入门项目</title>
-  <meta property="og:title" content="推荐几个堪称教科书级别的 Android 音视频入门项目" />
-  <meta name="twitter:title" content="推荐几个堪称教科书级别的 Android 音视频入门项目" />
+  <title>【音视频连载-011】第二季 FFmpeg 一层一层获取文件信息</title>
+  <meta property="og:title" content="【音视频连载-011】第二季 FFmpeg 一层一层获取文件信息" />
+  <meta name="twitter:title" content="【音视频连载-011】第二季 FFmpeg 一层一层获取文件信息" />
 
-  <meta name="description" content="在 直播 中有提到几个不错的开源项目，这里再重点推荐一下：
+  <meta name="description" content="本篇文章主要是讲解如何通过 FFmpeg 代码来获取文件信息。
 
-目前，市面上关于音视频学习的相关书籍并不多，而且即使看了书籍学了理论，最终还是要回归到代码上来。
+首先准备一个文件，用命令行来查看它的基本信息。
 
-毕竟 IT 行业实践性要求高，强调动手能力，音视频这方面就更得多操作和探索了。
+文件地址如下：
 
-推荐下面几个项目会各有侧重，分别涵盖了 Android 音视频录制 API 、OpenGL 渲染和综合运用的例子。">
-  <meta property="og:description" content="在 直播 中有提到几个不错的开源项目，这里再重点推荐一下：
+https://github.com/glumes/av-beginner/blob/master/resource/video/video-avi-320x320.avi
 
-目前，市面上关于音视频学习的相关书籍并不多，而且即使看了书籍学了理论，最终还是要回归到代码上来。
+这个文件很有意思，它的内容是一个时钟，每隔一秒，秒针都会跳动，同时还会发出滴答的声音，很方便后续做音视频同步处理。">
+  <meta property="og:description" content="本篇文章主要是讲解如何通过 FFmpeg 代码来获取文件信息。
 
-毕竟 IT 行业实践性要求高，强调动手能力，音视频这方面就更得多操作和探索了。
+首先准备一个文件，用命令行来查看它的基本信息。
 
-推荐下面几个项目会各有侧重，分别涵盖了 Android 音视频录制 API 、OpenGL 渲染和综合运用的例子。">
-  <meta name="twitter:description" content="在 直播 中有提到几个不错的开源项目，这里再重点推荐一下：
+文件地址如下：
 
-目前，市面上关于音视频学习的相关书籍并不多，而且即使看了书籍学了理论，最终还是要回归到代码上来。
+https://github.com/glumes/av-beginner/blob/master/resource/video/video-avi-320x320.avi
 
-毕竟 IT 行业实践性要求高，强调动手能力，音视频这方面就更得多操作和探索了。
+这个文件很有意思，它的内容是一个时钟，每隔一秒，秒针都会跳动，同时还会发出滴答的声音，很方便后续做音视频同步处理。">
+  <meta name="twitter:description" content="本篇文章主要是讲解如何通过 FFmpeg 代码来获取文件信息。
 
-推荐下面几个项目会各有侧重，分别涵盖了 Android 音视频录制 API 、OpenGL 渲染和综合运用的例子。">
+首先准备一个文件，用命令行来查看它的基本信息。
+
+文件地址如下：
+
+https://github.com/glumes/av-beginner/blob/master/resource/video/video-avi-320x320.avi
+
+这个文件很有意思，它的内容是一个时钟，每隔一秒，秒针都会跳动，同时还会发出滴答的声音，很方 …">
   <meta name="author" content="Glumes"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-av-beginner-resource/" />
+  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-011/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="纸上浅谈" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-av-beginner-resource/" />
+  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-011/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="纸上浅谈">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
@@ -170,7 +176,7 @@ if (!doNotTrack) {
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ae01.alicdn.com/kf/U63974cc923674332ab8751e2b18d9b9fd.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ae01.alicdn.com/kf/U0d90ed6069554297bec5112bed73109aN.jpg" ></div>
   
 
   <header class="header-section has-img">
@@ -185,10 +191,10 @@ if (!doNotTrack) {
                 <div class="page-heading">
                 
                   
-                     <h1>推荐几个堪称教科书级别的 Android 音视频入门项目</h1>
+                     <h1>【音视频连载-011】第二季 FFmpeg 一层一层获取文件信息</h1>
                      
                     <span class="post-meta">
-  Posted on May 6, 2020
+  Posted on May 18, 2020
   
 </span>
 
@@ -209,7 +215,7 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-                <h1 align="center">推荐几个堪称教科书级别的 Android 音视频入门项目</h1>
+                <h1 align="center">【音视频连载-011】第二季 FFmpeg 一层一层获取文件信息</h1>
                 
                 
             </div>
@@ -231,6 +237,12 @@ if (!doNotTrack) {
       <div>
           
           
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://glumes.com/tags/ffmpeg/">FFmpeg</a> &nbsp;
+            
+          </h5>
+          
       </div>
 
       <article role="main" class="blog-post" itemprop="articleBody" id="content">
@@ -241,90 +253,185 @@ if (!doNotTrack) {
 <ul>
 <li>
 <ul>
-<li><a href="#最后">最后</a></li>
+<li><a href="#信息获取">信息获取</a>
+<ul>
+<li><a href="#avformat-alloc-context">avformat_alloc_context</a></li>
+<li><a href="#avformat-open-input">avformat_open_input</a></li>
+<li><a href="#avformat-find-stream-info">avformat_find_stream_info</a></li>
+<li><a href="#av-dump-format">av_dump_format</a></li>
+</ul></li>
+<li><a href="#信息查看">信息查看</a></li>
+<li><a href="#总结">总结</a></li>
 </ul></li>
 </ul>
 </nav>
 </aside>
 
         
-        <p>在 <strong><a href="https://mp.weixin.qq.com/s/HlbGGOyfixc8wgoDjTY0Qw">直播</a></strong> 中有提到几个不错的开源项目，这里再重点推荐一下：</p>
+        <p>本篇文章主要是讲解如何通过 FFmpeg 代码来获取文件信息。</p>
 
-<p>目前，市面上关于音视频学习的相关书籍并不多，而且即使看了书籍学了理论，最终还是要回归到代码上来。</p>
+<p>首先准备一个文件，用命令行来查看它的基本信息。</p>
 
-<p>毕竟 IT 行业实践性要求高，强调动手能力，音视频这方面就更得多操作和探索了。</p>
+<p>文件地址如下：</p>
 
-<p>推荐下面几个项目会各有侧重，分别涵盖了 Android 音视频录制 API 、OpenGL 渲染和综合运用的例子。</p>
+<p><a href="https://github.com/glumes/av-beginner/blob/master/resource/video/video-avi-320x320.avi">https://github.com/glumes/av-beginner/blob/master/resource/video/video-avi-320x320.avi</a></p>
 
-<ul>
-<li>GPUImage</li>
-</ul>
+<p>这个文件很有意思，它的内容是一个时钟，每隔一秒，秒针都会跳动，同时还会发出滴答的声音，很方便后续做音视频同步处理。</p>
 
-<p>Github 地址：</p>
+<p>执行命令如下：</p>
 
 <blockquote>
-<p><a href="https://github.com/cats-oss/android-gpuimage">https://github.com/cats-oss/android-gpuimage</a></p>
+<p>ffmpeg -i your_file_path</p>
 </blockquote>
 
-<p>GPUImage 毫无疑问是音视频项目里面必读工程了，它的侧重点在于渲染方面。</p>
+<p>得到的结果如下图：</p>
 
-<p>有些公司的招聘要求上可能都会写明熟悉GPUImage ，重要性可见一斑。</p>
+<p><img src="https://ae01.alicdn.com/kf/H166f18215b2d49c48ad90860f26d7abbu.jpg" alt="" /></p>
 
-<p>通过阅读 GPUImage 的源码，能够让你掌握 OpenGL 的渲染以及渲染链的搭建，同时工程里面很多特效 Shader 代码，通过阅读和实践这些 Shader 代码，能够让你掌握初步的 Shader 编写能力。</p>
-
-<p>比如常见的滤镜效果，在 GPUImage 就有现成的代码例子，这一点在我的直播中也有讲到。有兴趣的可以翻阅视频，掌握常见滤镜效果的代码编写。</p>
-
-<p>如果需要 GPUImage 相关的源码分析文档，也可以参考我之前写过的一篇文章：</p>
-
-<p><a href="https://mp.weixin.qq.com/s/Xc0r6PsxrT-dJ_W4-K7V0Q">OpenGL 之 GPUImage 源码分析</a></p>
+<p>从图中获取如下的信息：</p>
 
 <ul>
-<li>AudioVideoRecordingSample</li>
+<li>视频时长 duration 为 12s</li>
+<li>开始时间点 start  0s</li>
+<li>比特率 bitrate 42 kb/s</li>
 </ul>
 
-<p>Github 地址</p>
+<p>另外，还可以得出该文件有两路流，一路视频，一路音频。</p>
 
-<blockquote>
-<p><a href="https://github.com/saki4510t/AudioVideoRecordingSample">https://github.com/saki4510t/AudioVideoRecordingSample</a></p>
-</blockquote>
+<p>以上这些信息都可以在一个叫 <code>AVFormatContext</code> 的结构体中得到。</p>
 
-<p>此项目的侧重点在于 Android 音视频相关 API 的使用，尤其是在 录制和编码方面的。</p>
+<p>除此之外，还可以看到该视频文件的分辨率是 <code>320x320</code> ，音频采样率是 <code>8000Hz</code> ，以上信息需要通过一个叫 <code>AVCodecContext</code> 的结构体去获得。</p>
 
-<p>该项目运行后能够将 Camera 采集的视频和音频内容编码成一个 MP4 文件。</p>
+<hr />
 
-<p>这其中用到了 MediaCodec 做编码，用到了 MediaMuxer 将音频和视频混合。</p>
+<h2 id="信息获取">信息获取</h2>
 
-<p>这样的一个完整示例对于掌握 Android 上音视频相关 API 帮忙非常大，因为它能够成功正确运行，而且可以通过去修改其源码来做自己的实验，验证自己对于 API 的理解和掌握。</p>
+<p>本篇文章就讲一讲如何获得 <code>AVFormatContext</code> 并查看它的信息。</p>
 
-<p>当你能够熟练掌握其内容，或者你就可以试着更进一步，尝试用 FFmpeg 做音视频的编码和混合，实现和 Android 音视频 API 一样的功能。</p>
+<p>核心代码很简单如下：</p>
+
+<pre><code class="language-cpp">    // 声明并初始化 AVFormatContext
+    AVFormatContext * fmt_ctx = avformat_alloc_context();
+
+    int ret = RET_OK;
+    
+    // 打开文件
+    if ((ret = avformat_open_input(&amp;fmt_ctx, filename, nullptr, nullptr)) &lt; 0) {
+        logE( &quot;Cannot open input file&quot;);
+        return ret;
+    }
+    
+    // 获取文件流相关信息
+    if ((ret = avformat_find_stream_info(fmt_ctx, nullptr)) &lt; 0) {
+        logE(&quot;Cannot find stream information&quot;);
+        return ret;
+    }
+</code></pre>
+
+<p>只有三个简单的函数调用：</p>
+
+<h3 id="avformat-alloc-context">avformat_alloc_context</h3>
+
+<p>作用如下：</p>
 
 <ul>
-<li>Grafika</li>
+<li>用来初始化 AVFormatContext 结构体的</li>
+<li>要配套使用 avformat_free_context 来释放</li>
 </ul>
 
-<p>Github 地址</p>
+<h3 id="avformat-open-input">avformat_open_input</h3>
+
+<p>作用如下：</p>
+
+<ul>
+<li><p>打开输入文件，通过读取文件头 AVFormatContext 就已经能够获取部分信息了，比如文件地址、文件封装格式、有多少路流等等。</p></li>
+
+<li><p>但是更多详细信息还需要通过其他方法来获取，比如流信息</p></li>
+
+<li><p>要配套使用 avformat_close_input 来关闭文件，并且要在 avformat_free_context 之前调用，否则就出问题了。</p></li>
+</ul>
+
+<h3 id="avformat-find-stream-info">avformat_find_stream_info</h3>
+
+<ul>
+<li>探测得到视频文件的具体流信息</li>
+</ul>
+
+<h3 id="av-dump-format">av_dump_format</h3>
+
+<p>通过改方法可以打印相关的文件信息，它的输出和 FFmpeg 命令行输出的内容基本一样。</p>
+
+<p>具体使用：</p>
+
+<pre><code class="language-cpp">av_dump_format(mFormatContext,0,filename,0);
+</code></pre>
+
+<p>最后要进行相关结构体的释放，不要忘了释放的顺序。</p>
+
+<pre><code class="language-cpp">avformat_close_input(&amp;mFormatContext);
+avformat_free_context(mFormatContext);
+</code></pre>
+
+<hr />
+
+<h2 id="信息查看">信息查看</h2>
+
+<p>当运行成功后，就可以查看 <code>AVFormatContext</code> 包含的具体信息了。</p>
+
+<p>先通过 CLion 的 <code>Structure</code> 工具查看 <code>AVFormatContext</code> 具体包含哪些信息。</p>
+
+<p><img src="https://ae01.alicdn.com/kf/Haba3869049d04f4a842cbf5568ffb115j.jpg" alt="" /></p>
 
 <blockquote>
-<p><a href="https://github.com/google/grafika">https://github.com/google/grafika</a></p>
+<p>在 Android Studio 中也可以这样进行查看，方便快速阅读源码。</p>
 </blockquote>
 
-<p>此项目是 Google 提供的一个非官方的项目，它的侧重点在于将 OpenGL 与 Android 音视频 API 综合运用。</p>
+<p>然后就可以通过打 Log 或者断点的方式查看运行后的具体某个数据是否符合预期了。</p>
 
-<p>它包含了很多个完整小示例，比如如何使用 TextureView 显示 OpenGL 内容、使用三种方式进行 OpenGL 内容的录制、如何进行硬编码操作等。</p>
+<p>以下是通过断点的方式：</p>
 
-<p>通过阅读这些例子，能够让你掌握更多的技巧，把前面学会的 OpenGL 和 Android 音视频 API 更灵活运用了，进一步加深理解。</p>
+<p><img src="https://ae01.alicdn.com/kf/Hc1e0f99c4761407fb678dd9097e58a20P.jpg" alt="" /></p>
 
-<p>甚至有些例子都可以用到项目早期需求中去的，比如如何进行 EGL 的封装、渲染线程与主线程的分离。</p>
+<p>以下是通过打 Log 的方式：</p>
 
-<p>另外，以上三个例子都会包含 Camera 相关的操作，比如如何将 Camera 内容展示到 SurfaceView 、TextureView 上，如何进行 Camera 拍摄等。</p>
+<pre><code class="language-cpp">    logI(&quot;file path is %s&quot;, mFormatContext-&gt;filename);
+    logI(&quot;iformat name is %s&quot;, mFormatContext-&gt;iformat-&gt;name);
+    logI(&quot;nb_streams is %d&quot;, mFormatContext-&gt;nb_streams);
+    logI(&quot;bitrate is %lld&quot;, mFormatContext-&gt;bit_rate);
+    logI(&quot;duration is %lld&quot;, mFormatContext-&gt;duration);
+    logI(&quot;start time is %lld&quot;,mFormatContext-&gt;start_time);
+</code></pre>
 
-<h2 id="最后">最后</h2>
+<p>打印的结果如下：</p>
 
-<p>之前这三个项目堪称教科学书级别的，不是没有理由的。至少我都源码阅读了两边以上。</p>
+<pre><code class="language-cpp"> [av-beginner]: iformat name is avi
+ [av-beginner]: nb_streams is 2
+ [av-beginner]: bitrate is 42912
+ [av-beginner]: duration is 12000000
+ [av-beginner]: start time is 0
+</code></pre>
 
-<p>第一次阅读的时候会觉得 &ldquo; 嗯，明白怎么回事了 &ldquo;，等到项目实践了，需要自己从头搞一遍，这时再回头看，会有新的感悟 &ldquo;哦，原来要这样设计呀&rdquo; ，等到更熟练的时候，在来看，可能就会觉得 &ldquo;咦，这块能优化一波了&rdquo;。</p>
+<p>可以看到和通过命令行显示的内容基本一致，除了在比特率上在有着些许误差，总的来说符合预期。</p>
 
-<p>以上，希望对于想从事音视频开发的你，也能够看看上面几个项目源码，学习到更多技巧，共同进步。</p>
+<p>想要看更多信息的话，自己也可以去打印或者断点查看。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>以上就是音视频基础学习连载的 011 篇。</p>
+
+<p>通过代码来查看文件信息，信息都存储在 <code>AVFormatContext</code> 的各个字段上，只是通过一些方法去获取、填充这些字段。</p>
+
+<p>后面会继续讲到如何创建和获取 <code>AVCodecContext</code> ，敬请期待~~~</p>
+
+<p>本文具体代码见仓库：</p>
+
+<blockquote>
+<p><a href="https://github.com/glumes/av-beginner">https://github.com/glumes/av-beginner</a></p>
+</blockquote>
+
+<p>仓库的代码会比文章提前更新，想要抢先知道后续内容，就关注代码吧，欢迎 star 。</p>
+
+<p>能力有限，文中有不对之处，欢迎加我微信 ezglumes 进行交流~~</p>
         
           <div class="entry-shang text-center">
     <p>「真诚赞赏，手留余香」</p>
@@ -372,7 +479,7 @@ if (!doNotTrack) {
 
                 
 
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-av-beginner-resource/">推荐几个堪称教科书级别的 Android 音视频入门项目</a>
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-011/">【音视频连载-011】第二季 FFmpeg 一层一层获取文件信息</a>
 
                 
 
@@ -401,18 +508,29 @@ if (!doNotTrack) {
       
         
 
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/ffmpeg/av-beginner-010/">【音视频连载-010】第二季 FFmpeg 日志打印</a></li>
+    
+    <li><a href="/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/">FFmpeg 3.0 版本视频解码浅析 </a></li>
+    
+    <li><a href="/post/ffmpeg/encode-and-decode-summary/">音视频编解码的那些基础理论</a></li>
+    
+</ul>
+
       
 
       
       <ul class="pager blog-pager">
         
           <li class="previous">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-010/" data-toggle="tooltip" data-placement="top" title="【音视频连载-010】第二季 FFmpeg 日志打印">&larr; Previous Post</a>
+            <a href="https://glumes.com/post/android/android-av-beginner-resource/" data-toggle="tooltip" data-placement="top" title="推荐几个堪称教科书级别的 Android 音视频入门项目">&larr; Previous Post</a>
           </li>
         
         
           <li class="next">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-011/" data-toggle="tooltip" data-placement="top" title="【音视频连载-011】第二季 FFmpeg 一层一层获取文件信息">Next Post &rarr;</a>
+            <a href="https://glumes.com/post/opengl/shader-tool-kodelife-introduce/" data-toggle="tooltip" data-placement="top" title="KodeLife | Shader 实时编辑预览的强大工具使用实践">Next Post &rarr;</a>
           </li>
         
       </ul>

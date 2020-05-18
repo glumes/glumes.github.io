@@ -204,7 +204,7 @@ if (!doNotTrack) {
                 
                 
                   <span class="post-meta">
-  Posted on May 6, 2020
+  Posted on May 18, 2020
   
 </span>
 
@@ -237,6 +237,109 @@ if (!doNotTrack) {
 
         <div class="posts-list">
           
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/rust-compile-so-library/">
+                <h2 class="post-title">rust 开发编译 Android 动态库实践</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  Posted on May 19, 2019
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p><img src="https://image.glumes.com/images/2019/05/19/rust-mm.png" alt="" /></p>
+
+<p>最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：</p>
+
+<blockquote>
+<p><a href="https://www.rust-lang.org/">https://www.rust-lang.org/</a></p>
+</blockquote>
+
+<p>rust 的学习曲线比较陡峭，在开始学习之前建议看看王垠的这篇文章 《如何掌握所有的编程语言》，地址如下:</p>
+
+<blockquote>
+<p><a href="https://www.yinwang.org/blog-cn/2017/07/06/master-pl">https://www.yinwang.org/blog-cn/2017/07/06/master-pl</a></p>
+</blockquote>
+
+<p>学习语言，重要的是掌握其语言特性。</p>
+
+<p>王垠举了一些语言特性的例子：</p>
+
+<ul>
+<li>变量定义</li>
+<li>算术运算</li>
+<li>for 循环语句，while 循环语句</li>
+<li>函数定义，函数调用</li>
+<li>递归</li>
+<li>静态类型系统</li>
+<li>类型推导</li>
+<li>lambda 函数</li>
+<li>面向对象</li>
+<li>垃圾回收</li>
+<li>指针算术</li>
+<li>goto 语句</li>
+</ul>
+
+<p>看着这些特性是不是很像一些编程语言书的目录🤔</p>
+
+<p>在学习 rust 的时候也可以照着这些语言特性去对比自己是否掌握了。</p>
+                  <a href="https://glumes.com/post/android/rust-compile-so-library/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/rust/">rust</a>&nbsp;
+                
+                  #<a href="https://glumes.com/tags/so/">so</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/">
+                <h2 class="post-title">Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  Posted on May 14, 2019
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>在 OpenGL 开发中，我们要渲染一张图片，通常先是得到一张图片对应的 Bitmap ,然后将该 Bitmap 作为纹理上传到 OpenGL 中。在 Android 中有封装好的 <code>GLUtils</code> 类的 <code>texImage2D</code> 方法供我们调用。</p>
+
+<pre><code class="language-java">    public static void texImage2D(int target, int level, int internalformat,
+            Bitmap bitmap, int type, int border)
+</code></pre>
+
+<p>该方法的底层原理实际上也是解析了该 Bitmap ，得到了 Bitmap 所有的像素数据，类似于 Android NDK 关于 Bitmap 操作的 <code>AndroidBitmap_lockPixels</code> 方法，如果你不太了解该方法，可以参考这篇文章：<a href="https://glumes.com/post/android/android-jni-bitmap-operation/">Android JNI 之 Bitmap 操作</a>。</p>
+
+<p>得到了所有像素数据之后，实际最终还是调用了 OpenGL 的 <code>glTexImage2D</code> 来实现纹理上传。当然，如果可以直接得到所有数据，也不需要走解析 Bitmap 这一步了，这种场景最常见的就是把相机作为输入了。</p>
+                  <a href="https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/jni/">JNI</a>&nbsp;
+                
+                </span>
+              
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/android/stb-image-introduce/">
@@ -560,76 +663,6 @@ public int decrementAndGet(){
                 <span class="post-meta">
                 
                   #<a href="https://glumes.com/tags/java/">Java</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/">
-                <h2 class="post-title">C&#43;&#43; 标准容器库小结</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on November 19, 2018
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>《C++ Primer》 第五版笔记摘录~~~</p>
-                  <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/c&#43;&#43;/">C&#43;&#43;</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/stl/">STL</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/">
-                <h2 class="post-title">MediaCodec 硬编码之相机内容编码成 H264 文件</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on September 19, 2018
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>在 Android 4.1 版本提供了 MediaCodec 接口来访问设备的编解码器，不同于 FFmpeg 的软件编解码，它采用的是硬件编解码能力，因此在速度上会比软解更具有优势，但是由于 Android 的碎片化问题，机型众多，版本各异，导致 MediaCodec 在机型兼容性上需要花精力去适配，并且编解码流程不可控，全交由厂商的底层硬件去实现，最终得到的视频质量不一定很理想。</p>
-
-<p>虽然 MediaCodec 仍然存在一定的弊端，但是对于快速实现编解码需求，还是很值得参考的。</p>
-
-<p>以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。</p>
-                  <a href="https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/mediacodec/">MediaCodec</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/yuv/">YUV</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/h264/">H264</a>&nbsp;
-                
-                  #<a href="https://glumes.com/tags/camera/">Camera</a>&nbsp;
                 
                 </span>
               

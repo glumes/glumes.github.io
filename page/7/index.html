@@ -204,7 +204,7 @@ if (!doNotTrack) {
                 
                 
                   <span class="post-meta">
-  Posted on May 6, 2020
+  Posted on May 18, 2020
   
 </span>
 
@@ -237,6 +237,120 @@ if (!doNotTrack) {
 
         <div class="posts-list">
           
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/">
+                <h2 class="post-title">OpenGL 的 glDrawElements  绘制方法</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  Posted on May 25, 2018
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>在之前的绘制中，我们都是通过 <code>glDrawArrays</code> 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。</p>
+
+<p>回顾一下之前提到的绘制类型：</p>
+
+<table>
+<thead>
+<tr>
+<th>绘制类型</th>
+<th>绘制方式</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>GL_POINTS</td>
+<td>将传入的顶点坐标作为单独的点绘制</td>
+</tr>
+
+<tr>
+<td>GL_LINES</td>
+<td>将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线</td>
+</tr>
+
+<tr>
+<td>GL_LINE_STRIP</td>
+<td>将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线</td>
+</tr>
+
+<tr>
+<td>GL_LINE_LOOP</td>
+<td>将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。</td>
+</tr>
+
+<tr>
+<td>GL_TRIANGLES</td>
+<td>将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形</td>
+</tr>
+
+<tr>
+<td>GL_TRIANGLE_STRIP</td>
+<td>将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形</td>
+</tr>
+
+<tr>
+<td>GL_TRIANGLE_FAN</td>
+<td>将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形</td>
+</tr>
+</tbody>
+</table>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                
+                </span>
+              
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/">
+                <h2 class="post-title">OpenGL 学习系列---观察矩阵</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  Posted on May 22, 2018
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 投影矩阵</a> 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。</p>
+
+<p>这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：<a href="https://glumpy.github.io/modern-gl.html">https://glumpy.github.io/modern-gl.html</a>）</p>
+
+<p><img src="https://image.glumes.com/images/2019/04/27/ViewFrustum_gvy6aq.png" alt="" /></p>
+
+<p>当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于<code>视点</code>的，视点也就是我们这篇文章要讲到的摄像机。</p>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                
+                  #<a href="https://glumes.com/tags/camera/">Camera</a>&nbsp;
+                
+                </span>
+              
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/android/android-jni-exception-handle/">
@@ -494,68 +608,6 @@ if (!doNotTrack) {
                   #<a href="https://glumes.com/tags/camera/">Camera</a>&nbsp;
                 
                   #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/">
-                <h2 class="post-title">Android 相机开发中的尺寸和方向问题</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on April 10, 2018
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <blockquote>
-<p>*本篇文章已授权微信公众号 guolin_blog （郭霖）独家发布</p>
-</blockquote>
-
-<p>在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。</p>
-                  <a href="https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/camera/">Camera</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-texture/">
-                <h2 class="post-title">OpenGL 学习系列---纹理</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on March 21, 2018
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>接下来探索纹理了。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-texture/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
                 
                 </span>
               

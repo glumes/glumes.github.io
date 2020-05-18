@@ -8,10 +8,27 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Mon, 27 Apr 2020 23:37:03 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 18 May 2020 11:37:09 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/ffmpeg/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【音视频连载-011】第二季 FFmpeg 一层一层获取文件信息</title>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-011/</link>
+      <pubDate>Mon, 18 May 2020 11:37:09 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-011/</guid>
+      <description>&lt;p&gt;本篇文章主要是讲解如何通过 FFmpeg 代码来获取文件信息。&lt;/p&gt;
+
+&lt;p&gt;首先准备一个文件，用命令行来查看它的基本信息。&lt;/p&gt;
+
+&lt;p&gt;文件地址如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/glumes/av-beginner/blob/master/resource/video/video-avi-320x320.avi&#34;&gt;https://github.com/glumes/av-beginner/blob/master/resource/video/video-avi-320x320.avi&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;这个文件很有意思，它的内容是一个时钟，每隔一秒，秒针都会跳动，同时还会发出滴答的声音，很方便后续做音视频同步处理。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>【音视频连载-010】第二季 FFmpeg 日志打印</title>
