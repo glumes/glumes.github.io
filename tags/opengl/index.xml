@@ -8,10 +8,37 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Mon, 18 May 2020 11:39:56 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 22 May 2020 14:33:35 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/tags/opengl/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Shader 优化 | OpenGL 绘制网格效果</title>
+      <link>https://glumes.com/post/opengl/opengl-draw-grid-optimize/</link>
+      <pubDate>Fri, 22 May 2020 14:33:35 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/opengl/opengl-draw-grid-optimize/</guid>
+      <description>&lt;p&gt;前几天发布了这样一篇文章：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/6ZMP6Tc_MqggjAXS_GjV2Q&#34;&gt;KodeLife | Shader 实时编辑预览的强大工具使用实践&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;除了介绍 KodeLife 的使用之外，还附带了一个 Shader 绘制网格效果的代码。&lt;/p&gt;
+
+&lt;p&gt;把这篇文章发到技术群里，随机就有大佬指出不足之处，提示说代码还可以进一步优化，并且提供了源码学习。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;可见加入一个高质量的技术群是多么重要，哪怕平时不说话，围观大佬们聊天都能学到很多。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;现在加入还来得及，尚有余位，详情点击如下链接：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/M4IiA-dTg1R68TeFaFvNPg&#34;&gt;移动端技术交流喊你入群啦~~~&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
     
     <item>
       <title>KodeLife | Shader 实时编辑预览的强大工具使用实践</title>

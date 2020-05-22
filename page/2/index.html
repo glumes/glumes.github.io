@@ -204,7 +204,7 @@ if (!doNotTrack) {
                 
                 
                   <span class="post-meta">
-  Posted on May 18, 2020
+  Posted on May 22, 2020
   
 </span>
 
@@ -242,13 +242,60 @@ if (!doNotTrack) {
 
 <p><img src="https://ae01.alicdn.com/kf/Uffc994392c6042b6b6ceadf2f0ee92feC.jpg" alt="" /></p>
 
-<p><img src="https://ae01.alicdn.com/kf/Ha61c79ef3ffb4c63b175ed12b431c53cq.jpg" alt="" /></p>
-
           </div>
         
 
         <div class="posts-list">
           
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/ffmpeg/av-beginner-003/">
+                <h2 class="post-title">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  Posted on March 3, 2020
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>音视频学习入门技术文章连载：</p>
+
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
+</ul>
+
+<p>在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。</p>
+
+<p>为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。</p>
+
+<pre><code class="language-cpp">    SDL_Event windowEvent;
+    while (true){
+        if (SDL_PollEvent(&amp;windowEvent)){
+            if (SDL_QUIT == windowEvent.type){
+                break;
+            }
+        }
+    }
+</code></pre>
+                  <a href="https://glumes.com/post/ffmpeg/av-beginner-003/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="https://glumes.com/tags/sdl/">SDL</a>&nbsp;
+                
+                </span>
+              
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/ffmpeg/av-beginner-002/">
@@ -637,51 +684,6 @@ if (!doNotTrack) {
                   #<a href="https://glumes.com/tags/image/">image</a>&nbsp;
                 
                 </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/android/google-jetpack-camerax/">
-                <h2 class="post-title">Google Jetpack 新组件 CameraX 介绍与实践</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on May 23, 2019
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>近期，Google 的 Jetpack 组件又出了新的库：CameraX 。</p>
-
-<p>顾名思义：CameraX 就是用来进行 Camera 开发的官方库了，而且后续会有 Google 进行维护和升级。这对于广大 Camera 开发工程师和即将成为 Camera 的程序员来说，真是个好消息~~~</p>
-
-<h2 id="camerax-介绍">CameraX 介绍</h2>
-
-<p>官方有给出一个示例的工程，我 fork 了之后，加入使用 OpenGL 黑白滤镜渲染的操作，具体地址如下：</p>
-
-<blockquote>
-<p><a href="https://github.com/glumes/camera">https://github.com/glumes/camera</a></p>
-</blockquote>
-
-<p>官方并没有提到 CameraX 库具体如何进行 OpenGL 线程渲染的， 继续往下看，你会找到答案的~~~</p>
-
-<p>关于 CameraX 更多的介绍，建议看看 Google I/O 大会上的视频记录，比看文档能了解更多内容~~~</p>
-
-<blockquote>
-<p><a href="https://www.youtube.com/watch?v=kuv8uK-5CLY">https://www.youtube.com/watch?v=kuv8uK-5CLY</a></p>
-</blockquote>
-
-<p>在视频中提到，目前有很多应用都开始接入了 CameraX，比如 Camera360、Tik Tok 等。</p>
-
-<p><img src="https://image.glumes.com/images/2019/05/22/-2019-05-23-8.35.08.png" alt="" /></p>
-                  <a href="https://glumes.com/post/android/google-jetpack-camerax/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
               
             </article>
           

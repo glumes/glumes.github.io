@@ -204,7 +204,7 @@ if (!doNotTrack) {
                 
                 
                   <span class="post-meta">
-  Posted on May 18, 2020
+  Posted on May 22, 2020
   
 </span>
 
@@ -242,13 +242,56 @@ if (!doNotTrack) {
 
 <p><img src="https://ae01.alicdn.com/kf/Uffc994392c6042b6b6ceadf2f0ee92feC.jpg" alt="" /></p>
 
-<p><img src="https://ae01.alicdn.com/kf/Ha61c79ef3ffb4c63b175ed12b431c53cq.jpg" alt="" /></p>
-
           </div>
         
 
         <div class="posts-list">
           
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/android/google-jetpack-camerax/">
+                <h2 class="post-title">Google Jetpack 新组件 CameraX 介绍与实践</h2>
+                
+                
+              </a>
+
+              <span class="post-meta">
+  Posted on May 23, 2019
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>近期，Google 的 Jetpack 组件又出了新的库：CameraX 。</p>
+
+<p>顾名思义：CameraX 就是用来进行 Camera 开发的官方库了，而且后续会有 Google 进行维护和升级。这对于广大 Camera 开发工程师和即将成为 Camera 的程序员来说，真是个好消息~~~</p>
+
+<h2 id="camerax-介绍">CameraX 介绍</h2>
+
+<p>官方有给出一个示例的工程，我 fork 了之后，加入使用 OpenGL 黑白滤镜渲染的操作，具体地址如下：</p>
+
+<blockquote>
+<p><a href="https://github.com/glumes/camera">https://github.com/glumes/camera</a></p>
+</blockquote>
+
+<p>官方并没有提到 CameraX 库具体如何进行 OpenGL 线程渲染的， 继续往下看，你会找到答案的~~~</p>
+
+<p>关于 CameraX 更多的介绍，建议看看 Google I/O 大会上的视频记录，比看文档能了解更多内容~~~</p>
+
+<blockquote>
+<p><a href="https://www.youtube.com/watch?v=kuv8uK-5CLY">https://www.youtube.com/watch?v=kuv8uK-5CLY</a></p>
+</blockquote>
+
+<p>在视频中提到，目前有很多应用都开始接入了 CameraX，比如 Camera360、Tik Tok 等。</p>
+
+<p><img src="https://image.glumes.com/images/2019/05/22/-2019-05-23-8.35.08.png" alt="" /></p>
+                  <a href="https://glumes.com/post/android/google-jetpack-camerax/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/android/rust-compile-so-library/">
@@ -617,64 +660,6 @@ if (!doNotTrack) {
                 <span class="post-meta">
                 
                   #<a href="https://glumes.com/tags/vulkan/">Vulkan</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/java/java-multithread-overview/">
-                <h2 class="post-title">Java 显式锁 Lock 与条件队列</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  Posted on November 19, 2018
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>在 Java 5.0 之前，在协调对共享对象的访问时可以使用的机制只有 <code>synchronized</code> 内置锁和 <code>volatile</code> 关键字。</p>
-
-<p>Java 5.0 增加了一种新的机制：<code>Lock</code>  显式锁，当内置锁 <code>synchronized</code> 不适用时，它就可以作为一种新的选择。</p>
-
-<p>回顾一下内置锁 synchronized 的使用：</p>
-
-<pre><code class="language-java">// synchronized关键字用法示例
-public synchronized void add(int t){// 同步方法
-    this.v += t;
-}
-
-public static synchronized void sub(int t){// 同步静态方法
-    value -= t;
-}
-public int decrementAndGet(){
-    synchronized(obj){// 同步代码块
-        return --v;
-    }
-}
-</code></pre>
-
-<p>内置锁不需要显式的获取和释放，任何一个对象都能作为一把内置锁。</p>
-
-<ul>
-<li>当 synchronized 作用于普通方法时，锁对象是 this 。</li>
-<li>当 synchronized 作用于静态方法时，锁对象是当前类的 Class 对象。</li>
-<li>当 synchronized 作用于代码块时，锁对象是 synchronized(obj) 中的这个 obj 对象。</li>
-</ul>
-
-<hr />
-                  <a href="https://glumes.com/post/java/java-multithread-overview/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="https://glumes.com/tags/java/">Java</a>&nbsp;
                 
                 </span>
               
