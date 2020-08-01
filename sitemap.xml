@@ -15,12 +15,6 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/opengl/</loc>
-    <lastmod>2020-05-22T14:33:35+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://glumes.com/tags/opengl/</loc>
     <lastmod>2020-05-22T14:33:35+08:00</lastmod>
     <priority>0</priority>
@@ -39,6 +33,12 @@
   
   <url>
     <loc>https://glumes.com/tags/</loc>
+    <lastmod>2020-05-22T14:33:35+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/opengl/</loc>
     <lastmod>2020-05-22T14:33:35+08:00</lastmod>
     <priority>0</priority>
   </url>
