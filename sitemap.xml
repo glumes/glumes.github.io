@@ -4,12 +4,47 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2020-05-22T14:33:35+08:00</lastmod>
+    <lastmod>2020-08-03T20:22:39+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/</loc>
+    <lastmod>2020-08-03T20:22:39+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/life/</loc>
+    <lastmod>2020-08-03T20:22:39+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/</loc>
+    <lastmod>2020-08-03T20:22:39+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/</loc>
+    <lastmod>2020-08-03T20:22:39+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/android/</loc>
+    <lastmod>2020-08-03T20:22:39+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/life/domain-name-register/</loc>
+    <lastmod>2020-08-03T20:22:39+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/opengl/</loc>
     <lastmod>2020-05-22T14:33:35+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -21,26 +56,8 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/opengl/</loc>
-    <lastmod>2020-05-22T14:33:35+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/post/</loc>
-    <lastmod>2020-05-22T14:33:35+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://glumes.com/post/opengl/opengl-draw-grid-optimize/</loc>
     <lastmod>2020-05-22T14:33:35+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/tags/</loc>
-    <lastmod>2020-05-22T14:33:35+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -63,12 +80,6 @@
   <url>
     <loc>https://glumes.com/post/ffmpeg/av-beginner-011/</loc>
     <lastmod>2020-05-18T11:37:09+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/categories/android/</loc>
-    <lastmod>2020-05-06T23:10:48+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -145,12 +156,6 @@
   
   <url>
     <loc>https://glumes.com/categories/life/</loc>
-    <lastmod>2019-12-27T15:40:54+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/tags/life/</loc>
     <lastmod>2019-12-27T15:40:54+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -278,13 +283,13 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/vulkan/</loc>
+    <loc>https://glumes.com/tags/vulkan/</loc>
     <lastmod>2019-04-07T15:39:14+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/vulkan/</loc>
+    <loc>https://glumes.com/categories/vulkan/</loc>
     <lastmod>2019-04-07T15:39:14+08:00</lastmod>
     <priority>0</priority>
   </url>

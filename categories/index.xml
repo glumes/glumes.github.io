@@ -8,10 +8,19 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Fri, 22 May 2020 14:33:35 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 03 Aug 2020 20:22:39 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>android</title>
+      <link>https://glumes.com/categories/android/</link>
+      <pubDate>Mon, 03 Aug 2020 20:22:39 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/categories/android/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>OpenGL</title>
@@ -28,15 +37,6 @@
       <pubDate>Mon, 18 May 2020 11:37:09 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/categories/ffmpeg/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>android</title>
-      <link>https://glumes.com/categories/android/</link>
-      <pubDate>Wed, 06 May 2020 23:10:48 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/categories/android/</guid>
       <description></description>
     </item>
     

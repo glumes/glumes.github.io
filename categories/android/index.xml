@@ -8,10 +8,29 @@
     <language>zh-cn</language>
     <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
     <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
-    <lastBuildDate>Wed, 06 May 2020 23:10:48 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 03 Aug 2020 20:22:39 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/android/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【喜大普奔】域名终于备案通过啦</title>
+      <link>https://glumes.com/post/life/domain-name-register/</link>
+      <pubDate>Mon, 03 Aug 2020 20:22:39 +0800</pubDate>
+      <author>zhaoying9402@gmail.com (Glumes)</author>
+      <guid>https://glumes.com/post/life/domain-name-register/</guid>
+      <description>&lt;p&gt;前段时间博客网站一直无法访问，还有不少朋友特意发微信告诉我，感谢大家的好意了!&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;网站是：&lt;a href=&#34;https://glumes.com&#34;&gt;https://glumes.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;其实是博客域名在备案啦。&lt;/p&gt;
+
+&lt;p&gt;之前博客搭建用的是 Github Pages 方案，访问速度一直被人诟病。&lt;/p&gt;
+
+&lt;p&gt;上个月就决定把服务器换成阿里云了，访问速度如火箭般提升🚀🚀🚀~~&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>推荐几个堪称教科书级别的 Android 音视频入门项目</title>
