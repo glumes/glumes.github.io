@@ -32,7 +32,13 @@
       <pubDate>Wed, 19 Sep 2018 23:12:45 +0800</pubDate>
       <author>zhaoying9402@gmail.com (Glumes)</author>
       <guid>https://glumes.com/post/ffmpeg/understand-yuv-format/</guid>
-      <description>&lt;p&gt;YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。&lt;/p&gt;</description>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;防止图片链接丢失，建议观看微信原文，获得更好的阅读体验：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/KKfkS5QpwPAdYcEwFAN9VA&#34;&gt;一文读懂 YUV 的采样与格式&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。&lt;/p&gt;</description>
     </item>
     
   </channel>
