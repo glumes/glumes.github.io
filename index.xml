@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>星陨的博客</title>
@@ -18,15 +18,11 @@
       
       <guid>https://www.glumes.com/post/life/domain-name-register/</guid>
       <description>&lt;p&gt;前段时间博客网站一直无法访问，还有不少朋友特意发微信告诉我，感谢大家的好意了!&lt;/p&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;网站是：&lt;a href=&#34;https://glumes.com&#34;&gt;https://glumes.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;网站是：https://glumes.com&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;其实是博客域名在备案啦。&lt;/p&gt;
-
 &lt;p&gt;之前博客搭建用的是 Github Pages 方案，访问速度一直被人诟病。&lt;/p&gt;
-
 &lt;p&gt;上个月就决定把服务器换成阿里云了，访问速度如火箭般提升🚀🚀🚀~~&lt;/p&gt;</description>
     </item>
     
@@ -37,21 +33,15 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-draw-grid-optimize/</guid>
       <description>&lt;p&gt;前几天发布了这样一篇文章：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/6ZMP6Tc_MqggjAXS_GjV2Q&#34;&gt;KodeLife | Shader 实时编辑预览的强大工具使用实践&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;除了介绍 KodeLife 的使用之外，还附带了一个 Shader 绘制网格效果的代码。&lt;/p&gt;
-
 &lt;p&gt;把这篇文章发到技术群里，随机就有大佬指出不足之处，提示说代码还可以进一步优化，并且提供了源码学习。&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;可见加入一个高质量的技术群是多么重要，哪怕平时不说话，围观大佬们聊天都能学到很多。&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;现在加入还来得及，尚有余位，详情点击如下链接：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/M4IiA-dTg1R68TeFaFvNPg&#34;&gt;移动端技术交流喊你入群啦~~~&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -64,26 +54,17 @@
       
       <guid>https://www.glumes.com/post/opengl/shader-tool-kodelife-introduce/</guid>
       <description>&lt;p&gt;经常有朋友在群里面问想学习 Shader 有什么工具可以推荐？&lt;/p&gt;
-
 &lt;p&gt;今天它来了~~~&lt;/p&gt;
-
 &lt;p&gt;推荐一款强大的 Shader 实时编辑预览的工具 —— &lt;code&gt;KodeLife&lt;/code&gt; 。&lt;/p&gt;
-
 &lt;p&gt;对，它的名字就叫做 &lt;code&gt;KodeLife&lt;/code&gt; ，可别看成 &lt;code&gt;KobeLife&lt;/code&gt; 了，一个字母之差完全就是两个概念。&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;KodeLife&lt;/code&gt; 的官网地址如下：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://hexler.net/products/kodelife&#34;&gt;https://hexler.net/products/kodelife&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;贴一张主页封面图：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://images.xiaozhuanlan.com/photo/2020/7d112ef33beccfe4fbf62e4879eabb25.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://images.xiaozhuanlan.com/photo/2020/7d112ef33beccfe4fbf62e4879eabb25.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;有需要的同学可以去官网下载安装，它是需要购买 &lt;strong&gt;License&lt;/strong&gt; 的，不过可以免费使用两个月。&lt;/p&gt;
-
-&lt;hr /&gt;</description>
+&lt;hr&gt;</description>
     </item>
     
     <item>
@@ -93,13 +74,9 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/av-beginner-011/</guid>
       <description>&lt;p&gt;本篇文章主要是讲解如何通过 FFmpeg 代码来获取文件信息。&lt;/p&gt;
-
 &lt;p&gt;首先准备一个文件，用命令行来查看它的基本信息。&lt;/p&gt;
-
 &lt;p&gt;文件地址如下：&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://github.com/glumes/av-beginner/blob/master/resource/video/video-avi-320x320.avi&#34;&gt;https://github.com/glumes/av-beginner/blob/master/resource/video/video-avi-320x320.avi&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;这个文件很有意思，它的内容是一个时钟，每隔一秒，秒针都会跳动，同时还会发出滴答的声音，很方便后续做音视频同步处理。&lt;/p&gt;</description>
     </item>
     
@@ -110,11 +87,8 @@
       
       <guid>https://www.glumes.com/post/android/android-av-beginner-resource/</guid>
       <description>&lt;p&gt;在 &lt;strong&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/HlbGGOyfixc8wgoDjTY0Qw&#34;&gt;直播&lt;/a&gt;&lt;/strong&gt; 中有提到几个不错的开源项目，这里再重点推荐一下：&lt;/p&gt;
-
 &lt;p&gt;目前，市面上关于音视频学习的相关书籍并不多，而且即使看了书籍学了理论，最终还是要回归到代码上来。&lt;/p&gt;
-
 &lt;p&gt;毕竟 IT 行业实践性要求高，强调动手能力，音视频这方面就更得多操作和探索了。&lt;/p&gt;
-
 &lt;p&gt;推荐下面几个项目会各有侧重，分别涵盖了 Android 音视频录制 API 、OpenGL 渲染和综合运用的例子。&lt;/p&gt;</description>
     </item>
     
@@ -125,7 +99,6 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/av-beginner-010/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
@@ -138,9 +111,7 @@
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/8faeLClht2kfKqfA8Vizug&#34;&gt;【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/iQwIpxUKr0qWvejrGVA3Uw&#34;&gt;【音视频连载-009】第二季 FFmpeg 打造简易播放器&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;音视频连载系列已经停更一段时间，再这么停下去估计就要掉粉了，捡起来继续更新~~~&lt;/p&gt;
-
 &lt;p&gt;接下来主要是讲解 FFmpeg 相关的内容，比如这篇就从简单的日志打印开始说起。&lt;/p&gt;</description>
     </item>
     
@@ -151,7 +122,6 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/av-beginner-008/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
@@ -162,7 +132,6 @@
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/9FSIVhd1TE3dDCIFmU02tw&#34;&gt;【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/VuWqZIG_HhghEsUYxnLwSw&#34;&gt;【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;接上篇 SDL 播放 PCM 音频文件，已经实现了 &lt;code&gt;推&lt;/code&gt; 的模式去播放，接下来看看 &lt;code&gt;拉&lt;/code&gt; 的模式如何实现。&lt;/p&gt;</description>
     </item>
     
@@ -173,7 +142,6 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/av-beginner-007/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
@@ -183,15 +151,10 @@
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/nCidtYLmB8_LtAzbW14skg&#34;&gt;【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/9FSIVhd1TE3dDCIFmU02tw&#34;&gt;【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件】&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。&lt;/p&gt;
-
 &lt;p&gt;SDL 播放音频文件有两种方法，可以理解成 &lt;code&gt;推(push)&lt;/code&gt;和&lt;code&gt;拉(pull)&lt;/code&gt;两种模式。&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;推&lt;/code&gt; 就是我们主动向设备缓冲区填充 Buffer ，而 &lt;code&gt;拉&lt;/code&gt; 就是由设备拉取 Buffer 填充到缓冲区。&lt;/p&gt;
-
 &lt;p&gt;在一些开发模型中，如果数据传递能够抽象成&lt;code&gt;流&lt;/code&gt;的形式，那么肯定就会有&lt;code&gt;推&lt;/code&gt;和&lt;code&gt;拉&lt;/code&gt;两种模式。&lt;/p&gt;
-
 &lt;p&gt;本篇文章主要是讲解 SDL 以推的形式播放音频文件。&lt;/p&gt;</description>
     </item>
     
@@ -202,7 +165,6 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/av-beginner-006/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
@@ -211,26 +173,17 @@
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw&#34;&gt;【音视频连载-004】基础学习篇-SDL 加载图片并显示&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/nCidtYLmB8_LtAzbW14skg&#34;&gt;【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;在前面的文章中，我们已经能够加载 YUV 帧并显示了，那是把一张图片转换成 YUV 帧得到的素材。&lt;/p&gt;
-
 &lt;p&gt;如果是一个 YUV 视频文件的话，那就是很多 YUV 帧连续在一起，既然能展示一帧，那肯定可以连续展示多帧。&lt;/p&gt;
-
 &lt;p&gt;接下来就要这样的操作。&lt;/p&gt;
-
 &lt;h2 id=&#34;yuv-视频文件素材&#34;&gt;YUV 视频文件素材&lt;/h2&gt;
-
 &lt;p&gt;还是要准备一下 YUV 视频素材，不用网上到处去下载，用 FFmpeg 命令将 &lt;code&gt;mp4&lt;/code&gt; 文件转换成 &lt;code&gt;yuv&lt;/code&gt; 文件就好了。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;ffmpeg&lt;/span&gt; -&lt;span style=&#34;color:#268bd2&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;file_name&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;mp4&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;filename&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;yuv&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;命令很简单，其中 &lt;code&gt;file_name&lt;/code&gt; 是文件的名称，使用时记得替换。&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;命令很简单，其中 &lt;code&gt;file_name&lt;/code&gt; 是文件的名称，使用时记得替换。&lt;/p&gt;
 &lt;p&gt;由于生成的 yuv 文件是未经过压缩的，文件过大不方便传 Github ，所以在程序运行前要自己去生成一下文件。&lt;/p&gt;
-
 &lt;p&gt;同样，也可以用 &lt;code&gt;ffplay&lt;/code&gt; 验证一下 yuv 文件转换是否正确。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;ffplay&lt;/span&gt; -&lt;span style=&#34;color:#268bd2&#34;&gt;f&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;rawvideo&lt;/span&gt; -&lt;span style=&#34;color:#268bd2&#34;&gt;video_size&lt;/span&gt;  &lt;span style=&#34;color:#2aa198;font-weight:bold&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;x100&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;yuv_filename&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;yuv&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;以上命令会打开一个窗口去播放视频内容，如果播放的和原来 mp4 文件内容一致，说明转换是成功的，YUV 文件可用。&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以上命令会打开一个窗口去播放视频内容，如果播放的和原来 mp4 文件内容一致，说明转换是成功的，YUV 文件可用。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -240,7 +193,6 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/av-beginner-005/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
@@ -248,29 +200,21 @@
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw&#34;&gt;【音视频连载-003】基础学习篇-SDL 消息循环和事件响应&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw&#34;&gt;【音视频连载-004】基础学习篇-SDL 加载图片并显示&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。&lt;/p&gt;
-
 &lt;h2 id=&#34;yuv-文件素材准备&#34;&gt;YUV 文件素材准备&lt;/h2&gt;
-
 &lt;p&gt;做这个功能点比较麻烦的是素材问题，上哪去找一个 YUV 文件出来，谷歌和百度搜索都不好使，其实直接使用 FFmpeg 生成文件就好了。&lt;/p&gt;
-
 &lt;p&gt;使用如下命令将图片文件转成 YUV 文件：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// 把 filename 改为图片对应的文件名
 &lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;ffmpeg&lt;/span&gt; -&lt;span style=&#34;color:#268bd2&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;image_filename&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;png&lt;/span&gt; -&lt;span style=&#34;color:#268bd2&#34;&gt;pix_fmt&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;yuv420p&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;yuv_filename&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;yuv&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;在这里将 YUV 文件格式固定为 &lt;code&gt;YUV420P&lt;/code&gt; 了，如果你对 YUV 格式不懂的话，强烈建议看看我之前写过的文章，图文并茂，清晰易懂，使用谷歌搜索 YUV 关键字，搜索结果排名前五的必有我这篇文章。&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在这里将 YUV 文件格式固定为 &lt;code&gt;YUV420P&lt;/code&gt; 了，如果你对 YUV 格式不懂的话，强烈建议看看我之前写过的文章，图文并茂，清晰易懂，使用谷歌搜索 YUV 关键字，搜索结果排名前五的必有我这篇文章。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/taMHYFZunxQ3XNZwR_U-Cg&#34;&gt;一文读懂 YUV 的采样与格式&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;顺便可以使用 FFplay 验证生成的 YUV 文件是否有效，使用如下命令：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// 100x100 代表图片的宽高，这里只是举例，换成实际的宽高
 &lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// 把 filename 改为 YUV 对应的文件名
 &lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;ffplay&lt;/span&gt; -&lt;span style=&#34;color:#268bd2&#34;&gt;f&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;rawvideo&lt;/span&gt; -&lt;span style=&#34;color:#268bd2&#34;&gt;video_size&lt;/span&gt;  &lt;span style=&#34;color:#2aa198;font-weight:bold&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;x100&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;yuv_filename&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;yuv&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;以上命令会打开一个窗口去展示图片，如果该图片和未转换成 YUV 的图片内容一致，那说明把图片转换成 YUV 格式文件是成功了，这样就有了实验素材。&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以上命令会打开一个窗口去展示图片，如果该图片和未转换成 YUV 的图片内容一致，那说明把图片转换成 YUV 格式文件是成功了，这样就有了实验素材。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -280,16 +224,13 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/av-beginner-004/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA&#34;&gt;【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw&#34;&gt;【音视频连载-003】基础学习篇-SDL 消息循环和事件响应&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;在前面的文章中已经介绍完 SDL 显示窗口、消息循环和事件响应这些基础内容，有了这些基础就可以进行功能性开发了。&lt;/p&gt;
-
 &lt;p&gt;本篇的主要内容是利用 SDL 加载并显示一张图片，然后再去进行更多的音视频操作。&lt;/p&gt;</description>
     </item>
     
@@ -300,15 +241,12 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/av-beginner-003/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA&#34;&gt;【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。&lt;/p&gt;
-
 &lt;p&gt;为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;    &lt;span style=&#34;color:#268bd2&#34;&gt;SDL_Event&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;windowEvent&lt;/span&gt;;
     &lt;span style=&#34;color:#859900&#34;&gt;while&lt;/span&gt; (&lt;span style=&#34;color:#cb4b16&#34;&gt;true&lt;/span&gt;){
@@ -328,14 +266,11 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/av-beginner-002/</guid>
       <description>&lt;p&gt;音视频技术文章连载：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。&lt;/p&gt;
-
 &lt;p&gt;本篇文章主要是创建一个应用程序窗口并显示。&lt;/p&gt;</description>
     </item>
     
@@ -346,19 +281,12 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/av-beginner-001/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/8ob0zrHs9_2pmQTOHXPfjg&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。&lt;/p&gt;
-
 &lt;h3 id=&#34;sdl-简介&#34;&gt;SDL 简介&lt;/h3&gt;
-
 &lt;p&gt;SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。&lt;/p&gt;
-
 &lt;p&gt;SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件的低级别访问接口，我们利用这些接口就能在不同系统上播放出音频、视频内容，而无需懂得系统特定的音视频接口。&lt;/p&gt;
-
 &lt;p&gt;这种跨平台特性和 OpenGL 是一样的，差别在与 OpenGL 是真·跨平台，它是 Khronos Group 组织开发维护的一个接口规范，具体的实现是由驱动厂商完成。而 SDL 是把要兼容平台的相关接口都给封装好了，然后才对外提供统一的接口。&lt;/p&gt;
-
 &lt;p&gt;由此可见，高下立判。一个跨平台是写了接口就行，不管实现；另一个是写好了实现，才能跨平台（貌似跑题了）。&lt;/p&gt;
-
 &lt;p&gt;由于 SDL 的跨平台特性，在后续学习 FFmpeg 时就可以利用 SDL 进行音视频的播放操作，而不用像在 Android 平台上搞 FFmpeg 还得编译 so、写 JNI 、写界面那么麻烦，另外 ffplay 源码里面也是用的 SDL 进行播放的，可以从中进行借鉴。&lt;/p&gt;</description>
     </item>
     
@@ -369,23 +297,16 @@
       
       <guid>https://www.glumes.com/post/opengl/run-learnopengl-code-on-xcode/</guid>
       <description>&lt;p&gt;学习 OpenGL ，相信肯定有不少人看过这个网站：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://learnopengl.com/&#34;&gt;https://learnopengl.com/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2020/01/04/WechatIMG585.jpg&#34; alt=&#34;https://learnopengl.com/&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2020/01/04/WechatIMG585.jpg&#34; alt=&#34;https://learnopengl.com/&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这是它的英文原版网站，后来又有了不同语言的翻译版本，对应中文就是：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://learnopengl-cn.github.io/&#34;&gt;https://learnopengl-cn.github.io/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2020/01/04/WechatIMG586.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2020/01/04/WechatIMG586.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这两个网站对于学习 OpenGL 帮助非常大，既可以用作入门的教材，也可以作为工具书，后续进行查漏补缺。&lt;/p&gt;
-
 &lt;p&gt;并且它的内容很全面，除了 OpenGL 基础知识、坐标系统、纹理、Shader、模型加载等，还有高级光照、PBR 等渲染技巧，这些在渲染引擎的开发中都是会用到的，后面会继续和大家分享。&lt;/p&gt;</description>
     </item>
     
@@ -396,15 +317,10 @@
       
       <guid>https://www.glumes.com/post/life/2019-review/</guid>
       <description>&lt;p&gt;时光荏苒，岁月如梭。&lt;/p&gt;
-
 &lt;p&gt;又到了回顾过去，展望未来的(chui)高(niu)光(bi)时刻了~~&lt;/p&gt;
-
 &lt;h2 id=&#34;职业回顾&#34;&gt;职业回顾&lt;/h2&gt;
-
 &lt;p&gt;去年年底准备跑路，然后年前面试，拿了头条的 offer，年后就入职了~~~&lt;/p&gt;
-
 &lt;p&gt;应聘的岗位是 Android-多媒体开发工程师，具体招聘岗位见官网：&lt;a href=&#34;https://job.bytedance.com/job/detail/26456&#34;&gt;多媒体平台研发工程师-Android — 抖音火山&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;工作内容简单说就是做音视频 SDK，支持头条的一些业务。&lt;/p&gt;</description>
     </item>
     
@@ -415,15 +331,10 @@
       
       <guid>https://www.glumes.com/post/life/imooc-course-online/</guid>
       <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
-
 &lt;p&gt;前段时间在慕课网上体验了一把做讲师的感觉，录制了一套免费技术视频~~&lt;/p&gt;
-
 &lt;p&gt;如下图所示：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/12/29/2019-12-15-1.21.42.png&#34; alt=&#34;-2019-12-15-1.21.42.png&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/12/29/2019-12-15-1.21.42.png&#34; alt=&#34;-2019-12-15-1.21.42.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在慕课网上通过如下路径就可以找到啦&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;免费课程 -&amp;gt; 课程 -&amp;gt; 移动开发 -&amp;gt; Android -&amp;gt; Android CMake 以及 NDK 实践基础&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -436,27 +347,16 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-transition/</guid>
       <description>&lt;h2 id=&#34;转场介绍&#34;&gt;转场介绍&lt;/h2&gt;
-
 &lt;p&gt;转场效果是什么？&lt;/p&gt;
-
 &lt;p&gt;转场效果，简单来说就是两段视频之间的衔接过渡效果。&lt;/p&gt;
-
 &lt;p&gt;现在拍摄 vlog 的玩家越来越多，要是视频没有一两个炫酷的转场效果，都不好意思拿出来炫酷了。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1578201670/transition_hpaktx.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1578201670/transition_hpaktx.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;那么如何在视频编辑软件中实现转场效果呢？&lt;/p&gt;
-
 &lt;p&gt;这里提供使用 OpenGL 实现视频转场的一个小示例，我们可以通过自定义 GLSL 来实现不同的转场效果。&lt;/p&gt;
-
 &lt;p&gt;以在 Android 平台上作为演示，但其实不管是 Android 还是 iOS，实现的原理都是一样的。&lt;/p&gt;
-
 &lt;p&gt;首先要有两段视频，视频 A 和视频 B，先播放视频 A 后播放视频 B，中间有一段过程称为 C ，C 就是视频 A、B 做转场动画的时间段。&lt;/p&gt;
-
 &lt;p&gt;如下所示：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/10/14/transition_model.jpg&#34; alt=&#34;transition_model.jpg&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/10/14/transition_model.jpg&#34; alt=&#34;transition_model.jpg&#34;&gt;&lt;/p&gt;
 &lt;p&gt;播放器按照时间顺序，从 A -&amp;gt; C -&amp;gt; B 的播放，这样就有了转场的效果。&lt;/p&gt;</description>
     </item>
     
@@ -467,19 +367,12 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-draw-bezier-line/</guid>
       <description>&lt;p&gt;说到贝塞尔曲线，大家肯定都不陌生，网上有很多关于介绍和理解贝塞尔曲线的优秀文章和动态图。&lt;/p&gt;
-
 &lt;p&gt;以下两个是比较经典的动图了。&lt;/p&gt;
-
 &lt;p&gt;二阶贝塞尔曲线：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://yalantis.com/uploads/ckeditor/pictures/502/content_image04.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://yalantis.com/uploads/ckeditor/pictures/502/content_image04.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;三阶贝塞尔曲线：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://yalantis.com/uploads/ckeditor/pictures/503/content_image06.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://yalantis.com/uploads/ckeditor/pictures/503/content_image06.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;由于在工作中经常要和贝塞尔曲线打交道，所以简单说一下自己的理解：&lt;/p&gt;</description>
     </item>
     
@@ -490,25 +383,16 @@
       
       <guid>https://www.glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</guid>
       <description>&lt;p&gt;在之前的文章中已经陆续介绍了 stb_image、libpng 的使用，相关链接如下：&lt;/p&gt;
-
 &lt;p&gt;【&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;简单易用的图像解码库介绍 —— stb_image&lt;/a&gt;】&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;https://glumes.com/post/android/stb-image-introduce/&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;【&lt;a href=&#34;https://glumes.com/post/opengl/libpng-compile-and-practice/&#34;&gt;图像库 libpng 编译与实践&lt;/a&gt;】&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://glumes.com/post/opengl/libpng-compile-and-practice/&#34;&gt;https://glumes.com/post/opengl/libpng-compile-and-practice/&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;而今天的主题就是 libjpeg-turbo 。&lt;/p&gt;
-
 &lt;p&gt;它的官网地址如下：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://libjpeg-turbo.org/&#34;&gt;https://libjpeg-turbo.org/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;它的 github 地址如下：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/libjpeg-turbo/libjpeg-turbo&#34;&gt;https://github.com/libjpeg-turbo/libjpeg-turbo&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -521,9 +405,7 @@
       
       <guid>https://www.glumes.com/post/opengl/libpng-compile-and-practice/</guid>
       <description>&lt;p&gt;在之前的文章中介绍了 &lt;code&gt;stb_image&lt;/code&gt; 图像库，还顺带提到了 libpng 和 libjpeg ，这篇文章就是介绍如何在 Android 平台上用 CMake 编译 libpng 动态库以及 libpng 使用实践。&lt;/p&gt;
-
 &lt;p&gt;【&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;简单易用的图像解码库介绍 —— stb_image&lt;/a&gt;】&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;https://glumes.com/post/android/stb-image-introduce/&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
@@ -534,28 +416,19 @@
       
       <guid>https://www.glumes.com/post/android/google-jetpack-camerax/</guid>
       <description>&lt;p&gt;近期，Google 的 Jetpack 组件又出了新的库：CameraX 。&lt;/p&gt;
-
 &lt;p&gt;顾名思义：CameraX 就是用来进行 Camera 开发的官方库了，而且后续会有 Google 进行维护和升级。这对于广大 Camera 开发工程师和即将成为 Camera 的程序员来说，真是个好消息~~~&lt;/p&gt;
-
 &lt;h2 id=&#34;camerax-介绍&#34;&gt;CameraX 介绍&lt;/h2&gt;
-
 &lt;p&gt;官方有给出一个示例的工程，我 fork 了之后，加入使用 OpenGL 黑白滤镜渲染的操作，具体地址如下：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/glumes/camera&#34;&gt;https://github.com/glumes/camera&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;官方并没有提到 CameraX 库具体如何进行 OpenGL 线程渲染的， 继续往下看，你会找到答案的~~~&lt;/p&gt;
-
 &lt;p&gt;关于 CameraX 更多的介绍，建议看看 Google I/O 大会上的视频记录，比看文档能了解更多内容~~~&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=kuv8uK-5CLY&#34;&gt;https://www.youtube.com/watch?v=kuv8uK-5CLY&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;在视频中提到，目前有很多应用都开始接入了 CameraX，比如 Camera360、Tik Tok 等。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/22/-2019-05-23-8.35.08.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/22/-2019-05-23-8.35.08.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -564,24 +437,17 @@
       <pubDate>Sun, 19 May 2019 23:25:31 +0800</pubDate>
       
       <guid>https://www.glumes.com/post/android/rust-compile-so-library/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/19/rust-mm.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+      <description>&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/19/rust-mm.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.rust-lang.org/&#34;&gt;https://www.rust-lang.org/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;rust 的学习曲线比较陡峭，在开始学习之前建议看看王垠的这篇文章 《如何掌握所有的编程语言》，地址如下:&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.yinwang.org/blog-cn/2017/07/06/master-pl&#34;&gt;https://www.yinwang.org/blog-cn/2017/07/06/master-pl&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;学习语言，重要的是掌握其语言特性。&lt;/p&gt;
-
 &lt;p&gt;王垠举了一些语言特性的例子：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;变量定义&lt;/li&gt;
 &lt;li&gt;算术运算&lt;/li&gt;
@@ -596,9 +462,7 @@
 &lt;li&gt;指针算术&lt;/li&gt;
 &lt;li&gt;goto 语句&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;看着这些特性是不是很像一些编程语言书的目录🤔&lt;/p&gt;
-
 &lt;p&gt;在学习 rust 的时候也可以照着这些语言特性去对比自己是否掌握了。&lt;/p&gt;</description>
     </item>
     
@@ -610,9 +474,8 @@
       <guid>https://www.glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/</guid>
       <description>&lt;p&gt;在 OpenGL 开发中，我们要渲染一张图片，通常先是得到一张图片对应的 Bitmap ,然后将该 Bitmap 作为纹理上传到 OpenGL 中。在 Android 中有封装好的 &lt;code&gt;GLUtils&lt;/code&gt; 类的 &lt;code&gt;texImage2D&lt;/code&gt; 方法供我们调用。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;    &lt;span style=&#34;color:#859900&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#859900&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;texImage2D&lt;/span&gt;(&lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;target&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;level&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;internalformat&lt;/span&gt;,
-            &lt;span style=&#34;color:#268bd2&#34;&gt;Bitmap&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;bitmap&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;type&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;border&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;该方法的底层原理实际上也是解析了该 Bitmap ，得到了 Bitmap 所有的像素数据，类似于 Android NDK 关于 Bitmap 操作的 &lt;code&gt;AndroidBitmap_lockPixels&lt;/code&gt; 方法，如果你不太了解该方法，可以参考这篇文章：&lt;a href=&#34;https://glumes.com/post/android/android-jni-bitmap-operation/&#34;&gt;Android JNI 之 Bitmap 操作&lt;/a&gt;。&lt;/p&gt;
-
+            &lt;span style=&#34;color:#268bd2&#34;&gt;Bitmap&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;bitmap&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;type&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;border&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;该方法的底层原理实际上也是解析了该 Bitmap ，得到了 Bitmap 所有的像素数据，类似于 Android NDK 关于 Bitmap 操作的 &lt;code&gt;AndroidBitmap_lockPixels&lt;/code&gt; 方法，如果你不太了解该方法，可以参考这篇文章：&lt;a href=&#34;https://glumes.com/post/android/android-jni-bitmap-operation/&#34;&gt;Android JNI 之 Bitmap 操作&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;得到了所有像素数据之后，实际最终还是调用了 OpenGL 的 &lt;code&gt;glTexImage2D&lt;/code&gt; 来实现纹理上传。当然，如果可以直接得到所有数据，也不需要走解析 Bitmap 这一步了，这种场景最常见的就是把相机作为输入了。&lt;/p&gt;</description>
     </item>
     
@@ -623,15 +486,10 @@
       
       <guid>https://www.glumes.com/post/android/stb-image-introduce/</guid>
       <description>&lt;p&gt;说到图像解码库，最容易想起的就是 &lt;code&gt;libpng&lt;/code&gt; 和 &lt;code&gt;libjpeg&lt;/code&gt; 这两个老牌图像解码库了。&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;libpng&lt;/code&gt; 和 &lt;code&gt;libjpeg&lt;/code&gt; 分别各自对应 &lt;code&gt;png&lt;/code&gt; 和 &lt;code&gt;jpeg&lt;/code&gt; 两种图像格式。这两种格式的区别如下：&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;png&lt;/code&gt; 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;jpg&lt;/code&gt; 不支持透明度，有损压缩的图片格式，有损压缩会使得原始图片数据质量下载，也因此它占用的内存小，在网页应用中加速速度快。&lt;/p&gt;
-
 &lt;p&gt;要想在工程中同时解码 &lt;code&gt;png&lt;/code&gt; 和 &lt;code&gt;jpeg&lt;/code&gt; 格式图片，就必须同时引用这两种库，而且还得经过一系列编译步骤才行。&lt;/p&gt;
-
 &lt;p&gt;在这里，介绍一个简单易用的图像库：&lt;code&gt;stb_image&lt;/code&gt; 。Github 地址为：&lt;a href=&#34;https://github.com/nothings/stb&#34;&gt;https://github.com/nothings/stb&lt;/a&gt; ，目前已经有了 9600+ Star 。它的使用非常简单，看看 README 可能你就会了。&lt;/p&gt;</description>
     </item>
     
@@ -644,15 +502,10 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;微博图床一时爽，迁移火葬场&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;前几天在群里看到说新浪微博图床挂掉了，图床上的图片链接单独访问还可以，但是在博客文章上就显示不出来了。&lt;/p&gt;
-
 &lt;p&gt;去自己网站上看一下，果然，连博客首页图片都加载不出来了，极大地影响了阅读体验呀。&lt;/p&gt;
-
 &lt;p&gt;还好图片链接是可以访问的，这就意味着图片还在，还来得及做迁移和备份。&lt;/p&gt;
-
 &lt;p&gt;回顾之前用了好多免(hao)费(yang)图(mao)床，从最早的 &lt;a href=&#34;https://www.qiniu.com/&#34;&gt;七牛&lt;/a&gt;，到 &lt;a href=&#34;https://cloudinary.com/&#34;&gt;Cloudinary&lt;/a&gt;，再到 微博图床。七牛由于是临时域名，没有及时备份图片，导致图都没了，而 &lt;a href=&#34;https://cloudinary.com/&#34;&gt;Cloudinary&lt;/a&gt; 和 微博图床 倒还是可以继续访问的。不过这种薅羊毛总不是个办法，万一服务商政策变了，又得再迁移图片了。&lt;/p&gt;
-
 &lt;p&gt;果然，免费的才是最贵的。&lt;/p&gt;</description>
     </item>
     
@@ -664,21 +517,29 @@
       <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-swap-chain/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/&#34;&gt;进击的 Vulkan 移动开发之 Instance &amp;amp; Device &amp;amp; Queue&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/&#34;&gt;进击的 Vulkan 移动开发之 Command-Buffer&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-
+&lt;blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/&#34;&gt;进击的 Vulkan 移动开发之 Instance &amp;amp; Device &amp;amp; Queue&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/&#34;&gt;进击的 Vulkan 移动开发之 Command-Buffer&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在之前的文章中，讲到了 &lt;code&gt;Command-Buffer&lt;/code&gt; 提交给 &lt;code&gt;Queue&lt;/code&gt; 去执行，也提到了 Vulkan 实现跨平台机制，是有一些拓展的，这里就讲讲 Vulkan 窗口系统的拓展（Vulkan Window System Integration WSI），如下图所示：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/bc32fd77gy1fyuhrs5xlwj21j00uywl8.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/bc32fd77gy1fyuhrs5xlwj21j00uywl8.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -689,19 +550,24 @@
       <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-command-buffer/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/&#34;&gt;进击的 Vulkan 移动开发之 Instance &amp;amp; Device &amp;amp; Queue&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-
+&lt;blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/&#34;&gt;进击的 Vulkan 移动开发之 Instance &amp;amp; Device &amp;amp; Queue&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;此篇文章继续学习 Vulkan 中的组件：Command-Buffer 。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/bc32fd77gy1fytl33ku2vj21c40r4n49.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/bc32fd77gy1fytl33ku2vj21c40r4n49.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -712,18 +578,19 @@
       <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-
+&lt;blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在 Vulkan 的系列文章中出现过如下的图片：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx80mwln17j21to110woq.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx80mwln17j21to110woq.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这张图片很详细的概括了 Vulkan 中的重要组件以及它们的工作流程，接下来的文章中会针对每个组件进行学习讲解并配上相关的示例代码，首先是 Instance、Device 和 Queue 组件。&lt;/p&gt;</description>
     </item>
     
@@ -752,9 +619,7 @@
       
       <guid>https://www.glumes.com/post/java/java-multithread-overview/</guid>
       <description>&lt;p&gt;在 Java 5.0 之前，在协调对共享对象的访问时可以使用的机制只有 &lt;code&gt;synchronized&lt;/code&gt; 内置锁和 &lt;code&gt;volatile&lt;/code&gt; 关键字。&lt;/p&gt;
-
 &lt;p&gt;Java 5.0 增加了一种新的机制：&lt;code&gt;Lock&lt;/code&gt;  显式锁，当内置锁 &lt;code&gt;synchronized&lt;/code&gt; 不适用时，它就可以作为一种新的选择。&lt;/p&gt;
-
 &lt;p&gt;回顾一下内置锁 synchronized 的使用：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// synchronized关键字用法示例
 &lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#859900&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#859900&#34;&gt;synchronized&lt;/span&gt; &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;t&lt;/span&gt;){&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// 同步方法
@@ -768,16 +633,14 @@
     &lt;span style=&#34;color:#859900&#34;&gt;synchronized&lt;/span&gt;(&lt;span style=&#34;color:#268bd2&#34;&gt;obj&lt;/span&gt;){&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// 同步代码块
 &lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#859900&#34;&gt;return&lt;/span&gt; --&lt;span style=&#34;color:#268bd2&#34;&gt;v&lt;/span&gt;;
     }
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;内置锁不需要显式的获取和释放，任何一个对象都能作为一把内置锁。&lt;/p&gt;
-
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;内置锁不需要显式的获取和释放，任何一个对象都能作为一把内置锁。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;当 synchronized 作用于普通方法时，锁对象是 this 。&lt;/li&gt;
 &lt;li&gt;当 synchronized 作用于静态方法时，锁对象是当前类的 Class 对象。&lt;/li&gt;
 &lt;li&gt;当 synchronized 作用于代码块时，锁对象是 synchronized(obj) 中的这个 obj 对象。&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;hr /&gt;</description>
+&lt;hr&gt;</description>
     </item>
     
     <item>
@@ -796,9 +659,7 @@
       
       <guid>https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/</guid>
       <description>&lt;p&gt;在 Android 4.1 版本提供了 MediaCodec 接口来访问设备的编解码器，不同于 FFmpeg 的软件编解码，它采用的是硬件编解码能力，因此在速度上会比软解更具有优势，但是由于 Android 的碎片化问题，机型众多，版本各异，导致 MediaCodec 在机型兼容性上需要花精力去适配，并且编解码流程不可控，全交由厂商的底层硬件去实现，最终得到的视频质量不一定很理想。&lt;/p&gt;
-
 &lt;p&gt;虽然 MediaCodec 仍然存在一定的弊端，但是对于快速实现编解码需求，还是很值得参考的。&lt;/p&gt;
-
 &lt;p&gt;以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。&lt;/p&gt;</description>
     </item>
     
@@ -810,10 +671,8 @@
       <guid>https://www.glumes.com/post/ffmpeg/understand-yuv-format/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;防止图片链接丢失，建议观看微信原文，获得更好的阅读体验：&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/KKfkS5QpwPAdYcEwFAN9VA&#34;&gt;一文读懂 YUV 的采样与格式&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;YUV 是一种颜色编码方法，和它等同的还有 RGB 颜色编码方法。&lt;/p&gt;</description>
     </item>
     
@@ -824,7 +683,6 @@
       
       <guid>https://www.glumes.com/post/android/cmake-best-practices/</guid>
       <description>&lt;p&gt;Android Studio 从 2.2 版本起开始支持 CMake ,可以通过 CMake 和 NDK 将 C/C++ 代码编译成底层的库，然后再配合 Gradle 的编译将库打包到 APK 中。&lt;/p&gt;
-
 &lt;p&gt;这意味就不需要再编写 &lt;code&gt;.mk&lt;/code&gt; 文件来编译 &lt;code&gt;so&lt;/code&gt; 动态库了。&lt;/p&gt;</description>
     </item>
     
@@ -844,7 +702,6 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-glsl-3-mark/</guid>
       <description>&lt;p&gt;在之前的&lt;a href=&#34;https://glumes.com/post/opengl/opengl-glsl-2-mark/&#34;&gt;文章&lt;/a&gt;中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。&lt;/p&gt;
-
 &lt;p&gt;本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。&lt;/p&gt;</description>
     </item>
     
@@ -855,7 +712,6 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-glsl-2-mark/</guid>
       <description>&lt;p&gt;要想发挥 OpenGL ES 自定义渲染管线的功能，就得学会写 GLSL 着色器脚本。&lt;/p&gt;
-
 &lt;p&gt;本文中的内容来自于 《Android 3D 游戏开发技术宝典 OpenGL ES 2.0》。&lt;/p&gt;</description>
     </item>
     
@@ -875,9 +731,7 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/</guid>
       <description>&lt;p&gt;帧缓冲(Framebuffer Object)，简称 &lt;code&gt;FBO&lt;/code&gt;，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。&lt;/p&gt;
-
 &lt;p&gt;除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。&lt;/p&gt;
-
 &lt;p&gt;FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。&lt;/p&gt;</description>
     </item>
     
@@ -888,7 +742,6 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-egl-usage/</guid>
       <description>&lt;p&gt;OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。&lt;/p&gt;
-
 &lt;p&gt;而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 &lt;code&gt;EGL&lt;/code&gt; 来完成这个转换工作。&lt;/p&gt;</description>
     </item>
     
@@ -908,7 +761,6 @@
       
       <guid>https://www.glumes.com/post/android/java-proxy-design-pattern/</guid>
       <description>&lt;p&gt;代理模式的使用场景如下：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -939,12 +791,9 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-light-mix/</guid>
       <description>&lt;p&gt;在前面的系列文章中，分别介绍了 OpenGL 的环境光、散射光、镜面光。&lt;/p&gt;
-
 &lt;p&gt;现在尝试将这些光照效果混合起来，让整个场景显得更加逼真。&lt;/p&gt;
-
 &lt;p&gt;具体的效果如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1532360616/light_mix_xmv86l.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1532360616/light_mix_xmv86l.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -981,15 +830,10 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-depth-test/</guid>
       <description>&lt;p&gt;在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。&lt;/p&gt;
-
 &lt;p&gt;直接看一个没有使用深度测试的绘制：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1532052034/code/undepth_test.gif&#34; alt=&#34;未开启深度测试的情况&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1532052034/code/undepth_test.gif&#34; alt=&#34;未开启深度测试的情况&#34;&gt;&lt;/p&gt;
 &lt;p&gt;按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。&lt;/p&gt;
-
 &lt;p&gt;这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。&lt;/p&gt;
-
 &lt;p&gt;要解决这种问题，就得使用深度测试了。&lt;/p&gt;</description>
     </item>
     
@@ -1000,11 +844,8 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-face-culling-usage/</guid>
       <description>&lt;p&gt;现在我们用 OpenGL 绘制了如下的立方体：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。&lt;/p&gt;
-
 &lt;p&gt;那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。&lt;/p&gt;</description>
     </item>
     
@@ -1015,9 +856,7 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/</guid>
       <description>&lt;p&gt;在之前使用 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/&#34;&gt;OpenGL 顶点缓冲区 VBO 的使用&lt;/a&gt; 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。&lt;/p&gt;
-
 &lt;p&gt;这就存在了一些重复的操作。&lt;/p&gt;
-
 &lt;p&gt;在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。&lt;/p&gt;</description>
     </item>
     
@@ -1028,7 +867,6 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/</guid>
       <description>&lt;p&gt;在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 &lt;code&gt;glDrawArrays&lt;/code&gt; 或 &lt;code&gt;glDrawElements&lt;/code&gt; 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。&lt;/p&gt;
-
 &lt;p&gt;可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。&lt;/p&gt;</description>
     </item>
     
@@ -1039,7 +877,6 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-color-blend/</guid>
       <description>&lt;p&gt;在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。&lt;/p&gt;
-
 &lt;p&gt;在 OpenGL 中同样有这样颜色混合的问题。&lt;/p&gt;</description>
     </item>
     
@@ -1059,9 +896,7 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-alpha-test/</guid>
       <description>&lt;p&gt;在前面的博客文章中有提到 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-scissor-test/&#34;&gt;OpenGL 裁剪测试及注意点&lt;/a&gt;，并且裁剪测试只能裁剪一个矩形区域，相当于就是把整个内容都绘制上去了，但是透过一个小矩形区域来看绘制的物体。&lt;/p&gt;
-
 &lt;p&gt;除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。&lt;/p&gt;
-
 &lt;p&gt;关于 Alpha 透明度测试，在 用 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/&#34;&gt;OpenGL 对视频帧内容进行替换&lt;/a&gt; 也用实践用到过。&lt;/p&gt;</description>
     </item>
     
@@ -1108,7 +943,6 @@
       
       <guid>https://www.glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</guid>
       <description>&lt;p&gt;在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。&lt;/p&gt;
-
 &lt;p&gt;再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。&lt;/p&gt;</description>
     </item>
     
@@ -1119,9 +953,7 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</guid>
       <description>&lt;p&gt;在之前的绘制中，我们都是通过 &lt;code&gt;glDrawArrays&lt;/code&gt; 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。&lt;/p&gt;
-
 &lt;p&gt;回顾一下之前提到的绘制类型：&lt;/p&gt;
-
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1129,38 +961,31 @@
 &lt;th&gt;绘制方式&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
-
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;GL_POINTS&lt;/td&gt;
 &lt;td&gt;将传入的顶点坐标作为单独的点绘制&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;GL_LINES&lt;/td&gt;
 &lt;td&gt;将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;GL_LINE_STRIP&lt;/td&gt;
 &lt;td&gt;将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;GL_LINE_LOOP&lt;/td&gt;
 &lt;td&gt;将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;GL_TRIANGLES&lt;/td&gt;
 &lt;td&gt;将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;GL_TRIANGLE_STRIP&lt;/td&gt;
 &lt;td&gt;将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;GL_TRIANGLE_FAN&lt;/td&gt;
 &lt;td&gt;将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形&lt;/td&gt;
@@ -1176,11 +1001,8 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/&#34;&gt;OpenGL 投影矩阵&lt;/a&gt; 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。&lt;/p&gt;
-
 &lt;p&gt;这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：&lt;a href=&#34;https://glumpy.github.io/modern-gl.html&#34;&gt;https://glumpy.github.io/modern-gl.html&lt;/a&gt;）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/ViewFrustum_gvy6aq.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/ViewFrustum_gvy6aq.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于&lt;code&gt;视点&lt;/code&gt;的，视点也就是我们这篇文章要讲到的摄像机。&lt;/p&gt;</description>
     </item>
     
@@ -1191,7 +1013,6 @@
       
       <guid>https://www.glumes.com/post/android/android-jni-exception-handle/</guid>
       <description>&lt;p&gt;Android JNI 调用时的异常主要有如下两种：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;Native 代码调用 Java 层代码时发生了异常要处理&lt;/li&gt;
 &lt;li&gt;Native 代码自己抛出了一个异常让 Java 层去处理&lt;/li&gt;
@@ -1205,7 +1026,6 @@
       
       <guid>https://www.glumes.com/post/android/android-jni-reference-manage-rules/</guid>
       <description>&lt;p&gt;在 Native 代码中有时候会接收 Java 传入的引用类型参数，有时候也会通过 NewObject 方法来创建一个 Java 的引用类型变量。&lt;/p&gt;
-
 &lt;p&gt;在编写 Native 代码时，要注意这个代表 Java 数据结构类型的引用在使用时会被 GC 回收的可能性。&lt;/p&gt;</description>
     </item>
     
@@ -1216,9 +1036,7 @@
       
       <guid>https://www.glumes.com/post/android/android-jni-cache-fieldid-and-methodid/</guid>
       <description>&lt;p&gt;在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。&lt;/p&gt;
-
 &lt;p&gt;事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。&lt;/p&gt;
-
 &lt;p&gt;缓存有两种方式，分别是使用时缓存和初始化时缓存。&lt;/p&gt;</description>
     </item>
     
@@ -1238,7 +1056,6 @@
       
       <guid>https://www.glumes.com/post/android/android-jni-access-field-and-method/</guid>
       <description>&lt;p&gt;在前面的两篇文章中，介绍了 Android 通过 JNI 进行基础类型、字符串和数组的相关操作，并描述了 Java 和 Native 在类型和签名之间的转换关系。&lt;/p&gt;
-
 &lt;p&gt;有了之前那些基础，就可以实现 Java 和 Native 的相互调用了，在 Native 中去访问 Java 类的字段并调用相应的方法。&lt;/p&gt;</description>
     </item>
     
@@ -1278,7 +1095,6 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;*本篇文章已授权微信公众号 guolin_blog （郭霖）独家发布&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。&lt;/p&gt;</description>
     </item>
     
@@ -1343,11 +1159,8 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-projection-matrix/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-coordinate/&#34;&gt;OpenGL 坐标系统&lt;/a&gt; 文章中，根据点的坐标变换得出了如下的公式：&lt;/p&gt;
-
-&lt;div&gt;$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$&lt;/div&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;这个公式每左乘一个矩阵，都代表了一种坐标系的变换。&lt;/p&gt;
-
 &lt;p&gt;转化为着色器脚本语言如下：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;&lt;span style=&#34;color:#859900&#34;&gt;attribute&lt;/span&gt; &lt;span style=&#34;color:#859900&#34;&gt;vec4&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;a_Position&lt;/span&gt;;
 &lt;span style=&#34;color:#859900&#34;&gt;uniform&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;mat4&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;u_ModelMatrix&lt;/span&gt;;
@@ -1356,8 +1169,8 @@
 &lt;span style=&#34;color:#859900&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;main&lt;/span&gt;()
 {
     &lt;span style=&#34;color:#268bd2&#34;&gt;gl_Position&lt;/span&gt;  = &lt;span style=&#34;color:#268bd2&#34;&gt;u_ProjectionMatrix&lt;/span&gt; * &lt;span style=&#34;color:#268bd2&#34;&gt;u_ViewMatrix&lt;/span&gt; * &lt;span style=&#34;color:#268bd2&#34;&gt;u_ModelMatrix&lt;/span&gt; * &lt;span style=&#34;color:#268bd2&#34;&gt;a_Position&lt;/span&gt;;
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;本篇文章就主要是对投影矩阵来分析的。&lt;/p&gt;</description>
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;本篇文章就主要是对投影矩阵来分析的。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1367,9 +1180,7 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-coordinate-system/</guid>
       <description>&lt;p&gt;在前面绘制基本图形中，遇到了很明显的问题，圆形不像圆形，正多边形不像正多边形？就像下面图形一样：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/12/opengl_16.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/12/opengl_16.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;好好的正五边形却东倒西歪的，这就是因为我们前面的绘制都是把它当成 二维 的绘制，而在 OpenGL 中却是绘制 三维的。在二维和三维之间还有个转换，而之前为了方便学习则忽略了这个转换，现在就要开始理解它了 —— &lt;code&gt;坐标系统&lt;/code&gt;！！&lt;/p&gt;</description>
     </item>
     
@@ -1389,9 +1200,7 @@
       
       <guid>https://www.glumes.com/post/docker/docker-summary/</guid>
       <description>&lt;p&gt;可以简单地将 Docker 理解为一种沙盒 Sandbox 。每个容器内运行一个应用，不同的容器相互隔离，容器之间也可以建立通信机制。&lt;/p&gt;
-
 &lt;p&gt;容器的创建和停止都十分快速，容器自身对资源的需求也十分有限，远远低于虚拟机，甚至把容器当做应用本身也没问题。&lt;/p&gt;
-
 &lt;p&gt;Docker 容器在启动速度、硬盘使用、性能、系统支持量、隔离性等方面与传统的虚拟机相比都有明显的优势。&lt;/p&gt;</description>
     </item>
     
@@ -1429,7 +1238,6 @@
       
       <guid>https://www.glumes.com/post/python/python-docopt/</guid>
       <description>&lt;p&gt;正如标题所言，docopt 是一个用来解析命令行参数的工具，当想要在 Python 程序后面附加参数时，就不需要再为此而发愁了。&lt;/p&gt;
-
 &lt;p&gt;docopt 是一个开源的库，代码地址：&lt;a href=&#34;https://github.com/docopt/docopt&#34;&gt;https://github.com/docopt/docopt&lt;/a&gt;。它在 README 中就已经做了详细的介绍，并且还附带了很多例子可供学习，这篇文章也是翻译一下 README 中内容&amp;hellip;&amp;hellip;&lt;/p&gt;</description>
     </item>
     
@@ -1440,9 +1248,7 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/</guid>
       <description>&lt;p&gt;有了上一篇文章基础，这里就只关注 FFmpeg 如何解析的具体实践了。&lt;/p&gt;
-
 &lt;p&gt;在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。&lt;/p&gt;
-
 &lt;p&gt;在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。&lt;/p&gt;</description>
     </item>
     
@@ -1453,7 +1259,6 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/encode-and-decode-summary/</guid>
       <description>&lt;p&gt;最近在研究学习 FFmpeg，从网上参考了好多资料，其中最了不起的就当属——&lt;a href=&#34;http://blog.csdn.net/leixiaohua1020&#34;&gt;雷霄骅&lt;/a&gt;大神了，若没有他的博文，别说入门了，可能连门在哪里都不知道，在此还是要表达一下对雷神的敬佩和敬仰。&lt;/p&gt;
-
 &lt;p&gt;本文主要讲的是视频文件的解码，从视频文件的封装格式解码到原始数据格式，通过讲解涉及到的各种概念，从而理清整个思路和流程。&lt;/p&gt;</description>
     </item>
     
@@ -1464,9 +1269,7 @@
       
       <guid>https://www.glumes.com/post/android/rxjava-wrapper-dialog/</guid>
       <description>&lt;p&gt;之前有写过一篇文章：&lt;a href=&#34;http://www.glumes.com/wrapper-callback-by-rxjava/&#34;&gt;用 RxJava 封装回调方法 CallBack&lt;/a&gt;。&lt;/p&gt;
-
 &lt;p&gt;RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。&lt;/p&gt;
-
 &lt;p&gt;这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。&lt;/p&gt;</description>
     </item>
     
@@ -1477,7 +1280,6 @@
       
       <guid>https://www.glumes.com/post/android/android-layout-inflater/</guid>
       <description>&lt;p&gt;Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。&lt;/p&gt;
-
 &lt;p&gt;LayoutInflater 实例的获取有多种方式，但最终是通过&lt;code&gt;(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)&lt;/code&gt;来得到的，也就是说加载布局的 &lt;code&gt;LayoutInflater&lt;/code&gt; 是来自于系统服务的。&lt;/p&gt;</description>
     </item>
     
@@ -1497,7 +1299,6 @@
       
       <guid>https://www.glumes.com/post/android/android-start-service/</guid>
       <description>&lt;p&gt;Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。&lt;/p&gt;
-
 &lt;p&gt;Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。&lt;/p&gt;</description>
     </item>
     
@@ -1508,7 +1309,6 @@
       
       <guid>https://www.glumes.com/post/android/android-statemachine/</guid>
       <description>&lt;p&gt;之前就有写过一篇文章来学习状态机：&lt;a href=&#34;http://www.glumes.com/statemachine_learn/&#34;&gt;状态机学习&lt;/a&gt;。&lt;/p&gt;
-
 &lt;p&gt;在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。&lt;/p&gt;</description>
     </item>
     
@@ -1528,7 +1328,6 @@
       
       <guid>https://www.glumes.com/post/android/android-window-and-view/</guid>
       <description>&lt;p&gt;在之前有分析过 Android 6.0 Launcher 启动 Activity 过程，文章的链接如下：&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-1/&#34;&gt;Android 6.0 Launcher 启动 Activity 过程源码分析（一）&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-2/&#34;&gt;Android 6.0 Launcher 启动 Activity 过程源码分析（二）&lt;/a&gt;&lt;/li&gt;
@@ -1544,9 +1343,7 @@
       
       <guid>https://www.glumes.com/post/android/android-system-server/</guid>
       <description>&lt;p&gt;在之前 &lt;a href=&#34;http://www.glumes.com/android-servicemanager/&#34;&gt;Android 系统服务管理 ServiceManager&lt;/a&gt; 中学习了各种系统服务 Service 都是通过 &lt;code&gt;ServiceManager&lt;/code&gt; 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 &lt;code&gt;ContextImpl&lt;/code&gt; 类、&lt;code&gt;SystemServiceRegistry&lt;/code&gt; 类、&lt;code&gt;ServiceManager&lt;/code&gt; 类、&lt;code&gt;ServiceManagerNative&lt;/code&gt; 类等等。&lt;/p&gt;
-
 &lt;p&gt;那么问题就来了，ServiceManager 所管理的那些 Service 的 Binder 对象引用又是何时注册添加的呢？&lt;/p&gt;
-
 &lt;p&gt;事实上这些服务 Service 是 SystemServer 进程中启动的。&lt;/p&gt;</description>
     </item>
     
@@ -1584,7 +1381,6 @@
       
       <guid>https://www.glumes.com/post/android/android-binder-summary/</guid>
       <description>&lt;p&gt;Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。&lt;/p&gt;
-
 &lt;p&gt;它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 &lt;code&gt;/dev/binder&lt;/code&gt;。&lt;/p&gt;</description>
     </item>
     
@@ -1604,15 +1400,12 @@
       
       <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-4/</guid>
       <description>&lt;p&gt;在如下三篇文章中过了一遍 Launcher 启动 Activity 的代码流程。&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;start-activity-from-launcher-in-android-1&#34;&gt; Android 6.0 Launcher 启动 Activity 过程源码分析（一）&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;start-activity-from-launcher-in-android-2&#34;&gt; Android 6.0 Launcher 启动 Activity 过程源码分析（二）&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;start-activity-from-launcher-in-android-3&#34;&gt; Android 6.0 Launcher 启动 Activity 过程源码分析（三）&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;然而， 即使看过了多遍代码流程依旧有点云里雾里的感觉。不从整体上来把握，光抓住细节代码会始终不得要领。&lt;/p&gt;
-
 &lt;p&gt;由于是从 Launcher 组件启动一个 Activity 组件，其中还需要与 ActivityManagerService 通信，而这三个部分都是位于不同的进程内，涉及进程间通信，因此可以将整个过程划分为三个不同的部分来分析，在 Launcher 进程内的操作，在 ActivityManagerService 进程内的操作，在创建的应用程序进程内的操作。&lt;/p&gt;</description>
     </item>
     
@@ -1632,7 +1425,6 @@
       
       <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-2/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-1/&#34;&gt;Android 6.0 Launcher 启动 Activity 过程源码分析（一）&lt;/a&gt; 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。&lt;/p&gt;
-
 &lt;p&gt;通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。&lt;/p&gt;</description>
     </item>
     
@@ -1643,9 +1435,7 @@
       
       <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-1/</guid>
       <description>&lt;p&gt;当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。&lt;/p&gt;
-
 &lt;p&gt;这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。&lt;/p&gt;
-
 &lt;p&gt;而当我们点击应用程序图标时，也就开启了从 Launcher 启动 Activity 的过程。&lt;/p&gt;</description>
     </item>
     
@@ -1665,7 +1455,6 @@
       
       <guid>https://www.glumes.com/post/android/android-hal-summary/</guid>
       <description>&lt;p&gt;Android 从 5.0 开始使用新的相机 API Camera2 来代替之前的旧版本，从而支持更多的特性。&lt;/p&gt;
-
 &lt;p&gt;在学习新的 API 调用之外，也还是要了解一下 Android 底层发生了哪些变化，从而能够让我们对 API 的调用流程更加的清晰，知其所以然。&lt;/p&gt;</description>
     </item>
     
@@ -1676,7 +1465,6 @@
       
       <guid>https://www.glumes.com/post/android/kotlin-functional-programming-whth-anko/</guid>
       <description>&lt;p&gt;之前讲到了如何在 &lt;a href=&#34;http://www.glumes.com/kotlin-anko-usage/&#34;&gt;Kotlin 开发中使用 Anko 构建布局&lt;/a&gt;。&lt;/p&gt;
-
 &lt;p&gt;这一篇将是分析其原理。&lt;/p&gt;</description>
     </item>
     
@@ -1687,7 +1475,6 @@
       
       <guid>https://www.glumes.com/post/android/kotlin-with-anko/</guid>
       <description>&lt;p&gt;学习 Kotlin 应该都或多或少听过 Anko 这个开源库。&lt;/p&gt;
-
 &lt;p&gt;使用 Anko 来构建界面会更加简单、快捷。&lt;/p&gt;</description>
     </item>
     

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GLSL on 星陨的博客</title>
@@ -18,7 +18,6 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-glsl-3-mark/</guid>
       <description>&lt;p&gt;在之前的&lt;a href=&#34;https://glumes.com/post/opengl/opengl-glsl-2-mark/&#34;&gt;文章&lt;/a&gt;中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。&lt;/p&gt;
-
 &lt;p&gt;本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。&lt;/p&gt;</description>
     </item>
     
@@ -29,7 +28,6 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-glsl-2-mark/</guid>
       <description>&lt;p&gt;要想发挥 OpenGL ES 自定义渲染管线的功能，就得学会写 GLSL 着色器脚本。&lt;/p&gt;
-
 &lt;p&gt;本文中的内容来自于 《Android 3D 游戏开发技术宝典 OpenGL ES 2.0》。&lt;/p&gt;</description>
     </item>
     

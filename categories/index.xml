@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 星陨的博客</title>
@@ -21,7 +21,7 @@
     </item>
     
     <item>
-      <title>OpenGL</title>
+      <title>opengl</title>
       <link>https://www.glumes.com/categories/opengl/</link>
       <pubDate>Fri, 22 May 2020 14:33:35 +0800</pubDate>
       

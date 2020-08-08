@@ -1,72 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>简单易用的图像解码库介绍 —— stb_image-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>简单易用的图像解码库介绍 —— stb_image</title>
   <meta property="og:title" content="简单易用的图像解码库介绍 —— stb_image" />
   <meta name="twitter:title" content="简单易用的图像解码库介绍 —— stb_image" />
 
   <meta name="description" content="说到图像解码库，最容易想起的就是 libpng 和 libjpeg 这两个老牌图像解码库了。
-
 libpng 和 libjpeg 分别各自对应 png 和 jpeg 两种图像格式。这两种格式的区别如下：
-
 png 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。
-
 jpg 不支持透明度，有损压缩的图片格式，有损压缩会使得原始图片数据质量下载，也因此它占用的内存小，在网页应用中加速速度快。
-
 要想在工程中同时解码 png 和 jpeg 格式图片，就必须同时引用这两种库，而且还得经过一系列编译步骤才行。
-
 在这里，介绍一个简单易用的图像库：stb_image 。Github 地址为：https://github.com/nothings/stb ，目前已经有了 9600&#43; Star 。它的使用非常简单，看看 README 可能你就会了。">
   <meta property="og:description" content="说到图像解码库，最容易想起的就是 libpng 和 libjpeg 这两个老牌图像解码库了。
-
 libpng 和 libjpeg 分别各自对应 png 和 jpeg 两种图像格式。这两种格式的区别如下：
-
 png 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。
-
 jpg 不支持透明度，有损压缩的图片格式，有损压缩会使得原始图片数据质量下载，也因此它占用的内存小，在网页应用中加速速度快。
-
 要想在工程中同时解码 png 和 jpeg 格式图片，就必须同时引用这两种库，而且还得经过一系列编译步骤才行。
-
 在这里，介绍一个简单易用的图像库：stb_image 。Github 地址为：https://github.com/nothings/stb ，目前已经有了 9600&#43; Star 。它的使用非常简单，看看 README 可能你就会了。">
   <meta name="twitter:description" content="说到图像解码库，最容易想起的就是 libpng 和 libjpeg 这两个老牌图像解码库了。
-
 libpng 和 libjpeg 分别各自对应 png 和 jpeg 两种图像格式。这两种格式的区别如下：
-
 png 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。
-
-jpg 不支持透明度，有损压缩的图片格 …">
+jpg 不支持透明度，有损压缩的图片格式，有损 …">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/stb-image-introduce/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/stb-image-introduce/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -81,11 +65,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -93,9 +89,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -158,6 +152,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -174,21 +171,24 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>简单易用的图像解码库介绍 —— stb_image</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
                   
-                  
+                     <h1>简单易用的图像解码库介绍 —— stb_image</h1>
+                     
                     <span class="post-meta">
-  
-    Posted on May 12, 2019
-  
+  Posted on May 12, 2019
   
 </span>
 
 
+                    
+                  
                   
               </div>
             </div>
@@ -197,122 +197,83 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>简单易用的图像解码库介绍 —— stb_image</h1>
+                <h1 align="center">简单易用的图像解码库介绍 —— stb_image</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on May 12, 2019
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/stb_image/">stb_image</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://www.glumes.com/tags/stb_image/">stb_image</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#stb-image">stb_image</a></li>
-<li><a href="#sbt-image-resize">sbt_image_resize</a></li>
-<li><a href="#stb-image-write">stb_image_write</a></li>
-<li><a href="#总结">总结</a></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#stb_image">stb_image</a></li>
+    <li><a href="#sbt_image_resize">sbt_image_resize</a></li>
+    <li><a href="#stb_image_write">stb_image_write</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>说到图像解码库，最容易想起的就是 <code>libpng</code> 和 <code>libjpeg</code> 这两个老牌图像解码库了。</p>
-
+        
+        <p>说到图像解码库，最容易想起的就是 <code>libpng</code> 和 <code>libjpeg</code> 这两个老牌图像解码库了。</p>
 <p><code>libpng</code> 和 <code>libjpeg</code> 分别各自对应 <code>png</code> 和 <code>jpeg</code> 两种图像格式。这两种格式的区别如下：</p>
-
 <p><code>png</code> 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。</p>
-
 <p><code>jpg</code> 不支持透明度，有损压缩的图片格式，有损压缩会使得原始图片数据质量下载，也因此它占用的内存小，在网页应用中加速速度快。</p>
-
 <p>要想在工程中同时解码 <code>png</code> 和 <code>jpeg</code> 格式图片，就必须同时引用这两种库，而且还得经过一系列编译步骤才行。</p>
-
 <p>在这里，介绍一个简单易用的图像库：<code>stb_image</code> 。Github 地址为：<a href="https://github.com/nothings/stb">https://github.com/nothings/stb</a> ，目前已经有了 9600+ Star 。它的使用非常简单，看看 README 可能你就会了。</p>
-
 <p>看看它的源码，你会发现全是 <code>.h</code> 头文件。这就是它的强大之处了，仅需在工程中加入头文件就可以解析图像了（实际上是函数实现等内容都放在头文件了而已）。</p>
-
 <p>重点关注如下三个头文件：</p>
-
 <ul>
 <li>stb_image.h
-
 <ul>
 <li>用于图像加载</li>
-</ul></li>
+</ul>
+</li>
 <li>stb_image_write.h
-
 <ul>
 <li>用于写入图像文件</li>
-</ul></li>
+</ul>
+</li>
 <li>stb_image_resize.h
-
 <ul>
 <li>用于改变图像尺寸</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>下面就开始实践吧，先给出一个完整的例子：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;iostream&gt;</span><span style="color:#93a1a1;font-style:italic">
 </span><span style="color:#93a1a1;font-style:italic"></span>
@@ -357,28 +318,19 @@ if (!doNotTrack) {
     <span style="color:#268bd2">stbi_image_free</span>(<span style="color:#268bd2">odata</span>);
     <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
 }
-</code></pre></div>
-<p>这个例子很简单也很全面，主要就是加载了一张图片，并将它的宽高都缩小一倍，并保存缩小后图片。</p>
-
-<h2 id="stb-image">stb_image</h2>
-
+</code></pre></div><p>这个例子很简单也很全面，主要就是加载了一张图片，并将它的宽高都缩小一倍，并保存缩小后图片。</p>
+<h2 id="stb_image">stb_image</h2>
 <p>首先是调用 <code>stbi_load</code> 方法去加载图像数据，并获取相关信息。传入的参数除了图片文件地址，还有宽、高、颜色通道信息的引用。</p>
-
 <p>变量 <code>n</code> 就代表图片的颜色通道值，通常有如下的情况：</p>
-
 <ul>
 <li>1 ： 灰度图</li>
-<li>2 ： 灰度图加透明度<br /></li>
+<li>2 ： 灰度图加透明度</li>
 <li>3 ： 红绿蓝 RGB 三色图</li>
 <li>4 ： 红绿蓝加透明度 RGBA 图</li>
 </ul>
-
 <p>返回的结果就是图片像素数据的指针了。</p>
-
 <p><code>stbi_load</code> 不仅仅支持 <code>png</code> 格式，把上面例子中的图片改成 <code>jpg</code> 格式后缀的依旧可行。</p>
-
 <p>它支持的所有格式如下：</p>
-
 <ul>
 <li>png</li>
 <li>jpg</li>
@@ -389,17 +341,11 @@ if (!doNotTrack) {
 <li>hdr</li>
 <li>pic</li>
 </ul>
-
 <p>格式虽多，不过一般用到 png 和 jpg 就好了。</p>
-
 <p>除了从文件加载图片，stb_image 还支持从内存中加载图片，通过该方法 <code>stbi_load_from_memory</code> ，在后续文章中会用到它的。</p>
-
 <p>加载完图片之后，stb_image 还提供了相应的释放方法 <code>stbi_image_free</code>，实际上就是把 <code>free</code> 封装了一下而已。</p>
-
-<h2 id="sbt-image-resize">sbt_image_resize</h2>
-
+<h2 id="sbt_image_resize">sbt_image_resize</h2>
 <p>加载完图片像素数据之后，就可以通过 <code>stbir_resize</code> 方法改变图片的尺寸。</p>
-
 <p><code>stbir_resize</code> 方法参数有很多：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">STBIRDEF</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">stbir_resize</span>(<span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">void</span> *<span style="color:#268bd2">input_pixels</span> , <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">input_w</span> , <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">input_h</span> , <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">input_stride_in_bytes</span>,
                              <span style="color:#859900;font-weight:bold">void</span> *<span style="color:#268bd2">output_pixels</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">output_w</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">output_h</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">output_stride_in_bytes</span>,
@@ -409,8 +355,7 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>                             <span style="color:#268bd2">stbir_edge</span> <span style="color:#268bd2">edge_mode_horizontal</span>, <span style="color:#268bd2">stbir_edge</span> <span style="color:#268bd2">edge_mode_vertical</span>, 
                              <span style="color:#268bd2">stbir_filter</span> <span style="color:#268bd2">filter_horizontal</span>,  <span style="color:#268bd2">stbir_filter</span> <span style="color:#268bd2">filter_vertical</span>,
                              <span style="color:#268bd2">stbir_colorspace</span> <span style="color:#268bd2">space</span>, <span style="color:#859900;font-weight:bold">void</span> *<span style="color:#268bd2">alloc_context</span>)
-</code></pre></div>
-<p><code>stbir_edge</code> 和 <code>stbir_filter</code> 类型的参数，stb_image_resize 提供了多种类型:</p>
+</code></pre></div><p><code>stbir_edge</code> 和 <code>stbir_filter</code> 类型的参数，stb_image_resize 提供了多种类型:</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">typedef</span> <span style="color:#859900">enum</span>
 {
     <span style="color:#268bd2">STBIR_EDGE_CLAMP</span>   = <span style="color:#2aa198;font-weight:bold">1</span>,
@@ -428,103 +373,84 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">STBIR_FILTER_CATMULLROM</span>   = <span style="color:#2aa198;font-weight:bold">4</span>,  <span style="color:#93a1a1;font-style:italic">// An interpolating cubic spline
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">STBIR_FILTER_MITCHELL</span>     = <span style="color:#2aa198;font-weight:bold">5</span>,  <span style="color:#93a1a1;font-style:italic">// Mitchell-Netrevalli filter with B=1/3, C=1/3
 </span><span style="color:#93a1a1;font-style:italic"></span>} <span style="color:#268bd2">stbir_filter</span>;
-</code></pre></div>
-<p>但实际上调整不同类型组合得到的图片并没有太多的变化 ┑(￣Д ￣)┍。</p>
-
+</code></pre></div><p>但实际上调整不同类型组合得到的图片并没有太多的变化 ┑(￣Д ￣)┍。</p>
 <p>真正有用的可能还是前面那几个参数，指定了要将图片缩放后的宽高数据。</p>
-
-<h2 id="stb-image-write">stb_image_write</h2>
-
+<h2 id="stb_image_write">stb_image_write</h2>
 <p>最后就是调用 <code>stbi_write_png</code> 方法将像素数据写入文件中，除此之外，stb_image_write 还提供了 <code>stbi_write_jpg</code> 方法来保存 jpg 格式图片。</p>
-
 <p>根据两者格式的不同，方法调用的参数也是不一样的。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">stbi_write_jpg</span>(<span style="color:#859900;font-weight:bold">char</span> <span style="color:#859900">const</span> *<span style="color:#268bd2">filename</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">x</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">y</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">comp</span>, <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">void</span> *<span style="color:#268bd2">data</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">quality</span>)
 
 <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">stbi_write_png</span>(<span style="color:#859900;font-weight:bold">char</span> <span style="color:#859900">const</span> *<span style="color:#268bd2">filename</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">x</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">y</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">comp</span>, <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">void</span> *<span style="color:#268bd2">data</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">stride_bytes</span>)
-</code></pre></div>
-<h2 id="总结">总结</h2>
-
+</code></pre></div><h2 id="总结">总结</h2>
 <p>以上就是关于 stb_image 图像解码库的小介绍。</p>
-
 <p>总的来说，它还是挺简单易用的，在平常做一些 Demo 以及需要快速实现、验证功能的情况下都可以考虑考虑。</p>
-
 <p>但是在一些大型的项目中，还是要深思熟虑一些，从性能方面考虑，它肯定不如老牌的图像解码库了，像 <code>libjpeg-turbo</code> 解码用到了 <code>NEON</code> 这样 SIMD （单指令流多数据流）的操作，才是大型项目的首选了。</p>
-
 <h2 id="参考">参考</h2>
-
 <p>关于 stb_image 在 Android 中的使用实践，可以参考我的项目：</p>
-
 <blockquote>
 <p><a href="https://github.com/glumes/InstantGLSL">https://github.com/glumes/InstantGLSL</a></p>
 </blockquote>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
-        
-          
-
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/life/blog-image-migrate/" data-toggle="tooltip" data-placement="top" title="博客图床迁移记">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/" data-toggle="tooltip" data-placement="top" title="Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
         
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
-        
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/stb-image-introduce/">简单易用的图像解码库介绍 —— stb_image</a>
+
+                
+
+                
+
 
         
-          
-
         
-  
-      </div>
-    
-    
+        
+      </article>
+
+      
+        
+
+      
+
+      
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://www.glumes.com/post/life/blog-image-migrate/" data-toggle="tooltip" data-placement="top" title="博客图床迁移记">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/" data-toggle="tooltip" data-placement="top" title="Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
+
+      
+        
+      
+
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -533,6 +459,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -575,25 +503,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -602,66 +524,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

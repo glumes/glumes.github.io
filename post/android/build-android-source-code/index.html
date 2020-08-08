@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>编译安卓源码-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>编译安卓源码</title>
   <meta property="og:title" content="编译安卓源码" />
   <meta name="twitter:title" content="编译安卓源码" />
 
@@ -14,33 +14,30 @@
   <meta property="og:description" content="花了一两天时间终于在 Mac 上成功编译了 Android 主线最新代码，中间遇到了不少问题，也查阅了好多资料，总算是成功了，看到模拟器启动的那一刻还是挺激动的。">
   <meta name="twitter:description" content="花了一两天时间终于在 Mac 上成功编译了 Android 主线最新代码，中间遇到了不少问题，也查阅了好多资料，总算是成功了，看到模拟器启动的那一刻还是挺激动的。">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/build-android-source-code/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/build-android-source-code/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -55,11 +52,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -67,9 +76,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -132,6 +139,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -144,131 +154,87 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>编译安卓源码</h1>
+                <h1 align="center">编译安卓源码</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on January 31, 2018
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-          
-            
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
 
-          <p>花了一两天时间终于在 Mac 上成功编译了 Android 主线最新代码，中间遇到了不少问题，也查阅了好多资料，总算是成功了，看到模拟器启动的那一刻还是挺激动的。</p>
 
+
+        
+      <div>
+          
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
+        
+        <p>花了一两天时间终于在 Mac 上成功编译了 Android 主线最新代码，中间遇到了不少问题，也查阅了好多资料，总算是成功了，看到模拟器启动的那一刻还是挺激动的。</p>
 <h2 id="环境准备">环境准备</h2>
-
 <p>由于我编译的是安卓主线的最新代码，版本是安卓 6.0 的，而网上有些博文是基于 Android 4.0 版本的，这两者之间的编译还是有些差距的，这里列举一下我的环境。</p>
-
 <ul>
 <li>   Mac 一台，16 G 内存（版本：10.11.5）。</li>
 <li>   Java 8</li>
 <li>   Xcode 安装（包含命令行工具等等）</li>
 <li>   Android 开发环境安装</li>
 </ul>
-
 <p>如果本身就是开发安卓的，那么这些环境准备工作应该都可以略过了，之前就应该配好了的，只要电脑足够强劲就行了。</p>
-
 <h2 id="大小写区分的文件系统">大小写区分的文件系统</h2>
-
 <p>在 Mac 电脑上需要创建一个大小写区分的文件系统，而 Mac 默认是大小写不区分的。</p>
-
 <h3 id="使用磁盘工具创建">使用磁盘工具创建</h3>
-
 <p>Mac 自带了磁盘工具软件来创建磁盘，也就是我们平时安装软件时的 <code>.dmg</code> 格式的文件。不过，在我使用的时候，明明选择了 <code>OS X 拓展（区分大小写，日志式）</code> ，可创建出的磁盘镜像依旧还是不区分大小写的，试了两次之后还是不行，干脆放弃了，转用命令行。</p>
-
 <h3 id="使用命令行创建">使用命令行创建 </h3>
-
-<p>在安卓的官方教程中都已经给出了具体的命令了：<a href="https://source.android.com/source/initializing.html#setting-up-a-mac-os-x-build-environment">https://source.android.com/source/initializing.html#setting-up-a-mac-os-x-build-environment</a></p>
-
+<p>在安卓的官方教程中都已经给出了具体的命令了：https://source.android.com/source/initializing.html#setting-up-a-mac-os-x-build-environment</p>
 <ul>
 <li>   创建一个大小是 40 G 的，区分大小写的，稀疏磁盘映像的文件系统。</li>
 </ul>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">hdiutil create -type SPARSE -fs <span style="color:#2aa198">&#39;Case-sensitive Journaled HFS+&#39;</span> -size 40g ~/android.dmg</code></pre></div>
-<p>然而，当我用了这个命令行之后，发现的确创建了磁盘，但却是只读的，不能写入，这就很尴尬了。
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hdiutil create -type SPARSE -fs &#39;Case-sensitive Journaled HFS+&#39; -size 40g ~/android.dmg
+</code></pre></div><p>然而，当我用了这个命令行之后，发现的确创建了磁盘，但却是只读的，不能写入，这就很尴尬了。
 解决方法就是干脆不创建稀疏磁盘映像了，创建一个固定大小的可读写的磁盘映像。</p>
-
 <p>使用 <code>hdiutil create -help</code> 命令，读/写磁盘映像的命令对应的是 <code>UDIF</code> ，更换命令行如下：</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">hdiutil create -type UDIF -fs <span style="color:#2aa198">&#39;Case-sensitive Journaled HFS+&#39;</span> -size 80g ~/android.dmg</code></pre></div>
-<p>将 <code>SPARSE</code> 替换成 <code>UDIF</code> ，并且将容量扩大到 80 G 。</p>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hdiutil create -type UDIF -fs &#39;Case-sensitive Journaled HFS+&#39; -size 80g ~/android.dmg
+</code></pre></div><p>将 <code>SPARSE</code> 替换成 <code>UDIF</code> ，并且将容量扩大到 80 G 。</p>
 <ul>
 <li>   调整磁盘映像文件大小</li>
 </ul>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">hdiutil resize -size &lt;new-size-you-want&gt;g ~/android.dmg.sparseimage</code></pre></div>
-<p>由于创建的固定大小的，也就没什么需要再改变的了。</p>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">hdiutil resize -size &lt;new-size-you-want&gt;g ~/android.dmg.sparseimage
+</code></pre></div><p>由于创建的固定大小的，也就没什么需要再改变的了。</p>
 <ul>
 <li>   挂载磁盘映像</li>
 </ul>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#93a1a1;font-style:italic"># mount the android file imagefunction mountAndroid { hdiutil attach ~/android.dmg -mountpoint /Volumes/android; }</span></code></pre></div>
-<p>将此 function 写入到 <code>~/.bash_profile</code> 文件中，就可以直接在命令行使用 mountAndroid 命令了。其实，创建了磁盘映像之后，直接双击也可以将其挂载上去了。</p>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#93a1a1;font-style:italic"># mount the android file imagefunction mountAndroid { hdiutil attach ~/android.dmg -mountpoint /Volumes/android; }</span>
+</code></pre></div><p>将此 function 写入到 <code>~/.bash_profile</code> 文件中，就可以直接在命令行使用 mountAndroid 命令了。其实，创建了磁盘映像之后，直接双击也可以将其挂载上去了。</p>
 <ul>
 <li>   卸载磁盘映像</li>
 </ul>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#93a1a1;font-style:italic"># unmount the android file imagefunction umountAndroid() { hdiutil detach /Volumes/android; }</span></code></pre></div>
-<h2 id="下载-android-源码">下载 Android 源码</h2>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># unmount the android file imagefunction umountAndroid() { hdiutil detach /Volumes/android; }
+</code></pre></div><h2 id="下载-android-源码">下载 Android 源码</h2>
 <p>由于众所周知的原因，Android 源码是在 <a href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/">清华大学 TUNA 镜像源</a> 上下载的。</p>
-
 <p>我使用的是每月更新的初始化包。首先需要进入到自己挂载的区分大小写的磁盘镜像中去，然后按照清华大学的 Android 镜像使用帮助给的命令执行即可。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">//下载 repo 工具
 mkdir ~/bin
@@ -278,97 +244,86 @@ chmod a+x ~/bin/repo //使用每月更新的初始化包
 wget https://mirrors.tuna.tsinghua.edu.cn/aosp-monthly/aosp-latest.tar <span style="color:#93a1a1;font-style:italic"># 下载初始化包</span>
 tar xf aosp-latest.tar
 <span style="color:#cb4b16">cd</span> AOSP   <span style="color:#93a1a1;font-style:italic"># 解压得到的 AOSP 工程目录# 这时 ls 的话什么也看不到，因为只有一个隐藏的 .repo 目录</span>
-repo sync <span style="color:#93a1a1;font-style:italic"># 正常同步一遍即可得到完整目录# 或 repo sync -l 仅checkout代码</span></code></pre></div>
-<p>解压之后，AOSP 文件夹的大小大概是 37.5 G 左右。</p>
-
+repo sync <span style="color:#93a1a1;font-style:italic"># 正常同步一遍即可得到完整目录# 或 repo sync -l 仅checkout代码</span>
+</code></pre></div><p>解压之后，AOSP 文件夹的大小大概是 37.5 G 左右。</p>
 <h2 id="一波三折的编译过程">一波三折的编译过程</h2>
-
 <p>下载好了 Android 源码就可以进行编译了，整个编译过程就三个命令：</p>
-
 <ul>
-<li><p>   脚本环境初始化</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#cb4b16">source</span> build/envsetup.sh</code></pre></div>
-<p>*   选择要编译的目标</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">lunch // 根据提示的选项用数字来选择</code></pre></div></li>
-
-<li><p>   执行编译</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make -j4// 数字4代表执行的线程，根据个人电脑情况所定</code></pre></div>
-<p>然后要顺利执行完这三个命令，中间还会遇到很多问题&hellip;&hellip;</p>
-
-<h3 id="使用-bash-而非-zsh">使用 bash 而非 zsh</h3>
-
-<p>在执行</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#cb4b16">source</span> build/envsetup.sh</code></pre></div></li>
+<li>   脚本环境初始化</li>
 </ul>
-
-<p>命令时，使用 zsh 并不能把所有的内容都初始化，有些命令还是需要 bash 来完成的。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#cb4b16">source</span> build/envsetup.sh
+</code></pre></div><p>*   选择要编译的目标</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">lunch // 根据提示的选项用数字来选择
+</code></pre></div><ul>
+<li>   执行编译</li>
+</ul>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make -j4// 数字4代表执行的线程，根据个人电脑情况所定
+</code></pre></div><p>然后要顺利执行完这三个命令，中间还会遇到很多问题&hellip;&hellip;</p>
+<h3 id="使用-bash-而非-zsh">使用 bash 而非 zsh</h3>
+<p>在执行</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#cb4b16">source</span> build/envsetup.sh
+</code></pre></div><p>命令时，使用 zsh 并不能把所有的内容都初始化，有些命令还是需要 bash 来完成的。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#cb4b16">echo</span> <span style="color:#268bd2">$SHELL</span>  // 查看当前使用的shell
-chsh-s /bin/bash    // 切换到 bash </code></pre></div>
-<h3 id="更新-curl-工具">更新 curl 工具</h3>
-
+chsh-s /bin/bash    // 切换到 bash 
+</code></pre></div><h3 id="更新-curl-工具">更新 curl 工具</h3>
 <p>在执行 make 命令时，会遇到如下的问题，需要安装 Jack server。这个东西是不需要再另行安装的，应该编译过程中会搞定的。执行在编译时用到了 curl 工具，而 curl 工具需要支持 ssl 。</p>
-
-<figure><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-java-server-not-install-2.png" alt="java-server-not-install-2"><figcaption>java-server-not-install-2</figcaption></figure>
-
-<p>通过 <code>curl --version</code> 查看当前 curl 版本，如果是 7.43 或者更低，不能再版本信息中看到 OpenSSL 的字样，说明就要更新了，然而，通过 homerew 更新 curl 之后，会发现，当前的版本仍是之前的版本，解决方法如下：<a href="http://stackoverflow.com/questions/31708574/curl-does-not-support-http2-on-mac">http://stackoverflow.com/questions/31708574/curl-does-not-support-http2-on-mac</a></p>
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-java-server-not-install-2.png" alt="java-server-not-install-2"></p>
+<p>通过 <code>curl --version</code> 查看当前 curl 版本，如果是 7.43 或者更低，不能再版本信息中看到 OpenSSL 的字样，说明就要更新了，然而，通过 homerew 更新 curl 之后，会发现，当前的版本仍是之前的版本，解决方法如下：http://stackoverflow.com/questions/31708574/curl-does-not-support-http2-on-mac</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">// 安装新版 curlbrew install curl --with-nghttp2 --with-openssl
 <span style="color:#93a1a1;font-style:italic"># link the formula to replace the system cURL</span>
 $  brew link curl --force
-<span style="color:#93a1a1;font-style:italic"># now reload the shell</span></code></pre></div>
-<p>这个时候在查看 curl 版本，就会发现已经更新了。</p>
-
+<span style="color:#93a1a1;font-style:italic"># now reload the shell</span>
+</code></pre></div><p>这个时候在查看 curl 版本，就会发现已经更新了。</p>
 <h3 id="空间不足">空间不足</h3>
-
-<p>如果在编译过程中出现了如下图片所示的错误，No space left on device ，说明创建的磁盘空间不足了，需要再扩大一下磁盘空间了。<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-no-space-left.png" alt="no-space-left" /></p>
-
+<p>如果在编译过程中出现了如下图片所示的错误，No space left on device ，说明创建的磁盘空间不足了，需要再扩大一下磁盘空间了。<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-no-space-left.png" alt="no-space-left"></p>
 <h2 id="编译成功">编译成功</h2>
-
 <p>在解决上面的问题之后，虽说编译过程还是会报出很多错误，但是都可以忽略了，并不影响到最后的编译结果。当然，如果编译到一半停住了，那肯定是要解决问题了。例如网上还有的问题就是报的内存不够之类的。
 漫长的等待之后，就会出现编译成功的提示了。
-<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-make-success.png" alt="make-success" /></p>
-
+<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-make-success.png" alt="make-success"></p>
 <h3 id="模拟器">模拟器</h3>
-
 <p>接下来就是启动模拟器了，一个令人激动的时刻了，因为之前选择的编译就是在模拟器上的。
-执行 <code>emulator</code> 命令即可启动模拟器，但还是会收到如下的提示：<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-system-partition.png" alt="system-partition" /></p>
-
+执行 <code>emulator</code> 命令即可启动模拟器，但还是会收到如下的提示：<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-system-partition.png" alt="system-partition"></p>
 <p>因为 Android 最新的版本是 6.0 的，所以我们还要指定一下模拟器的配置信息。<code>emulator  -partition-size 2048</code>在经过漫长的等待之后，模拟器就启动了，显示的就是最新的 Android 主分支上的 6.0 的系统了。</p>
-
 <h2 id="参考">参考</h2>
-
 <ol>
 <li><a href="http://www.jianshu.com/p/367f0886e62b#">http://www.jianshu.com/p/367f0886e62b#</a></li>
 <li><a href="http://www.cnblogs.com/qianxudetianxia/p/3681890.html">http://www.cnblogs.com/qianxudetianxia/p/3681890.html</a></li>
 <li><a href="http://blog.alexwan1989.com/2016/01/12/Android%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">http://blog.alexwan1989.com/2016/01/12/Android%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</a></li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/build-android-source-code/">编译安卓源码</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -395,45 +350,32 @@ $  brew link curl --force
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/android/android-rxjava/" data-toggle="tooltip" data-placement="top" title="安卓异步之RxJava">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/android/understand-mvp-architecture/" data-toggle="tooltip" data-placement="top" title="理解使用MVP架构">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/android/android-rxjava/" data-toggle="tooltip" data-placement="top" title="安卓异步之RxJava">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/android/understand-mvp-architecture/" data-toggle="tooltip" data-placement="top" title="理解使用MVP架构">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -442,6 +384,8 @@ $  brew link curl --force
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -484,25 +428,19 @@ $  brew link curl --force
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -511,66 +449,47 @@ $  brew link curl --force
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

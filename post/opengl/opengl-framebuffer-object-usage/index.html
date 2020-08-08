@@ -1,58 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>OpenGL 之 帧缓冲  使用实践-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>OpenGL 之 帧缓冲  使用实践</title>
   <meta property="og:title" content="OpenGL 之 帧缓冲  使用实践" />
   <meta name="twitter:title" content="OpenGL 之 帧缓冲  使用实践" />
 
   <meta name="description" content="帧缓冲(Framebuffer Object)，简称 FBO，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。
-
 除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。
-
 FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。">
   <meta property="og:description" content="帧缓冲(Framebuffer Object)，简称 FBO，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。
-
 除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。
-
 FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。">
   <meta name="twitter:description" content="帧缓冲(Framebuffer Object)，简称 FBO，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。
-
 除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。
-
-FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深 …">
+FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深 …">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -67,11 +58,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -79,9 +82,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -144,6 +145,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -160,21 +164,24 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>OpenGL 之 帧缓冲  使用实践</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
                   
-                  
+                     <h1>OpenGL 之 帧缓冲  使用实践</h1>
+                     
                     <span class="post-meta">
-  
-    Posted on September 4, 2018
-  
+  Posted on September 4, 2018
   
 </span>
 
 
+                    
+                  
                   
               </div>
             </div>
@@ -183,108 +190,66 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>OpenGL 之 帧缓冲  使用实践</h1>
+                <h1 align="center">OpenGL 之 帧缓冲  使用实践</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on September 4, 2018
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
-              
-                  <a href="https://www.glumes.com/tags/fbo/">FBO</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-          
-            
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
 
-          <p>帧缓冲(Framebuffer Object)，简称 <code>FBO</code>，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。</p>
 
+
+        
+      <div>
+          
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+            
+                <a href="https://www.glumes.com/tags/fbo/">FBO</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
+        
+        <p>帧缓冲(Framebuffer Object)，简称 <code>FBO</code>，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。</p>
 <p>除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。</p>
-
 <p>FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。</p>
-
 <p>渲染缓冲(Renderbuffer Object)，简称 <code>RBO</code>，由应用程序分配的 2D 图像缓冲区，可以用于分配和存储 <strong>深度</strong> 和 <strong>模板</strong> 值，也可以用作 FBO 的 <em>深度</em> 或者 <em>模板</em> 附件，另外，纹理也可以作为 FBO 的颜色和深度附件。</p>
-
 <p>帧缓冲与渲染缓冲和纹理的关系如下：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fuxlr1hxafj20a2081dg2.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fuxlr1hxafj20a2081dg2.jpg" alt=""></p>
 <h2 id="使用概述">使用概述</h2>
-
 <p>帧缓冲的使用，首先就创建对应的帧缓冲对象，然后给它添加对应的附件，比如颜色附件或者深度附件等。</p>
-
 <p>接着就是切换到帧缓冲渲染，在帧缓冲中进行绘制，此时绘制的内容都是记录在上一步添加的颜色附件或者深度附件上了。</p>
-
 <p>然后切换到屏幕的缓冲区，这时可以把帧缓冲中记录的颜色或者深度信息取出来，再把他们绘制到屏幕上。</p>
-
 <p>帧缓冲的使用看似很简单，但是用处却很普遍，使用帧缓冲可以在一些相机应用中做美颜处理、滤镜处理，也可以用来作贴纸等等效果。</p>
-
 <h2 id="使用步骤">使用步骤</h2>
-
 <h3 id="创建-fbo">创建 FBO</h3>
-
 <p>按照上面的步骤，首先是创建 FBO 。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">framebuffers</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">int</span>[<span style="color:#268bd2">1</span>];
-        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glGenFramebuffers</span>(<span style="color:#268bd2">1</span>, <span style="color:#268bd2">framebuffers</span>, <span style="color:#268bd2">0</span>);</code></pre></div>
-<p>和 OpenGL 中创建的大多对象相同，都是通过一个 <code>int</code> 型对象来表示的。</p>
-
+        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glGenFramebuffers</span>(<span style="color:#268bd2">1</span>, <span style="color:#268bd2">framebuffers</span>, <span style="color:#268bd2">0</span>);
+</code></pre></div><p>和 OpenGL 中创建的大多对象相同，都是通过一个 <code>int</code> 型对象来表示的。</p>
 <p>接下来就可以给这个 FBO 添加一些附件了。</p>
-
 <h3 id="绑定纹理">绑定纹理</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">// 把纹理绑定到颜色附件
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glFramebufferTexture2D</span>(
@@ -292,130 +257,119 @@ if (!doNotTrack) {
     <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_COLOR_ATTACHMENT0</span>, <span style="color:#93a1a1;font-style:italic">// 作为颜色附件
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_TEXTURE_2D</span>, 
     <span style="color:#268bd2">fboTextureId</span>, 
-    <span style="color:#268bd2">0</span>);</code></pre></div>
-<p>通过 <code>glFramebufferTexture2D</code> 函数可以将纹理绑定到 FBO 上作为附件，在绑定时有多种附件选项可以选择。</p>
-
+    <span style="color:#268bd2">0</span>);
+</code></pre></div><p>通过 <code>glFramebufferTexture2D</code> 函数可以将纹理绑定到 FBO 上作为附件，在绑定时有多种附件选项可以选择。</p>
 <ul>
-<li>GL_COLOR_ATTACHMENT0<br />
-
+<li>GL_COLOR_ATTACHMENT0
 <ul>
 <li>颜色附件</li>
-</ul></li>
-<li>GL_DEPTH_ATTACHMENT<br />
-
+</ul>
+</li>
+<li>GL_DEPTH_ATTACHMENT
 <ul>
 <li>深度附件</li>
-</ul></li>
-<li>GL_STENCIL_ATTACHMENT<br />
-
+</ul>
+</li>
+<li>GL_STENCIL_ATTACHMENT
 <ul>
 <li>模板附件</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>当然作为纹理，只有颜色和深度两种可以选择。</p>
-
 <p>如果是使用 OpenGL 3.x 版本，在绑定 FBO 时，还可以选择是绑定只读还是只写的 FBO。</p>
-
 <ul>
-<li>GL_READ_FRAMEBUFFER<br />
-
+<li>GL_READ_FRAMEBUFFER
 <ul>
 <li>只读的 FBO</li>
-</ul></li>
-<li>GL_DRAW_FRAMEBUFFER<br />
-
+</ul>
+</li>
+<li>GL_DRAW_FRAMEBUFFER
 <ul>
 <li>只写的 FBO</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>如果是使用 <code>GL_FRAMEBUFFER</code> 的话，那么读写皆可以。</p>
-
 <h3 id="绑定渲染缓冲">绑定渲染缓冲</h3>
-
 <p>除了纹理之外，还可以绑定到渲染缓冲。</p>
-
 <p>首先还是创建一个渲染缓冲对象：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">renderbuffers</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">int</span>[<span style="color:#268bd2">1</span>];
-        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glGenRenderbuffers</span>(<span style="color:#268bd2">1</span>, <span style="color:#268bd2">renderbuffers</span>, <span style="color:#268bd2">0</span>);</code></pre></div>
-<p>之后，要绑定到当前的渲染缓冲对象，并初始化渲染缓冲对象的数据存储，再把它添加到 FBO 上。</p>
+        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glGenRenderbuffers</span>(<span style="color:#268bd2">1</span>, <span style="color:#268bd2">renderbuffers</span>, <span style="color:#268bd2">0</span>);
+</code></pre></div><p>之后，要绑定到当前的渲染缓冲对象，并初始化渲染缓冲对象的数据存储，再把它添加到 FBO 上。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">// 绑定到当前渲染缓冲对象
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glBindRenderbuffer</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_RENDERBUFFER</span>, <span style="color:#268bd2">renderbufferId</span>);
 <span style="color:#93a1a1;font-style:italic">// 初始化渲染数据存储
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glRenderbufferStorage</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_RENDERBUFFER</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_DEPTH_ATTACHMENT</span>, <span style="color:#268bd2">width</span>, <span style="color:#268bd2">height</span>);
 <span style="color:#93a1a1;font-style:italic">// 将渲染缓冲添加到 FBO 上
-</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glFramebufferRenderbuffer</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_FRAMEBUFFER</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_DEPTH_ATTACHMENT</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_RENDERBUFFER</span>, <span style="color:#268bd2">renderbufferId</span>);</code></pre></div>
-<p>绑定渲染缓冲对象，并且初始化数据存储这一步有点类似于创建纹理并且初始化的操作。</p>
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glFramebufferRenderbuffer</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_FRAMEBUFFER</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_DEPTH_ATTACHMENT</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_RENDERBUFFER</span>, <span style="color:#268bd2">renderbufferId</span>);
+</code></pre></div><p>绑定渲染缓冲对象，并且初始化数据存储这一步有点类似于创建纹理并且初始化的操作。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#93a1a1;font-style:italic">// 绑定纹理
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glBindTexture</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_TEXTURE_2D</span>, <span style="color:#268bd2">textureId</span>);
         <span style="color:#93a1a1;font-style:italic">// 初始化纹理数据
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glTexImage2D</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_TEXTURE_2D</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_RGB</span>, <span style="color:#268bd2">width</span>, <span style="color:#268bd2">height</span>,
-                <span style="color:#268bd2">0</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_RGB</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_UNSIGNED_SHORT_5_6_5</span>, <span style="color:#859900;font-weight:bold">null</span>);</code></pre></div>
-<h3 id="渲染">渲染</h3>
-
+                <span style="color:#268bd2">0</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_RGB</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_UNSIGNED_SHORT_5_6_5</span>, <span style="color:#859900;font-weight:bold">null</span>);
+</code></pre></div><h3 id="渲染">渲染</h3>
 <p>在渲染时，先渲染到 FBO 上，在渲染到屏幕上。</p>
-
 <p>首先要切换到 FBO 进行渲染：</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glBindFramebuffer</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_FRAMEBUFFER</span>, <span style="color:#268bd2">fboId</span>);</code></pre></div>
-<p>如果 <code>fboId</code> 参数为 0 ，则代表切换到默认的屏幕上进行绘制。</p>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glBindFramebuffer</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_FRAMEBUFFER</span>, <span style="color:#268bd2">fboId</span>);
+</code></pre></div><p>如果 <code>fboId</code> 参数为 0 ，则代表切换到默认的屏幕上进行绘制。</p>
 <p>此时就可以进行正常的绘制，由添加的附件去记录绘制的信息。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">// 加载纹理
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">textureId</span> = <span style="color:#268bd2">TextureHelper</span>.<span style="color:#268bd2">loadTexture</span>(<span style="color:#268bd2">context</span>, <span style="color:#268bd2">R</span>.<span style="color:#268bd2">drawable</span>.<span style="color:#268bd2">lgq</span>);
 <span style="color:#93a1a1;font-style:italic">// 将纹理绘制到 FBO 上
-</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">mTextureRect</span>.<span style="color:#268bd2">drawSelf</span>(<span style="color:#268bd2">textureId</span>);</code></pre></div>
-<p>在 FBO 上绘制一张纹理贴图，此时 FBO 所绑定的颜色附件，会记录下纹理贴图的所有颜色内容。</p>
-
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">mTextureRect</span>.<span style="color:#268bd2">drawSelf</span>(<span style="color:#268bd2">textureId</span>);
+</code></pre></div><p>在 FBO 上绘制一张纹理贴图，此时 FBO 所绑定的颜色附件，会记录下纹理贴图的所有颜色内容。</p>
 <p>也就是说，FBO 所绑定的纹理作为颜色附件，此时它已经被渲染上了颜色，而这个颜色就是我们绘制的内容，那么接下来就可以使用 FBO 绑定的纹理继续用来绘制。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#93a1a1;font-style:italic">// 切换到屏幕的缓冲区
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glBindFramebuffer</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_FRAMEBUFFER</span>, <span style="color:#268bd2">0</span>);
         <span style="color:#93a1a1;font-style:italic">// 使用 FBO 所绑定的纹理进行绘制
-</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">mTextureRect</span>.<span style="color:#268bd2">drawSelf</span>(<span style="color:#268bd2">fboTextureId</span>);</code></pre></div>
-<p>切换到屏幕的缓冲区后，直接使用 FBO 绑定的纹理进行绘制，此时看到的效果和未使用 FBO 是相同的。</p>
-
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">mTextureRect</span>.<span style="color:#268bd2">drawSelf</span>(<span style="color:#268bd2">fboTextureId</span>);
+</code></pre></div><p>切换到屏幕的缓冲区后，直接使用 FBO 绑定的纹理进行绘制，此时看到的效果和未使用 FBO 是相同的。</p>
 <p>但是内部的绘制就是完全不一样了。</p>
-
 <p>文章中具体代码部分，可以参考我的 Github 项目，欢迎 Star 。</p>
-
 <blockquote>
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
 </blockquote>
-
 <h2 id="参考">参考</h2>
-
 <ol>
 <li><a href="https://blog.csdn.net/cauchyweierstrass/article/details/53166940">https://blog.csdn.net/cauchyweierstrass/article/details/53166940</a></li>
 <li>《OpenGL ES 3.x 游戏开发下卷》</li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/">OpenGL 之 帧缓冲  使用实践</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -442,45 +396,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/opengl/opengl-egl-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 之 EGL 使用实践">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/android/retrofit-analysis/" data-toggle="tooltip" data-placement="top" title="开源库之 Retrofit 源码分析">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/opengl/opengl-egl-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 之 EGL 使用实践">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/android/retrofit-analysis/" data-toggle="tooltip" data-placement="top" title="开源库之 Retrofit 源码分析">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -489,6 +430,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -531,25 +474,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -558,66 +495,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

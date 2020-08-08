@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Life on 星陨的博客</title>
@@ -18,15 +18,10 @@
       
       <guid>https://www.glumes.com/post/life/2019-review/</guid>
       <description>&lt;p&gt;时光荏苒，岁月如梭。&lt;/p&gt;
-
 &lt;p&gt;又到了回顾过去，展望未来的(chui)高(niu)光(bi)时刻了~~&lt;/p&gt;
-
 &lt;h2 id=&#34;职业回顾&#34;&gt;职业回顾&lt;/h2&gt;
-
 &lt;p&gt;去年年底准备跑路，然后年前面试，拿了头条的 offer，年后就入职了~~~&lt;/p&gt;
-
 &lt;p&gt;应聘的岗位是 Android-多媒体开发工程师，具体招聘岗位见官网：&lt;a href=&#34;https://job.bytedance.com/job/detail/26456&#34;&gt;多媒体平台研发工程师-Android — 抖音火山&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;工作内容简单说就是做音视频 SDK，支持头条的一些业务。&lt;/p&gt;</description>
     </item>
     
@@ -37,15 +32,10 @@
       
       <guid>https://www.glumes.com/post/life/imooc-course-online/</guid>
       <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
-
 &lt;p&gt;前段时间在慕课网上体验了一把做讲师的感觉，录制了一套免费技术视频~~&lt;/p&gt;
-
 &lt;p&gt;如下图所示：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/12/29/2019-12-15-1.21.42.png&#34; alt=&#34;-2019-12-15-1.21.42.png&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/12/29/2019-12-15-1.21.42.png&#34; alt=&#34;-2019-12-15-1.21.42.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在慕课网上通过如下路径就可以找到啦&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;免费课程 -&amp;gt; 课程 -&amp;gt; 移动开发 -&amp;gt; Android -&amp;gt; Android CMake 以及 NDK 实践基础&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -60,15 +50,10 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;微博图床一时爽，迁移火葬场&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;前几天在群里看到说新浪微博图床挂掉了，图床上的图片链接单独访问还可以，但是在博客文章上就显示不出来了。&lt;/p&gt;
-
 &lt;p&gt;去自己网站上看一下，果然，连博客首页图片都加载不出来了，极大地影响了阅读体验呀。&lt;/p&gt;
-
 &lt;p&gt;还好图片链接是可以访问的，这就意味着图片还在，还来得及做迁移和备份。&lt;/p&gt;
-
 &lt;p&gt;回顾之前用了好多免(hao)费(yang)图(mao)床，从最早的 &lt;a href=&#34;https://www.qiniu.com/&#34;&gt;七牛&lt;/a&gt;，到 &lt;a href=&#34;https://cloudinary.com/&#34;&gt;Cloudinary&lt;/a&gt;，再到 微博图床。七牛由于是临时域名，没有及时备份图片，导致图都没了，而 &lt;a href=&#34;https://cloudinary.com/&#34;&gt;Cloudinary&lt;/a&gt; 和 微博图床 倒还是可以继续访问的。不过这种薅羊毛总不是个办法，万一服务商政策变了，又得再迁移图片了。&lt;/p&gt;
-
 &lt;p&gt;果然，免费的才是最贵的。&lt;/p&gt;</description>
     </item>
     

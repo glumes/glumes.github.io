@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>OpenGL 学习系列---投影矩阵-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>OpenGL 学习系列---投影矩阵</title>
   <meta property="og:title" content="OpenGL 学习系列---投影矩阵" />
   <meta name="twitter:title" content="OpenGL 学习系列---投影矩阵" />
 
   <meta name="description" content="在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
 
-$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$
-
 这个公式每左乘一个矩阵，都代表了一种坐标系的变换。
-
 转化为着色器脚本语言如下：
 attribute vec4 a_Position;
 uniform mat4 u_ModelMatrix;
@@ -28,10 +25,7 @@ void main()
 本篇文章就主要是对投影矩阵来分析的。">
   <meta property="og:description" content="在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
 
-$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$
-
 这个公式每左乘一个矩阵，都代表了一种坐标系的变换。
-
 转化为着色器脚本语言如下：
 attribute vec4 a_Position;
 uniform mat4 u_ModelMatrix;
@@ -44,41 +38,38 @@ void main()
 本篇文章就主要是对投影矩阵来分析的。">
   <meta name="twitter:description" content="在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
 
-$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$
-
 这个公式每左乘一个矩阵，都代表了一种坐标系的变换。
-
 转化为着色器脚本语言如下：
 attribute vec4 a_Position;
-uniform mat4 …">
+uniform mat4 u_ModelMatrix;
+uniform mat4 u_ProjectionMatrix;
+uniform mat4 u_ViewMatrix;
+void …&lt;/!--&gt;">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/opengl/opengl-tutorial-projection-matrix/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/opengl/opengl-tutorial-projection-matrix/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -93,11 +84,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -105,9 +108,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -170,6 +171,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -182,97 +186,65 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>OpenGL 学习系列---投影矩阵</h1>
+                <h1 align="center">OpenGL 学习系列---投影矩阵</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on January 24, 2018
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#正交投影矩阵">正交投影矩阵</a></li>
-<li><a href="#透视投影矩阵">透视投影矩阵</a>
-<ul>
-<li><a href="#frustumm">frustumM</a></li>
-<li><a href="#perspectivem">perspectiveM</a></li>
-</ul></li>
-<li><a href="#小结">小结</a></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#正交投影矩阵">正交投影矩阵</a></li>
+    <li><a href="#透视投影矩阵">透视投影矩阵</a>
+      <ul>
+        <li><a href="#frustumm">frustumM</a></li>
+        <li><a href="#perspectivem">perspectiveM</a></li>
+      </ul>
+    </li>
+    <li><a href="#小结">小结</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate/">OpenGL 坐标系统</a> 文章中，根据点的坐标变换得出了如下的公式：</p>
-
-<div>$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$</div>
-
+        
+        <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate/">OpenGL 坐标系统</a> 文章中，根据点的坐标变换得出了如下的公式：</p>
+<!-- raw HTML omitted -->
 <p>这个公式每左乘一个矩阵，都代表了一种坐标系的变换。</p>
-
 <p>转化为着色器脚本语言如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl"><span style="color:#859900">attribute</span> <span style="color:#859900">vec4</span> <span style="color:#268bd2">a_Position</span>;
 <span style="color:#859900">uniform</span> <span style="color:#268bd2">mat4</span> <span style="color:#268bd2">u_ModelMatrix</span>;
@@ -281,32 +253,23 @@ if (!doNotTrack) {
 <span style="color:#859900">void</span> <span style="color:#268bd2">main</span>()
 {
     <span style="color:#268bd2">gl_Position</span>  = <span style="color:#268bd2">u_ProjectionMatrix</span> * <span style="color:#268bd2">u_ViewMatrix</span> * <span style="color:#268bd2">u_ModelMatrix</span> * <span style="color:#268bd2">a_Position</span>;
-}</code></pre></div>
-<p>本篇文章就主要是对投影矩阵来分析的。</p>
-
+}
+</code></pre></div><p>本篇文章就主要是对投影矩阵来分析的。</p>
 <p>OpenGL 在观察空间转换到裁剪空间时，需要用到投影矩阵。而在着色器脚本中，也需要提供一个投影矩阵给对应的 <code>u_ProjectionMatrix</code>变量。</p>
-
 <p>首先要在程序里绑定到对应的变量，然后再给变量赋值。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">// 绑定到着色器脚本中的对应变量
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">private</span> <span style="color:#859900">static</span> <span style="color:#859900">final</span> <span style="color:#268bd2">String</span> <span style="color:#268bd2">U_ProMatrix</span> = <span style="color:#2aa198">&#34;u_ProjectionMatrix&#34;</span>;
 <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">uProMatrixLocation</span>;
 <span style="color:#268bd2">uProMatrixLocation</span> = <span style="color:#268bd2">glGetUniformLocation</span>(<span style="color:#268bd2">mProgram</span>,<span style="color:#268bd2">U_ProMatrix</span>);
 <span style="color:#93a1a1;font-style:italic">// 给变量赋值，projectionMatrix 为投影矩阵
-</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">glUniformMatrix4fv</span>(<span style="color:#268bd2">uProMatrixLocation</span>,<span style="color:#268bd2">1</span>,<span style="color:#859900;font-weight:bold">false</span>,<span style="color:#268bd2">projectionMatrix</span>,<span style="color:#268bd2">0</span>)</code></pre></div>
-<p>正如前文讲到的，投影矩阵会创建一个视景体对物体坐标进行裁剪，得到的裁剪坐标再经过透视除法之后，就会得到归一化设备坐标。归一化设备坐标再经过视口转换，最终将坐标映射到了屏幕上。</p>
-
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">glUniformMatrix4fv</span>(<span style="color:#268bd2">uProMatrixLocation</span>,<span style="color:#268bd2">1</span>,<span style="color:#859900;font-weight:bold">false</span>,<span style="color:#268bd2">projectionMatrix</span>,<span style="color:#268bd2">0</span>)
+</code></pre></div><p>正如前文讲到的，投影矩阵会创建一个视景体对物体坐标进行裁剪，得到的裁剪坐标再经过透视除法之后，就会得到归一化设备坐标。归一化设备坐标再经过视口转换，最终将坐标映射到了屏幕上。</p>
 <p>OpenGL 提供了两种投影方式：正交投影和透视投影。</p>
-
 <h2 id="正交投影矩阵">正交投影矩阵</h2>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/opengl_ortho.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_ortho.png" alt=""></p>
 <p>不管是正交投影还是透视投影，最终都是将视景体内的物体投影在近平面上，这也是 3D 坐标转换到 2D 坐标的关键一步。</p>
-
 <p>而近平面上的坐标接着也会转换成归一化设备坐标，再映射到屏幕视口上。</p>
-
 <p>为了解决之前的图像拉伸问题，就是要保证近平面的宽高比和视口的宽高比一致，而且是以较短的那一边作为 1 的标准，让图像保持居中。</p>
-
 <p>OpenGL 提供了 <code>Matrix.orthoM</code> 函数来生成正交投影矩阵。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#93a1a1;font-style:italic">/**
 </span><span style="color:#93a1a1;font-style:italic">     * Computes an orthographic projection matrix.
@@ -322,13 +285,10 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic">     */</span>
     <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">orthoM</span>(<span style="color:#859900;font-weight:bold">float</span>[] <span style="color:#268bd2">m</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">mOffset</span>,
         <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">left</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">right</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">bottom</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">top</span>,
-        <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">near</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">far</span>)</code></pre></div>
-<p><img src="https://image.glumes.com/images/2019/04/27/opengl_ortho_2883b3b5bb574336e.png" alt="" /></p>
-
+        <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">near</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">far</span>)
+</code></pre></div><p><img src="https://image.glumes.com/images/2019/04/27/opengl_ortho_2883b3b5bb574336e.png" alt=""></p>
 <p>需要注意的是，我们的左、上、右、下距离都是相对于近平面中心的。</p>
-
 <p>近平面的坐标原点位于中心，向右为 $X$ 轴正方向，向上为 $Y$ 轴正方向，所以我们的 left、bottom 要为负数，而 right、top 要为正数。同时，近平面和远平面的距离都是指相对于视点的距离，所以 near、far 要为正数，而且 $far &gt; near$。</p>
-
 <p>可以在 GLSurfaceView 的 surfaceChanged 里面来设定正交投影矩阵。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#268bd2">@Override</span>
     <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">onSurfaceChanged</span>(<span style="color:#268bd2">GL10</span> <span style="color:#268bd2">gl</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">width</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">height</span>) {
@@ -338,19 +298,13 @@ if (!doNotTrack) {
         }<span style="color:#859900">else</span> {
             <span style="color:#268bd2">Matrix</span>.<span style="color:#268bd2">orthoM</span>(<span style="color:#268bd2">projectionMatrix</span>,<span style="color:#268bd2">0</span>,-<span style="color:#268bd2">1f</span>,<span style="color:#268bd2">1f</span>,-<span style="color:#268bd2">aspectRatio</span>,<span style="color:#268bd2">aspectRatio</span>,<span style="color:#268bd2">0f</span>,<span style="color:#268bd2">10f</span>);
         }
-    }</code></pre></div>
-<p>这样的话，就把近平面的宽高比设定与视口的宽高比一致了。解决了之前绘制的图像被拉伸的问题。</p>
-
+    }
+</code></pre></div><p>这样的话，就把近平面的宽高比设定与视口的宽高比一致了。解决了之前绘制的图像被拉伸的问题。</p>
 <h2 id="透视投影矩阵">透视投影矩阵</h2>
-
 <p>OpenGL 提供了两个函数来创建透视投影矩阵：<code>frustumM</code> 和 <code>perspectiveM</code>。</p>
-
 <h3 id="frustumm">frustumM</h3>
-
 <p>frustumM 函数创建的视景体是一个锥形。</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/opengl_frustumM_hgt4sg.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_frustumM_hgt4sg.jpg" alt=""></p>
 <p>它的视景体有点类似于正交投影，在参数理解上基本都相同的。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">/**
 </span><span style="color:#93a1a1;font-style:italic">     * Defines a projection matrix in terms of six clip planes.
@@ -367,19 +321,13 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic">     */</span>
     <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">frustumM</span>(<span style="color:#859900;font-weight:bold">float</span>[] <span style="color:#268bd2">m</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">offset</span>,
             <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">left</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">right</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">bottom</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">top</span>,
-            <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">near</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">far</span>)</code></pre></div>
-<p>需要注意的是 near 和 far 变量的值必须要大于 0 。因为它们都是相对于视点的距离，也就是照相机的距离。</p>
-
+            <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">near</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">far</span>)
+</code></pre></div><p>需要注意的是 near 和 far 变量的值必须要大于 0 。因为它们都是相对于视点的距离，也就是照相机的距离。</p>
 <p>当用视图矩阵确定了照相机的位置时，要确保物体距离视点的位置在 near 和 far  的区间范围内，否则就会看不到物体。</p>
-
 <p>由于透视投影会产生近大远小的效果，当照相机位置不变，改变 near 的值时也会改变物体大小，near 越小，则离视点越近，相当于物体越远，那么显示的物体也就越小了。</p>
-
 <p>当然也可以 near 和 far 的距离不动，改变摄像机的位置来改变观察到的物体大小。</p>
-
 <h3 id="perspectivem">perspectiveM</h3>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/opengl_perspectiveM_z2fgys.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_perspectiveM_z2fgys.jpg" alt=""></p>
 <p>OpenGL 还提供了  <code>perspectiveM</code> 函数来创建投影矩阵，它的视景体和 <code>frustumM</code> 函数相同，但是构造的参数有所不同。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#93a1a1;font-style:italic">/**
 </span><span style="color:#93a1a1;font-style:italic">     * Defines a projection matrix in terms of a field of view angle, an
@@ -394,61 +342,56 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic">     * @param zFar
 </span><span style="color:#93a1a1;font-style:italic">     */</span>
     <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">perspectiveM</span>(<span style="color:#859900;font-weight:bold">float</span>[] <span style="color:#268bd2">m</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">offset</span>,
-          <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">fovy</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">aspect</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">zNear</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">zFar</span>)</code></pre></div>
-<p>视景体不再需要确定近平面左、上、右、下距离了。</p>
-
+          <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">fovy</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">aspect</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">zNear</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">zFar</span>)
+</code></pre></div><p>视景体不再需要确定近平面左、上、右、下距离了。</p>
 <p>通过视角来决定我们能看到的视野大小。视角就是图中所示的那个夹角。另外的参数是视口的宽高比，还有近平面和远平面的距离，参数个数减少了。</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/opengl_fovy_bhplik.png" alt="" /></p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/opengl_fovy_result_gpzjwz.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_fovy_bhplik.png" alt=""></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/opengl_fovy_result_gpzjwz.png" alt=""></p>
 <p>上述图片左边是 90 视角，右边是 45 度视角。显然，视野角度越大，则看到的内容更多，但是物体显得更小，而视野角度越小，则看的内容更少，但物体显得更大。有点类似于成语 <strong>一叶障目</strong> 的感觉。</p>
-
 <p>和 <code>frustumM</code>不同的是，一旦确定了视角和宽高比，那么整个摄像机视野也就确定了，此时完整的锥形视野已经形成了，也就是说物体的近大远小效果已经完成了。这时，近平面距离和远平面距离只是确定想要截取锥形视野中的哪一部分了。不像在<code>frustumM</code>函数中，近、远平面的距离还能够调整近大远小的效果。</p>
-
 <h2 id="小结">小结</h2>
-
 <p>理解了 OpenGL 中的几种投影矩阵，在实际开发调试时就更得心应手了。</p>
-
 <h2 id="参考">参考</h2>
-
 <ol>
 <li>《OpenGL ES 应用开发实践指南》</li>
 <li>《OpenGL ES 3.x 游戏开发》</li>
 </ol>
-
 <p>具体代码详情，可以参考我的 Github 项目：</p>
-
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 学习系列---投影矩阵</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -461,45 +404,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/opengl/opengl-tutorial-coordinate-system/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---坐标系统">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/android/understand-state-machine/" data-toggle="tooltip" data-placement="top" title="理解状态机">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/opengl/opengl-tutorial-coordinate-system/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---坐标系统">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/android/understand-state-machine/" data-toggle="tooltip" data-placement="top" title="理解状态机">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -508,6 +438,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -550,25 +482,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -577,66 +503,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

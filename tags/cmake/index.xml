@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CMake on 星陨的博客</title>
@@ -18,7 +18,6 @@
       
       <guid>https://www.glumes.com/post/android/cmake-best-practices/</guid>
       <description>&lt;p&gt;Android Studio 从 2.2 版本起开始支持 CMake ,可以通过 CMake 和 NDK 将 C/C++ 代码编译成底层的库，然后再配合 Gradle 的编译将库打包到 APK 中。&lt;/p&gt;
-
 &lt;p&gt;这意味就不需要再编写 &lt;code&gt;.mk&lt;/code&gt; 文件来编译 &lt;code&gt;so&lt;/code&gt; 动态库了。&lt;/p&gt;</description>
     </item>
     

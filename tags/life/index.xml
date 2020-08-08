@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Life on 星陨的博客</title>
@@ -18,15 +18,11 @@
       
       <guid>https://www.glumes.com/post/life/domain-name-register/</guid>
       <description>&lt;p&gt;前段时间博客网站一直无法访问，还有不少朋友特意发微信告诉我，感谢大家的好意了!&lt;/p&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;网站是：&lt;a href=&#34;https://glumes.com&#34;&gt;https://glumes.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;网站是：https://glumes.com&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;其实是博客域名在备案啦。&lt;/p&gt;
-
 &lt;p&gt;之前博客搭建用的是 Github Pages 方案，访问速度一直被人诟病。&lt;/p&gt;
-
 &lt;p&gt;上个月就决定把服务器换成阿里云了，访问速度如火箭般提升🚀🚀🚀~~&lt;/p&gt;</description>
     </item>
     
@@ -37,15 +33,10 @@
       
       <guid>https://www.glumes.com/post/life/2019-review/</guid>
       <description>&lt;p&gt;时光荏苒，岁月如梭。&lt;/p&gt;
-
 &lt;p&gt;又到了回顾过去，展望未来的(chui)高(niu)光(bi)时刻了~~&lt;/p&gt;
-
 &lt;h2 id=&#34;职业回顾&#34;&gt;职业回顾&lt;/h2&gt;
-
 &lt;p&gt;去年年底准备跑路，然后年前面试，拿了头条的 offer，年后就入职了~~~&lt;/p&gt;
-
 &lt;p&gt;应聘的岗位是 Android-多媒体开发工程师，具体招聘岗位见官网：&lt;a href=&#34;https://job.bytedance.com/job/detail/26456&#34;&gt;多媒体平台研发工程师-Android — 抖音火山&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;工作内容简单说就是做音视频 SDK，支持头条的一些业务。&lt;/p&gt;</description>
     </item>
     
@@ -56,15 +47,10 @@
       
       <guid>https://www.glumes.com/post/life/imooc-course-online/</guid>
       <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
-
 &lt;p&gt;前段时间在慕课网上体验了一把做讲师的感觉，录制了一套免费技术视频~~&lt;/p&gt;
-
 &lt;p&gt;如下图所示：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/12/29/2019-12-15-1.21.42.png&#34; alt=&#34;-2019-12-15-1.21.42.png&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/12/29/2019-12-15-1.21.42.png&#34; alt=&#34;-2019-12-15-1.21.42.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在慕课网上通过如下路径就可以找到啦&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;免费课程 -&amp;gt; 课程 -&amp;gt; 移动开发 -&amp;gt; Android -&amp;gt; Android CMake 以及 NDK 实践基础&lt;/p&gt;
 &lt;/blockquote&gt;</description>

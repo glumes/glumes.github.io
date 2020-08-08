@@ -1,33 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>rust 开发编译 Android 动态库实践-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>rust 开发编译 Android 动态库实践</title>
   <meta property="og:title" content="rust 开发编译 Android 动态库实践" />
   <meta name="twitter:title" content="rust 开发编译 Android 动态库实践" />
 
   <meta name="description" content="
-
 最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：
-
 
 https://www.rust-lang.org/
 
-
 rust 的学习曲线比较陡峭，在开始学习之前建议看看王垠的这篇文章 《如何掌握所有的编程语言》，地址如下:
-
 
 https://www.yinwang.org/blog-cn/2017/07/06/master-pl
 
-
 学习语言，重要的是掌握其语言特性。
-
 王垠举了一些语言特性的例子：
-
 
 变量定义
 算术运算
@@ -42,28 +35,19 @@ lambda 函数
 指针算术
 goto 语句
 
-
 看着这些特性是不是很像一些编程语言书的目录🤔
-
 在学习 rust 的时候也可以照着这些语言特性去对比自己是否掌握了。">
   <meta property="og:description" content="
-
 最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：
-
 
 https://www.rust-lang.org/
 
-
 rust 的学习曲线比较陡峭，在开始学习之前建议看看王垠的这篇文章 《如何掌握所有的编程语言》，地址如下:
-
 
 https://www.yinwang.org/blog-cn/2017/07/06/master-pl
 
-
 学习语言，重要的是掌握其语言特性。
-
 王垠举了一些语言特性的例子：
-
 
 变量定义
 算术运算
@@ -78,53 +62,44 @@ lambda 函数
 指针算术
 goto 语句
 
-
 看着这些特性是不是很像一些编程语言书的目录🤔
-
 在学习 rust 的时候也可以照着这些语言特性去对比自己是否掌握了。">
   <meta name="twitter:description" content="
-
 最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：
-
 
 https://www.rust-lang.org/
 
-
 rust 的学习曲线比较陡峭，在开始学习之前建议看看王垠的这篇文章 《如何掌握所有的编程语言》，地址如下:
-
 
 https://www.yinwang.org/blog-cn/2017/07/06/master-pl
 
-
-学习语言，重要的是掌握其语言特 …">
+学习语言，重要的是掌握其语言特性。
+王垠 …">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/rust-compile-so-library/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/rust-compile-so-library/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -139,11 +114,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -151,9 +138,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -216,6 +201,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -228,111 +216,75 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>rust 开发编译 Android 动态库实践</h1>
+                <h1 align="center">rust 开发编译 Android 动态库实践</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on May 19, 2019
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/rust/">rust</a> &nbsp;
-              
-                  <a href="https://www.glumes.com/tags/so/">so</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://www.glumes.com/tags/rust/">rust</a> &nbsp;
+            
+                <a href="https://www.glumes.com/tags/so/">so</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#rust-编译-so-实践">rust 编译 so 实践</a>
-<ul>
-<li><a href="#安装-rust">安装 rust</a></li>
-<li><a href="#配置-rust-交叉编译">配置 rust 交叉编译</a></li>
-<li><a href="#rust-开发及编译">rust 开发及编译</a></li>
-</ul></li>
-<li><a href="#问题和思考">问题和思考</a></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#rust-编译-so-实践">rust 编译 so 实践</a>
+      <ul>
+        <li><a href="#安装-rust">安装 rust</a></li>
+        <li><a href="#配置-rust-交叉编译">配置 rust 交叉编译</a></li>
+        <li><a href="#rust-开发及编译">rust 开发及编译</a></li>
+      </ul>
+    </li>
+    <li><a href="#问题和思考">问题和思考</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p><img src="https://image.glumes.com/images/2019/05/19/rust-mm.png" alt="" /></p>
-
+        
+        <p><img src="https://image.glumes.com/images/2019/05/19/rust-mm.png" alt=""></p>
 <p>最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：</p>
-
 <blockquote>
 <p><a href="https://www.rust-lang.org/">https://www.rust-lang.org/</a></p>
 </blockquote>
-
 <p>rust 的学习曲线比较陡峭，在开始学习之前建议看看王垠的这篇文章 《如何掌握所有的编程语言》，地址如下:</p>
-
 <blockquote>
 <p><a href="https://www.yinwang.org/blog-cn/2017/07/06/master-pl">https://www.yinwang.org/blog-cn/2017/07/06/master-pl</a></p>
 </blockquote>
-
 <p>学习语言，重要的是掌握其语言特性。</p>
-
 <p>王垠举了一些语言特性的例子：</p>
-
 <ul>
 <li>变量定义</li>
 <li>算术运算</li>
@@ -347,47 +299,33 @@ if (!doNotTrack) {
 <li>指针算术</li>
 <li>goto 语句</li>
 </ul>
-
 <p>看着这些特性是不是很像一些编程语言书的目录🤔</p>
-
 <p>在学习 rust 的时候也可以照着这些语言特性去对比自己是否掌握了。</p>
-
 <p>那么 rust 到底强大在哪里？在 Kotlin 刚出的时候宣传的点就是空安全 ，弥补 Java 在这方面的不足。而 rust 可以说对比的是 C++，弥补 C++ 在空指针和野指针（悬垂指针）方面的不足，当然 rust 的优势还不足如此。</p>
-
 <p>以下是来自维基百科的介绍，有些特性我暂时还没体验过，先摘录一波：</p>
-
 <blockquote>
 <p>Rust 是由 Mozilla 主导开发的通用、编译型编程语言。。设计准则为“安全、并发、实用”，支持函数式、并发式、过程式以及面向对象的编程风格。</p>
 </blockquote>
-
 <p>目前国内也已经有一些团队在用 rust 进行开发了，可以在观望一波后，再决定是否投入精力入坑~~~</p>
-
-<hr />
-
+<hr>
 <h2 id="rust-编译-so-实践">rust 编译 so 实践</h2>
-
 <p>下面是用 rust 编译 Android 动态库实践，主要参考了 Mozilla 给的例子，具体链接在后面。</p>
-
 <h3 id="安装-rust">安装 rust</h3>
-
 <p>首先是安装 rust ，通过如下命令安装：</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">curl https://sh.rustup.rs -sSf | sh</code></pre></div>
-<p>然后通过如下命令输出 rust 版本以及验证是否安装成功。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">rustc --version</code></pre></div>
-<h3 id="配置-rust-交叉编译">配置 rust 交叉编译</h3>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">curl https://sh.rustup.rs -sSf | sh
+</code></pre></div><p>然后通过如下命令输出 rust 版本以及验证是否安装成功。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">rustc --version
+</code></pre></div><h3 id="配置-rust-交叉编译">配置 rust 交叉编译</h3>
 <p>确保 Android 的 sdk 目录配置到了系统环境中。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#cb4b16">export</span> <span style="color:#268bd2">ANDROID_HOME</span>=/Users/<span style="color:#268bd2">$USER</span>/Library/Android/sdk
-<span style="color:#cb4b16">export</span> <span style="color:#268bd2">NDK_HOME</span>=<span style="color:#268bd2">$ANDROID_HOME</span>/ndk-bundle</code></pre></div>
-<p>然后执行如下命令：</p>
+<span style="color:#cb4b16">export</span> <span style="color:#268bd2">NDK_HOME</span>=<span style="color:#268bd2">$ANDROID_HOME</span>/ndk-bundle
+</code></pre></div><p>然后执行如下命令：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir NDK
 <span style="color:#2aa198">${</span><span style="color:#268bd2">NDK_HOME</span><span style="color:#2aa198">}</span>/build/tools/make_standalone_toolchain.py --api <span style="color:#2aa198;font-weight:bold">26</span> --arch arm64 --install-dir NDK/arm64
 <span style="color:#2aa198">${</span><span style="color:#268bd2">NDK_HOME</span><span style="color:#2aa198">}</span>/build/tools/make_standalone_toolchain.py --api <span style="color:#2aa198;font-weight:bold">26</span> --arch arm --install-dir NDK/arm
-<span style="color:#2aa198">${</span><span style="color:#268bd2">NDK_HOME</span><span style="color:#2aa198">}</span>/build/tools/make_standalone_toolchain.py --api <span style="color:#2aa198;font-weight:bold">26</span> --arch x86 --install-dir NDK/x86</code></pre></div>
-<p>主要是执行 ndk-bundle 目录下的 python 脚本，该脚本在 NDK 目录中去创建 arm64、arm、x86 架构平台的编译环境。</p>
-
+<span style="color:#2aa198">${</span><span style="color:#268bd2">NDK_HOME</span><span style="color:#2aa198">}</span>/build/tools/make_standalone_toolchain.py --api <span style="color:#2aa198;font-weight:bold">26</span> --arch x86 --install-dir NDK/x86
+</code></pre></div><p>主要是执行 ndk-bundle 目录下的 python 脚本，该脚本在 NDK 目录中去创建 arm64、arm、x86 架构平台的编译环境。</p>
 <p>在把环境添加到 rust 的配置中。</p>
-
 <p>创建 <code>cargo-config.toml</code> 文件，输入如下内容：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">[target.aarch64-linux-android]
 <span style="color:#268bd2">ar</span> = <span style="color:#2aa198">&#34;&lt;path&gt;/NDK/arm64/bin/aarch64-linux-android-ar&#34;</span>
@@ -399,41 +337,29 @@ if (!doNotTrack) {
 
 [target.i686-linux-android]
 <span style="color:#268bd2">ar</span> = <span style="color:#2aa198">&#34;&lt;path&gt;/NDK/x86/bin/i686-linux-android-ar&#34;</span>
-<span style="color:#268bd2">linker</span> = <span style="color:#2aa198">&#34;&lt;path&gt;/NDK/x86/bin/i686-linux-android-clang&#34;</span></code></pre></div>
-<p>记得把 <path> 替换成 NDK 文件夹所在的路径。</p>
-
+<span style="color:#268bd2">linker</span> = <span style="color:#2aa198">&#34;&lt;path&gt;/NDK/x86/bin/i686-linux-android-clang&#34;</span>
+</code></pre></div><p>记得把 <!-- raw HTML omitted --> 替换成 NDK 文件夹所在的路径。</p>
 <p>然后执行：</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cp cargo-config.toml ~/.cargo/config</code></pre></div>
-<p>把 cargo-config.toml 移动到 <code>~/.cargo/</code> 目录下。</p>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cp cargo-config.toml ~/.cargo/config
+</code></pre></div><p>把 cargo-config.toml 移动到 <code>~/.cargo/</code> 目录下。</p>
 <p>再执行如下命令：</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android</code></pre></div>
-<p>以上就完成了交叉编译环境的配置。</p>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android
+</code></pre></div><p>以上就完成了交叉编译环境的配置。</p>
 <h3 id="rust-开发及编译">rust 开发及编译</h3>
-
 <p>现在要涉及到具体的 rust 开发了，推荐使用 JetBrains 系列的 IntelliJ IDEA ，无需激活，使用社区版就行，安装 rust 插件就可以愉快地编写代码了。</p>
-
 <p>执行以下命令创建工程目录：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir rust-android
-<span style="color:#cb4b16">cd</span> rust-android</code></pre></div>
-<p>然后创建 rust 项目：</p>
+<span style="color:#cb4b16">cd</span> rust-android
+</code></pre></div><p>然后创建 rust 项目：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cargo new rust --lib
-<span style="color:#cb4b16">cd</span> rust</code></pre></div>
-<p><code>rust</code> 代表创建的项目所在文件夹名字。</p>
-
+<span style="color:#cb4b16">cd</span> rust
+</code></pre></div><p><code>rust</code> 代表创建的项目所在文件夹名字。</p>
 <p><code>--lib</code> 代表我们创建的是一个库项目，而不是一个执行的二进制文件。</p>
-
 <p>项目结构图如下：</p>
-
-<p><img src="https://image.glumes.com/images/2019/05/18/-2019-05-18-4.32.01.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/05/18/-2019-05-18-4.32.01.png" alt=""></p>
 <p>结构很简单，就两个文件，本篇文章也不会自己去新增文件，当然肯定是会有编译文件出现的。</p>
-
 <p><code>Cargo.toml</code> 就相当于 Android 中的 build.gradle ，一些第三方库都是通过这里去引用的。</p>
-
 <p><code>lib.rs</code> 就是具体编写代码的地方了。</p>
-
 <p>首先要在 Cargo.toml 中去添加一些内容：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">[dependencies]
 <span style="color:#93a1a1;font-style:italic"># 添加 jni 依赖，并指定版本</span>
@@ -446,9 +372,8 @@ if (!doNotTrack) {
 <span style="color:#93a1a1;font-style:italic"># 编译的动态库名字</span>
 <span style="color:#268bd2">name</span> = <span style="color:#2aa198">&#34;rust&#34;</span>
 <span style="color:#93a1a1;font-style:italic"># 编译类型 cdylib 指定为动态库</span>
-crate-type = [<span style="color:#2aa198">&#34;cdylib&#34;</span>]</code></pre></div>
-<p>关于添加的内容含义如上注释，主要是添加了 jni 依赖和指定编译，有了 jni 依赖才能够让 Android 项目代码调用到 so 动态库的内容。</p>
-
+crate-type = [<span style="color:#2aa198">&#34;cdylib&#34;</span>]
+</code></pre></div><p>关于添加的内容含义如上注释，主要是添加了 jni 依赖和指定编译，有了 jni 依赖才能够让 Android 项目代码调用到 so 动态库的内容。</p>
 <p>接下来就是编写 rust 代码了。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#93a1a1;font-style:italic">// 指定 os 类型
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#93a1a1;font-style:italic">#![cfg(target_os = </span><span style="color:#2aa198">&#34;android&#34;</span><span style="color:#93a1a1;font-style:italic">)]</span>
@@ -476,109 +401,89 @@ crate-type = [<span style="color:#2aa198">&#34;cdylib&#34;</span>]</code></pre><
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">let</span> <span style="color:#268bd2">output</span> = <span style="color:#268bd2">env</span>.<span style="color:#268bd2">new_string</span>(<span style="color:#2aa198">&#34;hello&#34;</span>.<span style="color:#268bd2">to_owned</span>() + <span style="color:#268bd2">recipient</span>.<span style="color:#268bd2">to_str</span>().<span style="color:#268bd2">unwrap</span>()).<span style="color:#268bd2">unwrap</span>();
     <span style="color:#268bd2">output</span>.<span style="color:#268bd2">into_inner</span>()
 }
-</code></pre></div>
-<p>抛开 rust 具体语法不看，代码内容也很简单，传一个字符串，返回一个新的字符串。</p>
-
+</code></pre></div><p>抛开 rust 具体语法不看，代码内容也很简单，传一个字符串，返回一个新的字符串。</p>
 <p>接下来就是执行具体的编译：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cargo build --target aarch64-linux-android --release
 cargo build --target armv7-linux-androideabi --release
-cargo build --target i686-linux-android --release</code></pre></div>
-<p>分别执行上面三个命令，会分别构建三个不同平台的 so 库。</p>
-
+cargo build --target i686-linux-android --release
+</code></pre></div><p>分别执行上面三个命令，会分别构建三个不同平台的 so 库。</p>
 <p>然后把 so 库替换到 Android 项目的 jniLibs 具体文件夹就好了。</p>
-
-<p><img src="https://image.glumes.com/images/2019/05/18/-2019-05-18-4.56.37.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/05/18/-2019-05-18-4.56.37.png" alt=""></p>
 <p>这样就完成了用 rust 编译 Android 平台的 so 动态库，并且每次编译后的时候就要进行 so 的替换，当然也可以想办法把 rust so 的编译放在 Android gradle 的编译过程中，就和用 CMake 编译一样。</p>
-
 <h2 id="问题和思考">问题和思考</h2>
-
 <p>以上只是一个小小的例子，想用 rust 实现像 C++ 那样去开发动态库，可能还一些坑要去探索。仅仅是实现 jni 的调用还是远不够的，在 NDK 开发里面还有很多头文件，如何去在 rust 里面去实现调用？</p>
-
 <p>如果想要 rust 去打印 Android NDK 中的 log ，倒是可以参考 <a href="https://github.com/Nercury/android_logger-rs">android_logger-rs</a> 项目，至于其他的慢慢摸索中。</p>
-
 <p>另外还有个问题，如何在 Android 中去断点调试 rust 的代码，在网上搜索了一番，还没找到合适的答案，有知道的朋友可以指点我一二 🥺</p>
-
 <h2 id="参考">参考</h2>
-
 <p>具体的例子可以参考我的 GitHub 项目：</p>
-
 <blockquote>
 <p><a href="https://github.com/glumes/rust-android-example">https://github.com/glumes/rust-android-example</a></p>
 </blockquote>
-
 <ol>
 <li><a href="https://www.yinwang.org/blog-cn/2017/07/06/master-pl">https://www.yinwang.org/blog-cn/2017/07/06/master-pl</a></li>
 <li><a href="https://mozilla.github.io/firefox-browser-architecture/experiments/2017-09-21-rust-on-android.html">https://mozilla.github.io/firefox-browser-architecture/experiments/2017-09-21-rust-on-android.html</a></li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
-        
-          
-
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/" data-toggle="tooltip" data-placement="top" title="Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/android/google-jetpack-camerax/" data-toggle="tooltip" data-placement="top" title="Google Jetpack 新组件 CameraX 介绍与实践">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
         
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
-        
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/rust-compile-so-library/">rust 开发编译 Android 动态库实践</a>
+
+                
+
+                
+
 
         
-          
-
         
-  
-      </div>
-    
-    
+        
+      </article>
+
+      
+        
+
+      
+
+      
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://www.glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/" data-toggle="tooltip" data-placement="top" title="Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/android/google-jetpack-camerax/" data-toggle="tooltip" data-placement="top" title="Google Jetpack 新组件 CameraX 介绍与实践">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
+
+      
+        
+      
+
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -587,6 +492,8 @@ cargo build --target i686-linux-android --release</code></pre></div>
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -629,25 +536,19 @@ cargo build --target i686-linux-android --release</code></pre></div>
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -656,66 +557,47 @@ cargo build --target i686-linux-android --release</code></pre></div>
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

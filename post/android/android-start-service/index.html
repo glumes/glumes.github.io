@@ -1,52 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android 6.0 Service 启动过程源码分析（一）-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>Android 6.0 Service 启动过程源码分析（一）</title>
   <meta property="og:title" content="Android 6.0 Service 启动过程源码分析（一）" />
   <meta name="twitter:title" content="Android 6.0 Service 启动过程源码分析（一）" />
 
   <meta name="description" content="Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。
-
 Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。">
   <meta property="og:description" content="Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。
-
 Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。">
   <meta name="twitter:description" content="Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。
-
-Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在 …">
+Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的 …">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/android-start-service/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/android-start-service/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -61,11 +55,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -73,9 +79,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -138,6 +142,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -150,118 +157,84 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Android 6.0 Service 启动过程源码分析（一）</h1>
+                <h1 align="center">Android 6.0 Service 启动过程源码分析（一）</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on December 22, 2017
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
-              
-                  <a href="https://www.glumes.com/tags/framework/">Framework</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+            
+                <a href="https://www.glumes.com/tags/framework/">Framework</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#service-组件在新进程中的启动过程">Service 组件在新进程中的启动过程</a>
-<ul>
-<li><a href="#contextimpl-类的-startservice-方法">ContextImpl 类的 startService() 方法</a></li>
-<li><a href="#contextimpl-类的-startservicecommon-方法">ContextImpl 类的 startServiceCommon() 方法</a></li>
-<li><a href="#activitymanagerservice-类的-startservice-方法">ActivityManagerService 类的 startService() 方法</a></li>
-<li><a href="#activeservices-类的-startservicelocked-方法">ActiveServices 类的 startServiceLocked() 方法</a></li>
-<li><a href="#activeservices-类的-startserviceinnerlocked-方法">ActiveServices 类的 startServiceInnerLocked() 方法</a></li>
-<li><a href="#activeservices-类的-bringupservicelocked-方法">ActiveServices 类的 bringUpServiceLocked() 方法</a></li>
-<li><a href="#activityservices-类的-attachapplicationlocked-方法">ActivityServices 类的 attachApplicationLocked() 方法</a></li>
-<li><a href="#activityservices-类的-realstartservicelocked-方法">ActivityServices 类的 realStartServiceLocked() 方法</a></li>
-<li><a href="#activitythread-类的-handlecreateservice-方法">ActivityThread 类的 handleCreateService() 方法</a></li>
-<li><a href="#activityservices-类的-sendserviceargslocked-方法">ActivityServices 类的 sendServiceArgsLocked() 方法</a></li>
-<li><a href="#activitythread-类的-handleserviceargs-方法">ActivityThread 类的 handleServiceArgs() 方法</a></li>
-</ul></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#service-组件在新进程中的启动过程">Service 组件在新进程中的启动过程</a>
+      <ul>
+        <li><a href="#contextimpl-类的-startservice-方法">ContextImpl 类的 startService() 方法</a></li>
+        <li><a href="#contextimpl-类的-startservicecommon-方法">ContextImpl 类的 startServiceCommon() 方法</a></li>
+        <li><a href="#activitymanagerservice-类的-startservice-方法">ActivityManagerService 类的 startService() 方法</a></li>
+        <li><a href="#activeservices-类的-startservicelocked-方法">ActiveServices 类的 startServiceLocked() 方法</a></li>
+        <li><a href="#activeservices-类的-startserviceinnerlocked-方法">ActiveServices 类的 startServiceInnerLocked() 方法</a></li>
+        <li><a href="#activeservices-类的-bringupservicelocked-方法">ActiveServices 类的 bringUpServiceLocked() 方法</a></li>
+        <li><a href="#activityservices-类的-attachapplicationlocked-方法">ActivityServices 类的 attachApplicationLocked() 方法</a></li>
+        <li><a href="#activityservices-类的-realstartservicelocked-方法">ActivityServices 类的 realStartServiceLocked() 方法</a></li>
+        <li><a href="#activitythread-类的-handlecreateservice-方法">ActivityThread 类的 handleCreateService() 方法</a></li>
+        <li><a href="#activityservices-类的-sendserviceargslocked-方法">ActivityServices 类的 sendServiceArgsLocked() 方法</a></li>
+        <li><a href="#activitythread-类的-handleserviceargs-方法">ActivityThread 类的 handleServiceArgs() 方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。</p>
-
+        
+        <p>Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。</p>
 <p>Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。</p>
-
 <h2 id="service-组件在新进程中的启动过程">Service 组件在新进程中的启动过程</h2>
-
 <p>不管 Service 组件是在 Activity 组件中启动的还是在 Service 组件中启动的，它们都是继承自<code>ContextWrapper</code>类的，最后调用的还是<code>ContextImpl</code>的<code>startService</code>方法。</p>
-
 <p>所以直接从<code>ContextImpl</code>方法开始分析即可。</p>
-
 <h3 id="contextimpl-类的-startservice-方法">ContextImpl 类的 startService() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">@Override</span>
     <span style="color:#859900">public</span> <span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">startService</span>(<span style="color:#268bd2">Intent</span> <span style="color:#268bd2">service</span>) {
         <span style="color:#268bd2">warnIfCallingFromSystemProcess</span>();
         <span style="color:#859900">return</span> <span style="color:#268bd2">startServiceCommon</span>(<span style="color:#268bd2">service</span>, <span style="color:#268bd2">mUser</span>);
-    }</code></pre></div>
-<p>显然最后还是调用的<code>startServiceCommon</code>方法了。</p>
+    }
 
+</code></pre></div><p>显然最后还是调用的<code>startServiceCommon</code>方法了。</p>
 <h3 id="contextimpl-类的-startservicecommon-方法">ContextImpl 类的 startServiceCommon() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">private</span> <span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">startServiceCommon</span>(<span style="color:#268bd2">Intent</span> <span style="color:#268bd2">service</span>, <span style="color:#268bd2">UserHandle</span> <span style="color:#268bd2">user</span>) {
         <span style="color:#859900">try</span> {
@@ -284,9 +257,8 @@ if (!doNotTrack) {
         } <span style="color:#859900">catch</span> (<span style="color:#268bd2">RemoteException</span> <span style="color:#268bd2">e</span>) {
             <span style="color:#859900">throw</span> <span style="color:#859900">new</span> <span style="color:#268bd2">RuntimeException</span>(<span style="color:#2aa198">&#34;Failure from system&#34;</span>, <span style="color:#268bd2">e</span>);
         }
-    }</code></pre></div>
-<p>在<code>startServiceCommon</code>方法内又是 IPC 进程间通信了，通过<code>ActivityManagerProxy</code>向 Binder 驱动发送类型为<code>START_SERVICE_TRANSACTION</code>的消息，在<code>ActivityManagerService</code>响应对应消息。</p>
-
+    }
+</code></pre></div><p>在<code>startServiceCommon</code>方法内又是 IPC 进程间通信了，通过<code>ActivityManagerProxy</code>向 Binder 驱动发送类型为<code>START_SERVICE_TRANSACTION</code>的消息，在<code>ActivityManagerService</code>响应对应消息。</p>
 <h3 id="activitymanagerservice-类的-startservice-方法">ActivityManagerService 类的 startService() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">startService</span>(<span style="color:#268bd2">IApplicationThread</span> <span style="color:#268bd2">caller</span>, <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">service</span>,
             <span style="color:#268bd2">String</span> <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">callingPackage</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">userId</span>)
@@ -309,9 +281,8 @@ if (!doNotTrack) {
             <span style="color:#268bd2">Binder</span>.<span style="color:#268bd2">restoreCallingIdentity</span>(<span style="color:#268bd2">origId</span>);
             <span style="color:#859900">return</span> <span style="color:#268bd2">res</span>;
         }
-    }</code></pre></div>
-<p>在 ActivityManagerService 内又是调用 ActivityServices 类的 <code>startServiceLocked()</code> 方法，将调用者的<code>pid</code>和<code>uid</code>传入。</p>
-
+    }
+</code></pre></div><p>在 ActivityManagerService 内又是调用 ActivityServices 类的 <code>startServiceLocked()</code> 方法，将调用者的<code>pid</code>和<code>uid</code>传入。</p>
 <h3 id="activeservices-类的-startservicelocked-方法">ActiveServices 类的 startServiceLocked() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">startServiceLocked</span>(<span style="color:#268bd2">IApplicationThread</span> <span style="color:#268bd2">caller</span>, <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">service</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resolvedType</span>,
             <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">callingPid</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">callingUid</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">callingPackage</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">userId</span>)
@@ -377,11 +348,9 @@ if (!doNotTrack) {
         } 
 
         <span style="color:#859900">return</span> <span style="color:#268bd2">startServiceInnerLocked</span>(<span style="color:#268bd2">smap</span>, <span style="color:#268bd2">service</span>, <span style="color:#268bd2">r</span>, <span style="color:#268bd2">callerFg</span>, <span style="color:#268bd2">addToStarting</span>);
-    }</code></pre></div>
-<p>在 <code>startServiceLocked</code> 方法内的调用 <code>retrieveServiceLocked</code>方法在 ActivityManagerService 检查是否存在与参数 <code>service</code>对应的一个<code>ServiceRecord</code>对象。如果不存在，那么 ActivityManagerService 就会到 PackageManagerService 中去获取与参数<code>service</code>对应的一个 Service 组件的信息，然后将这些信息封装成一个<code>ServiceRecord</code>对象，最后将这个<code>ServiceRecord</code>对象封装成一个<code>ServiceLookupResult</code>对象返回给调用者。</p>
-
+    }
+</code></pre></div><p>在 <code>startServiceLocked</code> 方法内的调用 <code>retrieveServiceLocked</code>方法在 ActivityManagerService 检查是否存在与参数 <code>service</code>对应的一个<code>ServiceRecord</code>对象。如果不存在，那么 ActivityManagerService 就会到 PackageManagerService 中去获取与参数<code>service</code>对应的一个 Service 组件的信息，然后将这些信息封装成一个<code>ServiceRecord</code>对象，最后将这个<code>ServiceRecord</code>对象封装成一个<code>ServiceLookupResult</code>对象返回给调用者。</p>
 <p>接着就是对用户是否存在进行检查，最后调用<code>startServiceInnerLocked</code>方法。</p>
-
 <h3 id="activeservices-类的-startserviceinnerlocked-方法">ActiveServices 类的 startServiceInnerLocked() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">startServiceInnerLocked</span>(<span style="color:#268bd2">ServiceMap</span> <span style="color:#268bd2">smap</span>, <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">service</span>, <span style="color:#268bd2">ServiceRecord</span> <span style="color:#268bd2">r</span>,
             <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">callerFg</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">addToStarting</span>) <span style="color:#859900">throws</span> <span style="color:#268bd2">TransactionTooLargeException</span> {
@@ -409,9 +378,8 @@ if (!doNotTrack) {
             <span style="color:#268bd2">smap</span>.<span style="color:#268bd2">ensureNotStartingBackground</span>(<span style="color:#268bd2">r</span>);
         }
         <span style="color:#859900">return</span> <span style="color:#268bd2">r</span>.<span style="color:#268bd2">name</span>;
-    }</code></pre></div>
-<p>该方法内调用<code>bringUpServiceLocked</code>方法。</p>
-
+    }
+</code></pre></div><p>该方法内调用<code>bringUpServiceLocked</code>方法。</p>
 <h3 id="activeservices-类的-bringupservicelocked-方法">ActiveServices 类的 bringUpServiceLocked() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">private</span> <span style="color:#859900">final</span> <span style="color:#268bd2">String</span> <span style="color:#268bd2">bringUpServiceLocked</span>(<span style="color:#268bd2">ServiceRecord</span> <span style="color:#268bd2">r</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">intentFlags</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">execInFg</span>,
             <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">whileRestarting</span>) <span style="color:#859900">throws</span> <span style="color:#268bd2">TransactionTooLargeException</span> {
@@ -500,26 +468,19 @@ if (!doNotTrack) {
         }
 
         <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
-    }</code></pre></div>
-<p>在<code>bringUpServiceLocked</code>方法内先判断<code>ServiceRecord</code>的变量<code>app</code>和<code>thread</code>变量是否为<code>null</code>，也就是检查<code>service</code>对应的进程<code>ProcessRecord</code>和<code>ApplicationThread</code>对象是否存在，若存在，则直接执行<code>service</code>的<code>onStartCommand</code>方法。</p>
+    }
 
+</code></pre></div><p>在<code>bringUpServiceLocked</code>方法内先判断<code>ServiceRecord</code>的变量<code>app</code>和<code>thread</code>变量是否为<code>null</code>，也就是检查<code>service</code>对应的进程<code>ProcessRecord</code>和<code>ApplicationThread</code>对象是否存在，若存在，则直接执行<code>service</code>的<code>onStartCommand</code>方法。</p>
 <p>若不存在，则将<code>service</code>从重启和延时启动队列中移开，因为它正在启动中了，最后再确保拥有该<code>service</code>的用户已经启动了。</p>
-
 <p>接着 ActivityManagerService 根据进程名<code>procName</code>和<code>uid</code>调用<code>getProcessRecordLocked</code>方法查看对应的进程<code>ProcessRecord</code>是否存在。</p>
-
 <ul>
 <li>若存在，则调用<code>realStartServiceLocked</code>方法。</li>
 <li>若不存在，则调用<code>startProcessLocked</code>方法，先启动进程。</li>
 </ul>
-
 <p>ActivityManagerService 通过<code>startProcessLocked</code>方法启动一个新的进程，在分析<code>Launcher</code>启动 Activity 组件时已经了解过了。</p>
-
 <p>ActivityManagerService 创建一个新的进程，而一个新进程的入口就是<code>ActivityThread</code>类的<code>main</code>方法。在<code>ActivityThread</code>内会创建一个<code>ActivityThread</code>对象和一个<code>ApplicationThread</code>对象，而在<code>main</code>方法内又会调用<code>ActivityThread</code>的<code>attach</code>方法，用来向 ActivityManagerService 发送一个 类型为 <code>ATTACH_APPLICATION_TRANSACTION</code>的进程间通信，把<code>ApplicationThread</code>对象传递给 ActivityManagerService，以便能够 ActivityManagerService 可以和新进程进行 Binder 进程间通信。</p>
-
 <p>ActivityManagerService 响应类型为<code>ATTACH_APPLICATION_TRANSACTION</code>的进程间通信，执行<code>attachApplication</code>方法，进而执行<code>attachApplicationLocked</code>方法。</p>
-
 <p>在<code>attachApplicationLocked</code>方法内，首先会进行 Binder 跨进程调用，执行 <code>ApplicationThread</code>的<code>bindApplication</code>方法，然后再依次调度应用的<code>Activity</code>、<code>Service</code>、<code>Broadcast</code>组件。</p>
-
 <p>其中，调度<code>Service</code>组件的代码如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#93a1a1;font-style:italic">// Find any services that should be running in this process...
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (!<span style="color:#268bd2">badApp</span>) {
@@ -530,8 +491,8 @@ if (!doNotTrack) {
                 <span style="color:#268bd2">Slog</span>.<span style="color:#268bd2">wtf</span>(<span style="color:#268bd2">TAG</span>, <span style="color:#2aa198">&#34;Exception thrown starting services in &#34;</span> + <span style="color:#268bd2">app</span>, <span style="color:#268bd2">e</span>);
                 <span style="color:#268bd2">badApp</span> = <span style="color:#859900;font-weight:bold">true</span>;
             }
-        }</code></pre></div>
-<h3 id="activityservices-类的-attachapplicationlocked-方法">ActivityServices 类的 attachApplicationLocked() 方法</h3>
+        }
+</code></pre></div><h3 id="activityservices-类的-attachapplicationlocked-方法">ActivityServices 类的 attachApplicationLocked() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">attachApplicationLocked</span>(<span style="color:#268bd2">ProcessRecord</span> <span style="color:#268bd2">proc</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">processName</span>)
             <span style="color:#859900">throws</span> <span style="color:#268bd2">RemoteException</span> {
         <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">didSomething</span> = <span style="color:#859900;font-weight:bold">false</span>;
@@ -576,11 +537,9 @@ if (!doNotTrack) {
             }
         }
         <span style="color:#859900">return</span> <span style="color:#268bd2">didSomething</span>;
-    }</code></pre></div>
-<p><code>attachApplicationLocked</code>方法内启动<code>mPendingServices</code>队列中的服务和<code>mRestartingServices</code>中的服务。</p>
-
+    }
+</code></pre></div><p><code>attachApplicationLocked</code>方法内启动<code>mPendingServices</code>队列中的服务和<code>mRestartingServices</code>中的服务。</p>
 <p>真正启动服务的方法就是<code>realStartServiceLocked</code>。</p>
-
 <h3 id="activityservices-类的-realstartservicelocked-方法">ActivityServices 类的 realStartServiceLocked() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">realStartServiceLocked</span>(<span style="color:#268bd2">ServiceRecord</span> <span style="color:#268bd2">r</span>,
             <span style="color:#268bd2">ProcessRecord</span> <span style="color:#268bd2">app</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">execInFg</span>) <span style="color:#859900">throws</span> <span style="color:#268bd2">RemoteException</span> {
@@ -664,11 +623,9 @@ if (!doNotTrack) {
                 <span style="color:#268bd2">stopServiceLocked</span>(<span style="color:#268bd2">r</span>);
             }
         }
-    }</code></pre></div>
-<p>在<code>realStartServiceLocked</code>方法内，首先会通过<code>bumpServiceExecutingLocked</code>方法，然后再调用<code>scheduleServiceTimeoutLocked</code>方法，向 ActivityManagerService 的 <code>MainHandler</code>类型的 <code>mHandler</code> 发送一个消息 <code>SERVICE_TIMEOUT_MSG</code>。若 Service 在启动过程中没有及时向 ActivityManagerService 返回消息，把<code>SERVICE_TIMEOUT_MSG</code>消息给取消掉，那么则认为 Service 启动超时了。</p>
-
+    }
+</code></pre></div><p>在<code>realStartServiceLocked</code>方法内，首先会通过<code>bumpServiceExecutingLocked</code>方法，然后再调用<code>scheduleServiceTimeoutLocked</code>方法，向 ActivityManagerService 的 <code>MainHandler</code>类型的 <code>mHandler</code> 发送一个消息 <code>SERVICE_TIMEOUT_MSG</code>。若 Service 在启动过程中没有及时向 ActivityManagerService 返回消息，把<code>SERVICE_TIMEOUT_MSG</code>消息给取消掉，那么则认为 Service 启动超时了。</p>
 <p>标记完了时间后，就通过<code>scheduleCreateService</code>方法来启动 Service ，让 Service 进去<code>onCreate</code>状态。</p>
-
 <p>新创建的进程把自己的 Binder 本地对象 ApplicationThread 传递给了 ActivityManagerService ，ActivityManagerService 就通过它来与新进程通信了，<code>scheduleCreateService</code>方法向 Binder 驱动发送了一个类型为 <code>SCHEDULE_CREATE_SERVICE_TRANSACTION</code>的消息，而在 <code>ApplicationThread</code>响应了该消息。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">scheduleCreateService</span>(<span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">token</span>,
                 <span style="color:#268bd2">ServiceInfo</span> <span style="color:#268bd2">info</span>, <span style="color:#268bd2">CompatibilityInfo</span> <span style="color:#268bd2">compatInfo</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">processState</span>) {
@@ -679,9 +636,8 @@ if (!doNotTrack) {
             <span style="color:#268bd2">s</span>.<span style="color:#268bd2">compatInfo</span> = <span style="color:#268bd2">compatInfo</span>;
 
             <span style="color:#268bd2">sendMessage</span>(<span style="color:#268bd2">H</span>.<span style="color:#268bd2">CREATE_SERVICE</span>, <span style="color:#268bd2">s</span>);
-        }</code></pre></div>
-<p>ApplicationThread 的 <code>scheduleCreateService</code>方法向 ActivityThread 的主线程 <code>mH</code>发送了消息<code>CREATE_SERVICE</code>。ActivityThread 最终响应该消息。</p>
-
+        }
+</code></pre></div><p>ApplicationThread 的 <code>scheduleCreateService</code>方法向 ActivityThread 的主线程 <code>mH</code>发送了消息<code>CREATE_SERVICE</code>。ActivityThread 最终响应该消息。</p>
 <h3 id="activitythread-类的-handlecreateservice-方法">ActivityThread 类的 handleCreateService() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">handleCreateService</span>(<span style="color:#268bd2">CreateServiceData</span> <span style="color:#268bd2">data</span>) {
         <span style="color:#93a1a1;font-style:italic">// If we are getting ready to gc after going to the background, well
@@ -718,13 +674,10 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>            }
         } <span style="color:#859900">catch</span> (<span style="color:#268bd2">Exception</span> <span style="color:#268bd2">e</span>) {
         }
-    }</code></pre></div>
-<p>ActivityThread 类的<code>handleCreateService</code>主要是创建了 Service 对象，并且创建了<code>ContextImpl</code>对象和<code>Application</code>对象。同时调用了 Service 的<code>onCreate</code>方法。我们继承的 Service 的<code>onCreate</code>方法也是在这里被系统回调的。</p>
-
+    }
+</code></pre></div><p>ActivityThread 类的<code>handleCreateService</code>主要是创建了 Service 对象，并且创建了<code>ContextImpl</code>对象和<code>Application</code>对象。同时调用了 Service 的<code>onCreate</code>方法。我们继承的 Service 的<code>onCreate</code>方法也是在这里被系统回调的。</p>
 <p>随后向 ActivityManagerService 发送消息，取消 Service 延时启动的消息。</p>
-
 <p>Service 进入 <code>onCreate</code>状态后，接下来该进入<code>onStartCommand</code>状态。</p>
-
 <h3 id="activityservices-类的-sendserviceargslocked-方法">ActivityServices 类的 sendServiceArgsLocked() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">sendServiceArgsLocked</span>(<span style="color:#268bd2">ServiceRecord</span> <span style="color:#268bd2">r</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">execInFg</span>,
             <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">oomAdjusted</span>) <span style="color:#859900">throws</span> <span style="color:#268bd2">TransactionTooLargeException</span> {
@@ -772,9 +725,8 @@ if (!doNotTrack) {
             } <span style="color:#859900">catch</span> (<span style="color:#268bd2">Exception</span> <span style="color:#268bd2">e</span>) {
             }
         }
-    }</code></pre></div>
-<p>在<code>sendServiceArgsLocked</code>方法内通过跨进程<code>scheduleServiceArgs</code>方法，向 ActivityThread 发送消息。</p>
-
+    }
+</code></pre></div><p>在<code>sendServiceArgsLocked</code>方法内通过跨进程<code>scheduleServiceArgs</code>方法，向 ActivityThread 发送消息。</p>
 <h3 id="activitythread-类的-handleserviceargs-方法">ActivityThread 类的 handleServiceArgs() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">handleServiceArgs</span>(<span style="color:#268bd2">ServiceArgsData</span> <span style="color:#268bd2">data</span>) {
         <span style="color:#268bd2">Service</span> <span style="color:#268bd2">s</span> = <span style="color:#268bd2">mServices</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">data</span>.<span style="color:#268bd2">token</span>);
@@ -804,46 +756,49 @@ if (!doNotTrack) {
             } <span style="color:#859900">catch</span> (<span style="color:#268bd2">Exception</span> <span style="color:#268bd2">e</span>) {
             }
         }
-    }</code></pre></div>
-<p>ActivityThread 响应 Binder 驱动发送来的消息，仍然通过类型为<code>H</code>的<code>mH</code>处理消息，处理消息的方法就是<code>handleServiceArgs</code>。在方法内，回调了 Service 的<code>onStartCommand</code>方法，并且向 ActivityManagerService 发送消息取消了延时操作。</p>
-
+    }
+</code></pre></div><p>ActivityThread 响应 Binder 驱动发送来的消息，仍然通过类型为<code>H</code>的<code>mH</code>处理消息，处理消息的方法就是<code>handleServiceArgs</code>。在方法内，回调了 Service 的<code>onStartCommand</code>方法，并且向 ActivityManagerService 发送消息取消了延时操作。</p>
 <p>至此，Service 在新进程中的启动过程就分析结束了，从调用者的<code>startService</code>方法，再到 ActivityManagerService 的处理，再到 Service 进程的<code>onCreate</code>和<code>onStartCommand</code>方法。</p>
-
 <h2 id="参考">参考</h2>
-
 <ol>
 <li>Android 6.0 源码</li>
 <li>《Android 系统源代码情景分析》</li>
 <li><a href="http://gityuan.com/2016/03/06/start-service/">http://gityuan.com/2016/03/06/start-service/</a></li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/android-start-service/">Android 6.0 Service 启动过程源码分析（一）</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -870,45 +825,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/android/android-statemachine/" data-toggle="tooltip" data-placement="top" title="Android StateMachine 状态机分析">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/android/android-change-skin-by-plugin/" data-toggle="tooltip" data-placement="top" title="Android 插件换肤原理及源码分析">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/android/android-statemachine/" data-toggle="tooltip" data-placement="top" title="Android StateMachine 状态机分析">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/android/android-change-skin-by-plugin/" data-toggle="tooltip" data-placement="top" title="Android 插件换肤原理及源码分析">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -917,6 +859,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -959,25 +903,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -986,66 +924,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

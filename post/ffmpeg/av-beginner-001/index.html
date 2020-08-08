@@ -1,82 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>【音视频连载-001】基础学习篇- SDL 介绍以及工程配置-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</title>
   <meta property="og:title" content="【音视频连载-001】基础学习篇- SDL 介绍以及工程配置" />
   <meta name="twitter:title" content="【音视频连载-001】基础学习篇- SDL 介绍以及工程配置" />
 
   <meta name="description" content="技术开发故事会连载
-
 这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。
-
 SDL 简介
-
 SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。
-
 SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件的低级别访问接口，我们利用这些接口就能在不同系统上播放出音频、视频内容，而无需懂得系统特定的音视频接口。
-
 这种跨平台特性和 OpenGL 是一样的，差别在与 OpenGL 是真·跨平台，它是 Khronos Group 组织开发维护的一个接口规范，具体的实现是由驱动厂商完成。而 SDL 是把要兼容平台的相关接口都给封装好了，然后才对外提供统一的接口。
-
 由此可见，高下立判。一个跨平台是写了接口就行，不管实现；另一个是写好了实现，才能跨平台（貌似跑题了）。
-
 由于 SDL 的跨平台特性，在后续学习 FFmpeg 时就可以利用 SDL 进行音视频的播放操作，而不用像在 Android 平台上搞 FFmpeg 还得编译 so、写 JNI 、写界面那么麻烦，另外 ffplay 源码里面也是用的 SDL 进行播放的，可以从中进行借鉴。">
   <meta property="og:description" content="技术开发故事会连载
-
 这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。
-
 SDL 简介
-
 SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。
-
 SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件的低级别访问接口，我们利用这些接口就能在不同系统上播放出音频、视频内容，而无需懂得系统特定的音视频接口。
-
 这种跨平台特性和 OpenGL 是一样的，差别在与 OpenGL 是真·跨平台，它是 Khronos Group 组织开发维护的一个接口规范，具体的实现是由驱动厂商完成。而 SDL 是把要兼容平台的相关接口都给封装好了，然后才对外提供统一的接口。
-
 由此可见，高下立判。一个跨平台是写了接口就行，不管实现；另一个是写好了实现，才能跨平台（貌似跑题了）。
-
 由于 SDL 的跨平台特性，在后续学习 FFmpeg 时就可以利用 SDL 进行音视频的播放操作，而不用像在 Android 平台上搞 FFmpeg 还得编译 so、写 JNI 、写界面那么麻烦，另外 ffplay 源码里面也是用的 SDL 进行播放的，可以从中进行借鉴。">
   <meta name="twitter:description" content="技术开发故事会连载
-
 这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。
-
 SDL 简介
-
 SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。
-
-SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件 …">
+SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件的低级别 …">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/ffmpeg/av-beginner-001/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/ffmpeg/av-beginner-001/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -91,11 +70,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -103,9 +94,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -168,6 +157,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -184,21 +176,24 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
                   
-                  
+                     <h1>【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</h1>
+                     
                     <span class="post-meta">
-  
-    Posted on February 26, 2020
-  
+  Posted on February 26, 2020
   
 </span>
 
 
+                    
+                  
                   
               </div>
             </div>
@@ -207,137 +202,85 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</h1>
+                <h1 align="center">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on February 26, 2020
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/sdl/">SDL</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-          
-            
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
 
-          <p><a href="https://mp.weixin.qq.com/s/8ob0zrHs9_2pmQTOHXPfjg">技术开发故事会连载</a></p>
 
+
+        
+      <div>
+          
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://www.glumes.com/tags/sdl/">SDL</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
+        
+        <p><a href="https://mp.weixin.qq.com/s/8ob0zrHs9_2pmQTOHXPfjg">技术开发故事会连载</a></p>
 <p>这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。</p>
-
 <h3 id="sdl-简介">SDL 简介</h3>
-
 <p>SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。</p>
-
 <p>SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件的低级别访问接口，我们利用这些接口就能在不同系统上播放出音频、视频内容，而无需懂得系统特定的音视频接口。</p>
-
 <p>这种跨平台特性和 OpenGL 是一样的，差别在与 OpenGL 是真·跨平台，它是 Khronos Group 组织开发维护的一个接口规范，具体的实现是由驱动厂商完成。而 SDL 是把要兼容平台的相关接口都给封装好了，然后才对外提供统一的接口。</p>
-
 <p>由此可见，高下立判。一个跨平台是写了接口就行，不管实现；另一个是写好了实现，才能跨平台（貌似跑题了）。</p>
-
 <p>由于 SDL 的跨平台特性，在后续学习 FFmpeg 时就可以利用 SDL 进行音视频的播放操作，而不用像在 Android 平台上搞 FFmpeg 还得编译 so、写 JNI 、写界面那么麻烦，另外 ffplay 源码里面也是用的 SDL 进行播放的，可以从中进行借鉴。</p>
-
 <h3 id="sdl-下载安装">SDL 下载安装</h3>
-
 <p>在 Mac 上下载 SDL 很简单，直接</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">brew install sdl2</code></pre></div>
-<p>注意，这里下载的是 SDL 2.0 版本，如果用如下的命令</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">brew install sdl</code></pre></div>
-<p>下载的就是 SDL 1.0 版本了，区别就是版本后面数字 <code>2</code> 的后缀。</p>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">brew install sdl2
+</code></pre></div><p>注意，这里下载的是 SDL 2.0 版本，如果用如下的命令</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">brew install sdl
+</code></pre></div><p>下载的就是 SDL 1.0 版本了，区别就是版本后面数字 <code>2</code> 的后缀。</p>
 <p>采用最新的 2.0 ，我当前使用的版本号就是 <strong>2.0.10</strong> 。</p>
-
 <p>如果是 Windows 系统，参考下其他文章的下载配置吧，没有电脑也没办法了。</p>
-
 <p>SDL 下载之后位于 MAC 系统的如下目录，这个目录后续会用到的。</p>
-
 <blockquote>
 <p>/usr/local/Cellar/sdl2/2.0.10</p>
 </blockquote>
-
 <h3 id="clion-新建工程">CLion 新建工程</h3>
-
 <p>接下来就开始打开 CLion ，新建一个 C++ 工程。</p>
-
 <p>这里用到 CLion 是因为它确实好用，自动补全、代码提示、断点调试等功能非常好用，只是没有社区免费版的，有 30 天的免费试用期，之后就得靠激活码激活了。</p>
-
 <p>好在是用 CMake 进行编译的，如果下载了工程源码，并且配置好了 CMake 的关联库和头文件，直接用 CMake 命令行也可以进行编译的，这个后面会讲到。</p>
-
 <h3 id="c-工程关联-sdl-库">C++ 工程关联 SDL 库</h3>
-
 <p>接下来就是在 C++ 工程中关联 SDL 库，便于在工程中引用 SDL 相关头文件。</p>
-
 <p>之前提到 SDL 的安装路径如下：</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/usr/local/Cellar/sdl2/2.0.10</code></pre></div>
-<p>该目录如下图：</p>
-
-<p><img src="https://images.xiaozhuanlan.com/photo/2020/650c10feacc111f9a09d873711bdf0cb.png" alt="" /></p>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/usr/local/Cellar/sdl2/2.0.10
+</code></pre></div><p>该目录如下图：</p>
+<p><img src="https://images.xiaozhuanlan.com/photo/2020/650c10feacc111f9a09d873711bdf0cb.png" alt=""></p>
 <p>其中 include 就是头文件的路径，lib 就是库的路径。</p>
-
 <p>这里要用到 <code>include_directories</code> 和 <code>link_directories</code> 两个命令。</p>
-
 <p>其中：</p>
-
 <blockquote>
 <p><code>include_directories</code> 是将头文件所在文件夹添加在搜索路径中，这样就能通过 <code>include</code> 去加载头文件了。</p>
-
+</blockquote>
+<blockquote>
 <p><code>link_directories</code> 是将库所在的文件夹添加在路径中去，这样在编译时就能链接到这个库。</p>
 </blockquote>
-
 <p>具体代码如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic"># 声明一个变量 SDL_DIR 为 SDL 安装路径
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">set</span>(<span style="color:#268bd2">SDL_DIR</span> <span style="color:#2aa198">&#34;/usr/local/Cellar/sdl2/2.0.10&#34;</span>)
@@ -345,26 +288,17 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">include_directories</span>(${<span style="color:#268bd2">SDL_DIR</span>}/<span style="color:#268bd2">include</span>)
 <span style="color:#93a1a1;font-style:italic"># 设置要关联的库的路径
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">link_directories</span>(${<span style="color:#268bd2">SDL_DIR</span>}/<span style="color:#268bd2">lib</span>)
-</code></pre></div>
-<p>代码中声明了一个变量 <code>SDL_DIR</code> 作为安装路径，如果你的系统上路径有所不同，只需要修改路径就行了。</p>
-
+</code></pre></div><p>代码中声明了一个变量 <code>SDL_DIR</code> 作为安装路径，如果你的系统上路径有所不同，只需要修改路径就行了。</p>
 <blockquote>
 <p>在 MAC 上也可以把路径设置成 <code>/usr/local</code>，所有的库安装时在这个目录的 <code>lib</code> 和 <code>include</code> 目录下也有一份索引。</p>
 </blockquote>
-
 <p>最后将我们要编译的程序关联上 SDL 这个库。</p>
-
 <p>你可以通过 <code>link_directories</code> 命令将很多库所在文件夹都添加到路径中，但是只有 <code>target_link_libraries</code> 命令才会最终决定关联什么库，如果你添加的文件夹路径没有对应库的话，反而要报错的。</p>
-
 <p>实现代码如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">target_link_libraries</span>(<span style="color:#268bd2">av</span>-<span style="color:#268bd2">beginner</span> <span style="color:#268bd2">SDL2</span>)
-</code></pre></div>
-<p><code>target_link_libraries</code> 方法会优先链接动态库，也可以显示指定动态库或者静态库。MAC 上动态库的后缀是 <code>dylib</code> 。在上面的图片可以看到 <code>libSDL2.dylib</code> 其实是一个索引，真正的库是 <code>libSDL2-2.0.0.dylib</code>，索引忽略了它的版本号。</p>
-
+</code></pre></div><p><code>target_link_libraries</code> 方法会优先链接动态库，也可以显示指定动态库或者静态库。MAC 上动态库的后缀是 <code>dylib</code> 。在上面的图片可以看到 <code>libSDL2.dylib</code> 其实是一个索引，真正的库是 <code>libSDL2-2.0.0.dylib</code>，索引忽略了它的版本号。</p>
 <p>完成了 SDL 库的关联，就可以开始真正编写代码了。</p>
-
 <h3 id="代码实践">代码实践</h3>
-
 <p>代码实践主要是验证我们的环境配置有没有问题，运行一个 SDL 函数来试试。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;iostream&gt;</span><span style="color:#93a1a1;font-style:italic">
 </span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;SDL2/SDL.h&gt;</span><span style="color:#93a1a1;font-style:italic">
@@ -375,90 +309,76 @@ if (!doNotTrack) {
     <span style="color:#268bd2">SDL_Init</span>(<span style="color:#268bd2">SDL_INIT_EVERYTHING</span>);
     <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
 }
-</code></pre></div>
-<p><code>SDL_Init</code> 是 SDL 的初始化函数，可以根据所需功能选择性的初始化也可以全部初始化。</p>
-
+</code></pre></div><p><code>SDL_Init</code> 是 SDL 的初始化函数，可以根据所需功能选择性的初始化也可以全部初始化。</p>
 <p>如果程序正常输出并且正常退出，那么说明环境配置 OK 了，后面就可以进行功能开发了。</p>
-
 <h3 id="总结">总结</h3>
-
 <p>以上就是音视频基础学习连载的 <code>001</code> 篇。</p>
-
 <p>具体代码见仓库：</p>
-
 <blockquote>
 <p><a href="https://github.com/glumes/av-beginner">https://github.com/glumes/av-beginner</a></p>
 </blockquote>
-
 <p>本篇文章对应的提交 <code>tag</code> 为 <code>av-beginner-001</code>，可切换至对应源码查看。</p>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
-        
-          
-
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/opengl/run-learnopengl-code-on-xcode/" data-toggle="tooltip" data-placement="top" title="LearnOpenGL 源码在 MAC 上的编译与调试">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/ffmpeg/av-beginner-002/" data-toggle="tooltip" data-placement="top" title="【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
         
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
-        
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/ffmpeg/av-beginner-001/">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</a>
+
+                
+
+                
+
 
         
-          
-
         
-  
-      </div>
-    
-    
+        
+      </article>
+
+      
+        
+
+      
+
+      
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://www.glumes.com/post/opengl/run-learnopengl-code-on-xcode/" data-toggle="tooltip" data-placement="top" title="LearnOpenGL 源码在 MAC 上的编译与调试">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/ffmpeg/av-beginner-002/" data-toggle="tooltip" data-placement="top" title="【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
+
+      
+        
+      
+
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -467,6 +387,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -509,25 +431,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -536,66 +452,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

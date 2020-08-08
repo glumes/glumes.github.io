@@ -1,52 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android Binder Summary-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>Android Binder Summary</title>
   <meta property="og:title" content="Android Binder Summary" />
   <meta name="twitter:title" content="Android Binder Summary" />
 
   <meta name="description" content="Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。
-
 它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 /dev/binder。">
   <meta property="og:description" content="Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。
-
 它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 /dev/binder。">
   <meta name="twitter:description" content="Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。
-
 它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 /dev/binder。">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/android-binder-summary/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/android-binder-summary/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -61,11 +55,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -73,9 +79,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -138,6 +142,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -150,15 +157,13 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="posts-heading">
-              <h1>Android Binder Summary</h1>
+                <h1 align="center">Android Binder Summary</h1>
                 
                 
             </div>
@@ -166,89 +171,66 @@ if (!doNotTrack) {
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#android-应用层面的-binder">Android 应用层面的 Binder</a></li>
-<li><a href="#binder-框架">Binder 框架</a>
-<ul>
-<li><a href="#服务端接口">服务端接口</a></li>
-<li><a href="#binder-驱动">Binder 驱动</a></li>
-<li><a href="#客户端接口">客户端接口</a></li>
-</ul></li>
-<li><a href="#小结">小结</a>
-<ul>
-<li><a href="#注意事项">注意事项：</a></li>
-</ul></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#android-应用层面的-binder">Android 应用层面的 Binder</a></li>
+    <li><a href="#binder-框架">Binder 框架</a>
+      <ul>
+        <li><a href="#服务端接口">服务端接口</a></li>
+        <li><a href="#binder-驱动">Binder 驱动</a></li>
+        <li><a href="#客户端接口">客户端接口</a></li>
+      </ul>
+    </li>
+    <li><a href="#小结">小结</a>
+      <ul>
+        <li><a href="#注意事项">注意事项：</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。</p>
-
+        
+        <p>Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。</p>
 <p>它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 <code>/dev/binder</code>。</p>
-
 <h2 id="android-应用层面的-binder">Android 应用层面的 Binder</h2>
-
 <p>从 Android 的应用层面来说，Binder 是客户端和服务端进行通信的媒介，当 bindService 的时候，服务端会返回一个包含服务端业务调用的 Binder 对象，通过这个 Binder 对象，客户端就可以获取服务端提供的服务或者数据。</p>
-
 <p>比如，我们在写一个无须跨进程的本地服务 LocalService 时，需要在 Service 定义一个类继承自 Binder ，然后在 onBind() 方法中返回该 Binder 对象。这样在 <code>ServiceConnection</code> 接口的 onServiceConnection 方法中就会收到该 Binder 对象，通过该 Binder 对象就可以执行 LocalService 中的公共方法。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">onServiceConnected</span>(<span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">componentName</span>, <span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">iBinder</span>) {
        <span style="color:#268bd2">mLocalBinder</span> = (<span style="color:#268bd2">LocalService</span>.<span style="color:#268bd2">LocalBinder</span>) <span style="color:#268bd2">iBinder</span>;
-}</code></pre></div>
-<p>那么 onServiceConnection 是如何收到该 Binder 对象的呢？这个就是由 ActivityManagerService 来完成的了。AMS 在启动 Service 的过程中，就会回调
+}
+</code></pre></div><p>那么 onServiceConnection 是如何收到该 Binder 对象的呢？这个就是由 ActivityManagerService 来完成的了。AMS 在启动 Service 的过程中，就会回调
 onServiceConnection 方法，其中的 <code>IBinder</code> 参数就是 Service 的 Binder 引用。由于绑定的是无须跨进程的本地服务 LocalService ，那么返回的 Binder 也就是 Service 的 <code>Binder本地对象</code>， 执行的方法也是在主线程中了。</p>
-
 <p>而当 Service 组件是一个跨进程的 RemoteService 时，在 onServiceConnected 方法中再如上代码所示的调用返回的 IBinder 对象，则会报如下的转型错误：</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">java</span>.<span style="color:#268bd2">lang</span>.<span style="color:#268bd2">ClassCastException</span>: <span style="color:#268bd2">android</span>.<span style="color:#268bd2">os</span>.<span style="color:#268bd2">BinderProxy</span> <span style="color:#268bd2">cannot</span> <span style="color:#268bd2">be</span> <span style="color:#268bd2">cast</span> <span style="color:#268bd2">to</span> <span style="color:#268bd2">com</span>.<span style="color:#268bd2">glumes</span>.<span style="color:#268bd2">ipc_binder</span>.<span style="color:#268bd2">service</span>.<span style="color:#268bd2">LocalService$LocalBinder</span></code></pre></div>
-<p>这是因为 RemoteService 在另外的进程中，而<code>不同的进程内存资源是不能共享</code>的，服务端不能将自己的 Binder 本地对象返回过去，只能返回一个 <code>代理对象 Binder</code> ，客户端 Client 通过这个代理对象 Binder 来调用 RemoteService 的相关方法。这个代理对象的类型就是 <code>BinderProxy</code>。</p>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">java</span>.<span style="color:#268bd2">lang</span>.<span style="color:#268bd2">ClassCastException</span>: <span style="color:#268bd2">android</span>.<span style="color:#268bd2">os</span>.<span style="color:#268bd2">BinderProxy</span> <span style="color:#268bd2">cannot</span> <span style="color:#268bd2">be</span> <span style="color:#268bd2">cast</span> <span style="color:#268bd2">to</span> <span style="color:#268bd2">com</span>.<span style="color:#268bd2">glumes</span>.<span style="color:#268bd2">ipc_binder</span>.<span style="color:#268bd2">service</span>.<span style="color:#268bd2">LocalService$LocalBinder</span>
+</code></pre></div><p>这是因为 RemoteService 在另外的进程中，而<code>不同的进程内存资源是不能共享</code>的，服务端不能将自己的 Binder 本地对象返回过去，只能返回一个 <code>代理对象 Binder</code> ，客户端 Client 通过这个代理对象 Binder 来调用 RemoteService 的相关方法。这个代理对象的类型就是 <code>BinderProxy</code>。</p>
 <p>在 onServiceConnection 方法中通过 <code>asInterface</code> 方法来将 Service 返回的代理对象 Binder 转换成代理对象 Proxy，其中，Proxy 持有 Binder 的引用，其变量名为 <code>mRemote</code>。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">onServiceConnected</span>(<span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">componentName</span>, <span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">iBinder</span>) {
             <span style="color:#93a1a1;font-style:italic">// ActivityManagerService 在 bindService 的过程中会回调该方法，将 Service 的 Binder 对象传回来
@@ -256,125 +238,104 @@ onServiceConnection 方法，其中的 <code>IBinder</code> 参数就是 Service
 </span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#93a1a1;font-style:italic">// 如果在同一进程，返回的是本地对象 Binder 
 </span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#93a1a1;font-style:italic">// 如果不在同一进程，返回的是代理对象 Binder
 </span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">mService</span> = <span style="color:#268bd2">IBookManager</span>.<span style="color:#268bd2">Stub</span>.<span style="color:#268bd2">asInterface</span>(<span style="color:#268bd2">iBinder</span>);
-}</code></pre></div>
-<p>此时，Client 调用 RemoteService 的方法就是通过跨进程的方式了。而两个进程之间的通信就是通过 Binder 驱动来完成的。这是一个类似 <code>U 型</code> 的结构。Client 和 Server 分别在 <code>U 型</code> 的两头，而 Binder 驱动则在 <code>U 型</code> 的底部连接两者。</p>
-
+}
+</code></pre></div><p>此时，Client 调用 RemoteService 的方法就是通过跨进程的方式了。而两个进程之间的通信就是通过 Binder 驱动来完成的。这是一个类似 <code>U 型</code> 的结构。Client 和 Server 分别在 <code>U 型</code> 的两头，而 Binder 驱动则在 <code>U 型</code> 的底部连接两者。</p>
 <p>盗图一张，如下所示：</p>
-
-<figure><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-binder_ipc.png" alt="binder_ipc"><figcaption>binder_ipc</figcaption></figure>
-
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-binder_ipc.png" alt="binder_ipc"></p>
 <h2 id="binder-框架">Binder 框架</h2>
-
 <p>所以，当进行跨进程通信时，Binder 就可以看作是一种架构，这种架构提供了 <code>服务端接口</code>、<code>Binder 驱动</code>、<code>客户端接口</code> 三个模块，如下图所示：</p>
-
-<figure><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-binder_kuangjia.png" alt="binder_kuangjia"><figcaption>binder_kuangjia</figcaption></figure>
-
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-binder_kuangjia.png" alt="binder_kuangjia"></p>
 <h3 id="服务端接口">服务端接口</h3>
-
 <p>从 Java 层面来看，一个 Binder 服务端实际上就是一个 Binder 类的对象，该对象一旦创建，内部就启动一个隐藏线程。该线程接下来会接收 Binder 驱动发送的消息，收到消息后，会执行 Binder 对象中的 onTransact 函数，并按照该函数的参数执行不同的服务代码。因此，要实现一个 Binder 服务，就必须重载 onTransact 方法。</p>
-
 <h3 id="binder-驱动">Binder 驱动</h3>
-
 <p>任意一个服务端 Binder 对象被创建时，同时会在 Binder 驱动中创建一个 mRemote 对象，该对象的类型也是 Binder 类。客户端要访问远程服务时，都是通过 mRemote 对象。</p>
-
 <p>mRemote 对象的 transact 方法最终会调用一个 <code>native</code>的 <code>transactNative</code>方法，将数据写入 Binder 驱动，并由驱动去完成底层的通信过程。</p>
-
 <h3 id="客户端接口">客户端接口</h3>
-
 <p>客户端想要访问远程服务，必须获取远程服务在 Binder 驱动中对应的 mRemote 引用。获得该 mRemote 对象后，就可以调用其 transact 方法，而在 Binder 驱动中，mRemote 对象也重载了 transact 方法，重载内容主要包括以下几项：</p>
-
 <ul>
 <li>以线程间通信的模式，向服务端发送客户端传递过来的参数。</li>
 <li>挂起当前线程，当前线程正是客户端线程，并等待服务端线程执行完指定服务函数后通知。</li>
 <li>接收到服务端线程的通知，然后继续执行客户端线程，并返回客户端代码区。</li>
 </ul>
-
 <p>而客户端获取远程服务在 Binder 驱动中对应的 mRemote 引用，也是在 onServiceConnection 方法中得到的。</p>
-
 <p>onServiceConnection 的方法原型如下，由系统回调该方法，其中的参数 iBinder 就是 Service 的 Binder 代理对象。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">onServiceConnected</span>(<span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">componentName</span>, <span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">iBinder</span>) {</code></pre></div>
-<p>而在 onServiceConnection 方法内执行 <code>asInterface</code> 方法，返回的内部代理类 Proxy 。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">onServiceConnected</span>(<span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">componentName</span>, <span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">iBinder</span>) {
+</code></pre></div><p>而在 onServiceConnection 方法内执行 <code>asInterface</code> 方法，返回的内部代理类 Proxy 。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">// asInterface 方法原型为，其实参数 obj 为 onServiceConnected 方法的参数 iBinder 。
-</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#268bd2">IBookManager</span> <span style="color:#268bd2">asInterface</span>(<span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">obj</span>){</code></pre></div>
-<p>返回的内部代理类 Proxy 构造方法如下，其函数调用都是通过该 mRemote 对象的 <code>transact</code> 方法来完成的，此 mRemote 对象就是远程服务在 Binder 驱动中对应的 mRemote 引用，它的类型就是 <code>BinderProxy</code>，而 Proxy 类只是对 mRemote 对象组合了一下而已。</p>
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#268bd2">IBookManager</span> <span style="color:#268bd2">asInterface</span>(<span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">obj</span>){
+</code></pre></div><p>返回的内部代理类 Proxy 构造方法如下，其函数调用都是通过该 mRemote 对象的 <code>transact</code> 方法来完成的，此 mRemote 对象就是远程服务在 Binder 驱动中对应的 mRemote 引用，它的类型就是 <code>BinderProxy</code>，而 Proxy 类只是对 mRemote 对象组合了一下而已。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">   <span style="color:#859900">private</span> <span style="color:#859900">static</span> <span style="color:#859900">class</span> <span style="color:#cb4b16">Proxy</span> <span style="color:#859900">implements</span> <span style="color:#268bd2">IBookManager</span>{
         <span style="color:#859900">private</span> <span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">mRemote</span> ;
         <span style="color:#859900">public</span> <span style="color:#268bd2">Proxy</span>(<span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">remote</span>) {
             <span style="color:#268bd2">mRemote</span> = <span style="color:#268bd2">remote</span>;
-        }</code></pre></div>
-<p>事实上在跨进程的情况下，我们可以不需要使用 Proxy 对象，直接调用 onServiceConnection 方法中 iBinder 对象的 transact 方法也可以完成跨进程通信。</p>
-
+        }
+</code></pre></div><p>事实上在跨进程的情况下，我们可以不需要使用 Proxy 对象，直接调用 onServiceConnection 方法中 iBinder 对象的 transact 方法也可以完成跨进程通信。</p>
 <h2 id="小结">小结</h2>
-
 <p>对上述内容简单的小结一下：</p>
-
 <ul>
 <li>Android 中的跨进程通信是一个 <code>U 型</code>的过程，由底层的 Binder 驱动来完成双方通信。</li>
 <li>客户端 Client 无法得到 Server 的 Binder 本地对象，onServiceConnected 方法返回的是一个 <code>BinderProxy</code> 类型的 Binder 代理对象。</li>
 <li>客户端 Client 通过 Binder 代理对象的 <code>transact</code> 方法调用 Binder 驱动，驱动再调用服务端 Server 的 Binder 本地对象的 <code>onTransact</code> 方法来执行对应的操作。</li>
 <li>如果服务端 Server 不需要再向客户端 Client 返回数据，则 IPC 调用结束。如需要返回数据，服务端 Server 再调用 Binder 驱动写入数据，客户端 Client 接收到对应数据，IPC 调用结束。</li>
 </ul>
-
 <p>附《Android艺术开发探索》图：
-<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-binder_note_art.png" alt="binder_note_art" /></p>
-
+<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-binder_note_art.png" alt="binder_note_art"></p>
 <h3 id="注意事项">注意事项：</h3>
-
 <ul>
 <li>所有可以在 Binder 中传输的接口都需要继承 IInterface 接口。</li>
 <li>客户端通过 Binder 代理对象发起远程请求时，当前线程会被挂起，所以不应该在 UI 线程中执行。</li>
 <li>另一进程的服务端 Binder 运行在 Binder 线程池中，无需再异步执行，所以 Binder 方法不管是否耗时都应该采用同步的方式去实现。</li>
 <li>AIDL 支持的数据类型：
-
-<ul>
-<li>基本数据类型（int，long，char，boolean，double）</li>
-<li>String 和 CharSequence 。</li>
-<li>List：只支持 ArrayList，里面每个元素都必须能够被 AIDL 支持。</li>
-<li>Map：只支持 HashMap，里面每个元素都必须被 AIDL 支持，包括 key 和 value 。</li>
-<li>Parcelable：所有实现了 Parcelable 接口的对象。</li>
-<li>AIDL ：所有的 AIDL 接口本身也可以在 AIDL 文件中使用。</li>
-</ul></li>
+*	基本数据类型（int，long，char，boolean，double）
+*	String 和 CharSequence 。
+*	List：只支持 ArrayList，里面每个元素都必须能够被 AIDL 支持。
+*	Map：只支持 HashMap，里面每个元素都必须被 AIDL 支持，包括 key 和 value 。
+*	Parcelable：所有实现了 Parcelable 接口的对象。
+*	AIDL ：所有的 AIDL 接口本身也可以在 AIDL 文件中使用。</li>
 </ul>
-
 <p>代码地址：
 <a href="https://github.com/glumes/BinderLearn">https://github.com/glumes/BinderLearn</a></p>
-
 <h2 id="参考">参考</h2>
-
 <ol>
 <li>《Android内核剖析》</li>
 <li>《Android开发艺术探索》</li>
 <li><a href="http://www.codeceo.com/article/aidl-android-binder.html">http://www.codeceo.com/article/aidl-android-binder.html</a></li>
 <li><a href="http://weishu.me/2016/01/12/binder-index-for-newer/">http://weishu.me/2016/01/12/binder-index-for-newer/</a></li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/android-binder-summary/">Android Binder Summary</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -399,45 +360,32 @@ onServiceConnection 方法，其中的 <code>IBinder</code> 参数就是 Service
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/android/android-dagger-use/" data-toggle="tooltip" data-placement="top" title="Dagger2 在 Android 中的使用">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/android/android-material-design-summary-1/" data-toggle="tooltip" data-placement="top" title="Android Material Desing 控件小结-1">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/android/android-dagger-use/" data-toggle="tooltip" data-placement="top" title="Dagger2 在 Android 中的使用">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/android/android-material-design-summary-1/" data-toggle="tooltip" data-placement="top" title="Android Material Desing 控件小结-1">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -446,6 +394,8 @@ onServiceConnection 方法，其中的 <code>IBinder</code> 参数就是 Service
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -488,25 +438,19 @@ onServiceConnection 方法，其中的 <code>IBinder</code> 参数就是 Service
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -515,66 +459,47 @@ onServiceConnection 方法，其中的 <code>IBinder</code> 参数就是 Service
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

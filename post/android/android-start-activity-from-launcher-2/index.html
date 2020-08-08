@@ -1,52 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android 6.0 Launcher 启动 Activity 过程源码分析（二）-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>Android 6.0 Launcher 启动 Activity 过程源码分析（二）</title>
   <meta property="og:title" content="Android 6.0 Launcher 启动 Activity 过程源码分析（二）" />
   <meta name="twitter:title" content="Android 6.0 Launcher 启动 Activity 过程源码分析（二）" />
 
   <meta name="description" content="在 Android 6.0 Launcher 启动 Activity 过程源码分析（一） 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。
-
 通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。">
   <meta property="og:description" content="在 Android 6.0 Launcher 启动 Activity 过程源码分析（一） 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。
-
 通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。">
   <meta name="twitter:description" content="在 Android 6.0 Launcher 启动 Activity 过程源码分析（一） 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。
-
-通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最 …">
+通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终 …">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/android-start-activity-from-launcher-2/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/android-start-activity-from-launcher-2/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -61,11 +55,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -73,9 +79,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -138,6 +142,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -150,105 +157,74 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Android 6.0 Launcher 启动 Activity 过程源码分析（二）</h1>
+                <h1 align="center">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on December 22, 2017
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
-              
-                  <a href="https://www.glumes.com/tags/framework/">Framework</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+            
+                <a href="https://www.glumes.com/tags/framework/">Framework</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#activitymanagerservice-类的-startactivity-方法">ActivityManagerService 类的 startActivity()方法</a></li>
-<li><a href="#activitymanagerservice-类的-startactivityasuser-方法">ActivityManagerService 类的 startActivityAsUser()方法</a></li>
-<li><a href="#activitystacksupervisor-类的-startactivitymaywait-方法">ActivityStackSupervisor 类的 startActivityMayWait() 方法</a></li>
-<li><a href="#activitystacksupervisor-类的-startactivitylocked-方法">ActivityStackSupervisor 类的 startActivityLocked() 方法</a></li>
-<li><a href="#activitystacksupervisor-类的-startactivityuncheckedlocked-方法">ActivityStackSupervisor 类的 startActivityUncheckedLocked() 方法</a></li>
-<li><a href="#activitystack-类的-startactivitylocked-方法">ActivityStack 类的 startActivityLocked() 方法</a></li>
-<li><a href="#activitystacksupervisor-类的-resumetopactivitieslocked-方法">ActivityStackSupervisor 类的 resumeTopActivitiesLocked() 方法</a></li>
-<li><a href="#activitystack-类的-resumetopactivitylocked-方法">ActivityStack 类的 resumeTopActivityLocked() 方法</a></li>
-<li><a href="#activitystack-类的-resumetopactivityinnerlocked-方法">ActivityStack 类的 resumeTopActivityInnerLocked() 方法</a></li>
-</ul></li>
-<li><a href="#涉及到的其他类">涉及到的其他类</a></li>
-<li><a href="#参考">参考</a></li>
-<li><a href="#疑问">疑问</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#activitymanagerservice-类的-startactivity方法">ActivityManagerService 类的 startActivity()方法</a></li>
+        <li><a href="#activitymanagerservice-类的-startactivityasuser方法">ActivityManagerService 类的 startActivityAsUser()方法</a></li>
+        <li><a href="#activitystacksupervisor-类的-startactivitymaywait-方法">ActivityStackSupervisor 类的 startActivityMayWait() 方法</a></li>
+        <li><a href="#activitystacksupervisor-类的-startactivitylocked-方法">ActivityStackSupervisor 类的 startActivityLocked() 方法</a></li>
+        <li><a href="#activitystacksupervisor-类的-startactivityuncheckedlocked-方法">ActivityStackSupervisor 类的 startActivityUncheckedLocked() 方法</a></li>
+        <li><a href="#activitystack-类的-startactivitylocked-方法">ActivityStack 类的 startActivityLocked() 方法</a></li>
+        <li><a href="#activitystacksupervisor-类的-resumetopactivitieslocked-方法">ActivityStackSupervisor 类的 resumeTopActivitiesLocked() 方法</a></li>
+        <li><a href="#activitystack-类的-resumetopactivitylocked-方法">ActivityStack 类的 resumeTopActivityLocked() 方法</a></li>
+        <li><a href="#activitystack-类的-resumetopactivityinnerlocked-方法">ActivityStack 类的 resumeTopActivityInnerLocked() 方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#涉及到的其他类">涉及到的其他类</a></li>
+    <li><a href="#参考">参考</a></li>
+    <li><a href="#疑问">疑问</a></li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a> 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。</p>
-
+        
+        <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a> 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。</p>
 <p>通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。</p>
-
-<h3 id="activitymanagerservice-类的-startactivity-方法">ActivityManagerService 类的 startActivity()方法</h3>
+<h3 id="activitymanagerservice-类的-startactivity方法">ActivityManagerService 类的 startActivity()方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#268bd2">@Override</span>
     <span style="color:#859900">public</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startActivity</span>(<span style="color:#268bd2">IApplicationThread</span> <span style="color:#268bd2">caller</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">callingPackage</span>,
             <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">resultTo</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resultWho</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">requestCode</span>,
@@ -256,10 +232,9 @@ if (!doNotTrack) {
         <span style="color:#859900">return</span> <span style="color:#268bd2">startActivityAsUser</span>(<span style="color:#268bd2">caller</span>, <span style="color:#268bd2">callingPackage</span>, <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">resultTo</span>,
             <span style="color:#268bd2">resultWho</span>, <span style="color:#268bd2">requestCode</span>, <span style="color:#268bd2">startFlags</span>, <span style="color:#268bd2">profilerInfo</span>, <span style="color:#268bd2">options</span>,
             <span style="color:#268bd2">UserHandle</span>.<span style="color:#268bd2">getCallingUserId</span>());
-    }</code></pre></div>
-<p>显然，最后调用了 <code>startActivityAsUser</code> 方法：</p>
-
-<h3 id="activitymanagerservice-类的-startactivityasuser-方法">ActivityManagerService 类的 startActivityAsUser()方法</h3>
+    }
+</code></pre></div><p>显然，最后调用了 <code>startActivityAsUser</code> 方法：</p>
+<h3 id="activitymanagerservice-类的-startactivityasuser方法">ActivityManagerService 类的 startActivityAsUser()方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">@Override</span>
     <span style="color:#859900">public</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startActivityAsUser</span>(<span style="color:#268bd2">IApplicationThread</span> <span style="color:#268bd2">caller</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">callingPackage</span>,
             <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">resultTo</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resultWho</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">requestCode</span>,
@@ -272,11 +247,9 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">return</span> <span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">startActivityMayWait</span>(<span style="color:#268bd2">caller</span>, -<span style="color:#268bd2">1</span>, <span style="color:#268bd2">callingPackage</span>, <span style="color:#268bd2">intent</span>,
                 <span style="color:#268bd2">resolvedType</span>, <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#268bd2">resultTo</span>, <span style="color:#268bd2">resultWho</span>, <span style="color:#268bd2">requestCode</span>, <span style="color:#268bd2">startFlags</span>,
                 <span style="color:#268bd2">profilerInfo</span>, <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#268bd2">options</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#268bd2">userId</span>, <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#859900;font-weight:bold">null</span>);
-    }</code></pre></div>
-<p>在 <code>startActivityAsUser</code>先是执行了相关的验证过程，然后调用了类型为 <code>ActivityStackSupervisor</code>的<code>mStackSupervisor</code>的<code>startActivityMayWait()</code>方法。</p>
-
+    }
+</code></pre></div><p>在 <code>startActivityAsUser</code>先是执行了相关的验证过程，然后调用了类型为 <code>ActivityStackSupervisor</code>的<code>mStackSupervisor</code>的<code>startActivityMayWait()</code>方法。</p>
 <h3 id="activitystacksupervisor-类的-startactivitymaywait-方法">ActivityStackSupervisor 类的 startActivityMayWait() 方法</h3>
-
 <p>Android 中的 Activity 组件堆栈信息，也就是 Task，是用 <code>ActivityStack</code> 类管理的，而<code>ActivityStackSupervisor</code>则是一个管理所有的<code>ActivityStack</code>的类。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startActivityMayWait</span>(<span style="color:#268bd2">IApplicationThread</span> <span style="color:#268bd2">caller</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">callingUid</span>,
             <span style="color:#268bd2">String</span> <span style="color:#268bd2">callingPackage</span>, <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resolvedType</span>,
@@ -322,9 +295,8 @@ if (!doNotTrack) {
         }
         <span style="color:#93a1a1;font-style:italic">// 省略部分代码
 </span><span style="color:#93a1a1;font-style:italic"></span>        
-    }</code></pre></div>
-<p>首先会先调用<code>resolveActivity</code>函数，通过 PackageManagerService 解析 Intent 得到更多信息，返回<code>ActivityInfo</code>对象之后，便执行 <code>startActivityLocked</code>方法。</p>
-
+    }
+</code></pre></div><p>首先会先调用<code>resolveActivity</code>函数，通过 PackageManagerService 解析 Intent 得到更多信息，返回<code>ActivityInfo</code>对象之后，便执行 <code>startActivityLocked</code>方法。</p>
 <h3 id="activitystacksupervisor-类的-startactivitylocked-方法">ActivityStackSupervisor 类的 startActivityLocked() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startActivityLocked</span>(<span style="color:#268bd2">IApplicationThread</span> <span style="color:#268bd2">caller</span>,
             <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">ActivityInfo</span> <span style="color:#268bd2">aInfo</span>,
@@ -383,15 +355,11 @@ if (!doNotTrack) {
             }
         }
         <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
-    }</code></pre></div>
-<p>每一个应用程序进程都使用一个 <code>ProcessRecord</code>对象来描述，并且保存在 ActivityManagerService 内部。ActivityStackSupervisor 的 mService 变量指向了ActivityManagerService 。通过它的成员函数<code>getRecordForAppLocked</code>来获得参数<code>caller</code>对应的一个<code>ProcessRecord</code>对象<code>callerApp</code>。而参数<code>caller</code>指向的是 Launcher 组件所运行的应用程序进程的一个 ApplicationThread 对象，因此，<code>ProcessRecord</code>对象 <code>callerApp</code>实际上就指向了 Launcher 组件所运行的应用程序进程，接着得到这个应用程序进程的 PID  和 UID ，保存在参数<code>callingPid</code>和<code>callingUid</code>中。</p>
-
+    }
+</code></pre></div><p>每一个应用程序进程都使用一个 <code>ProcessRecord</code>对象来描述，并且保存在 ActivityManagerService 内部。ActivityStackSupervisor 的 mService 变量指向了ActivityManagerService 。通过它的成员函数<code>getRecordForAppLocked</code>来获得参数<code>caller</code>对应的一个<code>ProcessRecord</code>对象<code>callerApp</code>。而参数<code>caller</code>指向的是 Launcher 组件所运行的应用程序进程的一个 ApplicationThread 对象，因此，<code>ProcessRecord</code>对象 <code>callerApp</code>实际上就指向了 Launcher 组件所运行的应用程序进程，接着得到这个应用程序进程的 PID  和 UID ，保存在参数<code>callingPid</code>和<code>callingUid</code>中。</p>
 <p>ActivityStackSupervisor 变量内部有一个变量 mActivityDisplays，类型为<code>SparseArray&lt;ActivityDisplay&gt;</code>,而<code>ActivityDisplay</code>变量内部又持有一个<code>mStack</code>变量，类型为<code>ArrayList&lt;ActivityStack&gt;</code>，通过找到Activity 组件堆栈 <code>ActivityStack</code>，从而得到用来描述<code>Launcher</code>组件的<code>ActivityRecord</code>对象，保存在变量<code>sourceRecord</code>中，而由于 requestCode 为 -1 ，则 <code>resultRecord</code>继续为 null 。</p>
-
 <p>最后，创建了一个 ActivityRecord 对象<code>r</code>用来描述即将启动的 Activity 组件。</p>
-
 <p>现在，就已经得到请求启动 Activity 组件的 Launcher ActivityRecord 信息<code>sourceRecord</code>以及需要启动的 Activity 的组件信息<code>r</code>，下一步就执行<code>startActivityUncheckedLocked</code>操作。</p>
-
 <h3 id="activitystacksupervisor-类的-startactivityuncheckedlocked-方法">ActivityStackSupervisor 类的 startActivityUncheckedLocked() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startActivityUncheckedLocked</span>(<span style="color:#859900">final</span> <span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">r</span>, <span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">sourceRecord</span>,
             <span style="color:#268bd2">IVoiceInteractionSession</span> <span style="color:#268bd2">voiceSession</span>, <span style="color:#268bd2">IVoiceInteractor</span> <span style="color:#268bd2">voiceInteractor</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startFlags</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">doResume</span>, <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">options</span>, <span style="color:#268bd2">TaskRecord</span> <span style="color:#268bd2">inTask</span>) {
@@ -491,13 +459,10 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">mService</span>.<span style="color:#268bd2">setFocusedActivityLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#2aa198">&#34;startedActivity&#34;</span>);
         }
         <span style="color:#859900">return</span> <span style="color:#268bd2">ActivityManager</span>.<span style="color:#268bd2">START_SUCCESS</span>;
-}</code></pre></div>
-<p>检查 launchFlags 的 <code>Intent.Flag_ACTIVITY_NO_USER_ACTION</code> 是否等于 1 。如果等于 1，则表示目标 Activity 组件不是由用户手动启动的。如果目标 Activity 组件是由用户手动启动的，那么用来启动它的源 Activity 就会获得一个用户离开事件通知。</p>
-
+}
+</code></pre></div><p>检查 launchFlags 的 <code>Intent.Flag_ACTIVITY_NO_USER_ACTION</code> 是否等于 1 。如果等于 1，则表示目标 Activity 组件不是由用户手动启动的。如果目标 Activity 组件是由用户手动启动的，那么用来启动它的源 Activity 就会获得一个用户离开事件通知。</p>
 <p>由于是从 Launcher 启动 Activity 组件，则 <code>Flag_ACTIVITY_NO_USER_ACTION</code>等于 0 ，mUserLeaving 为 True ，表示后面要向 Launcher 组件发送一个用户离开事件通知。</p>
-
 <p>由于从 Launcher 启动的 Activity 运行在另一个 Task 中，则 addingToTask 为 <code>false</code> ，同时 <code>reuseTask</code>也是为 <code>null</code> 的，<code>inTask</code>为 <code>null</code>，并且 <code>r.resultTo</code>是一个 ActivityRecord 类型，由于 Activity 组件还没启动，也是为 <code>null</code>。所以，最上面的 if 判断成立，直接创建一个新的 Task 了。</p>
-
 <h3 id="activitystack-类的-startactivitylocked-方法">ActivityStack 类的 startActivityLocked() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">startActivityLocked</span>(<span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">r</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">newTask</span>,
             <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">doResume</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">keepCurTransition</span>, <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">options</span>) {
@@ -544,11 +509,9 @@ if (!doNotTrack) {
 <span style="color:#93a1a1;font-style:italic">// 将 ActivityRecord 添加到栈的方法
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">addActivityToTop</span>(<span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">r</span>) {
         <span style="color:#268bd2">addActivityAtIndex</span>(<span style="color:#268bd2">mActivities</span>.<span style="color:#268bd2">size</span>(), <span style="color:#268bd2">r</span>);
-}</code></pre></div>
-<p>在上一步中，已经通过 <code>r.setTask()</code>方法创建了一个新的 Task，并且 <code>newTask</code>变量为 <code>true</code> 。当 Activity 是在一个新的 Task 中启动时，需要将它放到 TaskRecord 的中，并且位于堆栈的最上方。</p>
-
+}
+</code></pre></div><p>在上一步中，已经通过 <code>r.setTask()</code>方法创建了一个新的 Task，并且 <code>newTask</code>变量为 <code>true</code> 。当 Activity 是在一个新的 Task 中启动时，需要将它放到 TaskRecord 的中，并且位于堆栈的最上方。</p>
 <p>当添加完之后，便继续执行 <code>resumeTopActivitiesLocked</code> 方法。</p>
-
 <h3 id="activitystacksupervisor-类的-resumetopactivitieslocked-方法">ActivityStackSupervisor 类的 resumeTopActivitiesLocked() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">resumeTopActivitiesLocked</span>(<span style="color:#268bd2">ActivityStack</span> <span style="color:#268bd2">targetStack</span>, <span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">target</span>,
             <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">targetOptions</span>) {
@@ -577,9 +540,8 @@ if (!doNotTrack) {
             }
         }
         <span style="color:#859900">return</span> <span style="color:#268bd2">result</span>;
-    }</code></pre></div>
-<p>ActivityStackSupervisor 类重载了两种形式的 <code>resumeTopActivitiesLocked</code>方法，主要就是将所有ActivityStack栈顶的ActivityRecord迁移到显示状态，都是调用 <code>ActivityStack</code>类的<code>resumeTopActivityLocked</code>方法，只不过参数略有不同了。</p>
-
+    }
+</code></pre></div><p>ActivityStackSupervisor 类重载了两种形式的 <code>resumeTopActivitiesLocked</code>方法，主要就是将所有ActivityStack栈顶的ActivityRecord迁移到显示状态，都是调用 <code>ActivityStack</code>类的<code>resumeTopActivityLocked</code>方法，只不过参数略有不同了。</p>
 <h3 id="activitystack-类的-resumetopactivitylocked-方法">ActivityStack 类的 resumeTopActivityLocked() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">resumeTopActivityLocked</span>(<span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">prev</span>, <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">options</span>) {
         <span style="color:#859900">if</span> (<span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">inResumeTopActivity</span>) {
@@ -600,9 +562,8 @@ if (!doNotTrack) {
             <span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">inResumeTopActivity</span> = <span style="color:#859900;font-weight:bold">false</span>;
         }
         <span style="color:#859900">return</span> <span style="color:#268bd2">result</span>;
-    }</code></pre></div>
-<p>在该方法内部最后调用了<code>resumeTopActivityInnerLocked</code>方法。</p>
-
+    }
+</code></pre></div><p>在该方法内部最后调用了<code>resumeTopActivityInnerLocked</code>方法。</p>
 <h3 id="activitystack-类的-resumetopactivityinnerlocked-方法">ActivityStack 类的 resumeTopActivityInnerLocked() 方法</h3>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">resumeTopActivityInnerLocked</span>(<span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">prev</span>, <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">options</span>) {
 		 <span style="color:#93a1a1;font-style:italic">// Find the first activity that is not finishing.
@@ -664,15 +625,12 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>			<span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">startSpecificActivityLocked</span>(<span style="color:#268bd2">next</span>, <span style="color:#859900;font-weight:bold">true</span>, <span style="color:#859900;font-weight:bold">true</span>);
 		}
 		
-    }</code></pre></div>
-<p>ActivityStack 类有三个成员变量：<code>mResumedActivity</code>、<code>mLastPausedActivity</code>、<code>mPausingActivity</code>，它们的类型均为 <code>ActivityRecord</code>，分别用来描述系统当前激活的 Activity 组件、上一次被中止的 Activity 组件，以及正在被中止的 Activity 组件。</p>
+    }
 
+</code></pre></div><p>ActivityStack 类有三个成员变量：<code>mResumedActivity</code>、<code>mLastPausedActivity</code>、<code>mPausingActivity</code>，它们的类型均为 <code>ActivityRecord</code>，分别用来描述系统当前激活的 Activity 组件、上一次被中止的 Activity 组件，以及正在被中止的 Activity 组件。</p>
 <p>而在<code>resumeTopActivityInnerLocked</code>方法中，待其的 Activity 的 ActivityRecord 已经位于栈顶了，需要将它运行到 <code>Resumed</code> 状态，而在这之前需要判断满足很多条件，比如当前所有的 Activity 组件要处于 <code>onPaused</code>状态，Launcher 组件要处于<code>onPaused</code>状态，否则会直接 return 退出了。</p>
-
 <p>当满足上面的条件时，最后就是判断待启动的 Activity 组件的应用程序进程是否创建，如果还没有，则通过<code>startSpecificActivityLocked</code>创建一个应用程序进程来启动 Activity 组件。</p>
-
 <h2 id="涉及到的其他类">涉及到的其他类</h2>
-
 <ul>
 <li>ActivityStack</li>
 <li>ActivityStackSupervisor</li>
@@ -681,46 +639,48 @@ if (!doNotTrack) {
 <li>ActivityInfo</li>
 <li>TaskRecord</li>
 </ul>
-
 <h2 id="参考">参考</h2>
-
 <p>1、 Android 6.0 源码
 2、《Android 系统源代码情景分析》
-3、<a href="http://duanqz.github.io/2016-07-29-Activity-LaunchProcess-Part1">http://duanqz.github.io/2016-07-29-Activity-LaunchProcess-Part1</a></p>
-
+3、http://duanqz.github.io/2016-07-29-Activity-LaunchProcess-Part1</p>
 <h2 id="疑问">疑问</h2>
-
 <ul>
 <li>Activity 的 堆栈 ActivityStack</li>
 </ul>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-2/">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -737,45 +697,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-1/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（一）">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-3/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（三）">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-1/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（一）">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-3/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（三）">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -784,6 +731,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -826,25 +775,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -853,66 +796,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

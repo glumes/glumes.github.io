@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>《OpenGL ES 3.x 游戏开发》光照系列之镜面光-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>《OpenGL ES 3.x 游戏开发》光照系列之镜面光</title>
   <meta property="og:title" content="《OpenGL ES 3.x 游戏开发》光照系列之镜面光" />
   <meta name="twitter:title" content="《OpenGL ES 3.x 游戏开发》光照系列之镜面光" />
 
@@ -14,33 +14,30 @@
   <meta property="og:description" content="学习笔记内容摘录">
   <meta name="twitter:description" content="学习笔记内容摘录">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/opengl/opengl-tutorial-specular-light/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/opengl/opengl-tutorial-specular-light/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -55,11 +52,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -67,9 +76,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -132,6 +139,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -148,26 +158,33 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>《OpenGL ES 3.x 游戏开发》光照系列之镜面光</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>《OpenGL ES 3.x 游戏开发》光照系列之镜面光</h1>
+                     
+                     
+                  
+                  
                   
                     
-                      <h2 class="post-subheading">学习笔记内容摘录</h2>
+                      <h2 align="center" class="post-subheading">学习笔记内容摘录</h2>
                     
                   
                   
                     <span class="post-meta">
-  
-    Posted on July 23, 2018
-  
+  Posted on July 23, 2018
   
 </span>
 
 
                   
+                
               </div>
             </div>
           </div>
@@ -175,127 +192,83 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>《OpenGL ES 3.x 游戏开发》光照系列之镜面光</h1>
+                <h1 align="center">《OpenGL ES 3.x 游戏开发》光照系列之镜面光</h1>
                 
                   
-                    <h2 class="post-subheading">学习笔记内容摘录</h2>
+                    <h2 align="center" class="post-subheading">学习笔记内容摘录</h2>
                   
                 
-                
-                  <span class="post-meta">
-  
-    Posted on July 23, 2018
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-          
-            
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
 
-          <p>在前面的文章中介绍了 OpenGL 的<a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/">环境光</a>和<a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/">散射光</a>，现在就是最后一个镜面光了。</p>
 
+
+        
+      <div>
+          
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
+        
+        <p>在前面的文章中介绍了 OpenGL 的<a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/">环境光</a>和<a href="https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/">散射光</a>，现在就是最后一个镜面光了。</p>
 <p>还是先理解一下什么是镜面光：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/specular_demo.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/specular_demo.png" alt=""></p>
 <p>就如同使用我们使用镜子反射太阳光一样，在现实世界中，当光滑表面被照射时会有方向很集中的反射光，这就是镜面光。</p>
-
 <p>与散射光最终强度仅依赖于入射光和被照射点法向量的夹角不同，镜面光的最终强度还依赖于观察者的位置，也就是说，如果从摄像机到被照射点的向量不在反射光方向集中的范围内，观察者将不会看到镜面光，就如上图所示。</p>
-
 <p>接下来就是镜面光的照射计算公式：</p>
-
 <blockquote>
 <p>镜面光照射结果 =</p>
-
+</blockquote>
+<blockquote>
 <p>$材质的反射系数 * 镜面光强度 * max（0，（cos（半向量与法向量的夹角）^{粗糙度}$）</p>
 </blockquote>
-
 <p>在实际开发中，镜面光照射结果分为两步进行：</p>
-
 <blockquote>
 <p>镜面光最终强度 =</p>
-
+</blockquote>
+<blockquote>
 <p>$镜面光强度 * max（0，（cos（半向量与法向量的夹角）^{粗糙度}$）</p>
-
+</blockquote>
+<blockquote>
 <p>镜面光照射结果 = 材质反射系数 * 镜面光最终强度</p>
 </blockquote>
-
 <p>其中：材质的反射系数实际指的就是物体被照射处的颜色，镜面光强度指的是镜面光中 RGB（红、绿、蓝）3 个色彩通道的强度。</p>
-
 <p>与计算散射光公式不同的是，计算余弦值时对应的角不再是入射角，而是<code>半向量</code>和法向量的夹角。其中，半向量指的是从被照射点到光源的向量与从被照射点到观察点向量的平均向量。</p>
-
 <p><code>半向量</code>的图示如下：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/specular_cal.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/specular_cal.png" alt=""></p>
 <p>其中，V 表示从被照射点到观察点的向量，N 为被照射点表面法向量，H 为半向量，L 为从被照射点到光源的向量。</p>
-
 <p>可以看到，向量 V 和向量 L 有共同交点 P ，所以它们在同一平面，而向量 H 是向量 V 和向量 L 的平均向量，所以向量 H 、V、L 共面，并且向量 H 和向量 V、L 的夹角相等。</p>
-
 <p>因此计算向量 H ，首先需要将向量 V 和向量 L 归一化，然后将归一化的向量 V 和 L 求和并再次归一化即可得到向量 H 。</p>
-
 <p>有了半向量 H 之后，计算其和法向量的余弦值就和在镜面光中提到的一样，进行点积就好了。</p>
-
 <p>除此之外，还有一个要考虑的就是物体的粗糙程度，物体越粗糙，镜面光面积越小，反之镜面光面积越大，这也挺符合现实世界的，毛毯的反射光肯定没有玻璃的反射光大。</p>
-
 <h2 id="实践">实践</h2>
-
 <p>加入镜面光对程序的影响主要还是在着色器代码上。</p>
-
 <p>对于片段着色器，依旧变化不大，主要的计算工作在顶点着色器，顶点着色器计算完最后镜面光照射强度之后，直接传递给片段着色器就好了。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl"><span style="color:#93a1a1;font-style:italic">#version 300 es</span>
 <span style="color:#859900">precision</span> <span style="color:#859900">mediump</span> <span style="color:#859900">float</span>;
@@ -310,8 +283,8 @@ if (!doNotTrack) {
    <span style="color:#859900">vec4</span> <span style="color:#268bd2">finalColor</span>=<span style="color:#859900">vec4</span>(<span style="color:#268bd2">color</span>,<span style="color:#2aa198;font-weight:bold">0</span>);
    <span style="color:#93a1a1;font-style:italic">//根据镜面光最终强度计算片元的最终颜色值</span>
    <span style="color:#268bd2">fragColor</span>=<span style="color:#268bd2">finalColor</span>*<span style="color:#268bd2">vDiffuse</span>;
-}</code></pre></div>
-<p>重点依旧是顶点着色器：</p>
+}
+</code></pre></div><p>重点依旧是顶点着色器：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl"><span style="color:#93a1a1;font-style:italic">#version 300 es</span>
 <span style="color:#859900">uniform</span> <span style="color:#268bd2">mat4</span> <span style="color:#268bd2">uMVPMatrix</span>; 	<span style="color:#93a1a1;font-style:italic">//总变换矩阵</span>
 <span style="color:#859900">uniform</span> <span style="color:#268bd2">mat4</span> <span style="color:#268bd2">uMMatrix</span>; 		<span style="color:#93a1a1;font-style:italic">//变换矩阵</span>
@@ -352,79 +325,70 @@ if (!doNotTrack) {
    <span style="color:#268bd2">pointLight</span>(<span style="color:#268bd2">normalize</span>(<span style="color:#268bd2">aNormal</span>), <span style="color:#268bd2">specularTemp</span>, <span style="color:#268bd2">uLightLocation</span>, <span style="color:#859900">vec4</span>(<span style="color:#2aa198;font-weight:bold">0.7</span>,<span style="color:#2aa198;font-weight:bold">0.7</span>,<span style="color:#2aa198;font-weight:bold">0.7</span>,<span style="color:#2aa198;font-weight:bold">1.0</span>));<span style="color:#93a1a1;font-style:italic">//计算镜面光</span>
    <span style="color:#268bd2">vSpecular</span>=<span style="color:#268bd2">specularTemp</span>;	<span style="color:#93a1a1;font-style:italic">//将最终镜面光强度传给片元着色器</span>
    <span style="color:#268bd2">vPosition</span> = <span style="color:#268bd2">aPosition</span>; 		<span style="color:#93a1a1;font-style:italic">//将顶点的位置传给片元着色器</span>
-}</code></pre></div>
-<p>在散射光，我们需要传递光源的位置，而在镜面光中，不仅仅是光源的位置，还需要把相机的位置传递给着色器代码用于计算。</p>
-
+}
+</code></pre></div><p>在散射光，我们需要传递光源的位置，而在镜面光中，不仅仅是光源的位置，还需要把相机的位置传递给着色器代码用于计算。</p>
 <p>在顶点着色器代码中，还是定义了一个函数 pointLight 用于计算镜面光照射强度。</p>
-
 <p>由于法向量的基于物体模型空间定义的，首先还是要将法向量转换到世界模型空间中。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl">  <span style="color:#859900">vec3</span> <span style="color:#268bd2">normalTarget</span>=<span style="color:#268bd2">aPosition</span>+<span style="color:#268bd2">normal</span>; 	<span style="color:#93a1a1;font-style:italic">//计算变换后的法向量</span>
-  <span style="color:#859900">vec3</span> <span style="color:#268bd2">newNormal</span>=(<span style="color:#268bd2">uMMatrix</span>*<span style="color:#859900">vec4</span>(<span style="color:#268bd2">normalTarget</span>,<span style="color:#2aa198;font-weight:bold">1</span>)).<span style="color:#268bd2">xyz</span>-(<span style="color:#268bd2">uMMatrix</span>*<span style="color:#859900">vec4</span>(<span style="color:#268bd2">aPosition</span>,<span style="color:#2aa198;font-weight:bold">1</span>)).<span style="color:#268bd2">xyz</span>;</code></pre></div>
-<p>其次将法向量归一化，然后计算物体表面的点到观察点相机的向量、计算物体表面的点到光源位置的向量，并将这两个向量也进行归一化。</p>
+  <span style="color:#859900">vec3</span> <span style="color:#268bd2">newNormal</span>=(<span style="color:#268bd2">uMMatrix</span>*<span style="color:#859900">vec4</span>(<span style="color:#268bd2">normalTarget</span>,<span style="color:#2aa198;font-weight:bold">1</span>)).<span style="color:#268bd2">xyz</span>-(<span style="color:#268bd2">uMMatrix</span>*<span style="color:#859900">vec4</span>(<span style="color:#268bd2">aPosition</span>,<span style="color:#2aa198;font-weight:bold">1</span>)).<span style="color:#268bd2">xyz</span>;
+</code></pre></div><p>其次将法向量归一化，然后计算物体表面的点到观察点相机的向量、计算物体表面的点到光源位置的向量，并将这两个向量也进行归一化。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl">  <span style="color:#268bd2">newNormal</span>=<span style="color:#268bd2">normalize</span>(<span style="color:#268bd2">newNormal</span>);  	<span style="color:#93a1a1;font-style:italic">//对法向量归一化</span>
   <span style="color:#93a1a1;font-style:italic">//计算从表面点到摄像机的向量</span>
   <span style="color:#859900">vec3</span> <span style="color:#268bd2">eye</span>= <span style="color:#268bd2">normalize</span>(<span style="color:#268bd2">uCamera</span>-(<span style="color:#268bd2">uMMatrix</span>*<span style="color:#859900">vec4</span>(<span style="color:#268bd2">aPosition</span>,<span style="color:#2aa198;font-weight:bold">1</span>)).<span style="color:#268bd2">xyz</span>);
   <span style="color:#93a1a1;font-style:italic">//计算从表面点到光源位置的向量vp</span>
   <span style="color:#859900">vec3</span> <span style="color:#268bd2">vp</span>= <span style="color:#268bd2">normalize</span>(<span style="color:#268bd2">lightLocation</span>-(<span style="color:#268bd2">uMMatrix</span>*<span style="color:#859900">vec4</span>(<span style="color:#268bd2">aPosition</span>,<span style="color:#2aa198;font-weight:bold">1</span>)).<span style="color:#268bd2">xyz</span>);
-  <span style="color:#268bd2">vp</span>=<span style="color:#268bd2">normalize</span>(<span style="color:#268bd2">vp</span>);<span style="color:#93a1a1;font-style:italic">//归一化vp</span></code></pre></div>
-<p>得到这三个向量归一化之后的向量，相对于就是在为接下来的计算做准备了。</p>
-
+  <span style="color:#268bd2">vp</span>=<span style="color:#268bd2">normalize</span>(<span style="color:#268bd2">vp</span>);<span style="color:#93a1a1;font-style:italic">//归一化vp</span>
+</code></pre></div><p>得到这三个向量归一化之后的向量，相对于就是在为接下来的计算做准备了。</p>
 <p>首先是得到<code>半向量</code>，并将它归一化，接着就是求<code>半向量</code>和法向量的点积，得到余弦值。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl">  <span style="color:#859900">vec3</span> <span style="color:#268bd2">halfVector</span>=<span style="color:#268bd2">normalize</span>(<span style="color:#268bd2">vp</span>+<span style="color:#268bd2">eye</span>);	<span style="color:#93a1a1;font-style:italic">//求视线与光线的半向量</span>
-  <span style="color:#859900">float</span> <span style="color:#268bd2">nDotViewHalfVector</span>=<span style="color:#268bd2">dot</span>(<span style="color:#268bd2">newNormal</span>,<span style="color:#268bd2">halfVector</span>);			<span style="color:#93a1a1;font-style:italic">//法线与半向量的点积</span></code></pre></div>
-<p>然后就是计算余弦值与物体表面粗糙因子的平方，并和 0 进行比较，若小于 0，则为 0 ，最后得到的是镜面反射光强度因子。</p>
+  <span style="color:#859900">float</span> <span style="color:#268bd2">nDotViewHalfVector</span>=<span style="color:#268bd2">dot</span>(<span style="color:#268bd2">newNormal</span>,<span style="color:#268bd2">halfVector</span>);			<span style="color:#93a1a1;font-style:italic">//法线与半向量的点积</span>
+</code></pre></div><p>然后就是计算余弦值与物体表面粗糙因子的平方，并和 0 进行比较，若小于 0，则为 0 ，最后得到的是镜面反射光强度因子。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl">  <span style="color:#93a1a1;font-style:italic">// 物体表面的光滑度，自己拟定为 50.0</span>
   <span style="color:#859900">float</span> <span style="color:#268bd2">shininess</span>=<span style="color:#2aa198;font-weight:bold">50.0</span>;				<span style="color:#93a1a1;font-style:italic">//粗糙度，越小越光滑</span>
-  <span style="color:#859900">float</span> <span style="color:#268bd2">powerFactor</span>=<span style="color:#268bd2">max</span>(<span style="color:#2aa198;font-weight:bold">0.0</span>,<span style="color:#268bd2">pow</span>(<span style="color:#268bd2">nDotViewHalfVector</span>,<span style="color:#268bd2">shininess</span>)); 	<span style="color:#93a1a1;font-style:italic">//镜面反射光强度因子</span></code></pre></div>
-<p>将反射光强度因子和镜面光强度相乘，得到最终的镜面光强度，这个强度就是用来传递给片段着色器的最终镜面光强度。</p>
-
+  <span style="color:#859900">float</span> <span style="color:#268bd2">powerFactor</span>=<span style="color:#268bd2">max</span>(<span style="color:#2aa198;font-weight:bold">0.0</span>,<span style="color:#268bd2">pow</span>(<span style="color:#268bd2">nDotViewHalfVector</span>,<span style="color:#268bd2">shininess</span>)); 	<span style="color:#93a1a1;font-style:italic">//镜面反射光强度因子</span>
+</code></pre></div><p>将反射光强度因子和镜面光强度相乘，得到最终的镜面光强度，这个强度就是用来传递给片段着色器的最终镜面光强度。</p>
 <p>使用效果如下：</p>
-
-<figure><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532348436/code/specular_demo.gif" alt="镜面光使用"><figcaption>镜面光使用</figcaption></figure>
-
+<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532348436/code/specular_demo.gif" alt="镜面光使用"></p>
 <p>如果我们改变自己拟定的物体粗糙度，粗糙度越大，会使得镜面光面积越小，粗糙度越小，会使得镜面光面积越大。</p>
-
 <p>同时，拖动滑块，改变光源的位置，也会影响镜面光反射的地方，镜面光也受光源的影响。</p>
-
 <p>具体的示例代码可以参考我的 Github 项目，求一波 Star 。</p>
-
 <blockquote>
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
 </blockquote>
-
 <h2 id="参考">参考</h2>
-
 <ol>
 <li>《OpenGL ES 3.x 游戏开发》</li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -451,45 +415,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/opengl/opengl-tutorial-diffuse-light/" data-toggle="tooltip" data-placement="top" title=" 《OpenGL ES 3.x 游戏开发》 光照系列之散射光">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/opengl/opengl-tutorial-light-mix/" data-toggle="tooltip" data-placement="top" title="《OpenGL ES 3.x 游戏开发》光照系列之效果混合">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/opengl/opengl-tutorial-diffuse-light/" data-toggle="tooltip" data-placement="top" title=" 《OpenGL ES 3.x 游戏开发》 光照系列之散射光">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/opengl/opengl-tutorial-light-mix/" data-toggle="tooltip" data-placement="top" title="《OpenGL ES 3.x 游戏开发》光照系列之效果混合">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -498,6 +449,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -540,25 +493,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -567,66 +514,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

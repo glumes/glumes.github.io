@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>so on 星陨的博客</title>
@@ -17,24 +17,17 @@
       <pubDate>Sun, 19 May 2019 23:25:31 +0800</pubDate>
       
       <guid>https://www.glumes.com/post/android/rust-compile-so-library/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/19/rust-mm.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+      <description>&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/19/rust-mm.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.rust-lang.org/&#34;&gt;https://www.rust-lang.org/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;rust 的学习曲线比较陡峭，在开始学习之前建议看看王垠的这篇文章 《如何掌握所有的编程语言》，地址如下:&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.yinwang.org/blog-cn/2017/07/06/master-pl&#34;&gt;https://www.yinwang.org/blog-cn/2017/07/06/master-pl&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;学习语言，重要的是掌握其语言特性。&lt;/p&gt;
-
 &lt;p&gt;王垠举了一些语言特性的例子：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;变量定义&lt;/li&gt;
 &lt;li&gt;算术运算&lt;/li&gt;
@@ -49,9 +42,7 @@
 &lt;li&gt;指针算术&lt;/li&gt;
 &lt;li&gt;goto 语句&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;看着这些特性是不是很像一些编程语言书的目录🤔&lt;/p&gt;
-
 &lt;p&gt;在学习 rust 的时候也可以照着这些语言特性去对比自己是否掌握了。&lt;/p&gt;</description>
     </item>
     

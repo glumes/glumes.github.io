@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>python on 星陨的博客</title>
@@ -27,7 +27,6 @@
       
       <guid>https://www.glumes.com/post/python/python-docopt/</guid>
       <description>&lt;p&gt;正如标题所言，docopt 是一个用来解析命令行参数的工具，当想要在 Python 程序后面附加参数时，就不需要再为此而发愁了。&lt;/p&gt;
-
 &lt;p&gt;docopt 是一个开源的库，代码地址：&lt;a href=&#34;https://github.com/docopt/docopt&#34;&gt;https://github.com/docopt/docopt&lt;/a&gt;。它在 README 中就已经做了详细的介绍，并且还附带了很多例子可供学习，这篇文章也是翻译一下 README 中内容&amp;hellip;&amp;hellip;&lt;/p&gt;</description>
     </item>
     

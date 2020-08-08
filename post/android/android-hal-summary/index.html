@@ -1,52 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android 硬件抽象层调用流程小结-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>Android 硬件抽象层调用流程小结</title>
   <meta property="og:title" content="Android 硬件抽象层调用流程小结" />
   <meta name="twitter:title" content="Android 硬件抽象层调用流程小结" />
 
   <meta name="description" content="Android 从 5.0 开始使用新的相机 API Camera2 来代替之前的旧版本，从而支持更多的特性。
-
 在学习新的 API 调用之外，也还是要了解一下 Android 底层发生了哪些变化，从而能够让我们对 API 的调用流程更加的清晰，知其所以然。">
   <meta property="og:description" content="Android 从 5.0 开始使用新的相机 API Camera2 来代替之前的旧版本，从而支持更多的特性。
-
 在学习新的 API 调用之外，也还是要了解一下 Android 底层发生了哪些变化，从而能够让我们对 API 的调用流程更加的清晰，知其所以然。">
   <meta name="twitter:description" content="Android 从 5.0 开始使用新的相机 API Camera2 来代替之前的旧版本，从而支持更多的特性。
-
 在学习新的 API 调用之外，也还是要了解一下 Android 底层发生了哪些变化，从而能够让我们对 API 的调用流程更加的清晰，知其所以然。">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/android-hal-summary/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/android-hal-summary/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -61,11 +55,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -73,9 +79,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -138,6 +142,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -150,295 +157,184 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Android 硬件抽象层调用流程小结</h1>
+                <h1 align="center">Android 硬件抽象层调用流程小结</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on December 22, 2017
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-          
-            
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
 
-          <p>Android 从 5.0 开始使用新的相机 API Camera2 来代替之前的旧版本，从而支持更多的特性。</p>
 
+
+        
+      <div>
+          
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
+        
+        <p>Android 从 5.0 开始使用新的相机 API Camera2 来代替之前的旧版本，从而支持更多的特性。</p>
 <p>在学习新的 API 调用之外，也还是要了解一下 Android 底层发生了哪些变化，从而能够让我们对 API 的调用流程更加的清晰，知其所以然。</p>
-
 <h2 id="由-上层应用-到-底层驱动-的-调用流程">由 上层应用 到 底层驱动 的 调用流程</h2>
-
 <p>当我们打开相机应用时，会打开摄像头，通过摄像头来采集数据，并将数据呈现在 Android 软件界面上。</p>
-
 <p>这看似简单的一个流程，实际上就包含了从我们上层软件到底层硬件驱动的一系列调用流程。</p>
-
 <p>简单的理解可以按照如下的流程：</p>
-
-<figure><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_hal_java_to_kernel.jpeg" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_hal_java_to_kernel.jpeg"><figcaption>http://7xqe3m.com1.z0.glb.clouddn.com/blog_hal_java_to_kernel.jpeg</figcaption></figure>
-
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_hal_java_to_kernel.jpeg" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_hal_java_to_kernel.jpeg"></p>
 <p>图片来自于 <a href="http://blog.csdn.net/luoshengyang">老罗的 Android 之旅</a> 中关于 <a href="http://blog.csdn.net/luoshengyang/article/details/6567257">硬件抽象层（HAL）概要介绍和学习计划</a>。</p>
-
 <p>我们的调用流程：</p>
-
 <p>应用程序框架层 &ndash;&gt; 运行时库 &ndash;&gt; 硬件抽象层 &ndash;&gt; 硬件驱动层 。</p>
-
 <blockquote>
 <p>关于硬件抽象层 HAL 是什么？</p>
 </blockquote>
-
 <p>HAL 是对硬件设备的抽象和封装，它定义了一个标准接口以供硬件供应商实现，这可让 Android 忽略较低级别的驱动程序实现，为 Android 在不同硬件设备上提供统一的访问接口。</p>
-
 <p>简单说来就是，我们控制硬件设备时，调用的是硬件抽象层，由硬件抽象层去调用驱动程序操控硬件设备。就好比之前学过的 OpenGL 一样， 它也是一套接口标准，具体的实现交给厂商去完成了，我们只是调用接口方法。</p>
-
 <p>HAL 是以动态链接库的形式提供的。</p>
-
 <p>这样的好处在于把 HAL 的具体实现交给硬件厂商去完成，同时由于开源协议的原因，硬件厂商的  HAL 实现部分不用开源出来，把厂商的核心内容，如算法等可以隐藏起来。</p>
-
 <p>总结一下老罗写的 HAL 系列文章会对 HAL 有一个更深的认识：</p>
-
 <ul>
 <li><a href="http://blog.csdn.net/luoshengyang/article/details/6568411">在 Android 内核源代码工程中编写硬件驱动程序</a></li>
 </ul>
-
 <p>在学习这篇博客之前，还是得有一些预备知识，不然就是一头雾水。</p>
-
 <p>首先要知道，在 Linux 中所有设备都是以文件的形式存在的，不管是普通文件还是硬件设备。</p>
-
 <blockquote>
 <p>了解 Linux 的驱动</p>
 </blockquote>
-
 <p>Linux 内核中采用可加载的模块化设计（LKMs，Loadable Kernel Modules）。</p>
-
 <p>一般情况下编译的 Linux 内核是支持可插入式模块的，也就是将最基本的核心代码编译在内核中，其他的代码可以选择是在内核中，或者编译为内核的模块文件。</p>
-
 <p>在内核的配置过程中，有很多设备驱动程序和其他内核元素都被编译成了模块。</p>
-
 <p>我们常见的驱动程序就是作为内核模块动态加载的，比如声卡驱动和网卡驱动等，而 Linux 最基础的驱动，如 CPU、PCI 总线 等驱动程序则编译在内核文件中。</p>
-
 <p>如果一个驱动程序被直接编译到了内核中，那么即使这个驱动程序没有运行，它的代码和静态数据也会占据一部分空间。</p>
-
 <p>但如果这个驱动程序被编译成一个模块，就只有在需要内存并将其加载到内核时才会真正占用内存空间。</p>
-
 <p>对于 LKM 来说，可以根据硬件和连接的设备来加载对应的模块。</p>
-
 <blockquote>
 <p>模块</p>
 </blockquote>
-
 <p>模块是在内核空间运行的程序，实际上是一种目标对象文件（<code>.o</code> 文件）没有链接，不能独立运行，但是可以装载到系统中作为内核的一部分运行，从而可以扩充内核的功能，模块最主要的用处就是用来实现设备驱动程序。</p>
-
 <p>Linux 下对于一个硬件的驱动，可以有两种方式：</p>
-
 <ul>
 <li>直接加载到内核代码中，启动内核时就会驱动此硬件程序</li>
 <li>以模块的方式启动，编译生成一个 <code>.o</code> 文件，当应用程序需要时再加载到内核空间运行。</li>
 </ul>
-
 <p>所以我们所说的一个硬件的驱动程序，通常指的就是一个驱动模块。</p>
-
 <blockquote>
 <p>设备文件</p>
 </blockquote>
-
 <p>Linux 中的设备文件分为三种：</p>
-
 <ul>
 <li>Block（块）型设备文件</li>
 <li>Character（字符）型设备文件</li>
 <li>Socket（网络）型设备文件</li>
 </ul>
-
 <p>对于一个设备，它可以在 <code>/dev</code> 下面存在一个对应的逻辑设备节点，这个节点以文件的形式存在，但它不是普通意义上的文件，它是设备文件，更确切的说，它是设备节点。这个节点是通过 mknod 命令建立的，其中指定了主设备号和次设备号。</p>
-
 <ul>
-<li><p>主设备号表明了某一类设备，一般对应着确定的驱动程序，用于内核把文件和它的驱动链接在一起。</p></li>
-
-<li><p>次设备号一般是区分不同属性，例如不同的使用方法，不同的位置，不同的操作。</p></li>
+<li>
+<p>主设备号表明了某一类设备，一般对应着确定的驱动程序，用于内核把文件和它的驱动链接在一起。</p>
+</li>
+<li>
+<p>次设备号一般是区分不同属性，例如不同的使用方法，不同的位置，不同的操作。</p>
+</li>
 </ul>
-
 <p>这个设备号是从 <code>/proc/devices</code> 文件中获得的，所以一般是先有驱动程序在内核中，才有设备节点在目录中。这个设备号（特指主设备号）的主要作用，就是声明设备所使用的驱动程序。驱动程序和设备号是一一对应的，<strong>当你打开一个设备文件时，操作系统就已经知道这个设备所对应的驱动程序</strong>。</p>
-
 <blockquote>
 <p>proc 文件系统</p>
 </blockquote>
-
 <p>一种用户程序和内核通讯最简单和流行的方式是通过使用 <code>/proc</code> 下文件系统进行通讯。</p>
-
 <p><code>/proc</code> 是一个伪文件系统，从这里的文件读取的数据是由内核返回的数据，并且写入到这里面的数据将会被内核读取和处理。</p>
-
 <p>使用 <code>/proc</code> 目录中的文件监视驱动程序的状态。访问设备文件时，操作系统通常会通过查找 <code>/proc/devices</code> 目录下的值，也就是根据主设备号，确定由哪些驱动模块来完成任务。如果 <code>proc</code> 文件系统没有加载，访问设备文件就会出现错误。</p>
-
 <p>总结一下上面的大摞文字：</p>
-
-<figure><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_driver_concept.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_driver_concept.png"><figcaption>http://7xqe3m.com1.z0.glb.clouddn.com/blog_driver_concept.png</figcaption></figure>
-
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_driver_concept.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_driver_concept.png"></p>
 <p>首先，内核加载我们的驱动程序，会生成对应的模块和主设备号。</p>
-
 <p>其次，插入设备文件时，会根据文件类型分配一个对应的主设备号，标识用哪种驱动打开。</p>
-
 <p>最后，打开设备文件，实质上就是通过驱动程序来打开设备文件，在 <code>/proc/devices</code>
- 中找到驱动。</p>
-
+中找到驱动。</p>
 <p>有了上面的知识储备，再来了解看老罗的博客，就明白一些了。</p>
-
 <p>老罗是把驱动编译成了内核模块，动态加载，并且在模块加载函数内部去执行了设备注册和初始化操作，主要有两个函数 <code>device_create</code> 和 <code>hello_create_proc</code>。</p>
-
 <p>这样一来，在模块加载时，就创建了对应设备文件，打开设备文件时，也会去加载对应的驱动。</p>
-
 <p>同时，还可以对设备文件执行相应的操作了，读和写变量的值，这些操作都是交给了驱动程序去完成读写的。</p>
-
 <p>对于驱动程序，就先了解到这里了，有时间再去深究。</p>
-
 <ul>
 <li><a href="http://blog.csdn.net/luoshengyang/article/details/6571210">在Ubuntu上为Android系统内置C可执行程序测试Linux内核驱动程序</a></li>
 </ul>
-
 <p>这篇文章的主要操作就是通过 C 程序的可执行文件来读写设备文件中的值。</p>
-
 <p>如果执行成功了，则代表 C 可执行程序通过访问驱动程序来访问硬件寄存器的值了。</p>
-
 <ul>
 <li><a href="http://blog.csdn.net/luoshengyang/article/details/6573809">在Ubuntu上为Android增加硬件抽象层（HAL）模块访问Linux内核驱动程序</a></li>
 </ul>
-
 <p>在这里就涉及到重点 硬件抽象层 HAL 了，通过设备文件来连接硬件抽象层和 Linux 内核驱动模块。</p>
-
 <p>硬件抽象层有两个重要的数据结构：硬件模块结构体 <code>hw_module_t</code> 和 硬件接口结构体 <code>hw_device_t</code>。</p>
-
 <p>Android HAL 将各类硬件设备抽象为硬件模块，使用 <code>hw_module_t</code> 来描述这一模块，每个硬件抽象模块都对应一个动态链接库，这一般是由厂商提供的。</p>
-
 <p>而每一类硬件抽象模块又包含多个独立的硬件设备，使用 <code>hw_device_t</code> 结构体描述硬件模块中的独立硬件设备。</p>
-
 <p>HAL 规定每个硬件模块必须包含一个 <code>HAL_MODULE_INFO_SYM</code> 的结构体，这个结构体的第一个元素必须为 <code>hw_module_t</code>，然后后面可以增加模块相关的其他信息。其中，<code>tag</code>属性也必须为 <code>HARDWARE_MODULE_TAG</code> 常量。</p>
-
 <p>对应老罗博客中的：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#93a1a1;font-style:italic">/*硬件模块结构体*/</span>  
-<span style="color:#859900">struct</span> <span style="color:#268bd2">hello_module_t</span> {  
-    <span style="color:#859900">struct</span> <span style="color:#268bd2">hw_module_t</span> <span style="color:#268bd2">common</span>;  
+<span style="color:#859900">struct</span> <span style="color:#cb4b16">hello_module_t</span> {  
+    <span style="color:#859900">struct</span> <span style="color:#cb4b16">hw_module_t</span> <span style="color:#268bd2">common</span>;  
 };  
-</code></pre></div>
-<p>HAL 规定每个硬件设备都必须定义一个硬件设备描述结构体，该结构体必须以 <code>hw_device_t</code> 作为第一个成员变量，后跟设备相关的公开函数和属性。</p>
-
+</code></pre></div><p>HAL 规定每个硬件设备都必须定义一个硬件设备描述结构体，该结构体必须以 <code>hw_device_t</code> 作为第一个成员变量，后跟设备相关的公开函数和属性。</p>
 <p>对应老罗博客中的：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#93a1a1;font-style:italic">/*硬件接口结构体*/</span>  
-<span style="color:#859900">struct</span> <span style="color:#268bd2">hello_device_t</span> {  
-    <span style="color:#859900">struct</span> <span style="color:#268bd2">hw_device_t</span> <span style="color:#268bd2">common</span>;  
+<span style="color:#859900">struct</span> <span style="color:#cb4b16">hello_device_t</span> {  
+    <span style="color:#859900">struct</span> <span style="color:#cb4b16">hw_device_t</span> <span style="color:#268bd2">common</span>;  
     <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">fd</span>;  
-    <span style="color:#859900;font-weight:bold">int</span> (*<span style="color:#268bd2">set_val</span>)(<span style="color:#859900">struct</span> <span style="color:#268bd2">hello_device_t</span>* <span style="color:#268bd2">dev</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">val</span>);  
-    <span style="color:#859900;font-weight:bold">int</span> (*<span style="color:#268bd2">get_val</span>)(<span style="color:#859900">struct</span> <span style="color:#268bd2">hello_device_t</span>* <span style="color:#268bd2">dev</span>, <span style="color:#859900;font-weight:bold">int</span>* <span style="color:#268bd2">val</span>);  
+    <span style="color:#859900;font-weight:bold">int</span> (*<span style="color:#268bd2">set_val</span>)(<span style="color:#859900">struct</span> <span style="color:#cb4b16">hello_device_t</span>* <span style="color:#268bd2">dev</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">val</span>);  
+    <span style="color:#859900;font-weight:bold">int</span> (*<span style="color:#268bd2">get_val</span>)(<span style="color:#859900">struct</span> <span style="color:#cb4b16">hello_device_t</span>* <span style="color:#268bd2">dev</span>, <span style="color:#859900;font-weight:bold">int</span>* <span style="color:#268bd2">val</span>);  
 };  
-</code></pre></div>
-<p>这里关于硬件模块和硬件设备有点绕，大概就是一类硬件模块包含许多硬件设备，一个硬件设备属于某一类硬件模块。</p>
-
+</code></pre></div><p>这里关于硬件模块和硬件设备有点绕，大概就是一类硬件模块包含许多硬件设备，一个硬件设备属于某一类硬件模块。</p>
 <p>Android 对于硬件抽象层有一些规定，这里就不去深入了，包括 HAL 命名规范、如何加载 HAL 等等。</p>
-
 <p>除此之外，还需要在 HAL 中定义一些需要的方法函数来执行操作。这些方法函数就类似于接口，可以供外部调用，而自己要完成其内部实现。</p>
-
 <p>在老罗的博客中定义了如下的方法：</p>
-
 <ul>
 <li>hello_device_open     打开设备</li>
 <li>hello_device_close     关闭设备</li>
 <li>hello_set_val     写入值</li>
 <li>hello_get_val     读取值</li>
 </ul>
-
 <p>其中，hello_device_open 函数中有一个  <code>open</code> 方法就是在执行打开文件操作，也就是打开 <code>/dev/hello</code> 设备文件，这就和上面用 C 程序验证测试 Linux 内核程序相同了。</p>
-
 <p>而 hello_set_val 和 hello_get_val 函数就是设备的访问函数，对应于硬件接口结构体中的 <code>*set_val</code> 和 <code>*get_val</code> 函数指针。它们的读写也是通过 hello_device_open 函数打开设备之后来执行的。</p>
-
 <p>最后将硬件抽象层编译成模块，也就是一个 <code>so</code> 动态链接库。</p>
-
 <p>这样就完成了一个简单的硬件抽象层，对外有提供函数进行方法调用，对内则和硬件驱动打交道。</p>
-
 <p>接下来就是在应用层通过 JNI 方法来调用硬件抽象层的接口函数，使得上层应用访问硬件设备。</p>
-
 <ul>
 <li><a href="http://blog.csdn.net/Luoshengyang/article/details/6575988">在Ubuntu为Android硬件抽象层（HAL）模块编写JNI方法提供Java访问硬件服务接口</a></li>
 <li><a href="http://blog.csdn.net/Luoshengyang/article/details/6578352">在Ubuntu上为Android系统的Application Frameworks层增加硬件访问服务</a></li>
 <li><a href="http://blog.csdn.net/Luoshengyang/article/details/6580267">在Ubuntu上为Android系统内置Java应用程序测试Application Frameworks层的硬件服务</a></li>
 </ul>
-
 <p>通过 JNI 方法来访问硬件抽象层，首先要去通过 Android 硬件抽象层提供的 <code>hw_get_module</code> 方法来加载模块 ID 为指定的 HELLO_HARDWARE_MODULE_ID 的硬件抽象层，Android 硬件抽象层会根据 ID 值在系统中找到对应的模块，然后加载起来，并返回 <code>hw_module_t</code> 接口给调用者使用，通过 <code>hw_module_t</code> 的 <code>common</code> 变量的 <code>methods</code> 方法最后得到了 <code>hello_device_t</code> 硬件接口结构体。</p>
-
 <p>有了 <code>hello_device_t</code> 这个变量就可以执行之前定义的相关读写操作了。</p>
-
 <p>有了 JNI 方法之后，还需要提供一个独立的硬件访问服务来为应用提供服务。应用需要通过 Binder 代理来访问硬件服务。由于是跨进程通信，还是需要 AIDL 来定义接口了。</p>
-
 <p>在独立进程的硬件访问服务中，还是要通过上面的 JNI 方法来访问硬件设备。</p>
-
 <p>最后，我们在应用进程里面 BindService 就可以跨进程通信了，读写硬件设备中的值。</p>
-
 <p>这样就实现了从应用程序到底层硬件的整个流程的调用。</p>
-
 <p>复习一下整个流程：</p>
-
-<figure><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_hal_java_to_kernel.jpeg" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_hal_java_to_kernel.jpeg"><figcaption>http://7xqe3m.com1.z0.glb.clouddn.com/blog_hal_java_to_kernel.jpeg</figcaption></figure>
-
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_hal_java_to_kernel.jpeg" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_hal_java_to_kernel.jpeg"></p>
 <p>有了老罗的分析，对于相机的上层软件到底层硬件的调用流程就不难分析了。</p>
-
 <p>更复杂具体的流程可以参考如下流程：</p>
-
-<figure><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_camera_java_to_kernel.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_camera_java_to_kernel.png"><figcaption>http://7xqe3m.com1.z0.glb.clouddn.com/blog_camera_java_to_kernel.png</figcaption></figure>
-
+<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_camera_java_to_kernel.png" alt="http://7xqe3m.com1.z0.glb.clouddn.com/blog_camera_java_to_kernel.png"></p>
 <h2 id="参考">参考</h2>
-
 <ol>
 <li><a href="http://www.jianshu.com/p/0d155f267589">http://www.jianshu.com/p/0d155f267589</a></li>
 <li><a href="https://www.ibm.com/developerworks/cn/linux/l-proc.html">https://www.ibm.com/developerworks/cn/linux/l-proc.html</a></li>
@@ -448,34 +344,40 @@ if (!doNotTrack) {
 <li><a href="http://read.pudn.com/downloads119/ebook/506573/Linuxdevicedriver.pdf">http://read.pudn.com/downloads119/ebook/506573/Linuxdevicedriver.pdf</a></li>
 <li><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-sysfs/index.html">https://www.ibm.com/developerworks/cn/linux/l-cn-sysfs/index.html</a></li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/android-hal-summary/">Android 硬件抽象层调用流程小结</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -486,45 +388,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/android/kotlin-functional-programming-whth-anko/" data-toggle="tooltip" data-placement="top" title="Kotlin 函数式编程与 Anko 构建布局实现原理分析">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/android/rxjava-wrapper-callback/" data-toggle="tooltip" data-placement="top" title="用 RxJava 封装回调方法 CallBack">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/android/kotlin-functional-programming-whth-anko/" data-toggle="tooltip" data-placement="top" title="Kotlin 函数式编程与 Anko 构建布局实现原理分析">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/android/rxjava-wrapper-callback/" data-toggle="tooltip" data-placement="top" title="用 RxJava 封装回调方法 CallBack">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -533,6 +422,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -575,25 +466,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -602,66 +487,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

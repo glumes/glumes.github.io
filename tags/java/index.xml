@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java on 星陨的博客</title>
@@ -18,9 +18,7 @@
       
       <guid>https://www.glumes.com/post/java/java-multithread-overview/</guid>
       <description>&lt;p&gt;在 Java 5.0 之前，在协调对共享对象的访问时可以使用的机制只有 &lt;code&gt;synchronized&lt;/code&gt; 内置锁和 &lt;code&gt;volatile&lt;/code&gt; 关键字。&lt;/p&gt;
-
 &lt;p&gt;Java 5.0 增加了一种新的机制：&lt;code&gt;Lock&lt;/code&gt;  显式锁，当内置锁 &lt;code&gt;synchronized&lt;/code&gt; 不适用时，它就可以作为一种新的选择。&lt;/p&gt;
-
 &lt;p&gt;回顾一下内置锁 synchronized 的使用：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// synchronized关键字用法示例
 &lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#859900&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#859900&#34;&gt;synchronized&lt;/span&gt; &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;t&lt;/span&gt;){&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// 同步方法
@@ -34,16 +32,14 @@
     &lt;span style=&#34;color:#859900&#34;&gt;synchronized&lt;/span&gt;(&lt;span style=&#34;color:#268bd2&#34;&gt;obj&lt;/span&gt;){&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// 同步代码块
 &lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#859900&#34;&gt;return&lt;/span&gt; --&lt;span style=&#34;color:#268bd2&#34;&gt;v&lt;/span&gt;;
     }
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;内置锁不需要显式的获取和释放，任何一个对象都能作为一把内置锁。&lt;/p&gt;
-
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;内置锁不需要显式的获取和释放，任何一个对象都能作为一把内置锁。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;当 synchronized 作用于普通方法时，锁对象是 this 。&lt;/li&gt;
 &lt;li&gt;当 synchronized 作用于静态方法时，锁对象是当前类的 Class 对象。&lt;/li&gt;
 &lt;li&gt;当 synchronized 作用于代码块时，锁对象是 synchronized(obj) 中的这个 obj 对象。&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;hr /&gt;</description>
+&lt;hr&gt;</description>
     </item>
     
     <item>
@@ -53,7 +49,6 @@
       
       <guid>https://www.glumes.com/post/android/java-proxy-design-pattern/</guid>
       <description>&lt;p&gt;代理模式的使用场景如下：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。&lt;/p&gt;
 &lt;/blockquote&gt;</description>

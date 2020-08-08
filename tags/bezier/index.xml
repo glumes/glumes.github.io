@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>bezier on 星陨的博客</title>
@@ -18,19 +18,12 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-draw-bezier-line/</guid>
       <description>&lt;p&gt;说到贝塞尔曲线，大家肯定都不陌生，网上有很多关于介绍和理解贝塞尔曲线的优秀文章和动态图。&lt;/p&gt;
-
 &lt;p&gt;以下两个是比较经典的动图了。&lt;/p&gt;
-
 &lt;p&gt;二阶贝塞尔曲线：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://yalantis.com/uploads/ckeditor/pictures/502/content_image04.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://yalantis.com/uploads/ckeditor/pictures/502/content_image04.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;三阶贝塞尔曲线：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://yalantis.com/uploads/ckeditor/pictures/503/content_image06.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://yalantis.com/uploads/ckeditor/pictures/503/content_image06.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;由于在工作中经常要和贝塞尔曲线打交道，所以简单说一下自己的理解：&lt;/p&gt;</description>
     </item>
     

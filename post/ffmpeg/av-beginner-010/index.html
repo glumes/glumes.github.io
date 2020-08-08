@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>【音视频连载-010】第二季 FFmpeg 日志打印-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>【音视频连载-010】第二季 FFmpeg 日志打印</title>
   <meta property="og:title" content="【音视频连载-010】第二季 FFmpeg 日志打印" />
   <meta name="twitter:title" content="【音视频连载-010】第二季 FFmpeg 日志打印" />
 
   <meta name="description" content="音视频学习入门技术文章连载：
 
-
 技术开发故事会连载
 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
 【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
@@ -24,13 +23,10 @@
 【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）
 【音视频连载-009】第二季 FFmpeg 打造简易播放器
 
-
 音视频连载系列已经停更一段时间，再这么停下去估计就要掉粉了，捡起来继续更新~~~
-
 接下来主要是讲解 FFmpeg 相关的内容，比如这篇就从简单的日志打印开始说起。">
   <meta property="og:description" content="音视频学习入门技术文章连载：
 
-
 技术开发故事会连载
 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
 【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
@@ -42,12 +38,9 @@
 【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）
 【音视频连载-009】第二季 FFmpeg 打造简易播放器
 
-
 音视频连载系列已经停更一段时间，再这么停下去估计就要掉粉了，捡起来继续更新~~~
-
 接下来主要是讲解 FFmpeg 相关的内容，比如这篇就从简单的日志打印开始说起。">
   <meta name="twitter:description" content="音视频学习入门技术文章连载：
-
 
 技术开发故事会连载
 【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
@@ -57,33 +50,30 @@
 【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示
 【音视频连载-006】基础学习 …">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/ffmpeg/av-beginner-010/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/ffmpeg/av-beginner-010/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -98,11 +88,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -110,9 +112,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -175,6 +175,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -191,21 +194,24 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>【音视频连载-010】第二季 FFmpeg 日志打印</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
                   
-                  
+                     <h1>【音视频连载-010】第二季 FFmpeg 日志打印</h1>
+                     
                     <span class="post-meta">
-  
-    Posted on April 27, 2020
-  
+  Posted on April 27, 2020
   
 </span>
 
 
+                    
+                  
                   
               </div>
             </div>
@@ -214,75 +220,47 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>【音视频连载-010】第二季 FFmpeg 日志打印</h1>
+                <h1 align="center">【音视频连载-010】第二季 FFmpeg 日志打印</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on April 27, 2020
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/ffmpeg/">FFmpeg</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-          
-            
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
 
-          <p>音视频学习入门技术文章连载：</p>
 
+
+        
+      <div>
+          
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://www.glumes.com/tags/ffmpeg/">FFmpeg</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
+        
+        <p>音视频学习入门技术文章连载：</p>
 <ul>
 <li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
 <li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
@@ -295,25 +273,18 @@ if (!doNotTrack) {
 <li><a href="https://mp.weixin.qq.com/s/8faeLClht2kfKqfA8Vizug">【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</a></li>
 <li><a href="https://mp.weixin.qq.com/s/iQwIpxUKr0qWvejrGVA3Uw">【音视频连载-009】第二季 FFmpeg 打造简易播放器</a></li>
 </ul>
-
 <p>音视频连载系列已经停更一段时间，再这么停下去估计就要掉粉了，捡起来继续更新~~~</p>
-
 <p>接下来主要是讲解 FFmpeg 相关的内容，比如这篇就从简单的日志打印开始说起。</p>
-
 <h3 id="日志打印基础使用">日志打印基础使用</h3>
-
 <p>在 FFmpeg 中提供了 av_log() 方法去打印日志，它的函数声明如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">av_log</span>(<span style="color:#859900;font-weight:bold">void</span> *<span style="color:#268bd2">avcl</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">level</span>, <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> *<span style="color:#268bd2">fmt</span>, ...)
-</code></pre></div>
-<p>其中 <code>level</code> 参数指的是日志级别，后面的 <code>fmt</code> 和 <code>...</code> 代表日志内容，和调用 <code>print</code> 打印信息一样。</p>
-
+</code></pre></div><p>其中 <code>level</code> 参数指的是日志级别，后面的 <code>fmt</code> 和 <code>...</code> 代表日志内容，和调用 <code>print</code> 打印信息一样。</p>
 <p>具体使用如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">av_log</span>(<span style="color:#859900">nullptr</span>,<span style="color:#268bd2">AV_LOG_INFO</span>,<span style="color:#2aa198">&#34;this is INFO log color&#34;</span>);
 <span style="color:#268bd2">av_log</span>(<span style="color:#859900">nullptr</span>,<span style="color:#268bd2">AV_LOG_DEBUG</span>,<span style="color:#2aa198">&#34;this is DEBUG log color&#34;</span>);
 <span style="color:#268bd2">av_log</span>(<span style="color:#859900">nullptr</span>,<span style="color:#268bd2">AV_LOG_WARNING</span>,<span style="color:#2aa198">&#34;this is WARNING log color&#34;</span>);
 <span style="color:#268bd2">av_log</span>(<span style="color:#859900">nullptr</span>,<span style="color:#268bd2">AV_LOG_ERROR</span>,<span style="color:#2aa198">&#34;this is ERROR log color&#34;</span>);
-</code></pre></div>
-<p>与 Android 日志类似，FFmpeg 也有多种级别的日志。</p>
+</code></pre></div><p>与 Android 日志类似，FFmpeg 也有多种级别的日志。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#define AV_LOG_FATAL     8
 </span><span style="color:#93a1a1;font-style:italic">#define AV_LOG_ERROR    16
 </span><span style="color:#93a1a1;font-style:italic">#define AV_LOG_WARNING  24
@@ -321,34 +292,22 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic">#define AV_LOG_VERBOSE  40
 </span><span style="color:#93a1a1;font-style:italic">#define AV_LOG_DEBUG    48
 </span><span style="color:#93a1a1;font-style:italic">#define AV_LOG_TRACE    56
-</span></code></pre></div>
-<p>看到 <code>INFO</code>、<code>DEBUG</code>、<code>ERROR</code> 这些级别是不是有似曾相识的感觉。</p>
-
+</span></code></pre></div><p>看到 <code>INFO</code>、<code>DEBUG</code>、<code>ERROR</code> 这些级别是不是有似曾相识的感觉。</p>
 <p>这些数值都是 8 的倍数，按照从小到大的顺序递增。</p>
-
 <h3 id="日志打印级别设置">日志打印级别设置</h3>
-
 <p>在 FFmpeg 中可以设置和获取当前日志打印的级别。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 设置日志打印级别
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">av_log_set_level</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">level</span>);
 <span style="color:#93a1a1;font-style:italic">// 获取日志打印级别
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">av_log_get_level</span>(<span style="color:#859900;font-weight:bold">void</span>);
-</code></pre></div>
-<p>比如设置了当前级别是 <code>AV_LOG_INFO</code> ，那么凡是级别低于它的都不会打印出来了。</p>
-
+</code></pre></div><p>比如设置了当前级别是 <code>AV_LOG_INFO</code> ，那么凡是级别低于它的都不会打印出来了。</p>
 <p>那么什么级别算是更低的呢？数字越小的级别越高，数字越大的级别越低。</p>
-
 <p>比如设置了 <code>AV_LOG_INFO</code> 级别，它的值是 32 ，那么 <code>AV_LOG_DEBUG</code> 级别的日志就不会打印，它的值是 48 ，级别更低。而 <code>AV_LOG_ERROR</code> 就会被打印，它的值是 16 ，级别更高。</p>
-
 <h3 id="自定义日志打印">自定义日志打印</h3>
-
 <p>在 FFmpeg 中可以通过 <code>av_log_set_callback</code> 函数来注册一个日志回调，在回调中自定义日志打印方式。</p>
-
 <p><code>av_log_set_callback</code> 的函数声明如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">av_log_set_callback</span>(<span style="color:#859900;font-weight:bold">void</span> (*<span style="color:#268bd2">callback</span>)(<span style="color:#859900;font-weight:bold">void</span>*, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">level</span>, <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span>* <span style="color:#268bd2">fmt</span>, <span style="color:#268bd2">va_list</span>));
-</code></pre></div>
-<p>它的参数是传一个函数指针，其中 <code>level</code> 指定了日志回调的级别，根据不同级别做不同操作，<code>fmt</code> 和 <code>va_list</code> 就是回调的日志内容了，和 <code>print</code> 函数相似。</p>
-
+</code></pre></div><p>它的参数是传一个函数指针，其中 <code>level</code> 指定了日志回调的级别，根据不同级别做不同操作，<code>fmt</code> 和 <code>va_list</code> 就是回调的日志内容了，和 <code>print</code> 函数相似。</p>
 <p>以下就是具体的操作：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">log_callback</span>(<span style="color:#859900;font-weight:bold">void</span> *<span style="color:#268bd2">ptr</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">level</span>, <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> *<span style="color:#268bd2">fmt</span>, <span style="color:#268bd2">va_list</span> <span style="color:#268bd2">vaList</span>) {
     <span style="color:#859900">switch</span> (<span style="color:#268bd2">level</span>) {
@@ -372,25 +331,17 @@ if (!doNotTrack) {
             <span style="color:#859900">break</span>;
     }
 }
-</code></pre></div>
-<p>在 <code>switch</code> 做日志级别的分发处理，具体的打印方法教给宏定义的函数。</p>
-
+</code></pre></div><p>在 <code>switch</code> 做日志级别的分发处理，具体的打印方法教给宏定义的函数。</p>
 <p>在这里主要是根据不同级别，调整日志打印输出的颜色，如下图所示：</p>
-
-<p><img src="https://user-gold-cdn.xitu.io/2020/4/27/171b9e8714fe442e?w=571&amp;h=271&amp;f=png&amp;s=53129" alt="" /></p>
-
+<p><img src="https://user-gold-cdn.xitu.io/2020/4/27/171b9e8714fe442e?w=571&amp;h=271&amp;f=png&amp;s=53129" alt=""></p>
 <blockquote>
 <p>注意的是，如果注册了自定义日志打印，那么除了我们调用 <code>av_log</code> 方法会打印日志之外，FFmpeg 内部的一些日志信息也会通过自定义的方法打印出来。</p>
 </blockquote>
-
 <h3 id="自定义日志打印颜色">自定义日志打印颜色</h3>
-
 <p>一般来说，日志打印都是通过宏函数来定义的。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#define logD(format,...)        \
-</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">logging</span>(<span style="color:#268bd2">LOG_GREEN</span>,<span style="color:#268bd2">format</span>,<span style="color:#93a1a1;font-style:italic">##__VA_ARGS__)     
-</span></code></pre></div>
-<p>其中 <code>##__VA_ARGS__</code> 意思就是可变参数宏，对应函数里面的三个点可变参数 <code>...</code> 。</p>
-
+</span><span style="color:#93a1a1;font-style:italic">logging(LOG_GREEN,format,##__VA_ARGS__)     
+</span></code></pre></div><p>其中 <code>##__VA_ARGS__</code> 意思就是可变参数宏，对应函数里面的三个点可变参数 <code>...</code> 。</p>
 <p>具体的函数实现如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">logging</span>(<span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> * <span style="color:#268bd2">color</span> ,<span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> *<span style="color:#268bd2">fmt</span>, <span style="color:#268bd2">va_list</span> <span style="color:#268bd2">vaList</span>)
 {
@@ -409,68 +360,60 @@ if (!doNotTrack) {
     <span style="color:#268bd2">logging</span>(<span style="color:#268bd2">color</span>,<span style="color:#268bd2">fmt</span>,<span style="color:#268bd2">vaList</span>);
     <span style="color:#268bd2">va_end</span>(<span style="color:#268bd2">vaList</span>);
 }
-</code></pre></div>
-<p>这里面涉及到可变参数以及日志颜色打印的内容，展开说一下日志颜色打印。</p>
-
+</code></pre></div><p>这里面涉及到可变参数以及日志颜色打印的内容，展开说一下日志颜色打印。</p>
 <p>在终端的字符颜色是由转义序列控制的，比如终端中要换行，那么转义序列就是 <code>\n</code> 操作，对于颜色控制同样如此。</p>
-
 <p>具体的显示格式如下：</p>
-
 <blockquote>
 <p>\033[显示方式;前景色;背景色m输出字符串\033[0m</p>
-
 <p>或</p>
-
 <p>\e[显示方式;前景色;背景色m输出字符串\e[0m</p>
 </blockquote>
-
 <p>在调用 print 函数打印信息时，就按照以上的方式即可，比如：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 打印红色的日志内容
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">printf</span>(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">\033</span><span style="color:#2aa198">[0;31m print red color log </span><span style="color:#2aa198">\033</span><span style="color:#2aa198">[0m</span><span style="color:#2aa198">\n</span><span style="color:#2aa198">&#34;</span>) ;
-</code></pre></div>
-<p>以上就可以打印出红色的日志信息，具体的关于显示方式、前景色、背景色这些内容，后续的文章再接着说了。</p>
-
+</code></pre></div><p>以上就可以打印出红色的日志信息，具体的关于显示方式、前景色、背景色这些内容，后续的文章再接着说了。</p>
 <h2 id="总结">总结</h2>
-
 <p>以上就是音视频基础学习连载的 010 篇。</p>
-
 <p>简单讲解了 FFmpeg 中的日志打印内容，本文具体代码见仓库：</p>
-
 <blockquote>
 <p><a href="https://github.com/glumes/av-beginner">https://github.com/glumes/av-beginner</a></p>
 </blockquote>
-
 <p>仓库的代码会比文章提前更新，想要抢先知道后续内容，就关注代码吧，欢迎 star 。</p>
-
 <p>能力有限，文中有不对之处，欢迎加我微信 ezglumes 进行交流~~</p>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/ffmpeg/av-beginner-010/">【音视频连载-010】第二季 FFmpeg 日志打印</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -481,45 +424,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/ffmpeg/av-beginner-008/" data-toggle="tooltip" data-placement="top" title="【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/android/android-av-beginner-resource/" data-toggle="tooltip" data-placement="top" title="推荐几个堪称教科书级别的 Android 音视频入门项目">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/ffmpeg/av-beginner-008/" data-toggle="tooltip" data-placement="top" title="【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/android/android-av-beginner-resource/" data-toggle="tooltip" data-placement="top" title="推荐几个堪称教科书级别的 Android 音视频入门项目">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -528,6 +458,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -570,25 +502,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -597,66 +523,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

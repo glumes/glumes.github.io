@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vulkan on 星陨的博客</title>
@@ -19,21 +19,29 @@
       <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-swap-chain/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/&#34;&gt;进击的 Vulkan 移动开发之 Instance &amp;amp; Device &amp;amp; Queue&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/&#34;&gt;进击的 Vulkan 移动开发之 Command-Buffer&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-
+&lt;blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/&#34;&gt;进击的 Vulkan 移动开发之 Instance &amp;amp; Device &amp;amp; Queue&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/&#34;&gt;进击的 Vulkan 移动开发之 Command-Buffer&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在之前的文章中，讲到了 &lt;code&gt;Command-Buffer&lt;/code&gt; 提交给 &lt;code&gt;Queue&lt;/code&gt; 去执行，也提到了 Vulkan 实现跨平台机制，是有一些拓展的，这里就讲讲 Vulkan 窗口系统的拓展（Vulkan Window System Integration WSI），如下图所示：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/bc32fd77gy1fyuhrs5xlwj21j00uywl8.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/bc32fd77gy1fyuhrs5xlwj21j00uywl8.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -44,19 +52,24 @@
       <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-command-buffer/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/&#34;&gt;进击的 Vulkan 移动开发之 Instance &amp;amp; Device &amp;amp; Queue&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-
+&lt;blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/&#34;&gt;进击的 Vulkan 移动开发之 Instance &amp;amp; Device &amp;amp; Queue&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;此篇文章继续学习 Vulkan 中的组件：Command-Buffer 。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/bc32fd77gy1fytl33ku2vj21c40r4n49.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/bc32fd77gy1fytl33ku2vj21c40r4n49.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -67,18 +80,19 @@
       <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-concept/&#34;&gt;进击的 Vulkan 移动开发（一）之今生前世&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-
+&lt;blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;https://glumes.com/post/vulkan/vulkan-tutorial-renderer/&#34;&gt;进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在 Vulkan 的系列文章中出现过如下的图片：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx80mwln17j21to110woq.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx80mwln17j21to110woq.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这张图片很详细的概括了 Vulkan 中的重要组件以及它们的工作流程，接下来的文章中会针对每个组件进行学习讲解并配上相关的示例代码，首先是 Instance、Device 和 Queue 组件。&lt;/p&gt;</description>
     </item>
     

@@ -1,88 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>OpenGL 实践之贝塞尔曲线绘制-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>OpenGL 实践之贝塞尔曲线绘制</title>
   <meta property="og:title" content="OpenGL 实践之贝塞尔曲线绘制" />
   <meta name="twitter:title" content="OpenGL 实践之贝塞尔曲线绘制" />
 
   <meta name="description" content="说到贝塞尔曲线，大家肯定都不陌生，网上有很多关于介绍和理解贝塞尔曲线的优秀文章和动态图。
-
 以下两个是比较经典的动图了。
-
 二阶贝塞尔曲线：
 
-
-
 三阶贝塞尔曲线：
-
-
-
 
 
 由于在工作中经常要和贝塞尔曲线打交道，所以简单说一下自己的理解：">
   <meta property="og:description" content="说到贝塞尔曲线，大家肯定都不陌生，网上有很多关于介绍和理解贝塞尔曲线的优秀文章和动态图。
-
 以下两个是比较经典的动图了。
-
 二阶贝塞尔曲线：
 
-
-
 三阶贝塞尔曲线：
-
-
-
 
 
 由于在工作中经常要和贝塞尔曲线打交道，所以简单说一下自己的理解：">
   <meta name="twitter:description" content="说到贝塞尔曲线，大家肯定都不陌生，网上有很多关于介绍和理解贝塞尔曲线的优秀文章和动态图。
-
 以下两个是比较经典的动图了。
-
 二阶贝塞尔曲线：
-
-
 
 三阶贝塞尔曲线：
 
 
-
-
-
 由于在工作中经常要和贝塞尔曲线打交道，所以简单说一下自己的理解：">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/opengl/opengl-draw-bezier-line/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/opengl/opengl-draw-bezier-line/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -97,11 +73,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -109,9 +97,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -174,6 +160,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -190,21 +179,24 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>OpenGL 实践之贝塞尔曲线绘制</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
                   
-                  
+                     <h1>OpenGL 实践之贝塞尔曲线绘制</h1>
+                     
                     <span class="post-meta">
-  
-    Posted on August 20, 2019
-  
+  Posted on August 20, 2019
   
 </span>
 
 
+                    
+                  
                   
               </div>
             </div>
@@ -213,198 +205,117 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>OpenGL 实践之贝塞尔曲线绘制</h1>
+                <h1 align="center">OpenGL 实践之贝塞尔曲线绘制</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on August 20, 2019
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/oepngl/">oepngl</a> &nbsp;
-              
-                  <a href="https://www.glumes.com/tags/bezier/">bezier</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://www.glumes.com/tags/oepngl/">oepngl</a> &nbsp;
+            
+                <a href="https://www.glumes.com/tags/bezier/">bezier</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#android-绘制贝塞尔曲线">Android 绘制贝塞尔曲线</a></li>
-<li><a href="#opengl-绘制">OpenGL 绘制</a></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#android-绘制贝塞尔曲线">Android 绘制贝塞尔曲线</a></li>
+    <li><a href="#opengl-绘制">OpenGL 绘制</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>说到贝塞尔曲线，大家肯定都不陌生，网上有很多关于介绍和理解贝塞尔曲线的优秀文章和动态图。</p>
-
+        
+        <p>说到贝塞尔曲线，大家肯定都不陌生，网上有很多关于介绍和理解贝塞尔曲线的优秀文章和动态图。</p>
 <p>以下两个是比较经典的动图了。</p>
-
 <p>二阶贝塞尔曲线：</p>
-
-<p><img src="https://yalantis.com/uploads/ckeditor/pictures/502/content_image04.gif" alt="" /></p>
-
+<p><img src="https://yalantis.com/uploads/ckeditor/pictures/502/content_image04.gif" alt=""></p>
 <p>三阶贝塞尔曲线：</p>
-
-<p><img src="https://yalantis.com/uploads/ckeditor/pictures/503/content_image06.gif" alt="" /></p>
-
-<hr />
-
+<p><img src="https://yalantis.com/uploads/ckeditor/pictures/503/content_image06.gif" alt=""></p>
+<hr>
 <p>由于在工作中经常要和贝塞尔曲线打交道，所以简单说一下自己的理解：</p>
-
 <p>现在假设我们要在坐标系中绘制一条直线，直线的方程很简单，就是 <code>y=x</code> ，很容易得到下图：</p>
-
-<p><img src="https://image.glumes.com/images/2019/08/10/-2019-08-10-3.44.51.md.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/08/10/-2019-08-10-3.44.51.md.png" alt=""></p>
 <p>现在我们限制一下 x 的取值范围为 <code>0~1</code> 的闭区间，那么可以得出 y 的取值范围也是 <code>0~1</code>。</p>
-
 <p>而在 <code>0~1</code> 的区间范围内，x 能取的数有多少个呢？答案当然是无数个了。</p>
-
-<p><img src="https://image.glumes.com/images/2019/08/10/-2019-08-10-4.17.15.md.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/08/10/-2019-08-10-4.17.15.md.png" alt=""></p>
 <p>同理，y 的取值个数也是有无数个。每一个 x 都有唯一的 y 与之对应，一个 (x,y) 在坐标系上就是一个点。</p>
-
 <p>所以最终得到的 <code>0~1</code> 区间的线段，实际上是由无数的点组成的。</p>
-
 <p>那么这条线段有多长呢？长度是由 x 的取值范围来决定的，若 x 的取值为 <code>0~2</code>，那么线段就长了一倍。</p>
-
 <p>另外，如果 x 的取值范围不是无数个，而是以 0.05 的间距从 0 到 1 之间递增，那么得到的就是一串点了。</p>
-
 <blockquote>
 <p>由于 点 是一个理想状态下的描述，在数学上点是没有宽高、没有面积的。</p>
-
 <p>但是，如果你在草稿纸上绘制一个点，不管你用到是铅笔、毛笔、水笔还是画笔，一个点总是要占面积的。</p>
-
 <p>毛笔画一个点的面积可能需要铅笔画几十个点了。</p>
 </blockquote>
-
 <p>在实际生活中，如果要以 0.05 的间距在第一幅坐标系图中画出 x 在 <code>0~1</code> 区间的一串点，最终结果就和直接画一条线段没啥差别了。</p>
-
 <p>这就是现实和理想的差别了。理想一串点，现实一条线。</p>
-
-<hr />
-
+<hr>
 <p>我们把这个逻辑放到手机屏幕上。</p>
-
 <p>手机屏幕上的最小显示单位就是像素了，一个 1920 * 1080 的屏幕指的就是各方向上像素点的数量。</p>
-
 <p>假如绘制一条和屏幕一样宽的线段，一个点最小就算一个像素，最多也就 1080 个点了。</p>
-
 <p>点占的像素越多，那么实际绘制时需要的点的数量越少，这也算是潜在的优化项了。</p>
-
-<hr />
-
+<hr>
 <p>说完直线，再回到贝塞尔曲线上。</p>
-
 <p>曲线和直线都有一个共同点，它们都有各自特定的方程，只不过我们用的直线例子比较简单，既 <code>y = x</code> ，一眼看出计算结果。</p>
-
 <p>直线方程 y = x，在数学上可以这么描述：y 是关于 x 的函数，既 <code>y = F(x)</code> ，其中 x 的取值决定了该直线的长度。</p>
-
 <p>根据上面的理解，这个长度的直线实际又是由在 x 的取值范围内对应的无数个点组成的。</p>
-
 <p>反观贝塞尔曲线方程以及对应的图形如下：</p>
-
 <ul>
 <li>二阶贝塞尔曲线：</li>
 </ul>
-
-<p><img src="https://image.glumes.com/images/2019/08/10/87a5997cdd29dcf7620f11b53015fcc8_r.jpg" alt="" /></p>
-
-<p><img src="https://yalantis.com/uploads/ckeditor/pictures/1961/content_content_image00.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/08/10/87a5997cdd29dcf7620f11b53015fcc8_r.jpg" alt=""></p>
+<p><img src="https://yalantis.com/uploads/ckeditor/pictures/1961/content_content_image00.png" alt=""></p>
 <p>其中，P0 和 P2 是起始点，P1 是控制点。</p>
-
 <ul>
 <li>三阶贝塞尔曲线</li>
 </ul>
-
-<p><img src="https://image.glumes.com/images/2019/08/10/5918c8d341e46406bf342725fd37124e_r.jpg" alt="" /></p>
-
-<p><img src="https://yalantis.com/uploads/ckeditor/pictures/1962/content_content_image09.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/08/10/5918c8d341e46406bf342725fd37124e_r.jpg" alt=""></p>
+<p><img src="https://yalantis.com/uploads/ckeditor/pictures/1962/content_content_image09.png" alt=""></p>
 <p>其中，P0 和 P3 是起始点，P1 和 P2 是控制点。</p>
-
-<hr />
-
+<hr>
 <p>不难理解，假设我们要绘制一条曲线，肯定要有起始和结束点来指定曲线的范围曲线。</p>
-
 <p>而控制点就是指定该曲线的弧度，或者说指定该曲线的弯曲走向，不同的控制点得出的曲线绘制结果是不一样的。</p>
-
 <p>另外，可以观察到，无论是几阶贝塞尔曲线，都会有参数 t 以及 t 的取值范围限定。</p>
-
 <p>t 在 0~1 范围的闭区间内，那么 t 的取值个数实际上就有无数个了，这时的 t 就可以理解成上面介绍直线中讲到的 x 。</p>
-
 <p>这样一来，就可以把起始点、控制点当初固定参数，那么贝塞尔曲线计算公式就成了 B = F(t) ，B 是关于 t 的函数，而 t 的取值范围为 0~1 的闭区间。</p>
-
 <blockquote>
 <p>也就是说贝塞尔曲线，选定了起始点和控制点，照样可以看成是 t 在 0~1 闭区间内对应的无数个点所组成的。</p>
 </blockquote>
-
 <p>有了上面的阐述，在工(ban)程(zhuan)的角度上，就不难理解贝塞尔曲线到底怎么使用了。</p>
-
-<hr />
-
+<hr>
 <h2 id="android-绘制贝塞尔曲线">Android 绘制贝塞尔曲线</h2>
-
 <p>Android 自带贝塞尔曲线绘制 API ，通过 Path 类的 <code>quadTo</code> 和 <code>cubicTo</code> 方法就可以完成绘制。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#93a1a1;font-style:italic">// 构建 path 路径，也就是选取
 </span><span style="color:#93a1a1;font-style:italic"></span>  <span style="color:#268bd2">path</span>.<span style="color:#268bd2">reset</span>();
@@ -415,33 +326,20 @@ if (!doNotTrack) {
   <span style="color:#268bd2">path</span>.<span style="color:#268bd2">close</span>();
   
   <span style="color:#93a1a1;font-style:italic">// 最后的绘制操作
-</span><span style="color:#93a1a1;font-style:italic"></span>  <span style="color:#268bd2">canvas</span>.<span style="color:#268bd2">drawPath</span>(<span style="color:#268bd2">path</span>, <span style="color:#268bd2">paint</span>);</code></pre></div>
-<p>这里的绘制实际上就是把贝塞尔曲线计算的方程式交给了 Android 系统内部去完成了，参数传递上只传递了起始点和控制点。</p>
-
+</span><span style="color:#93a1a1;font-style:italic"></span>  <span style="color:#268bd2">canvas</span>.<span style="color:#268bd2">drawPath</span>(<span style="color:#268bd2">path</span>, <span style="color:#268bd2">paint</span>);
+</code></pre></div><p>这里的绘制实际上就是把贝塞尔曲线计算的方程式交给了 Android 系统内部去完成了，参数传递上只传递了起始点和控制点。</p>
 <p>我们可以通过自己的代码来计算这个方程式从而对逻辑上获得更多控制权，也就是把曲线拆分成许多个点组成，如果点的尺寸比较大，甚至可以减少点的个数实现同样的效果，达到绘制优化的目的。</p>
-
 <h2 id="opengl-绘制">OpenGL 绘制</h2>
-
 <p>通过 OpenGL 可以实现我们上述的方案，把曲线拆分成多个点组成。这种方案要求我们在 CPU 上去计算贝塞尔曲线方程，根据 t 的每一个取值，计算出一个贝塞尔点，用 OpenGL 去绘制上这个点。</p>
-
 <p>这个点的绘制可以采用 OpenGL 中画三角形 <code>GL_TRIANGLES</code> 的形式去绘制，这样就可以给点带上纹理效果，不过这里面的坑略多，起始点和控制点都是运行时动态可变的实现难度会大于固定不变的。</p>
-
 <p>这里先介绍另一种方案，这种方案实现比较简单也能达到优化效果，我们可以把贝塞尔曲线的计算方程式交给 GPU， 在 OpenGL Shader 中去完成。</p>
-
 <p>这样一来，我们只要给定起始点和控制点，中间计算贝塞尔曲线去填补点的过程就交给 Shader 去完成了。</p>
-
 <p>另外，通过控制 t 的数量，我们可以控制贝塞尔点填补的疏密。</p>
-
 <p>t 越大，填补的点越多，超过一定阈值后，不会对绘制效果有提升，反而影响性能。</p>
-
 <p>t 越小，那么贝塞尔曲线就退化成一串点组成了。所以说 t 的取值范围也能对绘制起到优化作用。</p>
-
 <p>绘制效果如下图所示：</p>
-
-<p><img src="https://image.glumes.com/images/2019/08/18/opengl_bezier_crop.gif" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/08/18/opengl_bezier_crop.gif" alt=""></p>
 <p>以下就是实际的代码部分了，关于 OpenGL 的基础理论部分可以参考之前写过的文章和公众号，就不再阐述了。</p>
-
 <p>在 Shader 中定义一个函数，实现贝塞尔方程：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">vec2</span> <span style="color:#268bd2">fun</span>(<span style="color:#268bd2">in</span> <span style="color:#268bd2">vec2</span> <span style="color:#268bd2">p0</span>, <span style="color:#268bd2">in</span> <span style="color:#268bd2">vec2</span> <span style="color:#268bd2">p1</span>, <span style="color:#268bd2">in</span> <span style="color:#268bd2">vec2</span> <span style="color:#268bd2">p2</span>, <span style="color:#268bd2">in</span> <span style="color:#268bd2">vec2</span> <span style="color:#268bd2">p3</span>, <span style="color:#268bd2">in</span> <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">t</span>){
     <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">tt</span> = (<span style="color:#2aa198;font-weight:bold">1.0</span> - <span style="color:#268bd2">t</span>) * (<span style="color:#2aa198;font-weight:bold">1.0</span> -<span style="color:#268bd2">t</span>);
@@ -450,8 +348,7 @@ if (!doNotTrack) {
             + <span style="color:#2aa198;font-weight:bold">3.0</span> * <span style="color:#268bd2">t</span> *<span style="color:#268bd2">t</span> *(<span style="color:#2aa198;font-weight:bold">1.0</span> -<span style="color:#268bd2">t</span>) *<span style="color:#268bd2">p2</span> 
             + <span style="color:#268bd2">t</span> *<span style="color:#268bd2">t</span> *<span style="color:#268bd2">t</span> *<span style="color:#268bd2">p3</span>;
 }
-</code></pre></div>
-<p>该方程可以利用 Shader 中自带的函数优化一波：</p>
+</code></pre></div><p>该方程可以利用 Shader 中自带的函数优化一波：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">vec2</span> <span style="color:#268bd2">fun2</span>(<span style="color:#268bd2">in</span> <span style="color:#268bd2">vec2</span> <span style="color:#268bd2">p0</span>, <span style="color:#268bd2">in</span> <span style="color:#268bd2">vec2</span> <span style="color:#268bd2">p1</span>, <span style="color:#268bd2">in</span> <span style="color:#268bd2">vec2</span> <span style="color:#268bd2">p2</span>, <span style="color:#268bd2">in</span> <span style="color:#268bd2">vec2</span> <span style="color:#268bd2">p3</span>, <span style="color:#268bd2">in</span> <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">t</span>)
 {
     <span style="color:#268bd2">vec2</span> <span style="color:#268bd2">q0</span> = <span style="color:#268bd2">mix</span>(<span style="color:#268bd2">p0</span>, <span style="color:#268bd2">p1</span>, <span style="color:#268bd2">t</span>);
@@ -461,8 +358,7 @@ if (!doNotTrack) {
     <span style="color:#268bd2">vec2</span> <span style="color:#268bd2">r1</span> = <span style="color:#268bd2">mix</span>(<span style="color:#268bd2">q1</span>, <span style="color:#268bd2">q2</span>, <span style="color:#268bd2">t</span>);
     <span style="color:#859900">return</span> <span style="color:#268bd2">mix</span>(<span style="color:#268bd2">r0</span>, <span style="color:#268bd2">r1</span>, <span style="color:#268bd2">t</span>);
 }
-</code></pre></div>
-<p>接下来就是具体的顶点着色器 shader ：</p>
+</code></pre></div><p>接下来就是具体的顶点着色器 shader ：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 对应 t 数据的传递
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">attribute</span> <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">aData</span>;
 <span style="color:#93a1a1;font-style:italic">// 对应起始点和结束点
@@ -491,9 +387,7 @@ if (!doNotTrack) {
     <span style="color:#93a1a1;font-style:italic">// 定义点的尺寸大小
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">gl_PointSize</span> = <span style="color:#2aa198;font-weight:bold">20.0</span>;
 }
-</code></pre></div>
-<p>代码中的 <code>uStartEndData</code> 对应起始点和结束点，<code>uControlData</code> 对应两个控制点。</p>
-
+</code></pre></div><p>代码中的 <code>uStartEndData</code> 对应起始点和结束点，<code>uControlData</code> 对应两个控制点。</p>
 <p>这两个变量的数据传递通过 <code>glUniform4f</code> 方法就好了：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">mStartEndHandle</span> = <span style="color:#268bd2">glGetUniformLocation</span>(<span style="color:#268bd2">mProgram</span>, <span style="color:#2aa198">&#34;uStartEndData&#34;</span>);
     <span style="color:#268bd2">mControlHandle</span> = <span style="color:#268bd2">glGetUniformLocation</span>(<span style="color:#268bd2">mProgram</span>, <span style="color:#2aa198">&#34;uControlData&#34;</span>);
@@ -509,8 +403,7 @@ if (!doNotTrack) {
             <span style="color:#268bd2">mControlPoints</span>[<span style="color:#2aa198;font-weight:bold">2</span>],
             <span style="color:#268bd2">mControlPoints</span>[<span style="color:#2aa198;font-weight:bold">3</span>]);  
             
-</code></pre></div>
-<p>另外重要的变量就是 <code>aData</code> 了，它对应的就是 t 在 0~1 闭区间的划分的数量。</p>
+</code></pre></div><p>另外重要的变量就是 <code>aData</code> 了，它对应的就是 t 在 0~1 闭区间的划分的数量。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">float</span>[] <span style="color:#268bd2">genTData</span>() {
         <span style="color:#859900;font-weight:bold">float</span>[] <span style="color:#268bd2">tData</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">float</span>[<span style="color:#268bd2">Const</span>.<span style="color:#268bd2">NUM_POINTS</span>];
         <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span> = <span style="color:#268bd2">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#268bd2">tData</span>.<span style="color:#268bd2">length</span>; <span style="color:#268bd2">i</span> ++) {
@@ -518,94 +411,81 @@ if (!doNotTrack) {
             <span style="color:#268bd2">tData</span>[<span style="color:#268bd2">i</span>] = <span style="color:#268bd2">t</span>;
         }
         <span style="color:#859900">return</span> <span style="color:#268bd2">tData</span>;
-    }</code></pre></div>
-<p>以上函数就是把 t 在 0~1 闭区间分成 <code>Const.NUM_POINTS</code> 份，每一份的值都存在 tData 数组中，最后通过 <code>glVertexAttribPointer</code> 函数传递给 Shader 。</p>
-
+    }
+</code></pre></div><p>以上函数就是把 t 在 0~1 闭区间分成 <code>Const.NUM_POINTS</code> 份，每一份的值都存在 tData 数组中，最后通过 <code>glVertexAttribPointer</code> 函数传递给 Shader 。</p>
 <p>最后实际绘制时，我们采用 <code>GL_POINTS</code> 的形式绘制就好了。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glDrawArrays</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_POINTS</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">Const</span>.<span style="color:#268bd2">NUM_POINTS</span> );</code></pre></div>
-<p>以上就是 OpenGL 绘制贝塞尔曲线的小实践。</p>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glDrawArrays</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_POINTS</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">Const</span>.<span style="color:#268bd2">NUM_POINTS</span> );
+</code></pre></div><p>以上就是 OpenGL 绘制贝塞尔曲线的小实践。</p>
 <p>具体的代码部分可以参考我的项目：</p>
-
 <blockquote>
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
 </blockquote>
-
 <p>在参考中，也有一个 OpenGL 绘制贝塞尔曲线的例子，不过他绘制的是贝塞尔曲线面，采用的是 <code>GL_TRIANGLES</code> 的形式，而且在 <code>tData</code> 数组的构造也有些不同，但是都大同小异了，看明白了本文的例子也不难理解参考的文章。</p>
-
 <h2 id="参考">参考</h2>
-
 <ol>
 <li><a href="https://yalantis.com/blog/how-we-created-visualization-for-horizon-our-open-source-library-for-sound-visualization/">https://yalantis.com/blog/how-we-created-visualization-for-horizon-our-open-source-library-for-sound-visualization/</a></li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
-        
-          
-
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/" data-toggle="tooltip" data-placement="top" title="图像库 libjpeg-turbo 编译与实践">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/opengl/opengl-transition/" data-toggle="tooltip" data-placement="top" title="OpenGL 实现视频编辑中的转场效果">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
         
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
-        
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/opengl/opengl-draw-bezier-line/">OpenGL 实践之贝塞尔曲线绘制</a>
+
+                
+
+                
+
 
         
-          
-
         
-  
-      </div>
-    
-    
+        
+      </article>
+
+      
+        
+
+      
+
+      
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://www.glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/" data-toggle="tooltip" data-placement="top" title="图像库 libjpeg-turbo 编译与实践">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/opengl/opengl-transition/" data-toggle="tooltip" data-placement="top" title="OpenGL 实现视频编辑中的转场效果">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
+
+      
+        
+      
+
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -614,6 +494,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -656,25 +538,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -683,66 +559,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

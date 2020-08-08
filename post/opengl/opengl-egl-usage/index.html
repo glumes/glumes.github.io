@@ -1,52 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>OpenGL 之 EGL 使用实践-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>OpenGL 之 EGL 使用实践</title>
   <meta property="og:title" content="OpenGL 之 EGL 使用实践" />
   <meta name="twitter:title" content="OpenGL 之 EGL 使用实践" />
 
   <meta name="description" content="OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。
-
 而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 EGL 来完成这个转换工作。">
   <meta property="og:description" content="OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。
-
 而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 EGL 来完成这个转换工作。">
   <meta name="twitter:description" content="OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。
-
 而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 EGL 来完成这个转换工作。">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/opengl/opengl-egl-usage/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/opengl/opengl-egl-usage/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -61,11 +55,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -73,9 +79,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -138,6 +142,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -154,21 +161,24 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>OpenGL 之 EGL 使用实践</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
                   
-                  
+                     <h1>OpenGL 之 EGL 使用实践</h1>
+                     
                     <span class="post-meta">
-  
-    Posted on September 2, 2018
-  
+  Posted on September 2, 2018
   
 </span>
 
 
+                    
+                  
                   
               </div>
             </div>
@@ -177,103 +187,71 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>OpenGL 之 EGL 使用实践</h1>
+                <h1 align="center">OpenGL 之 EGL 使用实践</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on September 2, 2018
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
-              
-                  <a href="https://www.glumes.com/tags/egl/">EGL</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+            
+                <a href="https://www.glumes.com/tags/egl/">EGL</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#egl-使用实践">EGL 使用实践</a>
-<ul>
-<li><a href="#创建与本地窗口系统的连接">创建与本地窗口系统的连接</a></li>
-<li><a href="#初始化-egl">初始化 EGL</a></li>
-<li><a href="#确定可用的渲染表面-surface-配置">确定可用的渲染表面（Surface）配置</a></li>
-<li><a href="#创建渲染上下文">创建渲染上下文</a></li>
-<li><a href="#创建渲染表面">创建渲染表面</a></li>
-<li><a href="#绑定上下文">绑定上下文</a></li>
-<li><a href="#交换缓冲-进行显示">交换缓冲，进行显示</a></li>
-<li><a href="#释放操作">释放操作</a></li>
-</ul></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#egl-使用实践">EGL 使用实践</a>
+      <ul>
+        <li><a href="#创建与本地窗口系统的连接">创建与本地窗口系统的连接</a></li>
+        <li><a href="#初始化-egl">初始化 EGL</a></li>
+        <li><a href="#确定可用的渲染表面surface配置">确定可用的渲染表面（Surface）配置</a></li>
+        <li><a href="#创建渲染上下文">创建渲染上下文</a></li>
+        <li><a href="#创建渲染表面">创建渲染表面</a></li>
+        <li><a href="#绑定上下文">绑定上下文</a></li>
+        <li><a href="#交换缓冲进行显示">交换缓冲，进行显示</a></li>
+        <li><a href="#释放操作">释放操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。</p>
-
+        
+        <p>OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。</p>
 <p>而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 <code>EGL</code> 来完成这个转换工作。</p>
-
 <p>EGL 是 OpenGL ES 渲染 API 和本地窗口系统（native platform window system）之间的一个中间接口层，它也主要由厂商来实现。EGL 提供了如下机制：</p>
-
 <ul>
 <li>与设备的原生窗口系统通信</li>
 <li>查询绘图表面的可用类型和配置</li>
@@ -281,75 +259,63 @@ if (!doNotTrack) {
 <li>在 OpenGL ES 和其他图形渲染 API 之间同步渲染</li>
 <li>管理纹理贴图等渲染资源</li>
 </ul>
-
 <p>为了让 OpenGL ES 能够绘制在当前设备上，我们需要 EGL 作为 OpenGL ES 与设备的桥梁。</p>
-
 <p>我们可以直接用 GLSurfaceView 来进行 OpenGL 的渲染，就是因为在 GLSurfaceView 的内部已经完成了对 EGL 的使用封装，当然我们也可以封装自己的 EGL 环境。</p>
-
 <h2 id="egl-使用实践">EGL 使用实践</h2>
-
 <p>EGL 的使用要遵循一些固定的步骤，按照这些步骤去配置、创建、渲染、释放。</p>
-
 <ul>
 <li>创建与本地窗口系统的连接
-
 <ul>
 <li>调用 eglGetDisplay 方法得到 EGLDisplay</li>
-</ul></li>
+</ul>
+</li>
 <li>初始化 EGL 方法
-
 <ul>
 <li>调用 eglInitialize 方法初始化</li>
-</ul></li>
+</ul>
+</li>
 <li>确定渲染表面的配置信息
-
 <ul>
 <li>调用 eglChooseConfig 方法得到 EGLConfig</li>
-</ul></li>
+</ul>
+</li>
 <li>创建渲染上下文
-
 <ul>
 <li>通过 EGLDisplay 和 EGLConfig ，调用 eglCreateContext 方法创建渲染上下文，得到 EGLContext</li>
-</ul></li>
+</ul>
+</li>
 <li>创建渲染表面
-
 <ul>
 <li>通过 EGLDisplay 和 EGLConfig ，调用 eglCreateWindowSurface 方法创建渲染表面，得到 EGLSurface</li>
-</ul></li>
+</ul>
+</li>
 <li>绑定上下文
-
 <ul>
 <li>通过 eglMakeCurrent 方法将 EGLSurface、EGLContext、EGLDisplay 三者绑定，接下来就可以使用 OpenGL 进行绘制了。</li>
-</ul></li>
+</ul>
+</li>
 <li>交换缓冲
-
 <ul>
 <li>当用 OpenGL 绘制结束后，使用 eglSwapBuffers 方法交换前后缓冲，将绘制内容显示到屏幕上</li>
-</ul></li>
+</ul>
+</li>
 <li>释放 EGL 环境
-
 <ul>
 <li>绘制结束，不再需要使用 EGL 时，取消 eglMakeCurrent 的绑定，销毁  EGLDisplay、EGLSurface、EGLContext。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>如果对 EGLDisplay、EGLSurface 、EGLContext 这些抽象概念傻傻分不清楚，可以参考这幅图：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fu8hoo85znj20g008q78w.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fu8hoo85znj20g008q78w.jpg" alt=""></p>
 <p>其中：</p>
-
 <ul>
 <li>Display(EGLDisplay) 是对实际显示设备的抽象</li>
 <li>Surface（EGLSurface）是对用来存储图像的内存区域</li>
 <li>FrameBuffer 的抽象，包括 Color Buffer， Stencil Buffer ，Depth Buffer</li>
 <li>Context (EGLContext) 存储 OpenGL ES绘图的一些状态信息</li>
 </ul>
-
 <p>使用 EGL 的具体步骤如下：</p>
-
 <h3 id="创建与本地窗口系统的连接">创建与本地窗口系统的连接</h3>
-
 <p>通过 <code>eglGetDisplay</code> 方法创建与本地窗口系统的连接，返回的是 <code>EGLDisplay</code> 类型对象，可以把它抽象理解成设备的显示屏幕。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#268bd2">EGLDisplay</span> <span style="color:#268bd2">mEGLDisplay</span> = <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_NO_DISPLAY</span>;
     <span style="color:#93a1a1;font-style:italic">// 创建与本地窗口系统的连接
@@ -357,11 +323,9 @@ if (!doNotTrack) {
     <span style="color:#93a1a1;font-style:italic">// 如果创建之后还是 EGL_NO_DISPLAY ，表示创建失败
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">if</span> (<span style="color:#268bd2">mEGLDisplay</span> == <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_NO_DISPLAY</span>) {
         <span style="color:#93a1a1;font-style:italic">// failed
-</span><span style="color:#93a1a1;font-style:italic"></span>    }</code></pre></div>
-<p>这一步就可以看成是选择显示设备，一般都是选择默认的显示设备，也就是手机屏幕。</p>
-
+</span><span style="color:#93a1a1;font-style:italic"></span>    }
+</code></pre></div><p>这一步就可以看成是选择显示设备，一般都是选择默认的显示设备，也就是手机屏幕。</p>
 <h3 id="初始化-egl">初始化 EGL</h3>
-
 <p>创建 <code>EGLDisplay</code> 对象之后，要将它进行初始化。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#93a1a1;font-style:italic">// EGL 的主版本号
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">mMajorVersion</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">int</span>[<span style="color:#268bd2">1</span>];
@@ -370,26 +334,18 @@ if (!doNotTrack) {
     <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">result</span> = <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">eglInitialize</span>(<span style="color:#268bd2">mEGLDisplay</span>, <span style="color:#268bd2">mMajorVersion</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">mMajorVersion</span>, <span style="color:#268bd2">0</span>);
     <span style="color:#859900">if</span> (!<span style="color:#268bd2">result</span>) {
         <span style="color:#93a1a1;font-style:italic">// failed
-</span><span style="color:#93a1a1;font-style:italic"></span>    }</code></pre></div>
-<p>初始化的时候可以获得 EGL 的主版本号与次版本号。</p>
-
-<h3 id="确定可用的渲染表面-surface-配置">确定可用的渲染表面（Surface）配置</h3>
-
+</span><span style="color:#93a1a1;font-style:italic"></span>    }
+</code></pre></div><p>初始化的时候可以获得 EGL 的主版本号与次版本号。</p>
+<h3 id="确定可用的渲染表面surface配置">确定可用的渲染表面（Surface）配置</h3>
 <p>把 Surface 看成是一个渲染表面，渲染表面包含一些配置信息，也就是 <code>EGLConfig</code> 属性：</p>
-
 <p>比如：</p>
-
 <ul>
 <li>EGL_RED_SIZE：颜色缓冲区中红色用几位来表示</li>
 <li>EGL_BLUE_SIZE：颜色缓冲区中蓝色用几位来表示</li>
 </ul>
-
 <p>更多的 EGLConfig 属性参考这里：</p>
-
 <p><a href="https://www.jianshu.com/p/9db986365cda">https://www.jianshu.com/p/9db986365cda</a>。</p>
-
 <p>有两种方式用来确定可用的渲染表面配置。</p>
-
 <p>通过 <code>eglGetConfigs</code> 的方法获取底层窗口系统支持的所有 EGL 渲染表面配置，再用 <code>eglGetConfigAttrib</code> 查询每个 <code>EGLConfig</code> 的信息。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900">native</span> <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">eglGetConfigs</span>(
         <span style="color:#268bd2">EGLDisplay</span> <span style="color:#268bd2">dpy</span>,
@@ -406,8 +362,8 @@ if (!doNotTrack) {
         <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">attribute</span>,
         <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">value</span>,
         <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">offset</span>
-    );</code></pre></div>
-<p>另一种是创建好渲染表面配置列表，通过 <code>eglChooseConfig</code> 的方法，找到符合要求的 EGLConfig 配置。</p>
+    );
+</code></pre></div><p>另一种是创建好渲染表面配置列表，通过 <code>eglChooseConfig</code> 的方法，找到符合要求的 EGLConfig 配置。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900">native</span> <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">eglChooseConfig</span>(
         <span style="color:#268bd2">EGLDisplay</span> <span style="color:#268bd2">dpy</span>,
         <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">attrib_list</span>,
@@ -417,9 +373,8 @@ if (!doNotTrack) {
         <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">config_size</span>,
         <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">num_config</span>,
         <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">num_configOffset</span>
-    );</code></pre></div>
-<p>第二种方法相对于第一种来说，不用再查询每一个 EGLConfig 属性了。</p>
-
+    );
+</code></pre></div><p>第二种方法相对于第一种来说，不用再查询每一个 EGLConfig 属性了。</p>
 <p>具体使用如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#93a1a1;font-style:italic">// 定义 EGLConfig 属性配置
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">private</span> <span style="color:#859900">static</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">EGL_CONFIG</span> = {
@@ -431,8 +386,8 @@ if (!doNotTrack) {
             <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_STENCIL_SIZE</span>, <span style="color:#268bd2">CFG_STENCIL_SIZE</span>,
             <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_RENDERABLE_TYPE</span>, <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_OPENGL_ES2_BIT</span>,
             <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_NONE</span>,
-    };</code></pre></div>
-<p>首先定义 EGLConfig 属性配置数组，定义红、绿、蓝、透明度、深度、模板缓冲的位数，最后要以 <code>EGL14.EGL_NONE</code> 结尾。</p>
+    };
+</code></pre></div><p>首先定义 EGLConfig 属性配置数组，定义红、绿、蓝、透明度、深度、模板缓冲的位数，最后要以 <code>EGL14.EGL_NONE</code> 结尾。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#93a1a1;font-style:italic">// 所有符合配置的 EGLConfig 个数
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">numConfigs</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">int</span>[<span style="color:#268bd2">1</span>];
         <span style="color:#93a1a1;font-style:italic">// 所有符合配置的 EGLConfig
@@ -447,34 +402,28 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">eglChooseConfig</span>(<span style="color:#268bd2">mEGLDisplay</span>, <span style="color:#268bd2">EGL_CONFIG</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">configs</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">configs</span>.<span style="color:#268bd2">length</span>, <span style="color:#268bd2">numConfigs</span>, <span style="color:#268bd2">0</span>);
             <span style="color:#93a1a1;font-style:italic">// 去第一个
 </span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">mEGLConfig</span> = <span style="color:#268bd2">configs</span>[<span style="color:#268bd2">0</span>];
-        }</code></pre></div>
-<p>首先通过给 eglChooseConfig 相应参数设置为 null，找到符合条件的 EGLConfig 个数，如果不为空，则再一次调用，取第一个，就是想要的 <code>EGLConfig</code> 配置。</p>
-
+        }
+</code></pre></div><p>首先通过给 eglChooseConfig 相应参数设置为 null，找到符合条件的 EGLConfig 个数，如果不为空，则再一次调用，取第一个，就是想要的 <code>EGLConfig</code> 配置。</p>
 <h3 id="创建渲染上下文">创建渲染上下文</h3>
-
 <p>有了 <code>EGLDisplay</code> 和 <code>EGLConfig</code> 对象，就可以创建 渲染表面 <code>EGLSurface</code>和 渲染上下文 <code>EGLContext</code>。</p>
-
 <p>在创建渲染上下文时，同样要创建属性信息，主要是指定 OpenGL 使用版本。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900">static</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">EGL_ATTRIBUTE</span> = {
             <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_CONTEXT_CLIENT_VERSION</span>, <span style="color:#268bd2">2</span>,
             <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_NONE</span>,
-    };</code></pre></div>
-<p>同样，还是以 EGL14.EGL_NONE 结尾。</p>
+    };
+</code></pre></div><p>同样，还是以 EGL14.EGL_NONE 结尾。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#268bd2">EGLContext</span> <span style="color:#268bd2">mEGLContext</span> = <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_NO_CONTEXT</span>;
     <span style="color:#93a1a1;font-style:italic">// 创建上下文
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">mEGLContext</span> = <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">eglCreateContext</span>(<span style="color:#268bd2">mEGLDisplay</span>, <span style="color:#268bd2">mEGLConfig</span>, <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_NO_CONTEXT</span>, <span style="color:#268bd2">EGL_ATTRIBUTE</span>, <span style="color:#268bd2">0</span>);
     <span style="color:#859900">if</span> (<span style="color:#268bd2">mEGLContext</span> == <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_NO_CONTEXT</span>) {
         <span style="color:#93a1a1;font-style:italic">// failed
-</span><span style="color:#93a1a1;font-style:italic"></span>    }</code></pre></div>
-<h3 id="创建渲染表面">创建渲染表面</h3>
-
+</span><span style="color:#93a1a1;font-style:italic"></span>    }
+</code></pre></div><h3 id="创建渲染表面">创建渲染表面</h3>
 <p>EGL 提供了两种方式创建渲染表面，一种是可见的，渲染到屏幕上，一种是不可见的，也就离屏的。</p>
-
 <ul>
 <li>eglCreatePbufferSurface：创建离屏的渲染表面</li>
 <li>eglCreateWindowSurface：创建渲染到屏幕的渲染表面</li>
 </ul>
-
 <p>无论使用哪种创建方式，也都需要创建配置信息。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#93a1a1;font-style:italic">// 创建渲染表面的配置信息
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">private</span> <span style="color:#859900">static</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">EGL_SURFACE</span> = {
@@ -482,9 +431,8 @@ if (!doNotTrack) {
     };
     <span style="color:#859900">private</span> <span style="color:#268bd2">EGLSurface</span> <span style="color:#268bd2">mEGLSurface</span> = <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_NO_SURFACE</span>;
     <span style="color:#93a1a1;font-style:italic">// surface 参数是有 SurfaceView.getHolder 传递过来的
-</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">mEGLSurface</span> = <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">eglCreateWindowSurface</span>(<span style="color:#268bd2">mEGLDisplay</span>, <span style="color:#268bd2">mEGLConfig</span>, <span style="color:#268bd2">surface</span>, <span style="color:#268bd2">EGL_SURFACE</span>, <span style="color:#268bd2">0</span>);</code></pre></div>
-<p>对于渲染到屏幕上的创建，配置信息可以不添加什么，但还是要以 <code>EGL14.EGL_NONE</code> 结尾。</p>
-
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">mEGLSurface</span> = <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">eglCreateWindowSurface</span>(<span style="color:#268bd2">mEGLDisplay</span>, <span style="color:#268bd2">mEGLConfig</span>, <span style="color:#268bd2">surface</span>, <span style="color:#268bd2">EGL_SURFACE</span>, <span style="color:#268bd2">0</span>);
+</code></pre></div><p>对于渲染到屏幕上的创建，配置信息可以不添加什么，但还是要以 <code>EGL14.EGL_NONE</code> 结尾。</p>
 <p>而对于离屏的渲染表面创建，就还需要提供宽、高等信息，但是却不需要提供 <code>surface</code> 的参数了。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#93a1a1;font-style:italic">// 使用 eglCreatePbufferSurface 就需要指定宽和高
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">EGL_SURFACE</span> = {
@@ -492,21 +440,16 @@ if (!doNotTrack) {
                 <span style="color:#268bd2">EGL10</span>.<span style="color:#268bd2">EGL_HEIGHT</span>, <span style="color:#268bd2">h</span>,
                 <span style="color:#268bd2">EGL10</span>.<span style="color:#268bd2">EGL_NONE</span>,
         };
-        <span style="color:#268bd2">mEGLSurface</span> = <span style="color:#268bd2">mEGL</span>.<span style="color:#268bd2">eglCreatePbufferSurface</span>(<span style="color:#268bd2">mEGLDisplay</span>, <span style="color:#268bd2">mEGLConfig</span>, <span style="color:#268bd2">EGL_SURFACE</span>,<span style="color:#268bd2">0</span>);</code></pre></div>
-<h3 id="绑定上下文">绑定上下文</h3>
-
+        <span style="color:#268bd2">mEGLSurface</span> = <span style="color:#268bd2">mEGL</span>.<span style="color:#268bd2">eglCreatePbufferSurface</span>(<span style="color:#268bd2">mEGLDisplay</span>, <span style="color:#268bd2">mEGLConfig</span>, <span style="color:#268bd2">EGL_SURFACE</span>,<span style="color:#268bd2">0</span>);
+</code></pre></div><h3 id="绑定上下文">绑定上下文</h3>
 <p>当有了 <code>EGLDisplay</code>、<code>EGLSurface</code>、<code>EGLContext</code> 对象之后，就可以为 <code>EGLContext</code> 绑定上下文了。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">eglMakeCurrent</span>(<span style="color:#268bd2">mEGLDisplay</span>, <span style="color:#268bd2">mEGLSurface</span>, <span style="color:#268bd2">mEGLSurface</span>, <span style="color:#268bd2">mEGLContext</span>);</code></pre></div>
-<p>当绑定上下文之后，就可以执行具体的绘制操作了，调用 OpenGL 相关的方法绘制图形。</p>
-
-<h3 id="交换缓冲-进行显示">交换缓冲，进行显示</h3>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">eglMakeCurrent</span>(<span style="color:#268bd2">mEGLDisplay</span>, <span style="color:#268bd2">mEGLSurface</span>, <span style="color:#268bd2">mEGLSurface</span>, <span style="color:#268bd2">mEGLContext</span>);
+</code></pre></div><p>当绑定上下文之后，就可以执行具体的绘制操作了，调用 OpenGL 相关的方法绘制图形。</p>
+<h3 id="交换缓冲进行显示">交换缓冲，进行显示</h3>
 <p>当绘制结束之后，就该把绘制结果显示在屏幕上了。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">eglSwapBuffers</span>(<span style="color:#268bd2">mEGLDisplay</span>, <span style="color:#268bd2">mEGLSurface</span>);</code></pre></div>
-<p>通过 <code>eglSwapBuffers</code> 方法，将后台绘制的缓冲显示到前台。</p>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">eglSwapBuffers</span>(<span style="color:#268bd2">mEGLDisplay</span>, <span style="color:#268bd2">mEGLSurface</span>);
+</code></pre></div><p>通过 <code>eglSwapBuffers</code> 方法，将后台绘制的缓冲显示到前台。</p>
 <h3 id="释放操作">释放操作</h3>
-
 <p>当绘制结束时，要进行相应的释放操作。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">eglMakeCurrent</span>(<span style="color:#268bd2">mEGLDisplay</span>, <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_NO_SURFACE</span>, <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_NO_SURFACE</span>, <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_NO_CONTEXT</span>);
         <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">eglDestroyContext</span>(<span style="color:#268bd2">mEGLDisplay</span>, <span style="color:#268bd2">mEGLContext</span>);
@@ -516,55 +459,55 @@ if (!doNotTrack) {
 
         <span style="color:#268bd2">mEGLContext</span> = <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_NO_CONTEXT</span>;
         <span style="color:#268bd2">mEGLDisplay</span> = <span style="color:#268bd2">EGL14</span>.<span style="color:#268bd2">EGL_NO_DISPLAY</span>;
-        <span style="color:#268bd2">mEGLConfig</span> = <span style="color:#859900;font-weight:bold">null</span>;</code></pre></div>
-<p>相当于就是把前面操作的 EGL 相关对象都释放掉。</p>
-
+        <span style="color:#268bd2">mEGLConfig</span> = <span style="color:#859900;font-weight:bold">null</span>;
+</code></pre></div><p>相当于就是把前面操作的 EGL 相关对象都释放掉。</p>
 <p>当完成这样的一个流程之后，就基本上掌握了 EGL 的大部分使用。</p>
-
 <p>EGL 操作的很多流程都是固定的，可以把它们再单独做一层封装，这里可以参考 <a href="https://github.com/google/grafika">grafika</a> 的封装。</p>
-
 <p>文章中具体代码部分，可以参考我的 Github 项目，欢迎 Star 。</p>
-
 <blockquote>
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
 </blockquote>
-
 <h2 id="参考">参考</h2>
-
 <ol>
 <li><a href="https://woshijpf.github.io/android/2017/09/04/Android%E7%B3%BB%E7%BB%9F%E5%9B%BE%E5%BD%A2%E6%A0%88OpenGLES%E5%92%8CEGL%E4%BB%8B%E7%BB%8D.html">Android 系统图形栈（一）： OpenGL ES 和 EGL 介绍</a></li>
 <li><a href="https://www.slideshare.net/SuhanLee2/understaing-android-egl">Understaing Android EGL</a></li>
 <li><a href="https://blog.csdn.net/cauchyweierstrass/article/details/53189449">OpenGL ES EGL介绍</a></li>
 <li><a href="https://www.jianshu.com/p/9db986365cda">引入EGL</a></li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/opengl/opengl-egl-usage/">OpenGL 之 EGL 使用实践</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -591,45 +534,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/opengl/opengl-gpuimage-analysis/" data-toggle="tooltip" data-placement="top" title="OpenGL 之 GPUImage 源码分析">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 之 帧缓冲  使用实践">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/opengl/opengl-gpuimage-analysis/" data-toggle="tooltip" data-placement="top" title="OpenGL 之 GPUImage 源码分析">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 之 帧缓冲  使用实践">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -638,6 +568,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -680,25 +612,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -707,66 +633,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

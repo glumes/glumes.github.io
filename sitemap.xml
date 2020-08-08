@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -9,33 +9,28 @@
   </url>
   
   <url>
+    <loc>https://www.glumes.com/categories/android/</loc>
+    <lastmod>2020-08-03T20:22:39+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.glumes.com/categories/</loc>
     <lastmod>2020-08-03T20:22:39+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.glumes.com/tags/life/</loc>
     <lastmod>2020-08-03T20:22:39+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.glumes.com/post/</loc>
     <lastmod>2020-08-03T20:22:39+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.glumes.com/tags/</loc>
     <lastmod>2020-08-03T20:22:39+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.glumes.com/categories/android/</loc>
-    <lastmod>2020-08-03T20:22:39+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -44,15 +39,13 @@
   </url>
   
   <url>
-    <loc>https://www.glumes.com/categories/opengl/</loc>
+    <loc>https://www.glumes.com/tags/opengl/</loc>
     <lastmod>2020-05-22T14:33:35+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.glumes.com/tags/opengl/</loc>
+    <loc>https://www.glumes.com/categories/opengl/</loc>
     <lastmod>2020-05-22T14:33:35+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -66,15 +59,13 @@
   </url>
   
   <url>
-    <loc>https://www.glumes.com/categories/ffmpeg/</loc>
+    <loc>https://www.glumes.com/tags/ffmpeg/</loc>
     <lastmod>2020-05-18T11:37:09+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.glumes.com/tags/ffmpeg/</loc>
+    <loc>https://www.glumes.com/categories/ffmpeg/</loc>
     <lastmod>2020-05-18T11:37:09+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -95,7 +86,6 @@
   <url>
     <loc>https://www.glumes.com/tags/sdl/</loc>
     <lastmod>2020-03-22T18:38:09+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -106,7 +96,6 @@
   <url>
     <loc>https://www.glumes.com/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2020-03-22T18:38:09+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -157,13 +146,11 @@
   <url>
     <loc>https://www.glumes.com/categories/life/</loc>
     <lastmod>2019-12-27T15:40:54+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.glumes.com/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2019-12-27T15:40:54+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -174,7 +161,6 @@
   <url>
     <loc>https://www.glumes.com/tags/%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/</loc>
     <lastmod>2019-12-27T10:58:55+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -183,32 +169,28 @@
   </url>
   
   <url>
-    <loc>https://www.glumes.com/post/opengl/opengl-draw-bezier-line/</loc>
-    <lastmod>2019-08-20T23:51:59+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.glumes.com/tags/bezier/</loc>
     <lastmod>2019-08-20T23:51:59+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.glumes.com/tags/oepngl/</loc>
     <lastmod>2019-08-20T23:51:59+08:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.glumes.com/post/opengl/opengl-draw-bezier-line/</loc>
+    <lastmod>2019-08-20T23:51:59+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.glumes.com/tags/image/</loc>
     <lastmod>2019-07-13T00:08:18+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.glumes.com/tags/libjpeg-turbo/</loc>
     <lastmod>2019-07-13T00:08:18+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -219,7 +201,6 @@
   <url>
     <loc>https://www.glumes.com/tags/libpng/</loc>
     <lastmod>2019-07-12T23:26:58+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -235,7 +216,6 @@
   <url>
     <loc>https://www.glumes.com/tags/rust/</loc>
     <lastmod>2019-05-19T23:25:31+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -246,7 +226,6 @@
   <url>
     <loc>https://www.glumes.com/tags/so/</loc>
     <lastmod>2019-05-19T23:25:31+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -257,13 +236,11 @@
   <url>
     <loc>https://www.glumes.com/tags/jni/</loc>
     <lastmod>2019-05-14T23:16:45+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.glumes.com/tags/stb_image/</loc>
     <lastmod>2019-05-12T21:57:07+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -274,7 +251,6 @@
   <url>
     <loc>https://www.glumes.com/tags/python/</loc>
     <lastmod>2019-05-02T21:21:40+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -283,15 +259,13 @@
   </url>
   
   <url>
-    <loc>https://www.glumes.com/categories/vulkan/</loc>
+    <loc>https://www.glumes.com/tags/vulkan/</loc>
     <lastmod>2019-04-07T15:39:14+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.glumes.com/tags/vulkan/</loc>
+    <loc>https://www.glumes.com/categories/vulkan/</loc>
     <lastmod>2019-04-07T15:39:14+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -322,7 +296,6 @@
   <url>
     <loc>https://www.glumes.com/tags/java/</loc>
     <lastmod>2018-11-19T15:58:17+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -333,7 +306,6 @@
   <url>
     <loc>https://www.glumes.com/tags/c&#43;&#43;/</loc>
     <lastmod>2018-11-19T10:23:00+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -344,25 +316,21 @@
   <url>
     <loc>https://www.glumes.com/tags/stl/</loc>
     <lastmod>2018-11-19T10:23:00+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.glumes.com/tags/camera/</loc>
     <lastmod>2018-09-19T23:39:28+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.glumes.com/tags/h264/</loc>
     <lastmod>2018-09-19T23:39:28+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.glumes.com/tags/mediacodec/</loc>
     <lastmod>2018-09-19T23:39:28+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -373,13 +341,11 @@
   <url>
     <loc>https://www.glumes.com/tags/yuv/</loc>
     <lastmod>2018-09-19T23:39:28+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.glumes.com/tags/rgb/</loc>
     <lastmod>2018-09-19T23:12:45+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -395,19 +361,16 @@
   <url>
     <loc>https://www.glumes.com/tags/cmake/</loc>
     <lastmod>2018-09-12T09:19:09+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.glumes.com/tags/ndk/</loc>
     <lastmod>2018-09-12T09:19:09+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.glumes.com/tags/okhttp/</loc>
     <lastmod>2018-09-11T22:13:45+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -418,7 +381,6 @@
   <url>
     <loc>https://www.glumes.com/tags/glsl/</loc>
     <lastmod>2018-09-09T15:20:42+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -434,7 +396,6 @@
   <url>
     <loc>https://www.glumes.com/tags/retrofit/</loc>
     <lastmod>2018-09-09T14:54:57+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -445,7 +406,6 @@
   <url>
     <loc>https://www.glumes.com/tags/fbo/</loc>
     <lastmod>2018-09-04T22:28:11+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -456,7 +416,6 @@
   <url>
     <loc>https://www.glumes.com/tags/egl/</loc>
     <lastmod>2018-09-02T21:26:55+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -482,7 +441,6 @@
   <url>
     <loc>https://www.glumes.com/tags/android/</loc>
     <lastmod>2018-07-25T13:36:50+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -568,7 +526,6 @@
   <url>
     <loc>https://www.glumes.com/tags/kotlin/</loc>
     <lastmod>2018-06-29T20:31:53+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -639,7 +596,6 @@
   <url>
     <loc>https://www.glumes.com/tags/crack/</loc>
     <lastmod>2018-01-31T15:47:59+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -650,7 +606,6 @@
   <url>
     <loc>https://www.glumes.com/tags/architecture/</loc>
     <lastmod>2018-01-31T15:42:28+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -666,7 +621,6 @@
   <url>
     <loc>https://www.glumes.com/tags/rxjava/</loc>
     <lastmod>2018-01-31T15:26:16+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -677,7 +631,6 @@
   <url>
     <loc>https://www.glumes.com/tags/statemachine/</loc>
     <lastmod>2018-01-31T15:20:14+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -703,18 +656,16 @@
   <url>
     <loc>https://www.glumes.com/tags/docker/</loc>
     <lastmod>2017-12-22T16:24:03+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.glumes.com/post/docker/docker-summary/</loc>
-    <lastmod>2017-12-22T16:24:03+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.glumes.com/categories/docker/</loc>
     <lastmod>2017-12-22T16:24:03+08:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.glumes.com/post/docker/docker-summary/</loc>
+    <lastmod>2017-12-22T16:24:03+08:00</lastmod>
   </url>
   
   <url>
@@ -728,14 +679,13 @@
   </url>
   
   <url>
-    <loc>https://www.glumes.com/post/python/python-functional-programming/</loc>
+    <loc>https://www.glumes.com/categories/python/</loc>
     <lastmod>2017-12-22T16:10:57+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.glumes.com/categories/python/</loc>
+    <loc>https://www.glumes.com/post/python/python-functional-programming/</loc>
     <lastmod>2017-12-22T16:10:57+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -766,7 +716,6 @@
   <url>
     <loc>https://www.glumes.com/tags/inflater/</loc>
     <lastmod>2017-12-22T15:55:08+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -782,7 +731,6 @@
   <url>
     <loc>https://www.glumes.com/tags/framework/</loc>
     <lastmod>2017-12-22T15:40:19+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -828,7 +776,6 @@
   <url>
     <loc>https://www.glumes.com/tags/dagger2/</loc>
     <lastmod>2017-12-22T10:47:52+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -879,18 +826,16 @@
   <url>
     <loc>https://www.glumes.com/tags/opencv/</loc>
     <lastmod>2017-12-22T09:53:04+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.glumes.com/post/opencv/setup_opencv_environment/</loc>
-    <lastmod>2017-12-22T09:53:04+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.glumes.com/categories/opencv/</loc>
     <lastmod>2017-12-22T09:53:04+08:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.glumes.com/post/opencv/setup_opencv_environment/</loc>
+    <lastmod>2017-12-22T09:53:04+08:00</lastmod>
   </url>
   
   <url>

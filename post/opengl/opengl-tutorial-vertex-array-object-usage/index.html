@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用</title>
   <meta property="og:title" content="《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用" />
   <meta name="twitter:title" content="《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用" />
 
@@ -14,33 +14,30 @@
   <meta property="og:description" content="学习笔记内容摘录">
   <meta name="twitter:description" content="学习笔记内容摘录">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -55,11 +52,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -67,9 +76,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -132,6 +139,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -148,26 +158,33 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用</h1>
+                     
+                     
+                  
+                  
                   
                     
-                      <h2 class="post-subheading">学习笔记内容摘录</h2>
+                      <h2 align="center" class="post-subheading">学习笔记内容摘录</h2>
                     
                   
                   
                     <span class="post-meta">
-  
-    Posted on July 18, 2018
-  
+  Posted on July 18, 2018
   
 </span>
 
 
                   
+                
               </div>
             </div>
           </div>
@@ -175,121 +192,78 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用</h1>
+                <h1 align="center">《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用</h1>
                 
                   
-                    <h2 class="post-subheading">学习笔记内容摘录</h2>
+                    <h2 align="center" class="post-subheading">学习笔记内容摘录</h2>
                   
                 
-                
-                  <span class="post-meta">
-  
-    Posted on July 18, 2018
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-          
-            
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
 
-          <p>在之前使用 <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">OpenGL 顶点缓冲区 VBO 的使用</a> 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。</p>
 
+
+        
+      <div>
+          
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
+        
+        <p>在之前使用 <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">OpenGL 顶点缓冲区 VBO 的使用</a> 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。</p>
 <p>这就存在了一些重复的操作。</p>
-
 <p>在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。</p>
-
 <blockquote>
 <p>顶点数组对象又叫做 VAO （Vertex Array Object）。</p>
 </blockquote>
-
 <p>顶点数组对象的主要功能就是将绘制的一个物体时所需的对应于不同方面的顶点缓冲及相关设置包装成一个整体，在绘制时直接使用顶点数组对象即可，不必分别使用每个顶点缓冲，这样可以进一步提高绘制效率。</p>
-
 <h2 id="方法介绍">方法介绍</h2>
-
 <p>顶点数组对象主要提供了 glGenVertexArrays 和 glBindVertexArray 方法。</p>
-
 <h3 id="glgenvertexarrays-方法">glGenVertexArrays 方法</h3>
-
 <p>glGenVertexArrays 方法主要用于创建新的顶点数组对象，方法签名如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900">native</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">glGenVertexArrays</span>(
         <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">n</span>,
         <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">arrays</span>,
         <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">offset</span>
-    );</code></pre></div>
-<p>其中，参数 n 为要创建的顶点数组对象的数量，参数 arrays 用来存放创建的 n 个顶点数组对象的编号，参数 offset 为 arrays 数组的偏移量。</p>
-
+    );
+</code></pre></div><p>其中，参数 n 为要创建的顶点数组对象的数量，参数 arrays 用来存放创建的 n 个顶点数组对象的编号，参数 offset 为 arrays 数组的偏移量。</p>
 <h3 id="glbindvertexarray-方法">glBindVertexArray 方法</h3>
-
 <p>创建顶点数组对象之后，就可以用 glBindVertexArray 方法绑定指定的顶点数组对象，以便对指定的顶点数组对象进行设置或使用，方法签名如上：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900">native</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">glBindVertexArray</span>(
         <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">array</span>
-    );</code></pre></div>
-<p>其中，参数 array 为需要绑定的顶点数组对象的编号。</p>
-
+    );
+</code></pre></div><p>其中，参数 array 为需要绑定的顶点数组对象的编号。</p>
 <p>用 glBindVertexArray 方法绑定顶点数组对象之后，更改顶点数组状态的后续调用（如 glBindBuffer、glVertexAttribPointer、glEnableVertexAttribArray、glDisableVertexAttribArray 等）将影响绑定的顶点数组对象。</p>
-
 <p>通过绑定不同的顶点数组对象，绘制时应用程序可以快速在不同顶点数组配置之间进行切换，大大提高了开发效率。</p>
-
 <h2 id="实践">实践</h2>
-
 <p>下面是具体的实践，还是绘制如下的一张纹理图：</p>
-
-<figure><img src="https://image.glumes.com/images/2019/04/27/WechatIMG37.jpg" alt="顶点数组对象的使用"><figcaption>顶点数组对象的使用</figcaption></figure>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/WechatIMG37.jpg" alt="顶点数组对象的使用"></p>
 <p>使用顶点数组对象 VA0 之前，还是分别为顶点坐标、纹理坐标生成缓冲区，并传入数据。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">		<span style="color:#93a1a1;font-style:italic">// 生成纹理缓冲区
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">bufferIds</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">int</span>[<span style="color:#268bd2">3</span>];
@@ -303,8 +277,9 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">mTextureBufferId</span> = <span style="color:#268bd2">bufferIds</span>[<span style="color:#268bd2">1</span>];
         <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glBindBuffer</span>(<span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">GL_ARRAY_BUFFER</span>, <span style="color:#268bd2">mTextureBufferId</span>);
         <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glBufferData</span>(<span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">GL_ARRAY_BUFFER</span>, <span style="color:#268bd2">textures</span>.<span style="color:#268bd2">length</span> * <span style="color:#268bd2">4</span>, <span style="color:#268bd2">mTextureBuffer</span>, <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">GL_STATIC_DRAW</span>);
-        <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glBindBuffer</span>(<span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">GL_ARRAY_BUFFER</span>, <span style="color:#268bd2">0</span>);</code></pre></div>
-<p>接下来就是使用顶点数组对象了。</p>
+        <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glBindBuffer</span>(<span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">GL_ARRAY_BUFFER</span>, <span style="color:#268bd2">0</span>);
+
+</code></pre></div><p>接下来就是使用顶点数组对象了。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">		<span style="color:#93a1a1;font-style:italic">// 生成顶点数组对象
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">vaoIds</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">int</span>[<span style="color:#268bd2">1</span>];
         <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glGenVertexArrays</span>(<span style="color:#268bd2">1</span>, <span style="color:#268bd2">vaoIds</span>, <span style="color:#268bd2">0</span>);
@@ -324,11 +299,9 @@ if (!doNotTrack) {
         <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glVertexAttribPointer</span>(<span style="color:#268bd2">maTexCoorHandle</span>, <span style="color:#268bd2">2</span>, <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">GL_FLOAT</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#268bd2">2</span> * <span style="color:#268bd2">4</span>, <span style="color:#268bd2">0</span>);
         <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glBindBuffer</span>(<span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">GL_ARRAY_BUFFER</span>, <span style="color:#268bd2">0</span>);
 		<span style="color:#93a1a1;font-style:italic">// 绑定到默认的顶点数组对象
-</span><span style="color:#93a1a1;font-style:italic"></span>		  <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glBindVertexArray</span>(<span style="color:#268bd2">0</span>);</code></pre></div>
-<p>这里要注意的是，调用了 glBindVertexArray 绑定顶点数组对象之后，我们调用的 glBindBuffer、glVertexAttribPointer、glEnableVertexAttribArray、glDisableVertexAttribArray 等方法都属于该顶点数组对象之内了，都会影响到这个顶点数组对象，直到绑定了默认的顶点数组对象。</p>
-
+</span><span style="color:#93a1a1;font-style:italic"></span>		  <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glBindVertexArray</span>(<span style="color:#268bd2">0</span>);
+</code></pre></div><p>这里要注意的是，调用了 glBindVertexArray 绑定顶点数组对象之后，我们调用的 glBindBuffer、glVertexAttribPointer、glEnableVertexAttribArray、glDisableVertexAttribArray 等方法都属于该顶点数组对象之内了，都会影响到这个顶点数组对象，直到绑定了默认的顶点数组对象。</p>
 <p>在我们使用 顶点缓冲区 VBO 绘制时，要在 onDrawFrame 方法里面为每一个顶点坐标、纹理坐标调用 glBindBuffer 、glVertexAttribPointer、glEnableVertexAttribArray 方法，而使用了 顶点数组对象 VA0 之后，就不需要这么麻烦了，因为相当于顶点数组对象把它们都接管了，直接绑定顶点数组对象就好了。</p>
-
 <p>使用 顶点数组对象 VAO 绘制的代码如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">		<span style="color:#93a1a1;font-style:italic">// 绑定顶点数组对象
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glBindVertexArray</span>(<span style="color:#268bd2">mVAOId</span>);
@@ -336,48 +309,46 @@ if (!doNotTrack) {
         <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glDrawElements</span>(<span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">GL_TRIANGLES</span>, <span style="color:#268bd2">vCount</span>, <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">GL_UNSIGNED_BYTE</span>, <span style="color:#268bd2">0</span>);
         <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glBindBuffer</span>(<span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">GL_ELEMENT_ARRAY_BUFFER</span>, <span style="color:#268bd2">0</span>);
 		<span style="color:#93a1a1;font-style:italic">// 解除绑定顶点数组对象
-</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glBindVertexArray</span>(<span style="color:#268bd2">0</span>);</code></pre></div>
-<p>通过这种方式相当于替代了那些繁琐的方法，并且可以直接通过更改绑定的顶点数组对象 ID 去更改绘制的内容，简单高效地实现切换顶点数据。</p>
-
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">GLES30</span>.<span style="color:#268bd2">glBindVertexArray</span>(<span style="color:#268bd2">0</span>);
+</code></pre></div><p>通过这种方式相当于替代了那些繁琐的方法，并且可以直接通过更改绑定的顶点数组对象 ID 去更改绘制的内容，简单高效地实现切换顶点数据。</p>
 <p>关于具体的代码实现，可以参考我的 Github 项目：</p>
-
 <blockquote>
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
 </blockquote>
-
 <h2 id="参考">参考</h2>
-
 <ol>
 <li>《OpenGL ES 3.x 游戏开发》</li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -404,45 +375,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" data-toggle="tooltip" data-placement="top" title="《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 优化项之面剔除和注意点">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" data-toggle="tooltip" data-placement="top" title="《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 优化项之面剔除和注意点">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -451,6 +409,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -493,25 +453,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -520,66 +474,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

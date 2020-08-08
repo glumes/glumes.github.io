@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>android on 星陨的博客</title>
@@ -18,15 +18,11 @@
       
       <guid>https://www.glumes.com/post/life/domain-name-register/</guid>
       <description>&lt;p&gt;前段时间博客网站一直无法访问，还有不少朋友特意发微信告诉我，感谢大家的好意了!&lt;/p&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;网站是：&lt;a href=&#34;https://glumes.com&#34;&gt;https://glumes.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;网站是：https://glumes.com&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;其实是博客域名在备案啦。&lt;/p&gt;
-
 &lt;p&gt;之前博客搭建用的是 Github Pages 方案，访问速度一直被人诟病。&lt;/p&gt;
-
 &lt;p&gt;上个月就决定把服务器换成阿里云了，访问速度如火箭般提升🚀🚀🚀~~&lt;/p&gt;</description>
     </item>
     
@@ -37,11 +33,8 @@
       
       <guid>https://www.glumes.com/post/android/android-av-beginner-resource/</guid>
       <description>&lt;p&gt;在 &lt;strong&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/HlbGGOyfixc8wgoDjTY0Qw&#34;&gt;直播&lt;/a&gt;&lt;/strong&gt; 中有提到几个不错的开源项目，这里再重点推荐一下：&lt;/p&gt;
-
 &lt;p&gt;目前，市面上关于音视频学习的相关书籍并不多，而且即使看了书籍学了理论，最终还是要回归到代码上来。&lt;/p&gt;
-
 &lt;p&gt;毕竟 IT 行业实践性要求高，强调动手能力，音视频这方面就更得多操作和探索了。&lt;/p&gt;
-
 &lt;p&gt;推荐下面几个项目会各有侧重，分别涵盖了 Android 音视频录制 API 、OpenGL 渲染和综合运用的例子。&lt;/p&gt;</description>
     </item>
     
@@ -52,23 +45,16 @@
       
       <guid>https://www.glumes.com/post/opengl/run-learnopengl-code-on-xcode/</guid>
       <description>&lt;p&gt;学习 OpenGL ，相信肯定有不少人看过这个网站：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://learnopengl.com/&#34;&gt;https://learnopengl.com/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2020/01/04/WechatIMG585.jpg&#34; alt=&#34;https://learnopengl.com/&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2020/01/04/WechatIMG585.jpg&#34; alt=&#34;https://learnopengl.com/&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这是它的英文原版网站，后来又有了不同语言的翻译版本，对应中文就是：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://learnopengl-cn.github.io/&#34;&gt;https://learnopengl-cn.github.io/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2020/01/04/WechatIMG586.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2020/01/04/WechatIMG586.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这两个网站对于学习 OpenGL 帮助非常大，既可以用作入门的教材，也可以作为工具书，后续进行查漏补缺。&lt;/p&gt;
-
 &lt;p&gt;并且它的内容很全面，除了 OpenGL 基础知识、坐标系统、纹理、Shader、模型加载等，还有高级光照、PBR 等渲染技巧，这些在渲染引擎的开发中都是会用到的，后面会继续和大家分享。&lt;/p&gt;</description>
     </item>
     
@@ -79,27 +65,16 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-transition/</guid>
       <description>&lt;h2 id=&#34;转场介绍&#34;&gt;转场介绍&lt;/h2&gt;
-
 &lt;p&gt;转场效果是什么？&lt;/p&gt;
-
 &lt;p&gt;转场效果，简单来说就是两段视频之间的衔接过渡效果。&lt;/p&gt;
-
 &lt;p&gt;现在拍摄 vlog 的玩家越来越多，要是视频没有一两个炫酷的转场效果，都不好意思拿出来炫酷了。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1578201670/transition_hpaktx.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1578201670/transition_hpaktx.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;那么如何在视频编辑软件中实现转场效果呢？&lt;/p&gt;
-
 &lt;p&gt;这里提供使用 OpenGL 实现视频转场的一个小示例，我们可以通过自定义 GLSL 来实现不同的转场效果。&lt;/p&gt;
-
 &lt;p&gt;以在 Android 平台上作为演示，但其实不管是 Android 还是 iOS，实现的原理都是一样的。&lt;/p&gt;
-
 &lt;p&gt;首先要有两段视频，视频 A 和视频 B，先播放视频 A 后播放视频 B，中间有一段过程称为 C ，C 就是视频 A、B 做转场动画的时间段。&lt;/p&gt;
-
 &lt;p&gt;如下所示：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/10/14/transition_model.jpg&#34; alt=&#34;transition_model.jpg&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/10/14/transition_model.jpg&#34; alt=&#34;transition_model.jpg&#34;&gt;&lt;/p&gt;
 &lt;p&gt;播放器按照时间顺序，从 A -&amp;gt; C -&amp;gt; B 的播放，这样就有了转场的效果。&lt;/p&gt;</description>
     </item>
     
@@ -110,28 +85,19 @@
       
       <guid>https://www.glumes.com/post/android/google-jetpack-camerax/</guid>
       <description>&lt;p&gt;近期，Google 的 Jetpack 组件又出了新的库：CameraX 。&lt;/p&gt;
-
 &lt;p&gt;顾名思义：CameraX 就是用来进行 Camera 开发的官方库了，而且后续会有 Google 进行维护和升级。这对于广大 Camera 开发工程师和即将成为 Camera 的程序员来说，真是个好消息~~~&lt;/p&gt;
-
 &lt;h2 id=&#34;camerax-介绍&#34;&gt;CameraX 介绍&lt;/h2&gt;
-
 &lt;p&gt;官方有给出一个示例的工程，我 fork 了之后，加入使用 OpenGL 黑白滤镜渲染的操作，具体地址如下：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/glumes/camera&#34;&gt;https://github.com/glumes/camera&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;官方并没有提到 CameraX 库具体如何进行 OpenGL 线程渲染的， 继续往下看，你会找到答案的~~~&lt;/p&gt;
-
 &lt;p&gt;关于 CameraX 更多的介绍，建议看看 Google I/O 大会上的视频记录，比看文档能了解更多内容~~~&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=kuv8uK-5CLY&#34;&gt;https://www.youtube.com/watch?v=kuv8uK-5CLY&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;在视频中提到，目前有很多应用都开始接入了 CameraX，比如 Camera360、Tik Tok 等。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/22/-2019-05-23-8.35.08.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/22/-2019-05-23-8.35.08.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -140,24 +106,17 @@
       <pubDate>Sun, 19 May 2019 23:25:31 +0800</pubDate>
       
       <guid>https://www.glumes.com/post/android/rust-compile-so-library/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/19/rust-mm.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+      <description>&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/19/rust-mm.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.rust-lang.org/&#34;&gt;https://www.rust-lang.org/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;rust 的学习曲线比较陡峭，在开始学习之前建议看看王垠的这篇文章 《如何掌握所有的编程语言》，地址如下:&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.yinwang.org/blog-cn/2017/07/06/master-pl&#34;&gt;https://www.yinwang.org/blog-cn/2017/07/06/master-pl&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;学习语言，重要的是掌握其语言特性。&lt;/p&gt;
-
 &lt;p&gt;王垠举了一些语言特性的例子：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;变量定义&lt;/li&gt;
 &lt;li&gt;算术运算&lt;/li&gt;
@@ -172,9 +131,7 @@
 &lt;li&gt;指针算术&lt;/li&gt;
 &lt;li&gt;goto 语句&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;看着这些特性是不是很像一些编程语言书的目录🤔&lt;/p&gt;
-
 &lt;p&gt;在学习 rust 的时候也可以照着这些语言特性去对比自己是否掌握了。&lt;/p&gt;</description>
     </item>
     
@@ -185,15 +142,10 @@
       
       <guid>https://www.glumes.com/post/android/stb-image-introduce/</guid>
       <description>&lt;p&gt;说到图像解码库，最容易想起的就是 &lt;code&gt;libpng&lt;/code&gt; 和 &lt;code&gt;libjpeg&lt;/code&gt; 这两个老牌图像解码库了。&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;libpng&lt;/code&gt; 和 &lt;code&gt;libjpeg&lt;/code&gt; 分别各自对应 &lt;code&gt;png&lt;/code&gt; 和 &lt;code&gt;jpeg&lt;/code&gt; 两种图像格式。这两种格式的区别如下：&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;png&lt;/code&gt; 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;jpg&lt;/code&gt; 不支持透明度，有损压缩的图片格式，有损压缩会使得原始图片数据质量下载，也因此它占用的内存小，在网页应用中加速速度快。&lt;/p&gt;
-
 &lt;p&gt;要想在工程中同时解码 &lt;code&gt;png&lt;/code&gt; 和 &lt;code&gt;jpeg&lt;/code&gt; 格式图片，就必须同时引用这两种库，而且还得经过一系列编译步骤才行。&lt;/p&gt;
-
 &lt;p&gt;在这里，介绍一个简单易用的图像库：&lt;code&gt;stb_image&lt;/code&gt; 。Github 地址为：&lt;a href=&#34;https://github.com/nothings/stb&#34;&gt;https://github.com/nothings/stb&lt;/a&gt; ，目前已经有了 9600+ Star 。它的使用非常简单，看看 README 可能你就会了。&lt;/p&gt;</description>
     </item>
     
@@ -204,9 +156,7 @@
       
       <guid>https://www.glumes.com/post/java/java-multithread-overview/</guid>
       <description>&lt;p&gt;在 Java 5.0 之前，在协调对共享对象的访问时可以使用的机制只有 &lt;code&gt;synchronized&lt;/code&gt; 内置锁和 &lt;code&gt;volatile&lt;/code&gt; 关键字。&lt;/p&gt;
-
 &lt;p&gt;Java 5.0 增加了一种新的机制：&lt;code&gt;Lock&lt;/code&gt;  显式锁，当内置锁 &lt;code&gt;synchronized&lt;/code&gt; 不适用时，它就可以作为一种新的选择。&lt;/p&gt;
-
 &lt;p&gt;回顾一下内置锁 synchronized 的使用：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// synchronized关键字用法示例
 &lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#859900&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#859900&#34;&gt;synchronized&lt;/span&gt; &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;t&lt;/span&gt;){&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// 同步方法
@@ -220,16 +170,14 @@
     &lt;span style=&#34;color:#859900&#34;&gt;synchronized&lt;/span&gt;(&lt;span style=&#34;color:#268bd2&#34;&gt;obj&lt;/span&gt;){&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// 同步代码块
 &lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#859900&#34;&gt;return&lt;/span&gt; --&lt;span style=&#34;color:#268bd2&#34;&gt;v&lt;/span&gt;;
     }
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;内置锁不需要显式的获取和释放，任何一个对象都能作为一把内置锁。&lt;/p&gt;
-
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;内置锁不需要显式的获取和释放，任何一个对象都能作为一把内置锁。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;当 synchronized 作用于普通方法时，锁对象是 this 。&lt;/li&gt;
 &lt;li&gt;当 synchronized 作用于静态方法时，锁对象是当前类的 Class 对象。&lt;/li&gt;
 &lt;li&gt;当 synchronized 作用于代码块时，锁对象是 synchronized(obj) 中的这个 obj 对象。&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;hr /&gt;</description>
+&lt;hr&gt;</description>
     </item>
     
     <item>
@@ -248,9 +196,7 @@
       
       <guid>https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/</guid>
       <description>&lt;p&gt;在 Android 4.1 版本提供了 MediaCodec 接口来访问设备的编解码器，不同于 FFmpeg 的软件编解码，它采用的是硬件编解码能力，因此在速度上会比软解更具有优势，但是由于 Android 的碎片化问题，机型众多，版本各异，导致 MediaCodec 在机型兼容性上需要花精力去适配，并且编解码流程不可控，全交由厂商的底层硬件去实现，最终得到的视频质量不一定很理想。&lt;/p&gt;
-
 &lt;p&gt;虽然 MediaCodec 仍然存在一定的弊端，但是对于快速实现编解码需求，还是很值得参考的。&lt;/p&gt;
-
 &lt;p&gt;以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。&lt;/p&gt;</description>
     </item>
     
@@ -261,7 +207,6 @@
       
       <guid>https://www.glumes.com/post/android/cmake-best-practices/</guid>
       <description>&lt;p&gt;Android Studio 从 2.2 版本起开始支持 CMake ,可以通过 CMake 和 NDK 将 C/C++ 代码编译成底层的库，然后再配合 Gradle 的编译将库打包到 APK 中。&lt;/p&gt;
-
 &lt;p&gt;这意味就不需要再编写 &lt;code&gt;.mk&lt;/code&gt; 文件来编译 &lt;code&gt;so&lt;/code&gt; 动态库了。&lt;/p&gt;</description>
     </item>
     
@@ -290,7 +235,6 @@
       
       <guid>https://www.glumes.com/post/android/java-proxy-design-pattern/</guid>
       <description>&lt;p&gt;代理模式的使用场景如下：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -321,7 +265,6 @@
       
       <guid>https://www.glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</guid>
       <description>&lt;p&gt;在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。&lt;/p&gt;
-
 &lt;p&gt;再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。&lt;/p&gt;</description>
     </item>
     
@@ -332,7 +275,6 @@
       
       <guid>https://www.glumes.com/post/android/android-jni-exception-handle/</guid>
       <description>&lt;p&gt;Android JNI 调用时的异常主要有如下两种：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;Native 代码调用 Java 层代码时发生了异常要处理&lt;/li&gt;
 &lt;li&gt;Native 代码自己抛出了一个异常让 Java 层去处理&lt;/li&gt;
@@ -346,7 +288,6 @@
       
       <guid>https://www.glumes.com/post/android/android-jni-reference-manage-rules/</guid>
       <description>&lt;p&gt;在 Native 代码中有时候会接收 Java 传入的引用类型参数，有时候也会通过 NewObject 方法来创建一个 Java 的引用类型变量。&lt;/p&gt;
-
 &lt;p&gt;在编写 Native 代码时，要注意这个代表 Java 数据结构类型的引用在使用时会被 GC 回收的可能性。&lt;/p&gt;</description>
     </item>
     
@@ -357,9 +298,7 @@
       
       <guid>https://www.glumes.com/post/android/android-jni-cache-fieldid-and-methodid/</guid>
       <description>&lt;p&gt;在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。&lt;/p&gt;
-
 &lt;p&gt;事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。&lt;/p&gt;
-
 &lt;p&gt;缓存有两种方式，分别是使用时缓存和初始化时缓存。&lt;/p&gt;</description>
     </item>
     
@@ -379,7 +318,6 @@
       
       <guid>https://www.glumes.com/post/android/android-jni-access-field-and-method/</guid>
       <description>&lt;p&gt;在前面的两篇文章中，介绍了 Android 通过 JNI 进行基础类型、字符串和数组的相关操作，并描述了 Java 和 Native 在类型和签名之间的转换关系。&lt;/p&gt;
-
 &lt;p&gt;有了之前那些基础，就可以实现 Java 和 Native 的相互调用了，在 Native 中去访问 Java 类的字段并调用相应的方法。&lt;/p&gt;</description>
     </item>
     
@@ -419,7 +357,6 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;*本篇文章已授权微信公众号 guolin_blog （郭霖）独家发布&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。&lt;/p&gt;</description>
     </item>
     
@@ -475,9 +412,7 @@
       
       <guid>https://www.glumes.com/post/android/rxjava-wrapper-dialog/</guid>
       <description>&lt;p&gt;之前有写过一篇文章：&lt;a href=&#34;http://www.glumes.com/wrapper-callback-by-rxjava/&#34;&gt;用 RxJava 封装回调方法 CallBack&lt;/a&gt;。&lt;/p&gt;
-
 &lt;p&gt;RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。&lt;/p&gt;
-
 &lt;p&gt;这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。&lt;/p&gt;</description>
     </item>
     
@@ -488,7 +423,6 @@
       
       <guid>https://www.glumes.com/post/android/android-layout-inflater/</guid>
       <description>&lt;p&gt;Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。&lt;/p&gt;
-
 &lt;p&gt;LayoutInflater 实例的获取有多种方式，但最终是通过&lt;code&gt;(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)&lt;/code&gt;来得到的，也就是说加载布局的 &lt;code&gt;LayoutInflater&lt;/code&gt; 是来自于系统服务的。&lt;/p&gt;</description>
     </item>
     
@@ -508,7 +442,6 @@
       
       <guid>https://www.glumes.com/post/android/android-start-service/</guid>
       <description>&lt;p&gt;Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。&lt;/p&gt;
-
 &lt;p&gt;Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。&lt;/p&gt;</description>
     </item>
     
@@ -519,7 +452,6 @@
       
       <guid>https://www.glumes.com/post/android/android-statemachine/</guid>
       <description>&lt;p&gt;之前就有写过一篇文章来学习状态机：&lt;a href=&#34;http://www.glumes.com/statemachine_learn/&#34;&gt;状态机学习&lt;/a&gt;。&lt;/p&gt;
-
 &lt;p&gt;在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。&lt;/p&gt;</description>
     </item>
     
@@ -539,7 +471,6 @@
       
       <guid>https://www.glumes.com/post/android/android-window-and-view/</guid>
       <description>&lt;p&gt;在之前有分析过 Android 6.0 Launcher 启动 Activity 过程，文章的链接如下：&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-1/&#34;&gt;Android 6.0 Launcher 启动 Activity 过程源码分析（一）&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-2/&#34;&gt;Android 6.0 Launcher 启动 Activity 过程源码分析（二）&lt;/a&gt;&lt;/li&gt;
@@ -555,9 +486,7 @@
       
       <guid>https://www.glumes.com/post/android/android-system-server/</guid>
       <description>&lt;p&gt;在之前 &lt;a href=&#34;http://www.glumes.com/android-servicemanager/&#34;&gt;Android 系统服务管理 ServiceManager&lt;/a&gt; 中学习了各种系统服务 Service 都是通过 &lt;code&gt;ServiceManager&lt;/code&gt; 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 &lt;code&gt;ContextImpl&lt;/code&gt; 类、&lt;code&gt;SystemServiceRegistry&lt;/code&gt; 类、&lt;code&gt;ServiceManager&lt;/code&gt; 类、&lt;code&gt;ServiceManagerNative&lt;/code&gt; 类等等。&lt;/p&gt;
-
 &lt;p&gt;那么问题就来了，ServiceManager 所管理的那些 Service 的 Binder 对象引用又是何时注册添加的呢？&lt;/p&gt;
-
 &lt;p&gt;事实上这些服务 Service 是 SystemServer 进程中启动的。&lt;/p&gt;</description>
     </item>
     
@@ -595,7 +524,6 @@
       
       <guid>https://www.glumes.com/post/android/android-binder-summary/</guid>
       <description>&lt;p&gt;Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。&lt;/p&gt;
-
 &lt;p&gt;它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 &lt;code&gt;/dev/binder&lt;/code&gt;。&lt;/p&gt;</description>
     </item>
     
@@ -615,15 +543,12 @@
       
       <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-4/</guid>
       <description>&lt;p&gt;在如下三篇文章中过了一遍 Launcher 启动 Activity 的代码流程。&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;start-activity-from-launcher-in-android-1&#34;&gt; Android 6.0 Launcher 启动 Activity 过程源码分析（一）&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;start-activity-from-launcher-in-android-2&#34;&gt; Android 6.0 Launcher 启动 Activity 过程源码分析（二）&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;start-activity-from-launcher-in-android-3&#34;&gt; Android 6.0 Launcher 启动 Activity 过程源码分析（三）&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;然而， 即使看过了多遍代码流程依旧有点云里雾里的感觉。不从整体上来把握，光抓住细节代码会始终不得要领。&lt;/p&gt;
-
 &lt;p&gt;由于是从 Launcher 组件启动一个 Activity 组件，其中还需要与 ActivityManagerService 通信，而这三个部分都是位于不同的进程内，涉及进程间通信，因此可以将整个过程划分为三个不同的部分来分析，在 Launcher 进程内的操作，在 ActivityManagerService 进程内的操作，在创建的应用程序进程内的操作。&lt;/p&gt;</description>
     </item>
     
@@ -643,7 +568,6 @@
       
       <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-2/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-1/&#34;&gt;Android 6.0 Launcher 启动 Activity 过程源码分析（一）&lt;/a&gt; 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。&lt;/p&gt;
-
 &lt;p&gt;通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。&lt;/p&gt;</description>
     </item>
     
@@ -654,9 +578,7 @@
       
       <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-1/</guid>
       <description>&lt;p&gt;当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。&lt;/p&gt;
-
 &lt;p&gt;这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。&lt;/p&gt;
-
 &lt;p&gt;而当我们点击应用程序图标时，也就开启了从 Launcher 启动 Activity 的过程。&lt;/p&gt;</description>
     </item>
     
@@ -676,7 +598,6 @@
       
       <guid>https://www.glumes.com/post/android/android-hal-summary/</guid>
       <description>&lt;p&gt;Android 从 5.0 开始使用新的相机 API Camera2 来代替之前的旧版本，从而支持更多的特性。&lt;/p&gt;
-
 &lt;p&gt;在学习新的 API 调用之外，也还是要了解一下 Android 底层发生了哪些变化，从而能够让我们对 API 的调用流程更加的清晰，知其所以然。&lt;/p&gt;</description>
     </item>
     
@@ -687,7 +608,6 @@
       
       <guid>https://www.glumes.com/post/android/kotlin-functional-programming-whth-anko/</guid>
       <description>&lt;p&gt;之前讲到了如何在 &lt;a href=&#34;http://www.glumes.com/kotlin-anko-usage/&#34;&gt;Kotlin 开发中使用 Anko 构建布局&lt;/a&gt;。&lt;/p&gt;
-
 &lt;p&gt;这一篇将是分析其原理。&lt;/p&gt;</description>
     </item>
     
@@ -698,7 +618,6 @@
       
       <guid>https://www.glumes.com/post/android/kotlin-with-anko/</guid>
       <description>&lt;p&gt;学习 Kotlin 应该都或多或少听过 Anko 这个开源库。&lt;/p&gt;
-
 &lt;p&gt;使用 Anko 来构建界面会更加简单、快捷。&lt;/p&gt;</description>
     </item>
     

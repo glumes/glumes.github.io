@@ -1,61 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android JNI 调用时的异常处理-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>Android JNI 调用时的异常处理</title>
   <meta property="og:title" content="Android JNI 调用时的异常处理" />
   <meta name="twitter:title" content="Android JNI 调用时的异常处理" />
 
   <meta name="description" content="Android JNI 调用时的异常主要有如下两种：
-
 
 Native 代码调用 Java 层代码时发生了异常要处理
 Native 代码自己抛出了一个异常让 Java 层去处理
 ">
   <meta property="og:description" content="Android JNI 调用时的异常主要有如下两种：
 
-
 Native 代码调用 Java 层代码时发生了异常要处理
 Native 代码自己抛出了一个异常让 Java 层去处理
 ">
   <meta name="twitter:description" content="Android JNI 调用时的异常主要有如下两种：
 
-
 Native 代码调用 Java 层代码时发生了异常要处理
 Native 代码自己抛出了一个异常让 Java 层去处理
 ">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/android-jni-exception-handle/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/android-jni-exception-handle/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -70,11 +64,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -82,9 +88,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -147,6 +151,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -163,21 +170,24 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>Android JNI 调用时的异常处理</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
                   
-                  
+                     <h1>Android JNI 调用时的异常处理</h1>
+                     
                     <span class="post-meta">
-  
-    Posted on May 16, 2018
-  
+  Posted on May 16, 2018
   
 </span>
 
 
+                    
+                  
                   
               </div>
             </div>
@@ -186,101 +196,69 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Android JNI 调用时的异常处理</h1>
+                <h1 align="center">Android JNI 调用时的异常处理</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on May 16, 2018
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
-              
-                  <a href="https://www.glumes.com/tags/jni/">JNI</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-          
-            
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
 
-          <p>Android JNI 调用时的异常主要有如下两种：</p>
 
+
+        
+      <div>
+          
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+            
+                <a href="https://www.glumes.com/tags/jni/">JNI</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
+        
+        <p>Android JNI 调用时的异常主要有如下两种：</p>
 <ul>
 <li>Native 代码调用 Java 层代码时发生了异常要处理</li>
 <li>Native 代码自己抛出了一个异常让 Java 层去处理</li>
 </ul>
-
 <p>可以看到异常的发生和处理基本都需要 Native 和 Java 交互，而对于 Native 自身出了异常，也就是 C/C++ 代码有问题，导致应用崩溃的又是另一回事了。</p>
-
 <h2 id="native-调用-java-方法时的异常">Native 调用 Java 方法时的异常</h2>
-
 <p>之前的博客中就讲述了如何从 <a href="https://glumes.com/post/android/android-jni-access-field-and-method/">Native 调用 Java 的方法</a>，先准备一个有异常的方法供 Native 去调用。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">operation</span>() {
         <span style="color:#859900">return</span> <span style="color:#268bd2">2</span> / <span style="color:#268bd2">0</span>;
-    }</code></pre></div>
-<p>然后在 Native 中调用该方法。</p>
+    }
+</code></pre></div><p>然后在 Native 中调用该方法。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">jclass</span> <span style="color:#268bd2">cls</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">FindClass</span>(<span style="color:#2aa198">&#34;com/glumes/cppso/jnioperations/ExceptionOps&#34;</span>);
     <span style="color:#268bd2">jmethodID</span> <span style="color:#268bd2">mid</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetMethodID</span>(<span style="color:#268bd2">cls</span>, <span style="color:#2aa198">&#34;&lt;init&gt;&#34;</span>, <span style="color:#2aa198">&#34;()V&#34;</span>);
     <span style="color:#268bd2">jobject</span> <span style="color:#268bd2">obj</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">NewObject</span>(<span style="color:#268bd2">cls</span>, <span style="color:#268bd2">mid</span>);
     <span style="color:#268bd2">mid</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetMethodID</span>(<span style="color:#268bd2">cls</span>, <span style="color:#2aa198">&#34;operation&#34;</span>, <span style="color:#2aa198">&#34;()I&#34;</span>);
     <span style="color:#93a1a1;font-style:italic">// 先初始化一个类，然后调用类方法，就如博客中描述的那样
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">CallIntMethod</span>(<span style="color:#268bd2">obj</span>, <span style="color:#268bd2">mid</span>);
-</code></pre></div>
-<p>显然，除数为 0 ，一调用应用直接崩溃了。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#268bd2">java</span>.<span style="color:#268bd2">lang</span>.<span style="color:#268bd2">ArithmeticException</span>: <span style="color:#268bd2">divide</span> <span style="color:#268bd2">by</span> <span style="color:#268bd2">zero</span></code></pre></div>
-<p>接下来就是要进行异常处理的部分了。</p>
+</code></pre></div><p>显然，除数为 0 ，一调用应用直接崩溃了。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#268bd2">java</span>.<span style="color:#268bd2">lang</span>.<span style="color:#268bd2">ArithmeticException</span>: <span style="color:#268bd2">divide</span> <span style="color:#268bd2">by</span> <span style="color:#268bd2">zero</span>
+</code></pre></div><p>接下来就是要进行异常处理的部分了。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">jclass</span> <span style="color:#268bd2">cls</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">FindClass</span>(<span style="color:#2aa198">&#34;com/glumes/cppso/jnioperations/ExceptionOps&#34;</span>);
     <span style="color:#268bd2">jmethodID</span> <span style="color:#268bd2">mid</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetMethodID</span>(<span style="color:#268bd2">cls</span>, <span style="color:#2aa198">&#34;&lt;init&gt;&#34;</span>, <span style="color:#2aa198">&#34;()V&#34;</span>);
     <span style="color:#268bd2">jobject</span> <span style="color:#268bd2">obj</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">NewObject</span>(<span style="color:#268bd2">cls</span>, <span style="color:#268bd2">mid</span>);
@@ -300,25 +278,15 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">DeleteLocalRef</span>(<span style="color:#268bd2">cls</span>);
         <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">DeleteLocalRef</span>(<span style="color:#268bd2">obj</span>);
     }
-</code></pre></div>
-<p>添加如上代码进行处理后，应用并不会直接崩溃了，并且在 LogCat 中会看到对应的异常日志，这里面到了做了哪些操作呢？</p>
-
+</code></pre></div><p>添加如上代码进行处理后，应用并不会直接崩溃了，并且在 LogCat 中会看到对应的异常日志，这里面到了做了哪些操作呢？</p>
 <p>Native 提供了 <code>ExceptionOccurred</code> 和 <code>ExceptionCheck</code> 方法来检测是否有异常发生，前者返回的是 <code>jthrowable</code> 类型，后者返回的是 <code>jboolean</code> 类型。</p>
-
 <p>如果有异常，会通过 <code>ExceptionDescribe</code> 方法来打印异常信息，方便我们在 LogCat 中看到对应的信息。</p>
-
 <p>而 <code>ExceptionClear</code> 方法则是关键的不会让应用直接崩溃的方法，类似于 Java 的 <code>catch</code> 捕获异常处理，它会消除这次异常。</p>
-
 <p>这样就把由 Native 调用 Java 时的一个异常进行了处理，当处理完异常之后，别忘了释放对应的资源。</p>
-
 <p>不过，我们这样仅仅是消除了这次异常，还应该让调用者有异常的发生，那么就需要通过 Native 来抛出一个异常告诉 Java 调用者了。</p>
-
 <h2 id="native-抛出-java-中的异常">Native 抛出 Java 中的异常</h2>
-
 <p>有时在 Native 代码中进行一些操作，需要抛出异常到 Java ，交由上层去处理。</p>
-
 <p>比如 Java 调用 Native 方法传递了某个参数，而这个参数有问题，那么 Native 就可以抛出异常让 Java 去处理这个参数异常的问题。</p>
-
 <p>Native 抛出异常的代码大致都是相同的，可以抽出一个通用函数来：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">throwByName</span>(<span style="color:#268bd2">JNIEnv</span> *<span style="color:#268bd2">env</span>, <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> *<span style="color:#268bd2">name</span>, <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> *<span style="color:#268bd2">msg</span>) {
     <span style="color:#268bd2">jclass</span> <span style="color:#268bd2">cls</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">FindClass</span>(<span style="color:#268bd2">name</span>);
@@ -333,54 +301,53 @@ if (!doNotTrack) {
 <span style="color:#268bd2">Java_com_glumes_cppso_jnioperations_ExceptionOps_nativeThrowException</span>(<span style="color:#268bd2">JNIEnv</span> *<span style="color:#268bd2">env</span>, <span style="color:#268bd2">jobject</span> <span style="color:#268bd2">instance</span>) {
     <span style="color:#268bd2">throwByName</span>(<span style="color:#268bd2">env</span>, <span style="color:#2aa198">&#34;java/lang/IllegalArgumentException&#34;</span>, <span style="color:#2aa198">&#34;native throw exception&#34;</span>);
 }
-</code></pre></div>
-<p>根据异常类型和异常信息来抛出异常。</p>
-
+</code></pre></div><p>根据异常类型和异常信息来抛出异常。</p>
 <p>而在 Java 中，就必须要用 try &hellip; catch&hellip; 来准备好捕获这次异常了。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#859900">try</span> {
             <span style="color:#268bd2">nativeThrowException</span>();
         } <span style="color:#859900">catch</span> (<span style="color:#268bd2">IllegalArgumentException</span> <span style="color:#268bd2">e</span>) {
             <span style="color:#268bd2">Log</span>.<span style="color:#268bd2">e</span>(<span style="color:#2aa198">&#34;NativeMethod&#34;</span>, <span style="color:#268bd2">e</span>.<span style="color:#268bd2">getMessage</span>());
-        }</code></pre></div>
-<h2 id="异常处理小结">异常处理小结</h2>
-
+        }
+</code></pre></div><h2 id="异常处理小结">异常处理小结</h2>
 <p>除了以上两种异常情况之外，还有一个特别常见的异常，就是当判断某个变量为 NULL 之后，执行立即返回的操作。</p>
-
 <p>当发生异常时，一定要先处理异常，然后才能继续执行后面的步骤。如果不是需要立即返回的，那么就通过 <code>ExceptionClear</code>清除这次异常，然后在进行其他的处理。</p>
-
 <p>对于在 Native 中发生了异常，需要让 Java 层去处理了，则在 Native 中抛出对应的异常，由 Java 层去捕获，比如在使用 <code>ExceptionClear</code> 清除了异常之后，就可以通过 <code>throwNew</code> 来抛出异常信息。</p>
-
 <p>具体的异常处理方法和时机还是要看具体的使用场景，选择最合适的处理方法。</p>
-
 <p>具体示例代码可参考我的 Github 项目 <a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a>，欢迎 Star。</p>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/android-jni-exception-handle/">Android JNI 调用时的异常处理</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -407,45 +374,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/android/android-jni-reference-manage-rules/" data-toggle="tooltip" data-placement="top" title="Android JNI 中的引用管理">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---观察矩阵">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/android/android-jni-reference-manage-rules/" data-toggle="tooltip" data-placement="top" title="Android JNI 中的引用管理">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---观察矩阵">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -454,6 +408,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -496,25 +452,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -523,66 +473,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

@@ -1,52 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android 布局加载之 LayoutInflater-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>Android 布局加载之 LayoutInflater</title>
   <meta property="og:title" content="Android 布局加载之 LayoutInflater" />
   <meta name="twitter:title" content="Android 布局加载之 LayoutInflater" />
 
   <meta name="description" content="Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。
-
 LayoutInflater 实例的获取有多种方式，但最终是通过(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)来得到的，也就是说加载布局的 LayoutInflater 是来自于系统服务的。">
   <meta property="og:description" content="Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。
-
 LayoutInflater 实例的获取有多种方式，但最终是通过(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)来得到的，也就是说加载布局的 LayoutInflater 是来自于系统服务的。">
   <meta name="twitter:description" content="Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。
-
 LayoutInflater 实例的获取有多种方式， …">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/android-layout-inflater/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/android-layout-inflater/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -61,11 +55,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -73,9 +79,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -138,6 +142,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -150,110 +157,74 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Android 布局加载之 LayoutInflater</h1>
+                <h1 align="center">Android 布局加载之 LayoutInflater</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on December 22, 2017
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
-              
-                  <a href="https://www.glumes.com/tags/inflater/">Inflater</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+            
+                <a href="https://www.glumes.com/tags/inflater/">Inflater</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#inflate-方法加载-view">inflate 方法加载 View</a></li>
-<li><a href="#深度遍历加载布局">深度遍历加载布局</a></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#inflate-方法加载-view">inflate 方法加载 View</a></li>
+    <li><a href="#深度遍历加载布局">深度遍历加载布局</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。</p>
-
+        
+        <p>Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。</p>
 <p>LayoutInflater 实例的获取有多种方式，但最终是通过<code>(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)</code>来得到的，也就是说加载布局的 <code>LayoutInflater</code> 是来自于系统服务的。</p>
-
 <p>由于 Android 系统源码中关于 Content 部分采用的是装饰模式，Context 的具体功能都是由 <code>ContextImpl</code> 来实现的。通过在 ContextImpl 中找到<code>getSystemService</code>的代码，一路跟进，得知最后返回的实例是<code>PhoneLayoutInflater</code>。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#268bd2">registerService</span>(<span style="color:#268bd2">Context</span>.<span style="color:#268bd2">LAYOUT_INFLATER_SERVICE</span>, <span style="color:#268bd2">LayoutInflater</span>.<span style="color:#268bd2">class</span>,
                 <span style="color:#859900">new</span> <span style="color:#268bd2">CachedServiceFetcher</span>&lt;<span style="color:#268bd2">LayoutInflater</span>&gt;() {
             <span style="color:#268bd2">@Override</span>
             <span style="color:#859900">public</span> <span style="color:#268bd2">LayoutInflater</span> <span style="color:#268bd2">createService</span>(<span style="color:#268bd2">ContextImpl</span> <span style="color:#268bd2">ctx</span>) {
                 <span style="color:#859900">return</span> <span style="color:#859900">new</span> <span style="color:#268bd2">PhoneLayoutInflater</span>(<span style="color:#268bd2">ctx</span>.<span style="color:#268bd2">getOuterContext</span>());
-            }});</code></pre></div>
-<p>LayoutInflater 只是一个抽象类，而 PhoneLayoutInflater 才是具体的实现类。</p>
-
+            }});
+</code></pre></div><p>LayoutInflater 只是一个抽象类，而 PhoneLayoutInflater 才是具体的实现类。</p>
 <h2 id="inflate-方法加载-view">inflate 方法加载 View</h2>
-
 <p>使用 LayoutInflater 时常用方法就是<code>inflate</code>方法了，将一个布局文件 ID 传入并最后解析成一个 View 。</p>
-
 <p>LayoutInflater 加载布局的 inflate 方法也有多种重载形式：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">View</span> <span style="color:#268bd2">inflate</span>(<span style="color:#268bd2">@LayoutRes</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">resource</span>, <span style="color:#268bd2">@Nullable</span> <span style="color:#268bd2">ViewGroup</span> <span style="color:#268bd2">root</span>)
-<span style="color:#268bd2">View</span> <span style="color:#268bd2">inflate</span>(<span style="color:#268bd2">@LayoutRes</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">resource</span>, <span style="color:#268bd2">@Nullable</span> <span style="color:#268bd2">ViewGroup</span> <span style="color:#268bd2">root</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">attachToRoot</span>)</code></pre></div>
-<p>而这两者的差别就在于是否要将 <code>resource</code> 布局文件加载到 <code>root</code>布局中去。</p>
-
+<span style="color:#268bd2">View</span> <span style="color:#268bd2">inflate</span>(<span style="color:#268bd2">@LayoutRes</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">resource</span>, <span style="color:#268bd2">@Nullable</span> <span style="color:#268bd2">ViewGroup</span> <span style="color:#268bd2">root</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">attachToRoot</span>)
+</code></pre></div><p>而这两者的差别就在于是否要将 <code>resource</code> 布局文件加载到 <code>root</code>布局中去。</p>
 <p>不过有点需要注意的地方，若 <code>root</code>为 null，则在 xml 布局中为 <code>resource</code>设置的属性会失效，只是单纯的加载布局。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">				  <span style="color:#93a1a1;font-style:italic">// temp 是 xml 布局中的顶层 View
 </span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#859900">final</span> <span style="color:#268bd2">View</span> <span style="color:#268bd2">temp</span> = <span style="color:#268bd2">createViewFromTag</span>(<span style="color:#268bd2">root</span>, <span style="color:#268bd2">name</span>, <span style="color:#268bd2">inflaterContext</span>, <span style="color:#268bd2">attrs</span>);
@@ -273,8 +244,8 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>                    }
                     <span style="color:#859900">if</span> (<span style="color:#268bd2">root</span> == <span style="color:#859900;font-weight:bold">null</span> || !<span style="color:#268bd2">attachToRoot</span>) {
                         <span style="color:#268bd2">result</span> = <span style="color:#268bd2">temp</span>;
-                    }</code></pre></div>
-<p>跟进<code>createViewFromTag</code>方法查看 View 是如何创建出来的。</p>
+                    }
+</code></pre></div><p>跟进<code>createViewFromTag</code>方法查看 View 是如何创建出来的。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">			<span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span>; <span style="color:#93a1a1;font-style:italic">// 最后要返回的 View
 </span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#859900">if</span> (<span style="color:#268bd2">mFactory2</span> != <span style="color:#859900;font-weight:bold">null</span>) {
                 <span style="color:#268bd2">view</span> = <span style="color:#268bd2">mFactory2</span>.<span style="color:#268bd2">onCreateView</span>(<span style="color:#268bd2">parent</span>, <span style="color:#268bd2">name</span>, <span style="color:#268bd2">context</span>, <span style="color:#268bd2">attrs</span>); <span style="color:#93a1a1;font-style:italic">// 是否设置了 Factory2 
@@ -299,13 +270,10 @@ if (!doNotTrack) {
                 } <span style="color:#859900">finally</span> {
                     <span style="color:#268bd2">mConstructorArgs</span>[<span style="color:#268bd2">0</span>] = <span style="color:#268bd2">lastContext</span>;
                 }
-            }</code></pre></div>
-<p>如果设置过 Factory 接口，那么将由 Factory 中的 onCreateView 方法来生成 View 。</p>
-
+            }
+</code></pre></div><p>如果设置过 Factory 接口，那么将由 Factory 中的 onCreateView 方法来生成 View 。</p>
 <p>关于 <code>LayoutInflater.Factory</code> 的作用，就是用来在加载布局时可以自行去创建 View，抢在系统创建 View 之前去创建。</p>
-
 <p>关于 <code>LayoutInflater.Factory</code> 的使用场景，现在比较多的就是应用的换肤了。</p>
-
 <p>若没有设置过 Factory 接口，则是判断是否为自定义控件或者系统控件，不管是 onCreateView 方法还是 createView 方法，内部最终都是调用到了 createView 方法，通过它来生成 View 。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">// 通过反射生成 View 的参数，分别是 Context 和 AttributeSet 类
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">static</span> <span style="color:#859900">final</span> <span style="color:#268bd2">Class</span>&lt;?&gt;[] <span style="color:#268bd2">mConstructorSignature</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">Class</span>[] {
@@ -350,21 +318,14 @@ if (!doNotTrack) {
         <span style="color:#268bd2">Object</span>[] <span style="color:#268bd2">args</span> = <span style="color:#268bd2">mConstructorArgs</span>;
         <span style="color:#268bd2">args</span>[<span style="color:#268bd2">1</span>] = <span style="color:#268bd2">attrs</span>;
         <span style="color:#859900">final</span> <span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span> = <span style="color:#268bd2">constructor</span>.<span style="color:#268bd2">newInstance</span>(<span style="color:#268bd2">args</span>); <span style="color:#93a1a1;font-style:italic">// 通过反射生成 View
-</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#859900">return</span> <span style="color:#268bd2">view</span>;</code></pre></div>
-<p>在 createView 方法内部，首先从 View 的构造器缓存中查找是否有对应的缓存，若没有则生成构造器并且放到缓存中去，若有构造器则看能否通过过滤，是否允许该 View 生成。</p>
-
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#859900">return</span> <span style="color:#268bd2">view</span>;
+</code></pre></div><p>在 createView 方法内部，首先从 View 的构造器缓存中查找是否有对应的缓存，若没有则生成构造器并且放到缓存中去，若有构造器则看能否通过过滤，是否允许该 View 生成。</p>
 <p>最后都满足条件的则是通过 View 的构造器反射生成了 View 。</p>
-
 <p>在生成 View 时采用 <code>Constructor.newInstance</code>调用构造函数，而参数所需要的变量就是<code>mConstructorSignature</code>变量所定义的，分别是 <code>Context</code> 和 <code>AttributeSet</code>。可以看到，在最后生成 View 时也传入了对应的参数。</p>
-
 <p>采用 <code>Constructor.newInstance</code>的形式反射生成 View ，是为了解耦，只需要有了类名，就可以加载出来。</p>
-
 <p>由此可见，LayoutInflater 加载布局仍然是需要传递 <code>Context</code>的，不光是为了得到 LayoutInflater ，在反射生成 View 时同样会用到。</p>
-
 <h2 id="深度遍历加载布局">深度遍历加载布局</h2>
-
 <p>如果需要加载的布局只有一个控件，那么 LayoutInflater 返回那个 View 工作也就结束了。</p>
-
 <p>若布局文件中有多个需要加载的 View ，则通过<code>rInflateChildren</code>方法继续加载顶层 View 下的 View ，最后通过<code>rInflate</code>方法来加载。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">rInflate</span>(<span style="color:#268bd2">XmlPullParser</span> <span style="color:#268bd2">parser</span>, <span style="color:#268bd2">View</span> <span style="color:#268bd2">parent</span>, <span style="color:#268bd2">Context</span> <span style="color:#268bd2">context</span>,
             <span style="color:#268bd2">AttributeSet</span> <span style="color:#268bd2">attrs</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">finishInflate</span>) <span style="color:#859900">throws</span> <span style="color:#268bd2">XmlPullParserException</span>, <span style="color:#268bd2">IOException</span> {
@@ -402,49 +363,51 @@ if (!doNotTrack) {
         <span style="color:#859900">if</span> (<span style="color:#268bd2">finishInflate</span>) { <span style="color:#93a1a1;font-style:italic">// 遍历解析
 </span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">parent</span>.<span style="color:#268bd2">onFinishInflate</span>();
         }
-    }</code></pre></div>
-<p><code>rInflate</code>方法首先判断是否解析结束了，若没有，则从 XmlPullParser 中加载出下一个 View 进行处理，中间还会对不同的类型进行处理，比如<code>TAG_REQUEST_FOCUS</code>、<code>TAG_TAG</code>、<code>TAG_INCLUDE</code>、<code>TAG_MERGE</code>等等。</p>
-
+    }
+</code></pre></div><p><code>rInflate</code>方法首先判断是否解析结束了，若没有，则从 XmlPullParser 中加载出下一个 View 进行处理，中间还会对不同的类型进行处理，比如<code>TAG_REQUEST_FOCUS</code>、<code>TAG_TAG</code>、<code>TAG_INCLUDE</code>、<code>TAG_MERGE</code>等等。</p>
 <p>最后仍然还是通过<code>createViewFromTag</code>来生成 View ，并以这个生成的 View 为父节点，开始深度遍历，继续调用<code>rInflateChildren</code>方法加载布局，并把这个 View 加入到它的父 View 中去。</p>
-
 <p>至于为什么生成 View 的方法名字<code>createViewFromTag</code>从字面上来看是来自于 <code>Tag</code>标签，想必是和 <code>XmlPullParser</code>解析布局生成的内容有关。</p>
-
 <h2 id="参考">参考</h2>
-
 <ol>
 <li><a href="http://www.sunnyang.com/661.html?utm_source=tuicool&amp;utm_medium=referral">http://www.sunnyang.com/661.html?utm_source=tuicool&amp;utm_medium=referral</a></li>
 <li><a href="http://blog.csdn.net/lmj623565791/article/details/51503977">http://blog.csdn.net/lmj623565791/article/details/51503977</a></li>
 <li><a href="https://segmentfault.com/a/1190000003813755">https://segmentfault.com/a/1190000003813755</a></li>
 <li><a href="http://blog.csdn.net/panda1234lee/article/details/9009719">http://blog.csdn.net/panda1234lee/article/details/9009719</a></li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/android-layout-inflater/">Android 布局加载之 LayoutInflater</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -471,45 +434,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/android/android-change-skin-by-plugin/" data-toggle="tooltip" data-placement="top" title="Android 插件换肤原理及源码分析">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/android/rxjava-wrapper-dialog/" data-toggle="tooltip" data-placement="top" title="用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/android/android-change-skin-by-plugin/" data-toggle="tooltip" data-placement="top" title="Android 插件换肤原理及源码分析">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/android/rxjava-wrapper-dialog/" data-toggle="tooltip" data-placement="top" title="用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -518,6 +468,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -560,25 +512,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -587,66 +533,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

@@ -1,54 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android 系统服务启动 SystemServer-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>Android 系统服务启动 SystemServer</title>
   <meta property="og:title" content="Android 系统服务启动 SystemServer" />
   <meta name="twitter:title" content="Android 系统服务启动 SystemServer" />
 
   <meta name="description" content="在之前 Android 系统服务管理 ServiceManager 中学习了各种系统服务 Service 都是通过 ServiceManager 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 ContextImpl 类、SystemServiceRegistry 类、ServiceManager 类、ServiceManagerNative 类等等。
-
 那么问题就来了，ServiceManager 所管理的那些 Service 的 Binder 对象引用又是何时注册添加的呢？
-
 事实上这些服务 Service 是 SystemServer 进程中启动的。">
   <meta property="og:description" content="在之前 Android 系统服务管理 ServiceManager 中学习了各种系统服务 Service 都是通过 ServiceManager 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 ContextImpl 类、SystemServiceRegistry 类、ServiceManager 类、ServiceManagerNative 类等等。
-
 那么问题就来了，ServiceManager 所管理的那些 Service 的 Binder 对象引用又是何时注册添加的呢？
-
 事实上这些服务 Service 是 SystemServer 进程中启动的。">
   <meta name="twitter:description" content="在之前 Android 系统服务管理 ServiceManager 中学习了各种系统服务 Service 都是通过 ServiceManager 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 ContextImpl 类、SystemServiceRegistry 类、ServiceManager 类、ServiceManagerNative …">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/android-system-server/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/android-system-server/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -63,11 +56,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -75,9 +80,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -140,6 +143,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -152,113 +158,77 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Android 系统服务启动 SystemServer</h1>
+                <h1 align="center">Android 系统服务启动 SystemServer</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on December 22, 2017
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#systemserver-系统服务">SystemServer 系统服务</a></li>
-<li><a href="#systemserver-进程启动系统服务方式">SystemServer 进程启动系统服务方式</a>
-<ul>
-<li><a href="#startservice-方式">startService 方式</a></li>
-<li><a href="#addservice-方式">addService 方式</a></li>
-</ul></li>
-<li><a href="#servicemanager-启动时机">ServiceManager 启动时机</a></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#systemserver-系统服务">SystemServer 系统服务</a></li>
+    <li><a href="#systemserver-进程启动系统服务方式">SystemServer 进程启动系统服务方式</a>
+      <ul>
+        <li><a href="#startservice-方式">startService 方式</a></li>
+        <li><a href="#addservice-方式">addService 方式</a></li>
+      </ul>
+    </li>
+    <li><a href="#servicemanager-启动时机">ServiceManager 启动时机</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>在之前 <a href="http://www.glumes.com/android-servicemanager/">Android 系统服务管理 ServiceManager</a> 中学习了各种系统服务 Service 都是通过 <code>ServiceManager</code> 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 <code>ContextImpl</code> 类、<code>SystemServiceRegistry</code> 类、<code>ServiceManager</code> 类、<code>ServiceManagerNative</code> 类等等。</p>
-
+        
+        <p>在之前 <a href="http://www.glumes.com/android-servicemanager/">Android 系统服务管理 ServiceManager</a> 中学习了各种系统服务 Service 都是通过 <code>ServiceManager</code> 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 <code>ContextImpl</code> 类、<code>SystemServiceRegistry</code> 类、<code>ServiceManager</code> 类、<code>ServiceManagerNative</code> 类等等。</p>
 <p>那么问题就来了，ServiceManager 所管理的那些 Service 的 Binder 对象引用又是何时注册添加的呢？</p>
-
 <p>事实上这些服务 Service 是 SystemServer 进程中启动的。</p>
-
 <h2 id="systemserver-系统服务">SystemServer 系统服务</h2>
-
 <p>SystemServer 是由 Zygote 孵化的第一个进程，它和系统服务有着重要关系，通过 ps 命令，可知其进程名为 <code>system_server</code> 。Zygote 的进程名称为<code>app_process</code>。</p>
-
 <p>Android 系统中几乎所有的核心服务都在这个进程中，如 ActivityManagerService，PowerManagerService 和 WindowManagerService 等。</p>
-
 <p>Zygote 为启动 SystemService 提供了专门的函数 <code>forkSystemServer</code>，而不是标准的<code>forkAndSpecialize</code>函数。</p>
-
 <p>而 SystemServer 的执行主要在其 main 方法中，Android 6.0 的源码中不再是以前 Android 4.x 的 init1，init2 方法了。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#93a1a1;font-style:italic">/**
 </span><span style="color:#93a1a1;font-style:italic">     * The main entry point from zygote.
 </span><span style="color:#93a1a1;font-style:italic">     */</span>
     <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">main</span>(<span style="color:#268bd2">String</span>[] <span style="color:#268bd2">args</span>) {
         <span style="color:#859900">new</span> <span style="color:#268bd2">SystemServer</span>().<span style="color:#268bd2">run</span>();
-    }</code></pre></div>
-<p>继续跟进 run 方法查看：</p>
+    }
+</code></pre></div><p>继续跟进 run 方法查看：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">run</span>() {
         <span style="color:#859900">try</span> {
            
@@ -320,50 +290,35 @@ if (!doNotTrack) {
         <span style="color:#93a1a1;font-style:italic">// Loop forever.
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">Looper</span>.<span style="color:#268bd2">loop</span>();
         <span style="color:#859900">throw</span> <span style="color:#859900">new</span> <span style="color:#268bd2">RuntimeException</span>(<span style="color:#2aa198">&#34;Main thread loop unexpectedly exited&#34;</span>);
-    }</code></pre></div>
-<p>在 main 方法中删除了一些与虚拟机有关的代码，只关心系统服务的启动就好。</p>
-
+    }
+</code></pre></div><p>在 main 方法中删除了一些与虚拟机有关的代码，只关心系统服务的启动就好。</p>
 <p>在启动系统服务之前还初始化了系统环境上下文 <code>createSystemContext()</code>，执行了此方法之后<code>mSystemContext</code>变量才不会为 null ，关于如何初始化系统环境的上下文 Context ，必须得在写一篇博客单独学习了。</p>
-
 <p>初始化 mSystemContext 之后，就是启动服务了：</p>
-
 <ul>
 <li>startBootstrapServices();    // 启动引导服务</li>
 <li>startCoreServices();    // 启动核心服务</li>
 <li>startOtherServices();    // 启动其他服务</li>
 </ul>
-
 <h2 id="systemserver-进程启动系统服务方式">SystemServer 进程启动系统服务方式</h2>
-
 <p>SystemServer 进程启动系统服务有两种方式，分别是 SystemServiceManager 的<code>startService</code> 方式和 ServiceManager 的 <code>addService</code> 方式。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">       <span style="color:#268bd2">ServiceManager</span>.<span style="color:#268bd2">addService</span>(<span style="color:#2aa198">&#34;scheduling_policy&#34;</span>, <span style="color:#859900">new</span> <span style="color:#268bd2">SchedulingPolicyService</span>());
        <span style="color:#268bd2">Trace</span>.<span style="color:#268bd2">traceEnd</span>(<span style="color:#268bd2">Trace</span>.<span style="color:#268bd2">TRACE_TAG_SYSTEM_SERVER</span>);
-       <span style="color:#268bd2">mSystemServiceManager</span>.<span style="color:#268bd2">startService</span>(<span style="color:#268bd2">TelecomLoaderService</span>.<span style="color:#268bd2">class</span>);</code></pre></div>
-<h3 id="startservice-方式">startService 方式</h3>
-
+       <span style="color:#268bd2">mSystemServiceManager</span>.<span style="color:#268bd2">startService</span>(<span style="color:#268bd2">TelecomLoaderService</span>.<span style="color:#268bd2">class</span>);
+</code></pre></div><h3 id="startservice-方式">startService 方式</h3>
 <p>通过 SystemServiceManager 的<code>startService(Class&lt;T&gt; serviceClass)</code>用于启动继承于<code>SystemService</code>抽象类的服务。</p>
-
 <p>主要功能如下：</p>
-
 <ul>
 <li>通过反射创建对应的 SystemService ，并调用其 <code>onStart</code> 方法。</li>
 <li>同时将创建是 SystemService 添加到 SystemServiceManager 的 <code>mService</code> 集合变量中。</li>
 </ul>
-
 <h3 id="addservice-方式">addService 方式</h3>
-
 <p>通过 ServiceManager 的<code>addService(String name, IBinder service)</code>用于初始化继承于 IBinder 的服务。</p>
-
 <p>主要功能如下：</p>
-
 <ul>
 <li>将对应服务的 Binder 对象添加到 SystemManager 中去。</li>
 </ul>
-
 <p>之前有学习到 ServiceManager 是系统服务的管家，通过它来获得其他服务。然而，在启动系统服务时，有些服务竟然没有 addService 注册到 ServiceManager 中去。</p>
-
 <p>事实上，有些服务即使在启动时没有注册进去，在启动之后也会注册到 ServiceManager 中去。</p>
-
 <p>通过查看 <code>SystemService</code>这个抽象类的源码可知，有如下方法：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#93a1a1;font-style:italic">/**
 </span><span style="color:#93a1a1;font-style:italic">     * Publish the service so it is accessible to other services and apps.
@@ -378,8 +333,9 @@ if (!doNotTrack) {
     <span style="color:#859900">protected</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">publishBinderService</span>(<span style="color:#268bd2">String</span> <span style="color:#268bd2">name</span>, <span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">service</span>,
             <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">allowIsolated</span>) {
         <span style="color:#268bd2">ServiceManager</span>.<span style="color:#268bd2">addService</span>(<span style="color:#268bd2">name</span>, <span style="color:#268bd2">service</span>, <span style="color:#268bd2">allowIsolated</span>);
-    }</code></pre></div>
-<p>而 ServiceManager 的对应方法为，最后一个变量设置 true 的话，则表示允许隔离的沙盒进程访问该服务。</p>
+    }
+
+</code></pre></div><p>而 ServiceManager 的对应方法为，最后一个变量设置 true 的话，则表示允许隔离的沙盒进程访问该服务。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">/**
 </span><span style="color:#93a1a1;font-style:italic">     * Place a new @a service called @a name into the service
 </span><span style="color:#93a1a1;font-style:italic">     * manager.
@@ -395,13 +351,10 @@ if (!doNotTrack) {
         } <span style="color:#859900">catch</span> (<span style="color:#268bd2">RemoteException</span> <span style="color:#268bd2">e</span>) {
             <span style="color:#268bd2">Log</span>.<span style="color:#268bd2">e</span>(<span style="color:#268bd2">TAG</span>, <span style="color:#2aa198">&#34;error in addService&#34;</span>, <span style="color:#268bd2">e</span>);
         }
-    }</code></pre></div>
-<h2 id="servicemanager-启动时机">ServiceManager 启动时机</h2>
-
+    }
+</code></pre></div><h2 id="servicemanager-启动时机">ServiceManager 启动时机</h2>
 <p>SystemServer 是一个进程，由 Zygote 孵化的第一个进程，而 ServiceManager 也是一个进程，并且 SystemService 启动系统服务时，可以向 ServiceManager 中注册服务，那么可想而知，ServiceManager 是比 SystemService 先启动的。</p>
-
 <p>ServiceManager 是由 <code>init.rc</code> 进程启动的。</p>
-
 <p>在<code>init.rc</code>中有如下代码启动 ServiceManager 。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">service</span> <span style="color:#268bd2">servicemanager</span> /<span style="color:#268bd2">system</span>/<span style="color:#268bd2">bin</span>/<span style="color:#268bd2">servicemanager</span>
     <span style="color:#859900">class</span> <span style="color:#cb4b16">core</span>
@@ -412,19 +365,14 @@ if (!doNotTrack) {
     <span style="color:#268bd2">onrestart</span> <span style="color:#268bd2">restart</span> <span style="color:#268bd2">zygote</span>
     <span style="color:#268bd2">onrestart</span> <span style="color:#268bd2">restart</span> <span style="color:#268bd2">media</span>
     <span style="color:#268bd2">onrestart</span> <span style="color:#268bd2">restart</span> <span style="color:#268bd2">surfaceflinger</span>
-    <span style="color:#268bd2">onrestart</span> <span style="color:#268bd2">restart</span> <span style="color:#268bd2">drm</span></code></pre></div>
-<p>由于我编的 Android 源码里面竟然死活没找到上面的代码，附上源码链接地址为：
+    <span style="color:#268bd2">onrestart</span> <span style="color:#268bd2">restart</span> <span style="color:#268bd2">drm</span>
+</code></pre></div><p>由于我编的 Android 源码里面竟然死活没找到上面的代码，附上源码链接地址为：
 <a href="https://android.googlesource.com/platform/system/core/+/android-6.0.0_r1/rootdir/init.rc">https://android.googlesource.com/platform/system/core/+/android-6.0.0_r1/rootdir/init.rc</a></p>
-
 <p>就这样，虽然跳过了很多细节的部分，但还是大概的明白了 Android 系统服务管理（ServiceManager）和启动（SystemServer）的流程。</p>
-
 <p>其他的细节部分，每个部分都可在再继续深入学习了。</p>
-
 <p>最后还是附图一张：
-<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-android-SystemServer-function.png" alt="android-SystemServer-function" /></p>
-
+<img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-android-SystemServer-function.png" alt="android-SystemServer-function"></p>
 <h2 id="参考">参考</h2>
-
 <ol>
 <li>《Android内核剖析》</li>
 <li>《深入理解Android》</li>
@@ -432,34 +380,40 @@ if (!doNotTrack) {
 <li><a href="http://ticktick.blog.51cto.com/823160/1659473">http://ticktick.blog.51cto.com/823160/1659473</a></li>
 <li><a href="http://gityuan.com/2016/02/20/android-system-server-2/">http://gityuan.com/2016/02/20/android-system-server-2/</a></li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/android-system-server/">Android 系统服务启动 SystemServer</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -486,45 +440,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/android/android-service-manager/" data-toggle="tooltip" data-placement="top" title="Android 系统服务管理 ServiceManager">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/android/android-window-and-view/" data-toggle="tooltip" data-placement="top" title="Android Activity 创建 Window 及添加 View 流程分析">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/android/android-service-manager/" data-toggle="tooltip" data-placement="top" title="Android 系统服务管理 ServiceManager">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/android/android-window-and-view/" data-toggle="tooltip" data-placement="top" title="Android Activity 创建 Window 及添加 View 流程分析">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -533,6 +474,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -575,25 +518,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -602,66 +539,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kotlin on 星陨的博客</title>
@@ -18,7 +18,6 @@
       
       <guid>https://www.glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</guid>
       <description>&lt;p&gt;在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。&lt;/p&gt;
-
 &lt;p&gt;再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。&lt;/p&gt;</description>
     </item>
     
@@ -29,7 +28,6 @@
       
       <guid>https://www.glumes.com/post/android/kotlin-functional-programming-whth-anko/</guid>
       <description>&lt;p&gt;之前讲到了如何在 &lt;a href=&#34;http://www.glumes.com/kotlin-anko-usage/&#34;&gt;Kotlin 开发中使用 Anko 构建布局&lt;/a&gt;。&lt;/p&gt;
-
 &lt;p&gt;这一篇将是分析其原理。&lt;/p&gt;</description>
     </item>
     
@@ -40,7 +38,6 @@
       
       <guid>https://www.glumes.com/post/android/kotlin-with-anko/</guid>
       <description>&lt;p&gt;学习 Kotlin 应该都或多或少听过 Anko 这个开源库。&lt;/p&gt;
-
 &lt;p&gt;使用 Anko 来构建界面会更加简单、快捷。&lt;/p&gt;</description>
     </item>
     

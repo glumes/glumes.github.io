@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>OpenGL 的 glDrawElements  绘制方法-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>OpenGL 的 glDrawElements  绘制方法</title>
   <meta property="og:title" content="OpenGL 的 glDrawElements  绘制方法" />
   <meta name="twitter:title" content="OpenGL 的 glDrawElements  绘制方法" />
 
   <meta name="description" content="在之前的绘制中，我们都是通过 glDrawArrays 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。
-
 回顾一下之前提到的绘制类型：
-
 
 
 
@@ -23,35 +21,28 @@
 
 
 
-
 GL_POINTS
 将传入的顶点坐标作为单独的点绘制
-
 
 
 GL_LINES
 将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线
 
 
-
 GL_LINE_STRIP
 将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线
-
 
 
 GL_LINE_LOOP
 将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。
 
 
-
 GL_TRIANGLES
 将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形
 
 
-
 GL_TRIANGLE_STRIP
 将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形
-
 
 
 GL_TRIANGLE_FAN
@@ -60,9 +51,7 @@ GL_TRIANGLE_FAN
 
 ">
   <meta property="og:description" content="在之前的绘制中，我们都是通过 glDrawArrays 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。
-
 回顾一下之前提到的绘制类型：
-
 
 
 
@@ -72,35 +61,28 @@ GL_TRIANGLE_FAN
 
 
 
-
 GL_POINTS
 将传入的顶点坐标作为单独的点绘制
-
 
 
 GL_LINES
 将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线
 
 
-
 GL_LINE_STRIP
 将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线
-
 
 
 GL_LINE_LOOP
 将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。
 
 
-
 GL_TRIANGLES
 将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形
 
 
-
 GL_TRIANGLE_STRIP
 将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形
-
 
 
 GL_TRIANGLE_FAN
@@ -109,9 +91,7 @@ GL_TRIANGLE_FAN
 
 ">
   <meta name="twitter:description" content="在之前的绘制中，我们都是通过 glDrawArrays 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。
-
 回顾一下之前提到的绘制类型：
-
 
 
 
@@ -121,47 +101,41 @@ GL_TRIANGLE_FAN
 
 
 
-
 GL_POINTS
 将传入的顶点坐标作为单独的点绘制
-
 
 
 GL_LINES
 将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线
 
 
-
 GL_LINE_STRIP
-将传入的顶点 …">
+将传入的顶点作为折线绘 …">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -176,11 +150,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -188,9 +174,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -253,6 +237,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -269,21 +256,24 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>OpenGL 的 glDrawElements  绘制方法</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
                   
-                  
+                     <h1>OpenGL 的 glDrawElements  绘制方法</h1>
+                     
                     <span class="post-meta">
-  
-    Posted on May 25, 2018
-  
+  Posted on May 25, 2018
   
 </span>
 
 
+                    
+                  
                   
               </div>
             </div>
@@ -292,77 +282,48 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>OpenGL 的 glDrawElements  绘制方法</h1>
+                <h1 align="center">OpenGL 的 glDrawElements  绘制方法</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on May 25, 2018
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-          
-            
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
 
-          <p>在之前的绘制中，我们都是通过 <code>glDrawArrays</code> 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。</p>
 
+
+        
+      <div>
+          
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
+        
+        <p>在之前的绘制中，我们都是通过 <code>glDrawArrays</code> 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。</p>
 <p>回顾一下之前提到的绘制类型：</p>
-
 <table>
 <thead>
 <tr>
@@ -370,65 +331,47 @@ if (!doNotTrack) {
 <th>绘制方式</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>GL_POINTS</td>
 <td>将传入的顶点坐标作为单独的点绘制</td>
 </tr>
-
 <tr>
 <td>GL_LINES</td>
 <td>将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线</td>
 </tr>
-
 <tr>
 <td>GL_LINE_STRIP</td>
 <td>将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线</td>
 </tr>
-
 <tr>
 <td>GL_LINE_LOOP</td>
 <td>将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。</td>
 </tr>
-
 <tr>
 <td>GL_TRIANGLES</td>
 <td>将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形</td>
 </tr>
-
 <tr>
 <td>GL_TRIANGLE_STRIP</td>
 <td>将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形</td>
 </tr>
-
 <tr>
 <td>GL_TRIANGLE_FAN</td>
 <td>将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形</td>
 </tr>
 </tbody>
 </table>
-
 <p>假设要绘制一个立方体，以 <code>GL_TRIANGLES</code> 的类型进行绘制，那么六个面，每个面由两个三角形组成，就得向渲染管线传入 36 个顶点，36 个顶点按照顺序进行绘制，而实际上，一个矩形也就才 8 个顶点而已。</p>
-
 <p>为了优化绘制的效率，减少数据的传递，于是就有了 <code>glDrawElements</code> 绘制方法。</p>
-
 <h2 id="gldrawelements-绘制方法">glDrawElements 绘制方法</h2>
-
 <p><code>glDrawElements</code> 方法还是需要传递顶点数据，但只需要传递物体实际上的顶点数据，也就是最少的，不重复的顶点数据。</p>
-
 <p>然后再向渲染管线传递要绘制的顶点数据的索引，根据索引从顶点数据中取出对应的顶点，然后再按照指定的方式进行绘制。</p>
-
 <p>如下图所示，图片截自《OpenGL ES 3.x 游戏开发上卷》：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/glDrawElements_single.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/glDrawElements_single.png" alt=""></p>
 <p>由三个三角形组成的倒置的梯形，实际上只有五个顶点 $ {v0,v1,v2,v3,v4}$，因此也只传递了五个顶点，接下来就是确定这个五个顶点的索引顺序。</p>
-
 <p>索引顺序和我们要绘制的方式有很大的关系，不同绘制方式的索引顺序不同。</p>
-
 <p>采用 <code>GL_TRIANGLE_STRIP</code> 的类型绘制，那么索引顺序就是 ${0,1,2,3,4}$。</p>
-
 <p>具体方法调用情况代码：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#93a1a1;font-style:italic">// 函数原型
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900">native</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">glDrawElements</span>(
@@ -449,23 +392,15 @@ if (!doNotTrack) {
 	<span style="color:#93a1a1;font-style:italic">// glDrawElements 绘制
 </span><span style="color:#93a1a1;font-style:italic"></span>	<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glDrawElements</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_TRIANGLE_STRIP</span>,<span style="color:#268bd2">front</span>.<span style="color:#268bd2">size</span>,<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_UNSIGNED_BYTE</span>, <span style="color:#268bd2">frontBuffer</span>)
 	<span style="color:#93a1a1;font-style:italic">// glDrawArrays 绘制
-</span><span style="color:#93a1a1;font-style:italic"></span>	// <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glDrawArrays</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_TRIANGLE_STRIP</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">4</span>)</code></pre></div>
-<p>在函数原型中定义了要传入的参数，根据要绘制的方法和索引缓冲区，找到对应的点进行绘制。</p>
-
+</span><span style="color:#93a1a1;font-style:italic"></span>	<span style="color:#93a1a1;font-style:italic">// GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4)
+</span></code></pre></div><p>在函数原型中定义了要传入的参数，根据要绘制的方法和索引缓冲区，找到对应的点进行绘制。</p>
 <p>对于绘制时有重复点，采用这种方式，就可以减少向渲染管线中传递重复的点了。</p>
-
 <p>而且，在定义一个顶点时，大都是 <code>float</code> 类型，它是四个字节，而对于绘制量比较小，顶点数量在 <code>byte</code> 所能表达整数范围内，可以采用 <code>byte</code> 类型定义索引顺序，它只占一个字节，减少了内存的使用。</p>
-
 <h2 id="gldrawelements-和-gldrawarrays-的对比">glDrawElements 和 glDrawArrays 的对比</h2>
-
 <p><code>glDrawElements</code> 方法的 <code>count</code> 的参数定义了要取多少个索引出来绘制，而且这个绘制是连续的，必须要把 <code>count</code> 数量的顶点绘制完。</p>
-
 <p>这里就有一个很有意思的地方了，有一些小游戏是这样的：要求一笔绘制完一个形状，而且不允许交叉。</p>
-
 <p>比如，要求一笔绕过立方体的六个面，而且不允许交叉，这就很难做到的了。</p>
-
 <p>而使用 <code>glDrawElements</code> 方法同样会这样，采用索引不能一次不交叉的把图形全部绘制完，得采取两次绘制。</p>
-
 <p>比如在实践绘制一个立方体时，采用了如下的方式：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#93a1a1;font-style:italic">// 前面索引
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">byte</span>[] <span style="color:#268bd2">front</span> = {<span style="color:#268bd2">0</span>, <span style="color:#268bd2">1</span>, <span style="color:#268bd2">2</span>, <span style="color:#268bd2">3</span>};
@@ -478,44 +413,46 @@ if (!doNotTrack) {
     <span style="color:#93a1a1;font-style:italic">// 左面索引
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">byte</span>[] <span style="color:#268bd2">left</span> = {<span style="color:#268bd2">0</span>, <span style="color:#268bd2">4</span>, <span style="color:#268bd2">2</span>, <span style="color:#268bd2">6</span>};
     <span style="color:#93a1a1;font-style:italic">// 右侧索引
-</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">byte</span>[] <span style="color:#268bd2">right</span> = {<span style="color:#268bd2">1</span>, <span style="color:#268bd2">5</span>, <span style="color:#268bd2">3</span>, <span style="color:#268bd2">7</span>};</code></pre></div>
-<p>把立方体分解成了六个面的内容进行绘制，也就是采用了六个索引缓存。</p>
-
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">byte</span>[] <span style="color:#268bd2">right</span> = {<span style="color:#268bd2">1</span>, <span style="color:#268bd2">5</span>, <span style="color:#268bd2">3</span>, <span style="color:#268bd2">7</span>};
+</code></pre></div><p>把立方体分解成了六个面的内容进行绘制，也就是采用了六个索引缓存。</p>
 <p>而对于使用 <code>glDrawArrays</code>的方式，可以一次性把所有顶点传到渲染管线，并且可以选择绘制的开始和结尾点，这样就只要一个缓冲区就好了，不过代码就是要多占用内存空间了。</p>
-
 <p>所以说，能用 glDrawElements 方式的还是要采用的。</p>
-
 <p>具体代码详情，可以参考我的 Github 项目：</p>
-
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/">OpenGL 的 glDrawElements  绘制方法</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -534,45 +471,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---观察矩阵">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/" data-toggle="tooltip" data-placement="top" title="Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---观察矩阵">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/" data-toggle="tooltip" data-placement="top" title="Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -581,6 +505,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -623,25 +549,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -650,66 +570,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

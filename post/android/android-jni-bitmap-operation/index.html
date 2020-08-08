@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android JNI 之 Bitmap 操作-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>Android JNI 之 Bitmap 操作</title>
   <meta property="og:title" content="Android JNI 之 Bitmap 操作" />
   <meta name="twitter:title" content="Android JNI 之 Bitmap 操作" />
 
@@ -14,33 +14,30 @@
   <meta property="og:description" content="在 Android 中通过 JNI 去操作 Bitmap。">
   <meta name="twitter:description" content="在 Android 中通过 JNI 去操作 Bitmap。">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/android-jni-bitmap-operation/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/android-jni-bitmap-operation/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -55,11 +52,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -67,9 +76,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -132,6 +139,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -148,21 +158,24 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>Android JNI 之 Bitmap 操作</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
                   
-                  
+                     <h1>Android JNI 之 Bitmap 操作</h1>
+                     
                     <span class="post-meta">
-  
-    Posted on July 25, 2018
-  
+  Posted on July 25, 2018
   
 </span>
 
 
+                    
+                  
                   
               </div>
             </div>
@@ -171,107 +184,76 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Android JNI 之 Bitmap 操作</h1>
+                <h1 align="center">Android JNI 之 Bitmap 操作</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on July 25, 2018
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
-              
-                  <a href="https://www.glumes.com/tags/jni/">JNI</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+            
+                <a href="https://www.glumes.com/tags/jni/">JNI</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#检索-bitmap-对象信息">检索 Bitmap 对象信息</a></li>
-<li><a href="#访问原生像素缓存">访问原生像素缓存</a></li>
-<li><a href="#释放原生像素缓存">释放原生像素缓存</a></li>
-</ul></li>
-<li><a href="#实践">实践</a>
-<ul>
-<li><a href="#通过-jni-将-bitmap-旋转">通过 JNI 将 Bitmap 旋转</a></li>
-<li><a href="#通过-jni-将-bitmap-上下翻转和左右镜像">通过 JNI 将 Bitmap 上下翻转和左右镜像</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#检索-bitmap-对象信息">检索 Bitmap 对象信息</a></li>
+        <li><a href="#访问原生像素缓存">访问原生像素缓存</a></li>
+        <li><a href="#释放原生像素缓存">释放原生像素缓存</a></li>
+      </ul>
+    </li>
+    <li><a href="#实践">实践</a>
+      <ul>
+        <li><a href="#通过-jni-将-bitmap-旋转">通过 JNI 将 Bitmap 旋转</a></li>
+        <li><a href="#通过-jni-将-bitmap-上下翻转和左右镜像">通过 JNI 将 Bitmap 上下翻转和左右镜像</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>在 Android 中通过 JNI 去操作 Bitmap。</p>
-
+        
+        <p>在 Android 中通过 JNI 去操作 Bitmap。</p>
 <p>在 Android 通过 JNI 去调用 Bitmap，通过 CMake 去编 so 动态链接库的话，需要添加 jnigraphics 图像库。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmake" data-lang="cmake"><span style="color:#cb4b16">target_link_libraries</span>( <span style="color:#93a1a1;font-style:italic"># Specifies the target library.
 </span><span style="color:#93a1a1;font-style:italic"></span>                       <span style="color:#2aa198">native-operation</span>
                        <span style="color:#2aa198">jnigraphics</span>
-                       ${<span style="color:#268bd2">log-lib</span>} )</code></pre></div>
-<p>在 Android 中关于 JNI Bitmap 的操作，都定义在 <code>bitmap.h</code> 的头文件里面了，主要就三个函数，明白它们的含义之后就可以去实践体会了。</p>
-
+                       ${<span style="color:#268bd2">log-lib</span>} )
+</code></pre></div><p>在 Android 中关于 JNI Bitmap 的操作，都定义在 <code>bitmap.h</code> 的头文件里面了，主要就三个函数，明白它们的含义之后就可以去实践体会了。</p>
 <h3 id="检索-bitmap-对象信息">检索 Bitmap 对象信息</h3>
-
 <p>AndroidBitmap_getInfo 函数允许原生代码检索 Bitmap 对象信息，如它的大小、像素格式等，函数签名如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">/**
 </span><span style="color:#93a1a1;font-style:italic"> * Given a java bitmap object, fill out the AndroidBitmapInfo struct for it.
@@ -279,29 +261,25 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"> */</span>
 <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">AndroidBitmap_getInfo</span>(<span style="color:#268bd2">JNIEnv</span>* <span style="color:#268bd2">env</span>, <span style="color:#268bd2">jobject</span> <span style="color:#268bd2">jbitmap</span>,
                           <span style="color:#268bd2">AndroidBitmapInfo</span>* <span style="color:#268bd2">info</span>);
-</code></pre></div>
-<p>其中，第一个参数就是 JNI 接口指针，第二个参数就是 Bitmap 对象的引用，第三个参数是指向 AndroidBitmapInfo 结构体的指针。</p>
-
+</code></pre></div><p>其中，第一个参数就是 JNI 接口指针，第二个参数就是 Bitmap 对象的引用，第三个参数是指向 AndroidBitmapInfo 结构体的指针。</p>
 <p>AndroidBitmapInfo 结构体如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">/** Bitmap info, see AndroidBitmap_getInfo(). */</span>
 <span style="color:#859900">typedef</span> <span style="color:#859900">struct</span> {
     <span style="color:#93a1a1;font-style:italic">/** The bitmap width in pixels. */</span>
-    <span style="color:#268bd2">uint32_t</span>    <span style="color:#268bd2">width</span>;
+    <span style="color:#859900;font-weight:bold">uint32_t</span>    <span style="color:#268bd2">width</span>;
     <span style="color:#93a1a1;font-style:italic">/** The bitmap height in pixels. */</span>
-    <span style="color:#268bd2">uint32_t</span>    <span style="color:#268bd2">height</span>;
+    <span style="color:#859900;font-weight:bold">uint32_t</span>    <span style="color:#268bd2">height</span>;
     <span style="color:#93a1a1;font-style:italic">/** The number of byte per row. */</span>
-    <span style="color:#268bd2">uint32_t</span>    <span style="color:#268bd2">stride</span>;
+    <span style="color:#859900;font-weight:bold">uint32_t</span>    <span style="color:#268bd2">stride</span>;
     <span style="color:#93a1a1;font-style:italic">/** The bitmap pixel format. See {@link AndroidBitmapFormat} */</span>
-    <span style="color:#268bd2">int32_t</span>     <span style="color:#268bd2">format</span>;
+    <span style="color:#859900;font-weight:bold">int32_t</span>     <span style="color:#268bd2">format</span>;
     <span style="color:#93a1a1;font-style:italic">/** Unused. */</span>
-    <span style="color:#268bd2">uint32_t</span>    <span style="color:#268bd2">flags</span>;      <span style="color:#93a1a1;font-style:italic">// 0 for now
+    <span style="color:#859900;font-weight:bold">uint32_t</span>    <span style="color:#268bd2">flags</span>;      <span style="color:#93a1a1;font-style:italic">// 0 for now
 </span><span style="color:#93a1a1;font-style:italic"></span>} <span style="color:#268bd2">AndroidBitmapInfo</span>;
-</code></pre></div>
-<p>其中，width 就是 Bitmap 的宽，height 就是高，format 就是图像的格式，而 stride 就是每一行的字节数。</p>
-
+</code></pre></div><p>其中，width 就是 Bitmap 的宽，height 就是高，format 就是图像的格式，而 stride 就是每一行的字节数。</p>
 <p>图像的格式有如下支持：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">/** Bitmap pixel format. */</span>
-<span style="color:#859900">enum</span> <span style="color:#268bd2">AndroidBitmapFormat</span> {
+<span style="color:#859900">enum</span> <span style="color:#cb4b16">AndroidBitmapFormat</span> {
     <span style="color:#93a1a1;font-style:italic">/** No format. */</span>
     <span style="color:#268bd2">ANDROID_BITMAP_FORMAT_NONE</span>      = <span style="color:#2aa198;font-weight:bold">0</span>,
     <span style="color:#93a1a1;font-style:italic">/** Red: 8 bits, Green: 8 bits, Blue: 8 bits, Alpha: 8 bits. **/</span>
@@ -313,8 +291,7 @@ if (!doNotTrack) {
     <span style="color:#93a1a1;font-style:italic">/** Alpha: 8 bits. */</span>
     <span style="color:#268bd2">ANDROID_BITMAP_FORMAT_A_8</span>       = <span style="color:#2aa198;font-weight:bold">8</span>,
 };
-</code></pre></div>
-<p>如果 AndroidBitmap_getInfo 执行成功的话，会返回 0 ，否则返回一个负数，代表执行的错误码列表如下：</p>
+</code></pre></div><p>如果 AndroidBitmap_getInfo 执行成功的话，会返回 0 ，否则返回一个负数，代表执行的错误码列表如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">/** AndroidBitmap functions result code. */</span>
 <span style="color:#859900">enum</span> {
     <span style="color:#93a1a1;font-style:italic">/** Operation was successful. */</span>
@@ -326,11 +303,8 @@ if (!doNotTrack) {
     <span style="color:#93a1a1;font-style:italic">/** Allocation failed. */</span>
     <span style="color:#268bd2">ANDROID_BITMAP_RESULT_ALLOCATION_FAILED</span> = -<span style="color:#2aa198;font-weight:bold">3</span>,
 };
-</code></pre></div>
-<h3 id="访问原生像素缓存">访问原生像素缓存</h3>
-
+</code></pre></div><h3 id="访问原生像素缓存">访问原生像素缓存</h3>
 <p>AndroidBitmap_lockPixels 函数锁定了像素缓存以确保像素的内存不会被移动。</p>
-
 <p>如果 Native 层想要访问像素数据并操作它，该方法返回了像素缓存的一个原生指针，</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">/**
 </span><span style="color:#93a1a1;font-style:italic"> * Given a java bitmap object, attempt to lock the pixel address.
@@ -346,48 +320,32 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"> * fails, addrPtr will be ignored.
 </span><span style="color:#93a1a1;font-style:italic"> */</span>
 <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">AndroidBitmap_lockPixels</span>(<span style="color:#268bd2">JNIEnv</span>* <span style="color:#268bd2">env</span>, <span style="color:#268bd2">jobject</span> <span style="color:#268bd2">jbitmap</span>, <span style="color:#859900;font-weight:bold">void</span>** <span style="color:#268bd2">addrPtr</span>);
-</code></pre></div>
-<p>其中，第一个参数就是 JNI 接口指针，第二个参数就是 Bitmap 对象的引用，第三个参数是指向像素缓存地址的指针。</p>
-
+</code></pre></div><p>其中，第一个参数就是 JNI 接口指针，第二个参数就是 Bitmap 对象的引用，第三个参数是指向像素缓存地址的指针。</p>
 <p>AndroidBitmap_lockPixels 执行成功的话返回 0 ，否则返回一个负数，错误码列表就是上面提到的。</p>
-
 <h3 id="释放原生像素缓存">释放原生像素缓存</h3>
-
 <p>对 Bitmap 调用完 AndroidBitmap_lockPixels 之后都应该对应调用一次 AndroidBitmap_unlockPixels  用来释放原生像素缓存。</p>
-
 <p>当完成对原生像素缓存的读写之后，就应该释放它，一旦释放后，Bitmap Java 对象又可以在 Java 层使用了，函数签名如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">/**
 </span><span style="color:#93a1a1;font-style:italic"> * Call this to balance a successful call to AndroidBitmap_lockPixels.
 </span><span style="color:#93a1a1;font-style:italic"> */</span>
 <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">AndroidBitmap_unlockPixels</span>(<span style="color:#268bd2">JNIEnv</span>* <span style="color:#268bd2">env</span>, <span style="color:#268bd2">jobject</span> <span style="color:#268bd2">jbitmap</span>);
-</code></pre></div>
-<p>其中，第一个参数就是 JNI 接口指针，第二个参数就是 Bitmap 对象的引用，如果执行成功返回 0，否则返回 1。</p>
-
+</code></pre></div><p>其中，第一个参数就是 JNI 接口指针，第二个参数就是 Bitmap 对象的引用，如果执行成功返回 0，否则返回 1。</p>
 <blockquote>
 <p>对 Bitmap 的操作，最重要的就是 AndroidBitmap_lockPixels 函数拿到所有像素的缓存地址，然后对每个像素值进行操作，从而更改 Bitmap 。</p>
 </blockquote>
-
 <h2 id="实践">实践</h2>
-
 <p>通过对 Bitmap 进行旋转，上下翻转，左右镜像来体验 JNI 的开发。</p>
-
 <p>效果如下：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftl40fytkxj20u01hcdmh.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1ftl40fytkxj20u01hcdmh.jpg" alt=""></p>
 <p>具体代码可以参考我的 Github 项目，欢迎 Star。</p>
-
 <blockquote>
 <p><a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a></p>
 </blockquote>
-
 <h3 id="通过-jni-将-bitmap-旋转">通过 JNI 将 Bitmap 旋转</h3>
-
 <p>首先定义一个这样的 native 函数：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#93a1a1;font-style:italic">// 顺时针旋转 90° 的操作
-</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">public</span> <span style="color:#859900">native</span> <span style="color:#268bd2">Bitmap</span> <span style="color:#268bd2">rotateBitmap</span>(<span style="color:#268bd2">Bitmap</span> <span style="color:#268bd2">bitmap</span>);</code></pre></div>
-<p>传入一个 Bitmap 对象，然后返回一个 Bitmap 对象。</p>
-
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">public</span> <span style="color:#859900">native</span> <span style="color:#268bd2">Bitmap</span> <span style="color:#268bd2">rotateBitmap</span>(<span style="color:#268bd2">Bitmap</span> <span style="color:#268bd2">bitmap</span>);
+</code></pre></div><p>传入一个 Bitmap 对象，然后返回一个 Bitmap 对象。</p>
 <p>然后在 C++ 代码中，首先检索 Bitmap 的信息，看看是否成功。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">AndroidBitmapInfo</span> <span style="color:#268bd2">bitmapInfo</span>;
     <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">ret</span>;
@@ -395,29 +353,22 @@ if (!doNotTrack) {
         <span style="color:#268bd2">LOGE</span>(<span style="color:#2aa198">&#34;AndroidBitmap_getInfo() failed ! error=%d&#34;</span>, <span style="color:#268bd2">ret</span>);
         <span style="color:#859900">return</span> <span style="color:#cb4b16">NULL</span>;
     }
-</code></pre></div>
-<p>接下来就是获得 Bitmap 的像素缓存指针：</p>
+</code></pre></div><p>接下来就是获得 Bitmap 的像素缓存指针：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 读取 bitmap 的像素内容到 native 内存
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900;font-weight:bold">void</span> *<span style="color:#268bd2">bitmapPixels</span>;
     <span style="color:#859900">if</span> ((<span style="color:#268bd2">ret</span> = <span style="color:#268bd2">AndroidBitmap_lockPixels</span>(<span style="color:#268bd2">env</span>, <span style="color:#268bd2">bitmap</span>, &amp;<span style="color:#268bd2">bitmapPixels</span>)) &lt; <span style="color:#2aa198;font-weight:bold">0</span>) {
         <span style="color:#268bd2">LOGE</span>(<span style="color:#2aa198">&#34;AndroidBitmap_lockPixels() failed ! error=%d&#34;</span>, <span style="color:#268bd2">ret</span>);
         <span style="color:#859900">return</span> <span style="color:#cb4b16">NULL</span>;
     }
-</code></pre></div>
-<p>这个指针指向的就是 Bitmap 像素内容，它是一个以一维数组的形式保存所有的像素点的值，但是我们在定义 Bitmap 图像时，都会定义宽和高，这就相对于是一个二维的了，那么就存在 Bitmap 的像素内容如何转成指针指向的一维内容，是按照行排列还是按照列排列呢？</p>
-
+</code></pre></div><p>这个指针指向的就是 Bitmap 像素内容，它是一个以一维数组的形式保存所有的像素点的值，但是我们在定义 Bitmap 图像时，都会定义宽和高，这就相对于是一个二维的了，那么就存在 Bitmap 的像素内容如何转成指针指向的一维内容，是按照行排列还是按照列排列呢？</p>
 <p>在这里是按照行进行排列的，而且行的排列是从左往右，列的排列是从上往下，起始点就和屏幕坐标原点一样，位于左上角。</p>
-
 <p>通过 AndroidBitmap_lockPixels 方法，bitmapPixels 指针就指向了 Bitmap 的像素内容，它的长度就是 Bitmap 的宽和高的乘积。</p>
-
 <p>要将 Bitmap 进行旋转，可以通过直接更改 bitmapPixels 指针指向的像素点的值，也可以通过创建一个新的 Bitmap 对象，然后将像素值填充到 Bitmap 对象中，这里选择后者的实现方式。</p>
-
 <p>首先创建一个新的 Bitmap 对象，参考之前文章中提到的方式：<a href="https://glumes.com/post/android/android-jni-access-field-and-method/">Android 通过 JNI 访问 Java 字段和方法调用</a>。</p>
-
 <p>在 Java 代码中，通过  createBitmap 方法可以创建一个 Bitmap，如下所示：</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#268bd2">Bitmap</span>.<span style="color:#268bd2">createBitmap</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">width</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">height</span>, <span style="color:#268bd2">@NonNull</span> <span style="color:#268bd2">Config</span> <span style="color:#268bd2">config</span>)`</code></pre></div>
-<p>所以在 JNI 中就需要调用 Bitmap 的静态方法来创建一个 Bitmap 对象。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">jobject</span> <span style="color:#268bd2">generateBitmap</span>(<span style="color:#268bd2">JNIEnv</span> *<span style="color:#268bd2">env</span>, <span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">width</span>, <span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">height</span>) {
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#268bd2">Bitmap</span>.<span style="color:#268bd2">createBitmap</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">width</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">height</span>, <span style="color:#268bd2">@NonNull</span> <span style="color:#268bd2">Config</span> <span style="color:#268bd2">config</span>)`
+</code></pre></div><p>所以在 JNI 中就需要调用 Bitmap 的静态方法来创建一个 Bitmap 对象。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">jobject</span> <span style="color:#268bd2">generateBitmap</span>(<span style="color:#268bd2">JNIEnv</span> *<span style="color:#268bd2">env</span>, <span style="color:#859900;font-weight:bold">uint32_t</span> <span style="color:#268bd2">width</span>, <span style="color:#859900;font-weight:bold">uint32_t</span> <span style="color:#268bd2">height</span>) {
 
     <span style="color:#268bd2">jclass</span> <span style="color:#268bd2">bitmapCls</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">FindClass</span>(<span style="color:#2aa198">&#34;android/graphics/Bitmap&#34;</span>);
     <span style="color:#268bd2">jmethodID</span> <span style="color:#268bd2">createBitmapFunction</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetStaticMethodID</span>(<span style="color:#268bd2">bitmapCls</span>,
@@ -438,96 +389,89 @@ if (!doNotTrack) {
                                                     <span style="color:#268bd2">height</span>, <span style="color:#268bd2">bitmapConfig</span>);
     <span style="color:#859900">return</span> <span style="color:#268bd2">newBitmap</span>;
 }
-</code></pre></div>
-<p>首先通过 <code>FindClass</code> 方法找到 Config 类，得到一个 ARGB_8888 的配置，然后得到 Bitmap 类，调用它的静态方法 <code>createBitmap</code> 创建一个新的 Bitmap 对象，具体可以参考之前的文章。</p>
-
+</code></pre></div><p>首先通过 <code>FindClass</code> 方法找到 Config 类，得到一个 ARGB_8888 的配置，然后得到 Bitmap 类，调用它的静态方法 <code>createBitmap</code> 创建一个新的 Bitmap 对象，具体可以参考之前的文章。</p>
 <p>在这里要传入新 Bitmap 的宽高，这个宽高也是通过 <code>AndroidBitmap_getInfo</code> 方法得到原来的宽高之后，根据不同的操作计算后得到的。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">	<span style="color:#93a1a1;font-style:italic">// 旋转操作，新 Bitmap 的宽等于原来的高，新 Bitmap 的高等于原来的宽
-</span><span style="color:#93a1a1;font-style:italic"></span>   <span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">newWidth</span> = <span style="color:#268bd2">bitmapInfo</span>.<span style="color:#268bd2">height</span>;
-    <span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">newHeight</span> = <span style="color:#268bd2">bitmapInfo</span>.<span style="color:#268bd2">width</span>;
-</code></pre></div>
-<p>有了新的 Bitmap 对象，又有了原有的 Bitmap 像素指针，接下来就是创建新的像素指针，并填充像素内容，然后把这个像素内容再填充到 Bitmap 上。</p>
+</span><span style="color:#93a1a1;font-style:italic"></span>   <span style="color:#859900;font-weight:bold">uint32_t</span> <span style="color:#268bd2">newWidth</span> = <span style="color:#268bd2">bitmapInfo</span>.<span style="color:#268bd2">height</span>;
+    <span style="color:#859900;font-weight:bold">uint32_t</span> <span style="color:#268bd2">newHeight</span> = <span style="color:#268bd2">bitmapInfo</span>.<span style="color:#268bd2">width</span>;
+</code></pre></div><p>有了新的 Bitmap 对象，又有了原有的 Bitmap 像素指针，接下来就是创建新的像素指针，并填充像素内容，然后把这个像素内容再填充到 Bitmap 上。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 创建一个新的数组指针，把这个新的数组指针填充像素值
-</span><span style="color:#93a1a1;font-style:italic"></span>	<span style="color:#268bd2">uint32_t</span> *<span style="color:#268bd2">newBitmapPixels</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">uint32_t</span>[<span style="color:#268bd2">newWidth</span> * <span style="color:#268bd2">newHeight</span>];
+</span><span style="color:#93a1a1;font-style:italic"></span>	<span style="color:#859900;font-weight:bold">uint32_t</span> *<span style="color:#268bd2">newBitmapPixels</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">uint32_t</span>[<span style="color:#268bd2">newWidth</span> * <span style="color:#268bd2">newHeight</span>];
     <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">whereToGet</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
     <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">y</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">y</span> &lt; <span style="color:#268bd2">newHeight</span>; ++<span style="color:#268bd2">y</span>) {
         <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">x</span> = <span style="color:#268bd2">newWidth</span> - <span style="color:#2aa198;font-weight:bold">1</span>; <span style="color:#268bd2">x</span> &gt;= <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">x</span>--) {
-            <span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">pixel</span> = ((<span style="color:#268bd2">uint32_t</span> *) <span style="color:#268bd2">bitmapPixels</span>)[<span style="color:#268bd2">whereToGet</span>++];
+            <span style="color:#859900;font-weight:bold">uint32_t</span> <span style="color:#268bd2">pixel</span> = ((<span style="color:#859900;font-weight:bold">uint32_t</span> *) <span style="color:#268bd2">bitmapPixels</span>)[<span style="color:#268bd2">whereToGet</span>++];
             <span style="color:#268bd2">newBitmapPixels</span>[<span style="color:#268bd2">newWidth</span> * <span style="color:#268bd2">y</span> + <span style="color:#268bd2">x</span>] = <span style="color:#268bd2">pixel</span>;
         }
     }
-</code></pre></div>
-<p>在这两个 <code>for</code>循环里面就是从原来的像素指针中取出像素值，然后把它按照特定的排列顺序填充到新的像素指针中对应位置的值，这里也就是前面强调的像素指针是按照行进行排列的，起点是 Bitmap 的左上角。</p>
+</code></pre></div><p>在这两个 <code>for</code>循环里面就是从原来的像素指针中取出像素值，然后把它按照特定的排列顺序填充到新的像素指针中对应位置的值，这里也就是前面强调的像素指针是按照行进行排列的，起点是 Bitmap 的左上角。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900;font-weight:bold">void</span> *<span style="color:#268bd2">resultBitmapPixels</span>;
     <span style="color:#859900">if</span> ((<span style="color:#268bd2">ret</span> = <span style="color:#268bd2">AndroidBitmap_lockPixels</span>(<span style="color:#268bd2">env</span>, <span style="color:#268bd2">newBitmap</span>, &amp;<span style="color:#268bd2">resultBitmapPixels</span>)) &lt; <span style="color:#2aa198;font-weight:bold">0</span>) {
         <span style="color:#268bd2">LOGE</span>(<span style="color:#2aa198">&#34;AndroidBitmap_lockPixels() failed ! error=%d&#34;</span>, <span style="color:#268bd2">ret</span>);
         <span style="color:#859900">return</span> <span style="color:#cb4b16">NULL</span>;
     }
     <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">pixelsCount</span> = <span style="color:#268bd2">newWidth</span> * <span style="color:#268bd2">newHeight</span>;
-    <span style="color:#268bd2">memcpy</span>((<span style="color:#268bd2">uint32_t</span> *) <span style="color:#268bd2">resultBitmapPixels</span>, <span style="color:#268bd2">newBitmapPixels</span>, <span style="color:#859900">sizeof</span>(<span style="color:#268bd2">uint32_t</span>) * <span style="color:#268bd2">pixelsCount</span>);
+    <span style="color:#268bd2">memcpy</span>((<span style="color:#859900;font-weight:bold">uint32_t</span> *) <span style="color:#268bd2">resultBitmapPixels</span>, <span style="color:#268bd2">newBitmapPixels</span>, <span style="color:#859900">sizeof</span>(<span style="color:#859900;font-weight:bold">uint32_t</span>) * <span style="color:#268bd2">pixelsCount</span>);
     <span style="color:#268bd2">AndroidBitmap_unlockPixels</span>(<span style="color:#268bd2">env</span>, <span style="color:#268bd2">newBitmap</span>);
-</code></pre></div>
-<p>再次创建一个 resultBitmapPixels 指针，并调用 AndroidBitmap_lockPixels 方法获取新的 Bitmap 的像素指针缓存，然后调用 <code>memcpy</code> 方法，将待填充的像素指针填充到 resultBitmapPixels 上，这样就完成了像素的赋值，最后调用 <code>AndroidBitmap_unlockPixels</code> 方法释放像素指针缓存，完成整个赋值过程。</p>
-
+</code></pre></div><p>再次创建一个 resultBitmapPixels 指针，并调用 AndroidBitmap_lockPixels 方法获取新的 Bitmap 的像素指针缓存，然后调用 <code>memcpy</code> 方法，将待填充的像素指针填充到 resultBitmapPixels 上，这样就完成了像素的赋值，最后调用 <code>AndroidBitmap_unlockPixels</code> 方法释放像素指针缓存，完成整个赋值过程。</p>
 <p>就这样通过读取原有 Bitmap 的像素内容然后进行操作后再赋值给新的 Bitmap 对象就完成了 JNI 操作 Bitmap 。</p>
-
 <h3 id="通过-jni-将-bitmap-上下翻转和左右镜像">通过 JNI 将 Bitmap 上下翻转和左右镜像</h3>
-
 <p>将 Bitmap 进行上下翻转以及左右镜像和旋转操作类似了，只是针对像素指针的操作方式不同。</p>
-
 <p>上下翻转的操作：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">whereToGet</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
     <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">y</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">y</span> &lt; <span style="color:#268bd2">newHeight</span>; ++<span style="color:#268bd2">y</span>) {
         <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">x</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">x</span> &lt; <span style="color:#268bd2">newWidth</span>; <span style="color:#268bd2">x</span>++) {
-            <span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">pixel</span> = ((<span style="color:#268bd2">uint32_t</span> *) <span style="color:#268bd2">bitmapPixels</span>)[<span style="color:#268bd2">whereToGet</span>++];
+            <span style="color:#859900;font-weight:bold">uint32_t</span> <span style="color:#268bd2">pixel</span> = ((<span style="color:#859900;font-weight:bold">uint32_t</span> *) <span style="color:#268bd2">bitmapPixels</span>)[<span style="color:#268bd2">whereToGet</span>++];
             <span style="color:#268bd2">newBitmapPixels</span>[<span style="color:#268bd2">newWidth</span> * (<span style="color:#268bd2">newHeight</span> - <span style="color:#2aa198;font-weight:bold">1</span> - <span style="color:#268bd2">y</span>) + <span style="color:#268bd2">x</span>] = <span style="color:#268bd2">pixel</span>;
         }
     }
-</code></pre></div>
-<p>左右镜像的操作：</p>
+</code></pre></div><p>左右镜像的操作：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">whereToGet</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
     <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">y</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">y</span> &lt; <span style="color:#268bd2">newHeight</span>; ++<span style="color:#268bd2">y</span>) {
         <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">x</span> = <span style="color:#268bd2">newWidth</span> - <span style="color:#2aa198;font-weight:bold">1</span>; <span style="color:#268bd2">x</span> &gt;= <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">x</span>--) {
-            <span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">pixel</span> = ((<span style="color:#268bd2">uint32_t</span> *) <span style="color:#268bd2">bitmapPixels</span>)[<span style="color:#268bd2">whereToGet</span>++];
+            <span style="color:#859900;font-weight:bold">uint32_t</span> <span style="color:#268bd2">pixel</span> = ((<span style="color:#859900;font-weight:bold">uint32_t</span> *) <span style="color:#268bd2">bitmapPixels</span>)[<span style="color:#268bd2">whereToGet</span>++];
             <span style="color:#268bd2">newBitmapPixels</span>[<span style="color:#268bd2">newWidth</span> * <span style="color:#268bd2">y</span> + <span style="color:#268bd2">x</span>] = <span style="color:#268bd2">pixel</span>;
         }
     }
-</code></pre></div>
-<p>其他的操作都相同了，具体还是看项目代码吧。</p>
-
+</code></pre></div><p>其他的操作都相同了，具体还是看项目代码吧。</p>
 <p>参考</p>
-
 <ol>
 <li>《Android C++ 高级编程&ndash;使用 NDK》</li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/android-jni-bitmap-operation/">Android JNI 之 Bitmap 操作</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -554,45 +498,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/opengl/opengl-tutorial-light-mix/" data-toggle="tooltip" data-placement="top" title="《OpenGL ES 3.x 游戏开发》光照系列之效果混合">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/opengl/opengl-axially-aligned-bounding-box/" data-toggle="tooltip" data-placement="top" title="《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/opengl/opengl-tutorial-light-mix/" data-toggle="tooltip" data-placement="top" title="《OpenGL ES 3.x 游戏开发》光照系列之效果混合">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/opengl/opengl-axially-aligned-bounding-box/" data-toggle="tooltip" data-placement="top" title="《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -601,6 +532,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -643,25 +576,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -670,66 +597,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

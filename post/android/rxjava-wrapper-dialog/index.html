@@ -1,58 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</title>
   <meta property="og:title" content="用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析" />
   <meta name="twitter:title" content="用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析" />
 
   <meta name="description" content="之前有写过一篇文章：用 RxJava 封装回调方法 CallBack。
-
 RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。
-
 这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。">
   <meta property="og:description" content="之前有写过一篇文章：用 RxJava 封装回调方法 CallBack。
-
 RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。
-
 这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。">
   <meta name="twitter:description" content="之前有写过一篇文章：用 RxJava 封装回调方法 CallBack。
-
 RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。
-
-这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对 …">
+这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的 …">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/rxjava-wrapper-dialog/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/rxjava-wrapper-dialog/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -67,11 +58,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -79,9 +82,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -144,6 +145,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -156,81 +160,51 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</h1>
+                <h1 align="center">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on December 22, 2017
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
-              
-                  <a href="https://www.glumes.com/tags/rxjava/">RxJava</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-          
-            
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
 
-          <p>之前有写过一篇文章：<a href="http://www.glumes.com/wrapper-callback-by-rxjava/">用 RxJava 封装回调方法 CallBack</a>。</p>
 
+
+        
+      <div>
+          
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+            
+                <a href="https://www.glumes.com/tags/rxjava/">RxJava</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
+        
+        <p>之前有写过一篇文章：<a href="http://www.glumes.com/wrapper-callback-by-rxjava/">用 RxJava 封装回调方法 CallBack</a>。</p>
 <p>RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。</p>
-
 <p>这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。</p>
-
 <p>下来展示具体代码的操作，用的是 RxJava 2.x 的版本：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#859900">private</span> <span style="color:#268bd2">Observable</span>&lt;<span style="color:#268bd2">Integer</span>&gt; <span style="color:#268bd2">handleRxJavaDialog</span>() {
         <span style="color:#859900">return</span> <span style="color:#268bd2">Observable</span>.<span style="color:#268bd2">create</span>(<span style="color:#268bd2">emitter</span> -&gt; {
@@ -247,17 +221,12 @@ if (!doNotTrack) {
                 }
             });
         });
-    }</code></pre></div>
-<p>如此封装之后，直接通过 RxJava 的 onNext 方法将事件封装到 RxJava 事件流里面去。</p>
-
+    }
+</code></pre></div><p>如此封装之后，直接通过 RxJava 的 onNext 方法将事件封装到 RxJava 事件流里面去。</p>
 <p>弄到这，想起了一个开源的 RxJava 系列框架：<a href="https://github.com/JakeWharton/RxBinding">RxBinding</a>，和本文的封装有相同之处。</p>
-
 <h2 id="rxbinding-实现简要分析">RxBinding 实现简要分析</h2>
-
 <p>RxBinding 是用来处理控件异步调用的一个框架，它也已经更新到了 RxJava 2.x 的版本。</p>
-
 <p>在它的源码里对许多控件都进行了封装，可以看到如：<code>RxView</code>、<code>RxTextView</code>、<code>RxSeekBar</code>、<code>RxProgressBar</code>、<code>RxPopupMenu</code>等等。</p>
-
 <p>它们的使用也是大同小异，比如要对一个 View 封装其点击事件，就可以这样写：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#268bd2">RxView</span>.<span style="color:#268bd2">clicks</span>(<span style="color:#268bd2">mBtn</span>)
 		.<span style="color:#268bd2">subscribe</span>(<span style="color:#859900">new</span> <span style="color:#268bd2">Consumer</span>&lt;<span style="color:#268bd2">Object</span>&gt;() {
@@ -265,16 +234,15 @@ if (!doNotTrack) {
             <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">accept</span>(<span style="color:#268bd2">@NonNull</span> <span style="color:#268bd2">Object</span> <span style="color:#268bd2">o</span>) <span style="color:#859900">throws</span> <span style="color:#268bd2">Exception</span> {
                 <span style="color:#268bd2">Timber</span>.<span style="color:#268bd2">d</span>(<span style="color:#2aa198">&#34;RxView&#34;</span>);
             }
-        });</code></pre></div>
-<p>在代码的前半部分<code>RxView.clicks(mBtn)</code>返回的正好是一个 Observable 对象，然后就可以像平时使用 RxJava 一样添加各种操作符，最后通过 subscribe 进行订阅了。</p>
-
+        });
+</code></pre></div><p>在代码的前半部分<code>RxView.clicks(mBtn)</code>返回的正好是一个 Observable 对象，然后就可以像平时使用 RxJava 一样添加各种操作符，最后通过 subscribe 进行订阅了。</p>
 <p>在 RxView.clicks 的源码中，最后返回的是一个 ViewClickObservable，从名字可见，这个 Observable 专门是用来处理点击事件的，在 RxBinding 中还有很多专门处理其他事件的 Observable，例如：<code>ViewDragObservable</code>、<code>ViewLongClickObservable</code>、<code>ViewScrollChangeEventObservable</code>等等，他们的实现方法也都大同小异了。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#268bd2">@CheckResult</span> <span style="color:#268bd2">@NonNull</span>
   <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#268bd2">Observable</span>&lt;<span style="color:#268bd2">Object</span>&gt; <span style="color:#268bd2">clicks</span>(<span style="color:#268bd2">@NonNull</span> <span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span>) {
     <span style="color:#268bd2">checkNotNull</span>(<span style="color:#268bd2">view</span>, <span style="color:#2aa198">&#34;view == null&#34;</span>);
     <span style="color:#859900">return</span> <span style="color:#859900">new</span> <span style="color:#268bd2">ViewClickObservable</span>(<span style="color:#268bd2">view</span>);
-  }</code></pre></div>
-<p>在专门处理各种事件的 Observable 类中，都会有一个实现 <code>Disposable</code>接口和具体事件所对应的接口的 Listener 类，而这个 Listener 类的作用，就是给我们所需要的 View 设置对应事件回调接口的，并且在回调接口中调用 Observable 的 onNext 方法来将事件转换到 RxJava 的事件流中。</p>
+  }
+</code></pre></div><p>在专门处理各种事件的 Observable 类中，都会有一个实现 <code>Disposable</code>接口和具体事件所对应的接口的 Listener 类，而这个 Listener 类的作用，就是给我们所需要的 View 设置对应事件回调接口的，并且在回调接口中调用 Observable 的 onNext 方法来将事件转换到 RxJava 的事件流中。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#268bd2">ViewClickObservable</span>(<span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span>) {
     <span style="color:#859900">this</span>.<span style="color:#268bd2">view</span> = <span style="color:#268bd2">view</span>;
 	}
@@ -307,48 +275,48 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">@Override</span> <span style="color:#859900">protected</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">onDispose</span>() {
       <span style="color:#268bd2">view</span>.<span style="color:#268bd2">setOnClickListener</span>(<span style="color:#859900;font-weight:bold">null</span>);
     }
-  }</code></pre></div>
-<p>而在开始订阅时，就调用<code>subscribeActual</code>方法来给 View 设置回调接口以便转换事件流。并且还设置了<code>Disposable</code>以便响应当结束订阅时的操作。</p>
-
+  }
+</code></pre></div><p>而在开始订阅时，就调用<code>subscribeActual</code>方法来给 View 设置回调接口以便转换事件流。并且还设置了<code>Disposable</code>以便响应当结束订阅时的操作。</p>
 <p>这一逻辑和本文上半部分将的有相同之处，核心都是用 onNext 方法转换事件流。</p>
-
 <p>而 RxBinding 则封装的更多了，没有在 create 方法里面进行操作， 而是针对 View 控件不同的事件来生成对应的 Observable 对象，对象里面持有 View 控件的实例，并且也完成了给 View 控件设置回调接口以及取消订阅时的方法。</p>
-
 <p>但毫无疑问，针对 View 控件的事件来生成 Observable 会使得代码的兼容性更强了吧，毕竟大多数控件都有公共事件，而只需要针对这个功能事件写一遍代码就行了，不需要针对每个控件来实现一套代码了。</p>
-
 <p>总结经验，写代码时还是要多想想，谋定而后动！！！</p>
-
 <h2 id="参考">参考</h2>
-
-<p>1、<a href="http://adelnizamutdinov.github.io/blog/2014/11/23/advanced-rxjava-on-android-popupmenus-and-dialogs/">http://adelnizamutdinov.github.io/blog/2014/11/23/advanced-rxjava-on-android-popupmenus-and-dialogs/</a></p>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
+<p>1、http://adelnizamutdinov.github.io/blog/2014/11/23/advanced-rxjava-on-android-popupmenus-and-dialogs/</p>
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/rxjava-wrapper-dialog/">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -375,45 +343,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/android/android-layout-inflater/" data-toggle="tooltip" data-placement="top" title="Android 布局加载之 LayoutInflater">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/ffmpeg/encode-and-decode-summary/" data-toggle="tooltip" data-placement="top" title="音视频编解码的那些基础理论">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/android/android-layout-inflater/" data-toggle="tooltip" data-placement="top" title="Android 布局加载之 LayoutInflater">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/ffmpeg/encode-and-decode-summary/" data-toggle="tooltip" data-placement="top" title="音视频编解码的那些基础理论">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -422,6 +377,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -464,25 +421,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -491,66 +442,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

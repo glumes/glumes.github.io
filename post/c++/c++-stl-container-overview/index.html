@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>C&#43;&#43; 标准容器库小结-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>C&#43;&#43; 标准容器库小结</title>
   <meta property="og:title" content="C&#43;&#43; 标准容器库小结" />
   <meta name="twitter:title" content="C&#43;&#43; 标准容器库小结" />
 
@@ -14,33 +14,30 @@
   <meta property="og:description" content="《C&#43;&#43; Primer》 第五版笔记摘录~~~">
   <meta name="twitter:description" content="《C&#43;&#43; Primer》 第五版笔记摘录~~~">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -55,11 +52,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -67,9 +76,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -132,6 +139,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -148,21 +158,24 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>C&#43;&#43; 标准容器库小结</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
                   
-                  
+                     <h1>C&#43;&#43; 标准容器库小结</h1>
+                     
                     <span class="post-meta">
-  
-    Posted on November 19, 2018
-  
+  Posted on November 19, 2018
   
 </span>
 
 
+                    
+                  
                   
               </div>
             </div>
@@ -171,161 +184,115 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>C&#43;&#43; 标准容器库小结</h1>
+                <h1 align="center">C&#43;&#43; 标准容器库小结</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on November 19, 2018
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/c&#43;&#43;/">C&#43;&#43;</a> &nbsp;
-              
-                  <a href="https://www.glumes.com/tags/stl/">STL</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://www.glumes.com/tags/c&#43;&#43;/">C&#43;&#43;</a> &nbsp;
+            
+                <a href="https://www.glumes.com/tags/stl/">STL</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#顺序容器">顺序容器</a>
-<ul>
-<li><a href="#顺序容器操作">顺序容器操作</a></li>
-<li><a href="#容器的一些通用操作">容器的一些通用操作</a>
-<ul>
-<li><a href="#容器定义和初始化">容器定义和初始化</a></li>
-<li><a href="#将一个容器初始化为另一个容器的拷贝">将一个容器初始化为另一个容器的拷贝</a></li>
-<li><a href="#迭代器">迭代器</a></li>
-<li><a href="#迭代器的使用">迭代器的使用</a></li>
-<li><a href="#迭代器的类型">迭代器的类型</a></li>
-<li><a href="#迭代器解引用和成员访问操作">迭代器解引用和成员访问操作</a></li>
-</ul></li>
-<li><a href="#顺序容器添加和删除元素">顺序容器添加和删除元素</a></li>
-</ul></li>
-<li><a href="#容器适配器">容器适配器</a>
-<ul>
-<li><a href="#定义适配器">定义适配器</a></li>
-<li><a href="#栈适配器">栈适配器</a></li>
-<li><a href="#队列适配器">队列适配器</a></li>
-</ul></li>
-<li><a href="#顺序容器小结">顺序容器小结</a></li>
-<li><a href="#关联容器">关联容器</a>
-<ul>
-<li><a href="#pair-类型">pair 类型</a></li>
-<li><a href="#关联容器迭代器">关联容器迭代器</a></li>
-<li><a href="#向-map-添加元素">向 map 添加元素：</a></li>
-<li><a href="#向-multiset-或者-multimap-添加元素">向 multiset 或者 multimap 添加元素</a></li>
-<li><a href="#map-移除元素">map 移除元素</a></li>
-<li><a href="#map-的下标操作和元素访问操作">map 的下标操作和元素访问操作</a>
-<ul>
-<li><a href="#下标操作">下标操作</a></li>
-<li><a href="#元素访问">元素访问</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#关联容器小结">关联容器小结</a></li>
-<li><a href="#小结">小结</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#顺序容器">顺序容器</a>
+      <ul>
+        <li><a href="#顺序容器操作">顺序容器操作</a></li>
+        <li><a href="#容器的一些通用操作">容器的一些通用操作</a></li>
+        <li><a href="#顺序容器添加和删除元素">顺序容器添加和删除元素</a></li>
+      </ul>
+    </li>
+    <li><a href="#容器适配器">容器适配器</a>
+      <ul>
+        <li><a href="#定义适配器">定义适配器</a></li>
+        <li><a href="#栈适配器">栈适配器</a></li>
+        <li><a href="#队列适配器">队列适配器</a></li>
+      </ul>
+    </li>
+    <li><a href="#顺序容器小结">顺序容器小结</a></li>
+    <li><a href="#关联容器">关联容器</a>
+      <ul>
+        <li><a href="#pair-类型">pair 类型</a></li>
+        <li><a href="#关联容器迭代器">关联容器迭代器</a></li>
+        <li><a href="#向-map-添加元素">向 map 添加元素：</a></li>
+        <li><a href="#向-multiset-或者-multimap-添加元素">向 multiset 或者 multimap 添加元素</a></li>
+        <li><a href="#map-移除元素">map 移除元素</a></li>
+        <li><a href="#map-的下标操作和元素访问操作">map 的下标操作和元素访问操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#关联容器小结">关联容器小结</a></li>
+    <li><a href="#小结">小结</a></li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>《C++ Primer》 第五版笔记摘录~~~</p>
-
+        
+        <p>《C++ Primer》 第五版笔记摘录~~~</p>
 <p>C++ 容器的种类如下：</p>
-
 <ul>
 <li>顺序容器
-
 <ul>
 <li>vector</li>
 <li>list</li>
 <li>deque</li>
-</ul></li>
+</ul>
+</li>
 <li>关联容器
-
 <ul>
 <li>map</li>
 <li>set</li>
 <li>multimap</li>
 <li>multiset</li>
-</ul></li>
+</ul>
+</li>
 <li>容器适配器
-
 <ul>
 <li>stack</li>
 <li>queue</li>
 <li>priority_queue</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h2 id="顺序容器">顺序容器</h2>
-
 <p>顺序容器提供了控制元素存储和访问顺序的能力，这种顺序不依赖于元素的值，而是与元素加入容器的位置相对应。</p>
-
 <p>以下表格是标准库中的顺序容器，它们都提供快速顺序访问元素的能力，但是这些容器在以下方面有不同的性能这种：</p>
-
 <ul>
 <li>向容器添加或从容器中删除元素的代价</li>
 <li>非顺序访问容器中元素的代价</li>
 </ul>
-
 <table>
 <thead>
 <tr>
@@ -333,61 +300,44 @@ if (!doNotTrack) {
 <th>介绍</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>vector</td>
 <td>可变大小数组。支持快速随机访问。在尾部之外的位置插入或删除元素可能很慢</td>
 </tr>
-
 <tr>
 <td>deque</td>
 <td>双端队列。支持快速随机访问。在头尾位置插入/删除速度很快</td>
 </tr>
-
 <tr>
 <td>list</td>
 <td>双向链表。只支持双向顺序访问。在 list 中任何位置进行插入/删除操作速度都很快</td>
 </tr>
-
 <tr>
 <td>forward_list</td>
 <td>单向链表。只支持单向顺序访问。在链表任何位置进行插入/删除操作速度都很快</td>
 </tr>
-
 <tr>
 <td>array</td>
 <td>固定数组大小。支持快速随机访问。不能添加或删除元素</td>
 </tr>
-
 <tr>
 <td>string</td>
 <td>与 vector 相似的容器，但专门用于保存字符。随机访问快。在尾部插入/删除速度快</td>
 </tr>
 </tbody>
 </table>
-
 <p>所有容器有一些共有的操作。</p>
-
 <h3 id="顺序容器操作">顺序容器操作</h3>
-
 <p>顺序容器几乎可以保存任意类型的元素，特别是，我们可以定义一个容器，其元素的类型是另一个容器。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">vector</span>&lt;<span style="color:#268bd2">vector</span>&lt;<span style="color:#268bd2">string</span>&gt;&gt; <span style="color:#268bd2">lines</span> ; <span style="color:#93a1a1;font-style:italic">// vector 的 vector
-</span></code></pre></div>
-<h3 id="容器的一些通用操作">容器的一些通用操作</h3>
-
+</span></code></pre></div><h3 id="容器的一些通用操作">容器的一些通用操作</h3>
 <h4 id="容器定义和初始化">容器定义和初始化</h4>
-
 <p>每个容器类型都定义了一个默认构造函数。除 array 之外，其他容器的默认构造函数都会创建一个指定类型的空容器，且都可以接受指定容器大小和元素初始值的参数。</p>
-
 <p>容器定义和初始化方法见下图：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwovi7exigj20pj0fnwp1.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwovi7exigj20pj0fnwp1.jpg" alt=""></p>
 <h4 id="将一个容器初始化为另一个容器的拷贝">将一个容器初始化为另一个容器的拷贝</h4>
-
 <p>将一个容器创建为另一个容器的拷贝的方法有两种：</p>
-
 <ol>
 <li>可以直接拷贝整个容器。</li>
 <li>拷贝由一个迭代器对指定的元素范围（除 array 外）。</li>
@@ -399,25 +349,15 @@ if (!doNotTrack) {
     <span style="color:#268bd2">vector</span>&lt;<span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> *&gt; <span style="color:#268bd2">articles</span> = {<span style="color:#2aa198">&#34;a&#34;</span>, <span style="color:#2aa198">&#34;an&#34;</span>, <span style="color:#2aa198">&#34;use&#34;</span>};
     <span style="color:#268bd2">forward_list</span>&lt;<span style="color:#268bd2">string</span>&gt; <span style="color:#268bd2">word</span>(<span style="color:#268bd2">articles</span>.<span style="color:#268bd2">begin</span>(), <span style="color:#268bd2">articles</span>.<span style="color:#268bd2">end</span>());
     <span style="color:#268bd2">cout</span> &lt;&lt; *<span style="color:#268bd2">word</span>.<span style="color:#268bd2">begin</span>() &lt;&lt; <span style="color:#268bd2">endl</span>;
-</code></pre></div>
-<p>当将一个容器初始化为另一个容器的拷贝时，两个容器的容器类型和元素类型都必须相同。</p>
-
+</code></pre></div><p>当将一个容器初始化为另一个容器的拷贝时，两个容器的容器类型和元素类型都必须相同。</p>
 <p>不过，当传递迭代器参数来拷贝一个范围时，就不要求容器类型是相同的了，而且，新容器和原容器的元素类型也可以不同，只要能将要拷贝的元素转换为要初始化的容器的元素类型即可。</p>
-
 <h4 id="迭代器">迭代器</h4>
-
 <p>所有标准库容器都可以使用迭代器，但是其中只有少数几种才同时支持下标运算符。</p>
-
 <p>和指针类似，迭代器也提供了对对象的间接访问。就迭代器而言，其对象是容器中的元素或者 string 对象中的字符。使用迭代器可以访问某个元素，迭代器也能从一个元素移动到另外一个元素。</p>
-
 <p>迭代器有有效和无效之分，这一点和指针差不多。有效的迭代器或者指向某个元素，或者指向容器中尾元素的下一位置：其他所有情况都属于无效。</p>
-
 <h4 id="迭代器的使用">迭代器的使用</h4>
-
 <p>获取迭代器不是使用取地址符，有迭代器的类型同时拥有返回迭代器的成员。</p>
-
 <p>比如，这些类型都拥有名为 <code>begin</code> 和 <code>end</code> 的成员，其中 begin 成员负责返回指向第一个元素的迭代器，end 成员则负责返回指向容器尾元素的下一位置的迭代器，常称作 <code>尾后迭代器</code> ，也就是说该迭代器指示的是容器一个本不存在的 <code>尾后元素</code> 。</p>
-
 <p>特殊情况下如果容器为空，则 begin 和 end 返回的就是同一个迭代器。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">string</span> <span style="color:#268bd2">content</span> = <span style="color:#2aa198">&#34;content&#34;</span>;
     <span style="color:#268bd2">string</span>::<span style="color:#268bd2">iterator</span> <span style="color:#268bd2">begin</span> = <span style="color:#268bd2">content</span>.<span style="color:#268bd2">begin</span>();
@@ -426,24 +366,17 @@ if (!doNotTrack) {
         <span style="color:#268bd2">cout</span> &lt;&lt; (*<span style="color:#268bd2">begin</span>) &lt;&lt; <span style="color:#268bd2">endl</span>;
         <span style="color:#268bd2">begin</span>++;
     }
-</code></pre></div>
-<h4 id="迭代器的类型">迭代器的类型</h4>
-
+</code></pre></div><h4 id="迭代器的类型">迭代器的类型</h4>
 <p>一般来说不需要知道迭代器的精确类型，而实际上，拥有迭代器的标准库类型使用 <code>iterator</code> 和 <code>const_iterator</code> 来表示迭代器的类型。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">vector</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt;::<span style="color:#268bd2">iterator</span> <span style="color:#268bd2">it</span> ;    <span style="color:#93a1a1;font-style:italic">// it 能读写 vector&lt;int&gt; 的元素
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">string</span>::<span style="color:#268bd2">iterator</span> <span style="color:#268bd2">it2</span> ;        <span style="color:#93a1a1;font-style:italic">// it2 能读写 string 对象中的字符
 </span><span style="color:#93a1a1;font-style:italic"></span>    
     <span style="color:#268bd2">vector</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt;::<span style="color:#268bd2">const_iterator</span> <span style="color:#268bd2">it3</span>;   <span style="color:#93a1a1;font-style:italic">// it3 只能读元素，不能写元素
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">string</span>::<span style="color:#268bd2">const_iterator</span> <span style="color:#268bd2">it4</span>;        <span style="color:#93a1a1;font-style:italic">// it4 只能读字符，不能写字符
-</span></code></pre></div>
-<p>begin 和 end 返回的具体类型由对象是否是常量决定，如果对象是常量，返回的是 const_iterator ，如果对象不是常量，返回的是 iterator 。</p>
-
+</span></code></pre></div><p>begin 和 end 返回的具体类型由对象是否是常量决定，如果对象是常量，返回的是 const_iterator ，如果对象不是常量，返回的是 iterator 。</p>
 <p>如果对象只需读操作，无需写操作，那么迭代器最好使用常量类型，为了便于专门得到 const_iterator 类型的返回值，C++ 11 新标准引入了两个新函数，分别是 <code>cbegin</code> 和 <code>cend</code> 。</p>
-
 <p>类似于 begin 和 end ，上述两个新函数也分别返回指示容器第一个元素或最后元素下一位置的迭代器，有所不同的是，不论 vector 对象（或 string 对象）本身是否是常量，返回值都是 const_iterator 。</p>
-
 <h4 id="迭代器解引用和成员访问操作">迭代器解引用和成员访问操作</h4>
-
 <p>解引用迭代器可以获得迭代器所指的对象，如果该对象的类型恰好是类，就有可能希望进一步访问它的成员。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">vector</span>&lt;<span style="color:#268bd2">string</span>&gt; <span style="color:#268bd2">strings</span>(<span style="color:#2aa198;font-weight:bold">3</span>, <span style="color:#2aa198">&#34;content&#34;</span>);
     <span style="color:#859900">auto</span> <span style="color:#268bd2">it</span> = <span style="color:#268bd2">strings</span>.<span style="color:#268bd2">begin</span>();
@@ -453,72 +386,60 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">cout</span> &lt;&lt; (*<span style="color:#268bd2">it</span>).<span style="color:#268bd2">empty</span>() &lt;&lt; <span style="color:#268bd2">endl</span>;
     <span style="color:#93a1a1;font-style:italic">// 通过箭头运算符 -&gt; 把解引用和成员访问结合在一起
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#268bd2">it</span>-&gt;<span style="color:#268bd2">empty</span>() &lt;&lt; <span style="color:#268bd2">endl</span>;
-</code></pre></div>
-<p>C++ 语言定义了箭头运算符 <code>-&gt;</code> ，能够把解引用和成员访问两个操作结合在一起。</p>
-
+</code></pre></div><p>C++ 语言定义了箭头运算符 <code>-&gt;</code> ，能够把解引用和成员访问两个操作结合在一起。</p>
 <h3 id="顺序容器添加和删除元素">顺序容器添加和删除元素</h3>
-
 <p>除了 array 固定大小之外，所有标准容器库都提供灵活的内存管理。在运行时可以动态添加或删除元素来改变容器大小。</p>
-
 <p>以下是向顺序容器中添加元素的操作。</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwo8b7wyadj20k30g4wlt.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwo8b7wyadj20k30g4wlt.jpg" alt=""></p>
 <p>当使用如上的操作时，必须记得不同容器使用不同的策略来分配元素空间，这些策略直接影响性能。</p>
-
 <p>添加主要操作函数有如下：</p>
-
 <ul>
 <li>push_back
-
 <ul>
 <li>将一个元素追加到容器的尾部，除了 array 和 forward_list 之外，每个顺序容器都支持。</li>
-</ul></li>
+</ul>
+</li>
 <li>push_front
-
 <ul>
 <li>将元素插入到容器头部，除了 push_back，list、forward_list 和 deque 容器还支持 push_front 操作。</li>
-</ul></li>
+</ul>
+</li>
 <li>insert
-
 <ul>
 <li>在容器中任意位置插入 0 个或多个元素，vector、deque、list 和 string 都支持 insert 操作。</li>
 <li>forward_list 提供了特殊版本的 insert 成员。</li>
 <li>每个 insert 函数都接受一个迭代器作为其第一个参数，迭代器指出了在容器中什么位置放置新元素。</li>
 <li>insert 函数将元素插入到迭代器所指定的位置之前。</li>
-</ul></li>
+</ul>
+</li>
 <li>emplace
-
 <ul>
 <li>C++ 新标准引入了三个新成员，emplace_front、emplace 和 emplace_back，这些操作构造而不是拷贝元素。这些操作分别对应于 push_front、insert 和 push_back ，允许我们将元素放置在容器头部、一个指定位置之前或者容器尾部。</li>
 <li>当调用 push 或 insert 成员函数时，我们将元素类型的对象传递给它们，这些对象被拷贝到容器中。</li>
 <li>而当我们调用一个 emplace 成员函数时，则是将参数传递给元素类型的构造函数，emplace 成员使用这些参数在容器管理的内存空间直接构造元素。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>删除主要操作函数如下：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwoydkugt2j20t10il4b7.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwoydkugt2j20t10il4b7.jpg" alt=""></p>
 <ul>
 <li>pop_front 和 pop_back
-
 <ul>
 <li>pop_front 和 pop_back 成员函数分别删除首元素和尾元素。</li>
 <li>与 vector 和 string 不支持 push_front 一样，这些类型也不支持 pop_front 。</li>
 <li>forward_list 不支持 pop_back 。</li>
 <li>不能对一个空容器执行弹出操作。</li>
-</ul></li>
+</ul>
+</li>
 <li>erase
-
 <ul>
 <li>从容器指定位置删除元素。</li>
 <li>可以删除由一个迭代器指定的单个元素，也可以删除由一对迭代器指定的范围内的所有元素。</li>
 <li>两种形式的 erase 都返回指向删除的（最后一个）元素之后位置的迭代器。</li>
 <li>接受一对迭代器的 erase 运行删除一个范围内的元素。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>代码示例如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">vector</span>&lt;<span style="color:#268bd2">string</span>&gt; <span style="color:#268bd2">str</span>(<span style="color:#2aa198;font-weight:bold">5</span>, <span style="color:#2aa198">&#34;content&#34;</span>);
     <span style="color:#93a1a1;font-style:italic">// 添加尾元素
@@ -550,52 +471,33 @@ if (!doNotTrack) {
         <span style="color:#268bd2">cout</span> &lt;&lt; *<span style="color:#268bd2">del_begin</span> &lt;&lt; <span style="color:#268bd2">endl</span>;
         <span style="color:#268bd2">del_begin</span>++;
     }
-</code></pre></div>
-<h2 id="容器适配器">容器适配器</h2>
-
+</code></pre></div><h2 id="容器适配器">容器适配器</h2>
 <p>除了顺序容器外，标准库还定义了三个顺序容器适配器：</p>
-
 <ul>
 <li>stack</li>
 <li>queue</li>
 <li>priority_queue</li>
 </ul>
-
 <p>适配器是标准库中的一个通用概念，容器、迭代器和函数都要适配器。</p>
-
 <p>本质上，一个适配器是一种机制，能使某种事物的行为看起来像另外一种事物一样，一个容器适配器接受一种已有的容器类型，使其行为看起来像一种不同的类型。例如，stack 适配器接受一个顺序容器（除 array 或 forward_list 外），并使其操作起来像一个 stack 一样。</p>
-
 <p>所有容器适配器都支持的操作如下：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd77po68vj20ib090whe.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd77po68vj20ib090whe.jpg" alt=""></p>
 <h3 id="定义适配器">定义适配器</h3>
-
 <p>每个适配器都定义两个构造函数：默认构造函数创建一个空对象，接受一个容器的构造函数拷贝该函数来初始化适配器。</p>
-
-<p>例如，假如 deq 是一个 deque<int> ，可以用 deq 来初始化一个新的 stack 。</p>
+<p>例如，假如 deq 是一个 deque<!-- raw HTML omitted --> ，可以用 deq 来初始化一个新的 stack 。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">stack</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt; <span style="color:#268bd2">stk</span>(<span style="color:#268bd2">deq</span>);	<span style="color:#93a1a1;font-style:italic">// 从 deq 拷贝元素到 stk
-</span></code></pre></div>
-<p>默认情况下，stack 和 queue 是基于 deque 实现的，priority_queue 是在 vector 之上实现的。我们可以创建一个适配器时将一个命名的顺序容器作为第二个类型参数，来重载默认容器类型。</p>
+</span></code></pre></div><p>默认情况下，stack 和 queue 是基于 deque 实现的，priority_queue 是在 vector 之上实现的。我们可以创建一个适配器时将一个命名的顺序容器作为第二个类型参数，来重载默认容器类型。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 在 vector 上实现的空栈
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">stack</span>&lt;<span style="color:#268bd2">string</span>, <span style="color:#268bd2">vector</span>&lt;<span style="color:#268bd2">string</span>&gt;&gt; <span style="color:#268bd2">str_stk</span>;
 <span style="color:#93a1a1;font-style:italic">// str_stk2 在 vector 上实现，初始化时保存 svec 的拷贝
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">stack</span>&lt;<span style="color:#268bd2">string</span>, <span style="color:#268bd2">vector</span>&lt;<span style="color:#268bd2">string</span>&gt;&gt; <span style="color:#268bd2">str_stk2</span>(<span style="color:#268bd2">svec</span>);
-</code></pre></div>
-<p>对于一个给定的适配器，可以使用哪些容器是有限制的。所有适配器都要求容器具有添加和删除元素的能力。因此，适配器不能构造在 array 之上，类似的，也不能用 forward_list 来构造适配器，因为所有适配器都要求容器具有添加、删除以及访问尾元素的能力。</p>
-
+</code></pre></div><p>对于一个给定的适配器，可以使用哪些容器是有限制的。所有适配器都要求容器具有添加和删除元素的能力。因此，适配器不能构造在 array 之上，类似的，也不能用 forward_list 来构造适配器，因为所有适配器都要求容器具有添加、删除以及访问尾元素的能力。</p>
 <p>stack 只要求 push_back、pop_back 和 back 操作，因此可以使用除 array 和 forward_list 之外的任何容器来构造 stack 。</p>
-
 <p>queue 适配器要求 back、push_back、front 和 push_front ，因此它可以构造于 list 或 queue 之上，但不能基于 vector 构造。</p>
-
 <p>priority_queue 除了 front、push_back 和 pop_back 操作之外还要求随机访问能力，因此它可以构造于 vector 或 queue 之上，但不能基于 list 构造。</p>
-
 <h3 id="栈适配器">栈适配器</h3>
-
 <p>stack 类型定义在 stack 头文件中，支持的操作如下表：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd78arzj4j20ig04rwga.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd78arzj4j20ig04rwga.jpg" alt=""></p>
 <p>代码示例如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">stack</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt; <span style="color:#268bd2">intStack</span>; <span style="color:#93a1a1;font-style:italic">// 声明一个空栈
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">for</span>(<span style="color:#268bd2">size_t</span> <span style="color:#268bd2">ix</span> = <span style="color:#2aa198;font-weight:bold">0</span>;<span style="color:#268bd2">ix</span> != <span style="color:#2aa198;font-weight:bold">10</span>;<span style="color:#268bd2">ix</span>++){
@@ -605,65 +507,38 @@ if (!doNotTrack) {
 	<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">value</span> = <span style="color:#268bd2">intStack</span>.<span style="color:#268bd2">top</span>();
 	<span style="color:#268bd2">intStack</span>.<span style="color:#268bd2">pop</span>();
 }
-</code></pre></div>
-<p>每个容器适配器都基于底层容器类型的操作定义了自己的特殊操作。我们只可以使用适配器操作，而不能使用底层容器类型的操作。</p>
-
+</code></pre></div><p>每个容器适配器都基于底层容器类型的操作定义了自己的特殊操作。我们只可以使用适配器操作，而不能使用底层容器类型的操作。</p>
 <h3 id="队列适配器">队列适配器</h3>
-
 <p>queue 和 priority_queue 适配器定义在 queue 头文件中，支持的操作如下表：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd78arzj4j20ig04rwga.jpg" alt="" /></p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd7dnqwazj20ib02smxx.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd78arzj4j20ig04rwga.jpg" alt=""></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fxd7dnqwazj20ib02smxx.jpg" alt=""></p>
 <p>标准库 queue 使用先进先出的存储和访问策略。进入队列的对象被放置到队尾，而离开队列的对象从队首删除。</p>
-
 <p>priority_queue 允许我们为队列中的元素建立优先级。新加入的元素会排在所有优先级比它低的已有元素之前。</p>
-
 <h2 id="顺序容器小结">顺序容器小结</h2>
-
 <p>标准库容器是模板类型，用来保存给定类型的对象。在一个顺序容器中，元素是按顺序存放的，通过位置来访问。顺序容器有公共的标准接口：如果两个顺序容器都提供一个特定的操作，那么这个操作在两个容器中具有相同的接口和含义。</p>
-
 <p>所有容器（除 array 外）都提供高效的动态内存管理。我们可以向容器中添加元素，而不必担心元素存储在哪里。容器负责管理自身的存储。vector 和 string 都提供更细致的内存管理控制，这是通过它们的 reserve 和 capacity 成员函数来实现的。</p>
-
 <p>很大程度上，容器只定义了极少的操作。每个容器都定义了构造函数、添加和删除元素的操作、确定容器大小的操作以及返回特定元素迭代器的操作。其他一些有用的操作，如排序或搜索，并不是由容器类型定义的，而是由标准库算法实现的。</p>
-
 <p>当使用添加或删除元素的容器操作时，必须注意这些操作可能使指向容器中的元素的迭代器、指针或引用失效。很多会使迭代器失效的操作，如 insert 和 erase ，都会返回一个新的迭代器，来帮助程序员维护容器中的位置。如果循环程序中使用了改变容器大小的操作，就要尤其小心其中迭代器、指针和引用的使用。</p>
-
-<hr />
-
+<hr>
 <h2 id="关联容器">关联容器</h2>
-
 <p>关联容器和顺序容器有着根本的不同：关联容器中的元素是按关键字来保存和访问的，与之相对，顺序容器中的元素是按它们在容器中的位置来顺序保存和访问的。</p>
-
 <p>关联容器支持高效的关键字查找和访问，两个主要的关联容器类型是 <code>map</code> 和 <code>set</code> 。</p>
-
 <p>map 中的元素是一些 关键字-值 对：关键字起到索引的作用，值则表示与索引相关联的数据。</p>
-
 <p>set 中每个元素只包含一个关键字，set 支持高效的关键词查询操作，检查一个给定关键字是否在 set 中。</p>
-
 <p>标准库提供了 8 个关联容器，如下图：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwoym8cn2ij20t50cfn4e.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwoym8cn2ij20t50cfn4e.jpg" alt=""></p>
 <p>这 8 个关联容器间的不同体现在三个维度上：</p>
-
 <ul>
 <li>每个容器或是一个 set 或者是一个 map 。</li>
 <li>或者要求不重复的关键字，或者允许重复关键字。</li>
 <li>按顺序保存元素，或无序保存。</li>
 </ul>
-
 <p>允许重复关键字的容器的名字中都包含单词 <code>multi</code> 。</p>
-
 <p>不保持关键字按顺序存储的容器的名字都以单词 <code>unordered</code> 开头。</p>
-
 <p>因此，一个 <code>unordered_multi_set</code> 是一个允许重复关键字，元素无序保存的集合，而一个 set 则是要求不重复关键字，有序存储的集合。</p>
-
 <blockquote>
 <p>类型 map 和 multimap 定义在头文件 map 中，set 和 multiset 定义在头文件 set 中，无序容器则定义在头文件 unordered_map 和 unordered_set 中。</p>
 </blockquote>
-
 <p>map 的简单示例：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">map</span>&lt;<span style="color:#268bd2">string</span>, <span style="color:#268bd2">size_t</span>&gt; <span style="color:#268bd2">word_count</span>;
     <span style="color:#268bd2">string</span> <span style="color:#268bd2">word</span>;
@@ -674,8 +549,7 @@ if (!doNotTrack) {
         <span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#268bd2">w</span>.<span style="color:#268bd2">first</span> &lt;&lt; <span style="color:#2aa198">&#34; occurs&#34;</span> &lt;&lt;
              <span style="color:#268bd2">w</span>.<span style="color:#268bd2">second</span> &lt;&lt; ((<span style="color:#268bd2">w</span>.<span style="color:#268bd2">second</span> &gt; <span style="color:#2aa198;font-weight:bold">1</span>) ? <span style="color:#2aa198">&#34; times&#34;</span> : <span style="color:#2aa198">&#34; time&#34;</span>) &lt;&lt; <span style="color:#268bd2">endl</span>;
     }
-</code></pre></div>
-<p>set 的简单示例：</p>
+</code></pre></div><p>set 的简单示例：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">map</span>&lt;<span style="color:#268bd2">string</span>, <span style="color:#268bd2">size_t</span>&gt; <span style="color:#268bd2">word_count</span>;
     <span style="color:#268bd2">set</span>&lt;<span style="color:#268bd2">string</span>&gt; <span style="color:#268bd2">exclude</span> = {<span style="color:#2aa198">&#34;The&#34;</span>, <span style="color:#2aa198">&#34;But&#34;</span>, <span style="color:#2aa198">&#34;And&#34;</span>};
     <span style="color:#268bd2">string</span> <span style="color:#268bd2">word</span>;
@@ -684,27 +558,18 @@ if (!doNotTrack) {
             ++<span style="color:#268bd2">word_count</span>[<span style="color:#268bd2">word</span>];
         }
     }
-</code></pre></div>
-<h3 id="pair-类型">pair 类型</h3>
-
+</code></pre></div><h3 id="pair-类型">pair 类型</h3>
 <p>在开始关联容器的操作之前，需要了解 <code>pair</code> 的标准库类型，它定义在头文件 <code>utility</code> 中。</p>
-
 <p>一个 pair 保存两个数据成员。pair 是一个用来生成特别类型的模板。当创建一个 pair 时，我们必须提供两个类型名，pair 的数据成员将具有对应的类型，两个类型不要求一样：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">pair</span>&lt;<span style="color:#268bd2">string</span>,<span style="color:#268bd2">string</span>&gt; <span style="color:#268bd2">anon</span>;
 <span style="color:#268bd2">pair</span>&lt;<span style="color:#268bd2">string</span>,<span style="color:#268bd2">size_t</span>&gt; <span style="color:#268bd2">word_count</span>;
 <span style="color:#268bd2">pair</span>&lt;<span style="color:#268bd2">string</span>,<span style="color:#268bd2">vector</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt;&gt; <span style="color:#268bd2">line</span>;
 <span style="color:#268bd2">pair</span>&lt;<span style="color:#268bd2">string</span>,<span style="color:#268bd2">string</span>&gt; <span style="color:#268bd2">author</span>{<span style="color:#2aa198">&#34;James&#34;</span>,<span style="color:#2aa198">&#34;Joyce&#34;</span>};
-</code></pre></div>
-<p>pair 的默认构造函数对数据成员进行值初始化，当然也可以为每个成员提供初始化器。</p>
-
+</code></pre></div><p>pair 的默认构造函数对数据成员进行值初始化，当然也可以为每个成员提供初始化器。</p>
 <p>pair 的数据成员是 public 的。两个成员分别命名为 first 和 second 。可以用普通的访问符来访问它们。</p>
-
 <p>具体 pair 上的一些操作如下：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwr9pwm1vdj21fo0w21hy.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwr9pwm1vdj21fo0w21hy.jpg" alt=""></p>
 <h3 id="关联容器迭代器">关联容器迭代器</h3>
-
 <p>当解引用一个关联容器迭代器时，我们会得到一个类型为容器的 value_type 的值的引用。对 map 而言，value_type 是一个 pair 类型，其 first 成员保存 const 的关键字，second 成员保存值。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 获得指向 word_count 中一个元素的迭代器
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">auto</span> <span style="color:#268bd2">map_it</span> = <span style="color:#268bd2">word_count</span>.<span style="color:#268bd2">begin</span>();
@@ -713,11 +578,9 @@ if (!doNotTrack) {
     <span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#268bd2">map_it</span>-&gt;<span style="color:#268bd2">second</span>;
     <span style="color:#93a1a1;font-style:italic">// 可以通过迭代器改变元素
 </span><span style="color:#93a1a1;font-style:italic"></span>    ++<span style="color:#268bd2">map_it</span>-&gt;<span style="color:#268bd2">second</span>;
-</code></pre></div>
-<blockquote>
+</code></pre></div><blockquote>
 <p>一个 map 的 value_type 是一个 pari ，我们可以改变 pair 的值，但不能改变关键字成员的值。</p>
 </blockquote>
-
 <p>对于 set 而言，它的 iterator 和 const_iterator 迭代器都只允许只读访问 set 中的元素，而且，set 中的关键字也是 const 的 。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">set</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt; <span style="color:#268bd2">iset</span> = {<span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">2</span>, <span style="color:#2aa198;font-weight:bold">3</span>, <span style="color:#2aa198;font-weight:bold">4</span>, <span style="color:#2aa198;font-weight:bold">5</span>};
     <span style="color:#268bd2">set</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt;::<span style="color:#268bd2">iterator</span> <span style="color:#268bd2">set_it</span> = <span style="color:#268bd2">iset</span>.<span style="color:#268bd2">begin</span>();
@@ -725,11 +588,8 @@ if (!doNotTrack) {
         <span style="color:#93a1a1;font-style:italic">// *set_it = 42;   // 关键字只读，不能赋值
 </span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">cout</span> &lt;&lt; *<span style="color:#268bd2">set_it</span> &lt;&lt; <span style="color:#268bd2">endl</span>;
     }
-</code></pre></div>
-<h3 id="向-map-添加元素">向 map 添加元素：</h3>
-
+</code></pre></div><h3 id="向-map-添加元素">向 map 添加元素：</h3>
 <p>对一个 map 进行 insert 操作时，必须记住元素类型是 <code>pair</code> 。</p>
-
 <p>通常，对于一个想要插入的数据，并没有一个现成的 pair 对象，可以在 insert 的参数列表中创建一个 <code>pair</code> 。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">map</span>&lt;<span style="color:#268bd2">string</span>, <span style="color:#268bd2">size_t</span>&gt; <span style="color:#268bd2">word_count</span>;
     <span style="color:#268bd2">string</span> <span style="color:#268bd2">word</span> = <span style="color:#2aa198">&#34;word&#34;</span>;
@@ -738,17 +598,11 @@ if (!doNotTrack) {
     <span style="color:#268bd2">word_count</span>.<span style="color:#268bd2">insert</span>(<span style="color:#268bd2">make_pair</span>(<span style="color:#268bd2">word</span>, <span style="color:#2aa198;font-weight:bold">1</span>));
     <span style="color:#268bd2">word_count</span>.<span style="color:#268bd2">insert</span>(<span style="color:#268bd2">pair</span>&lt;<span style="color:#268bd2">string</span>, <span style="color:#268bd2">size_t</span>&gt;(<span style="color:#268bd2">word</span>, <span style="color:#2aa198;font-weight:bold">1</span>));
     <span style="color:#268bd2">word_count</span>.<span style="color:#268bd2">insert</span>(<span style="color:#268bd2">map</span>&lt;<span style="color:#268bd2">string</span>, <span style="color:#268bd2">size_t</span>&gt;::<span style="color:#268bd2">value_type</span>(<span style="color:#268bd2">word</span>, <span style="color:#2aa198;font-weight:bold">1</span>));
-</code></pre></div>
-<p>在新标准下，创建一个 pair 最简单的方法是在参数列表中使用花括号初始化，也可以用 <code>make_pair</code> 或显示构造 <code>pair</code> 。或者通过 <code>map&lt;string,size_t&gt;::value_type</code> 构造一个恰当的 pair 类型，并构造该类型的一个对象，然后插入到 map 中。</p>
-
+</code></pre></div><p>在新标准下，创建一个 pair 最简单的方法是在参数列表中使用花括号初始化，也可以用 <code>make_pair</code> 或显示构造 <code>pair</code> 。或者通过 <code>map&lt;string,size_t&gt;::value_type</code> 构造一个恰当的 pair 类型，并构造该类型的一个对象，然后插入到 map 中。</p>
 <p>关联容器的 insert 操作如下表：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpbcg2ekoj20re0e67cn.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpbcg2ekoj20re0e67cn.jpg" alt=""></p>
 <p>insert （或 emplace）返回的值依赖于容器类型和参数。对于不包含重复关键字的容器，添加单一元素的 insert 和 emplace 版本返回一个 pair ，告诉我们插入操作是否成功。</p>
-
 <p>pair 的 first 成员是一个迭代器，指向具有给定关键字的元素；second 成员是一个 bool 值，指出元素是插入成功还是已经存在于容器中。如果关键字已在容器中，则 insert 什么事情也不做，且返回值中的 bool 部分为 false。如果关键字不存在，元素被插入容器，且 bool 值为 true 。</p>
-
 <p>比如如下代码：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">	<span style="color:#268bd2">map</span>&lt;<span style="color:#268bd2">string</span>, <span style="color:#268bd2">size_t</span>&gt; <span style="color:#268bd2">word_count</span>;
     <span style="color:#268bd2">string</span> <span style="color:#268bd2">word</span> = <span style="color:#2aa198">&#34;word&#34;</span>;
@@ -759,84 +613,53 @@ if (!doNotTrack) {
             ++<span style="color:#268bd2">ret</span>.<span style="color:#268bd2">first</span>-&gt;<span style="color:#268bd2">second</span>;
         }
     }
-</code></pre></div>
-<p>在 if 中根据 second 来判断是否插入成功，如果已经存在了，就把 pair 对应的 value 值递增。</p>
-
+</code></pre></div><p>在 if 中根据 second 来判断是否插入成功，如果已经存在了，就把 pair 对应的 value 值递增。</p>
 <p>这里要重点查看递增语句，比较难理解：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">	++<span style="color:#268bd2">ret</span>.<span style="color:#268bd2">first</span>-&gt;<span style="color:#268bd2">second</span>;
 	<span style="color:#93a1a1;font-style:italic">// 等价于
 </span><span style="color:#93a1a1;font-style:italic"></span>	++((<span style="color:#268bd2">ret</span>.<span style="color:#268bd2">first</span>)-&gt;<span style="color:#268bd2">second</span>);
-</code></pre></div>
-<p><code>ret.first</code> 是 pair 的第一个成员，是一个 map 迭代器，指向具有给定关键字的元素。
+</code></pre></div><p><code>ret.first</code> 是 pair 的第一个成员，是一个 map 迭代器，指向具有给定关键字的元素。
 <code>ret.first-&gt;</code> 解引用此迭代器，提取 map 中的元素，元素也是一个 pair 。
 <code>ret.first-&gt;second</code> map 中元素的值部分。
 <code>++ret.first-&gt;second</code> 递增此值。</p>
-
 <h3 id="向-multiset-或者-multimap-添加元素">向 multiset 或者 multimap 添加元素</h3>
-
 <p>如果希望添加具有相同关键字的多个元素，就应该使用 <code>multimap</code> 。由于一个 multi 容器中的关键字不必唯一，在这些类型上调用 insert 总会插入一个元素。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">multimap</span>&lt;<span style="color:#268bd2">string</span>, <span style="color:#268bd2">string</span>&gt; <span style="color:#268bd2">authors</span>;
     <span style="color:#93a1a1;font-style:italic">// 插入两个元素，关键字都为 Barth
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">authors</span>.<span style="color:#268bd2">insert</span>({<span style="color:#2aa198">&#34;Barth&#34;</span>, <span style="color:#2aa198">&#34;fadt&#34;</span>});
     <span style="color:#268bd2">authors</span>.<span style="color:#268bd2">insert</span>({<span style="color:#2aa198">&#34;Barth&#34;</span>, <span style="color:#2aa198">&#34;asdd&#34;</span>});
-</code></pre></div>
-<p>对允许重复关键字的容器，接受单个元素的 insert 操作返回一个指向新元素的迭代器。这里无须返回一个 bool 值，因为 insert 总是向这类容器加入一个新元素。</p>
-
+</code></pre></div><p>对允许重复关键字的容器，接受单个元素的 insert 操作返回一个指向新元素的迭代器。这里无须返回一个 bool 值，因为 insert 总是向这类容器加入一个新元素。</p>
 <h3 id="map-移除元素">map 移除元素</h3>
-
 <p>关联容器定义了三个版本的 <code>earse</code> 。</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpc64o9buj20re07l79v.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpc64o9buj20re07l79v.jpg" alt=""></p>
 <p>与顺序容器一样，我们可以通过传递给 erase 一个迭代器或一个迭代器对来删除一个元素或者一个元素范围。另外还有一个额外的 earse 操作，它接受一个 <code>key_type</code> 参数，它会删除所有匹配给定关键字的元素（如果存在的话），返回实际删除的元素的数量。</p>
-
 <p>对于不保存重复关键字的容器，erase 的返回值总是 0 或 1 。若返回值为 0 ，则表明想要删除的元素并不在容器中。对允许重复关键字的容器，删除元素的数量可能大于 1 。</p>
-
 <h3 id="map-的下标操作和元素访问操作">map 的下标操作和元素访问操作</h3>
-
 <h4 id="下标操作">下标操作</h4>
-
 <p>map 和 unordered_map 容器提供了下标运算符和一个对应的 <code>at</code> 函数。</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpiihxamnj20vi06s0xa.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpiihxamnj20vi06s0xa.jpg" alt=""></p>
 <p>set 类型不支持下标操作，因为 set 中没有与关键字相关联的 “值” ，元素本身就是关键字，因此 “获取与一个关键字相关联的值” 的操作就没意义了。</p>
-
 <p>不能对一个 multimap 或一个 unordered_multimap 进行下标操作，因为这些容器中可能有多个值与一个关键字相关联。</p>
-
 <p>类似于其他下标运算符，map 下标运算符接受一个索引（即：关键字），获取于此关键字相关联的值。但是，如果关键字并不在 map 中，会为它创建一个元素并插入到 map 中，关联值将进行值初始化。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">map</span>&lt;<span style="color:#268bd2">string</span>, <span style="color:#268bd2">size_t</span>&gt; <span style="color:#268bd2">word_count</span>;
     <span style="color:#93a1a1;font-style:italic">// 接受索引为关键字，如果没有就创建一个并插入到 map 中
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">word_count</span>[<span style="color:#2aa198">&#34;Anna&#34;</span>] = <span style="color:#2aa198;font-weight:bold">1</span>;
-</code></pre></div>
-<p>如果下标运算符可能插入一个新元素，我们只可以对非 const 的 map 使用下标操作。</p>
-
+</code></pre></div><p>如果下标运算符可能插入一个新元素，我们只可以对非 const 的 map 使用下标操作。</p>
 <p>通常情况下，解引用一个迭代器所返回的类型与下标运算符返回的类型是一样的。但对于 map 则不然：当对一个 map 进行下标操作时，会获得一个 <code>mapped_type</code> 对象；当解引用一个 map 迭代器时，会得到一个 <code>valut_type</code> 对象。</p>
-
 <p>与其他下标运算符相同的是，map 的下标运算符返回一个左值。由于返回的是一个左值，所以我们既可以读也可以写元素。</p>
-
 <h4 id="元素访问">元素访问</h4>
-
 <p>关联容器提供多种查找一个指定元素的方法。</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpj7wig23j20yu04kn11.jpg" alt="" /></p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpj82iljyj20yw0ai44z.jpg" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpj7wig23j20yu04kn11.jpg" alt=""></p>
+<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fwpj82iljyj20yw0ai44z.jpg" alt=""></p>
 <p>应该使用哪个操作依赖于我们要解决什么问题：</p>
-
 <ul>
 <li>如果关心的是一个特定元素是否已在容器中，可能 <code>find</code> 是最佳选择。</li>
 <li>对于不允许重复关键字的容器，可能使用 <code>find</code> 还是 <code>count</code> 没什么区别。</li>
 <li>对于允许重复关键字的容器，<code>count</code> 还会统计有多少个元素有相同的关键字，如果不需要，最好使用 <code>find</code> 。</li>
 </ul>
-
 <p>对 map 和 unordered_map 类型，下标运算符提供了最简单的提取元素的方法。但是，使用下标有一个严重的副作用：如果关键字还未在 map 中，下标操作会插入一个具有给定关键字的元素。这种行为是否正确完全依赖于我们的预期是是什么。</p>
-
 <p>但有时，如果只是想知道一个给定关键字是否在 map 中，而不想改变 map ，那就不能使用下标运算符来检查一个元素是否存在，而是该使用 find 操作符。</p>
-
 <p>如果要在允许重复关键字的容器中查找元素，在容器中可能有很多元素具有给定的关键字。如果一个 multimap 或 mulitset 中有多个元素具有给定关键字，则这些元素在容器中会相邻存储。</p>
-
 <p>代码示例如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">string</span> <span style="color:#268bd2">search_item</span>(<span style="color:#2aa198">&#34;Alain de Botton&#34;</span>);
     <span style="color:#93a1a1;font-style:italic">// 返回关键字等于 search_item 的数量
@@ -849,11 +672,8 @@ if (!doNotTrack) {
         ++<span style="color:#268bd2">iter</span>;
         --<span style="color:#268bd2">entries</span>;
     }
-</code></pre></div>
-<p>还可以使用 <code>lower_bound</code> 和 <code>upper_bound</code> 来实现上述代码，这两个操作都接受一个关键字，返回一个迭代器。</p>
-
+</code></pre></div><p>还可以使用 <code>lower_bound</code> 和 <code>upper_bound</code> 来实现上述代码，这两个操作都接受一个关键字，返回一个迭代器。</p>
 <p>如果关键字在容器中，<code>lower_bound</code> 返回的迭代器将指向第一个具有给定关键字的元素，而 <code>upper_bound</code> 返回的迭代器则指向最后一个匹配给定关键字的元素之后的位置，如果元素不在 multimap 中，则 lower_bound 和 upper_bound 会返回相等的迭代器，指向一个不影响排序的关键字插入位置。</p>
-
 <p>因此用相同的关键字调用 lower_bound 和 upper_bound 会得到一个迭代器范围，表示所有具有该关键字的元素的范围。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">string</span> <span style="color:#268bd2">search_item</span>(<span style="color:#2aa198">&#34;Alain de Botton&#34;</span>);
     <span style="color:#859900">for</span> (<span style="color:#859900">auto</span> <span style="color:#268bd2">beg</span> = <span style="color:#268bd2">authors</span>.<span style="color:#268bd2">lower_bound</span>(<span style="color:#268bd2">search_item</span>),
@@ -863,20 +683,17 @@ if (!doNotTrack) {
             ) {
         <span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#268bd2">beg</span>-&gt;<span style="color:#268bd2">second</span> &lt;&lt; <span style="color:#268bd2">endl</span>;
     }
-</code></pre></div>
-<p>另外还可以使用 <code>equal_range</code> 函数来实现。此函数接受一个关键字，返回一个迭代器 pair 。若关键字存在，则第一个迭代器指向第一个与关键字匹配的元素，第二个迭代器指向最后一个匹配元素之后的位置。若未找到匹配元素，则两个迭代器都指向关键字可以插入的位置。</p>
+</code></pre></div><p>另外还可以使用 <code>equal_range</code> 函数来实现。此函数接受一个关键字，返回一个迭代器 pair 。若关键字存在，则第一个迭代器指向第一个与关键字匹配的元素，第二个迭代器指向最后一个匹配元素之后的位置。若未找到匹配元素，则两个迭代器都指向关键字可以插入的位置。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">string</span> <span style="color:#268bd2">search_item</span>(<span style="color:#2aa198">&#34;Alain de Botton&#34;</span>);
     <span style="color:#859900">for</span> (<span style="color:#859900">auto</span> <span style="color:#268bd2">pos</span> = <span style="color:#268bd2">authors</span>.<span style="color:#268bd2">equal_range</span>(<span style="color:#268bd2">search_item</span>);
          <span style="color:#268bd2">pos</span>.<span style="color:#268bd2">first</span> != <span style="color:#268bd2">pos</span>.<span style="color:#268bd2">second</span>; ++<span style="color:#268bd2">pos</span>.<span style="color:#268bd2">first</span>) {
         <span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#268bd2">pos</span>.<span style="color:#268bd2">first</span>-&gt;<span style="color:#268bd2">second</span> &lt;&lt; <span style="color:#268bd2">endl</span>;
     }
-</code></pre></div>
-<p><code>equal_range</code> 返回的 pair 的 first 成员保存的迭代器与 lower_bound 返回的迭代器是一样的，second 保存的迭代器与 upper_bound 的返回值是一样的。因此在程序中，pos.first 等于上面的 beg ，pos.second 等价于 end 。</p>
-
+</code></pre></div><p><code>equal_range</code> 返回的 pair 的 first 成员保存的迭代器与 lower_bound 返回的迭代器是一样的，second 保存的迭代器与 upper_bound 的返回值是一样的。因此在程序中，pos.first 等于上面的 beg ，pos.second 等价于 end 。</p>
 <p>下面是一个单词转换的代码总结 map 的使用：</p>
-
 <p>通过读取两个文件，一个是单词转换文件，一个是要转换的文本文件来实现。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">/**
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">
+<span style="color:#93a1a1;font-style:italic">/**
 </span><span style="color:#93a1a1;font-style:italic"> * 读取转换规则文件，保存每个单词到其转换内容的映射
 </span><span style="color:#93a1a1;font-style:italic"> * @param map_file
 </span><span style="color:#93a1a1;font-style:italic"> * @return
@@ -936,98 +753,77 @@ if (!doNotTrack) {
         <span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#268bd2">endl</span>;
     }
 }
-</code></pre></div>
-<h2 id="关联容器小结">关联容器小结</h2>
-
+</code></pre></div><h2 id="关联容器小结">关联容器小结</h2>
 <p>关联容器支持通过关键字高效查找和提取元素。对关键字的使用将关联容器和顺序容器区分开，顺序容器是通过位置访问元素的。</p>
-
 <p>标准库定义了 8 个关联容器，每个容器：</p>
-
 <ul>
 <li>是一个 map 或是一个 set 。map 保存 关键字-值 对；set 只保存关键字。</li>
 <li>要求关键字唯一或不要求。s</li>
 <li>保持关键字有序或不保证有序。</li>
 </ul>
-
 <p>有序容器使用比较函数来比较关键字，从而将元素按顺序存储。默认情况下，比较操作是采用关键字类型的 <code>&lt;</code> 运算符。无序容器使用关键字类型的 <code>==</code> 运算符和一个 <code>hash&lt;key_type&gt;</code> 类型的对象来组织元素。</p>
-
 <p>允许重复关键字的容器的名字都包含 multi 。而使用哈希技术的容器的名字都以 <code>unordered</code> 开头。例如：set 是一个有序集合，其中每个关键字只可以出现一次；unordered_multiset 则是一个无序的关键字集合，其中关键字可以出现多次。</p>
-
 <p>关联容器和顺序容器有很多共同的元素。但是，关联容器定义了一些新操作，并对一些和顺序容器和关联容器都支持的操作重新定义了含义或返回类型。操作的不同反映出关联容器使用关键字的特点。</p>
-
 <p>有序容器的迭代器通过关键字有序访问容器中的元素。无论在有序容器中还是在无序容器中，具有相同关键字的元素都是相邻存储的。</p>
-
 <h2 id="小结">小结</h2>
-
 <p>标准容器库使用还是挺频繁的，能用标准库的时候就尽量用，包括刷题写代码之类的，《C++ Primer》要多看几遍。</p>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
-        
-          
-
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/" data-toggle="tooltip" data-placement="top" title="MediaCodec 硬编码之相机内容编码成 H264 文件">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/java/java-multithread-overview/" data-toggle="tooltip" data-placement="top" title="Java 显式锁 Lock 与条件队列">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
         
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
-        
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                
+
 
         
-          
-
         
-  
-      </div>
-    
-    
+        
+      </article>
+
+      
+        
+
+      
+
+      
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/" data-toggle="tooltip" data-placement="top" title="MediaCodec 硬编码之相机内容编码成 H264 文件">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/java/java-multithread-overview/" data-toggle="tooltip" data-placement="top" title="Java 显式锁 Lock 与条件队列">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
+
+      
+        
+      
+
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -1036,6 +832,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -1078,25 +876,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -1105,66 +897,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

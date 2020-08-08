@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>OpenGL on 星陨的博客</title>
@@ -18,21 +18,15 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-draw-grid-optimize/</guid>
       <description>&lt;p&gt;前几天发布了这样一篇文章：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/6ZMP6Tc_MqggjAXS_GjV2Q&#34;&gt;KodeLife | Shader 实时编辑预览的强大工具使用实践&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;除了介绍 KodeLife 的使用之外，还附带了一个 Shader 绘制网格效果的代码。&lt;/p&gt;
-
 &lt;p&gt;把这篇文章发到技术群里，随机就有大佬指出不足之处，提示说代码还可以进一步优化，并且提供了源码学习。&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;可见加入一个高质量的技术群是多么重要，哪怕平时不说话，围观大佬们聊天都能学到很多。&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;现在加入还来得及，尚有余位，详情点击如下链接：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/M4IiA-dTg1R68TeFaFvNPg&#34;&gt;移动端技术交流喊你入群啦~~~&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -45,26 +39,17 @@
       
       <guid>https://www.glumes.com/post/opengl/shader-tool-kodelife-introduce/</guid>
       <description>&lt;p&gt;经常有朋友在群里面问想学习 Shader 有什么工具可以推荐？&lt;/p&gt;
-
 &lt;p&gt;今天它来了~~~&lt;/p&gt;
-
 &lt;p&gt;推荐一款强大的 Shader 实时编辑预览的工具 —— &lt;code&gt;KodeLife&lt;/code&gt; 。&lt;/p&gt;
-
 &lt;p&gt;对，它的名字就叫做 &lt;code&gt;KodeLife&lt;/code&gt; ，可别看成 &lt;code&gt;KobeLife&lt;/code&gt; 了，一个字母之差完全就是两个概念。&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;KodeLife&lt;/code&gt; 的官网地址如下：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://hexler.net/products/kodelife&#34;&gt;https://hexler.net/products/kodelife&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;贴一张主页封面图：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://images.xiaozhuanlan.com/photo/2020/7d112ef33beccfe4fbf62e4879eabb25.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://images.xiaozhuanlan.com/photo/2020/7d112ef33beccfe4fbf62e4879eabb25.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;有需要的同学可以去官网下载安装，它是需要购买 &lt;strong&gt;License&lt;/strong&gt; 的，不过可以免费使用两个月。&lt;/p&gt;
-
-&lt;hr /&gt;</description>
+&lt;hr&gt;</description>
     </item>
     
     <item>
@@ -74,27 +59,16 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-transition/</guid>
       <description>&lt;h2 id=&#34;转场介绍&#34;&gt;转场介绍&lt;/h2&gt;
-
 &lt;p&gt;转场效果是什么？&lt;/p&gt;
-
 &lt;p&gt;转场效果，简单来说就是两段视频之间的衔接过渡效果。&lt;/p&gt;
-
 &lt;p&gt;现在拍摄 vlog 的玩家越来越多，要是视频没有一两个炫酷的转场效果，都不好意思拿出来炫酷了。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1578201670/transition_hpaktx.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1578201670/transition_hpaktx.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;那么如何在视频编辑软件中实现转场效果呢？&lt;/p&gt;
-
 &lt;p&gt;这里提供使用 OpenGL 实现视频转场的一个小示例，我们可以通过自定义 GLSL 来实现不同的转场效果。&lt;/p&gt;
-
 &lt;p&gt;以在 Android 平台上作为演示，但其实不管是 Android 还是 iOS，实现的原理都是一样的。&lt;/p&gt;
-
 &lt;p&gt;首先要有两段视频，视频 A 和视频 B，先播放视频 A 后播放视频 B，中间有一段过程称为 C ，C 就是视频 A、B 做转场动画的时间段。&lt;/p&gt;
-
 &lt;p&gt;如下所示：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/10/14/transition_model.jpg&#34; alt=&#34;transition_model.jpg&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/10/14/transition_model.jpg&#34; alt=&#34;transition_model.jpg&#34;&gt;&lt;/p&gt;
 &lt;p&gt;播放器按照时间顺序，从 A -&amp;gt; C -&amp;gt; B 的播放，这样就有了转场的效果。&lt;/p&gt;</description>
     </item>
     
@@ -105,7 +79,6 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-glsl-3-mark/</guid>
       <description>&lt;p&gt;在之前的&lt;a href=&#34;https://glumes.com/post/opengl/opengl-glsl-2-mark/&#34;&gt;文章&lt;/a&gt;中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。&lt;/p&gt;
-
 &lt;p&gt;本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。&lt;/p&gt;</description>
     </item>
     
@@ -116,7 +89,6 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-glsl-2-mark/</guid>
       <description>&lt;p&gt;要想发挥 OpenGL ES 自定义渲染管线的功能，就得学会写 GLSL 着色器脚本。&lt;/p&gt;
-
 &lt;p&gt;本文中的内容来自于 《Android 3D 游戏开发技术宝典 OpenGL ES 2.0》。&lt;/p&gt;</description>
     </item>
     
@@ -127,9 +99,7 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/</guid>
       <description>&lt;p&gt;帧缓冲(Framebuffer Object)，简称 &lt;code&gt;FBO&lt;/code&gt;，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。&lt;/p&gt;
-
 &lt;p&gt;除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。&lt;/p&gt;
-
 &lt;p&gt;FBO 实际上是由颜色附件、深度附件、模板附件组成的，作为着色器各方面（一般包括颜色、深度、深度值）绘制结果存储的逻辑对象。&lt;/p&gt;</description>
     </item>
     
@@ -140,7 +110,6 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-egl-usage/</guid>
       <description>&lt;p&gt;OpenGL 是跨平台的、专业的图形编程接口，而接口的实现是由厂商来完成的。&lt;/p&gt;
-
 &lt;p&gt;而当我们使用这组接口完成绘制之后，要把结果显示在屏幕上，就要用到 &lt;code&gt;EGL&lt;/code&gt; 来完成这个转换工作。&lt;/p&gt;</description>
     </item>
     
@@ -169,12 +138,9 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-light-mix/</guid>
       <description>&lt;p&gt;在前面的系列文章中，分别介绍了 OpenGL 的环境光、散射光、镜面光。&lt;/p&gt;
-
 &lt;p&gt;现在尝试将这些光照效果混合起来，让整个场景显得更加逼真。&lt;/p&gt;
-
 &lt;p&gt;具体的效果如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1532360616/light_mix_xmv86l.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1532360616/light_mix_xmv86l.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -211,15 +177,10 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-depth-test/</guid>
       <description>&lt;p&gt;在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。&lt;/p&gt;
-
 &lt;p&gt;直接看一个没有使用深度测试的绘制：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1532052034/code/undepth_test.gif&#34; alt=&#34;未开启深度测试的情况&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1532052034/code/undepth_test.gif&#34; alt=&#34;未开启深度测试的情况&#34;&gt;&lt;/p&gt;
 &lt;p&gt;按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。&lt;/p&gt;
-
 &lt;p&gt;这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。&lt;/p&gt;
-
 &lt;p&gt;要解决这种问题，就得使用深度测试了。&lt;/p&gt;</description>
     </item>
     
@@ -230,11 +191,8 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-face-culling-usage/</guid>
       <description>&lt;p&gt;现在我们用 OpenGL 绘制了如下的立方体：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。&lt;/p&gt;
-
 &lt;p&gt;那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。&lt;/p&gt;</description>
     </item>
     
@@ -245,9 +203,7 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/</guid>
       <description>&lt;p&gt;在之前使用 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/&#34;&gt;OpenGL 顶点缓冲区 VBO 的使用&lt;/a&gt; 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。&lt;/p&gt;
-
 &lt;p&gt;这就存在了一些重复的操作。&lt;/p&gt;
-
 &lt;p&gt;在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。&lt;/p&gt;</description>
     </item>
     
@@ -258,7 +214,6 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/</guid>
       <description>&lt;p&gt;在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 &lt;code&gt;glDrawArrays&lt;/code&gt; 或 &lt;code&gt;glDrawElements&lt;/code&gt; 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。&lt;/p&gt;
-
 &lt;p&gt;可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。&lt;/p&gt;</description>
     </item>
     
@@ -269,7 +224,6 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-color-blend/</guid>
       <description>&lt;p&gt;在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。&lt;/p&gt;
-
 &lt;p&gt;在 OpenGL 中同样有这样颜色混合的问题。&lt;/p&gt;</description>
     </item>
     
@@ -280,9 +234,7 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-alpha-test/</guid>
       <description>&lt;p&gt;在前面的博客文章中有提到 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-scissor-test/&#34;&gt;OpenGL 裁剪测试及注意点&lt;/a&gt;，并且裁剪测试只能裁剪一个矩形区域，相当于就是把整个内容都绘制上去了，但是透过一个小矩形区域来看绘制的物体。&lt;/p&gt;
-
 &lt;p&gt;除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。&lt;/p&gt;
-
 &lt;p&gt;关于 Alpha 透明度测试，在 用 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/&#34;&gt;OpenGL 对视频帧内容进行替换&lt;/a&gt; 也用实践用到过。&lt;/p&gt;</description>
     </item>
     
@@ -329,9 +281,7 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</guid>
       <description>&lt;p&gt;在之前的绘制中，我们都是通过 &lt;code&gt;glDrawArrays&lt;/code&gt; 方法来实现的，它会按照我们传入的顶点顺序和指定的绘制方式进行绘制。&lt;/p&gt;
-
 &lt;p&gt;回顾一下之前提到的绘制类型：&lt;/p&gt;
-
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -339,38 +289,31 @@
 &lt;th&gt;绘制方式&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
-
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;GL_POINTS&lt;/td&gt;
 &lt;td&gt;将传入的顶点坐标作为单独的点绘制&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;GL_LINES&lt;/td&gt;
 &lt;td&gt;将传入的坐标作为单独线条绘制，ABCDEFG六个顶点，绘制AB、CD、EF三条线&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;GL_LINE_STRIP&lt;/td&gt;
 &lt;td&gt;将传入的顶点作为折线绘制，ABCD四个顶点，绘制AB、BC、CD三条线&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;GL_LINE_LOOP&lt;/td&gt;
 &lt;td&gt;将传入的顶点作为闭合折线绘制，ABCD四个顶点，绘制AB、BC、CD、DA四条线。&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;GL_TRIANGLES&lt;/td&gt;
 &lt;td&gt;将传入的顶点作为单独的三角形绘制，ABCDEF绘制ABC,DEF两个三角形&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;GL_TRIANGLE_STRIP&lt;/td&gt;
 &lt;td&gt;将传入的顶点作为三角条带绘制，ABCDEF绘制ABC,BCD,CDE,DEF四个三角形&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;GL_TRIANGLE_FAN&lt;/td&gt;
 &lt;td&gt;将传入的顶点作为扇面绘制，ABCDEF绘制ABC、ACD、ADE、AEF四个三角形&lt;/td&gt;
@@ -386,11 +329,8 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/&#34;&gt;OpenGL 投影矩阵&lt;/a&gt; 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。&lt;/p&gt;
-
 &lt;p&gt;这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：&lt;a href=&#34;https://glumpy.github.io/modern-gl.html&#34;&gt;https://glumpy.github.io/modern-gl.html&lt;/a&gt;）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/ViewFrustum_gvy6aq.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/04/27/ViewFrustum_gvy6aq.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于&lt;code&gt;视点&lt;/code&gt;的，视点也就是我们这篇文章要讲到的摄像机。&lt;/p&gt;</description>
     </item>
     
@@ -410,11 +350,8 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-projection-matrix/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-coordinate/&#34;&gt;OpenGL 坐标系统&lt;/a&gt; 文章中，根据点的坐标变换得出了如下的公式：&lt;/p&gt;
-
-&lt;div&gt;$$ V_{clip}=M_{projection} \cdot M_{view} \cdot M_{model} \cdot V_{local} $$&lt;/div&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;这个公式每左乘一个矩阵，都代表了一种坐标系的变换。&lt;/p&gt;
-
 &lt;p&gt;转化为着色器脚本语言如下：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-glsl&#34; data-lang=&#34;glsl&#34;&gt;&lt;span style=&#34;color:#859900&#34;&gt;attribute&lt;/span&gt; &lt;span style=&#34;color:#859900&#34;&gt;vec4&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;a_Position&lt;/span&gt;;
 &lt;span style=&#34;color:#859900&#34;&gt;uniform&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;mat4&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;u_ModelMatrix&lt;/span&gt;;
@@ -423,8 +360,8 @@
 &lt;span style=&#34;color:#859900&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;main&lt;/span&gt;()
 {
     &lt;span style=&#34;color:#268bd2&#34;&gt;gl_Position&lt;/span&gt;  = &lt;span style=&#34;color:#268bd2&#34;&gt;u_ProjectionMatrix&lt;/span&gt; * &lt;span style=&#34;color:#268bd2&#34;&gt;u_ViewMatrix&lt;/span&gt; * &lt;span style=&#34;color:#268bd2&#34;&gt;u_ModelMatrix&lt;/span&gt; * &lt;span style=&#34;color:#268bd2&#34;&gt;a_Position&lt;/span&gt;;
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;本篇文章就主要是对投影矩阵来分析的。&lt;/p&gt;</description>
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;本篇文章就主要是对投影矩阵来分析的。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -434,9 +371,7 @@
       
       <guid>https://www.glumes.com/post/opengl/opengl-tutorial-coordinate-system/</guid>
       <description>&lt;p&gt;在前面绘制基本图形中，遇到了很明显的问题，圆形不像圆形，正多边形不像正多边形？就像下面图形一样：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/12/opengl_16.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/12/opengl_16.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;好好的正五边形却东倒西歪的，这就是因为我们前面的绘制都是把它当成 二维 的绘制，而在 OpenGL 中却是绘制 三维的。在二维和三维之间还有个转换，而之前为了方便学习则忽略了这个转换，现在就要开始理解它了 —— &lt;code&gt;坐标系统&lt;/code&gt;！！&lt;/p&gt;</description>
     </item>
     

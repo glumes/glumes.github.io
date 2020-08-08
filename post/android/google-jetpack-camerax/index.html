@@ -1,96 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Google Jetpack 新组件 CameraX 介绍与实践-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>Google Jetpack 新组件 CameraX 介绍与实践</title>
   <meta property="og:title" content="Google Jetpack 新组件 CameraX 介绍与实践" />
   <meta name="twitter:title" content="Google Jetpack 新组件 CameraX 介绍与实践" />
 
   <meta name="description" content="近期，Google 的 Jetpack 组件又出了新的库：CameraX 。
-
 顾名思义：CameraX 就是用来进行 Camera 开发的官方库了，而且后续会有 Google 进行维护和升级。这对于广大 Camera 开发工程师和即将成为 Camera 的程序员来说，真是个好消息~~~
-
 CameraX 介绍
-
 官方有给出一个示例的工程，我 fork 了之后，加入使用 OpenGL 黑白滤镜渲染的操作，具体地址如下：
-
 
 https://github.com/glumes/camera
 
-
 官方并没有提到 CameraX 库具体如何进行 OpenGL 线程渲染的， 继续往下看，你会找到答案的~~~
-
 关于 CameraX 更多的介绍，建议看看 Google I/O 大会上的视频记录，比看文档能了解更多内容~~~
-
 
 https://www.youtube.com/watch?v=kuv8uK-5CLY
 
-
 在视频中提到，目前有很多应用都开始接入了 CameraX，比如 Camera360、Tik Tok 等。
-
 ">
   <meta property="og:description" content="近期，Google 的 Jetpack 组件又出了新的库：CameraX 。
-
 顾名思义：CameraX 就是用来进行 Camera 开发的官方库了，而且后续会有 Google 进行维护和升级。这对于广大 Camera 开发工程师和即将成为 Camera 的程序员来说，真是个好消息~~~
-
 CameraX 介绍
-
 官方有给出一个示例的工程，我 fork 了之后，加入使用 OpenGL 黑白滤镜渲染的操作，具体地址如下：
-
 
 https://github.com/glumes/camera
 
-
 官方并没有提到 CameraX 库具体如何进行 OpenGL 线程渲染的， 继续往下看，你会找到答案的~~~
-
 关于 CameraX 更多的介绍，建议看看 Google I/O 大会上的视频记录，比看文档能了解更多内容~~~
-
 
 https://www.youtube.com/watch?v=kuv8uK-5CLY
 
-
 在视频中提到，目前有很多应用都开始接入了 CameraX，比如 Camera360、Tik Tok 等。
-
 ">
   <meta name="twitter:description" content="近期，Google 的 Jetpack 组件又出了新的库：CameraX 。
-
 顾名思义：CameraX 就是用来进行 Camera 开发的官方库了，而且后续会有 Google 进行维护和升级。这对于广大 Camera 开发工程师和即将成为 Camera 的程序员来说，真是个好消息~~~
-
 CameraX 介绍
-
-官方有给出一个示例的工程，我 fork 了之后，加入使用 OpenGL 黑白滤镜渲染 …">
+官方有给出一个示例的工程，我 fork 了之后，加入使用 OpenGL 黑白滤镜渲染的操 …">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/google-jetpack-camerax/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/google-jetpack-camerax/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -105,11 +81,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -117,9 +105,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -182,6 +168,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -198,21 +187,24 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>Google Jetpack 新组件 CameraX 介绍与实践</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
                   
-                  
+                     <h1>Google Jetpack 新组件 CameraX 介绍与实践</h1>
+                     
                     <span class="post-meta">
-  
-    Posted on May 23, 2019
-  
+  Posted on May 23, 2019
   
 </span>
 
 
+                    
+                  
                   
               </div>
             </div>
@@ -221,166 +213,111 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Google Jetpack 新组件 CameraX 介绍与实践</h1>
+                <h1 align="center">Google Jetpack 新组件 CameraX 介绍与实践</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on May 23, 2019
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
-            
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#camerax-介绍">CameraX 介绍</a></li>
-<li><a href="#简述-camera-开发">简述 Camera 开发</a></li>
-<li><a href="#camerax-开发实践">CameraX 开发实践</a>
-<ul>
-<li><a href="#预览">预览</a></li>
-<li><a href="#图像分析">图像分析</a></li>
-<li><a href="#拍摄">拍摄</a></li>
-<li><a href="#opengl-渲染">OpenGL 渲染</a></li>
-</ul></li>
-<li><a href="#camerax-的拓展">CameraX 的拓展</a></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#camerax-介绍">CameraX 介绍</a></li>
+    <li><a href="#简述-camera-开发">简述 Camera 开发</a></li>
+    <li><a href="#camerax-开发实践">CameraX 开发实践</a>
+      <ul>
+        <li><a href="#预览">预览</a></li>
+        <li><a href="#图像分析">图像分析</a></li>
+        <li><a href="#拍摄">拍摄</a></li>
+        <li><a href="#opengl-渲染">OpenGL 渲染</a></li>
+      </ul>
+    </li>
+    <li><a href="#camerax-的拓展">CameraX 的拓展</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>近期，Google 的 Jetpack 组件又出了新的库：CameraX 。</p>
-
+        
+        <p>近期，Google 的 Jetpack 组件又出了新的库：CameraX 。</p>
 <p>顾名思义：CameraX 就是用来进行 Camera 开发的官方库了，而且后续会有 Google 进行维护和升级。这对于广大 Camera 开发工程师和即将成为 Camera 的程序员来说，真是个好消息~~~</p>
-
 <h2 id="camerax-介绍">CameraX 介绍</h2>
-
 <p>官方有给出一个示例的工程，我 fork 了之后，加入使用 OpenGL 黑白滤镜渲染的操作，具体地址如下：</p>
-
 <blockquote>
 <p><a href="https://github.com/glumes/camera">https://github.com/glumes/camera</a></p>
 </blockquote>
-
 <p>官方并没有提到 CameraX 库具体如何进行 OpenGL 线程渲染的， 继续往下看，你会找到答案的~~~</p>
-
 <p>关于 CameraX 更多的介绍，建议看看 Google I/O 大会上的视频记录，比看文档能了解更多内容~~~</p>
-
 <blockquote>
 <p><a href="https://www.youtube.com/watch?v=kuv8uK-5CLY">https://www.youtube.com/watch?v=kuv8uK-5CLY</a></p>
 </blockquote>
-
 <p>在视频中提到，目前有很多应用都开始接入了 CameraX，比如 Camera360、Tik Tok 等。</p>
-
-<p><img src="https://image.glumes.com/images/2019/05/22/-2019-05-23-8.35.08.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/05/22/-2019-05-23-8.35.08.png" alt=""></p>
 <h2 id="简述-camera-开发">简述 Camera 开发</h2>
-
 <p>关于 Camera 的开发，之前也有写过相关的文章🤔</p>
-
 <blockquote>
 <p><a href="https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/">Android 相机开发中的尺寸和方向问题</a></p>
-
+</blockquote>
+<blockquote>
 <p><a href="https://glumes.com/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></p>
 </blockquote>
-
 <p>对于一个简单能用的 Camera 应用（Demo 级别）来说，关注两个方面就好了：预览和拍摄。</p>
-
 <p>而预览和拍摄的图像都受到分辨率、方向的影响。Camera 最必备的功能就是能针对预览和拍摄提供两套分辨率，因此就得区分场景去设置。</p>
-
 <p>对于拍摄还好说一点，要获得最好的图像质量，就选择同比例中分辨率最大的吧。</p>
-
 <p>而预览的图像最终要呈现到 Android 的 Surface 上，因此选择分辨率的时候要考虑 Surface 的宽高比例，不要出现比例不匹配导致图像拉伸的现象。</p>
-
 <p>另外，如果要做美颜、滤镜类的应用，就要把 Camera 预览的图像放到 OpenGL 渲染的线程上去，然后由 OpenGL 去做图像相关的操作，也就没 Camera 什么事了。等到拍摄图片时，可以由 OpenGL 去获取图像内容，也可以由 Camera 获得图像内容，然后经过 OpenGL 做离屏处理~~~</p>
-
 <p>至于 Camera 开发的其他功能，比如对焦、曝光、白平衡、HDR 等操作，不一定所有的 Camera 都能够支持，而且也可以在上面的基础上当做 Camera 的一个 feature 去拓展开发，并不算难事，这也是一个 Camera 开发工程师进阶所要掌握的内容~~</p>
-
 <h2 id="camerax-开发实践">CameraX 开发实践</h2>
-
 <p>CameraX 目前的版本是 <code>1.0.0-alpha01</code> ，在使用时要添加如下的依赖：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">    <span style="color:#93a1a1;font-style:italic">// CameraX
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">def</span> <span style="color:#268bd2">camerax_version</span> = <span style="color:#2aa198">&#34;1.0.0-alpha01&#34;</span>
     <span style="color:#268bd2">implementation</span> <span style="color:#2aa198">&#34;androidx.camera:camera-core:${camerax_version}&#34;</span>
-    <span style="color:#268bd2">implementation</span> <span style="color:#2aa198">&#34;androidx.camera:camera-camera2:${camerax_version}&#34;</span></code></pre></div>
-<p>CameraX 向后兼容到 Android 5.0（API Level 21），并且它是基于 Camera 2.0 的 API 进行封装的，解决了市面上绝大部分手机的兼容性问题~~~</p>
-
+    <span style="color:#268bd2">implementation</span> <span style="color:#2aa198">&#34;androidx.camera:camera-camera2:${camerax_version}&#34;</span>
+</code></pre></div><p>CameraX 向后兼容到 Android 5.0（API Level 21），并且它是基于 Camera 2.0 的 API 进行封装的，解决了市面上绝大部分手机的兼容性问题~~~</p>
 <p>相比 Camera 2.0 复杂的调用流程，CameraX 就简化很多，只关心我们需要的内容就好了，不像前者得自己维护 CameraSession 会话等状态，并且 CameraX 和 Jetpack 主打的 Lifecycle 绑定在一起了，什么时候该打开相机，什么时候该释放相机，都交给 Lifecycle 生命周期去管理吧</p>
-
 <p>上手 CameraX 主要关注三个方面：</p>
-
 <ul>
 <li>图像预览（Image Preview）</li>
 <li>图像分析（Image analysis）</li>
 <li>图像拍摄（Image capture）</li>
 </ul>
-
 <h3 id="预览">预览</h3>
-
 <p>不管是 预览 还是 图像分析、图像拍摄，CameraX 都是通过一个建造者模式来构建参数 Config 类，再由 Config 类创建预览、分析器、拍摄的类，并在绑定生命周期时将它们传过去。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#93a1a1;font-style:italic">// // Apply declared configs to CameraX using the same lifecycle owner
 </span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">CameraX</span>.<span style="color:#268bd2">bindToLifecycle</span>(
-               <span style="color:#268bd2">lifecycleOwner</span>: <span style="color:#859900">this</span>, <span style="color:#268bd2">preview</span>, <span style="color:#268bd2">imageCapture</span>, <span style="color:#268bd2">imageAnalyzer</span>)</code></pre></div>
-<p>既可以绑定 Activity 的 Lifecycle，也可以绑定 Fragment 的。</p>
-
+               <span style="color:#268bd2">lifecycleOwner</span>: <span style="color:#859900">this</span>, <span style="color:#268bd2">preview</span>, <span style="color:#268bd2">imageCapture</span>, <span style="color:#268bd2">imageAnalyzer</span>)
+</code></pre></div><p>既可以绑定 Activity 的 Lifecycle，也可以绑定 Fragment 的。</p>
 <p>当需要解除绑定时：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#93a1a1;font-style:italic">// Unbinds all use cases from the lifecycle and removes them from CameraX.
-</span><span style="color:#93a1a1;font-style:italic"></span> <span style="color:#268bd2">CameraX</span>.<span style="color:#268bd2">unbindAll</span>()</code></pre></div>
-<p>关于预览的参数配置，如果你有看过之前的文章：<a href="https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/">Android 相机开发中的尺寸和方向问题</a> 想必就会很了解了。</p>
-
+</span><span style="color:#93a1a1;font-style:italic"></span> <span style="color:#268bd2">CameraX</span>.<span style="color:#268bd2">unbindAll</span>()
+</code></pre></div><p>关于预览的参数配置，如果你有看过之前的文章：<a href="https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/">Android 相机开发中的尺寸和方向问题</a> 想必就会很了解了。</p>
 <p>提供我们的目标参数，由 CameraX 去判断当前 Camera 是否支持，并选择最符合的。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#859900">fun</span> <span style="color:#268bd2">buildPreviewUseCase</span>(): <span style="color:#268bd2">Preview</span> {
     <span style="color:#859900">val</span> <span style="color:#268bd2">previewConfig</span> = <span style="color:#268bd2">PreviewConfig</span>.<span style="color:#268bd2">Builder</span>()
@@ -403,11 +340,9 @@ if (!doNotTrack) {
     }
 
     <span style="color:#859900">return</span> <span style="color:#268bd2">preview</span>
-}</code></pre></div>
-<p>通过建造者模式创建 <code>Preview</code> 对象，并且一定要给 Preview 对象设置 <code>OnPreviewOutputUpdateListener</code> 接口回调。</p>
-
+}
+</code></pre></div><p>通过建造者模式创建 <code>Preview</code> 对象，并且一定要给 Preview 对象设置 <code>OnPreviewOutputUpdateListener</code> 接口回调。</p>
 <p>相机预览的图像流是通过 SurfaceTexture 来返回的，而在项目例子中，是通过把 TextureView 的 SurfaceTexture 替换成 CameraX 返回的 SurfaceTexture，这样实现了 TextureView 控件显示 Camera 预览内容。</p>
-
 <p>另外，还需要考虑到设备的选择方向，当设备横屏变为竖屏了，TextureView 也要相应的做旋转。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#268bd2">preview</span>.<span style="color:#268bd2">setOnPreviewOutputUpdateListener</span> { <span style="color:#268bd2">previewOutput</span> -&gt;
     <span style="color:#268bd2">cameraTextureView</span>.<span style="color:#268bd2">surfaceTexture</span> = <span style="color:#268bd2">previewOutput</span>.<span style="color:#268bd2">surfaceTexture</span>
@@ -430,13 +365,10 @@ if (!doNotTrack) {
 
     <span style="color:#93a1a1;font-style:italic">// Finally, apply transformations to TextureView
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">cameraTextureView</span>.<span style="color:#268bd2">setTransform</span>(<span style="color:#268bd2">matrix</span>)
-}</code></pre></div>
-<p>TextureView 旋转的设置同样在 <code>OnPreviewOutputUpdateListener</code> 接口中去完成。</p>
-
+}
+</code></pre></div><p>TextureView 旋转的设置同样在 <code>OnPreviewOutputUpdateListener</code> 接口中去完成。</p>
 <h3 id="图像分析">图像分析</h3>
-
 <p>在 <code>bindToLifecycle</code> 方法中，<code>imageAnalyzer</code> 参数并不是必需的。</p>
-
 <p><code>ImageAnalysis</code> 可以帮助我们做一些图像质量的分析，需要我们去实现 <code>ImageAnalysis.Analyzer</code> 接口的 <code>analyze</code> 方法。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#859900">fun</span> <span style="color:#268bd2">buildImageAnalysisUseCase</span>(): <span style="color:#268bd2">ImageAnalysis</span> {
     <span style="color:#93a1a1;font-style:italic">// 分析器配置 Config 的建造者
@@ -469,30 +401,24 @@ if (!doNotTrack) {
     }
 
     <span style="color:#859900">return</span> <span style="color:#268bd2">analysis</span>
-}</code></pre></div>
-<p>在图像分析器的相关配置中，有个 <code>ImageReaderMode</code> 和 <code>ImageQueueDepth</code> 的设置。</p>
-
+}
+</code></pre></div><p>在图像分析器的相关配置中，有个 <code>ImageReaderMode</code> 和 <code>ImageQueueDepth</code> 的设置。</p>
 <p>ImageQueueDepth 会指定相机管线中图像的个数，提高 ImageQueueDepth 的数量会对相机的性能和内存的使用造成影响</p>
-
 <p>其中，ImageReaderMode 有两种模式：</p>
-
 <ul>
 <li>ACQUIRE_LATEST_IMAGE
-
 <ul>
 <li>该模式下，获得图像队列中最新的图片，并且会清空队列已有的旧的图像。</li>
-</ul></li>
+</ul>
+</li>
 <li>ACQUIRE_NEXT_IMAGE
-
 <ul>
 <li>该模式下，获得下一张图像。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>在图像分析的 <code>analyze</code> 方法中，能通过 ImageProxy 类拿到一些图像信息，并基于这些信息做分析。</p>
-
 <h3 id="拍摄">拍摄</h3>
-
 <p>拍摄同样有一个 Config 参数构建者类，而且设定的参数和预览相差不大，也是图像宽高比例、旋转方向、分辨率，除此之外还有闪光灯等配置项。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#859900">fun</span> <span style="color:#268bd2">buildImageCaptureUseCase</span>(): <span style="color:#268bd2">ImageCapture</span> {
     <span style="color:#859900">val</span> <span style="color:#268bd2">captureConfig</span> = <span style="color:#268bd2">ImageCaptureConfig</span>.<span style="color:#268bd2">Builder</span>()
@@ -525,128 +451,103 @@ if (!doNotTrack) {
     }
 
     <span style="color:#859900">return</span> <span style="color:#268bd2">capture</span>
-}</code></pre></div>
-<p>在图像拍摄的相关配置中，也有个 <code>CaptureMode</code> 的设置。</p>
-
+}
+</code></pre></div><p>在图像拍摄的相关配置中，也有个 <code>CaptureMode</code> 的设置。</p>
 <p>它有两种选项：</p>
-
 <ul>
 <li>MIN_LATENCY
-
 <ul>
 <li>该模式下，拍摄速度会相对快一点，但图像质量会打折扣</li>
-</ul></li>
+</ul>
+</li>
 <li>MAX_QUALITY
-
 <ul>
 <li>该模式下，拍摄速度会慢一点，但图像质量好</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h3 id="opengl-渲染">OpenGL 渲染</h3>
-
 <p>以上是关于 CameraX 的简单应用方面的内容，更关心的是如何用 CameraX 去做 OpenGL 渲染实现美颜。滤镜等效果。</p>
-
 <p>还记得在图像预览 Preview 的 setOnPreviewOutputUpdateListener 方法中，会返回一个 <code>SurfaceTexture</code> ，相机的图像流就是通过它返回的。</p>
-
 <p>那么要实现 OpenGL 线程的渲染，首先就要基于 EGL 去创建 OpenGL 绘制环境，然后利用 SurfaceTexture 的 <code>attachToGLContext</code> 方法，将 SurfaceTexture 添加到 OpenGL 线程去。</p>
-
 <p>attachToGLContext 的参数是一个纹理 ID ，这个纹理就必须是 OES 类型的纹理。</p>
-
 <p>然后再把这纹理 ID 绘制到 OpenGL 对应的 Surface 上，这可以看成是两个不同的线程在允许，一个 Camera 预览线程，一个 OpenGL 绘制线程。</p>
-
 <p>如果你不是很理解的话，建议还是看看上面提供的代码地址：</p>
-
 <blockquote>
 <p><a href="https://github.com/glumes/camera">https://github.com/glumes/camera</a></p>
 </blockquote>
-
 <p>也可以关注我的微信公众号 【纸上浅谈】，里面有一些关于 OpenGL 学习和实践的文章~~~</p>
-
 <h2 id="camerax-的拓展">CameraX 的拓展</h2>
-
 <p>如果你看了 Google I/O 大会的视频，那肯定了解 CameraX 的拓展属性。</p>
-
 <p>在视频中提到 Google 也正在和华为、三星、LG、摩托摩拉等厂商进行合作，为了获得厂商系统相机的一些能力，比如 HDR 等。</p>
-
 <p>不过考虑到目前的形势，可能和华为的合作难以继续下去了吧&hellip;</p>
-
 <p>但还是期待 CameraX 能给带来更多的新特性吧~~~</p>
-
 <h2 id="参考">参考</h2>
-
 <ol>
 <li><a href="https://www.youtube.com/watch?v=kuv8uK-5CLY">https://www.youtube.com/watch?v=kuv8uK-5CLY</a></li>
 <li><a href="https://proandroiddev.com/android-camerax-preview-analyze-capture-1b3f403a9395">https://proandroiddev.com/android-camerax-preview-analyze-capture-1b3f403a9395</a></li>
 </ol>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
-        
-          
-
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/android/rust-compile-so-library/" data-toggle="tooltip" data-placement="top" title="rust 开发编译 Android 动态库实践">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/opengl/libpng-compile-and-practice/" data-toggle="tooltip" data-placement="top" title="图像库 libpng 编译与实践">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
         
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
-        
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/google-jetpack-camerax/">Google Jetpack 新组件 CameraX 介绍与实践</a>
+
+                
+
+                
+
 
         
-          
-
         
-  
-      </div>
-    
-    
+        
+      </article>
+
+      
+        
+
+      
+
+      
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://www.glumes.com/post/android/rust-compile-so-library/" data-toggle="tooltip" data-placement="top" title="rust 开发编译 Android 动态库实践">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/opengl/libpng-compile-and-practice/" data-toggle="tooltip" data-placement="top" title="图像库 libpng 编译与实践">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
+
+      
+        
+      
+
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -655,6 +556,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -697,25 +600,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -724,66 +621,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

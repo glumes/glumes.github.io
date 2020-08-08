@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>FFmpeg on 星陨的博客</title>
@@ -18,13 +18,9 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/av-beginner-011/</guid>
       <description>&lt;p&gt;本篇文章主要是讲解如何通过 FFmpeg 代码来获取文件信息。&lt;/p&gt;
-
 &lt;p&gt;首先准备一个文件，用命令行来查看它的基本信息。&lt;/p&gt;
-
 &lt;p&gt;文件地址如下：&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://github.com/glumes/av-beginner/blob/master/resource/video/video-avi-320x320.avi&#34;&gt;https://github.com/glumes/av-beginner/blob/master/resource/video/video-avi-320x320.avi&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;这个文件很有意思，它的内容是一个时钟，每隔一秒，秒针都会跳动，同时还会发出滴答的声音，很方便后续做音视频同步处理。&lt;/p&gt;</description>
     </item>
     
@@ -35,7 +31,6 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/av-beginner-010/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g&#34;&gt;【音视频连载-001】基础学习篇-SDL 介绍以及工程配置&lt;/a&gt;&lt;/li&gt;
@@ -48,9 +43,7 @@
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/8faeLClht2kfKqfA8Vizug&#34;&gt;【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/iQwIpxUKr0qWvejrGVA3Uw&#34;&gt;【音视频连载-009】第二季 FFmpeg 打造简易播放器&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;音视频连载系列已经停更一段时间，再这么停下去估计就要掉粉了，捡起来继续更新~~~&lt;/p&gt;
-
 &lt;p&gt;接下来主要是讲解 FFmpeg 相关的内容，比如这篇就从简单的日志打印开始说起。&lt;/p&gt;</description>
     </item>
     
@@ -61,9 +54,7 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/</guid>
       <description>&lt;p&gt;有了上一篇文章基础，这里就只关注 FFmpeg 如何解析的具体实践了。&lt;/p&gt;
-
 &lt;p&gt;在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。&lt;/p&gt;
-
 &lt;p&gt;在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。&lt;/p&gt;</description>
     </item>
     
@@ -74,7 +65,6 @@
       
       <guid>https://www.glumes.com/post/ffmpeg/encode-and-decode-summary/</guid>
       <description>&lt;p&gt;最近在研究学习 FFmpeg，从网上参考了好多资料，其中最了不起的就当属——&lt;a href=&#34;http://blog.csdn.net/leixiaohua1020&#34;&gt;雷霄骅&lt;/a&gt;大神了，若没有他的博文，别说入门了，可能连门在哪里都不知道，在此还是要表达一下对雷神的敬佩和敬仰。&lt;/p&gt;
-
 &lt;p&gt;本文主要讲的是视频文件的解码，从视频文件的封装格式解码到原始数据格式，通过讲解涉及到的各种概念，从而理清整个思路和流程。&lt;/p&gt;</description>
     </item>
     

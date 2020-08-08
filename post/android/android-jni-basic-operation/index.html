@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android JNI 基本操作 -星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>Android JNI 基本操作 </title>
   <meta property="og:title" content="Android JNI 基本操作 " />
   <meta name="twitter:title" content="Android JNI 基本操作 " />
 
@@ -14,33 +14,30 @@
   <meta property="og:description" content="自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C&#43;&#43; 方法，只要专注写好 C&#43;&#43; 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。">
   <meta name="twitter:description" content="自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C&#43;&#43; 方法，只要专注写好 C&#43;&#43; 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。">
   <meta name="author" content=""/>
-      <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/post/android/android-jni-basic-operation/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="星陨的博客" />
 
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://www.glumes.com/post/android/android-jni-basic-operation/" />
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://www.glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://www.glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -55,11 +52,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -67,9 +76,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
-      </a>
+      <a class="navbar-brand" href="https://www.glumes.com/">星陨的博客</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -132,6 +139,9 @@ if (!doNotTrack) {
 </nav>
 
 
+
+
+
     
   
   
@@ -148,21 +158,24 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>Android JNI 基本操作 </h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
                   
-                  
+                     <h1>Android JNI 基本操作 </h1>
+                     
                     <span class="post-meta">
-  
-    Posted on May 7, 2018
-  
+  Posted on May 7, 2018
   
 </span>
 
 
+                    
+                  
                   
               </div>
             </div>
@@ -171,170 +184,106 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Android JNI 基本操作 </h1>
+                <h1 align="center">Android JNI 基本操作 </h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on May 7, 2018
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
-              
-                  <a href="https://www.glumes.com/tags/jni/">JNI</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+            
+                <a href="https://www.glumes.com/tags/jni/">JNI</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#jni-和-ndk-的区别">JNI 和 NDK 的区别</a></li>
-<li><a href="#简单实例">简单实例</a>
-<ul>
-<li>
-<ul>
-<li><a href="#jnienv-类型对象参数-env">JNIEnv 类型对象参数 env</a></li>
-<li><a href="#jobject-参数">jobject 参数</a></li>
-<li><a href="#基本数据类型转换">基本数据类型转换</a></li>
-<li><a href="#引用数据类型转换">引用数据类型转换</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#string-字符串操作">String 字符串操作</a>
-<ul>
-<li>
-<ul>
-<li><a href="#获得源字符串的指针">获得源字符串的指针</a></li>
-<li><a href="#获得字符串的长度">获得字符串的长度：</a></li>
-<li><a href="#获得指定范围的字符串内容">获得指定范围的字符串内容</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#string-字符串函数操作总结">String 字符串函数操作总结</a></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#jni-和-ndk-的区别">JNI 和 NDK 的区别</a></li>
+    <li><a href="#简单实例">简单实例</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#string-字符串操作">String 字符串操作</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#string-字符串函数操作总结">String 字符串函数操作总结</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C++ 方法，只要专注写好 C++ 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。</p>
-
+        
+        <p>自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C++ 方法，只要专注写好 C++ 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。</p>
 <h2 id="jni-和-ndk-的区别">JNI 和 NDK 的区别</h2>
-
-<hr />
-
+<hr>
 <p>NDK 开发难免会搞不清 JNI 和 NDK 的区别。</p>
-
 <p>JNI 全称是 Java Native Interface，即 Java 本地接口。它是用来使得 Java 语言和 C/C++ 语言相互调用的。它本身和 Android 并无关系，只是在 Android 开发中会用到，在其他地方也会用到的。</p>
-
 <p>而 NDK 的全称是 Native Development Kit，和 SDK 的全称是 Software Development Kit 一样，都是开发工具包。NDK 是 Android 开发的工具包，主要用作 C/C++ 开发，提供了相关的动态库。</p>
-
 <p>在 Android 上进行 NDK 开发还是得先学会 JNI 相关技能，先可以从 Java 层到 C/C++ 层的相互调用，然后再学习 NDK 开发的那些技巧。</p>
-
 <h2 id="简单实例">简单实例</h2>
-
-<hr />
-
+<hr>
 <p>在 AS 新建工程时若选择了 Include C++ Support，就会自带配置好的 C++ 开发环境。</p>
-
 <p>在声明 native 方法时还是用 Java 来写比较好，比 Kotlin 的 external 关键字要友好多了，可以直接快捷键生成对用的 C++ 方法。</p>
-
 <p>声明 native 方法如下：</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900">native</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">plus</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">a</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">b</span>);</code></pre></div>
-<p>快捷键便会生成对应的 C++ 方法</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900">native</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">plus</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">a</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">b</span>);
+</code></pre></div><p>快捷键便会生成对应的 C++ 方法</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">extern</span> <span style="color:#2aa198">&#34;C&#34;</span>
 <span style="color:#268bd2">JNIEXPORT</span> <span style="color:#268bd2">jint</span> <span style="color:#268bd2">JNICALL</span>
 <span style="color:#268bd2">Java_com_glumes_myapplication_NativeClass_plus</span>(<span style="color:#268bd2">JNIEnv</span> *<span style="color:#268bd2">env</span>, <span style="color:#268bd2">jobject</span> <span style="color:#268bd2">instance</span>, <span style="color:#268bd2">jint</span> <span style="color:#268bd2">a</span>, <span style="color:#268bd2">jint</span> <span style="color:#268bd2">b</span>) {
     <span style="color:#268bd2">jint</span> <span style="color:#268bd2">sum</span> = <span style="color:#268bd2">a</span> + <span style="color:#268bd2">b</span>;
     <span style="color:#859900">return</span> <span style="color:#268bd2">sum</span>;
 }
-</code></pre></div>
-<p>这是一个简单的计算 a+b 的 native 方法，但却包含了许多基本内容，在 C++ 层接收来自 Java 层的参数，并转换成 C++ 层的数据类型，计算之后再返回成 Java 层的数据类型。</p>
-
+</code></pre></div><p>这是一个简单的计算 a+b 的 native 方法，但却包含了许多基本内容，在 C++ 层接收来自 Java 层的参数，并转换成 C++ 层的数据类型，计算之后再返回成 Java 层的数据类型。</p>
 <p>在 Java 层中只有两个参数，而在 C++ 代码就有四个参数了，至少都会包含前面两个参数，下面讲解这些参数意义。</p>
-
-<p>其中：
-* <code>env</code>变量是 JNIEnv 类型的对象，该对象是一个 Java 虚拟机所运行的环境，通过它可以访问到 Java 虚拟机内部的各种对象。</p>
-
+<p>其中：</p>
+<ul>
+<li><code>env</code>变量是 JNIEnv 类型的对象，该对象是一个 Java 虚拟机所运行的环境，通过它可以访问到 Java 虚拟机内部的各种对象。</li>
+</ul>
 <h4 id="jnienv-类型对象参数-env">JNIEnv 类型对象参数 env</h4>
-
 <p><code>JNIEnv*</code> 是定义任意 native 函数的第一个参数，它是一个指针，通过它可以访问虚拟机内部的各种数据结构，同时它还指向 JVM 函数表的指针，函数表中的每一个入口指向一个 JNI 函数，每个函数用于访问 JVM 中特定的数据结构。</p>
-
 <p>结构如下图所示：</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/JNIEnv-Pointer_pjzwm1.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/JNIEnv-Pointer_pjzwm1.png" alt=""></p>
 <p>可以看到这里面涉及了三类指针，JNIEnv * 本身就是指针，而它指向的也是指针，在 JVM 函数表里面的每一项又都是指针。</p>
-
 <h4 id="jobject-参数">jobject 参数</h4>
-
 <p>jobject 是 native 函数里的第二个参数类型，但却不是一定的。</p>
-
 <p>如果该 native 方法是一个静态 static 方法，那么第二个参数就是 jobject 类型，指的是调用该函数的对象；</p>
-
 <p>如果是一个实例方法，那么第二个参数就是 jclass 类型，指的是调用该函数的类。</p>
-
 <h4 id="基本数据类型转换">基本数据类型转换</h4>
-
 <p>在 Java 中传递的参数类型是 int，而在 JNI 中就成了 jint，这就涉及到 Java 到 JNI 的数据类型转换。</p>
-
 <p>如下表所示：</p>
-
 <table>
 <thead>
 <tr>
@@ -344,7 +293,6 @@ if (!doNotTrack) {
 <th>字长</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>boolean</td>
@@ -352,49 +300,42 @@ if (!doNotTrack) {
 <td>无符号</td>
 <td>8位</td>
 </tr>
-
 <tr>
 <td>byte</td>
 <td>jbyte</td>
 <td>无符号</td>
 <td>8位</td>
 </tr>
-
 <tr>
 <td>char</td>
 <td>jchar</td>
 <td>无符号</td>
 <td>16位</td>
 </tr>
-
 <tr>
 <td>short</td>
 <td>jshort</td>
 <td>有符号</td>
 <td>16位</td>
 </tr>
-
 <tr>
 <td>int</td>
 <td>jnit</td>
 <td>有符号</td>
 <td>32位</td>
 </tr>
-
 <tr>
 <td>long</td>
 <td>jlong</td>
 <td>有符号</td>
 <td>64位</td>
 </tr>
-
 <tr>
 <td>float</td>
 <td>jfloat</td>
 <td>有符号</td>
 <td>32位</td>
 </tr>
-
 <tr>
 <td>double</td>
 <td>jdouble</td>
@@ -403,13 +344,9 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-
 <p>我们传递的基本数据类型在 JNI 中都有相对的数据类型。</p>
-
 <h4 id="引用数据类型转换">引用数据类型转换</h4>
-
 <p>除了基本数据类型之外，引用数据类型也有着一一对应。</p>
-
 <table>
 <thead>
 <tr>
@@ -419,7 +356,6 @@ if (!doNotTrack) {
 <th>Native 类型</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>All objects</td>
@@ -427,42 +363,36 @@ if (!doNotTrack) {
 <td>char$[]$</td>
 <td>jcharArray</td>
 </tr>
-
 <tr>
 <td>java.lang.Class</td>
 <td>jclass</td>
 <td>short$[]$</td>
 <td>jshortArray</td>
 </tr>
-
 <tr>
 <td>java.lang.String</td>
 <td>jstring</td>
 <td>int$[]$</td>
 <td>jintArray</td>
 </tr>
-
 <tr>
 <td>Object$[]$</td>
 <td>jobjectArray</td>
 <td>long$[]$</td>
 <td>jlongArray</td>
 </tr>
-
 <tr>
 <td>boolean$[]$</td>
 <td>jbooleanArray</td>
 <td>float$[]$</td>
 <td>jfloatArray</td>
 </tr>
-
 <tr>
 <td>byte$[]$</td>
 <td>jbyteArray</td>
 <td>double$[]$</td>
 <td>jdoubleArray</td>
 </tr>
-
 <tr>
 <td>java.lang.Throwable</td>
 <td>jthrowable</td>
@@ -471,22 +401,15 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-
 <p>可以看到，除了 Java 中基本数据类型的数组、Class、String 和 Throwable 外，其余所有 Java 对象的数据类型在 JNI 中都用 jobject 表示。</p>
-
 <p>明白了参数类型之后，接下来就是按照正常写代码一样，完成函数的返回值了。</p>
-
 <h2 id="string-字符串操作">String 字符串操作</h2>
-
-<hr />
-
+<hr>
 <p>对于基本数据类型的操作，比如 boolean、int、float 等都大同小异，无非是在原来的数据类型前面加了一个 <code>j</code>来表示 JNI 数据类型。</p>
-
 <p>而对于 String 类型，必须要使用合适的 JNI 函数来将 jstring 转变成 C/C++ 字符串。</p>
-
 <p>对于下面的 Native 方法，传入一个字符串，并要求返回一个字符串。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900">native</span> <span style="color:#268bd2">String</span> <span style="color:#268bd2">getNativeString</span>(<span style="color:#268bd2">String</span> <span style="color:#268bd2">str</span>);</code></pre></div>
-<p>生成的对应的 C++ 代码如下：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900">native</span> <span style="color:#268bd2">String</span> <span style="color:#268bd2">getNativeString</span>(<span style="color:#268bd2">String</span> <span style="color:#268bd2">str</span>);
+</code></pre></div><p>生成的对应的 C++ 代码如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">extern</span> <span style="color:#2aa198">&#34;C&#34;</span>
 <span style="color:#268bd2">JNIEXPORT</span> <span style="color:#268bd2">jstring</span> <span style="color:#268bd2">JNICALL</span>
 <span style="color:#268bd2">Java_com_glumes_cppso_SampleNativeMethod_getNativeString</span>(<span style="color:#268bd2">JNIEnv</span> *<span style="color:#268bd2">env</span>, <span style="color:#268bd2">jclass</span> <span style="color:#268bd2">type</span>, <span style="color:#268bd2">jstring</span> <span style="color:#268bd2">str_</span>) {
@@ -500,29 +423,19 @@ if (!doNotTrack) {
     <span style="color:#93a1a1;font-style:italic">// 返回 jstring 类型字符串
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">return</span> <span style="color:#268bd2">returnValue</span>;
 }
-</code></pre></div>
-<p>Java 层的字符串到了 JNI 就成了 jstring 类型的，但 jstring 指向的是 JVM 内部的一个字符串，它不是 C 风格的字符串 <code>char*</code>，所以不能像使用 C 风格字符串一样来使用 jstring 。</p>
-
+</code></pre></div><p>Java 层的字符串到了 JNI 就成了 jstring 类型的，但 jstring 指向的是 JVM 内部的一个字符串，它不是 C 风格的字符串 <code>char*</code>，所以不能像使用 C 风格字符串一样来使用 jstring 。</p>
 <p>JNI 支持将 jstring 转换成 UTF 编码和 Unicode 编码两种。因为 Java 默认使用 Unicode 编码，而 C/C++ 默认使用 UTF 编码。</p>
-
 <ul>
 <li>GetStringUTFChars(jstring string, jboolean* isCopy)</li>
 </ul>
-
 <p>将 jstring 转换成 UTF 编码的字符串</p>
-
 <ul>
 <li>GetStringChars(jstring string, jboolean* isCopy)</li>
 </ul>
-
 <p>将 jstring 转换成 Unicode 编码的字符串，由于 Native 层是 C/C++ 编码，默认使用 UTF 格式，所以 GetStringChars 并不常用。</p>
-
 <p>其中，jstring 类型参数就是我们需要转换的字符串，而 isCopy 参数的值为  <code>JNI_TRUE</code> 或者 <code>JNI_FALSE</code> ，代表是否返回 JVM 源字符串的一份拷贝。如果为<code>JNI_TRUE</code> 则返回拷贝，并且要为产生的字符串拷贝分配内存空间；如果为<code>JNI_FALSE</code> 就直接返回了 JVM 源字符串的指针，意味着可以通过指针修改源字符串的内容，但这就违反了 Java 中字符串不能修改的规定，在实际开发中，直接填 NULL 就好了。</p>
-
 <p>当调用完 GetStringUTFChars 方法时别忘了做完全检查。因为 JVM 需要为产生的新字符串分配内存空间，如果分配失败就会返回 NULL，并且会抛出 OutOfMemoryError 异常，所以要对 GetStringUTFChars 结果进行判断。</p>
-
 <p>当使用完 UTF 编码的字符串时，还不能忘了释放所申请的内存空间。调用 ReleaseStringUTFChars 方法进行释放。</p>
-
 <p>完整地转换字符串的代码如下：</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 申请分配内存空间，jstring 转换为 C 风格字符串
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> *<span style="color:#268bd2">utfStr</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetStringUTFChars</span>(<span style="color:#268bd2">str_</span>,<span style="color:#cb4b16">NULL</span>);
@@ -534,19 +447,12 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">printf</span>(<span style="color:#2aa198">&#34;%s&#34;</span>,<span style="color:#268bd2">utfStr</span>);
     <span style="color:#93a1a1;font-style:italic">// 操作结束后，释放内存
 </span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">ReleaseStringUTFChars</span>(<span style="color:#268bd2">str_</span>,<span style="color:#268bd2">utfStr</span>);
-</code></pre></div>
-<p>除了将 jstring 转换为 C 风格字符串，JNI 还提供了将 C 风格字符串转换为 jstring 类型。</p>
-
+</code></pre></div><p>除了将 jstring 转换为 C 风格字符串，JNI 还提供了将 C 风格字符串转换为 jstring 类型。</p>
 <p>通过 NewStringUTF 函数可以将 UTF 编码的 C 风格字符串转换为 jstring 类型，通过 NewString 函数可以将 Unicode 编码的 C 风格字符串转换为 jstring 类型。这个 jstring 类型会自动转换成 Java 支持的 Unicode 编码格式。</p>
-
 <p>除了 jstring 和 C 风格字符串的相互转换之外，JNI 还提供了其他的函数。</p>
-
 <h4 id="获得源字符串的指针">获得源字符串的指针</h4>
-
 <p>在某些情况下，我们只需要获得 Java 字符串的直接指针，而不需要把它转换成 C 风格的字符串。</p>
-
 <p>比如，一个字符串内容很大，有 1 M 多，而我们只是需要读取字符串内容，这种情况下再把它转换为 C 风格字符串，不仅多此一举（通过直接字符串指针也可以读取内容），而且还需要为 C 风格字符串分配内存。</p>
-
 <p>为此，JNI 提供了 GetStringCritical 和 ReleaseStringCritical 函数来返回字符串的直接指针，这样只需要分配一个指针的内存空间就好了。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900">const</span> <span style="color:#268bd2">jchar</span> *<span style="color:#268bd2">c_str</span> = <span style="color:#cb4b16">NULL</span>;
     <span style="color:#268bd2">c_str</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetStringCritical</span>(<span style="color:#268bd2">str_</span>, <span style="color:#cb4b16">NULL</span>);
@@ -555,61 +461,39 @@ if (!doNotTrack) {
         <span style="color:#93a1a1;font-style:italic">// error handle
 </span><span style="color:#93a1a1;font-style:italic"></span>    }
     <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">ReleaseStringCritical</span>(<span style="color:#268bd2">str_</span>, <span style="color:#268bd2">c_str</span>);
-</code></pre></div>
-<p>和 GetStringUTFChars 一样，在使用完之后，还需要将分配的指针内存空间给释放掉。</p>
-
+</code></pre></div><p>和 GetStringUTFChars 一样，在使用完之后，还需要将分配的指针内存空间给释放掉。</p>
 <p>注意它的返回值指针类型是 <code>const jchar *</code>，而 GetStringUTFChars 函数的返回值就是 <code>const char*</code>，这就说明 GetStringUTFChars 返回的是 C 风格字符串的指针，而 GetStringCritical 返回的是源 Java 字符串的直接指针。</p>
-
 <p>另外，GetStringCritical 还有额外的限制。</p>
-
 <p>在 GetStringCritical 和 ReleaseStringCritical 两个函数之间的 Native 代码不能调用任何会让线程阻塞或者等待 JVM 中其他线程的 Native 函数或 JNI 函数。</p>
-
 <p>因为通过 GetStringCritical 得到的是一个指向 JVM 内部字符串的直接指针，获取这个直接指针后会导致暂停 GC 线程，当 GC 线程被暂停后，如果其他线程触发 GC 继续运行的话，都会导致阻塞调用者。所以，GetStringCritical 和 ReleaseStringCritical 这对函数中间的任何本地代码都不可以执行导致阻塞的调用或为新对象在 JVM 中分配内存，否则，JVM 有可能死锁。</p>
-
 <p>另外还是需要检查是否因为内存溢出而导致返回值为 NULL，因为 JVM 在执行 GetStringCritical 函数时，仍有发生数据复制的可能性，尤其是当 JVM 内部存储的数组不连续时，为了返回一个指向连续内存空间的指针，JVM 必须复制所有数据。</p>
-
 <h4 id="获得字符串的长度">获得字符串的长度：</h4>
-
 <p>由于 UTF-8 编码的字符串以 <code>\0</code> 结尾，而 Unicode 字符串不是，所以对于两种编码获得字符串长度的函数也是不同的。</p>
-
 <ul>
 <li>GetStringLength</li>
 </ul>
-
 <p>获得 Unicode 编码的字符串的长度。</p>
-
 <ul>
 <li>GetStringUTFLength</li>
 </ul>
-
 <p>获得 UTF-8 编码的字符串的长度，或者使用 C 语言的 strlen 函数。</p>
-
 <p>这里的字符串指的是 Java 层的字符串，传入的参数都是 jsting 类型，而 Java 层默认是 Unicode 编码，所以大多使用 GetStringLength 方法。</p>
-
 <h4 id="获得指定范围的字符串内容">获得指定范围的字符串内容</h4>
-
 <p>JNI 提供了函数来获得字符串指定范围的内容，这里的字符串指的是 Java 层的字符串。函数会把源字符串复制到一个预先分配的缓冲区内。</p>
-
 <ul>
 <li>GetStringRegion</li>
 </ul>
-
 <p>获得 Unicode 编码的字符串指定内容。</p>
-
 <ul>
 <li>GetStringUTFRegion</li>
 </ul>
-
 <p>获得 UTF-8 编码的字符串指定内容。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">jchar</span> <span style="color:#268bd2">outbuf</span>[<span style="color:#2aa198;font-weight:bold">128</span>],<span style="color:#268bd2">inbuf</span>[<span style="color:#2aa198;font-weight:bold">128</span>];
     <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">len</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetStringLength</span>(<span style="color:#268bd2">str_</span>);
     <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetStringRegion</span>(<span style="color:#268bd2">str_</span>,<span style="color:#2aa198;font-weight:bold">0</span>,<span style="color:#268bd2">len</span>,<span style="color:#268bd2">outbuf</span>);
     <span style="color:#268bd2">LOGD</span>(<span style="color:#2aa198">&#34;%s&#34;</span>,<span style="color:#268bd2">outbuf</span>);
-</code></pre></div>
-<h2 id="string-字符串函数操作总结">String 字符串函数操作总结</h2>
-
+</code></pre></div><h2 id="string-字符串函数操作总结">String 字符串函数操作总结</h2>
 <p>关于字符串的函数汇总</p>
-
 <table>
 <thead>
 <tr>
@@ -617,99 +501,89 @@ if (!doNotTrack) {
 <th>描述</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>GetStringChars / ReleaseStringChars</td>
 <td>获得或释放一个指向 Unicode 编码的字符串的指针（指 C/C++ 字符串）</td>
 </tr>
-
 <tr>
 <td>GetStringUTFChars / ReleaseStringUTFChars</td>
 <td>获得或释放一个指向 UTF-8 编码的字符串的指针（指 C/C++ 字符串）</td>
 </tr>
-
 <tr>
 <td>GetStringLength</td>
 <td>返回 Unicode 编码的字符串的长度</td>
 </tr>
-
 <tr>
 <td>getStringUTFLength</td>
 <td>返回 UTF-8 编码的字符串的长度</td>
 </tr>
-
 <tr>
 <td>NewString</td>
 <td>将 Unicode 编码的 C/C++ 字符串转换为 Java 字符串</td>
 </tr>
-
 <tr>
 <td>NewStringUTF</td>
 <td>将 UTF-8 编码的 C/C++ 字符串转换为 Java 字符串</td>
 </tr>
-
 <tr>
 <td>GetStringCritical / ReleaseStringCritical</td>
 <td>获得或释放一个指向字符串内容的指针(指 Java 字符串)</td>
 </tr>
-
 <tr>
 <td>GetStringRegion</td>
 <td>获取或者设置 Unicode 编码的字符串的指定范围的内容</td>
 </tr>
-
 <tr>
 <td>GetStringUTFRegion</td>
 <td>获取或者设置 UTF-8 编码的字符串的指定范围的内容</td>
 </tr>
 </tbody>
 </table>
-
 <p>选择合适的 JNI 函数</p>
-
-<p><img src="https://image.glumes.com/images/2019/04/27/choose-right-jni-string-function.png" alt="" /></p>
-
+<p><img src="https://image.glumes.com/images/2019/04/27/choose-right-jni-string-function.png" alt=""></p>
 <p>对于 JNI String 操作，要选择合适的函数，上表可以作为参考。</p>
-
 <h2 id="参考">参考</h2>
-
-<hr />
-
+<hr>
 <ol>
 <li>《The Java Native Interface》</li>
 <li><a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a></li>
 </ol>
-
 <p>具体示例代码可参考我的 Github 项目 <a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a>，欢迎 Star。</p>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/android-jni-basic-operation/">Android JNI 基本操作 </a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -736,45 +610,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://www.glumes.com/post/android/android-camrea-api-evolution/" data-toggle="tooltip" data-placement="top" title="Android Camera 模型及 API 接口演变">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://www.glumes.com/post/android/android-jni-array-operation/" data-toggle="tooltip" data-placement="top" title="Android JNI 数组 操作">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://www.glumes.com/post/android/android-camrea-api-evolution/" data-toggle="tooltip" data-placement="top" title="Android Camera 模型及 API 接口演变">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://www.glumes.com/post/android/android-jni-array-operation/" data-toggle="tooltip" data-placement="top" title="Android JNI 数组 操作">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -783,6 +644,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -825,25 +688,19 @@ if (!doNotTrack) {
             <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -852,66 +709,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://www.glumes.com/js/prism.js?t=123"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
+
+
+
+
+
+
+
   
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>RxJava on 星陨的博客</title>
@@ -27,9 +27,7 @@
       
       <guid>https://www.glumes.com/post/android/rxjava-wrapper-dialog/</guid>
       <description>&lt;p&gt;之前有写过一篇文章：&lt;a href=&#34;http://www.glumes.com/wrapper-callback-by-rxjava/&#34;&gt;用 RxJava 封装回调方法 CallBack&lt;/a&gt;。&lt;/p&gt;
-
 &lt;p&gt;RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。&lt;/p&gt;
-
 &lt;p&gt;这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。&lt;/p&gt;</description>
     </item>
     
