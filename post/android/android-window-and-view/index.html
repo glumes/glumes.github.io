@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android Activity 创建 Window 及添加 View 流程分析</title>
+  <title>Android Activity 创建 Window 及添加 View 流程分析-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="Android Activity 创建 Window 及添加 View 流程分析" />
   <meta name="twitter:title" content="Android Activity 创建 Window 及添加 View 流程分析" />
 
@@ -33,33 +33,34 @@ Android 6.0 Launcher 启动 Activity 过程源码分析（一）
 Android 6.0 Launcher 启动 Activity 过程源码分析（二）
 Android 6.0 Launcher 启动 Activity 过程源码分析（三）
 Android 6.0 …">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-window-and-view/" />
+  <meta property="og:url" content="https://www.glumes.com/post/android/android-window-and-view/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-window-and-view/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/android/android-window-and-view/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -74,23 +75,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -98,7 +87,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -109,15 +100,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -125,25 +116,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -161,9 +152,6 @@ if (!doNotTrack) {
 </nav>
 
 
-
-
-
     
   
   
@@ -176,45 +164,59 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">Android Activity 创建 Window 及添加 View 流程分析</h1>
+              <h1>Android Activity 创建 Window 及添加 View 流程分析</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on December 22, 2017
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
             
-          </h5>
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -230,8 +232,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p>在之前有分析过 Android 6.0 Launcher 启动 Activity 过程，文章的链接如下：</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>在之前有分析过 Android 6.0 Launcher 启动 Activity 过程，文章的链接如下：</p>
 
 <ol>
 <li><a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a></li>
@@ -259,28 +274,25 @@ if (!doNotTrack) {
 <h2 id="window-的创建">Window 的创建</h2>
 
 <p>attach 方法内创建 Window 的代码示例如下：</p>
-
-<pre><code class="language-java">		mWindow = new PhoneWindow(this); // 创建 Window，实例是 PhonwWindow
-        mWindow.setCallback(this);    // 设置回调
-        mWindow.setOnWindowDismissedCallback(this);  // 设置回调
-        mWindow.getLayoutInflater().setPrivateFactory(this);
-        if (info.softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_UNSPECIFIED) {
-            mWindow.setSoftInputMode(info.softInputMode);    // 调整键盘
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">		<span style="color:#268bd2">mWindow</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">PhoneWindow</span>(<span style="color:#859900">this</span>); <span style="color:#93a1a1;font-style:italic">// 创建 Window，实例是 PhonwWindow
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">mWindow</span>.<span style="color:#268bd2">setCallback</span>(<span style="color:#859900">this</span>);    <span style="color:#93a1a1;font-style:italic">// 设置回调
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">mWindow</span>.<span style="color:#268bd2">setOnWindowDismissedCallback</span>(<span style="color:#859900">this</span>);  <span style="color:#93a1a1;font-style:italic">// 设置回调
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">mWindow</span>.<span style="color:#268bd2">getLayoutInflater</span>().<span style="color:#268bd2">setPrivateFactory</span>(<span style="color:#859900">this</span>);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">info</span>.<span style="color:#268bd2">softInputMode</span> != <span style="color:#268bd2">WindowManager</span>.<span style="color:#268bd2">LayoutParams</span>.<span style="color:#268bd2">SOFT_INPUT_STATE_UNSPECIFIED</span>) {
+            <span style="color:#268bd2">mWindow</span>.<span style="color:#268bd2">setSoftInputMode</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">softInputMode</span>);    <span style="color:#93a1a1;font-style:italic">// 调整键盘
+</span><span style="color:#93a1a1;font-style:italic"></span>        }
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">info</span>.<span style="color:#268bd2">uiOptions</span> != <span style="color:#268bd2">0</span>) {
+            <span style="color:#268bd2">mWindow</span>.<span style="color:#268bd2">setUiOptions</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">uiOptions</span>);
         }
-        if (info.uiOptions != 0) {
-            mWindow.setUiOptions(info.uiOptions);
-        }
 
-        mWindow.setWindowManager(    // 设置 WindowManager
-                (WindowManager)context.getSystemService(Context.WINDOW_SERVICE),
-                mToken, mComponent.flattenToString(),
-                (info.flags &amp; ActivityInfo.FLAG_HARDWARE_ACCELERATED) != 0);
-        if (mParent != null) {
-            mWindow.setContainer(mParent.getWindow());
+        <span style="color:#268bd2">mWindow</span>.<span style="color:#268bd2">setWindowManager</span>(    <span style="color:#93a1a1;font-style:italic">// 设置 WindowManager
+</span><span style="color:#93a1a1;font-style:italic"></span>                (<span style="color:#268bd2">WindowManager</span>)<span style="color:#268bd2">context</span>.<span style="color:#268bd2">getSystemService</span>(<span style="color:#268bd2">Context</span>.<span style="color:#268bd2">WINDOW_SERVICE</span>),
+                <span style="color:#268bd2">mToken</span>, <span style="color:#268bd2">mComponent</span>.<span style="color:#268bd2">flattenToString</span>(),
+                (<span style="color:#268bd2">info</span>.<span style="color:#268bd2">flags</span> &amp; <span style="color:#268bd2">ActivityInfo</span>.<span style="color:#268bd2">FLAG_HARDWARE_ACCELERATED</span>) != <span style="color:#268bd2">0</span>);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">mParent</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#268bd2">mWindow</span>.<span style="color:#268bd2">setContainer</span>(<span style="color:#268bd2">mParent</span>.<span style="color:#268bd2">getWindow</span>());
         }
-        mWindowManager = mWindow.getWindowManager();
-</code></pre>
-
+        <span style="color:#268bd2">mWindowManager</span> = <span style="color:#268bd2">mWindow</span>.<span style="color:#268bd2">getWindowManager</span>();</code></pre></div>
 <p>在 Android 6.0 的源码中，创建 Window 不再采用策略模式了，直接创建了 PhoneWindow。Window 是一个抽象类，它的唯一实现就是 PhoneWindow。</p>
 
 <p>接下来就是为 Window 设置回调，回调是实现都是由 Activity 来实现的，回调方法有很多，就不一一列举了，常见的有如下一些：
@@ -300,18 +312,15 @@ if (!doNotTrack) {
 <p>Android 中的所有视图都是通过 Window 来呈现的，不管是 Activity、Dialog 还是 Toast，它们的视图实际上都是附加在 Window 上的。</p>
 
 <p>因此，我们的 Activity 中的所有 View 也是添加在 Window 上的，而这一切入点就是<code>setContentView</code>方法。</p>
-
-<pre><code class="language-java">    public void setContentView(int layoutResID) {
-        getWindow().setContentView(layoutResID);
-        initWindowDecorActionBar();
-    }
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">setContentView</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">layoutResID</span>) {
+        <span style="color:#268bd2">getWindow</span>().<span style="color:#268bd2">setContentView</span>(<span style="color:#268bd2">layoutResID</span>);
+        <span style="color:#268bd2">initWindowDecorActionBar</span>();
+    }</code></pre></div>
 <p>getWindow 方法返回的就是上面创建的 PhoneWindow 对象，而重点就在于<code>setContentView</code>方法内。</p>
 
 <p>是时候展现一张经典的图了：</p>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-activity-window.png" alt="activity-window" /></p>
+<figure><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog-activity-window.png" alt="activity-window"><figcaption>activity-window</figcaption></figure>
 
 <p>在上图中，DecorView 就是一个 FrameLayout 的 ViewGroup 容器，也是 Activity 中的顶级 View，一般来说它内部包含标题栏和内部栏，但还是会随着主题发生变化的，但不管怎么样，内容栏是肯定有的。</p>
 
@@ -320,29 +329,26 @@ if (!doNotTrack) {
 <p>同时，DecorView 是依附于 Window 之上的，没有了 Window，DecorView 也无从谈起了。当我们创建好了 DecorView 时，还得把 DecorView 添加到 Window 上。</p>
 
 <p>而<code>setContentView</code>方法就是对上述图片创建 DecorView 的解释了。</p>
-
-<pre><code class="language-java">    @Override
-    public void setContentView(int layoutResID) {
-        if (mContentParent == null) {    // 代表图中 ContentView 的内容
-            installDecor();    // 创建 DecorView
-        } else if (!hasFeature(FEATURE_CONTENT_TRANSITIONS)) {
-            mContentParent.removeAllViews();    // 
-        }
-        if (hasFeature(FEATURE_CONTENT_TRANSITIONS)) {
-            final Scene newScene = Scene.getSceneForLayout(mContentParent, layoutResID,
-                    getContext());
-            transitionTo(newScene);
-        } else {
-            mLayoutInflater.inflate(layoutResID, mContentParent);    // 将布局文件加载到 mContentParent 中去，注意 mContentParent 就是上图中的内容栏
-        }
-        mContentParent.requestApplyInsets();
-        final Callback cb = getCallback();
-        if (cb != null &amp;&amp; !isDestroyed()) {
-            cb.onContentChanged();    // 在 Activity 内部回调 onContentChanged 方法，表示视图已经发生改变
-        }
-    }
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#268bd2">@Override</span>
+    <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">setContentView</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">layoutResID</span>) {
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">mContentParent</span> == <span style="color:#859900;font-weight:bold">null</span>) {    <span style="color:#93a1a1;font-style:italic">// 代表图中 ContentView 的内容
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">installDecor</span>();    <span style="color:#93a1a1;font-style:italic">// 创建 DecorView
+</span><span style="color:#93a1a1;font-style:italic"></span>        } <span style="color:#859900">else</span> <span style="color:#859900">if</span> (!<span style="color:#268bd2">hasFeature</span>(<span style="color:#268bd2">FEATURE_CONTENT_TRANSITIONS</span>)) {
+            <span style="color:#268bd2">mContentParent</span>.<span style="color:#268bd2">removeAllViews</span>();    <span style="color:#93a1a1;font-style:italic">// 
+</span><span style="color:#93a1a1;font-style:italic"></span>        }
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">hasFeature</span>(<span style="color:#268bd2">FEATURE_CONTENT_TRANSITIONS</span>)) {
+            <span style="color:#859900">final</span> <span style="color:#268bd2">Scene</span> <span style="color:#268bd2">newScene</span> = <span style="color:#268bd2">Scene</span>.<span style="color:#268bd2">getSceneForLayout</span>(<span style="color:#268bd2">mContentParent</span>, <span style="color:#268bd2">layoutResID</span>,
+                    <span style="color:#268bd2">getContext</span>());
+            <span style="color:#268bd2">transitionTo</span>(<span style="color:#268bd2">newScene</span>);
+        } <span style="color:#859900">else</span> {
+            <span style="color:#268bd2">mLayoutInflater</span>.<span style="color:#268bd2">inflate</span>(<span style="color:#268bd2">layoutResID</span>, <span style="color:#268bd2">mContentParent</span>);    <span style="color:#93a1a1;font-style:italic">// 将布局文件加载到 mContentParent 中去，注意 mContentParent 就是上图中的内容栏
+</span><span style="color:#93a1a1;font-style:italic"></span>        }
+        <span style="color:#268bd2">mContentParent</span>.<span style="color:#268bd2">requestApplyInsets</span>();
+        <span style="color:#859900">final</span> <span style="color:#268bd2">Callback</span> <span style="color:#268bd2">cb</span> = <span style="color:#268bd2">getCallback</span>();
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">cb</span> != <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; !<span style="color:#268bd2">isDestroyed</span>()) {
+            <span style="color:#268bd2">cb</span>.<span style="color:#268bd2">onContentChanged</span>();    <span style="color:#93a1a1;font-style:italic">// 在 Activity 内部回调 onContentChanged 方法，表示视图已经发生改变
+</span><span style="color:#93a1a1;font-style:italic"></span>        }
+    }</code></pre></div>
 <p>首先要明确的是<code>mContentParent</code>指的就是图中的<code>ContentView</code>内容栏，当内容栏为 null 时，则去为 Window 创建 DecorView 。</p>
 
 <p>当 DecorView 创建完成后，则直接调用 LayoutInflater 的 inflate 方法将我们自己的布局文件添加到<code>mContentParent</code>中，由此完成了 View 的添加。关于 LayoutInflater 如何将布局添加到父布局中，可以参考之前写的文章：<a href="http://www.glumes.com/android-layoutinflater/">Android 布局加载之LayoutInflater</a>。</p>
@@ -350,30 +356,24 @@ if (!doNotTrack) {
 <h2 id="decorview-的创建和初始-view-的添加">DecorView 的创建和初始 View 的添加</h2>
 
 <p>下面就是分析 DecorView 是如何创建并添加初始的布局内容的。</p>
-
-<pre><code class="language-java">    private void installDecor() {
-        if (mDecor == null) {
-            mDecor = generateDecor();    // 直接 new 一个 DecorView 对象
-        }
-        if (mContentParent == null) {
-            mContentParent = generateLayout(mDecor);    // 创建内容栏
-        }
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">installDecor</span>() {
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">mDecor</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#268bd2">mDecor</span> = <span style="color:#268bd2">generateDecor</span>();    <span style="color:#93a1a1;font-style:italic">// 直接 new 一个 DecorView 对象
+</span><span style="color:#93a1a1;font-style:italic"></span>        }
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">mContentParent</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#268bd2">mContentParent</span> = <span style="color:#268bd2">generateLayout</span>(<span style="color:#268bd2">mDecor</span>);    <span style="color:#93a1a1;font-style:italic">// 创建内容栏
+</span><span style="color:#93a1a1;font-style:italic"></span>        }
 	}
-	
-</code></pre>
-
+	</code></pre></div>
 <p>在 installDecor 方法中直接 new 了一个 DecorView 对象，此时它还是只是一个 FrameLayout 容器，内部还没有东西。接着就是去创建内容栏。</p>
-
-<pre><code class="language-java">		int layoutResource ;
-		// 省略掉根据各自 Feature 参数来初始化不同的 layoutResource 过程
-		mDecor.startChanging();    // 标识 DecorView 中的内容开始改变
-        View in = mLayoutInflater.inflate(layoutResource, null);    // 加载 XML 布局文件，可能没有标题栏，但一定有内容栏
-        decor.addView(in, new ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT));    // 为 DecorView 添加内容
-        mContentRoot = (ViewGroup) in;
-        ViewGroup contentParent = (ViewGroup)findViewById(ID_ANDROID_CONTENT);
-        mDecor.finishChanging(); // 标识 DecorView 中的内容改变完成
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">		<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">layoutResource</span> ;
+		<span style="color:#93a1a1;font-style:italic">// 省略掉根据各自 Feature 参数来初始化不同的 layoutResource 过程
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#268bd2">mDecor</span>.<span style="color:#268bd2">startChanging</span>();    <span style="color:#93a1a1;font-style:italic">// 标识 DecorView 中的内容开始改变
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">View</span> <span style="color:#268bd2">in</span> = <span style="color:#268bd2">mLayoutInflater</span>.<span style="color:#268bd2">inflate</span>(<span style="color:#268bd2">layoutResource</span>, <span style="color:#859900;font-weight:bold">null</span>);    <span style="color:#93a1a1;font-style:italic">// 加载 XML 布局文件，可能没有标题栏，但一定有内容栏
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">decor</span>.<span style="color:#268bd2">addView</span>(<span style="color:#268bd2">in</span>, <span style="color:#859900">new</span> <span style="color:#268bd2">ViewGroup</span>.<span style="color:#268bd2">LayoutParams</span>(<span style="color:#268bd2">MATCH_PARENT</span>, <span style="color:#268bd2">MATCH_PARENT</span>));    <span style="color:#93a1a1;font-style:italic">// 为 DecorView 添加内容
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">mContentRoot</span> = (<span style="color:#268bd2">ViewGroup</span>) <span style="color:#268bd2">in</span>;
+        <span style="color:#268bd2">ViewGroup</span> <span style="color:#268bd2">contentParent</span> = (<span style="color:#268bd2">ViewGroup</span>)<span style="color:#268bd2">findViewById</span>(<span style="color:#268bd2">ID_ANDROID_CONTENT</span>);
+        <span style="color:#268bd2">mDecor</span>.<span style="color:#268bd2">finishChanging</span>(); // <span style="color:#268bd2">标识</span> <span style="color:#268bd2">DecorView</span> <span style="color:#268bd2">中的内容改变完成</span></code></pre></div>
 <p>在上面曾提到了，在 DecorView 中，标题栏可能没有，则内容栏是一定要有的，这是因为用户可能在 Actiivty 设置了相应的参数，比如设置 Window 类型为 <code>FEATURE_NO_TITLE</code> 的类型。</p>
 
 <p>而 DecorView 添加内容 View 时，这个 View 是从 XML 布局文件中加载的，针对不同的 FEATURE， XML 布局文件中的内容也不相同，有的可能就没有标题栏了，只有一个内容栏，而且不管怎么样，所有的内容栏的 ID 都是固定的，为 <code>android.R.id.content</code>。</p>
@@ -387,23 +387,20 @@ if (!doNotTrack) {
 <p>而我们现在只是分析完了 DecorView 的添加，还并没将它依附到 Window 上去。只有将 View 添加到 Window 上之后，它才能够拥有具体的功能，处理外界的输入信息等等。</p>
 
 <p>在<code>handleResumeActivity</code>方法内的处理代码如下：</p>
-
-<pre><code class="language-java">	// 变量 r 指的是 ActivityClientRecord 类，变量 a 指的是 Activity，也就是 r.activity
-		 if (r.window == null &amp;&amp; !a.mFinished &amp;&amp; willBeVisible) {    // if 判断成立
-                r.window = r.activity.getWindow();
-                View decor = r.window.getDecorView();    // 设置 DecorView 可见
-                decor.setVisibility(View.INVISIBLE);
-                ViewManager wm = a.getWindowManager();
-                WindowManager.LayoutParams l = r.window.getAttributes();
-                a.mDecor = decor;
-                l.type = WindowManager.LayoutParams.TYPE_BASE_APPLICATION;
-                l.softInputMode |= forwardBit;
-                if (a.mVisibleFromClient) {
-                    a.mWindowAdded = true;
-                    wm.addView(decor, l);    // WindowManager 添加 DecorView
-                }
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#93a1a1;font-style:italic">// 变量 r 指的是 ActivityClientRecord 类，变量 a 指的是 Activity，也就是 r.activity
+</span><span style="color:#93a1a1;font-style:italic"></span>		 <span style="color:#859900">if</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">window</span> == <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; !<span style="color:#268bd2">a</span>.<span style="color:#268bd2">mFinished</span> &amp;&amp; <span style="color:#268bd2">willBeVisible</span>) {    <span style="color:#93a1a1;font-style:italic">// if 判断成立
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">r</span>.<span style="color:#268bd2">window</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">activity</span>.<span style="color:#268bd2">getWindow</span>();
+                <span style="color:#268bd2">View</span> <span style="color:#268bd2">decor</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">window</span>.<span style="color:#268bd2">getDecorView</span>();    <span style="color:#93a1a1;font-style:italic">// 设置 DecorView 可见
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">decor</span>.<span style="color:#268bd2">setVisibility</span>(<span style="color:#268bd2">View</span>.<span style="color:#268bd2">INVISIBLE</span>);
+                <span style="color:#268bd2">ViewManager</span> <span style="color:#268bd2">wm</span> = <span style="color:#268bd2">a</span>.<span style="color:#268bd2">getWindowManager</span>();
+                <span style="color:#268bd2">WindowManager</span>.<span style="color:#268bd2">LayoutParams</span> <span style="color:#268bd2">l</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">window</span>.<span style="color:#268bd2">getAttributes</span>();
+                <span style="color:#268bd2">a</span>.<span style="color:#268bd2">mDecor</span> = <span style="color:#268bd2">decor</span>;
+                <span style="color:#268bd2">l</span>.<span style="color:#268bd2">type</span> = <span style="color:#268bd2">WindowManager</span>.<span style="color:#268bd2">LayoutParams</span>.<span style="color:#268bd2">TYPE_BASE_APPLICATION</span>;
+                <span style="color:#268bd2">l</span>.<span style="color:#268bd2">softInputMode</span> |= <span style="color:#268bd2">forwardBit</span>;
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">a</span>.<span style="color:#268bd2">mVisibleFromClient</span>) {
+                    <span style="color:#268bd2">a</span>.<span style="color:#268bd2">mWindowAdded</span> = <span style="color:#859900;font-weight:bold">true</span>;
+                    <span style="color:#268bd2">wm</span>.<span style="color:#268bd2">addView</span>(<span style="color:#268bd2">decor</span>, <span style="color:#268bd2">l</span>);    <span style="color:#93a1a1;font-style:italic">// WindowManager 添加 DecorView
+</span><span style="color:#93a1a1;font-style:italic"></span>                }</code></pre></div>
 <p>截取的代码片段，其中<code>r</code>指的就是<code>ActivityClientRecord</code>类型，存储了 Activity 的状态，此时<code>r</code>的<code>window</code>变量还是为 null 的。于是为<code>ActivityClientRecord</code>相应的变量设置值，以记录当前 Activity 的状态，然后在设置 DecorView 为可见，并把 DecorView 添加到 WindowManager 中去，以便 DecorView 能够响应各种事件，进行事件分发等等操作。</p>
 
 <p>至此，就分析完了 Activity 的 Window 的创建以及 View 的添加过程。</p>
@@ -418,146 +415,99 @@ if (!doNotTrack) {
 <li><code>Instrumentation</code>类开始回调 Activity 的一系列生命周期方法，当回调<code>onCreate</code>方法时，主要做的就是创建 DecorView，并将我们传递过来的 View 添加到 DecorView 的内容栏中，而此时，DecorView 和 Window 两者还是处于分离的状态。</li>
 <li>在 Activity 生命周期的<code>onResume</code>方法内，将 DecorView 添加进了 Window 中，并设置 DecorView 可见，此时，就完成了 Activity Window 的创建和 View 的添加过程。</li>
 </ul>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-window-and-view/">Android Activity 创建 Window 及添加 View 流程分析</a>
-
-                
-
-                
-
-
-        
-        
-        
-      </article>
-
-      
-        
+          
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/android/android-system-server/">Android 系统服务启动 SystemServer</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-system-server/">Android 系统服务启动 SystemServer</a></li>
     
-    <li><a href="/post/android/android-service-manager/">Android 系统服务管理 ServiceManager</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-service-manager/">Android 系统服务管理 ServiceManager</a></li>
     
-    <li><a href="/post/android/android-material-design-summary-2/">Android Material Desing 控件小结-2</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-material-design-summary-2/">Android Material Desing 控件小结-2</a></li>
     
-    <li><a href="/post/android/android-material-design-summary-1/">Android Material Desing 控件小结-1</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-material-design-summary-1/">Android Material Desing 控件小结-1</a></li>
     
-    <li><a href="/post/android/android-binder-summary/">Android Binder Summary</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-binder-summary/">Android Binder Summary</a></li>
     
-    <li><a href="/post/android/android-dagger-use/">Dagger2 在 Android 中的使用</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-dagger-use/">Dagger2 在 Android 中的使用</a></li>
     
-    <li><a href="/post/android/android-start-activity-from-launcher-4/"> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-4/"> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</a></li>
     
-    <li><a href="/post/android/android-start-activity-from-launcher-3/">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-3/">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a></li>
     
-    <li><a href="/post/android/android-start-activity-from-launcher-2/">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-2/">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a></li>
     
-    <li><a href="/post/android/android-start-activity-from-launcher-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a></li>
     
 </ul>
 
-      
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/android/android-system-server/" data-toggle="tooltip" data-placement="top" title="Android 系统服务启动 SystemServer">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/android/android-lrucache/" data-toggle="tooltip" data-placement="top" title="Android LruCache实现分析">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+        
 
-      
-      <ul class="pager blog-pager">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-          <li class="previous">
-            <a href="https://glumes.com/post/android/android-system-server/" data-toggle="tooltip" data-placement="top" title="Android 系统服务启动 SystemServer">&larr; Previous Post</a>
-          </li>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/android-lrucache/" data-toggle="tooltip" data-placement="top" title="Android LruCache实现分析">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
-      
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+          
+
+        
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -566,8 +516,6 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -598,21 +546,8 @@ if (!doNotTrack) {
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -620,22 +555,28 @@ if (!doNotTrack) {
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -644,49 +585,66 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

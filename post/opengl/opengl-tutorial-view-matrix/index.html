@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>OpenGL 学习系列---观察矩阵</title>
+  <title>OpenGL 学习系列---观察矩阵-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="OpenGL 学习系列---观察矩阵" />
   <meta name="twitter:title" content="OpenGL 学习系列---观察矩阵" />
 
@@ -31,33 +31,34 @@
 
 
 当定义裁剪空间视景体时，我们都需要提供近 …">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" />
+  <meta property="og:url" content="https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -72,23 +73,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -96,7 +85,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -107,15 +98,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -123,25 +114,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -157,9 +148,6 @@ if (!doNotTrack) {
 
   </div>
 </nav>
-
-
-
 
 
     
@@ -178,24 +166,21 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
-        
         <div class="container">
           <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>OpenGL 学习系列---观察矩阵</h1>
                   
-                     <h1>OpenGL 学习系列---观察矩阵</h1>
-                     
+                  
                     <span class="post-meta">
-  Posted on May 22, 2018
+  
+    Posted on May 22, 2018
+  
   
 </span>
 
 
-                    
-                  
                   
               </div>
             </div>
@@ -204,47 +189,61 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">OpenGL 学习系列---观察矩阵</h1>
+              <h1>OpenGL 学习系列---观察矩阵</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on May 22, 2018
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
             
-                <a href="https://glumes.com/tags/camera/">Camera</a> &nbsp;
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+              
+                  <a href="https://www.glumes.com/tags/camera/">Camera</a> &nbsp;
+              
+            </h5>
             
-          </h5>
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -263,8 +262,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 投影矩阵</a> 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 投影矩阵</a> 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。</p>
 
 <p>这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：<a href="https://glumpy.github.io/modern-gl.html">https://glumpy.github.io/modern-gl.html</a>）</p>
 
@@ -292,7 +304,7 @@ if (!doNotTrack) {
 
 <p>在上面也提到，投影矩阵或者说视景体的一个展开，是以相机作为参考的，那么我们肯定还需要一个摄像机的观察方向，这个方向就是视景体展开的方向。</p>
 
-<p><img src="https://image.glumes.com/images/2019/04/27/camera_axes.png" alt="camera" /></p>
+<figure><img src="https://image.glumes.com/images/2019/04/27/camera_axes.png" alt="camera"><figcaption>camera</figcaption></figure>
 
 <p>如上图的左二内容所示，摄像机在 Z 轴正方向向坐标系的原点进行观察，假设此时摄像机坐标为 $A(-1,1,1)$，而原点为 $O(0,0,0)$，那么观察方向就是从 $A$ 点向 $O$ 点。而方向向量就是 $A-O$，就是向量  $ \overrightarrow {OA}(-1,1,1)$，它的方向也就是图二中的蓝色箭头所示，可以看到 摄像机的方向向量和它的观察方向正好是相反的。</p>
 
@@ -311,29 +323,26 @@ if (!doNotTrack) {
 <p>确定摄像机之后，就是用它来生成我们的观察矩阵，把观察矩阵用于在 OpenGL 渲染管线中进行处理。</p>
 
 <p>和投影矩阵一样，Android 也提供了对应函数 <code>Matrix.setLookAtM</code> 来生成 OpenGL 坐标转换中的观察矩阵。</p>
-
-<pre><code class="language-java">	 /**
-     * Defines a viewing transformation in terms of an eye point, a center of
-     * view, and an up vector.
-     *
-     * @param rm returns the result
-     * @param rmOffset index into rm where the result matrix starts
-     * @param eyeX eye point X
-     * @param eyeY eye point Y
-     * @param eyeZ eye point Z
-     * @param centerX center of view X
-     * @param centerY center of view Y
-     * @param centerZ center of view Z
-     * @param upX up vector X
-     * @param upY up vector Y
-     * @param upZ up vector Z
-     */
-    public static void setLookAtM(float[] rm, int rmOffset,
-            float eyeX, float eyeY, float eyeZ,
-            float centerX, float centerY, float centerZ, float upX, float upY,
-            float upZ)
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	 <span style="color:#93a1a1;font-style:italic">/**
+</span><span style="color:#93a1a1;font-style:italic">     * Defines a viewing transformation in terms of an eye point, a center of
+</span><span style="color:#93a1a1;font-style:italic">     * view, and an up vector.
+</span><span style="color:#93a1a1;font-style:italic">     *
+</span><span style="color:#93a1a1;font-style:italic">     * @param rm returns the result
+</span><span style="color:#93a1a1;font-style:italic">     * @param rmOffset index into rm where the result matrix starts
+</span><span style="color:#93a1a1;font-style:italic">     * @param eyeX eye point X
+</span><span style="color:#93a1a1;font-style:italic">     * @param eyeY eye point Y
+</span><span style="color:#93a1a1;font-style:italic">     * @param eyeZ eye point Z
+</span><span style="color:#93a1a1;font-style:italic">     * @param centerX center of view X
+</span><span style="color:#93a1a1;font-style:italic">     * @param centerY center of view Y
+</span><span style="color:#93a1a1;font-style:italic">     * @param centerZ center of view Z
+</span><span style="color:#93a1a1;font-style:italic">     * @param upX up vector X
+</span><span style="color:#93a1a1;font-style:italic">     * @param upY up vector Y
+</span><span style="color:#93a1a1;font-style:italic">     * @param upZ up vector Z
+</span><span style="color:#93a1a1;font-style:italic">     */</span>
+    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">setLookAtM</span>(<span style="color:#859900;font-weight:bold">float</span>[] <span style="color:#268bd2">rm</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">rmOffset</span>,
+            <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">eyeX</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">eyeY</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">eyeZ</span>,
+            <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">centerX</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">centerY</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">centerZ</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">upX</span>, <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">upY</span>,
+            <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">upZ</span>)</code></pre></div>
 <p>其中，第一个参数就是要传入的观察矩阵，第二个参数是偏移量，这个一般是  0 ，之后就是相机位置、观察点、辅助上向量。</p>
 
 <h2 id="移动相机观察内容">移动相机观察内容</h2>
@@ -344,78 +353,69 @@ if (!doNotTrack) {
 
 <p>用 OpenGL 来绘制一个立方体，并通过旋转移动摄像机，让摄像机绕 $Y$ 轴做圆形旋转，从而可以从不同方向来观察物体，效果图如下：</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif" alt="rotate-camera" /></p>
+<figure><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif" alt="rotate-camera"><figcaption>rotate-camera</figcaption></figure>
 
 <p>让立方体稍微向 $Z$ 轴做一点倾斜，这样最多就可以观察到三个面了。</p>
 
 <p>具体代码示例：</p>
-
-<pre><code class="language-java">    var num = 0
-    var RotateNum  = 360 // 绕 Y 轴做圆形旋转，把圆分成 360 份
-    val radian = (2 * Math.PI / RotateNum).toFloat() // 每一份对应的弧度
-	override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
-		//... 省略代码
-		// 通过 RxJava 的 interval 操作符，每隔 30 毫秒，移动相机观察角度
-        Observable.interval(30, TimeUnit.MILLISECONDS)
-                .subscribe {
-                    eyeX = eyeDistance * Math.sin((radian * num).toDouble()).toFloat()
-                    eyeZ = eyeDistance * Math.cos((radian * num).toDouble()).toFloat()
-                    num++
-                    if (num &gt; 360) {
-                        num = 0
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#268bd2">var</span> <span style="color:#268bd2">num</span> = <span style="color:#268bd2">0</span>
+    <span style="color:#268bd2">var</span> <span style="color:#268bd2">RotateNum</span>  = <span style="color:#268bd2">360</span> <span style="color:#93a1a1;font-style:italic">// 绕 Y 轴做圆形旋转，把圆分成 360 份
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">val</span> <span style="color:#268bd2">radian</span> = (<span style="color:#268bd2">2</span> * <span style="color:#268bd2">Math</span>.<span style="color:#268bd2">PI</span> / <span style="color:#268bd2">RotateNum</span>).<span style="color:#268bd2">toFloat</span>() <span style="color:#93a1a1;font-style:italic">// 每一份对应的弧度
+</span><span style="color:#93a1a1;font-style:italic"></span>	<span style="color:#268bd2">override</span> <span style="color:#268bd2">fun</span> <span style="color:#268bd2">onSurfaceChanged</span>(<span style="color:#268bd2">gl:</span> <span style="color:#268bd2">GL10</span>?, <span style="color:#268bd2">width:</span> <span style="color:#268bd2">Int</span>, <span style="color:#268bd2">height:</span> <span style="color:#268bd2">Int</span>) {
+		<span style="color:#93a1a1;font-style:italic">//... 省略代码
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#93a1a1;font-style:italic">// 通过 RxJava 的 interval 操作符，每隔 30 毫秒，移动相机观察角度
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">Observable</span>.<span style="color:#268bd2">interval</span>(<span style="color:#268bd2">30</span>, <span style="color:#268bd2">TimeUnit</span>.<span style="color:#268bd2">MILLISECONDS</span>)
+                .<span style="color:#268bd2">subscribe</span> {
+                    <span style="color:#268bd2">eyeX</span> = <span style="color:#268bd2">eyeDistance</span> * <span style="color:#268bd2">Math</span>.<span style="color:#268bd2">sin</span>((<span style="color:#268bd2">radian</span> * <span style="color:#268bd2">num</span>).<span style="color:#268bd2">toDouble</span>()).<span style="color:#268bd2">toFloat</span>()
+                    <span style="color:#268bd2">eyeZ</span> = <span style="color:#268bd2">eyeDistance</span> * <span style="color:#268bd2">Math</span>.<span style="color:#268bd2">cos</span>((<span style="color:#268bd2">radian</span> * <span style="color:#268bd2">num</span>).<span style="color:#268bd2">toDouble</span>()).<span style="color:#268bd2">toFloat</span>()
+                    <span style="color:#268bd2">num</span>++
+                    <span style="color:#859900">if</span> (<span style="color:#268bd2">num</span> &gt; <span style="color:#268bd2">360</span>) {
+                        <span style="color:#268bd2">num</span> = <span style="color:#268bd2">0</span>
                     }
                 }
-		// 设置观察矩阵
-	    MatrixState.setCamera(eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ)		
-	    // 让物体稍微向 Z 轴负方向倾斜一定角度
-	    MatrixState.rotate(-30f, 0f, 0f, 1f)
-	}
-</code></pre>
-
+		<span style="color:#93a1a1;font-style:italic">// 设置观察矩阵
+</span><span style="color:#93a1a1;font-style:italic"></span>	    <span style="color:#268bd2">MatrixState</span>.<span style="color:#268bd2">setCamera</span>(<span style="color:#268bd2">eyeX</span>, <span style="color:#268bd2">eyeY</span>, <span style="color:#268bd2">eyeZ</span>, <span style="color:#268bd2">lookX</span>, <span style="color:#268bd2">lookY</span>, <span style="color:#268bd2">lookZ</span>, <span style="color:#268bd2">upX</span>, <span style="color:#268bd2">upY</span>, <span style="color:#268bd2">upZ</span>)		
+	    <span style="color:#93a1a1;font-style:italic">// 让物体稍微向 Z 轴负方向倾斜一定角度
+</span><span style="color:#93a1a1;font-style:italic"></span>	    <span style="color:#268bd2">MatrixState</span>.<span style="color:#268bd2">rotate</span>(-<span style="color:#268bd2">30f</span>, <span style="color:#268bd2">0f</span>, <span style="color:#268bd2">0f</span>, <span style="color:#268bd2">1f</span>)
+	}</code></pre></div>
 <p>在 GLSurfaceView 的 onSurfaceChanged 方法里面设定观察矩阵，并通过 RxJava 的 interval 操作符每隔 30 毫秒改变相机位置的 $X$ 坐标和 $Z$ 坐标，让摄像机在 $XOY$ 平面上绕 $Y$ 轴做圆周运动。</p>
 
 <p>在 onDrawFrame 方法里，每当坐标改变了，就改变相机的位置。</p>
-
-<pre><code class="language-java">    override fun onDrawFrame(gl: GL10?) {
-		//... 省略代码
-        MatrixState.setCamera(eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ)
-        GLES20.glUniformMatrix4fv(uViewMatrixAttr, 1, false, MatrixState.getVMatrix(), 0)
-        //... 省略代码
-    }
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#268bd2">override</span> <span style="color:#268bd2">fun</span> <span style="color:#268bd2">onDrawFrame</span>(<span style="color:#268bd2">gl:</span> <span style="color:#268bd2">GL10</span>?) {
+		<span style="color:#93a1a1;font-style:italic">//... 省略代码
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">MatrixState</span>.<span style="color:#268bd2">setCamera</span>(<span style="color:#268bd2">eyeX</span>, <span style="color:#268bd2">eyeY</span>, <span style="color:#268bd2">eyeZ</span>, <span style="color:#268bd2">lookX</span>, <span style="color:#268bd2">lookY</span>, <span style="color:#268bd2">lookZ</span>, <span style="color:#268bd2">upX</span>, <span style="color:#268bd2">upY</span>, <span style="color:#268bd2">upZ</span>)
+        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glUniformMatrix4fv</span>(<span style="color:#268bd2">uViewMatrixAttr</span>, <span style="color:#268bd2">1</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#268bd2">MatrixState</span>.<span style="color:#268bd2">getVMatrix</span>(), <span style="color:#268bd2">0</span>)
+        <span style="color:#93a1a1;font-style:italic">//... 省略代码
+</span><span style="color:#93a1a1;font-style:italic"></span>    }</code></pre></div>
 <p>由于是做圆周运动，圆的半径是没有变的，所以看到的物体大小是不变的，只是看到的内容不同。</p>
 
 <h3 id="前后移动相机">前后移动相机</h3>
 
 <p>我们还可以前后移动相机，这样就相当于人走近或者离开物体，感觉到物体大小发生变化（实际上并没有）。</p>
 
-<p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526959206/code/rotate-camera-front-and-back.gif" alt="rotate-camera" /></p>
+<figure><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526959206/code/rotate-camera-front-and-back.gif" alt="rotate-camera"><figcaption>rotate-camera</figcaption></figure>
 
 <p>如上图，物体还是那个物体，但是从不同的远近来观察，所看到的大小就不一样了。</p>
-
-<pre><code class="language-java">    override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
-        super.onSurfaceChanged(gl, width, height)
-        var isPlus = true
-        var distance = eyeZ
-        Observable.interval(100, TimeUnit.MILLISECONDS)
-                .subscribe {
-                    distance = if (isPlus) distance + 0.1f else distance - 0.1f
-                    if (distance &lt; 2.0f) {
-                        isPlus = true
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#268bd2">override</span> <span style="color:#268bd2">fun</span> <span style="color:#268bd2">onSurfaceChanged</span>(<span style="color:#268bd2">gl:</span> <span style="color:#268bd2">GL10</span>?, <span style="color:#268bd2">width:</span> <span style="color:#268bd2">Int</span>, <span style="color:#268bd2">height:</span> <span style="color:#268bd2">Int</span>) {
+        <span style="color:#859900">super</span>.<span style="color:#268bd2">onSurfaceChanged</span>(<span style="color:#268bd2">gl</span>, <span style="color:#268bd2">width</span>, <span style="color:#268bd2">height</span>)
+        <span style="color:#268bd2">var</span> <span style="color:#268bd2">isPlus</span> = <span style="color:#859900;font-weight:bold">true</span>
+        <span style="color:#268bd2">var</span> <span style="color:#268bd2">distance</span> = <span style="color:#268bd2">eyeZ</span>
+        <span style="color:#268bd2">Observable</span>.<span style="color:#268bd2">interval</span>(<span style="color:#268bd2">100</span>, <span style="color:#268bd2">TimeUnit</span>.<span style="color:#268bd2">MILLISECONDS</span>)
+                .<span style="color:#268bd2">subscribe</span> {
+                    <span style="color:#268bd2">distance</span> = <span style="color:#859900">if</span> (<span style="color:#268bd2">isPlus</span>) <span style="color:#268bd2">distance</span> + <span style="color:#268bd2">0</span>.<span style="color:#268bd2">1f</span> <span style="color:#859900">else</span> <span style="color:#268bd2">distance</span> - <span style="color:#268bd2">0</span>.<span style="color:#268bd2">1f</span>
+                    <span style="color:#268bd2">if</span> (<span style="color:#268bd2">distance</span> &lt; <span style="color:#268bd2">2</span>.<span style="color:#268bd2">0f</span>) {
+                        <span style="color:#268bd2">isPlus</span> = <span style="color:#859900;font-weight:bold">true</span>
                     }
-                    if (distance &gt; 5.0f) {
-                        isPlus = false
+                    <span style="color:#859900">if</span> (<span style="color:#268bd2">distance</span> &gt; <span style="color:#268bd2">5</span>.<span style="color:#268bd2">0f</span>) {
+                        <span style="color:#268bd2">isPlus</span> = <span style="color:#859900;font-weight:bold">false</span>
                     }
-                    eyeZ = distance
-                    updateCamera()
+                    <span style="color:#268bd2">eyeZ</span> = <span style="color:#268bd2">distance</span>
+                    <span style="color:#268bd2">updateCamera</span>()
                 }
-        // 将物体调整一下，可以看到三个面
-        MatrixState.rotate(-45f, 0f, 1f, 0f)
-        MatrixState.rotate(45f, 1f, 0f, 0f)
-    }
-</code></pre>
-
+        <span style="color:#93a1a1;font-style:italic">// 将物体调整一下，可以看到三个面
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">MatrixState</span>.<span style="color:#268bd2">rotate</span>(-<span style="color:#268bd2">45f</span>, <span style="color:#268bd2">0f</span>, <span style="color:#268bd2">1f</span>, <span style="color:#268bd2">0f</span>)
+        <span style="color:#268bd2">MatrixState</span>.<span style="color:#268bd2">rotate</span>(<span style="color:#268bd2">45f</span>, <span style="color:#268bd2">1f</span>, <span style="color:#268bd2">0f</span>, <span style="color:#268bd2">0f</span>)
+    }</code></pre></div>
 <p>如上代码所示，我们改变了相机的 $Z$ 轴坐标，让它在 $[2.0,5.0]$ 之间来回移动，这样就达到了前后移动相机的效果。</p>
 
 <p>最后，还可以把两种旋转结合起来，即做圆周运动又前后移动相机，效果如下：</p>
@@ -429,140 +429,93 @@ if (!doNotTrack) {
 <p>具体代码详情，可以参考我的 Github 项目：</p>
 
 <p><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/">OpenGL 学习系列---观察矩阵</a>
-
-                
-
-                
-
-
-        
-        
-        
-      </article>
-
-      
-        
+          
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></li>
     
-    <li><a href="/post/android/android-camera-aspect-ratio-and-orientation/">Android 相机开发中的尺寸和方向问题</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-camera-aspect-ratio-and-orientation/">Android 相机开发中的尺寸和方向问题</a></li>
     
-    <li><a href="/post/opengl/opengl-tutorial-texture/">OpenGL 学习系列---纹理</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-tutorial-texture/">OpenGL 学习系列---纹理</a></li>
     
-    <li><a href="/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 学习系列---投影矩阵</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 学习系列---投影矩阵</a></li>
     
-    <li><a href="/post/opengl/opengl-tutorial-coordinate-system/">OpenGL 学习系列---坐标系统</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-tutorial-coordinate-system/">OpenGL 学习系列---坐标系统</a></li>
     
-    <li><a href="/post/opengl/opengl-tutorial-draw-basic-shape/">OpenGL 学习系列---基本形状的绘制</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/">OpenGL 学习系列---基本形状的绘制</a></li>
     
-    <li><a href="/post/opengl/opengl-tutorial-draw-point/">OpenGL 学习系列---基础的绘制流程</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-tutorial-draw-point/">OpenGL 学习系列---基础的绘制流程</a></li>
     
 </ul>
 
-      
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/android/android-jni-exception-handle/" data-toggle="tooltip" data-placement="top" title="Android JNI 调用时的异常处理">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" data-toggle="tooltip" data-placement="top" title="OpenGL 的 glDrawElements  绘制方法">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+        
 
-      
-      <ul class="pager blog-pager">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-          <li class="previous">
-            <a href="https://glumes.com/post/android/android-jni-exception-handle/" data-toggle="tooltip" data-placement="top" title="Android JNI 调用时的异常处理">&larr; Previous Post</a>
-          </li>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" data-toggle="tooltip" data-placement="top" title="OpenGL 的 glDrawElements  绘制方法">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
-      
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+          
+
+        
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -571,8 +524,6 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -603,21 +554,8 @@ if (!doNotTrack) {
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -625,22 +563,28 @@ if (!doNotTrack) {
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -649,49 +593,66 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

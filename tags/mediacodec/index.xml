@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>MediaCodec on 技术开发进阶</title>
-    <link>https://glumes.com/tags/mediacodec/</link>
-    <description>Recent content in MediaCodec on 技术开发进阶</description>
+    <title>MediaCodec on 星陨的博客</title>
+    <link>https://www.glumes.com/tags/mediacodec/</link>
+    <description>Recent content in MediaCodec on 星陨的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
-    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <language>en-us</language>
     <lastBuildDate>Wed, 19 Sep 2018 23:39:28 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.com/tags/mediacodec/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glumes.com/tags/mediacodec/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>MediaCodec 硬编码之相机内容编码成 H264 文件</title>
-      <link>https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/</link>
+      <link>https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/</link>
       <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/</guid>
+      
+      <guid>https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/</guid>
       <description>&lt;p&gt;在 Android 4.1 版本提供了 MediaCodec 接口来访问设备的编解码器，不同于 FFmpeg 的软件编解码，它采用的是硬件编解码能力，因此在速度上会比软解更具有优势，但是由于 Android 的碎片化问题，机型众多，版本各异，导致 MediaCodec 在机型兼容性上需要花精力去适配，并且编解码流程不可控，全交由厂商的底层硬件去实现，最终得到的视频质量不一定很理想。&lt;/p&gt;
 
 &lt;p&gt;虽然 MediaCodec 仍然存在一定的弊端，但是对于快速实现编解码需求，还是很值得参考的。&lt;/p&gt;

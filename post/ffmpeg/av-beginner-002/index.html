@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</title>
+  <title>【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色" />
   <meta name="twitter:title" content="【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色" />
 
@@ -40,33 +40,34 @@
 在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。
 
 本篇文章主要是创建一个应用程序窗口并显示。">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-002/" />
+  <meta property="og:url" content="https://www.glumes.com/post/ffmpeg/av-beginner-002/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-002/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/ffmpeg/av-beginner-002/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -81,23 +82,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -105,7 +94,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -116,15 +107,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -132,25 +123,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -166,9 +157,6 @@ if (!doNotTrack) {
 
   </div>
 </nav>
-
-
-
 
 
     
@@ -187,24 +175,21 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
-        
         <div class="container">
           <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</h1>
                   
-                     <h1>【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</h1>
-                     
+                  
                     <span class="post-meta">
-  Posted on March 2, 2020
+  
+    Posted on March 2, 2020
+  
   
 </span>
 
 
-                    
-                  
                   
               </div>
             </div>
@@ -213,65 +198,74 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</h1>
+              <h1>【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on March 2, 2020
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/sdl/">SDL</a> &nbsp;
             
-          </h5>
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/sdl/">SDL</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
+            
           
-<aside class="toc">
-  <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#创建-sdl-窗口">创建 SDL 窗口</a></li>
-<li><a href="#展示-sdl-窗口">展示 SDL 窗口</a></li>
-<li><a href="#渲染-sdl-窗口">渲染 SDL 窗口</a></li>
-<li><a href="#销毁-sdl-窗口">销毁 SDL 窗口</a></li>
-<li><a href="#总结">总结</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
-</aside>
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
 
-        
-        <p>音视频技术文章连载：</p>
+          <p>音视频技术文章连载：</p>
 
 <ul>
 <li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
@@ -285,28 +279,24 @@ if (!doNotTrack) {
 <h3 id="创建-sdl-窗口">创建 SDL 窗口</h3>
 
 <p>通过 SDL 中的 <code>SDL_CreateWindow</code> 函数就能够创建了，</p>
-
-<pre><code class="language-cpp">extern DECLSPEC SDL_Window * SDLCALL SDL_CreateWindow(
-        const char *title,
-        int x, int y, int w,
-        int h, Uint32 flags);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">extern</span> <span style="color:#268bd2">DECLSPEC</span> <span style="color:#268bd2">SDL_Window</span> * <span style="color:#268bd2">SDLCALL</span> <span style="color:#268bd2">SDL_CreateWindow</span>(
+        <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> *<span style="color:#268bd2">title</span>,
+        <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">x</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">y</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">w</span>,
+        <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">h</span>, <span style="color:#268bd2">Uint32</span> <span style="color:#268bd2">flags</span>);
+</code></pre></div>
 <p>其中，<code>title</code> 就是窗口的标题，<code>x</code>,<code>y</code>,<code>width</code>,<code>height</code> 就是窗口的左上角坐标点和宽高值。</p>
 
 <p>最后的 <code>flags</code> 参数有很多类型，不同的类型对应不同的窗口功能，比如窗口全屏、是否可见等，具体可以在 SDL 源码中找到。</p>
 
 <p>这里简单设置成如下：</p>
-
-<pre><code class="language-cpp">    int width = 400;
-    int height = 400;
-    SDL_Window *window = SDL_CreateWindow(&quot;Hello SDL&quot;,
-            SDL_WINDOWPOS_CENTERED,
-            SDL_WINDOWPOS_CENTERED,
-            width,height,
-            SDL_WINDOW_ALLOW_HIGHDPI);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">width</span> = <span style="color:#2aa198;font-weight:bold">400</span>;
+    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">height</span> = <span style="color:#2aa198;font-weight:bold">400</span>;
+    <span style="color:#268bd2">SDL_Window</span> *<span style="color:#268bd2">window</span> = <span style="color:#268bd2">SDL_CreateWindow</span>(<span style="color:#2aa198">&#34;Hello SDL&#34;</span>,
+            <span style="color:#268bd2">SDL_WINDOWPOS_CENTERED</span>,
+            <span style="color:#268bd2">SDL_WINDOWPOS_CENTERED</span>,
+            <span style="color:#268bd2">width</span>,<span style="color:#268bd2">height</span>,
+            <span style="color:#268bd2">SDL_WINDOW_ALLOW_HIGHDPI</span>);
+</code></pre></div>
 <p>对于窗口的左上角坐标点使用 SDL 默认的宏 <code>SDL_WINDOWPOS_CENTERED</code> 让它居中显示就好了，flags 使用 <code>SDL_WINDOW_ALLOW_HIGHDPI</code>。</p>
 
 <h3 id="展示-sdl-窗口">展示 SDL 窗口</h3>
@@ -316,17 +306,15 @@ if (!doNotTrack) {
 <p>不过可能是由于 MAC 系统或者 SDL 版本的问题，实际上并没有窗口弹出来，倒是在任务栏中确实能看到有个程序在运行。</p>
 
 <p>后来在创建窗口之后，加上如下的代码就好了：</p>
-
-<pre><code class="language-cpp">    SDL_Event windowEvent;
-    while (true){
-        if (SDL_PollEvent(&amp;windowEvent)){
-            if (SDL_QUIT == windowEvent.type){
-                break;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">SDL_Event</span> <span style="color:#268bd2">windowEvent</span>;
+    <span style="color:#859900">while</span> (<span style="color:#cb4b16">true</span>){
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">SDL_PollEvent</span>(&amp;<span style="color:#268bd2">windowEvent</span>)){
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">SDL_QUIT</span> == <span style="color:#268bd2">windowEvent</span>.<span style="color:#268bd2">type</span>){
+                <span style="color:#859900">break</span>;
             }
         }
     }
-</code></pre>
-
+</code></pre></div>
 <p>在程序中创建一个死循环，当做消息循环机制，只有当满足特定条件时才退出循环结束程序。</p>
 
 <p>添加这段代码之后在运行，就能看到窗口了。</p>
@@ -340,29 +328,25 @@ if (!doNotTrack) {
 <p>渲染窗口，首先要创建一个渲染器，并设置渲染颜色，然后开始渲染。</p>
 
 <p>如下代码所示：</p>
-
-<pre><code class="language-cpp">    SDL_Renderer* pRenderer = NULL;
-    // 创建渲染器
-    pRenderer = SDL_CreateRenderer(window, -1, 0);
-    // 指定渲染颜色
-    SDL_SetRenderDrawColor(pRenderer,0,255,0,255);
-    // 清空当前窗口的颜色
-    SDL_RenderClear(pRenderer);
-    // 执行渲染操作，更新窗口
-    SDL_RenderPresent(pRenderer);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">SDL_Renderer</span>* <span style="color:#268bd2">pRenderer</span> = <span style="color:#cb4b16">NULL</span>;
+    <span style="color:#93a1a1;font-style:italic">// 创建渲染器
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">pRenderer</span> = <span style="color:#268bd2">SDL_CreateRenderer</span>(<span style="color:#268bd2">window</span>, -<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">0</span>);
+    <span style="color:#93a1a1;font-style:italic">// 指定渲染颜色
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">SDL_SetRenderDrawColor</span>(<span style="color:#268bd2">pRenderer</span>,<span style="color:#2aa198;font-weight:bold">0</span>,<span style="color:#2aa198;font-weight:bold">255</span>,<span style="color:#2aa198;font-weight:bold">0</span>,<span style="color:#2aa198;font-weight:bold">255</span>);
+    <span style="color:#93a1a1;font-style:italic">// 清空当前窗口的颜色
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">SDL_RenderClear</span>(<span style="color:#268bd2">pRenderer</span>);
+    <span style="color:#93a1a1;font-style:italic">// 执行渲染操作，更新窗口
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">SDL_RenderPresent</span>(<span style="color:#268bd2">pRenderer</span>);
+</code></pre></div>
 <p>调用 <code>SDL_CreateRenderer</code> 方法来创建渲染器，并通过 <code>SDL_SetRenderDrawColor</code> 来指定颜色，颜色参数都是 <code>red</code>、<code>green</code>、<code>blue</code>、<code>alpha</code> 四个，这里指定了渲染为绿色。</p>
 
 <p>然后通过 <code>SDL_RenderClear</code> 方法清空一下当前窗口上的颜色，避免和要渲染的颜色混在一起了，最后就可以执行渲染了。</p>
 
 <p>这个流程和 OpenGL 的渲染操作有点类似了：</p>
-
-<pre><code class="language-cpp">glClearColor()
-glClear()
-glDrawArrays() 
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">glClearColor</span>()
+<span style="color:#268bd2">glClear</span>()
+<span style="color:#268bd2">glDrawArrays</span>() 
+</code></pre></div>
 <p>也是先清空后渲染，实际效果如下：</p>
 
 <p><img src="https://images.xiaozhuanlan.com/photo/2020/26c7c7f2bd4a2135d668ff898352fd3f.png" alt="" /></p>
@@ -372,12 +356,10 @@ glDrawArrays()
 <h3 id="销毁-sdl-窗口">销毁 SDL 窗口</h3>
 
 <p>最后，当退出循环时，要执行销毁操作，把创建的 SDL_Window 和 SDL_Renderer 都释放了。</p>
-
-<pre><code class="language-cpp">    SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(pRenderer);
-    SDL_Quit();
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">SDL_DestroyWindow</span>(<span style="color:#268bd2">window</span>);
+    <span style="color:#268bd2">SDL_DestroyRenderer</span>(<span style="color:#268bd2">pRenderer</span>);
+    <span style="color:#268bd2">SDL_Quit</span>();
+</code></pre></div>
 <p>这样就完成了整个程序。</p>
 
 <h3 id="总结">总结</h3>
@@ -393,128 +375,81 @@ glDrawArrays()
 <p>本篇文章对应的提交 <code>tag</code> 为 <code>av-beginner-002</code>，可切换至对应源码查看。</p>
 
 <p>能力有限，文中有不对之处，欢迎加我微信 ezgluems 进行交流~~</p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-002/">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a>
-
-                
-
-                
-
-
-        
-        
-        
-      </article>
-
-      
-        
+          
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/ffmpeg/av-beginner-001/">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</a></li>
+    <li><a href="https://www.glumes.com/post/ffmpeg/av-beginner-001/">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</a></li>
     
 </ul>
 
-      
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/ffmpeg/av-beginner-001/" data-toggle="tooltip" data-placement="top" title="【音视频连载-001】基础学习篇- SDL 介绍以及工程配置">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/ffmpeg/av-beginner-003/" data-toggle="tooltip" data-placement="top" title="【音视频连载-003】基础学习篇-SDL 消息循环和事件响应">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+        
 
-      
-      <ul class="pager blog-pager">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-          <li class="previous">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-001/" data-toggle="tooltip" data-placement="top" title="【音视频连载-001】基础学习篇- SDL 介绍以及工程配置">&larr; Previous Post</a>
-          </li>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-003/" data-toggle="tooltip" data-placement="top" title="【音视频连载-003】基础学习篇-SDL 消息循环和事件响应">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
-      
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+          
+
+        
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -523,8 +458,6 @@ glDrawArrays()
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -555,21 +488,8 @@ glDrawArrays()
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -577,22 +497,28 @@ glDrawArrays()
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -601,49 +527,66 @@ glDrawArrays()
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

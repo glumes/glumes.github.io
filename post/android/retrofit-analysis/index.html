@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>开源库之 Retrofit 源码分析</title>
+  <title>开源库之 Retrofit 源码分析-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="开源库之 Retrofit 源码分析" />
   <meta name="twitter:title" content="开源库之 Retrofit 源码分析" />
 
   <meta name="description" content="分析一波 Retrofit 的源码实现。">
   <meta property="og:description" content="分析一波 Retrofit 的源码实现。">
   <meta name="twitter:description" content="分析一波 Retrofit 的源码实现。">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/retrofit-analysis/" />
+  <meta property="og:url" content="https://www.glumes.com/post/android/retrofit-analysis/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/android/retrofit-analysis/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/android/retrofit-analysis/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -54,23 +55,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -78,7 +67,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -89,15 +80,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -105,25 +96,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -139,9 +130,6 @@ if (!doNotTrack) {
 
   </div>
 </nav>
-
-
-
 
 
     
@@ -160,24 +148,21 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
-        
         <div class="container">
           <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>开源库之 Retrofit 源码分析</h1>
                   
-                     <h1>开源库之 Retrofit 源码分析</h1>
-                     
+                  
                     <span class="post-meta">
-  Posted on September 9, 2018
+  
+    Posted on September 9, 2018
+  
   
 </span>
 
 
-                    
-                  
                   
               </div>
             </div>
@@ -186,45 +171,59 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">开源库之 Retrofit 源码分析</h1>
+              <h1>开源库之 Retrofit 源码分析</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on September 9, 2018
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/retrofit/">Retrofit</a> &nbsp;
             
-          </h5>
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/retrofit/">Retrofit</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -240,22 +239,32 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p>分析一波 Retrofit 的源码实现。</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>分析一波 Retrofit 的源码实现。</p>
 
 <h2 id="简单使用">简单使用</h2>
 
 <p>官方给出了使用例子，具体详情参看 <a href="https://square.github.io/retrofit/">官网</a>。</p>
 
 <p>如果加入 RxJava 和 Gson ,就需要添加对应的适配和转换工厂类。</p>
-
-<pre><code class="language-java">val retrofit = Retrofit.Builder()
-    .baseUrl(&quot;https://api.github.com/&quot;)
-    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-    .addConverterFactory(GsonConverterFactory.create())
-    .build()
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">val</span> <span style="color:#268bd2">retrofit</span> = <span style="color:#268bd2">Retrofit</span>.<span style="color:#268bd2">Builder</span>()
+    .<span style="color:#268bd2">baseUrl</span>(<span style="color:#2aa198">&#34;https://api.github.com/&#34;</span>)
+    .<span style="color:#268bd2">addCallAdapterFactory</span>(<span style="color:#268bd2">RxJavaCallAdapterFactory</span>.<span style="color:#268bd2">create</span>())
+    .<span style="color:#268bd2">addConverterFactory</span>(<span style="color:#268bd2">GsonConverterFactory</span>.<span style="color:#268bd2">create</span>())
+    .<span style="color:#268bd2">build</span>()</code></pre></div>
 <p>围绕 Retrofit 的调用流程分析它的内部实现。</p>
 
 <h2 id="retrofit-类的构建">Retrofit 类的构建</h2>
@@ -265,41 +274,37 @@ if (!doNotTrack) {
 <p>在 <code>Retrofit.Builder</code> 类的调用方法中指定一些参数，就比如上面的 RxJava 和 Gson 对应的工厂类。</p>
 
 <p>在 <code>build</code> 方法里面可以看到全部的所需要的内容：</p>
-
-<pre><code class="language-java">    public Retrofit build() {
-      // HTTP 请求的 host 路径
-      if (baseUrl == null) {
-        throw new IllegalStateException(&quot;Base URL required.&quot;);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">public</span> <span style="color:#268bd2">Retrofit</span> <span style="color:#268bd2">build</span>() {
+      <span style="color:#93a1a1;font-style:italic">// HTTP 请求的 host 路径
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#859900">if</span> (<span style="color:#268bd2">baseUrl</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+        <span style="color:#859900">throw</span> <span style="color:#859900">new</span> <span style="color:#268bd2">IllegalStateException</span>(<span style="color:#2aa198">&#34;Base URL required.&#34;</span>);
       }
-      // 用来执行请求的工厂，若没有设置就是使用 OKHttpClient
-      okhttp3.Call.Factory callFactory = this.callFactory;
-      if (callFactory == null) {
-        callFactory = new OkHttpClient();
+      <span style="color:#93a1a1;font-style:italic">// 用来执行请求的工厂，若没有设置就是使用 OKHttpClient
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#268bd2">okhttp3</span>.<span style="color:#268bd2">Call</span>.<span style="color:#268bd2">Factory</span> <span style="color:#268bd2">callFactory</span> = <span style="color:#859900">this</span>.<span style="color:#268bd2">callFactory</span>;
+      <span style="color:#859900">if</span> (<span style="color:#268bd2">callFactory</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+        <span style="color:#268bd2">callFactory</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">OkHttpClient</span>();
       }
-      // 异步请求时回调线程切换的执行器
-      Executor callbackExecutor = this.callbackExecutor;
-      if (callbackExecutor == null) {
-        callbackExecutor = platform.defaultCallbackExecutor();
+      <span style="color:#93a1a1;font-style:italic">// 异步请求时回调线程切换的执行器
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#268bd2">Executor</span> <span style="color:#268bd2">callbackExecutor</span> = <span style="color:#859900">this</span>.<span style="color:#268bd2">callbackExecutor</span>;
+      <span style="color:#859900">if</span> (<span style="color:#268bd2">callbackExecutor</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+        <span style="color:#268bd2">callbackExecutor</span> = <span style="color:#268bd2">platform</span>.<span style="color:#268bd2">defaultCallbackExecutor</span>();
       }
-      // 网络请求适配器的工厂集合
-      // Make a defensive copy of the adapters and add the default Call adapter.
-      List&lt;CallAdapter.Factory&gt; callAdapterFactories = new ArrayList&lt;&gt;(this.callAdapterFactories);
-      callAdapterFactories.add(platform.defaultCallAdapterFactory(callbackExecutor));
-      // 数据转换器的工厂
-      // Make a defensive copy of the converters.
-      List&lt;Converter.Factory&gt; converterFactories =
-          new ArrayList&lt;&gt;(1 + this.converterFactories.size());
-      // Add the built-in converter factory first. This prevents overriding its behavior but also
-      // ensures correct behavior when using converters that consume all types.
-      converterFactories.add(new BuiltInConverters());
-      converterFactories.addAll(this.converterFactories);
-      // 创建 Retrofit 实例
-      return new Retrofit(callFactory, baseUrl, unmodifiableList(converterFactories),
-          unmodifiableList(callAdapterFactories), callbackExecutor, validateEagerly);
-    }
-
-</code></pre>
-
+      <span style="color:#93a1a1;font-style:italic">// 网络请求适配器的工厂集合
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#93a1a1;font-style:italic">// Make a defensive copy of the adapters and add the default Call adapter.
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#268bd2">List</span>&lt;<span style="color:#268bd2">CallAdapter</span>.<span style="color:#268bd2">Factory</span>&gt; <span style="color:#268bd2">callAdapterFactories</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">ArrayList</span>&lt;&gt;(<span style="color:#859900">this</span>.<span style="color:#268bd2">callAdapterFactories</span>);
+      <span style="color:#268bd2">callAdapterFactories</span>.<span style="color:#268bd2">add</span>(<span style="color:#268bd2">platform</span>.<span style="color:#268bd2">defaultCallAdapterFactory</span>(<span style="color:#268bd2">callbackExecutor</span>));
+      <span style="color:#93a1a1;font-style:italic">// 数据转换器的工厂
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#93a1a1;font-style:italic">// Make a defensive copy of the converters.
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#268bd2">List</span>&lt;<span style="color:#268bd2">Converter</span>.<span style="color:#268bd2">Factory</span>&gt; <span style="color:#268bd2">converterFactories</span> =
+          <span style="color:#859900">new</span> <span style="color:#268bd2">ArrayList</span>&lt;&gt;(<span style="color:#268bd2">1</span> + <span style="color:#859900">this</span>.<span style="color:#268bd2">converterFactories</span>.<span style="color:#268bd2">size</span>());
+      <span style="color:#93a1a1;font-style:italic">// Add the built-in converter factory first. This prevents overriding its behavior but also
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#93a1a1;font-style:italic">// ensures correct behavior when using converters that consume all types.
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#268bd2">converterFactories</span>.<span style="color:#268bd2">add</span>(<span style="color:#859900">new</span> <span style="color:#268bd2">BuiltInConverters</span>());
+      <span style="color:#268bd2">converterFactories</span>.<span style="color:#268bd2">addAll</span>(<span style="color:#859900">this</span>.<span style="color:#268bd2">converterFactories</span>);
+      <span style="color:#93a1a1;font-style:italic">// 创建 Retrofit 实例
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#859900">return</span> <span style="color:#859900">new</span> <span style="color:#268bd2">Retrofit</span>(<span style="color:#268bd2">callFactory</span>, <span style="color:#268bd2">baseUrl</span>, <span style="color:#268bd2">unmodifiableList</span>(<span style="color:#268bd2">converterFactories</span>),
+          <span style="color:#268bd2">unmodifiableList</span>(<span style="color:#268bd2">callAdapterFactories</span>), <span style="color:#268bd2">callbackExecutor</span>, <span style="color:#268bd2">validateEagerly</span>);
+    }</code></pre></div>
 <p>在 Build 创建 Retrofit 时有如下要注意的东西：</p>
 
 <ul>
@@ -312,10 +317,7 @@ if (!doNotTrack) {
 <p>这四个东西可以说是 Retrofit 中很重要的内容了，它们在 Retrofit 类中都是接口或抽象类类型，将定义与实现进行分离，可以做到面向接口编程。</p>
 
 <p>Retrofit 是对网络请求的封装库，一个网络请求的过程大致可以抽象如下：</p>
-
-<pre><code>创建网络请求 --&gt; 发出网络请求 --&gt; 收到请求内容 --&gt; 对内容进行处理
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">创建网络请求 --&gt; 发出网络请求 --&gt; 收到请求内容 --&gt; 对内容进行处理</pre></div>
 <p>而 Retrofit 可以说是对上面的流程都进行了抽象，抽象出一些类和接口，这些抽象类或者接口的调用就是实现上面的请求流程。</p>
 
 <p><code>adapterFactories</code> 就是对创建的网络请求适配的集合，比如默认请求是 <code>Call</code>，但是可以通过 <code>RxJavaCallAdapterFactory</code> 将网络请求适配到 RxJava 的 <code>Observable</code> 。</p>
@@ -327,49 +329,40 @@ if (!doNotTrack) {
 <p><code>callbackExecutor</code> 就是在网络请求结束后，从子线程切换到对数据操作的线程，主要就是切换到主线程。</p>
 
 <p>依照网络请求流程，上面四个重点变量在请求中出现的先后顺序也是如下：</p>
-
-<pre><code>adapterFactories --&gt; callFactory --&gt; converterFactories --&gt; callbackExecutor
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">adapterFactories --&gt; callFactory --&gt; converterFactories --&gt; callbackExecutor</pre></div>
 <p>另外，Retrofit 还是支持多平台的，除了 Android 平台之外，还有 Java 等平台，在 <code>Retrofit.Builder</code> 的构造方法中就对当前平台做了一个判断，这里就只看 Android Platform 就好了。</p>
 
 <p>弄懂了大致的脉络，接着再来看实际代码。</p>
 
 <p>如果没有指定请求后的线程切换操作，那么就会使用 <code>defaultCallbackExecutor</code> 。 Android 下默认的就是 <code>MainThreadExecutor</code> ，通过主线程的 Handler 来实现线程切换。</p>
-
-<pre><code class="language-java">    static class MainThreadExecutor implements Executor {
-      private final Handler handler = new Handler(Looper.getMainLooper());
-      // 向主线程 post 一个 runnable 实现切换
-      @Override public void execute(Runnable r) {
-        handler.post(r);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">static</span> <span style="color:#859900">class</span> <span style="color:#cb4b16">MainThreadExecutor</span> <span style="color:#859900">implements</span> <span style="color:#268bd2">Executor</span> {
+      <span style="color:#859900">private</span> <span style="color:#859900">final</span> <span style="color:#268bd2">Handler</span> <span style="color:#268bd2">handler</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">Handler</span>(<span style="color:#268bd2">Looper</span>.<span style="color:#268bd2">getMainLooper</span>());
+      <span style="color:#93a1a1;font-style:italic">// 向主线程 post 一个 runnable 实现切换
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#268bd2">@Override</span> <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">execute</span>(<span style="color:#268bd2">Runnable</span> <span style="color:#268bd2">r</span>) {
+        <span style="color:#268bd2">handler</span>.<span style="color:#268bd2">post</span>(<span style="color:#268bd2">r</span>);
       }
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p>如果没有添加网络请求适配器对象，那么就会使用默认的 <code>defaultCallAdapterFactory</code> 。Android 下默认的就是 <code>ExecutorCallAdapterFactory</code> ，</p>
 
 <p>它的主要代码如下：</p>
-
-<pre><code class="language-java">  @Override
-  public CallAdapter&lt;?, ?&gt; get(Type returnType, Annotation[] annotations, Retrofit retrofit) {
-    if (getRawType(returnType) != Call.class) {
-      return null;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#268bd2">@Override</span>
+  <span style="color:#859900">public</span> <span style="color:#268bd2">CallAdapter</span>&lt;?, ?&gt; <span style="color:#268bd2">get</span>(<span style="color:#268bd2">Type</span> <span style="color:#268bd2">returnType</span>, <span style="color:#268bd2">Annotation</span>[] <span style="color:#268bd2">annotations</span>, <span style="color:#268bd2">Retrofit</span> <span style="color:#268bd2">retrofit</span>) {
+    <span style="color:#859900">if</span> (<span style="color:#268bd2">getRawType</span>(<span style="color:#268bd2">returnType</span>) != <span style="color:#268bd2">Call</span>.<span style="color:#268bd2">class</span>) {
+      <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
     }
-    final Type responseType = Utils.getCallResponseType(returnType);
-    // 返回 CallAdapter 对象进行适配
-    return new CallAdapter&lt;Object, Call&lt;?&gt;&gt;() {
-      @Override public Type responseType() {
-        return responseType;
+    <span style="color:#859900">final</span> <span style="color:#268bd2">Type</span> <span style="color:#268bd2">responseType</span> = <span style="color:#268bd2">Utils</span>.<span style="color:#268bd2">getCallResponseType</span>(<span style="color:#268bd2">returnType</span>);
+    <span style="color:#93a1a1;font-style:italic">// 返回 CallAdapter 对象进行适配
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">return</span> <span style="color:#859900">new</span> <span style="color:#268bd2">CallAdapter</span>&lt;<span style="color:#268bd2">Object</span>, <span style="color:#268bd2">Call</span>&lt;?&gt;&gt;() {
+      <span style="color:#268bd2">@Override</span> <span style="color:#859900">public</span> <span style="color:#268bd2">Type</span> <span style="color:#268bd2">responseType</span>() {
+        <span style="color:#859900">return</span> <span style="color:#268bd2">responseType</span>;
       }
-      // 具体适配函数
-      @Override public Call&lt;Object&gt; adapt(Call&lt;Object&gt; call) {
-        // 返回 ExecutorCallbackCall 函数，因为就是对 call 的一个委托
-        return new ExecutorCallbackCall&lt;&gt;(callbackExecutor, call);
+      <span style="color:#93a1a1;font-style:italic">// 具体适配函数
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#268bd2">@Override</span> <span style="color:#859900">public</span> <span style="color:#268bd2">Call</span>&lt;<span style="color:#268bd2">Object</span>&gt; <span style="color:#268bd2">adapt</span>(<span style="color:#268bd2">Call</span>&lt;<span style="color:#268bd2">Object</span>&gt; <span style="color:#268bd2">call</span>) {
+        <span style="color:#93a1a1;font-style:italic">// 返回 ExecutorCallbackCall 函数，因为就是对 call 的一个委托
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">return</span> <span style="color:#859900">new</span> <span style="color:#268bd2">ExecutorCallbackCall</span>&lt;&gt;(<span style="color:#268bd2">callbackExecutor</span>, <span style="color:#268bd2">call</span>);
       }
     };
-  }
-</code></pre>
-
+  }</code></pre></div>
 <p>重点在于返回 <code>CallAdapter</code> 对象，它将网络请求进行适配，如果没有使用 RxJava 的话，那么返回的就是 <code>ExecutorCallbackCall</code> 。</p>
 
 <p>如果没有指定请求结果转换对象，那么就会使用默认的 <code>BuiltInConverters</code> 类进行转换，<code>BuiltInConverters</code> 与请求适配和线程切换不同，它是和平台无关的。</p>
@@ -381,16 +374,13 @@ if (!doNotTrack) {
 <h2 id="动态代理创建网络请求对象">动态代理创建网络请求对象</h2>
 
 <p>接下来就是使用 Retrofit 类通过动态代理创建一个代理对象实例。</p>
-
-<pre><code class="language-java">// 定义请求接口
-public interface GitHubService {
-  @GET(&quot;users/{user}/repos&quot;)
-  Call&lt;List&lt;Repo&gt;&gt; listRepos(@Path(&quot;user&quot;) String user);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">// 定义请求接口
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">public</span> <span style="color:#859900">interface</span> <span style="color:#cb4b16">GitHubService</span> {
+  <span style="color:#268bd2">@GET</span>(<span style="color:#2aa198">&#34;users/{user}/repos&#34;</span>)
+  <span style="color:#268bd2">Call</span>&lt;<span style="color:#268bd2">List</span>&lt;<span style="color:#268bd2">Repo</span>&gt;&gt; <span style="color:#268bd2">listRepos</span>(<span style="color:#268bd2">@Path</span>(<span style="color:#2aa198">&#34;user&#34;</span>) <span style="color:#268bd2">String</span> <span style="color:#268bd2">user</span>);
 }
-// 动态代理创建实现了请求接口的类
-GitHubService service = retrofit.create(GitHubService.class);
-</code></pre>
-
+<span style="color:#93a1a1;font-style:italic">// 动态代理创建实现了请求接口的类
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">GitHubService</span> <span style="color:#268bd2">service</span> = <span style="color:#268bd2">retrofit</span>.<span style="color:#268bd2">create</span>(<span style="color:#268bd2">GitHubService</span>.<span style="color:#268bd2">class</span>);</code></pre></div>
 <p>动态代理的作用与实现，可以参考 <a href="https://glumes.com/post/android/java-proxy-design-pattern/">这篇文章</a>。</p>
 
 <p>请求接口定义的所有方法，都会通过 <code>InvocationHandler</code> 中的 <code>invoke</code> 方法去分发处理。</p>
@@ -398,39 +388,33 @@ GitHubService service = retrofit.create(GitHubService.class);
 <p>也就是说，请求接口定义的返回类型是 <code>Call</code> ，那么 <code>invoke</code> 方法返回的也是 <code>Call</code> 类型。</p>
 
 <p>主要代码如下：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#859900">new</span> <span style="color:#268bd2">InvocationHandler</span>() {
+          <span style="color:#859900">private</span> <span style="color:#859900">final</span> <span style="color:#268bd2">Platform</span> <span style="color:#268bd2">platform</span> = <span style="color:#268bd2">Platform</span>.<span style="color:#268bd2">get</span>();
 
-<pre><code class="language-java">        new InvocationHandler() {
-          private final Platform platform = Platform.get();
-
-          @Override public Object invoke(Object proxy, Method method, @Nullable Object[] args)
-              throws Throwable {
-            // If the method is a method from Object then defer to normal invocation.
-            if (method.getDeclaringClass() == Object.class) {
-              return method.invoke(this, args);
+          <span style="color:#268bd2">@Override</span> <span style="color:#859900">public</span> <span style="color:#268bd2">Object</span> <span style="color:#268bd2">invoke</span>(<span style="color:#268bd2">Object</span> <span style="color:#268bd2">proxy</span>, <span style="color:#268bd2">Method</span> <span style="color:#268bd2">method</span>, <span style="color:#268bd2">@Nullable</span> <span style="color:#268bd2">Object</span>[] <span style="color:#268bd2">args</span>)
+              <span style="color:#859900">throws</span> <span style="color:#268bd2">Throwable</span> {
+            <span style="color:#93a1a1;font-style:italic">// If the method is a method from Object then defer to normal invocation.
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#859900">if</span> (<span style="color:#268bd2">method</span>.<span style="color:#268bd2">getDeclaringClass</span>() == <span style="color:#268bd2">Object</span>.<span style="color:#268bd2">class</span>) {
+              <span style="color:#859900">return</span> <span style="color:#268bd2">method</span>.<span style="color:#268bd2">invoke</span>(<span style="color:#859900">this</span>, <span style="color:#268bd2">args</span>);
             }
-            if (platform.isDefaultMethod(method)) {
-              return platform.invokeDefaultMethod(method, service, proxy, args);
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">platform</span>.<span style="color:#268bd2">isDefaultMethod</span>(<span style="color:#268bd2">method</span>)) {
+              <span style="color:#859900">return</span> <span style="color:#268bd2">platform</span>.<span style="color:#268bd2">invokeDefaultMethod</span>(<span style="color:#268bd2">method</span>, <span style="color:#268bd2">service</span>, <span style="color:#268bd2">proxy</span>, <span style="color:#268bd2">args</span>);
             }
-            ServiceMethod&lt;Object, Object&gt; serviceMethod =
-                (ServiceMethod&lt;Object, Object&gt;) loadServiceMethod(method);
-            OkHttpCall&lt;Object&gt; okHttpCall = new OkHttpCall&lt;&gt;(serviceMethod, args);
-            return serviceMethod.adapt(okHttpCall);
+            <span style="color:#268bd2">ServiceMethod</span>&lt;<span style="color:#268bd2">Object</span>, <span style="color:#268bd2">Object</span>&gt; <span style="color:#268bd2">serviceMethod</span> =
+                (<span style="color:#268bd2">ServiceMethod</span>&lt;<span style="color:#268bd2">Object</span>, <span style="color:#268bd2">Object</span>&gt;) <span style="color:#268bd2">loadServiceMethod</span>(<span style="color:#268bd2">method</span>);
+            <span style="color:#268bd2">OkHttpCall</span>&lt;<span style="color:#268bd2">Object</span>&gt; <span style="color:#268bd2">okHttpCall</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">OkHttpCall</span>&lt;&gt;(<span style="color:#268bd2">serviceMethod</span>, <span style="color:#268bd2">args</span>);
+            <span style="color:#859900">return</span> <span style="color:#268bd2">serviceMethod</span>.<span style="color:#268bd2">adapt</span>(<span style="color:#268bd2">okHttpCall</span>);
           }
-        });
-</code></pre>
-
+        });</code></pre></div>
 <p>其中，<code>method</code> 就是对应接口中声明的方法，对每一个方法都会通过 <code>loadServiceMethod</code> 方法将它转换成 <code>ServiceMethod</code> 对象。</p>
 
 <p>serviceMethod 会先从缓存 <code>ConcurrentHashMap</code> 中查找，如果没有在通过 <code>ServiceMethod.Builder</code> 创建一个。</p>
 
 <p>创建时首先是如下两个方法：</p>
-
-<pre><code class="language-java">    // 通过 method 的返回类型和 注解 找到对应的 callAdapter
-    callAdapter = createCallAdapter();
-    // 通过 method 的 请求返回类型 和 注解 找到对应的 responseConverter
-    responseConverter = createResponseConverter();
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#93a1a1;font-style:italic">// 通过 method 的返回类型和 注解 找到对应的 callAdapter
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">callAdapter</span> = <span style="color:#268bd2">createCallAdapter</span>();
+    <span style="color:#93a1a1;font-style:italic">// 通过 method 的 请求返回类型 和 注解 找到对应的 responseConverter
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">responseConverter</span> = <span style="color:#268bd2">createResponseConverter</span>();</code></pre></div>
 <p>这两个方法有点类似，在前面提到的 <code>adapterFactories</code> 适配器集合和 <code>converterFactories</code> 转换器集合都是列表。</p>
 
 <p>要通过方法的返回类型、请求结果的返回类型、方法注解，为当前方法找到合适的适配器和转换器。</p>
@@ -438,19 +422,16 @@ GitHubService service = retrofit.create(GitHubService.class);
 <p>在这里可以看到，Retrofit 其实支持在请求接口中定义不同的返回类型，可以 <code>Call</code> 和 <code>Observable</code> 同时使用，也可以 <code>GSON</code> 和 <code>Response</code> 同时使用。</p>
 
 <p>确定了请求适配和结果转换类之后，就是处理接口方法中定义的那些注解，分别是为该方法定义的注解和为该方法参数定义的注解。</p>
-
-<pre><code class="language-java">      // 处理方法对应的注解
-      for (Annotation annotation : methodAnnotations) {
-        parseMethodAnnotation(annotation);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">      <span style="color:#93a1a1;font-style:italic">// 处理方法对应的注解
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#859900">for</span> (<span style="color:#268bd2">Annotation</span> <span style="color:#268bd2">annotation</span> : <span style="color:#268bd2">methodAnnotations</span>) {
+        <span style="color:#268bd2">parseMethodAnnotation</span>(<span style="color:#268bd2">annotation</span>);
       }
-      // 处理方法参数对应的注解
-      int parameterCount = parameterAnnotationsArray.length;
-      parameterHandlers = new ParameterHandler&lt;?&gt;[parameterCount];
-      for (int p = 0; p &lt; parameterCount; p++) {
-          parameterHandlers[p] = parseParameter(p, parameterType, parameterAnnotations);
-      }
-</code></pre>
-
+      <span style="color:#93a1a1;font-style:italic">// 处理方法参数对应的注解
+</span><span style="color:#93a1a1;font-style:italic"></span>      <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">parameterCount</span> = <span style="color:#268bd2">parameterAnnotationsArray</span>.<span style="color:#268bd2">length</span>;
+      <span style="color:#268bd2">parameterHandlers</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">ParameterHandler</span>&lt;?&gt;[<span style="color:#268bd2">parameterCount</span>];
+      <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">p</span> = <span style="color:#268bd2">0</span>; <span style="color:#268bd2">p</span> &lt; <span style="color:#268bd2">parameterCount</span>; <span style="color:#268bd2">p</span>++) {
+          <span style="color:#268bd2">parameterHandlers</span>[<span style="color:#268bd2">p</span>] = <span style="color:#268bd2">parseParameter</span>(<span style="color:#268bd2">p</span>, <span style="color:#268bd2">parameterType</span>, <span style="color:#268bd2">parameterAnnotations</span>);
+      }</code></pre></div>
 <p>关于注解处理这块比较冗长，文章篇幅有限，就不细写了，其实也主要是对那些 <code>GET</code>、<code>POST</code>、<code>HEAD</code> 等进行处理。</p>
 
 <p>对这些注解的处理在最后创建 <code>Call</code> 用来发起网络请求时会用到。</p>
@@ -470,104 +451,89 @@ GitHubService service = retrofit.create(GitHubService.class);
 <h2 id="执行网络请求">执行网络请求</h2>
 
 <p>有了 <code>ExecutorCallbackCall</code> 对象之后，就可以像 OkHttp 那样去执行请求了。</p>
-
-<pre><code class="language-java">        // 异步请求
-        repos.enqueue(object : Callback&lt;MutableList&lt;Repo&gt;&gt; {
-            override fun onFailure(call: Call&lt;MutableList&lt;Repo&gt;&gt;?, t: Throwable?) {
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#93a1a1;font-style:italic">// 异步请求
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">repos</span>.<span style="color:#268bd2">enqueue</span>(<span style="color:#268bd2">object</span> : <span style="color:#268bd2">Callback</span>&lt;<span style="color:#268bd2">MutableList</span>&lt;<span style="color:#268bd2">Repo</span>&gt;&gt; {
+            <span style="color:#268bd2">override</span> <span style="color:#268bd2">fun</span> <span style="color:#268bd2">onFailure</span>(<span style="color:#268bd2">call:</span> <span style="color:#268bd2">Call</span>&lt;<span style="color:#268bd2">MutableList</span>&lt;<span style="color:#268bd2">Repo</span>&gt;&gt;?, <span style="color:#268bd2">t:</span> <span style="color:#268bd2">Throwable</span>?) {
             }
 
-            override fun onResponse(call: Call&lt;MutableList&lt;Repo&gt;&gt;?, response: Response&lt;MutableList&lt;Repo&gt;&gt;?) {
+            <span style="color:#268bd2">override</span> <span style="color:#268bd2">fun</span> <span style="color:#268bd2">onResponse</span>(<span style="color:#268bd2">call:</span> <span style="color:#268bd2">Call</span>&lt;<span style="color:#268bd2">MutableList</span>&lt;<span style="color:#268bd2">Repo</span>&gt;&gt;?, <span style="color:#268bd2">response:</span> <span style="color:#268bd2">Response</span>&lt;<span style="color:#268bd2">MutableList</span>&lt;<span style="color:#268bd2">Repo</span>&gt;&gt;?) {
             }
         })
-        // 同步请求
-        repos.execute()
-</code></pre>
-
+        <span style="color:#93a1a1;font-style:italic">// 同步请求
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">repos</span>.<span style="color:#268bd2">execute</span>()</code></pre></div>
 <p><code>ExecutorCallbackCall</code> 对象其实是对 <code>OkHttpCall</code> 的委托，具体的 <code>enqueue</code> 和 <code>execute</code> 方法都是由 OkHttpCall 来实现的。</p>
 
 <p>先看一下同步调用</p>
-
-<pre><code class="language-java">   private @Nullable okhttp3.Call rawCall;
-   @Override public Response&lt;T&gt; execute() throws IOException {
-    okhttp3.Call call;
-    synchronized (this) {
-      if (executed) throw new IllegalStateException(&quot;Already executed.&quot;);
-      executed = true;
-      call = rawCall;
-      if (call == null) {
-        try {
-        // createRawCall 方法创建 call 
-          call = rawCall = createRawCall();
-        } catch (IOException | RuntimeException | Error e) {
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">   <span style="color:#859900">private</span> <span style="color:#268bd2">@Nullable</span> <span style="color:#268bd2">okhttp3</span>.<span style="color:#268bd2">Call</span> <span style="color:#268bd2">rawCall</span>;
+   <span style="color:#268bd2">@Override</span> <span style="color:#859900">public</span> <span style="color:#268bd2">Response</span>&lt;<span style="color:#268bd2">T</span>&gt; <span style="color:#268bd2">execute</span>() <span style="color:#859900">throws</span> <span style="color:#268bd2">IOException</span> {
+    <span style="color:#268bd2">okhttp3</span>.<span style="color:#268bd2">Call</span> <span style="color:#268bd2">call</span>;
+    <span style="color:#859900">synchronized</span> (<span style="color:#859900">this</span>) {
+      <span style="color:#859900">if</span> (<span style="color:#268bd2">executed</span>) <span style="color:#859900">throw</span> <span style="color:#859900">new</span> <span style="color:#268bd2">IllegalStateException</span>(<span style="color:#2aa198">&#34;Already executed.&#34;</span>);
+      <span style="color:#268bd2">executed</span> = <span style="color:#859900;font-weight:bold">true</span>;
+      <span style="color:#268bd2">call</span> = <span style="color:#268bd2">rawCall</span>;
+      <span style="color:#859900">if</span> (<span style="color:#268bd2">call</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+        <span style="color:#859900">try</span> {
+        <span style="color:#93a1a1;font-style:italic">// createRawCall 方法创建 call 
+</span><span style="color:#93a1a1;font-style:italic"></span>          <span style="color:#268bd2">call</span> = <span style="color:#268bd2">rawCall</span> = <span style="color:#268bd2">createRawCall</span>();
+        } <span style="color:#859900">catch</span> (<span style="color:#268bd2">IOException</span> | <span style="color:#268bd2">RuntimeException</span> | <span style="color:#268bd2">Error</span> <span style="color:#268bd2">e</span>) {
         }
       }
     }
-    // 取消请求
-    if (canceled) {
-      call.cancel();
+    <span style="color:#93a1a1;font-style:italic">// 取消请求
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">if</span> (<span style="color:#268bd2">canceled</span>) {
+      <span style="color:#268bd2">call</span>.<span style="color:#268bd2">cancel</span>();
     }
-    // 解析请求内容
-    return parseResponse(call.execute());
-  }
-</code></pre>
-
+    <span style="color:#93a1a1;font-style:italic">// 解析请求内容
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">return</span> <span style="color:#268bd2">parseResponse</span>(<span style="color:#268bd2">call</span>.<span style="color:#268bd2">execute</span>());
+  }</code></pre></div>
 <p>实际是通过 <code>createRawCall</code> 方法来创建 <code>Call</code> 的，在 <code>createRawCall</code> 里面又主要是通过 <code>serviceMethod.toCall</code> 方法来完成的。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#268bd2">okhttp3</span>.<span style="color:#268bd2">Call</span> <span style="color:#268bd2">toCall</span>(<span style="color:#268bd2">@Nullable</span> <span style="color:#268bd2">Object</span>... <span style="color:#268bd2">args</span>) <span style="color:#859900">throws</span> <span style="color:#268bd2">IOException</span> {
+    <span style="color:#93a1a1;font-style:italic">// 用上了之前解析注解得到的结果
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">RequestBuilder</span> <span style="color:#268bd2">requestBuilder</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">RequestBuilder</span>(<span style="color:#268bd2">httpMethod</span>, <span style="color:#268bd2">baseUrl</span>, <span style="color:#268bd2">relativeUrl</span>, <span style="color:#268bd2">headers</span>,
+        <span style="color:#268bd2">contentType</span>, <span style="color:#268bd2">hasBody</span>, <span style="color:#268bd2">isFormEncoded</span>, <span style="color:#268bd2">isMultipart</span>);
+    <span style="color:#93a1a1;font-style:italic">// 处理请求的参数
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">@SuppressWarnings</span>(<span style="color:#2aa198">&#34;unchecked&#34;</span>) <span style="color:#93a1a1;font-style:italic">// It is an error to invoke a method with the wrong arg types.
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">ParameterHandler</span>&lt;<span style="color:#268bd2">Object</span>&gt;[] <span style="color:#268bd2">handlers</span> = (<span style="color:#268bd2">ParameterHandler</span>&lt;<span style="color:#268bd2">Object</span>&gt;[]) <span style="color:#268bd2">parameterHandlers</span>;
 
-<pre><code class="language-java">  okhttp3.Call toCall(@Nullable Object... args) throws IOException {
-    // 用上了之前解析注解得到的结果
-    RequestBuilder requestBuilder = new RequestBuilder(httpMethod, baseUrl, relativeUrl, headers,
-        contentType, hasBody, isFormEncoded, isMultipart);
-    // 处理请求的参数
-    @SuppressWarnings(&quot;unchecked&quot;) // It is an error to invoke a method with the wrong arg types.
-    ParameterHandler&lt;Object&gt;[] handlers = (ParameterHandler&lt;Object&gt;[]) parameterHandlers;
-
-    int argumentCount = args != null ? args.length : 0;
-    if (argumentCount != handlers.length) {
-      throw new IllegalArgumentException(&quot;Argument count (&quot; + argumentCount
-          + &quot;) doesn't match expected count (&quot; + handlers.length + &quot;)&quot;);
+    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">argumentCount</span> = <span style="color:#268bd2">args</span> != <span style="color:#859900;font-weight:bold">null</span> ? <span style="color:#268bd2">args</span>.<span style="color:#268bd2">length</span> : <span style="color:#268bd2">0</span>;
+    <span style="color:#859900">if</span> (<span style="color:#268bd2">argumentCount</span> != <span style="color:#268bd2">handlers</span>.<span style="color:#268bd2">length</span>) {
+      <span style="color:#859900">throw</span> <span style="color:#859900">new</span> <span style="color:#268bd2">IllegalArgumentException</span>(<span style="color:#2aa198">&#34;Argument count (&#34;</span> + <span style="color:#268bd2">argumentCount</span>
+          + <span style="color:#2aa198">&#34;) doesn&#39;t match expected count (&#34;</span> + <span style="color:#268bd2">handlers</span>.<span style="color:#268bd2">length</span> + <span style="color:#2aa198">&#34;)&#34;</span>);
     }
-    // 把注解和参数对应上
-    for (int p = 0; p &lt; argumentCount; p++) {
-      handlers[p].apply(requestBuilder, args[p]);
+    <span style="color:#93a1a1;font-style:italic">// 把注解和参数对应上
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">p</span> = <span style="color:#268bd2">0</span>; <span style="color:#268bd2">p</span> &lt; <span style="color:#268bd2">argumentCount</span>; <span style="color:#268bd2">p</span>++) {
+      <span style="color:#268bd2">handlers</span>[<span style="color:#268bd2">p</span>].<span style="color:#268bd2">apply</span>(<span style="color:#268bd2">requestBuilder</span>, <span style="color:#268bd2">args</span>[<span style="color:#268bd2">p</span>]);
     }
-    // 最后还是通过 callFactory 来创建 Call 
-    return callFactory.newCall(requestBuilder.build());
-  }
-</code></pre>
-
+    <span style="color:#93a1a1;font-style:italic">// 最后还是通过 callFactory 来创建 Call 
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">return</span> <span style="color:#268bd2">callFactory</span>.<span style="color:#268bd2">newCall</span>(<span style="color:#268bd2">requestBuilder</span>.<span style="color:#268bd2">build</span>());
+  }</code></pre></div>
 <p>在 <code>toCall</code> 方法里就用到了之前解析的注解内容，依然通过建造者模式创建请求，并且把请求的参数和对应的注解内容对应上，也就是 <code>ParameterHandler</code> 的 <code>apply</code> 方法。</p>
 
 <p>最后是通过 callFactory 网络请求工厂来创建请求，默认就是使用 OkHttp 来创建。</p>
 
 <p><code>parseResponse</code> 方法会处理 <code>Call</code> 执行的结果，最终也是通过 <code>serviceMethod.toResponse</code> 方法来处理。</p>
-
-<pre><code class="language-java">  R toResponse(ResponseBody body) throws IOException {
-    return responseConverter.convert(body);
-  }
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#268bd2">R</span> <span style="color:#268bd2">toResponse</span>(<span style="color:#268bd2">ResponseBody</span> <span style="color:#268bd2">body</span>) <span style="color:#859900">throws</span> <span style="color:#268bd2">IOException</span> {
+    <span style="color:#859900">return</span> <span style="color:#268bd2">responseConverter</span>.<span style="color:#268bd2">convert</span>(<span style="color:#268bd2">body</span>);
+  }</code></pre></div>
 <p>在该方法里，用到之前提到的数据转换器 <code>responseConverter</code> 来实现数据的转换,最终就得到了请求的结果 <code>Response</code> 。</p>
 
 <p>异步请求和同步请求大致相同，不同点在于异步请求要切换到主线程，这也是用之前提到的 <code>callbackExecutor</code> 来实现线程切换。</p>
-
-<pre><code class="language-java">      delegate.enqueue(new Callback&lt;T&gt;() {
-        @Override public void onResponse(Call&lt;T&gt; call, final Response&lt;T&gt; response) {
-          // 切换线程
-          callbackExecutor.execute(new Runnable() {
-            @Override public void run() {
-              if (delegate.isCanceled()) {
-                // Emulate OkHttp's behavior of throwing/delivering an IOException on cancellation.
-                callback.onFailure(ExecutorCallbackCall.this, new IOException(&quot;Canceled&quot;));
-              } else {
-                callback.onResponse(ExecutorCallbackCall.this, response);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">      <span style="color:#268bd2">delegate</span>.<span style="color:#268bd2">enqueue</span>(<span style="color:#859900">new</span> <span style="color:#268bd2">Callback</span>&lt;<span style="color:#268bd2">T</span>&gt;() {
+        <span style="color:#268bd2">@Override</span> <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">onResponse</span>(<span style="color:#268bd2">Call</span>&lt;<span style="color:#268bd2">T</span>&gt; <span style="color:#268bd2">call</span>, <span style="color:#859900">final</span> <span style="color:#268bd2">Response</span>&lt;<span style="color:#268bd2">T</span>&gt; <span style="color:#268bd2">response</span>) {
+          <span style="color:#93a1a1;font-style:italic">// 切换线程
+</span><span style="color:#93a1a1;font-style:italic"></span>          <span style="color:#268bd2">callbackExecutor</span>.<span style="color:#268bd2">execute</span>(<span style="color:#859900">new</span> <span style="color:#268bd2">Runnable</span>() {
+            <span style="color:#268bd2">@Override</span> <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">run</span>() {
+              <span style="color:#859900">if</span> (<span style="color:#268bd2">delegate</span>.<span style="color:#268bd2">isCanceled</span>()) {
+                <span style="color:#93a1a1;font-style:italic">// Emulate OkHttp&#39;s behavior of throwing/delivering an IOException on cancellation.
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">callback</span>.<span style="color:#268bd2">onFailure</span>(<span style="color:#268bd2">ExecutorCallbackCall</span>.<span style="color:#268bd2">this</span>, <span style="color:#859900">new</span> <span style="color:#268bd2">IOException</span>(<span style="color:#2aa198">&#34;Canceled&#34;</span>));
+              } <span style="color:#859900">else</span> {
+                <span style="color:#268bd2">callback</span>.<span style="color:#268bd2">onResponse</span>(<span style="color:#268bd2">ExecutorCallbackCall</span>.<span style="color:#268bd2">this</span>, <span style="color:#268bd2">response</span>);
               }
             }
           });
         }
-        //...
-      }
-</code></pre>
-
+        <span style="color:#93a1a1;font-style:italic">//...
+</span><span style="color:#93a1a1;font-style:italic"></span>      }</code></pre></div>
 <p><code>enqueue</code> 请求的回调方法通过 <code>callbackExecutor</code> 实现了线程切换。</p>
 
 <p>以上，就分析了 Retrofit 从创建到发起网络请求的过程。</p>
@@ -583,121 +549,74 @@ GitHubService service = retrofit.create(GitHubService.class);
 <p>接着，基于对 OkHttp 的封装，能够利用 OkHttp 去实现最重要的网络请求功能。</p>
 
 <p>最后，学习 Retrofit 的设计思想，并把它们用到我们的代码中去。</p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/retrofit-analysis/">开源库之 Retrofit 源码分析</a>
-
-                
-
-                
-
+          
 
         
+  
         
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 之 帧缓冲  使用实践">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/opengl/opengl-glsl-2-mark/" data-toggle="tooltip" data-placement="top" title="OpenGL ES 2.0 着色器语言 GLSL 学习 Mark ">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
         
-      </article>
 
-      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
 
-      
+        
+          
 
-      
-      <ul class="pager blog-pager">
         
-          <li class="previous">
-            <a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 之 帧缓冲  使用实践">&larr; Previous Post</a>
-          </li>
-        
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-glsl-2-mark/" data-toggle="tooltip" data-placement="top" title="OpenGL ES 2.0 着色器语言 GLSL 学习 Mark ">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
-
-      
-        
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -706,8 +625,6 @@ GitHubService service = retrofit.create(GitHubService.class);
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -738,21 +655,8 @@ GitHubService service = retrofit.create(GitHubService.class);
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -760,22 +664,28 @@ GitHubService service = retrofit.create(GitHubService.class);
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -784,49 +694,66 @@ GitHubService service = retrofit.create(GitHubService.class);
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

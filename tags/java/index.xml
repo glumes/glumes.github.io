@@ -1,45 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Java on 技术开发进阶</title>
-    <link>https://glumes.com/tags/java/</link>
-    <description>Recent content in Java on 技术开发进阶</description>
+    <title>Java on 星陨的博客</title>
+    <link>https://www.glumes.com/tags/java/</link>
+    <description>Recent content in Java on 星陨的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
-    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <language>en-us</language>
     <lastBuildDate>Mon, 19 Nov 2018 15:58:17 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glumes.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Java 显式锁 Lock 与条件队列</title>
-      <link>https://glumes.com/post/java/java-multithread-overview/</link>
+      <link>https://www.glumes.com/post/java/java-multithread-overview/</link>
       <pubDate>Mon, 19 Nov 2018 15:58:17 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/post/java/java-multithread-overview/</guid>
+      
+      <guid>https://www.glumes.com/post/java/java-multithread-overview/</guid>
       <description>&lt;p&gt;在 Java 5.0 之前，在协调对共享对象的访问时可以使用的机制只有 &lt;code&gt;synchronized&lt;/code&gt; 内置锁和 &lt;code&gt;volatile&lt;/code&gt; 关键字。&lt;/p&gt;
 
 &lt;p&gt;Java 5.0 增加了一种新的机制：&lt;code&gt;Lock&lt;/code&gt;  显式锁，当内置锁 &lt;code&gt;synchronized&lt;/code&gt; 不适用时，它就可以作为一种新的选择。&lt;/p&gt;
 
 &lt;p&gt;回顾一下内置锁 synchronized 的使用：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// synchronized关键字用法示例
-public synchronized void add(int t){// 同步方法
-    this.v += t;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// synchronized关键字用法示例
+&lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#859900&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#859900&#34;&gt;synchronized&lt;/span&gt; &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;t&lt;/span&gt;){&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// 同步方法
+&lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#859900&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;v&lt;/span&gt; += &lt;span style=&#34;color:#268bd2&#34;&gt;t&lt;/span&gt;;
 }
 
-public static synchronized void sub(int t){// 同步静态方法
-    value -= t;
+&lt;span style=&#34;color:#859900&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#859900&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#859900&#34;&gt;synchronized&lt;/span&gt; &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;sub&lt;/span&gt;(&lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;t&lt;/span&gt;){&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// 同步静态方法
+&lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#268bd2&#34;&gt;value&lt;/span&gt; -= &lt;span style=&#34;color:#268bd2&#34;&gt;t&lt;/span&gt;;
 }
-public int decrementAndGet(){
-    synchronized(obj){// 同步代码块
-        return --v;
+&lt;span style=&#34;color:#859900&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;decrementAndGet&lt;/span&gt;(){
+    &lt;span style=&#34;color:#859900&#34;&gt;synchronized&lt;/span&gt;(&lt;span style=&#34;color:#268bd2&#34;&gt;obj&lt;/span&gt;){&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// 同步代码块
+&lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#859900&#34;&gt;return&lt;/span&gt; --&lt;span style=&#34;color:#268bd2&#34;&gt;v&lt;/span&gt;;
     }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;内置锁不需要显式的获取和释放，任何一个对象都能作为一把内置锁。&lt;/p&gt;
 
 &lt;ul&gt;
@@ -53,10 +48,10 @@ public int decrementAndGet(){
     
     <item>
       <title>Java 中的静态代理和动态代理</title>
-      <link>https://glumes.com/post/android/java-proxy-design-pattern/</link>
+      <link>https://www.glumes.com/post/android/java-proxy-design-pattern/</link>
       <pubDate>Tue, 28 Aug 2018 22:55:49 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/post/android/java-proxy-design-pattern/</guid>
+      
+      <guid>https://www.glumes.com/post/android/java-proxy-design-pattern/</guid>
       <description>&lt;p&gt;代理模式的使用场景如下：&lt;/p&gt;
 
 &lt;blockquote&gt;

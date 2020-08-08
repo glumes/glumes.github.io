@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>FBO on 技术开发进阶</title>
-    <link>https://glumes.com/tags/fbo/</link>
-    <description>Recent content in FBO on 技术开发进阶</description>
+    <title>FBO on 星陨的博客</title>
+    <link>https://www.glumes.com/tags/fbo/</link>
+    <description>Recent content in FBO on 星陨的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
-    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <language>en-us</language>
     <lastBuildDate>Tue, 04 Sep 2018 22:28:11 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.com/tags/fbo/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glumes.com/tags/fbo/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>OpenGL 之 帧缓冲  使用实践</title>
-      <link>https://glumes.com/post/opengl/opengl-framebuffer-object-usage/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/</link>
       <pubDate>Tue, 04 Sep 2018 22:28:11 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/post/opengl/opengl-framebuffer-object-usage/</guid>
+      
+      <guid>https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/</guid>
       <description>&lt;p&gt;帧缓冲(Framebuffer Object)，简称 &lt;code&gt;FBO&lt;/code&gt;，在渲染绘制中， 图像最终都是绘制到 FBO 上的，一般都是默认的 FBO 上，也就是我们的屏幕。&lt;/p&gt;
 
 &lt;p&gt;除此之外，还可以创建自己的 FBO，用来作为绘制的载体，当在自己的 FBO 上绘制好了之后，可以再把绘制内容显示到屏幕上，实现一个双缓冲的绘制。&lt;/p&gt;

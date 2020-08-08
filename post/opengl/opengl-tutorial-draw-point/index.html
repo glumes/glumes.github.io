@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>OpenGL 学习系列---基础的绘制流程</title>
+  <title>OpenGL 学习系列---基础的绘制流程-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="OpenGL 学习系列---基础的绘制流程" />
   <meta name="twitter:title" content="OpenGL 学习系列---基础的绘制流程" />
 
   <meta name="description" content="终于要开始探索奇妙的 3D 世界了，OpenGL 搞起。">
   <meta property="og:description" content="终于要开始探索奇妙的 3D 世界了，OpenGL 搞起。">
   <meta name="twitter:description" content="终于要开始探索奇妙的 3D 世界了，OpenGL 搞起。">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-tutorial-draw-point/" />
+  <meta property="og:url" content="https://www.glumes.com/post/opengl/opengl-tutorial-draw-point/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-tutorial-draw-point/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/opengl/opengl-tutorial-draw-point/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -54,23 +55,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -78,7 +67,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -89,15 +80,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -105,25 +96,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -141,9 +132,6 @@ if (!doNotTrack) {
 </nav>
 
 
-
-
-
     
   
   
@@ -156,45 +144,59 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">OpenGL 学习系列---基础的绘制流程</h1>
+              <h1>OpenGL 学习系列---基础的绘制流程</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on December 22, 2017
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
             
-          </h5>
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -226,8 +228,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p>终于要开始探索奇妙的 3D 世界了，OpenGL 搞起。</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>终于要开始探索奇妙的 3D 世界了，OpenGL 搞起。</p>
 
 <h2 id="opengl-简介">OpenGL 简介</h2>
 
@@ -363,19 +378,16 @@ if (!doNotTrack) {
 <p>使用<code>ByteBuffer.allocateDirect()</code>方法就可以分配一块 Native 内存，这块内存不会被 Java 的垃圾回收器管理。</p>
 
 <p>它的使用方法大致都一样，抽出公共的模板：</p>
-
-<pre><code class="language-java">   // 声明一个字节缓冲区 FloatBuffer
-   private FloatBuffer floatBuffer;
-   // 定义顶点数据
-   float[] vertexData = new float[16];
-   // FloatBuffer 初始化工作并放入顶点数据
-   floatBuffer = ByteBuffer
-       .allocateDirect(vertexData.length * Constant.BYTES_PRE_FLOAT)
-       .order(ByteOrder.nativeOrder())
-       .asFloatBuffer()
-       .put(vertexData);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">   <span style="color:#93a1a1;font-style:italic">// 声明一个字节缓冲区 FloatBuffer
+</span><span style="color:#93a1a1;font-style:italic"></span>   <span style="color:#859900">private</span> <span style="color:#268bd2">FloatBuffer</span> <span style="color:#268bd2">floatBuffer</span>;
+   <span style="color:#93a1a1;font-style:italic">// 定义顶点数据
+</span><span style="color:#93a1a1;font-style:italic"></span>   <span style="color:#859900;font-weight:bold">float</span>[] <span style="color:#268bd2">vertexData</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">float</span>[<span style="color:#268bd2">16</span>];
+   <span style="color:#93a1a1;font-style:italic">// FloatBuffer 初始化工作并放入顶点数据
+</span><span style="color:#93a1a1;font-style:italic"></span>   <span style="color:#268bd2">floatBuffer</span> = <span style="color:#268bd2">ByteBuffer</span>
+       .<span style="color:#268bd2">allocateDirect</span>(<span style="color:#268bd2">vertexData</span>.<span style="color:#268bd2">length</span> * <span style="color:#268bd2">Constant</span>.<span style="color:#268bd2">BYTES_PRE_FLOAT</span>)
+       .<span style="color:#268bd2">order</span>(<span style="color:#268bd2">ByteOrder</span>.<span style="color:#268bd2">nativeOrder</span>())
+       .<span style="color:#268bd2">asFloatBuffer</span>()
+       .<span style="color:#268bd2">put</span>(<span style="color:#268bd2">vertexData</span>);</code></pre></div>
 <p>在<code>allocateDirect</code>方法分配了内存并指定了大小之后，下一步就是告诉 ByteBuffer 按照<code>本地字节序</code>组织它的内容。本地字节序是指，当一个值占用多个字节时，比如 32 位整型数，字节按照从最重要位到最不重要位或者相反顺序排列。</p>
 
 <p>接下来<code>asFloatBuffer</code>方法可以得到一个反映底层字节的 FloatBuffer 类实例，避免直接操作单独的字节，而是使用浮点数。</p>
@@ -397,15 +409,12 @@ if (!doNotTrack) {
 <p><code>GLSL</code>语言类似于 C 语言或者 Java 语言，它的程序入口也是一个名为<code>main</code>的函数。关于 GLSL 的部分，完全可以单独写一篇博客了，暂时先不详细阐述。</p>
 
 <p>下面就是一个简单的顶点着色器程序：</p>
-
-<pre><code class="language-java">attribute vec4 a_Position;
-void main()
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">attribute</span> <span style="color:#268bd2">vec4</span> <span style="color:#268bd2">a_Position</span>;
+<span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">main</span>()
 {
-    gl_Position = a_Position;
-    gl_PointSize = 30.0;
-}
-</code></pre>
-
+    <span style="color:#268bd2">gl_Position</span> = <span style="color:#268bd2">a_Position</span>;
+    <span style="color:#268bd2">gl_PointSize</span> = <span style="color:#268bd2">30</span>.<span style="color:#268bd2">0</span>;
+}</code></pre></div>
 <p>着色器类似于一个函数调用的方式——数据传输进来，经过处理，然后再传输出去。</p>
 
 <p>其中，<code>gl_Position</code>和<code>gl_PointSize</code>就是着色器中的特殊全局变量，它接收输入。</p>
@@ -441,15 +450,12 @@ void main()
 <p>对于基本图元的每个片段，片段着色器都会被调用一次，因此，如果一个三角形被映射到 10000 个片段，那么片段着色器就会被调用 10000 次。</p>
 
 <p>下面就是一个简单的片段着色器程序：</p>
-
-<pre><code class="language-java">precision mediump float;
-uniform vec4 u_Color;
-void main()
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">precision</span> <span style="color:#268bd2">mediump</span> <span style="color:#859900;font-weight:bold">float</span>;
+<span style="color:#268bd2">uniform</span> <span style="color:#268bd2">vec4</span> <span style="color:#268bd2">u_Color</span>;
+<span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">main</span>()
 {
-    gl_FragColor = u_Color;
-}
-</code></pre>
-
+    <span style="color:#268bd2">gl_FragColor</span> = <span style="color:#268bd2">u_Color</span>;
+}</code></pre></div>
 <p>其中，<code>gl_FragColor</code>变量就是 OpenGL 最终渲染出来的颜色的全局变量，而<code>u_Color</code>就是我们定义的变量，通过在 Java 层绑定到 <code>u_Color</code>变量并给它赋值，就会传递到 Native 层的<code>gl_FragColor</code>中。</p>
 
 <p>而第一行的<code>mediump</code>指的就是片段着色器的精度了，有三种可选，这里用中等精度就行了。<code>uniform</code>则表示该变量是不可变的了，也就是固定颜色了，目前显示固定颜色就好了。</p>
@@ -472,40 +478,37 @@ void main()
 <p>创建新的文件编写着色器程序，然后再从文件以字符串的形式中读取文件内容。这样会比把着色器程序写成字符串的形式更加清晰。</p>
 
 <p>当读取了着色器程序内容之后，就可以编译了。</p>
-
-<pre><code class="language-java">   // 编译顶点着色器
-    public static int compileVertexShader(String shaderCode) {
-        return compileShader(GL_VERTEX_SHADER, shaderCode);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">   <span style="color:#93a1a1;font-style:italic">// 编译顶点着色器
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">compileVertexShader</span>(<span style="color:#268bd2">String</span> <span style="color:#268bd2">shaderCode</span>) {
+        <span style="color:#859900">return</span> <span style="color:#268bd2">compileShader</span>(<span style="color:#268bd2">GL_VERTEX_SHADER</span>, <span style="color:#268bd2">shaderCode</span>);
     }
     
-    // 编译片段着色器
-    public static int compleFragmentShader(String shaderCode) {
-        return compileShader(GL_FRAGMENT_SHADER, shaderCode);
+    <span style="color:#93a1a1;font-style:italic">// 编译片段着色器
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">compleFragmentShader</span>(<span style="color:#268bd2">String</span> <span style="color:#268bd2">shaderCode</span>) {
+        <span style="color:#859900">return</span> <span style="color:#268bd2">compileShader</span>(<span style="color:#268bd2">GL_FRAGMENT_SHADER</span>, <span style="color:#268bd2">shaderCode</span>);
     }
 
-    // 根据类型编译着色器
-    private static int compileShader(int type, String shaderCode) {
-	    // 根据不同的类型创建着色器 ID
-        final int shaderObjectId = glCreateShader(type);
-        if (shaderObjectId == 0) {
-            return 0;
+    <span style="color:#93a1a1;font-style:italic">// 根据类型编译着色器
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">private</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">compileShader</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">type</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">shaderCode</span>) {
+	    <span style="color:#93a1a1;font-style:italic">// 根据不同的类型创建着色器 ID
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">shaderObjectId</span> = <span style="color:#268bd2">glCreateShader</span>(<span style="color:#268bd2">type</span>);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">shaderObjectId</span> == <span style="color:#268bd2">0</span>) {
+            <span style="color:#859900">return</span> <span style="color:#268bd2">0</span>;
         }
-        // 将着色器 ID 和着色器程序内容连接
-        glShaderSource(shaderObjectId, shaderCode);
-        // 编译着色器
-        glCompileShader(shaderObjectId);
-		// 以下为验证编译结果是否失败
-        final int[] compileStatsu = new int[1];
-        glGetShaderiv(shaderObjectId, GL_COMPILE_STATUS, compileStatsu, 0);
-        if ((compileStatsu[0] == 0)) {
-	        // 失败则删除
-            glDeleteShader(shaderObjectId);
-            return 0;
+        <span style="color:#93a1a1;font-style:italic">// 将着色器 ID 和着色器程序内容连接
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">glShaderSource</span>(<span style="color:#268bd2">shaderObjectId</span>, <span style="color:#268bd2">shaderCode</span>);
+        <span style="color:#93a1a1;font-style:italic">// 编译着色器
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">glCompileShader</span>(<span style="color:#268bd2">shaderObjectId</span>);
+		<span style="color:#93a1a1;font-style:italic">// 以下为验证编译结果是否失败
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">compileStatsu</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">int</span>[<span style="color:#268bd2">1</span>];
+        <span style="color:#268bd2">glGetShaderiv</span>(<span style="color:#268bd2">shaderObjectId</span>, <span style="color:#268bd2">GL_COMPILE_STATUS</span>, <span style="color:#268bd2">compileStatsu</span>, <span style="color:#268bd2">0</span>);
+        <span style="color:#859900">if</span> ((<span style="color:#268bd2">compileStatsu</span>[<span style="color:#268bd2">0</span>] == <span style="color:#268bd2">0</span>)) {
+	        <span style="color:#93a1a1;font-style:italic">// 失败则删除
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">glDeleteShader</span>(<span style="color:#268bd2">shaderObjectId</span>);
+            <span style="color:#859900">return</span> <span style="color:#268bd2">0</span>;
         }
-        return shaderObjectId;
-    }
-</code></pre>
-
+        <span style="color:#859900">return</span> <span style="color:#268bd2">shaderObjectId</span>;
+    }</code></pre></div>
 <p>以上程序主要就是通过<code>glCreateShader</code>方法创建了着色器 ID，然后通过<code>glShaderSource</code>连接上着色器程序内容，接下来通过<code>glCompileShader</code>编译着色器，最后通过<code>glGetShaderiv</code>验证是否失败。</p>
 
 <p><code>glGetShaderiv</code>函数比较通用，在着色器阶段和 OpenGL 程序阶段都会通过它来验证结果。</p>
@@ -513,175 +516,157 @@ void main()
 <h4 id="创建-opengl-程序和着色器链接">创建 OpenGL 程序和着色器链接</h4>
 
 <p>接下来就是创建 OpenGL 程序并加着色器加进来。</p>
-
-<pre><code class="language-java">  public static int linkProgram(int vertexShaderId, int fragmentShaderId) {
-		// 创建 OpenGL 程序 ID
-        final int programObjectId = glCreateProgram();
-        if (programObjectId == 0) {
-            return 0;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">linkProgram</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">vertexShaderId</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">fragmentShaderId</span>) {
+		<span style="color:#93a1a1;font-style:italic">// 创建 OpenGL 程序 ID
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">programObjectId</span> = <span style="color:#268bd2">glCreateProgram</span>();
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">programObjectId</span> == <span style="color:#268bd2">0</span>) {
+            <span style="color:#859900">return</span> <span style="color:#268bd2">0</span>;
         }
-        // 链接上 顶点着色器
-        glAttachShader(programObjectId, vertexShaderId);
-        // 链接上 片段着色器
-        glAttachShader(programObjectId, fragmentShaderId);
-        // 链接着色器之后，链接 OpenGL 程序
-        glLinkProgram(programObjectId);
-        final int[] linkStatus = new int[1];
-        // 验证链接结果是否失败
-        glGetProgramiv(programObjectId, GL_LINK_STATUS, linkStatus, 0);
-        if (linkStatus[0] == 0) {
-	        // 失败则删除 OpenGL 程序
-            glDeleteProgram(programObjectId);
-            return 0;
+        <span style="color:#93a1a1;font-style:italic">// 链接上 顶点着色器
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">glAttachShader</span>(<span style="color:#268bd2">programObjectId</span>, <span style="color:#268bd2">vertexShaderId</span>);
+        <span style="color:#93a1a1;font-style:italic">// 链接上 片段着色器
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">glAttachShader</span>(<span style="color:#268bd2">programObjectId</span>, <span style="color:#268bd2">fragmentShaderId</span>);
+        <span style="color:#93a1a1;font-style:italic">// 链接着色器之后，链接 OpenGL 程序
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">glLinkProgram</span>(<span style="color:#268bd2">programObjectId</span>);
+        <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">linkStatus</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">int</span>[<span style="color:#268bd2">1</span>];
+        <span style="color:#93a1a1;font-style:italic">// 验证链接结果是否失败
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">glGetProgramiv</span>(<span style="color:#268bd2">programObjectId</span>, <span style="color:#268bd2">GL_LINK_STATUS</span>, <span style="color:#268bd2">linkStatus</span>, <span style="color:#268bd2">0</span>);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">linkStatus</span>[<span style="color:#268bd2">0</span>] == <span style="color:#268bd2">0</span>) {
+	        <span style="color:#93a1a1;font-style:italic">// 失败则删除 OpenGL 程序
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">glDeleteProgram</span>(<span style="color:#268bd2">programObjectId</span>);
+            <span style="color:#859900">return</span> <span style="color:#268bd2">0</span>;
         }
-        return programObjectId;
-    }
-</code></pre>
-
+        <span style="color:#859900">return</span> <span style="color:#268bd2">programObjectId</span>;
+    }</code></pre></div>
 <p>首先通过<code>glCreateProgram</code>程序创建 OpenGL 程序，然后通过<code>glAttachShader</code>将着色器程序 ID 添加上 OpenGL 程序，接下来通过<code>glLinkProgram</code>链接 OpenGL 程序，最后通过<code>glGetProgramiv</code>来验证链接是否失败。</p>
 
 <h4 id="验证-opengl-程序">验证 OpenGL 程序</h4>
 
 <p>链接了 OpenGL 程序后，就是验证 OpenGL 是否可用。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">validateProgram</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">programObjectId</span>) {
+        <span style="color:#268bd2">glValidateProgram</span>(<span style="color:#268bd2">programObjectId</span>);
+        <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">validateStatus</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">int</span>[<span style="color:#268bd2">1</span>];
+        <span style="color:#268bd2">glGetProgramiv</span>(<span style="color:#268bd2">programObjectId</span>, <span style="color:#268bd2">GL_VALIDATE_STATUS</span>, <span style="color:#268bd2">validateStatus</span>, <span style="color:#268bd2">0</span>);
+        <span style="color:#859900">return</span> <span style="color:#268bd2">validateStatus</span>[<span style="color:#268bd2">0</span>] != <span style="color:#268bd2">0</span>;
 
-<pre><code class="language-java"> public static boolean validateProgram(int programObjectId) {
-        glValidateProgram(programObjectId);
-        final int[] validateStatus = new int[1];
-        glGetProgramiv(programObjectId, GL_VALIDATE_STATUS, validateStatus, 0);
-        return validateStatus[0] != 0;
-
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p>通过<code>glValidateProgram</code>函数验证，并再次通过<code>glGetProgramiv</code>函数验证是否失败。</p>
 
 <h4 id="确定使用-opengl-程序">确定使用 OpenGL 程序</h4>
 
 <p>当一切完成后，就是确定使用该 OpenGL 程序了。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">// 创建 OpenGL 程序过程
+</span><span style="color:#93a1a1;font-style:italic"></span> <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">buildProgram</span>(<span style="color:#268bd2">Context</span> <span style="color:#268bd2">context</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">vertexShaderSource</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">fragmentShaderSource</span>) {
+        <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">program</span>;
 
-<pre><code class="language-java">// 创建 OpenGL 程序过程
- public static int buildProgram(Context context, int vertexShaderSource, int fragmentShaderSource) {
-        int program;
+        <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">vertexShader</span> = <span style="color:#268bd2">compileVertexShader</span>(
+                <span style="color:#268bd2">TextResourceReader</span>.<span style="color:#268bd2">readTextFileFromResource</span>(<span style="color:#268bd2">context</span>, <span style="color:#268bd2">vertexShaderSource</span>));
 
-        int vertexShader = compileVertexShader(
-                TextResourceReader.readTextFileFromResource(context, vertexShaderSource));
+        <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">fragmentShader</span> = <span style="color:#268bd2">compleFragmentShader</span>(
+                <span style="color:#268bd2">TextResourceReader</span>.<span style="color:#268bd2">readTextFileFromResource</span>(<span style="color:#268bd2">context</span>, <span style="color:#268bd2">fragmentShaderSource</span>));
 
-        int fragmentShader = compleFragmentShader(
-                TextResourceReader.readTextFileFromResource(context, fragmentShaderSource));
+        <span style="color:#268bd2">program</span> = <span style="color:#268bd2">linkProgram</span>(<span style="color:#268bd2">vertexShader</span>, <span style="color:#268bd2">fragmentShader</span>);
 
-        program = linkProgram(vertexShader, fragmentShader);
+        <span style="color:#268bd2">validateProgram</span>(<span style="color:#268bd2">program</span>);
 
-        validateProgram(program);
-
-        return program;
+        <span style="color:#859900">return</span> <span style="color:#268bd2">program</span>;
     }
 
-// 创建完毕后，确定使用
-    mProgram = ShaderHelper.buildProgram(context, R.raw.point_vertex_shader
-                , R.raw.point_fragment_shader);
+<span style="color:#93a1a1;font-style:italic">// 创建完毕后，确定使用
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">mProgram</span> = <span style="color:#268bd2">ShaderHelper</span>.<span style="color:#268bd2">buildProgram</span>(<span style="color:#268bd2">context</span>, <span style="color:#268bd2">R</span>.<span style="color:#268bd2">raw</span>.<span style="color:#268bd2">point_vertex_shader</span>
+                , <span style="color:#268bd2">R</span>.<span style="color:#268bd2">raw</span>.<span style="color:#268bd2">point_fragment_shader</span>);
 
-        glUseProgram(mProgram);
-</code></pre>
-
+        <span style="color:#268bd2">glUseProgram</span>(<span style="color:#268bd2">mProgram</span>);</code></pre></div>
 <p>将上述的过程合并起来，<code>buildProgram</code>函数返回的 OpenGL 程序 ID 即可，通过<code>glUseProgram</code>函数表示使用该 OpenGL 程序。</p>
 
 <h3 id="绘制">绘制</h3>
 
 <p>完成了 OpenGL 程序的编译，就是最后的绘制了，再回到渲染器 <code>Renderer</code>里面。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900">class</span> <span style="color:#cb4b16">PointRenderer</span> <span style="color:#859900">extends</span> <span style="color:#268bd2">BaseRenderer</span> {
 
-<pre><code class="language-java">public class PointRenderer extends BaseRenderer {
-
-    private Point mPoint;
-    public PointRenderer(Context mContext) {
-        super(mContext);
+    <span style="color:#859900">private</span> <span style="color:#268bd2">Point</span> <span style="color:#268bd2">mPoint</span>;
+    <span style="color:#859900">public</span> <span style="color:#268bd2">PointRenderer</span>(<span style="color:#268bd2">Context</span> <span style="color:#268bd2">mContext</span>) {
+        <span style="color:#859900">super</span>(<span style="color:#268bd2">mContext</span>);
     }
 
-    @Override
-    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        super.onSurfaceCreated(gl, config);
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        // 在 onSurfaceCreated 里面初始化，否则会报线程错误
-        mPoint = new Point(mContext);
-        // 绑定相应的顶点数据
-        mPoint.bindData();
+    <span style="color:#268bd2">@Override</span>
+    <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">onSurfaceCreated</span>(<span style="color:#268bd2">GL10</span> <span style="color:#268bd2">gl</span>, <span style="color:#268bd2">EGLConfig</span> <span style="color:#268bd2">config</span>) {
+        <span style="color:#859900">super</span>.<span style="color:#268bd2">onSurfaceCreated</span>(<span style="color:#268bd2">gl</span>, <span style="color:#268bd2">config</span>);
+        <span style="color:#268bd2">glClearColor</span>(<span style="color:#268bd2">0</span>.<span style="color:#268bd2">0f</span>, <span style="color:#268bd2">0</span>.<span style="color:#268bd2">0f</span>, <span style="color:#268bd2">0</span>.<span style="color:#268bd2">0f</span>, <span style="color:#268bd2">0</span>.<span style="color:#268bd2">0f</span>);
+        <span style="color:#93a1a1;font-style:italic">// 在 onSurfaceCreated 里面初始化，否则会报线程错误
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">mPoint</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">Point</span>(<span style="color:#268bd2">mContext</span>);
+        <span style="color:#93a1a1;font-style:italic">// 绑定相应的顶点数据
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">mPoint</span>.<span style="color:#268bd2">bindData</span>();
     }
     
-    @Override
-    public void onSurfaceChanged(GL10 gl, int width, int height) {
-        // 确定视口大小
-        glViewport(0, 0, width, height);
+    <span style="color:#268bd2">@Override</span>
+    <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">onSurfaceChanged</span>(<span style="color:#268bd2">GL10</span> <span style="color:#268bd2">gl</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">width</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">height</span>) {
+        <span style="color:#93a1a1;font-style:italic">// 确定视口大小
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">glViewport</span>(<span style="color:#268bd2">0</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">width</span>, <span style="color:#268bd2">height</span>);
     }
 
-    @Override
-    public void onDrawFrame(GL10 gl) {
-        // 清屏
-        glClear(GL_COLOR_BUFFER_BIT);
-        // 绘制
-        mPoint.draw();
+    <span style="color:#268bd2">@Override</span>
+    <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">onDrawFrame</span>(<span style="color:#268bd2">GL10</span> <span style="color:#268bd2">gl</span>) {
+        <span style="color:#93a1a1;font-style:italic">// 清屏
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">glClear</span>(<span style="color:#268bd2">GL_COLOR_BUFFER_BIT</span>);
+        <span style="color:#93a1a1;font-style:italic">// 绘制
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">mPoint</span>.<span style="color:#268bd2">draw</span>();
     }
-}
-</code></pre>
-
+}</code></pre></div>
 <p>在<code>onSurfaceCreated</code>函数里面做初始化工作，绑定数据等；在<code>onSurfaceChanged</code>方法里面确定视图大小，在<code>onDrawFrame</code>里面执行绘制。</p>
 
 <p>为了简化渲染流程，把所有的操作都放在放在要渲染的对象里面去了，声明一个 Point 对象，代表要绘制的点。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900">class</span> <span style="color:#cb4b16">Point</span> <span style="color:#859900">extends</span> <span style="color:#268bd2">BaseShape</span> {
 
-<pre><code class="language-java">public class Point extends BaseShape {
-
-    // 着色器中定义的变量，在 Java 层绑定并赋值
-    private static final String U_COLOR = &quot;u_Color&quot;;
-    private static final String A_POSITION = &quot;a_Position&quot;;
-    private int aColorLocation;
-    private int aPositionLocation;
+    <span style="color:#93a1a1;font-style:italic">// 着色器中定义的变量，在 Java 层绑定并赋值
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">private</span> <span style="color:#859900">static</span> <span style="color:#859900">final</span> <span style="color:#268bd2">String</span> <span style="color:#268bd2">U_COLOR</span> = <span style="color:#2aa198">&#34;u_Color&#34;</span>;
+    <span style="color:#859900">private</span> <span style="color:#859900">static</span> <span style="color:#859900">final</span> <span style="color:#268bd2">String</span> <span style="color:#268bd2">A_POSITION</span> = <span style="color:#2aa198">&#34;a_Position&#34;</span>;
+    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">aColorLocation</span>;
+    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">aPositionLocation</span>;
     
-    float[] pointVertex = {
-            0f, 0f
+    <span style="color:#859900;font-weight:bold">float</span>[] <span style="color:#268bd2">pointVertex</span> = {
+            <span style="color:#268bd2">0f</span>, <span style="color:#268bd2">0f</span>
     };
 
-    public Point(Context context) {
-        super(context);
-        mProgram = ShaderHelper.buildProgram(context, R.raw.point_vertex_shader
-                , R.raw.point_fragment_shader);
-        glUseProgram(mProgram);
-        vertexArray = new VertexArray(pointVertex);
-        POSITION_COMPONENT_COUNT = 2;
+    <span style="color:#859900">public</span> <span style="color:#268bd2">Point</span>(<span style="color:#268bd2">Context</span> <span style="color:#268bd2">context</span>) {
+        <span style="color:#859900">super</span>(<span style="color:#268bd2">context</span>);
+        <span style="color:#268bd2">mProgram</span> = <span style="color:#268bd2">ShaderHelper</span>.<span style="color:#268bd2">buildProgram</span>(<span style="color:#268bd2">context</span>, <span style="color:#268bd2">R</span>.<span style="color:#268bd2">raw</span>.<span style="color:#268bd2">point_vertex_shader</span>
+                , <span style="color:#268bd2">R</span>.<span style="color:#268bd2">raw</span>.<span style="color:#268bd2">point_fragment_shader</span>);
+        <span style="color:#268bd2">glUseProgram</span>(<span style="color:#268bd2">mProgram</span>);
+        <span style="color:#268bd2">vertexArray</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">VertexArray</span>(<span style="color:#268bd2">pointVertex</span>);
+        <span style="color:#268bd2">POSITION_COMPONENT_COUNT</span> = <span style="color:#268bd2">2</span>;
     }
 
-    @Override
-    public void bindData() {
-        //绑定值
-        aColorLocation = glGetUniformLocation(mProgram, U_COLOR);
-        aPositionLocation = glGetAttribLocation(mProgram, A_POSITION);
-        // 给绑定的值赋值，也就是从顶点数据那里开始读取，每次读取间隔是多少
-        vertexArray.setVertexAttribPointer(0, aPositionLocation, POSITION_COMPONENT_COUNT,
-                0);
+    <span style="color:#268bd2">@Override</span>
+    <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">bindData</span>() {
+        <span style="color:#93a1a1;font-style:italic">//绑定值
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">aColorLocation</span> = <span style="color:#268bd2">glGetUniformLocation</span>(<span style="color:#268bd2">mProgram</span>, <span style="color:#268bd2">U_COLOR</span>);
+        <span style="color:#268bd2">aPositionLocation</span> = <span style="color:#268bd2">glGetAttribLocation</span>(<span style="color:#268bd2">mProgram</span>, <span style="color:#268bd2">A_POSITION</span>);
+        <span style="color:#93a1a1;font-style:italic">// 给绑定的值赋值，也就是从顶点数据那里开始读取，每次读取间隔是多少
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">vertexArray</span>.<span style="color:#268bd2">setVertexAttribPointer</span>(<span style="color:#268bd2">0</span>, <span style="color:#268bd2">aPositionLocation</span>, <span style="color:#268bd2">POSITION_COMPONENT_COUNT</span>,
+                <span style="color:#268bd2">0</span>);
     }
 
-    @Override
-    public void draw() {
-        // 给绑定的值赋值
-        glUniform4f(aColorLocation, 0.0f, 0.0f, 1.0f, 1.0f);
-        glDrawArrays(GL_POINTS, 0, 1);
+    <span style="color:#268bd2">@Override</span>
+    <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">draw</span>() {
+        <span style="color:#93a1a1;font-style:italic">// 给绑定的值赋值
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">glUniform4f</span>(<span style="color:#268bd2">aColorLocation</span>, <span style="color:#268bd2">0</span>.<span style="color:#268bd2">0f</span>, <span style="color:#268bd2">0</span>.<span style="color:#268bd2">0f</span>, <span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>, <span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>);
+        <span style="color:#268bd2">glDrawArrays</span>(<span style="color:#268bd2">GL_POINTS</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">1</span>);
     }
-}
-</code></pre>
-
+}</code></pre></div>
 <p>在 Point 的构造函数中，编译并使用 OpenGL 程序，而在 <code>bindData</code>函数中，通过<code>glGetUniformLocation</code>和<code>glGetAttribLocation</code>函数绑定了我们在 OpenGL 中声明的变量<code>u_Color</code>和<code>a_Position</code>，要注意的是，<code>attribute</code>类型和<code>uniform</code>类型所对应的方法是不同的，最后通过给<code>POSITION_COMPONENT_COUNT</code>变量赋值，指定每个顶点数据的个数为 2 。</p>
 
 <p>绑定了变量之后，接下来就是给他们赋值了，对于<code>uniform</code>类型变量，由于是固定值，所以直接调用<code>glUniform4f</code>方法给其赋值就好了，而<code>attribute</code>类型变量，则需要对应顶点数据中的值了，<code>vertexArray.setVertexAttribPointer</code>方法就是完成这个任务的。</p>
-
-<pre><code class="language-java">	// 给某个顶点数据绑定值，并 Enable 使能
-    public void setVertexAttribPointer(int dataOffset, int attributeLocation, int componentCount, int stride) {
-        floatBuffer.position(dataOffset);
-        glVertexAttribPointer(attributeLocation, componentCount, GL_FLOAT, false, stride, floatBuffer);
-        glEnableVertexAttribArray(attributeLocation);
-        floatBuffer.position(0);
-    }
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#93a1a1;font-style:italic">// 给某个顶点数据绑定值，并 Enable 使能
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">setVertexAttribPointer</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">dataOffset</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">attributeLocation</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">componentCount</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">stride</span>) {
+        <span style="color:#268bd2">floatBuffer</span>.<span style="color:#268bd2">position</span>(<span style="color:#268bd2">dataOffset</span>);
+        <span style="color:#268bd2">glVertexAttribPointer</span>(<span style="color:#268bd2">attributeLocation</span>, <span style="color:#268bd2">componentCount</span>, <span style="color:#268bd2">GL_FLOAT</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#268bd2">stride</span>, <span style="color:#268bd2">floatBuffer</span>);
+        <span style="color:#268bd2">glEnableVertexAttribArray</span>(<span style="color:#268bd2">attributeLocation</span>);
+        <span style="color:#268bd2">floatBuffer</span>.<span style="color:#268bd2">position</span>(<span style="color:#268bd2">0</span>);
+    }</code></pre></div>
 <p>在<code>setVertexAttribPointer</code>方法中，使用了<code>glVertexAttribPointer</code>方法来绑定值，它的参数释义如下所示：</p>
 
-<p><img src="https://image.glumes.com/images/2019/05/12/opengl_canshu.png" alt="https://image.glumes.com/images/2019/05/12/opengl_canshu.png" /></p>
+<figure><img src="https://image.glumes.com/images/2019/05/12/opengl_canshu.png" alt="https://image.glumes.com/images/2019/05/12/opengl_canshu.png"><figcaption>https://image.glumes.com/images/2019/05/12/opengl_canshu.png</figcaption></figure>
 
 <p>通过<code>glEnableVertexAttribArray</code>方法来开启使用即可。</p>
 
@@ -710,121 +695,74 @@ void main()
 <li>《OpenGL 编程指南》（原书第八版）</li>
 <li><a href="https://github.com/glumes/AndroidOpenGLTutorial">https://github.com/glumes/AndroidOpenGLTutorial</a></li>
 </ol>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-tutorial-draw-point/">OpenGL 学习系列---基础的绘制流程</a>
-
-                
-
-                
-
+          
 
         
+  
         
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/python/python-functional-programming/" data-toggle="tooltip" data-placement="top" title="Python 函数式编程">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---基本形状的绘制">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
         
-      </article>
 
-      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
 
-      
+        
+          
 
-      
-      <ul class="pager blog-pager">
         
-          <li class="previous">
-            <a href="https://glumes.com/post/python/python-functional-programming/" data-toggle="tooltip" data-placement="top" title="Python 函数式编程">&larr; Previous Post</a>
-          </li>
-        
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/" data-toggle="tooltip" data-placement="top" title="OpenGL 学习系列---基本形状的绘制">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
-
-      
-        
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -833,8 +771,6 @@ void main()
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -865,21 +801,8 @@ void main()
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -887,22 +810,28 @@ void main()
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -911,49 +840,66 @@ void main()
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android 6.0 Launcher 启动 Activity 过程源码分析（二）</title>
+  <title>Android 6.0 Launcher 启动 Activity 过程源码分析（二）-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="Android 6.0 Launcher 启动 Activity 过程源码分析（二）" />
   <meta name="twitter:title" content="Android 6.0 Launcher 启动 Activity 过程源码分析（二）" />
 
@@ -19,33 +19,34 @@
   <meta name="twitter:description" content="在 Android 6.0 Launcher 启动 Activity 过程源码分析（一） 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。
 
 通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最 …">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-start-activity-from-launcher-2/" />
+  <meta property="og:url" content="https://www.glumes.com/post/android/android-start-activity-from-launcher-2/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-start-activity-from-launcher-2/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/android/android-start-activity-from-launcher-2/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -60,23 +61,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -84,7 +73,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -95,15 +86,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -111,25 +102,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -147,9 +138,6 @@ if (!doNotTrack) {
 </nav>
 
 
-
-
-
     
   
   
@@ -162,47 +150,61 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</h1>
+              <h1>Android 6.0 Launcher 启动 Activity 过程源码分析（二）</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on December 22, 2017
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
             
-                <a href="https://glumes.com/tags/framework/">Framework</a> &nbsp;
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+              
+                  <a href="https://www.glumes.com/tags/framework/">Framework</a> &nbsp;
+              
+            </h5>
             
-          </h5>
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -228,159 +230,160 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a> 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>在 <a href="http://www.glumes.com/start-activity-from-launcher-in-android-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a> 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。</p>
 
 <p>通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。</p>
 
 <h3 id="activitymanagerservice-类的-startactivity-方法">ActivityManagerService 类的 startActivity()方法</h3>
-
-<pre><code class="language-java"> @Override
-    public final int startActivity(IApplicationThread caller, String callingPackage,
-            Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode,
-            int startFlags, ProfilerInfo profilerInfo, Bundle options) {
-        return startActivityAsUser(caller, callingPackage, intent, resolvedType, resultTo,
-            resultWho, requestCode, startFlags, profilerInfo, options,
-            UserHandle.getCallingUserId());
-    }
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#268bd2">@Override</span>
+    <span style="color:#859900">public</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startActivity</span>(<span style="color:#268bd2">IApplicationThread</span> <span style="color:#268bd2">caller</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">callingPackage</span>,
+            <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">resultTo</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resultWho</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">requestCode</span>,
+            <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startFlags</span>, <span style="color:#268bd2">ProfilerInfo</span> <span style="color:#268bd2">profilerInfo</span>, <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">options</span>) {
+        <span style="color:#859900">return</span> <span style="color:#268bd2">startActivityAsUser</span>(<span style="color:#268bd2">caller</span>, <span style="color:#268bd2">callingPackage</span>, <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">resultTo</span>,
+            <span style="color:#268bd2">resultWho</span>, <span style="color:#268bd2">requestCode</span>, <span style="color:#268bd2">startFlags</span>, <span style="color:#268bd2">profilerInfo</span>, <span style="color:#268bd2">options</span>,
+            <span style="color:#268bd2">UserHandle</span>.<span style="color:#268bd2">getCallingUserId</span>());
+    }</code></pre></div>
 <p>显然，最后调用了 <code>startActivityAsUser</code> 方法：</p>
 
 <h3 id="activitymanagerservice-类的-startactivityasuser-方法">ActivityManagerService 类的 startActivityAsUser()方法</h3>
-
-<pre><code class="language-java">@Override
-    public final int startActivityAsUser(IApplicationThread caller, String callingPackage,
-            Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode,
-            int startFlags, ProfilerInfo profilerInfo, Bundle options, int userId) {
-        // 相关验证过程
-        enforceNotIsolatedCaller(&quot;startActivity&quot;);
-        userId = handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), userId,
-                false, ALLOW_FULL_ONLY, &quot;startActivity&quot;, null);
-        // 
-        return mStackSupervisor.startActivityMayWait(caller, -1, callingPackage, intent,
-                resolvedType, null, null, resultTo, resultWho, requestCode, startFlags,
-                profilerInfo, null, null, options, false, userId, null, null);
-    }
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">@Override</span>
+    <span style="color:#859900">public</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startActivityAsUser</span>(<span style="color:#268bd2">IApplicationThread</span> <span style="color:#268bd2">caller</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">callingPackage</span>,
+            <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">resultTo</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resultWho</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">requestCode</span>,
+            <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startFlags</span>, <span style="color:#268bd2">ProfilerInfo</span> <span style="color:#268bd2">profilerInfo</span>, <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">options</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">userId</span>) {
+        <span style="color:#93a1a1;font-style:italic">// 相关验证过程
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">enforceNotIsolatedCaller</span>(<span style="color:#2aa198">&#34;startActivity&#34;</span>);
+        <span style="color:#268bd2">userId</span> = <span style="color:#268bd2">handleIncomingUser</span>(<span style="color:#268bd2">Binder</span>.<span style="color:#268bd2">getCallingPid</span>(), <span style="color:#268bd2">Binder</span>.<span style="color:#268bd2">getCallingUid</span>(), <span style="color:#268bd2">userId</span>,
+                <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#268bd2">ALLOW_FULL_ONLY</span>, <span style="color:#2aa198">&#34;startActivity&#34;</span>, <span style="color:#859900;font-weight:bold">null</span>);
+        <span style="color:#93a1a1;font-style:italic">// 
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">return</span> <span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">startActivityMayWait</span>(<span style="color:#268bd2">caller</span>, -<span style="color:#268bd2">1</span>, <span style="color:#268bd2">callingPackage</span>, <span style="color:#268bd2">intent</span>,
+                <span style="color:#268bd2">resolvedType</span>, <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#268bd2">resultTo</span>, <span style="color:#268bd2">resultWho</span>, <span style="color:#268bd2">requestCode</span>, <span style="color:#268bd2">startFlags</span>,
+                <span style="color:#268bd2">profilerInfo</span>, <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#268bd2">options</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#268bd2">userId</span>, <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#859900;font-weight:bold">null</span>);
+    }</code></pre></div>
 <p>在 <code>startActivityAsUser</code>先是执行了相关的验证过程，然后调用了类型为 <code>ActivityStackSupervisor</code>的<code>mStackSupervisor</code>的<code>startActivityMayWait()</code>方法。</p>
 
 <h3 id="activitystacksupervisor-类的-startactivitymaywait-方法">ActivityStackSupervisor 类的 startActivityMayWait() 方法</h3>
 
 <p>Android 中的 Activity 组件堆栈信息，也就是 Task，是用 <code>ActivityStack</code> 类管理的，而<code>ActivityStackSupervisor</code>则是一个管理所有的<code>ActivityStack</code>的类。</p>
-
-<pre><code class="language-java">    final int startActivityMayWait(IApplicationThread caller, int callingUid,
-            String callingPackage, Intent intent, String resolvedType,
-            IVoiceInteractionSession voiceSession, IVoiceInteractor voiceInteractor,
-            IBinder resultTo, String resultWho, int requestCode, int startFlags,
-            ProfilerInfo profilerInfo, WaitResult outResult, Configuration config,
-            Bundle options, boolean ignoreTargetSecurity, int userId,
-            IActivityContainer iContainer, TaskRecord inTask) {
-	    // 省略部分代码
-     
-        // Collect information about the target of the Intent.
-        // 通过 PackageManagerService 解析 Intent 参数内容，获得更多信息，保存到 ActivityInfo 类中
-        ActivityInfo aInfo =
-                resolveActivity(intent, resolvedType, startFlags, profilerInfo, userId);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startActivityMayWait</span>(<span style="color:#268bd2">IApplicationThread</span> <span style="color:#268bd2">caller</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">callingUid</span>,
+            <span style="color:#268bd2">String</span> <span style="color:#268bd2">callingPackage</span>, <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resolvedType</span>,
+            <span style="color:#268bd2">IVoiceInteractionSession</span> <span style="color:#268bd2">voiceSession</span>, <span style="color:#268bd2">IVoiceInteractor</span> <span style="color:#268bd2">voiceInteractor</span>,
+            <span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">resultTo</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resultWho</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">requestCode</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startFlags</span>,
+            <span style="color:#268bd2">ProfilerInfo</span> <span style="color:#268bd2">profilerInfo</span>, <span style="color:#268bd2">WaitResult</span> <span style="color:#268bd2">outResult</span>, <span style="color:#268bd2">Configuration</span> <span style="color:#268bd2">config</span>,
+            <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">options</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">ignoreTargetSecurity</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">userId</span>,
+            <span style="color:#268bd2">IActivityContainer</span> <span style="color:#268bd2">iContainer</span>, <span style="color:#268bd2">TaskRecord</span> <span style="color:#268bd2">inTask</span>) {
+	    <span style="color:#93a1a1;font-style:italic">// 省略部分代码
+</span><span style="color:#93a1a1;font-style:italic"></span>     
+        <span style="color:#93a1a1;font-style:italic">// Collect information about the target of the Intent.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// 通过 PackageManagerService 解析 Intent 参数内容，获得更多信息，保存到 ActivityInfo 类中
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">ActivityInfo</span> <span style="color:#268bd2">aInfo</span> =
+                <span style="color:#268bd2">resolveActivity</span>(<span style="color:#268bd2">intent</span>, <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">startFlags</span>, <span style="color:#268bd2">profilerInfo</span>, <span style="color:#268bd2">userId</span>);
 		
-		// 省略部分关于 aInfo 代码
+		<span style="color:#93a1a1;font-style:italic">// 省略部分关于 aInfo 代码
+</span><span style="color:#93a1a1;font-style:italic"></span>
+            <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">res</span> = <span style="color:#268bd2">startActivityLocked</span>(<span style="color:#268bd2">caller</span>, <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">aInfo</span>,
+                    <span style="color:#268bd2">voiceSession</span>, <span style="color:#268bd2">voiceInteractor</span>, <span style="color:#268bd2">resultTo</span>, <span style="color:#268bd2">resultWho</span>,
+                    <span style="color:#268bd2">requestCode</span>, <span style="color:#268bd2">callingPid</span>, <span style="color:#268bd2">callingUid</span>, <span style="color:#268bd2">callingPackage</span>,
+                    <span style="color:#268bd2">realCallingPid</span>, <span style="color:#268bd2">realCallingUid</span>, <span style="color:#268bd2">startFlags</span>, <span style="color:#268bd2">options</span>, <span style="color:#268bd2">ignoreTargetSecurity</span>,
+                    <span style="color:#268bd2">componentSpecified</span>, <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#268bd2">container</span>, <span style="color:#268bd2">inTask</span>);
 
-            int res = startActivityLocked(caller, intent, resolvedType, aInfo,
-                    voiceSession, voiceInteractor, resultTo, resultWho,
-                    requestCode, callingPid, callingUid, callingPackage,
-                    realCallingPid, realCallingUid, startFlags, options, ignoreTargetSecurity,
-                    componentSpecified, null, container, inTask);
-
-            Binder.restoreCallingIdentity(origId);
-            return res;
+            <span style="color:#268bd2">Binder</span>.<span style="color:#268bd2">restoreCallingIdentity</span>(<span style="color:#268bd2">origId</span>);
+            <span style="color:#859900">return</span> <span style="color:#268bd2">res</span>;
         }
     }
 
-// resolveActivity 函数
-    ActivityInfo resolveActivity(Intent intent, String resolvedType, int startFlags,
-            ProfilerInfo profilerInfo, int userId) {
-        // Collect information about the target of the Intent.
-        ActivityInfo aInfo;
-        try {
-            ResolveInfo rInfo =
-                AppGlobals.getPackageManager().resolveIntent(
-                        intent, resolvedType,
-                        PackageManager.MATCH_DEFAULT_ONLY
-                                    | ActivityManagerService.STOCK_PM_FLAGS, userId);
-            aInfo = rInfo != null ? rInfo.activityInfo : null;
-        } catch (RemoteException e) {
-            aInfo = null;
+<span style="color:#93a1a1;font-style:italic">// resolveActivity 函数
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">ActivityInfo</span> <span style="color:#268bd2">resolveActivity</span>(<span style="color:#268bd2">Intent</span> <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resolvedType</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startFlags</span>,
+            <span style="color:#268bd2">ProfilerInfo</span> <span style="color:#268bd2">profilerInfo</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">userId</span>) {
+        <span style="color:#93a1a1;font-style:italic">// Collect information about the target of the Intent.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">ActivityInfo</span> <span style="color:#268bd2">aInfo</span>;
+        <span style="color:#859900">try</span> {
+            <span style="color:#268bd2">ResolveInfo</span> <span style="color:#268bd2">rInfo</span> =
+                <span style="color:#268bd2">AppGlobals</span>.<span style="color:#268bd2">getPackageManager</span>().<span style="color:#268bd2">resolveIntent</span>(
+                        <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">resolvedType</span>,
+                        <span style="color:#268bd2">PackageManager</span>.<span style="color:#268bd2">MATCH_DEFAULT_ONLY</span>
+                                    | <span style="color:#268bd2">ActivityManagerService</span>.<span style="color:#268bd2">STOCK_PM_FLAGS</span>, <span style="color:#268bd2">userId</span>);
+            <span style="color:#268bd2">aInfo</span> = <span style="color:#268bd2">rInfo</span> != <span style="color:#859900;font-weight:bold">null</span> ? <span style="color:#268bd2">rInfo</span>.<span style="color:#268bd2">activityInfo</span> : <span style="color:#859900;font-weight:bold">null</span>;
+        } <span style="color:#859900">catch</span> (<span style="color:#268bd2">RemoteException</span> <span style="color:#268bd2">e</span>) {
+            <span style="color:#268bd2">aInfo</span> = <span style="color:#859900;font-weight:bold">null</span>;
         }
-        // 省略部分代码
-        
-    }
-</code></pre>
-
+        <span style="color:#93a1a1;font-style:italic">// 省略部分代码
+</span><span style="color:#93a1a1;font-style:italic"></span>        
+    }</code></pre></div>
 <p>首先会先调用<code>resolveActivity</code>函数，通过 PackageManagerService 解析 Intent 得到更多信息，返回<code>ActivityInfo</code>对象之后，便执行 <code>startActivityLocked</code>方法。</p>
 
 <h3 id="activitystacksupervisor-类的-startactivitylocked-方法">ActivityStackSupervisor 类的 startActivityLocked() 方法</h3>
-
-<pre><code class="language-java">final int startActivityLocked(IApplicationThread caller,
-            Intent intent, String resolvedType, ActivityInfo aInfo,
-            IVoiceInteractionSession voiceSession, IVoiceInteractor voiceInteractor,
-            IBinder resultTo, String resultWho, int requestCode,
-            int callingPid, int callingUid, String callingPackage,
-            int realCallingPid, int realCallingUid, int startFlags, Bundle options,
-            boolean ignoreTargetSecurity, boolean componentSpecified, ActivityRecord[] outActivity,
-            ActivityContainer container, TaskRecord inTask) {
-        int err = ActivityManager.START_SUCCESS;
-		ProcessRecord callerApp = null;
-        if (caller != null) {
-            callerApp = mService.getRecordForAppLocked(caller); // 得到调用者的 ProcessRecord
-            if (callerApp != null) {
-                callingPid = callerApp.pid;  // 调用者的 PID
-                callingUid = callerApp.info.uid; // 调用者的 UID 
-            } else {
-                err = ActivityManager.START_PERMISSION_DENIED;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startActivityLocked</span>(<span style="color:#268bd2">IApplicationThread</span> <span style="color:#268bd2">caller</span>,
+            <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">ActivityInfo</span> <span style="color:#268bd2">aInfo</span>,
+            <span style="color:#268bd2">IVoiceInteractionSession</span> <span style="color:#268bd2">voiceSession</span>, <span style="color:#268bd2">IVoiceInteractor</span> <span style="color:#268bd2">voiceInteractor</span>,
+            <span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">resultTo</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resultWho</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">requestCode</span>,
+            <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">callingPid</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">callingUid</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">callingPackage</span>,
+            <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">realCallingPid</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">realCallingUid</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startFlags</span>, <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">options</span>,
+            <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">ignoreTargetSecurity</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">componentSpecified</span>, <span style="color:#268bd2">ActivityRecord</span>[] <span style="color:#268bd2">outActivity</span>,
+            <span style="color:#268bd2">ActivityContainer</span> <span style="color:#268bd2">container</span>, <span style="color:#268bd2">TaskRecord</span> <span style="color:#268bd2">inTask</span>) {
+        <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">err</span> = <span style="color:#268bd2">ActivityManager</span>.<span style="color:#268bd2">START_SUCCESS</span>;
+		<span style="color:#268bd2">ProcessRecord</span> <span style="color:#268bd2">callerApp</span> = <span style="color:#859900;font-weight:bold">null</span>;
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">caller</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#268bd2">callerApp</span> = <span style="color:#268bd2">mService</span>.<span style="color:#268bd2">getRecordForAppLocked</span>(<span style="color:#268bd2">caller</span>); <span style="color:#93a1a1;font-style:italic">// 得到调用者的 ProcessRecord
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#859900">if</span> (<span style="color:#268bd2">callerApp</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+                <span style="color:#268bd2">callingPid</span> = <span style="color:#268bd2">callerApp</span>.<span style="color:#268bd2">pid</span>;  <span style="color:#93a1a1;font-style:italic">// 调用者的 PID
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">callingUid</span> = <span style="color:#268bd2">callerApp</span>.<span style="color:#268bd2">info</span>.<span style="color:#268bd2">uid</span>; <span style="color:#93a1a1;font-style:italic">// 调用者的 UID 
+</span><span style="color:#93a1a1;font-style:italic"></span>            } <span style="color:#859900">else</span> {
+                <span style="color:#268bd2">err</span> = <span style="color:#268bd2">ActivityManager</span>.<span style="color:#268bd2">START_PERMISSION_DENIED</span>;
             }
         }
 		
-		// 省略部分代码 ，得到描述 Launcher 组件的 ActivityRecord 对象，保存在变量 sourceRecord 中
-		ActivityRecord sourceRecord = null;
-        ActivityRecord resultRecord = null;
-        if (resultTo != null) {
-            sourceRecord = isInAnyStackLocked(resultTo);
-            if (DEBUG_RESULTS) Slog.v(TAG_RESULTS,
-                    &quot;Will send result to &quot; + resultTo + &quot; &quot; + sourceRecord);
-            if (sourceRecord != null) { 
-            // 从 Launcher 启动，requestCode 为 -1 ，下面的if不成立，resultRecord 为 null 。
-                if (requestCode &gt;= 0 &amp;&amp; !sourceRecord.finishing) {
-                    resultRecord = sourceRecord;
+		<span style="color:#93a1a1;font-style:italic">// 省略部分代码 ，得到描述 Launcher 组件的 ActivityRecord 对象，保存在变量 sourceRecord 中
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">sourceRecord</span> = <span style="color:#859900;font-weight:bold">null</span>;
+        <span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">resultRecord</span> = <span style="color:#859900;font-weight:bold">null</span>;
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">resultTo</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#268bd2">sourceRecord</span> = <span style="color:#268bd2">isInAnyStackLocked</span>(<span style="color:#268bd2">resultTo</span>);
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">DEBUG_RESULTS</span>) <span style="color:#268bd2">Slog</span>.<span style="color:#268bd2">v</span>(<span style="color:#268bd2">TAG_RESULTS</span>,
+                    <span style="color:#2aa198">&#34;Will send result to &#34;</span> + <span style="color:#268bd2">resultTo</span> + <span style="color:#2aa198">&#34; &#34;</span> + <span style="color:#268bd2">sourceRecord</span>);
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">sourceRecord</span> != <span style="color:#859900;font-weight:bold">null</span>) { 
+            <span style="color:#93a1a1;font-style:italic">// 从 Launcher 启动，requestCode 为 -1 ，下面的if不成立，resultRecord 为 null 。
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#859900">if</span> (<span style="color:#268bd2">requestCode</span> &gt;= <span style="color:#268bd2">0</span> &amp;&amp; !<span style="color:#268bd2">sourceRecord</span>.<span style="color:#268bd2">finishing</span>) {
+                    <span style="color:#268bd2">resultRecord</span> = <span style="color:#268bd2">sourceRecord</span>;
                 }
             }
         }
 		
-		// 创建用来描述被启动的 Activity 组件的 ActivityRecord 。
-		ActivityRecord r = new ActivityRecord(mService, callerApp, callingUid, callingPackage, intent, resolvedType, aInfo, mService.mConfiguration, resultRecord, resultWho, requestCode, componentSpecified, voiceSession != null, this, container, options);
+		<span style="color:#93a1a1;font-style:italic">// 创建用来描述被启动的 Activity 组件的 ActivityRecord 。
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">r</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">ActivityRecord</span>(<span style="color:#268bd2">mService</span>, <span style="color:#268bd2">callerApp</span>, <span style="color:#268bd2">callingUid</span>, <span style="color:#268bd2">callingPackage</span>, <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">aInfo</span>, <span style="color:#268bd2">mService</span>.<span style="color:#268bd2">mConfiguration</span>, <span style="color:#268bd2">resultRecord</span>, <span style="color:#268bd2">resultWho</span>, <span style="color:#268bd2">requestCode</span>, <span style="color:#268bd2">componentSpecified</span>, <span style="color:#268bd2">voiceSession</span> != <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#859900">this</span>, <span style="color:#268bd2">container</span>, <span style="color:#268bd2">options</span>);
                 	
-		err = startActivityUncheckedLocked(r, sourceRecord, voiceSession, voiceInteractor,
-                startFlags, true, options, inTask);
+		<span style="color:#268bd2">err</span> = <span style="color:#268bd2">startActivityUncheckedLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">sourceRecord</span>, <span style="color:#268bd2">voiceSession</span>, <span style="color:#268bd2">voiceInteractor</span>,
+                <span style="color:#268bd2">startFlags</span>, <span style="color:#859900;font-weight:bold">true</span>, <span style="color:#268bd2">options</span>, <span style="color:#268bd2">inTask</span>);
 }
 
-// 根据 token 找到对应的 ActivityRecord 变量，相当于一个数组变量里面的每个元素又持有一个数组。
-ActivityRecord isInAnyStackLocked(IBinder token) {
-		// mActivityDisplays 变量的类型为 SparseArray&lt;ActivityDisplay&gt;
-        int numDisplays = mActivityDisplays.size();
-        for (int displayNdx = 0; displayNdx &lt; numDisplays; ++displayNdx) {
-        // 内部持有一个 ArrayList&lt;ActivityStack&gt; 类型的变量 mStacks
-            ArrayList&lt;ActivityStack&gt; stacks = mActivityDisplays.valueAt(displayNdx).mStacks;
-            for (int stackNdx = stacks.size() - 1; stackNdx &gt;= 0; --stackNdx) {
-                final ActivityRecord r = stacks.get(stackNdx).isInStackLocked(token);
-                if (r != null) {
-                    return r;
+<span style="color:#93a1a1;font-style:italic">// 根据 token 找到对应的 ActivityRecord 变量，相当于一个数组变量里面的每个元素又持有一个数组。
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">isInAnyStackLocked</span>(<span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">token</span>) {
+		<span style="color:#93a1a1;font-style:italic">// mActivityDisplays 变量的类型为 SparseArray&lt;ActivityDisplay&gt;
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">numDisplays</span> = <span style="color:#268bd2">mActivityDisplays</span>.<span style="color:#268bd2">size</span>();
+        <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">displayNdx</span> = <span style="color:#268bd2">0</span>; <span style="color:#268bd2">displayNdx</span> &lt; <span style="color:#268bd2">numDisplays</span>; ++<span style="color:#268bd2">displayNdx</span>) {
+        <span style="color:#93a1a1;font-style:italic">// 内部持有一个 ArrayList&lt;ActivityStack&gt; 类型的变量 mStacks
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">ArrayList</span>&lt;<span style="color:#268bd2">ActivityStack</span>&gt; <span style="color:#268bd2">stacks</span> = <span style="color:#268bd2">mActivityDisplays</span>.<span style="color:#268bd2">valueAt</span>(<span style="color:#268bd2">displayNdx</span>).<span style="color:#268bd2">mStacks</span>;
+            <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">stackNdx</span> = <span style="color:#268bd2">stacks</span>.<span style="color:#268bd2">size</span>() - <span style="color:#268bd2">1</span>; <span style="color:#268bd2">stackNdx</span> &gt;= <span style="color:#268bd2">0</span>; --<span style="color:#268bd2">stackNdx</span>) {
+                <span style="color:#859900">final</span> <span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">r</span> = <span style="color:#268bd2">stacks</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">stackNdx</span>).<span style="color:#268bd2">isInStackLocked</span>(<span style="color:#268bd2">token</span>);
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">r</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+                    <span style="color:#859900">return</span> <span style="color:#268bd2">r</span>;
                 }
             }
         }
-        return null;
-    }
-</code></pre>
-
+        <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
+    }</code></pre></div>
 <p>每一个应用程序进程都使用一个 <code>ProcessRecord</code>对象来描述，并且保存在 ActivityManagerService 内部。ActivityStackSupervisor 的 mService 变量指向了ActivityManagerService 。通过它的成员函数<code>getRecordForAppLocked</code>来获得参数<code>caller</code>对应的一个<code>ProcessRecord</code>对象<code>callerApp</code>。而参数<code>caller</code>指向的是 Launcher 组件所运行的应用程序进程的一个 ApplicationThread 对象，因此，<code>ProcessRecord</code>对象 <code>callerApp</code>实际上就指向了 Launcher 组件所运行的应用程序进程，接着得到这个应用程序进程的 PID  和 UID ，保存在参数<code>callingPid</code>和<code>callingUid</code>中。</p>
 
 <p>ActivityStackSupervisor 变量内部有一个变量 mActivityDisplays，类型为<code>SparseArray&lt;ActivityDisplay&gt;</code>,而<code>ActivityDisplay</code>变量内部又持有一个<code>mStack</code>变量，类型为<code>ArrayList&lt;ActivityStack&gt;</code>，通过找到Activity 组件堆栈 <code>ActivityStack</code>，从而得到用来描述<code>Launcher</code>组件的<code>ActivityRecord</code>对象，保存在变量<code>sourceRecord</code>中，而由于 requestCode 为 -1 ，则 <code>resultRecord</code>继续为 null 。</p>
@@ -390,108 +393,105 @@ ActivityRecord isInAnyStackLocked(IBinder token) {
 <p>现在，就已经得到请求启动 Activity 组件的 Launcher ActivityRecord 信息<code>sourceRecord</code>以及需要启动的 Activity 的组件信息<code>r</code>，下一步就执行<code>startActivityUncheckedLocked</code>操作。</p>
 
 <h3 id="activitystacksupervisor-类的-startactivityuncheckedlocked-方法">ActivityStackSupervisor 类的 startActivityUncheckedLocked() 方法</h3>
-
-<pre><code class="language-java">final int startActivityUncheckedLocked(final ActivityRecord r, ActivityRecord sourceRecord,
-            IVoiceInteractionSession voiceSession, IVoiceInteractor voiceInteractor, int startFlags, boolean doResume, Bundle options, TaskRecord inTask) {
-		final Intent intent = r.intent;
-        final int callingUid = r.launchedFromUid;
-        // 得到目标 Activity 组件的启动标志位
-		int launchFlags = intent.getFlags(); 
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startActivityUncheckedLocked</span>(<span style="color:#859900">final</span> <span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">r</span>, <span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">sourceRecord</span>,
+            <span style="color:#268bd2">IVoiceInteractionSession</span> <span style="color:#268bd2">voiceSession</span>, <span style="color:#268bd2">IVoiceInteractor</span> <span style="color:#268bd2">voiceInteractor</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">startFlags</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">doResume</span>, <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">options</span>, <span style="color:#268bd2">TaskRecord</span> <span style="color:#268bd2">inTask</span>) {
+		<span style="color:#859900">final</span> <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">intent</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">intent</span>;
+        <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">callingUid</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">launchedFromUid</span>;
+        <span style="color:#93a1a1;font-style:italic">// 得到目标 Activity 组件的启动标志位
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">launchFlags</span> = <span style="color:#268bd2">intent</span>.<span style="color:#268bd2">getFlags</span>(); 
 		
-        // We'll invoke onUserLeaving before onPause only if the launching
-        // activity did not explicitly state that this is an automated launch.
-        mUserLeaving = (launchFlags &amp; Intent.FLAG_ACTIVITY_NO_USER_ACTION) == 0;
+        <span style="color:#93a1a1;font-style:italic">// We&#39;ll invoke onUserLeaving before onPause only if the launching
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// activity did not explicitly state that this is an automated launch.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">mUserLeaving</span> = (<span style="color:#268bd2">launchFlags</span> &amp; <span style="color:#268bd2">Intent</span>.<span style="color:#268bd2">FLAG_ACTIVITY_NO_USER_ACTION</span>) == <span style="color:#268bd2">0</span>;
 
-		boolean addingToTask = false; // 是否将需要启动的 Activity 添加到给定的 task 中
-        TaskRecord reuseTask = null; // 
-
-        // If the caller is not coming from another activity, but has given us an
-        // explicit task into which they would like us to launch the new activity,
-        // then let's see about doing that.
-        // 如果调用者
-        if (sourceRecord == null &amp;&amp; inTask != null &amp;&amp; inTask.stack != null) {
-		 // 省略部分代码
-         // If task is empty, then adopt the interesting intent launch flags in to the
-         // activity being started.
-            if (root == null) {
-                final int flagsOfInterest = Intent.FLAG_ACTIVITY_NEW_TASK
-                        | Intent.FLAG_ACTIVITY_MULTIPLE_TASK | Intent.FLAG_ACTIVITY_NEW_DOCUMENT
-                        | Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS;
-                launchFlags = (launchFlags&amp;~flagsOfInterest)
-                        | (baseIntent.getFlags()&amp;flagsOfInterest);
-                intent.setFlags(launchFlags);
-                inTask.setIntent(r);
-                addingToTask = true;
+		<span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">addingToTask</span> = <span style="color:#859900;font-weight:bold">false</span>; <span style="color:#93a1a1;font-style:italic">// 是否将需要启动的 Activity 添加到给定的 task 中
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">TaskRecord</span> <span style="color:#268bd2">reuseTask</span> = <span style="color:#859900;font-weight:bold">null</span>; <span style="color:#93a1a1;font-style:italic">// 
+</span><span style="color:#93a1a1;font-style:italic"></span>
+        <span style="color:#93a1a1;font-style:italic">// If the caller is not coming from another activity, but has given us an
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// explicit task into which they would like us to launch the new activity,
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// then let&#39;s see about doing that.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// 如果调用者
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">sourceRecord</span> == <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; <span style="color:#268bd2">inTask</span> != <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; <span style="color:#268bd2">inTask</span>.<span style="color:#268bd2">stack</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+		 <span style="color:#93a1a1;font-style:italic">// 省略部分代码
+</span><span style="color:#93a1a1;font-style:italic"></span>         <span style="color:#93a1a1;font-style:italic">// If task is empty, then adopt the interesting intent launch flags in to the
+</span><span style="color:#93a1a1;font-style:italic"></span>         <span style="color:#93a1a1;font-style:italic">// activity being started.
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#859900">if</span> (<span style="color:#268bd2">root</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+                <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">flagsOfInterest</span> = <span style="color:#268bd2">Intent</span>.<span style="color:#268bd2">FLAG_ACTIVITY_NEW_TASK</span>
+                        | <span style="color:#268bd2">Intent</span>.<span style="color:#268bd2">FLAG_ACTIVITY_MULTIPLE_TASK</span> | <span style="color:#268bd2">Intent</span>.<span style="color:#268bd2">FLAG_ACTIVITY_NEW_DOCUMENT</span>
+                        | <span style="color:#268bd2">Intent</span>.<span style="color:#268bd2">FLAG_ACTIVITY_RETAIN_IN_RECENTS</span>;
+                <span style="color:#268bd2">launchFlags</span> = (<span style="color:#268bd2">launchFlags</span>&amp;~<span style="color:#268bd2">flagsOfInterest</span>)
+                        | (<span style="color:#268bd2">baseIntent</span>.<span style="color:#268bd2">getFlags</span>()&amp;<span style="color:#268bd2">flagsOfInterest</span>);
+                <span style="color:#268bd2">intent</span>.<span style="color:#268bd2">setFlags</span>(<span style="color:#268bd2">launchFlags</span>);
+                <span style="color:#268bd2">inTask</span>.<span style="color:#268bd2">setIntent</span>(<span style="color:#268bd2">r</span>);
+                <span style="color:#268bd2">addingToTask</span> = <span style="color:#859900;font-weight:bold">true</span>;
         }
 		
-		// 省略启动 Activity 已经启动过的情况，主要是将 Activity 移植 Task 栈顶
-		// 启动一个从未启动过的 Activity 
-		boolean newTask = false; // 表示在一个新的 Task 中启动 Activity
-        boolean keepCurTransition = false;
+		<span style="color:#93a1a1;font-style:italic">// 省略启动 Activity 已经启动过的情况，主要是将 Activity 移植 Task 栈顶
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#93a1a1;font-style:italic">// 启动一个从未启动过的 Activity 
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">newTask</span> = <span style="color:#859900;font-weight:bold">false</span>; <span style="color:#93a1a1;font-style:italic">// 表示在一个新的 Task 中启动 Activity
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">keepCurTransition</span> = <span style="color:#859900;font-weight:bold">false</span>;
         
-        // Should this be considered a new task?
-        // 是否要创建一个新的 Task ，当然是要的
-        if (r.resultTo == null &amp;&amp; inTask == null &amp;&amp; !addingToTask
-                &amp;&amp; (launchFlags &amp; Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
-            newTask = true;
-            targetStack = computeStackFocus(r, newTask);
-            targetStack.moveToFront(&quot;startingNewTask&quot;);
+        <span style="color:#93a1a1;font-style:italic">// Should this be considered a new task?
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// 是否要创建一个新的 Task ，当然是要的
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">resultTo</span> == <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; <span style="color:#268bd2">inTask</span> == <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; !<span style="color:#268bd2">addingToTask</span>
+                &amp;&amp; (<span style="color:#268bd2">launchFlags</span> &amp; <span style="color:#268bd2">Intent</span>.<span style="color:#268bd2">FLAG_ACTIVITY_NEW_TASK</span>) != <span style="color:#268bd2">0</span>) {
+            <span style="color:#268bd2">newTask</span> = <span style="color:#859900;font-weight:bold">true</span>;
+            <span style="color:#268bd2">targetStack</span> = <span style="color:#268bd2">computeStackFocus</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">newTask</span>);
+            <span style="color:#268bd2">targetStack</span>.<span style="color:#268bd2">moveToFront</span>(<span style="color:#2aa198">&#34;startingNewTask&#34;</span>);
 
-            if (reuseTask == null) {  // reuseTask 为 null，创建一个新的 Task 
-                r.setTask(targetStack.createTaskRecord(getNextTaskId(),
-                        newTaskInfo != null ? newTaskInfo : r.info,
-                        newTaskIntent != null ? newTaskIntent : intent,
-                        voiceSession, voiceInteractor, !launchTaskBehind /* toTop */),
-                        taskToAffiliate);
-                if (DEBUG_TASKS) Slog.v(TAG_TASKS,
-                        &quot;Starting new activity &quot; + r + &quot; in new task &quot; + r.task);
-            } else {
-                r.setTask(reuseTask, taskToAffiliate);
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">reuseTask</span> == <span style="color:#859900;font-weight:bold">null</span>) {  <span style="color:#93a1a1;font-style:italic">// reuseTask 为 null，创建一个新的 Task 
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">r</span>.<span style="color:#268bd2">setTask</span>(<span style="color:#268bd2">targetStack</span>.<span style="color:#268bd2">createTaskRecord</span>(<span style="color:#268bd2">getNextTaskId</span>(),
+                        <span style="color:#268bd2">newTaskInfo</span> != <span style="color:#859900;font-weight:bold">null</span> ? <span style="color:#268bd2">newTaskInfo</span> : <span style="color:#268bd2">r</span>.<span style="color:#268bd2">info</span>,
+                        <span style="color:#268bd2">newTaskIntent</span> != <span style="color:#859900;font-weight:bold">null</span> ? <span style="color:#268bd2">newTaskIntent</span> : <span style="color:#268bd2">intent</span>,
+                        <span style="color:#268bd2">voiceSession</span>, <span style="color:#268bd2">voiceInteractor</span>, !<span style="color:#268bd2">launchTaskBehind</span> <span style="color:#93a1a1;font-style:italic">/* toTop */</span>),
+                        <span style="color:#268bd2">taskToAffiliate</span>);
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">DEBUG_TASKS</span>) <span style="color:#268bd2">Slog</span>.<span style="color:#268bd2">v</span>(<span style="color:#268bd2">TAG_TASKS</span>,
+                        <span style="color:#2aa198">&#34;Starting new activity &#34;</span> + <span style="color:#268bd2">r</span> + <span style="color:#2aa198">&#34; in new task &#34;</span> + <span style="color:#268bd2">r</span>.<span style="color:#268bd2">task</span>);
+            } <span style="color:#859900">else</span> {
+                <span style="color:#268bd2">r</span>.<span style="color:#268bd2">setTask</span>(<span style="color:#268bd2">reuseTask</span>, <span style="color:#268bd2">taskToAffiliate</span>);
             }
-            if (isLockTaskModeViolation(r.task)) {
-                Slog.e(TAG, &quot;Attempted Lock Task Mode violation r=&quot; + r);
-                return ActivityManager.START_RETURN_LOCK_TASK_MODE_VIOLATION;
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">isLockTaskModeViolation</span>(<span style="color:#268bd2">r</span>.<span style="color:#268bd2">task</span>)) {
+                <span style="color:#268bd2">Slog</span>.<span style="color:#268bd2">e</span>(<span style="color:#268bd2">TAG</span>, <span style="color:#2aa198">&#34;Attempted Lock Task Mode violation r=&#34;</span> + <span style="color:#268bd2">r</span>);
+                <span style="color:#859900">return</span> <span style="color:#268bd2">ActivityManager</span>.<span style="color:#268bd2">START_RETURN_LOCK_TASK_MODE_VIOLATION</span>;
             }
-            if (!movedHome) {
-                if ((launchFlags &amp;
-                        (FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_TASK_ON_HOME))
-                        == (FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_TASK_ON_HOME)) {
-                    // Caller wants to appear on home activity, so before starting
-                    // their own activity we will bring home to the front.
-                    r.task.setTaskToReturnTo(HOME_ACTIVITY_TYPE);
+            <span style="color:#859900">if</span> (!<span style="color:#268bd2">movedHome</span>) {
+                <span style="color:#859900">if</span> ((<span style="color:#268bd2">launchFlags</span> &amp;
+                        (<span style="color:#268bd2">FLAG_ACTIVITY_NEW_TASK</span> | <span style="color:#268bd2">FLAG_ACTIVITY_TASK_ON_HOME</span>))
+                        == (<span style="color:#268bd2">FLAG_ACTIVITY_NEW_TASK</span> | <span style="color:#268bd2">FLAG_ACTIVITY_TASK_ON_HOME</span>)) {
+                    <span style="color:#93a1a1;font-style:italic">// Caller wants to appear on home activity, so before starting
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#93a1a1;font-style:italic">// their own activity we will bring home to the front.
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#268bd2">r</span>.<span style="color:#268bd2">task</span>.<span style="color:#268bd2">setTaskToReturnTo</span>(<span style="color:#268bd2">HOME_ACTIVITY_TYPE</span>);
                 }
             }
-        } else if (sourceRecord != null) {
-			// 上面的 if 判断成立，省略代码
-			// 在调用者的 Task 中做操作 ，resumeTopActivityLocked 方法
-		} else if (inTask != null) {
-			// 上面的 if 判断成立，省略代码
-			// 在指定的 Task 中做操作，
-		} else {
-			// 上面的 if 判断成立，省略代码
-		}
+        } <span style="color:#859900">else</span> <span style="color:#859900">if</span> (<span style="color:#268bd2">sourceRecord</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+			<span style="color:#93a1a1;font-style:italic">// 上面的 if 判断成立，省略代码
+</span><span style="color:#93a1a1;font-style:italic"></span>			<span style="color:#93a1a1;font-style:italic">// 在调用者的 Task 中做操作 ，resumeTopActivityLocked 方法
+</span><span style="color:#93a1a1;font-style:italic"></span>		} <span style="color:#859900">else</span> <span style="color:#859900">if</span> (<span style="color:#268bd2">inTask</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+			<span style="color:#93a1a1;font-style:italic">// 上面的 if 判断成立，省略代码
+</span><span style="color:#93a1a1;font-style:italic"></span>			<span style="color:#93a1a1;font-style:italic">// 在指定的 Task 中做操作，
+</span><span style="color:#93a1a1;font-style:italic"></span>		} <span style="color:#859900">else</span> {
+			<span style="color:#93a1a1;font-style:italic">// 上面的 if 判断成立，省略代码
+</span><span style="color:#93a1a1;font-style:italic"></span>		}
 			
-		mService.grantUriPermissionFromIntentLocked(callingUid, r.packageName,
-                intent, r.getUriPermissionsLocked(), r.userId);
+		<span style="color:#268bd2">mService</span>.<span style="color:#268bd2">grantUriPermissionFromIntentLocked</span>(<span style="color:#268bd2">callingUid</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">packageName</span>,
+                <span style="color:#268bd2">intent</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">getUriPermissionsLocked</span>(), <span style="color:#268bd2">r</span>.<span style="color:#268bd2">userId</span>);
 
-        if (sourceRecord != null &amp;&amp; sourceRecord.isRecentsActivity()) {
-            r.task.setTaskToReturnTo(RECENTS_ACTIVITY_TYPE);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">sourceRecord</span> != <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; <span style="color:#268bd2">sourceRecord</span>.<span style="color:#268bd2">isRecentsActivity</span>()) {
+            <span style="color:#268bd2">r</span>.<span style="color:#268bd2">task</span>.<span style="color:#268bd2">setTaskToReturnTo</span>(<span style="color:#268bd2">RECENTS_ACTIVITY_TYPE</span>);
         }
-        if (newTask) {
-            EventLog.writeEvent(EventLogTags.AM_CREATE_TASK, r.userId, r.task.taskId);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">newTask</span>) {
+            <span style="color:#268bd2">EventLog</span>.<span style="color:#268bd2">writeEvent</span>(<span style="color:#268bd2">EventLogTags</span>.<span style="color:#268bd2">AM_CREATE_TASK</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">userId</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">task</span>.<span style="color:#268bd2">taskId</span>);
         }
-        ActivityStack.logStartActivity(EventLogTags.AM_CREATE_ACTIVITY, r, r.task);
-        targetStack.mLastPausedActivity = null;
-        // 启动 Activity 组件的下一步
-        targetStack.startActivityLocked(r, newTask, doResume, keepCurTransition, options);
-        if (!launchTaskBehind) {
-            // Don't set focus on an activity that's going to the back.
-            mService.setFocusedActivityLocked(r, &quot;startedActivity&quot;);
+        <span style="color:#268bd2">ActivityStack</span>.<span style="color:#268bd2">logStartActivity</span>(<span style="color:#268bd2">EventLogTags</span>.<span style="color:#268bd2">AM_CREATE_ACTIVITY</span>, <span style="color:#268bd2">r</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">task</span>);
+        <span style="color:#268bd2">targetStack</span>.<span style="color:#268bd2">mLastPausedActivity</span> = <span style="color:#859900;font-weight:bold">null</span>;
+        <span style="color:#93a1a1;font-style:italic">// 启动 Activity 组件的下一步
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">targetStack</span>.<span style="color:#268bd2">startActivityLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">newTask</span>, <span style="color:#268bd2">doResume</span>, <span style="color:#268bd2">keepCurTransition</span>, <span style="color:#268bd2">options</span>);
+        <span style="color:#859900">if</span> (!<span style="color:#268bd2">launchTaskBehind</span>) {
+            <span style="color:#93a1a1;font-style:italic">// Don&#39;t set focus on an activity that&#39;s going to the back.
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">mService</span>.<span style="color:#268bd2">setFocusedActivityLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#2aa198">&#34;startedActivity&#34;</span>);
         }
-        return ActivityManager.START_SUCCESS;
-}
-</code></pre>
-
+        <span style="color:#859900">return</span> <span style="color:#268bd2">ActivityManager</span>.<span style="color:#268bd2">START_SUCCESS</span>;
+}</code></pre></div>
 <p>检查 launchFlags 的 <code>Intent.Flag_ACTIVITY_NO_USER_ACTION</code> 是否等于 1 。如果等于 1，则表示目标 Activity 组件不是由用户手动启动的。如果目标 Activity 组件是由用户手动启动的，那么用来启动它的源 Activity 就会获得一个用户离开事件通知。</p>
 
 <p>由于是从 Launcher 启动 Activity 组件，则 <code>Flag_ACTIVITY_NO_USER_ACTION</code>等于 0 ，mUserLeaving 为 True ，表示后面要向 Launcher 组件发送一个用户离开事件通知。</p>
@@ -499,185 +499,172 @@ ActivityRecord isInAnyStackLocked(IBinder token) {
 <p>由于从 Launcher 启动的 Activity 运行在另一个 Task 中，则 addingToTask 为 <code>false</code> ，同时 <code>reuseTask</code>也是为 <code>null</code> 的，<code>inTask</code>为 <code>null</code>，并且 <code>r.resultTo</code>是一个 ActivityRecord 类型，由于 Activity 组件还没启动，也是为 <code>null</code>。所以，最上面的 if 判断成立，直接创建一个新的 Task 了。</p>
 
 <h3 id="activitystack-类的-startactivitylocked-方法">ActivityStack 类的 startActivityLocked() 方法</h3>
-
-<pre><code class="language-java">    final void startActivityLocked(ActivityRecord r, boolean newTask,
-            boolean doResume, boolean keepCurTransition, Bundle options) {
-		TaskRecord rTask = r.task;
-        final int taskId = rTask.taskId;
-        // mLaunchTaskBehind tasks get placed at the back of the task stack.
-        if (!r.mLaunchTaskBehind &amp;&amp; (taskForIdLocked(taskId) == null || newTask)) {
-            // Last activity in task had been removed or ActivityManagerService is reusing task.
-            // Insert or replace.
-            // Might not even be in.
-            insertTaskAtTop(rTask, r);
-            mWindowManager.moveTaskToTop(taskId);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">startActivityLocked</span>(<span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">r</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">newTask</span>,
+            <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">doResume</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">keepCurTransition</span>, <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">options</span>) {
+		<span style="color:#268bd2">TaskRecord</span> <span style="color:#268bd2">rTask</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">task</span>;
+        <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">taskId</span> = <span style="color:#268bd2">rTask</span>.<span style="color:#268bd2">taskId</span>;
+        <span style="color:#93a1a1;font-style:italic">// mLaunchTaskBehind tasks get placed at the back of the task stack.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (!<span style="color:#268bd2">r</span>.<span style="color:#268bd2">mLaunchTaskBehind</span> &amp;&amp; (<span style="color:#268bd2">taskForIdLocked</span>(<span style="color:#268bd2">taskId</span>) == <span style="color:#859900;font-weight:bold">null</span> || <span style="color:#268bd2">newTask</span>)) {
+            <span style="color:#93a1a1;font-style:italic">// Last activity in task had been removed or ActivityManagerService is reusing task.
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#93a1a1;font-style:italic">// Insert or replace.
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#93a1a1;font-style:italic">// Might not even be in.
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">insertTaskAtTop</span>(<span style="color:#268bd2">rTask</span>, <span style="color:#268bd2">r</span>);
+            <span style="color:#268bd2">mWindowManager</span>.<span style="color:#268bd2">moveTaskToTop</span>(<span style="color:#268bd2">taskId</span>);
         }
 		
-		 if (!newTask) {
-			 // newTask 为 true ，省略部分代码
-		 }
+		 <span style="color:#859900">if</span> (!<span style="color:#268bd2">newTask</span>) {
+			 <span style="color:#93a1a1;font-style:italic">// newTask 为 true ，省略部分代码
+</span><span style="color:#93a1a1;font-style:italic"></span>		 }
 		 
-		// Place a new activity at top of stack, so it is next to interact
-        // with the user.
-
-        // If we are not placing the new activity frontmost, we do not want
-        // to deliver the onUserLeaving callback to the actual frontmost activity 
-        // task 变量为 null，尚未赋值， IF 判断不成立
-        if (task == r.task &amp;&amp; mTaskHistory.indexOf(task) != (mTaskHistory.size() - 1)) {
-            mStackSupervisor.mUserLeaving = false;
-            if (DEBUG_USER_LEAVING) Slog.v(TAG_USER_LEAVING,
-                    &quot;startActivity() behind front, mUserLeaving=false&quot;);
+		<span style="color:#93a1a1;font-style:italic">// Place a new activity at top of stack, so it is next to interact
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// with the user.
+</span><span style="color:#93a1a1;font-style:italic"></span>
+        <span style="color:#93a1a1;font-style:italic">// If we are not placing the new activity frontmost, we do not want
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// to deliver the onUserLeaving callback to the actual frontmost activity 
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// task 变量为 null，尚未赋值， IF 判断不成立
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">task</span> == <span style="color:#268bd2">r</span>.<span style="color:#268bd2">task</span> &amp;&amp; <span style="color:#268bd2">mTaskHistory</span>.<span style="color:#268bd2">indexOf</span>(<span style="color:#268bd2">task</span>) != (<span style="color:#268bd2">mTaskHistory</span>.<span style="color:#268bd2">size</span>() - <span style="color:#268bd2">1</span>)) {
+            <span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">mUserLeaving</span> = <span style="color:#859900;font-weight:bold">false</span>;
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">DEBUG_USER_LEAVING</span>) <span style="color:#268bd2">Slog</span>.<span style="color:#268bd2">v</span>(<span style="color:#268bd2">TAG_USER_LEAVING</span>,
+                    <span style="color:#2aa198">&#34;startActivity() behind front, mUserLeaving=false&#34;</span>);
         }
 
-		task = r.task;
-		// Slot the activity into the history stack and proceed
-        if (DEBUG_ADD_REMOVE) Slog.i(TAG, &quot;Adding activity &quot; + r + &quot; to stack to task &quot; + task,
-                new RuntimeException(&quot;here&quot;).fillInStackTrace());
-        task.addActivityToTop(r);
-        task.setFrontOfTask();
-		 r.putInHistory();
+		<span style="color:#268bd2">task</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">task</span>;
+		<span style="color:#93a1a1;font-style:italic">// Slot the activity into the history stack and proceed
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">DEBUG_ADD_REMOVE</span>) <span style="color:#268bd2">Slog</span>.<span style="color:#268bd2">i</span>(<span style="color:#268bd2">TAG</span>, <span style="color:#2aa198">&#34;Adding activity &#34;</span> + <span style="color:#268bd2">r</span> + <span style="color:#2aa198">&#34; to stack to task &#34;</span> + <span style="color:#268bd2">task</span>,
+                <span style="color:#859900">new</span> <span style="color:#268bd2">RuntimeException</span>(<span style="color:#2aa198">&#34;here&#34;</span>).<span style="color:#268bd2">fillInStackTrace</span>());
+        <span style="color:#268bd2">task</span>.<span style="color:#268bd2">addActivityToTop</span>(<span style="color:#268bd2">r</span>);
+        <span style="color:#268bd2">task</span>.<span style="color:#268bd2">setFrontOfTask</span>();
+		 <span style="color:#268bd2">r</span>.<span style="color:#268bd2">putInHistory</span>();
 
-		// 省略 Window 添加部分代码
-        if (doResume) {
-            mStackSupervisor.resumeTopActivitiesLocked(this, r, options);
+		<span style="color:#93a1a1;font-style:italic">// 省略 Window 添加部分代码
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">doResume</span>) {
+            <span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">resumeTopActivitiesLocked</span>(<span style="color:#859900">this</span>, <span style="color:#268bd2">r</span>, <span style="color:#268bd2">options</span>);
         }
     }
-// 将 ActivityRecord 添加到栈的方法
-void addActivityToTop(ActivityRecord r) {
-        addActivityAtIndex(mActivities.size(), r);
-}
-</code></pre>
-
+<span style="color:#93a1a1;font-style:italic">// 将 ActivityRecord 添加到栈的方法
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">addActivityToTop</span>(<span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">r</span>) {
+        <span style="color:#268bd2">addActivityAtIndex</span>(<span style="color:#268bd2">mActivities</span>.<span style="color:#268bd2">size</span>(), <span style="color:#268bd2">r</span>);
+}</code></pre></div>
 <p>在上一步中，已经通过 <code>r.setTask()</code>方法创建了一个新的 Task，并且 <code>newTask</code>变量为 <code>true</code> 。当 Activity 是在一个新的 Task 中启动时，需要将它放到 TaskRecord 的中，并且位于堆栈的最上方。</p>
 
 <p>当添加完之后，便继续执行 <code>resumeTopActivitiesLocked</code> 方法。</p>
 
 <h3 id="activitystacksupervisor-类的-resumetopactivitieslocked-方法">ActivityStackSupervisor 类的 resumeTopActivitiesLocked() 方法</h3>
-
-<pre><code class="language-java">boolean resumeTopActivitiesLocked(ActivityStack targetStack, ActivityRecord target,
-            Bundle targetOptions) {
-        if (targetStack == null) {
-            targetStack = mFocusedStack;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">resumeTopActivitiesLocked</span>(<span style="color:#268bd2">ActivityStack</span> <span style="color:#268bd2">targetStack</span>, <span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">target</span>,
+            <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">targetOptions</span>) {
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">targetStack</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#268bd2">targetStack</span> = <span style="color:#268bd2">mFocusedStack</span>;
         }
-        // Do targetStack first.
-        boolean result = false;
-        if (isFrontStack(targetStack)) {
-	        // 调用 ActivityStack 类的 resumeTopActivityLocked 方法
-            result = targetStack.resumeTopActivityLocked(target, targetOptions);
+        <span style="color:#93a1a1;font-style:italic">// Do targetStack first.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">result</span> = <span style="color:#859900;font-weight:bold">false</span>;
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">isFrontStack</span>(<span style="color:#268bd2">targetStack</span>)) {
+	        <span style="color:#93a1a1;font-style:italic">// 调用 ActivityStack 类的 resumeTopActivityLocked 方法
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">result</span> = <span style="color:#268bd2">targetStack</span>.<span style="color:#268bd2">resumeTopActivityLocked</span>(<span style="color:#268bd2">target</span>, <span style="color:#268bd2">targetOptions</span>);
         }
 
-        for (int displayNdx = mActivityDisplays.size() - 1; displayNdx &gt;= 0; --displayNdx) {
-            final ArrayList&lt;ActivityStack&gt; stacks = mActivityDisplays.valueAt(displayNdx).mStacks;
-            for (int stackNdx = stacks.size() - 1; stackNdx &gt;= 0; --stackNdx) {
-                final ActivityStack stack = stacks.get(stackNdx);
-                if (stack == targetStack) {
-                    // Already started above.
-                    continue;
+        <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">displayNdx</span> = <span style="color:#268bd2">mActivityDisplays</span>.<span style="color:#268bd2">size</span>() - <span style="color:#268bd2">1</span>; <span style="color:#268bd2">displayNdx</span> &gt;= <span style="color:#268bd2">0</span>; --<span style="color:#268bd2">displayNdx</span>) {
+            <span style="color:#859900">final</span> <span style="color:#268bd2">ArrayList</span>&lt;<span style="color:#268bd2">ActivityStack</span>&gt; <span style="color:#268bd2">stacks</span> = <span style="color:#268bd2">mActivityDisplays</span>.<span style="color:#268bd2">valueAt</span>(<span style="color:#268bd2">displayNdx</span>).<span style="color:#268bd2">mStacks</span>;
+            <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">stackNdx</span> = <span style="color:#268bd2">stacks</span>.<span style="color:#268bd2">size</span>() - <span style="color:#268bd2">1</span>; <span style="color:#268bd2">stackNdx</span> &gt;= <span style="color:#268bd2">0</span>; --<span style="color:#268bd2">stackNdx</span>) {
+                <span style="color:#859900">final</span> <span style="color:#268bd2">ActivityStack</span> <span style="color:#268bd2">stack</span> = <span style="color:#268bd2">stacks</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">stackNdx</span>);
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">stack</span> == <span style="color:#268bd2">targetStack</span>) {
+                    <span style="color:#93a1a1;font-style:italic">// Already started above.
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#859900">continue</span>;
                 }
-                if (isFrontStack(stack)) {
-	                // 调用 ActivityStack 类的 resumeTopActivityLocked 方法，参数为 null
-                    stack.resumeTopActivityLocked(null);
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">isFrontStack</span>(<span style="color:#268bd2">stack</span>)) {
+	                <span style="color:#93a1a1;font-style:italic">// 调用 ActivityStack 类的 resumeTopActivityLocked 方法，参数为 null
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#268bd2">stack</span>.<span style="color:#268bd2">resumeTopActivityLocked</span>(<span style="color:#859900;font-weight:bold">null</span>);
                 }
             }
         }
-        return result;
-    }
-</code></pre>
-
+        <span style="color:#859900">return</span> <span style="color:#268bd2">result</span>;
+    }</code></pre></div>
 <p>ActivityStackSupervisor 类重载了两种形式的 <code>resumeTopActivitiesLocked</code>方法，主要就是将所有ActivityStack栈顶的ActivityRecord迁移到显示状态，都是调用 <code>ActivityStack</code>类的<code>resumeTopActivityLocked</code>方法，只不过参数略有不同了。</p>
 
 <h3 id="activitystack-类的-resumetopactivitylocked-方法">ActivityStack 类的 resumeTopActivityLocked() 方法</h3>
-
-<pre><code class="language-java">final boolean resumeTopActivityLocked(ActivityRecord prev, Bundle options) {
-        if (mStackSupervisor.inResumeTopActivity) {
-            // Don't even start recursing.
-            return false;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">resumeTopActivityLocked</span>(<span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">prev</span>, <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">options</span>) {
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">inResumeTopActivity</span>) {
+            <span style="color:#93a1a1;font-style:italic">// Don&#39;t even start recursing.
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">false</span>;
         }
 
-        boolean result = false;
-        try {
-            // Protect against recursion.
-            mStackSupervisor.inResumeTopActivity = true;
-            if (mService.mLockScreenShown == ActivityManagerService.LOCK_SCREEN_LEAVING) {
-                mService.mLockScreenShown = ActivityManagerService.LOCK_SCREEN_HIDDEN;
-                mService.updateSleepIfNeededLocked();
+        <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">result</span> = <span style="color:#859900;font-weight:bold">false</span>;
+        <span style="color:#859900">try</span> {
+            <span style="color:#93a1a1;font-style:italic">// Protect against recursion.
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">inResumeTopActivity</span> = <span style="color:#859900;font-weight:bold">true</span>;
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">mService</span>.<span style="color:#268bd2">mLockScreenShown</span> == <span style="color:#268bd2">ActivityManagerService</span>.<span style="color:#268bd2">LOCK_SCREEN_LEAVING</span>) {
+                <span style="color:#268bd2">mService</span>.<span style="color:#268bd2">mLockScreenShown</span> = <span style="color:#268bd2">ActivityManagerService</span>.<span style="color:#268bd2">LOCK_SCREEN_HIDDEN</span>;
+                <span style="color:#268bd2">mService</span>.<span style="color:#268bd2">updateSleepIfNeededLocked</span>();
             }
-            result = resumeTopActivityInnerLocked(prev, options);
-        } finally {
-            mStackSupervisor.inResumeTopActivity = false;
+            <span style="color:#268bd2">result</span> = <span style="color:#268bd2">resumeTopActivityInnerLocked</span>(<span style="color:#268bd2">prev</span>, <span style="color:#268bd2">options</span>);
+        } <span style="color:#859900">finally</span> {
+            <span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">inResumeTopActivity</span> = <span style="color:#859900;font-weight:bold">false</span>;
         }
-        return result;
-    }
-</code></pre>
-
+        <span style="color:#859900">return</span> <span style="color:#268bd2">result</span>;
+    }</code></pre></div>
 <p>在该方法内部最后调用了<code>resumeTopActivityInnerLocked</code>方法。</p>
 
 <h3 id="activitystack-类的-resumetopactivityinnerlocked-方法">ActivityStack 类的 resumeTopActivityInnerLocked() 方法</h3>
-
-<pre><code class="language-java">    private boolean resumeTopActivityInnerLocked(ActivityRecord prev, Bundle options) {
-		 // Find the first activity that is not finishing.
-		 // 找到当前 ActivityRecord 的栈顶，指向了要启动的 Activity 组件。
-        final ActivityRecord next = topRunningActivityLocked(null);
-		final TaskRecord prevTask = prev != null ? prev.task : null;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">resumeTopActivityInnerLocked</span>(<span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">prev</span>, <span style="color:#268bd2">Bundle</span> <span style="color:#268bd2">options</span>) {
+		 <span style="color:#93a1a1;font-style:italic">// Find the first activity that is not finishing.
+</span><span style="color:#93a1a1;font-style:italic"></span>		 <span style="color:#93a1a1;font-style:italic">// 找到当前 ActivityRecord 的栈顶，指向了要启动的 Activity 组件。
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">final</span> <span style="color:#268bd2">ActivityRecord</span> <span style="color:#268bd2">next</span> = <span style="color:#268bd2">topRunningActivityLocked</span>(<span style="color:#859900;font-weight:bold">null</span>);
+		<span style="color:#859900">final</span> <span style="color:#268bd2">TaskRecord</span> <span style="color:#268bd2">prevTask</span> = <span style="color:#268bd2">prev</span> != <span style="color:#859900;font-weight:bold">null</span> ? <span style="color:#268bd2">prev</span>.<span style="color:#268bd2">task</span> : <span style="color:#859900;font-weight:bold">null</span>;
 		
-		if (next == null) {
-			进入该分支表示没有要启动的 Activity 。
+		<span style="color:#859900">if</span> (<span style="color:#268bd2">next</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+			<span style="color:#268bd2">进入该分支表示没有要启动的</span> <span style="color:#268bd2">Activity</span> 。
 		}
-		// 省略部分代码
-		// If the top activity is the resumed one, nothing to do.
-		// 检查要启动的 Activity 组件是否等于当前被激活的 Activity 组件，如果等于，并且处于 RESUMED 状态，直接返回
-        if (mResumedActivity == next &amp;&amp; next.state == ActivityState.RESUMED &amp;&amp;
-                    mStackSupervisor.allResumedActivitiesComplete()) {
-            // Make sure we have executed any pending transitions, since there
-            // should be nothing left to do at this point.
-            mWindowManager.executeAppTransition();
-            mNoAnimActivities.clear();
-            ActivityOptions.abort(options);
-            return false;
+		<span style="color:#93a1a1;font-style:italic">// 省略部分代码
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#93a1a1;font-style:italic">// If the top activity is the resumed one, nothing to do.
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#93a1a1;font-style:italic">// 检查要启动的 Activity 组件是否等于当前被激活的 Activity 组件，如果等于，并且处于 RESUMED 状态，直接返回
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">mResumedActivity</span> == <span style="color:#268bd2">next</span> &amp;&amp; <span style="color:#268bd2">next</span>.<span style="color:#268bd2">state</span> == <span style="color:#268bd2">ActivityState</span>.<span style="color:#268bd2">RESUMED</span> &amp;&amp;
+                    <span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">allResumedActivitiesComplete</span>()) {
+            <span style="color:#93a1a1;font-style:italic">// Make sure we have executed any pending transitions, since there
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#93a1a1;font-style:italic">// should be nothing left to do at this point.
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">mWindowManager</span>.<span style="color:#268bd2">executeAppTransition</span>();
+            <span style="color:#268bd2">mNoAnimActivities</span>.<span style="color:#268bd2">clear</span>();
+            <span style="color:#268bd2">ActivityOptions</span>.<span style="color:#268bd2">abort</span>(<span style="color:#268bd2">options</span>);
+            <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">false</span>;
         }
 		
-		// If we are sleeping, and there is no resumed activity, and the top
-        // activity is paused, well that is the state we want.
-        // 检查要启动的 Activity 组件是否等于上一次被中止了的 Activity 组件，如果等于，
-        // 并且这时候系统正要进入关机或睡眠状态，则直接退出，启动毫无意义
-        if (mService.isSleepingOrShuttingDown()
-                &amp;&amp; mLastPausedActivity == next
-                &amp;&amp; mStackSupervisor.allPausedActivitiesComplete()) {
-            // Make sure we have executed any pending transitions, since there
-            // should be nothing left to do at this point.
-            mWindowManager.executeAppTransition();
-            mNoAnimActivities.clear();
-            ActivityOptions.abort(options);
-            return false;
+		<span style="color:#93a1a1;font-style:italic">// If we are sleeping, and there is no resumed activity, and the top
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// activity is paused, well that is the state we want.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// 检查要启动的 Activity 组件是否等于上一次被中止了的 Activity 组件，如果等于，
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// 并且这时候系统正要进入关机或睡眠状态，则直接退出，启动毫无意义
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">mService</span>.<span style="color:#268bd2">isSleepingOrShuttingDown</span>()
+                &amp;&amp; <span style="color:#268bd2">mLastPausedActivity</span> == <span style="color:#268bd2">next</span>
+                &amp;&amp; <span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">allPausedActivitiesComplete</span>()) {
+            <span style="color:#93a1a1;font-style:italic">// Make sure we have executed any pending transitions, since there
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#93a1a1;font-style:italic">// should be nothing left to do at this point.
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">mWindowManager</span>.<span style="color:#268bd2">executeAppTransition</span>();
+            <span style="color:#268bd2">mNoAnimActivities</span>.<span style="color:#268bd2">clear</span>();
+            <span style="color:#268bd2">ActivityOptions</span>.<span style="color:#268bd2">abort</span>(<span style="color:#268bd2">options</span>);
+            <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">false</span>;
         }
 
-		// If we are currently pausing an activity, then don't do anything until that is done.
-        // 检查系统中止 Activity 组件是否完成，如果没有，则直接返回了，等待所有的 Activity 进入中止状态
-        if (!mStackSupervisor.allPausedActivitiesComplete()) {
-            return false;
+		<span style="color:#93a1a1;font-style:italic">// If we are currently pausing an activity, then don&#39;t do anything until that is done.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// 检查系统中止 Activity 组件是否完成，如果没有，则直接返回了，等待所有的 Activity 进入中止状态
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (!<span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">allPausedActivitiesComplete</span>()) {
+            <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">false</span>;
         }
 
-		// We need to start pausing the current activity so the top one can be resumed...
-        // Launcher 组件进入 onPause 状态
-        boolean dontWaitForPause = (next.info.flags&amp;ActivityInfo.FLAG_RESUME_WHILE_PAUSING) != 0;
-        boolean pausing = mStackSupervisor.pauseBackStacks(userLeaving, true, dontWaitForPause);
-        if (mResumedActivity != null) {
-        // mResumedActivity 指向了 Launcher 组件，不为 null ，则中止 Launcher 组件
-            pausing |= startPausingLocked(userLeaving, false, true, dontWaitForPause);
+		<span style="color:#93a1a1;font-style:italic">// We need to start pausing the current activity so the top one can be resumed...
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// Launcher 组件进入 onPause 状态
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">dontWaitForPause</span> = (<span style="color:#268bd2">next</span>.<span style="color:#268bd2">info</span>.<span style="color:#268bd2">flags</span>&amp;<span style="color:#268bd2">ActivityInfo</span>.<span style="color:#268bd2">FLAG_RESUME_WHILE_PAUSING</span>) != <span style="color:#268bd2">0</span>;
+        <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">pausing</span> = <span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">pauseBackStacks</span>(<span style="color:#268bd2">userLeaving</span>, <span style="color:#859900;font-weight:bold">true</span>, <span style="color:#268bd2">dontWaitForPause</span>);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">mResumedActivity</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+        <span style="color:#93a1a1;font-style:italic">// mResumedActivity 指向了 Launcher 组件，不为 null ，则中止 Launcher 组件
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">pausing</span> |= <span style="color:#268bd2">startPausingLocked</span>(<span style="color:#268bd2">userLeaving</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#859900;font-weight:bold">true</span>, <span style="color:#268bd2">dontWaitForPause</span>);
         }
-		// 省略部分代码
-		
-		if (next.app != null &amp;&amp; next.app.thread != null) {
-			// 待启动的 Activity 在新的进程中，app 变量为 null 
-		} else {
-			// 创建一个新的应用程序进程
-			mStackSupervisor.startSpecificActivityLocked(next, true, true);
+		<span style="color:#93a1a1;font-style:italic">// 省略部分代码
+</span><span style="color:#93a1a1;font-style:italic"></span>		
+		<span style="color:#859900">if</span> (<span style="color:#268bd2">next</span>.<span style="color:#268bd2">app</span> != <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; <span style="color:#268bd2">next</span>.<span style="color:#268bd2">app</span>.<span style="color:#268bd2">thread</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+			<span style="color:#93a1a1;font-style:italic">// 待启动的 Activity 在新的进程中，app 变量为 null 
+</span><span style="color:#93a1a1;font-style:italic"></span>		} <span style="color:#859900">else</span> {
+			<span style="color:#93a1a1;font-style:italic">// 创建一个新的应用程序进程
+</span><span style="color:#93a1a1;font-style:italic"></span>			<span style="color:#268bd2">mStackSupervisor</span>.<span style="color:#268bd2">startSpecificActivityLocked</span>(<span style="color:#268bd2">next</span>, <span style="color:#859900;font-weight:bold">true</span>, <span style="color:#859900;font-weight:bold">true</span>);
 		}
 		
-    }
-
-</code></pre>
-
+    }</code></pre></div>
 <p>ActivityStack 类有三个成员变量：<code>mResumedActivity</code>、<code>mLastPausedActivity</code>、<code>mPausingActivity</code>，它们的类型均为 <code>ActivityRecord</code>，分别用来描述系统当前激活的 Activity 组件、上一次被中止的 Activity 组件，以及正在被中止的 Activity 组件。</p>
 
 <p>而在<code>resumeTopActivityInnerLocked</code>方法中，待其的 Activity 的 ActivityRecord 已经位于栈顶了，需要将它运行到 <code>Resumed</code> 状态，而在这之前需要判断满足很多条件，比如当前所有的 Activity 组件要处于 <code>onPaused</code>状态，Launcher 组件要处于<code>onPaused</code>状态，否则会直接 return 退出了。</p>
@@ -706,136 +693,89 @@ void addActivityToTop(ActivityRecord r) {
 <ul>
 <li>Activity 的 堆栈 ActivityStack</li>
 </ul>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-start-activity-from-launcher-2/">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a>
-
-                
-
-                
-
-
-        
-        
-        
-      </article>
-
-      
-        
+          
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/android/android-start-activity-from-launcher-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a></li>
     
-    <li><a href="/post/android/rxjava-wrapper-callback/">用 RxJava 封装回调方法 CallBack</a></li>
+    <li><a href="https://www.glumes.com/post/android/rxjava-wrapper-callback/">用 RxJava 封装回调方法 CallBack</a></li>
     
-    <li><a href="/post/android/android-hal-summary/">Android 硬件抽象层调用流程小结</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-hal-summary/">Android 硬件抽象层调用流程小结</a></li>
     
-    <li><a href="/post/android/kotlin-functional-programming-whth-anko/">Kotlin 函数式编程与 Anko 构建布局实现原理分析</a></li>
+    <li><a href="https://www.glumes.com/post/android/kotlin-functional-programming-whth-anko/">Kotlin 函数式编程与 Anko 构建布局实现原理分析</a></li>
     
-    <li><a href="/post/android/kotlin-with-anko/">Kotlin 使用 Anko 布局那些事</a></li>
+    <li><a href="https://www.glumes.com/post/android/kotlin-with-anko/">Kotlin 使用 Anko 布局那些事</a></li>
     
 </ul>
 
-      
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-1/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（一）">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-3/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（三）">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+        
 
-      
-      <ul class="pager blog-pager">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-          <li class="previous">
-            <a href="https://glumes.com/post/android/android-start-activity-from-launcher-1/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（一）">&larr; Previous Post</a>
-          </li>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/android-start-activity-from-launcher-3/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（三）">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
-      
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+          
+
+        
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -844,8 +784,6 @@ void addActivityToTop(ActivityRecord r) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -876,21 +814,8 @@ void addActivityToTop(ActivityRecord r) {
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -898,22 +823,28 @@ void addActivityToTop(ActivityRecord r) {
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -922,49 +853,66 @@ void addActivityToTop(ActivityRecord r) {
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

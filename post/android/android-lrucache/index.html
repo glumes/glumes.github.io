@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android LruCache实现分析</title>
+  <title>Android LruCache实现分析-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="Android LruCache实现分析" />
   <meta name="twitter:title" content="Android LruCache实现分析" />
 
   <meta name="description" content="LruCache 是安卓开发中常用到的缓存技术，LRU 的全名是 Least Recently Used，表示最近最少使用算法，也就是说当内存快到达阈值时，若某个对象最近很少使用的，那么它就会被回收掉以释放内存。">
   <meta property="og:description" content="LruCache 是安卓开发中常用到的缓存技术，LRU 的全名是 Least Recently Used，表示最近最少使用算法，也就是说当内存快到达阈值时，若某个对象最近很少使用的，那么它就会被回收掉以释放内存。">
   <meta name="twitter:description" content="LruCache 是安卓开发中常用到的缓存技术，LRU 的全名是 Least Recently Used，表示最近最少使用算法，也就是说当内存快到达阈值时，若某个对象最近很少使用的，那么它就会被回收掉以释放内存。">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-lrucache/" />
+  <meta property="og:url" content="https://www.glumes.com/post/android/android-lrucache/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-lrucache/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/android/android-lrucache/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -54,23 +55,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -78,7 +67,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -89,15 +80,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -105,25 +96,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -141,9 +132,6 @@ if (!doNotTrack) {
 </nav>
 
 
-
-
-
     
   
   
@@ -156,93 +144,99 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">Android LruCache实现分析</h1>
+              <h1>Android LruCache实现分析</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on December 22, 2017
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
             
-          </h5>
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
+            
           
-<aside class="toc">
-  <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#使用">使用</a></li>
-<li><a href="#原理分析">原理分析</a>
-<ul>
-<li><a href="#lrucache-的-get-操作">LruCache 的 get 操作</a></li>
-<li><a href="#lrucache-的-put-操作">LruCache 的 put 操作</a></li>
-</ul></li>
-<li><a href="#同步锁相关操作">同步锁相关操作</a></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul>
-</nav>
-</aside>
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
 
-        
-        <p>LruCache 是安卓开发中常用到的缓存技术，LRU 的全名是 Least Recently Used，表示最近最少使用算法，也就是说当内存快到达阈值时，若某个对象最近很少使用的，那么它就会被回收掉以释放内存。</p>
+          <p>LruCache 是安卓开发中常用到的缓存技术，LRU 的全名是 Least Recently Used，表示最近最少使用算法，也就是说当内存快到达阈值时，若某个对象最近很少使用的，那么它就会被回收掉以释放内存。</p>
 
 <h2 id="使用">使用</h2>
 
 <p>LruCache 的使用方法大致如下 ：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">// LruCache 的声明初始化
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">maxMemory</span> = (<span style="color:#859900;font-weight:bold">int</span>) (<span style="color:#268bd2">Runtime</span>.<span style="color:#268bd2">getRuntime</span>().<span style="color:#268bd2">maxMemory</span>() / <span style="color:#268bd2">1024</span>);
+        <span style="color:#93a1a1;font-style:italic">// 指定缓存的内存大小，一般为当前进程可用内存的 1/8 即可
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">cacheSize</span> = <span style="color:#268bd2">maxMemory</span> / <span style="color:#268bd2">8</span> ;
+        <span style="color:#268bd2">LruCache</span>&lt;<span style="color:#268bd2">String</span>,<span style="color:#268bd2">Bitmap</span>&gt; <span style="color:#268bd2">cache</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">LruCache</span>&lt;<span style="color:#268bd2">String</span>,<span style="color:#268bd2">Bitmap</span>&gt;(<span style="color:#268bd2">cacheSize</span>){
 
-<pre><code class="language-java">// LruCache 的声明初始化
-        int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-        // 指定缓存的内存大小，一般为当前进程可用内存的 1/8 即可
-        int cacheSize = maxMemory / 8 ;
-        LruCache&lt;String,Bitmap&gt; cache = new LruCache&lt;String,Bitmap&gt;(cacheSize){
-
-            // 如何计算缓存的资源的内存大小
-            @Override
-            protected int sizeOf(String key, Bitmap value) {
-                return value.getRowBytes() * value.getHeight() / 1024 ;
+            <span style="color:#93a1a1;font-style:italic">// 如何计算缓存的资源的内存大小
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">@Override</span>
+            <span style="color:#859900">protected</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">sizeOf</span>(<span style="color:#268bd2">String</span> <span style="color:#268bd2">key</span>, <span style="color:#268bd2">Bitmap</span> <span style="color:#268bd2">value</span>) {
+                <span style="color:#859900">return</span> <span style="color:#268bd2">value</span>.<span style="color:#268bd2">getRowBytes</span>() * <span style="color:#268bd2">value</span>.<span style="color:#268bd2">getHeight</span>() / <span style="color:#268bd2">1024</span> ;
             }
-            // 当缓存对象被回收时执行的回调方法，以便释放一些资源之类的，默认为空
-            @Override
-            protected void entryRemoved(boolean evicted, String key, Bitmap oldValue, Bitmap newValue) {
-                super.entryRemoved(evicted, key, oldValue, newValue);
+            <span style="color:#93a1a1;font-style:italic">// 当缓存对象被回收时执行的回调方法，以便释放一些资源之类的，默认为空
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">@Override</span>
+            <span style="color:#859900">protected</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">entryRemoved</span>(<span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">evicted</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">key</span>, <span style="color:#268bd2">Bitmap</span> <span style="color:#268bd2">oldValue</span>, <span style="color:#268bd2">Bitmap</span> <span style="color:#268bd2">newValue</span>) {
+                <span style="color:#859900">super</span>.<span style="color:#268bd2">entryRemoved</span>(<span style="color:#268bd2">evicted</span>, <span style="color:#268bd2">key</span>, <span style="color:#268bd2">oldValue</span>, <span style="color:#268bd2">newValue</span>);
             }
         };
-        // LruCache 添加缓存对象
-        cache.put(key,bitmap) ;
-        // LruCache 获取缓存对象
-        cache.get(key);
-</code></pre>
-
+        <span style="color:#93a1a1;font-style:italic">// LruCache 添加缓存对象
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">cache</span>.<span style="color:#268bd2">put</span>(<span style="color:#268bd2">key</span>,<span style="color:#268bd2">bitmap</span>) ;
+        <span style="color:#93a1a1;font-style:italic">// LruCache 获取缓存对象
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">cache</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">key</span>);</code></pre></div>
 <p>LruCache 的声明和使用都比较简单，在它的内部就已经帮我们完成了缓存对象的移除和添加，而我们无需过多的考虑对象的释放问题。</p>
 
 <h2 id="原理分析">原理分析</h2>
@@ -264,53 +258,44 @@ if (!doNotTrack) {
 <p>从 LruCache 中取出一个元素，显然，这个结果是可能为 null 的。</p>
 
 <p>LruCache 使用<code>get</code>操作很简单，有就取出来，没有就返回个 null 。</p>
-
-<pre><code class="language-java">		V mapValue;
-        synchronized (this) {
-            mapValue = map.get(key);
-            if (mapValue != null) {
-                hitCount++;
-                return mapValue;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">		<span style="color:#268bd2">V</span> <span style="color:#268bd2">mapValue</span>;
+        <span style="color:#859900">synchronized</span> (<span style="color:#859900">this</span>) {
+            <span style="color:#268bd2">mapValue</span> = <span style="color:#268bd2">map</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">key</span>);
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">mapValue</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+                <span style="color:#268bd2">hitCount</span>++;
+                <span style="color:#859900">return</span> <span style="color:#268bd2">mapValue</span>;
             }
-            missCount++;
-        }
-</code></pre>
-
+            <span style="color:#268bd2">missCount</span>++;
+        }</code></pre></div>
 <p>而重点就在于<code>LinkedHashMap</code>的<code>get</code>方法了。</p>
-
-<pre><code class="language-java">	int hash = Collections.secondaryHash(key); // 计算 key 的 hash 值
-        HashMapEntry&lt;K, V&gt;[] tab = table;
-        for (HashMapEntry&lt;K, V&gt; e = tab[hash &amp; (tab.length - 1)]; e != null; e = e.next) {
-            K eKey = e.key;
-            if (eKey == key || (e.hash == hash &amp;&amp; key.equals(eKey))) {
-                if (accessOrder)
-                    makeTail((LinkedEntry&lt;K, V&gt;) e);
-                return e.value;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">hash</span> = <span style="color:#268bd2">Collections</span>.<span style="color:#268bd2">secondaryHash</span>(<span style="color:#268bd2">key</span>); <span style="color:#93a1a1;font-style:italic">// 计算 key 的 hash 值
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">HashMapEntry</span>&lt;<span style="color:#268bd2">K</span>, <span style="color:#268bd2">V</span>&gt;[] <span style="color:#268bd2">tab</span> = <span style="color:#268bd2">table</span>;
+        <span style="color:#859900">for</span> (<span style="color:#268bd2">HashMapEntry</span>&lt;<span style="color:#268bd2">K</span>, <span style="color:#268bd2">V</span>&gt; <span style="color:#268bd2">e</span> = <span style="color:#268bd2">tab</span>[<span style="color:#268bd2">hash</span> &amp; (<span style="color:#268bd2">tab</span>.<span style="color:#268bd2">length</span> - <span style="color:#268bd2">1</span>)]; <span style="color:#268bd2">e</span> != <span style="color:#859900;font-weight:bold">null</span>; <span style="color:#268bd2">e</span> = <span style="color:#268bd2">e</span>.<span style="color:#268bd2">next</span>) {
+            <span style="color:#268bd2">K</span> <span style="color:#268bd2">eKey</span> = <span style="color:#268bd2">e</span>.<span style="color:#268bd2">key</span>;
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">eKey</span> == <span style="color:#268bd2">key</span> || (<span style="color:#268bd2">e</span>.<span style="color:#268bd2">hash</span> == <span style="color:#268bd2">hash</span> &amp;&amp; <span style="color:#268bd2">key</span>.<span style="color:#268bd2">equals</span>(<span style="color:#268bd2">eKey</span>))) {
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">accessOrder</span>)
+                    <span style="color:#268bd2">makeTail</span>((<span style="color:#268bd2">LinkedEntry</span>&lt;<span style="color:#268bd2">K</span>, <span style="color:#268bd2">V</span>&gt;) <span style="color:#268bd2">e</span>);
+                <span style="color:#859900">return</span> <span style="color:#268bd2">e</span>.<span style="color:#268bd2">value</span>;
             }
-        }
-</code></pre>
-
+        }</code></pre></div>
 <p><code>LinkedHashMap</code>的节点类是<code>LinkedEntry</code>，它继承自<code>HashMapEntry</code>，在其继承之上多了指向前后元素的引用。</p>
 
 <p>所以，从上述代码可以看出，无非就是一个遍历，找到 <code>key</code>对应的元素就取出来，并且多了一个操作<code>makeTail</code>。</p>
 
 <p><code>makeTail</code>的操作又是干什么的呢？它可谓是实现最近最少算法的精髓了。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">makeTail</span>(<span style="color:#268bd2">LinkedEntry</span>&lt;<span style="color:#268bd2">K</span>, <span style="color:#268bd2">V</span>&gt; <span style="color:#268bd2">e</span>) {
+        <span style="color:#93a1a1;font-style:italic">// Unlink e 将节点 e 的前节点和后节点进行连接，而将它自己给释放出来
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">e</span>.<span style="color:#268bd2">prv</span>.<span style="color:#268bd2">nxt</span> = <span style="color:#268bd2">e</span>.<span style="color:#268bd2">nxt</span>;
+        <span style="color:#268bd2">e</span>.<span style="color:#268bd2">nxt</span>.<span style="color:#268bd2">prv</span> = <span style="color:#268bd2">e</span>.<span style="color:#268bd2">prv</span>;
 
-<pre><code class="language-java"> private void makeTail(LinkedEntry&lt;K, V&gt; e) {
-        // Unlink e 将节点 e 的前节点和后节点进行连接，而将它自己给释放出来
-        e.prv.nxt = e.nxt;
-        e.nxt.prv = e.prv;
-
-        // Relink e as tail 将节点 e 连接到链表的尾部
-        LinkedEntry&lt;K, V&gt; header = this.header;
-        LinkedEntry&lt;K, V&gt; oldTail = header.prv;
-        e.nxt = header;
-        e.prv = oldTail;
-        oldTail.nxt = header.prv = e;
-        modCount++;
-    }
-</code></pre>
-
+        <span style="color:#93a1a1;font-style:italic">// Relink e as tail 将节点 e 连接到链表的尾部
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">LinkedEntry</span>&lt;<span style="color:#268bd2">K</span>, <span style="color:#268bd2">V</span>&gt; <span style="color:#268bd2">header</span> = <span style="color:#859900">this</span>.<span style="color:#268bd2">header</span>;
+        <span style="color:#268bd2">LinkedEntry</span>&lt;<span style="color:#268bd2">K</span>, <span style="color:#268bd2">V</span>&gt; <span style="color:#268bd2">oldTail</span> = <span style="color:#268bd2">header</span>.<span style="color:#268bd2">prv</span>;
+        <span style="color:#268bd2">e</span>.<span style="color:#268bd2">nxt</span> = <span style="color:#268bd2">header</span>;
+        <span style="color:#268bd2">e</span>.<span style="color:#268bd2">prv</span> = <span style="color:#268bd2">oldTail</span>;
+        <span style="color:#268bd2">oldTail</span>.<span style="color:#268bd2">nxt</span> = <span style="color:#268bd2">header</span>.<span style="color:#268bd2">prv</span> = <span style="color:#268bd2">e</span>;
+        <span style="color:#268bd2">modCount</span>++;
+    }</code></pre></div>
 <p><code>makeTail</code>操作，将一个<code>get</code>的节点，从原本它在链表中的位置移到了整个链表中的尾部，使它的前节点是上一任的尾节点，而后节点则是头结点。</p>
 
 <p>而在上面提到过，<code>LinkedHashMap</code>链表中元素的顺序正是完美的体现了最少最近算法的思想。</p>
@@ -320,47 +305,41 @@ if (!doNotTrack) {
 <h3 id="lrucache-的-put-操作">LruCache 的 put 操作</h3>
 
 <p><code>put</code>操作则是向<code>LinkedHashMap</code>中放入一个元素，而缓存的容量又是有限的，这么一来，在有限的情况下，就会有元素被垃圾回收了。</p>
-
-<pre><code class="language-java">	  V previous;
-        synchronized (this) {
-            putCount++;
-            size += safeSizeOf(key, value);
-            previous = map.put(key, value); // 若存在 key 相同的元素，则返回之前的，否则返回 null
-            if (previous != null) {    // 存在 key 相同的元素
-                size -= safeSizeOf(key, previous);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	  <span style="color:#268bd2">V</span> <span style="color:#268bd2">previous</span>;
+        <span style="color:#859900">synchronized</span> (<span style="color:#859900">this</span>) {
+            <span style="color:#268bd2">putCount</span>++;
+            <span style="color:#268bd2">size</span> += <span style="color:#268bd2">safeSizeOf</span>(<span style="color:#268bd2">key</span>, <span style="color:#268bd2">value</span>);
+            <span style="color:#268bd2">previous</span> = <span style="color:#268bd2">map</span>.<span style="color:#268bd2">put</span>(<span style="color:#268bd2">key</span>, <span style="color:#268bd2">value</span>); <span style="color:#93a1a1;font-style:italic">// 若存在 key 相同的元素，则返回之前的，否则返回 null
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#859900">if</span> (<span style="color:#268bd2">previous</span> != <span style="color:#859900;font-weight:bold">null</span>) {    <span style="color:#93a1a1;font-style:italic">// 存在 key 相同的元素
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">size</span> -= <span style="color:#268bd2">safeSizeOf</span>(<span style="color:#268bd2">key</span>, <span style="color:#268bd2">previous</span>);
             }
         }
-        // 移除最近最少使用的元素
-		trimToSize(maxSize);
-</code></pre>
-
+        <span style="color:#93a1a1;font-style:italic">// 移除最近最少使用的元素
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#268bd2">trimToSize</span>(<span style="color:#268bd2">maxSize</span>);</code></pre></div>
 <p>当进行<code>put</code>操作时，若放入一个 key 存在的元素，则返回已经存在的对应的值。</p>
 
 <p>同时，在每次<code>put</code>操作之后，都要进行容量的清除工作。</p>
-
-<pre><code class="language-java">public void trimToSize(int maxSize) {
-        while (true) { // 死循环
-            K key;
-            V value;
-            synchronized (this) {
-                if (size &lt;= maxSize) {
-                    break;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">trimToSize</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">maxSize</span>) {
+        <span style="color:#859900">while</span> (<span style="color:#859900;font-weight:bold">true</span>) { <span style="color:#93a1a1;font-style:italic">// 死循环
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">K</span> <span style="color:#268bd2">key</span>;
+            <span style="color:#268bd2">V</span> <span style="color:#268bd2">value</span>;
+            <span style="color:#859900">synchronized</span> (<span style="color:#859900">this</span>) {
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">size</span> &lt;= <span style="color:#268bd2">maxSize</span>) {
+                    <span style="color:#859900">break</span>;
                 }
-                Map.Entry&lt;K, V&gt; toEvict = map.eldest(); // 取出最老的元素
-                if (toEvict == null) {
-                    break;
+                <span style="color:#268bd2">Map</span>.<span style="color:#268bd2">Entry</span>&lt;<span style="color:#268bd2">K</span>, <span style="color:#268bd2">V</span>&gt; <span style="color:#268bd2">toEvict</span> = <span style="color:#268bd2">map</span>.<span style="color:#268bd2">eldest</span>(); <span style="color:#93a1a1;font-style:italic">// 取出最老的元素
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#859900">if</span> (<span style="color:#268bd2">toEvict</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+                    <span style="color:#859900">break</span>;
                 }
-                key = toEvict.getKey();
-                value = toEvict.getValue();
-                map.remove(key);
-                size -= safeSizeOf(key, value);
-                evictionCount++;
+                <span style="color:#268bd2">key</span> = <span style="color:#268bd2">toEvict</span>.<span style="color:#268bd2">getKey</span>();
+                <span style="color:#268bd2">value</span> = <span style="color:#268bd2">toEvict</span>.<span style="color:#268bd2">getValue</span>();
+                <span style="color:#268bd2">map</span>.<span style="color:#268bd2">remove</span>(<span style="color:#268bd2">key</span>);
+                <span style="color:#268bd2">size</span> -= <span style="color:#268bd2">safeSizeOf</span>(<span style="color:#268bd2">key</span>, <span style="color:#268bd2">value</span>);
+                <span style="color:#268bd2">evictionCount</span>++;
             }
-            entryRemoved(true, key, value, null);
+            <span style="color:#268bd2">entryRemoved</span>(<span style="color:#859900;font-weight:bold">true</span>, <span style="color:#268bd2">key</span>, <span style="color:#268bd2">value</span>, <span style="color:#859900;font-weight:bold">null</span>);
         }
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p><code>trimToSize</code>的操作是一个死循环的操作，当<code>size</code>小于<code>maxSize</code>时，直接返回，否则从<code>LinkedHashMap</code>中移除最近最少使用的元素，也就是头节点后的元素。</p>
 
 <p>以上就大致实现了 LRU 的最少最近算法。</p>
@@ -374,146 +353,99 @@ if (!doNotTrack) {
 <h2 id="参考">参考</h2>
 
 <p>1、<a href="https://github.com/LittleFriendsGroup/AndroidSdkSourceAnalysis/blob/master/article/LruCache%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">https://github.com/LittleFriendsGroup/AndroidSdkSourceAnalysis/blob/master/article/LruCache%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md</a></p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-lrucache/">Android LruCache实现分析</a>
-
-                
-
-                
-
-
-        
-        
-        
-      </article>
-
-      
-        
+          
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/android/android-window-and-view/">Android Activity 创建 Window 及添加 View 流程分析</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-window-and-view/">Android Activity 创建 Window 及添加 View 流程分析</a></li>
     
-    <li><a href="/post/android/android-system-server/">Android 系统服务启动 SystemServer</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-system-server/">Android 系统服务启动 SystemServer</a></li>
     
-    <li><a href="/post/android/android-service-manager/">Android 系统服务管理 ServiceManager</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-service-manager/">Android 系统服务管理 ServiceManager</a></li>
     
-    <li><a href="/post/android/android-material-design-summary-2/">Android Material Desing 控件小结-2</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-material-design-summary-2/">Android Material Desing 控件小结-2</a></li>
     
-    <li><a href="/post/android/android-material-design-summary-1/">Android Material Desing 控件小结-1</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-material-design-summary-1/">Android Material Desing 控件小结-1</a></li>
     
-    <li><a href="/post/android/android-binder-summary/">Android Binder Summary</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-binder-summary/">Android Binder Summary</a></li>
     
-    <li><a href="/post/android/android-dagger-use/">Dagger2 在 Android 中的使用</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-dagger-use/">Dagger2 在 Android 中的使用</a></li>
     
-    <li><a href="/post/android/android-start-activity-from-launcher-4/"> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-4/"> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</a></li>
     
-    <li><a href="/post/android/android-start-activity-from-launcher-3/">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-3/">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a></li>
     
-    <li><a href="/post/android/android-start-activity-from-launcher-2/">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-2/">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a></li>
     
 </ul>
 
-      
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/android/android-window-and-view/" data-toggle="tooltip" data-placement="top" title="Android Activity 创建 Window 及添加 View 流程分析">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/android/android-statemachine/" data-toggle="tooltip" data-placement="top" title="Android StateMachine 状态机分析">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+        
 
-      
-      <ul class="pager blog-pager">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-          <li class="previous">
-            <a href="https://glumes.com/post/android/android-window-and-view/" data-toggle="tooltip" data-placement="top" title="Android Activity 创建 Window 及添加 View 流程分析">&larr; Previous Post</a>
-          </li>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/android-statemachine/" data-toggle="tooltip" data-placement="top" title="Android StateMachine 状态机分析">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
-      
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+          
+
+        
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -522,8 +454,6 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -554,21 +484,8 @@ if (!doNotTrack) {
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -576,22 +493,28 @@ if (!doNotTrack) {
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -600,49 +523,66 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

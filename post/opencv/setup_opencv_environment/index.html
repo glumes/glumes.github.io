@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Python、C&#43;&#43;、Android OpenCV 开发环境的配置</title>
+  <title>Python、C&#43;&#43;、Android OpenCV 开发环境的配置-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="Python、C&#43;&#43;、Android OpenCV 开发环境的配置" />
   <meta name="twitter:title" content="Python、C&#43;&#43;、Android OpenCV 开发环境的配置" />
 
   <meta name="description" content="setup opencv environment">
   <meta property="og:description" content="setup opencv environment">
   <meta name="twitter:description" content="setup opencv environment">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opencv/setup_opencv_environment/" />
+  <meta property="og:url" content="https://www.glumes.com/post/opencv/setup_opencv_environment/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/opencv/setup_opencv_environment/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/opencv/setup_opencv_environment/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -54,23 +55,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -78,7 +67,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -89,15 +80,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -105,25 +96,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -141,9 +132,6 @@ if (!doNotTrack) {
 </nav>
 
 
-
-
-
     
   
   
@@ -156,45 +144,59 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">Python、C&#43;&#43;、Android OpenCV 开发环境的配置</h1>
+              <h1>Python、C&#43;&#43;、Android OpenCV 开发环境的配置</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on December 22, 2017
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/opencv/">Opencv</a> &nbsp;
             
-          </h5>
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/opencv/">Opencv</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -214,8 +216,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p>在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。</p>
 
 <h2 id="opencv-的安装">OpenCV 的安装</h2>
 
@@ -242,11 +257,8 @@ if (!doNotTrack) {
 <p>这时候，在 Terminal 上，直接运行 Python3 命令，然后在交互式环境中通过 <code>import cv2</code>的命令来导入 OpenCV 的库依旧是找不到的。</p>
 
 <p>解决办法就是进入到 <code>/usr/local/lib/python3.6/site-packages</code> 目录下，通过 <code>ln</code> 命令将 <code>/usr/local/Cellar/opencv/3.3.1_1/lib/python3.6/site-packages</code> 目录下的 <code>cv2.so</code> 链接到当前目录。</p>
-
-<pre><code class="language-sh">///usr/local/lib/python3.6/site-packages 目录下执行如下指令
-sudo ln -s /usr/local/Cellar/opencv/3.3.1_1/lib/python3.6/site-packages/cv2.so cv2.so
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">///usr/local/lib/python3.6/site-packages 目录下执行如下指令
+sudo ln -s /usr/local/Cellar/opencv/3.3.1_1/lib/python3.6/site-packages/cv2.so cv2.so</code></pre></div>
 <p>这样就可以完成导入了。</p>
 
 <h2 id="python-配置-opencv-环境">Python 配置 OpenCV 环境</h2>
@@ -258,20 +270,17 @@ sudo ln -s /usr/local/Cellar/opencv/3.3.1_1/lib/python3.6/site-packages/cv2.so c
 <p>但却有个问题：</p>
 
 <p>通过这种方式安装的 OpenCV 在运行播放视频的代码时会出错：</p>
-
-<pre><code class="language-java">import cv2
-videoUrl = &quot;/Users/glumes/Desktop/kpt1.mp4&quot;
-cap = cv2.VideoCapture('/Users/glumes/Desktop/kpt1.mp4')
-while(cap.isOpened()):
-    ret, frame = cap.read()
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    cv2.imshow('frame', gray)
-    if cv2.waitKey(0) &amp; 0xFF == ord('q'):
-        break
-cap.release()
-cv2.destroyAllWindows()
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">cv2</span>
+<span style="color:#268bd2">videoUrl</span> = <span style="color:#2aa198">&#34;/Users/glumes/Desktop/kpt1.mp4&#34;</span>
+<span style="color:#268bd2">cap</span> = <span style="color:#268bd2">cv2</span>.<span style="color:#268bd2">VideoCapture</span>(&#39;/<span style="color:#268bd2">Users</span>/<span style="color:#268bd2">glumes</span>/<span style="color:#268bd2">Desktop</span>/<span style="color:#268bd2">kpt1</span>.<span style="color:#268bd2">mp4</span>&#39;)
+<span style="color:#859900">while</span>(<span style="color:#268bd2">cap</span>.<span style="color:#268bd2">isOpened</span>()):
+    <span style="color:#268bd2">ret</span>, <span style="color:#268bd2">frame</span> = <span style="color:#268bd2">cap</span>.<span style="color:#268bd2">read</span>()
+    <span style="color:#268bd2">gray</span> = <span style="color:#268bd2">cv2</span>.<span style="color:#268bd2">cvtColor</span>(<span style="color:#268bd2">frame</span>, <span style="color:#268bd2">cv2</span>.<span style="color:#268bd2">COLOR_BGR2GRAY</span>)
+    <span style="color:#268bd2">cv2</span>.<span style="color:#268bd2">imshow</span>(&#39;<span style="color:#268bd2">frame</span>&#39;, <span style="color:#268bd2">gray</span>)
+    <span style="color:#859900">if</span> <span style="color:#268bd2">cv2</span>.<span style="color:#268bd2">waitKey</span>(<span style="color:#268bd2">0</span>) &amp; <span style="color:#268bd2">0xFF</span> == <span style="color:#268bd2">ord</span>(<span style="color:#2aa198">&#39;q&#39;</span>):
+        <span style="color:#859900">break</span>
+<span style="color:#268bd2">cap</span>.<span style="color:#268bd2">release</span>()
+<span style="color:#268bd2">cv2</span>.<span style="color:#268bd2">destroyAllWindows</span>()</code></pre></div>
 <p>报错的内容是：<code>The current event queue and the main event queue are not the same</code>。</p>
 
 <p>正好在 OpenCV 的 Github 上有个 Issue 也提到了这个问题：<a href="https://github.com/opencv/opencv/issues/7474">https://github.com/opencv/opencv/issues/7474</a>
@@ -282,24 +291,21 @@ cv2.destroyAllWindows()
 <p>安装好之后，就可以开始运行我们的 OpenCV 代码了。</p>
 
 <p>简单的展示一张图片代码示例：</p>
-
-<pre><code class="language-java">import cv2
-print(cv2.__version__)
-imgUrl = '/Users/glumes/Desktop/blog_camera_block.png'
-img = cv2.imread(imgUrl,0)
-cv2.imshow('image',img)
-cv2.waitKey(0)
-print(&quot;waiting&quot;)
-cv2.destroyAllWindows()
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">cv2</span>
+<span style="color:#268bd2">print</span>(<span style="color:#268bd2">cv2</span>.<span style="color:#268bd2">__version__</span>)
+<span style="color:#268bd2">imgUrl</span> = &#39;/<span style="color:#268bd2">Users</span>/<span style="color:#268bd2">glumes</span>/<span style="color:#268bd2">Desktop</span>/<span style="color:#268bd2">blog_camera_block</span>.<span style="color:#268bd2">png</span>&#39;
+<span style="color:#268bd2">img</span> = <span style="color:#268bd2">cv2</span>.<span style="color:#268bd2">imread</span>(<span style="color:#268bd2">imgUrl</span>,<span style="color:#268bd2">0</span>)
+<span style="color:#268bd2">cv2</span>.<span style="color:#268bd2">imshow</span>(&#39;<span style="color:#268bd2">image</span>&#39;,<span style="color:#268bd2">img</span>)
+<span style="color:#268bd2">cv2</span>.<span style="color:#268bd2">waitKey</span>(<span style="color:#268bd2">0</span>)
+<span style="color:#268bd2">print</span>(<span style="color:#2aa198">&#34;waiting&#34;</span>)
+<span style="color:#268bd2">cv2</span>.<span style="color:#268bd2">destroyAllWindows</span>()</code></pre></div>
 <h2 id="c-配置-opencv-环境">C++ 配置 OpenCV 环境</h2>
 
 <p>C++ 开发用的 Mac 的 Xcode。</p>
 
 <p>首先要在 Xcode 中创建一个命令行工程。</p>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_mac_pro_command_line.png" alt="mac-command-line-project" /></p>
+<figure><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_mac_pro_command_line.png" alt="mac-command-line-project"><figcaption>mac-command-line-project</figcaption></figure>
 
 <p>然后在工程名处右键，选择 <code>Add File to Project</code>，通过快捷键 <code>Command＋Shift＋G</code>进入到 <code>/usr/local/lib</code>目录下，将所有和 OpenCV 相关的 <code>dylib</code> 库添加进来。</p>
 
@@ -320,42 +326,39 @@ cv2.destroyAllWindows()
 
 <p>效果图如下：</p>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_xcode_build_setting.png" alt="xcode_build_setting" /></p>
+<figure><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_xcode_build_setting.png" alt="xcode_build_setting"><figcaption>xcode_build_setting</figcaption></figure>
 
 <p>完成之后，就可以开始编写 C++ 代码来开发 OpenCV 了。</p>
 
 <p>同样还是预览一张图片作为示例：</p>
-
-<pre><code class="language-c++">//
-//  main.cpp
-//  OpenCVEnv
-//
-//  Created by glumes on 2017/11/7.
-//  Copyright © 2017年 glumes. All rights reserved.
-//
-
-#include &lt;iostream&gt;
-#include &lt;opencv2/opencv.hpp&gt;
-#include &lt;opencv2/highgui/highgui.hpp&gt;
-#include &lt;opencv/cvaux.hpp&gt;
-#include &lt;fstream&gt;
-using namespace std;
-#define BYTE unsigned char
-
-int main(int argc, const char * argv[])
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#93a1a1;font-style:italic">//
+</span><span style="color:#93a1a1;font-style:italic">//  main.cpp
+</span><span style="color:#93a1a1;font-style:italic">//  OpenCVEnv
+</span><span style="color:#93a1a1;font-style:italic">//
+</span><span style="color:#93a1a1;font-style:italic">//  Created by glumes on 2017/11/7.
+</span><span style="color:#93a1a1;font-style:italic">//  Copyright © 2017年 glumes. All rights reserved.
+</span><span style="color:#93a1a1;font-style:italic">//
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;iostream&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;opencv2/opencv.hpp&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;opencv2/highgui/highgui.hpp&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;opencv/cvaux.hpp&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;fstream&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">using</span> <span style="color:#859900">namespace</span> <span style="color:#268bd2">std</span>;
+<span style="color:#93a1a1;font-style:italic">#define BYTE unsigned char
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">main</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">argc</span>, <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> * <span style="color:#268bd2">argv</span>[])
 {
-    //这个地方的目录需要改成自己的
-    IplImage* img = cvLoadImage(&quot;/Users/glumes/Desktop/blog_opengl_result_point.png&quot;, 1);
-    cvNamedWindow(&quot;picture&quot;, 1);
-    cvShowImage(&quot;picture&quot;, img);
-    cvWaitKey(0);
-    cvReleaseImage(&amp;img);
-    cvDestroyWindow(&quot;picture&quot;);
-    return 0;
+    <span style="color:#93a1a1;font-style:italic">//这个地方的目录需要改成自己的
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">IplImage</span>* <span style="color:#268bd2">img</span> = <span style="color:#268bd2">cvLoadImage</span>(<span style="color:#2aa198">&#34;/Users/glumes/Desktop/blog_opengl_result_point.png&#34;</span>, <span style="color:#2aa198;font-weight:bold">1</span>);
+    <span style="color:#268bd2">cvNamedWindow</span>(<span style="color:#2aa198">&#34;picture&#34;</span>, <span style="color:#2aa198;font-weight:bold">1</span>);
+    <span style="color:#268bd2">cvShowImage</span>(<span style="color:#2aa198">&#34;picture&#34;</span>, <span style="color:#268bd2">img</span>);
+    <span style="color:#268bd2">cvWaitKey</span>(<span style="color:#2aa198;font-weight:bold">0</span>);
+    <span style="color:#268bd2">cvReleaseImage</span>(&amp;<span style="color:#268bd2">img</span>);
+    <span style="color:#268bd2">cvDestroyWindow</span>(<span style="color:#2aa198">&#34;picture&#34;</span>);
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
 }
-
-</code></pre>
-
+</code></pre></div>
 <p>点击运行，当编译成功时，就可以看到多了一个命令行窗口，里面就是我们预览的图片内容。</p>
 
 <p>完成了开发环境的配置之后，就可以愉快地进行 OpenCV 开发咯。</p>
@@ -372,164 +375,107 @@ int main(int argc, const char * argv[])
 
 <p>然后选择 Import Module，在弹出的框中，选择下载好的 SDK 的 java 文件夹，如下图：</p>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_import_opencv_module.png" alt="import_opencv_module" /></p>
+<figure><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_import_opencv_module.png" alt="import_opencv_module"><figcaption>import_opencv_module</figcaption></figure>
 
 <p>这会将 OpenCV 提供的对 NDK 调用封装的库以依赖的形式导入到我们的工程。</p>
 
 <p>别忘了在工程的 build.gradle 添加如下代码来导入</p>
-
-<pre><code class="language-gradle">  implementation project(':OpenCVLibrary330')
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gradle" data-lang="gradle">  <span style="color:#268bd2">implementation</span> <span style="color:#268bd2">project</span>(<span style="color:#2aa198">&#39;:OpenCVLibrary330&#39;</span>)</code></pre></div>
 <p>之后，就是导入 <code>so</code> 动态库。</p>
 
 <p>将 OpenCV-android-sdk\sdk\native\libs 目录下的内容拷贝到应用的 jibLibs 目录下。</p>
 
-<p><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_import_opencv_so.png" alt="import_opencv_sp" /></p>
+<figure><img src="http://7xqe3m.com1.z0.glb.clouddn.com/blog_import_opencv_so.png" alt="import_opencv_sp"><figcaption>import_opencv_sp</figcaption></figure>
 
 <p>接下来修改 CMakeLists.txt 文件，将头文件和库进行导入。</p>
-
-<pre><code class="language-cmake"># 包含头文件
- include_directories(/Users/glumes/Downloads/OpenCV-android-sdk/sdk/native/jni/include)
-# 添加 lib_opencv 动态库
- add_library( lib_opencv SHARED IMPORTED )
-# 设置库的导入路径
- set_target_properties(lib_opencv PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libopencv_java3.so)
-
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmake" data-lang="cmake"><span style="color:#93a1a1;font-style:italic"># 包含头文件
+</span><span style="color:#93a1a1;font-style:italic"></span> <span style="color:#cb4b16">include_directories</span>(<span style="color:#2aa198">/Users/glumes/Downloads/OpenCV-android-sdk/sdk/native/jni/include</span>)
+<span style="color:#93a1a1;font-style:italic"># 添加 lib_opencv 动态库
+</span><span style="color:#93a1a1;font-style:italic"></span> <span style="color:#cb4b16">add_library</span>( <span style="color:#2aa198">lib_opencv</span> <span style="color:#2aa198">SHARED</span> <span style="color:#2aa198">IMPORTED</span> )
+<span style="color:#93a1a1;font-style:italic"># 设置库的导入路径
+</span><span style="color:#93a1a1;font-style:italic"></span> <span style="color:#cb4b16">set_target_properties</span>(<span style="color:#2aa198">lib_opencv</span> <span style="color:#2aa198">PROPERTIES</span> <span style="color:#2aa198">IMPORTED_LOCATION</span> ${<span style="color:#268bd2">CMAKE_CURRENT_SOURCE_DIR</span>}<span style="color:#2aa198">/src/main/jniLibs/</span>${<span style="color:#268bd2">ANDROID_ABI</span>}<span style="color:#2aa198">/libopencv_java3.so</span>)</code></pre></div>
 <p>这里仅仅是导入了 libs 目录下的动态 so 库，也可以将静态的 <code>.a</code> 库导入。</p>
 
 <p>完成了这一步后，就可以用 C++ 进行 OpenCV 的开发了。</p>
 
 <p>在默认的 native-lib 动态库中，添加 opencv 的动态库，这样就可以链接到了。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmake" data-lang="cmake"><span style="color:#cb4b16">target_link_libraries</span>( <span style="color:#93a1a1;font-style:italic"># Specifies the target library.
+</span><span style="color:#93a1a1;font-style:italic"></span>                       <span style="color:#2aa198">native-lib</span>
+					   <span style="color:#93a1a1;font-style:italic"># 链接 opencv 的动态库
+</span><span style="color:#93a1a1;font-style:italic"></span>                       <span style="color:#2aa198">lib_opencv</span>
 
-<pre><code class="language-cmake">target_link_libraries( # Specifies the target library.
-                       native-lib
-					   # 链接 opencv 的动态库
-                       lib_opencv
-
-                       # Links the target library to the log library
-                       # included in the NDK.
-                       ${log-lib} )
-</code></pre>
-
+                       <span style="color:#93a1a1;font-style:italic"># Links the target library to the log library
+</span><span style="color:#93a1a1;font-style:italic"></span>                       <span style="color:#93a1a1;font-style:italic"># included in the NDK.
+</span><span style="color:#93a1a1;font-style:italic"></span>                       ${<span style="color:#268bd2">log-lib</span>} )</code></pre></div>
 <p>具体的详细配置 Demo 可以参考我的 Github 地址  <a href="https://github.com/glumes/AndroidOpenCV">https://github.com/glumes/AndroidOpenCV</a></p>
 
 <h2 id="参考">参考</h2>
 
 <p>1、<a href="http://www.jianshu.com/p/11959977589a">http://www.jianshu.com/p/11959977589a</a></p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opencv/setup_opencv_environment/">Python、C&#43;&#43;、Android OpenCV 开发环境的配置</a>
-
-                
-
-                
-
+          
 
         
+  
         
+        <ul class="pager blog-pager">
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/android/kotlin-with-anko/" data-toggle="tooltip" data-placement="top" title="Kotlin 使用 Anko 布局那些事">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
         
-      </article>
 
-      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
 
-      
+        
+          
 
-      
-      <ul class="pager blog-pager">
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/kotlin-with-anko/" data-toggle="tooltip" data-placement="top" title="Kotlin 使用 Anko 布局那些事">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
-
-      
-        
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -538,8 +484,6 @@ int main(int argc, const char * argv[])
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -570,21 +514,8 @@ int main(int argc, const char * argv[])
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -592,22 +523,28 @@ int main(int argc, const char * argv[])
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -616,49 +553,66 @@ int main(int argc, const char * argv[])
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

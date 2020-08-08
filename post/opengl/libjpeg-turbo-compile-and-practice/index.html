@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>图像库 libjpeg-turbo 编译与实践</title>
+  <title>图像库 libjpeg-turbo 编译与实践-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="图像库 libjpeg-turbo 编译与实践" />
   <meta name="twitter:title" content="图像库 libjpeg-turbo 编译与实践" />
 
@@ -63,33 +63,34 @@ https://github.com/libjpeg-turbo/libjpeg-turbo
 https://glumes.com/post/android/stb-image-introduce/
 
 【图像库 libpng 编译与实践】 …">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/" />
+  <meta property="og:url" content="https://www.glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -104,23 +105,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -128,7 +117,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -139,15 +130,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -155,25 +146,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -189,9 +180,6 @@ if (!doNotTrack) {
 
   </div>
 </nav>
-
-
-
 
 
     
@@ -210,24 +198,21 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
-        
         <div class="container">
           <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>图像库 libjpeg-turbo 编译与实践</h1>
                   
-                     <h1>图像库 libjpeg-turbo 编译与实践</h1>
-                     
+                  
                     <span class="post-meta">
-  Posted on July 13, 2019
+  
+    Posted on July 13, 2019
+  
   
 </span>
 
 
-                    
-                  
                   
               </div>
             </div>
@@ -236,47 +221,61 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">图像库 libjpeg-turbo 编译与实践</h1>
+              <h1>图像库 libjpeg-turbo 编译与实践</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on July 13, 2019
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/libjpeg-turbo/">libjpeg-turbo</a> &nbsp;
             
-                <a href="https://glumes.com/tags/image/">image</a> &nbsp;
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/libjpeg-turbo/">libjpeg-turbo</a> &nbsp;
+              
+                  <a href="https://www.glumes.com/tags/image/">image</a> &nbsp;
+              
+            </h5>
             
-          </h5>
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -295,8 +294,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p>在之前的文章中已经陆续介绍了 stb_image、libpng 的使用，相关链接如下：</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>在之前的文章中已经陆续介绍了 stb_image、libpng 的使用，相关链接如下：</p>
 
 <p>【<a href="https://glumes.com/post/android/stb-image-introduce/">简单易用的图像解码库介绍 —— stb_image</a>】</p>
 
@@ -325,28 +337,26 @@ if (!doNotTrack) {
 <p>在 libjpeg-turbo 的源码中就已经有了讲述如何编译的 BUILDING.md 文件，还是使用 CMake 进行编译，大体方法和参数设置都大同小异了。</p>
 
 <p>参考源码给出的编译代码：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic"># Set these variables to suit your needs
+</span><span style="color:#93a1a1;font-style:italic"># 设置交叉编译的变量
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">NDK_PATH</span>={<span style="color:#268bd2">full</span> <span style="color:#268bd2">path</span> <span style="color:#268bd2">to</span> <span style="color:#268bd2">the</span> <span style="color:#268bd2">NDK</span> <span style="color:#268bd2">directory</span>-- <span style="color:#859900">for</span> <span style="color:#268bd2">example</span>,
+  /<span style="color:#268bd2">opt</span>/<span style="color:#268bd2">android</span>/<span style="color:#268bd2">android</span>-<span style="color:#268bd2">ndk</span>-<span style="color:#268bd2">r16b</span>}
+<span style="color:#268bd2">TOOLCHAIN</span>={<span style="color:#2aa198">&#34;gcc&#34;</span> <span style="color:#268bd2">or</span> <span style="color:#2aa198">&#34;clang&#34;</span>-- <span style="color:#2aa198">&#34;gcc&#34;</span> <span style="color:#268bd2">must</span> <span style="color:#268bd2">be</span> <span style="color:#268bd2">used</span> <span style="color:#268bd2">with</span> <span style="color:#268bd2">NDK</span> <span style="color:#268bd2">r16b</span> <span style="color:#268bd2">and</span> <span style="color:#268bd2">earlier</span>,
+  <span style="color:#268bd2">and</span> <span style="color:#2aa198">&#34;clang&#34;</span> <span style="color:#268bd2">must</span> <span style="color:#268bd2">be</span> <span style="color:#268bd2">used</span> <span style="color:#268bd2">with</span> <span style="color:#268bd2">NDK</span> <span style="color:#268bd2">r17c</span> <span style="color:#268bd2">and</span> <span style="color:#268bd2">later</span>}
+<span style="color:#268bd2">ANDROID_VERSION</span>={<span style="color:#268bd2">the</span> <span style="color:#268bd2">minimum</span> <span style="color:#268bd2">version</span> <span style="color:#268bd2">of</span> <span style="color:#268bd2">Android</span> <span style="color:#268bd2">to</span> <span style="color:#268bd2">support</span>-- <span style="color:#859900">for</span> <span style="color:#268bd2">example</span>,
+  <span style="color:#2aa198">&#34;16&#34;</span>, <span style="color:#2aa198">&#34;19&#34;</span>, <span style="color:#268bd2">etc</span>.}
 
-<pre><code class="language-cpp"># Set these variables to suit your needs
-# 设置交叉编译的变量
-NDK_PATH={full path to the NDK directory-- for example,
-  /opt/android/android-ndk-r16b}
-TOOLCHAIN={&quot;gcc&quot; or &quot;clang&quot;-- &quot;gcc&quot; must be used with NDK r16b and earlier,
-  and &quot;clang&quot; must be used with NDK r17c and later}
-ANDROID_VERSION={the minimum version of Android to support-- for example,
-  &quot;16&quot;, &quot;19&quot;, etc.}
-
-cd {build_directory}
-cmake -G&quot;Unix Makefiles&quot; \
-  -DANDROID_ABI=armeabi-v7a \
-  -DANDROID_ARM_MODE=arm \
-  -DANDROID_PLATFORM=android-${ANDROID_VERSION} \
-  -DANDROID_TOOLCHAIN=${TOOLCHAIN} \
-  -DCMAKE_ASM_FLAGS=&quot;--target=arm-linux-androideabi${ANDROID_VERSION}&quot; \
-  -DCMAKE_TOOLCHAIN_FILE=${NDK_PATH}/build/cmake/android.toolchain.cmake \
-  [additional CMake flags] {source_directory}
-make
-</code></pre>
-
+<span style="color:#268bd2">cd</span> {<span style="color:#268bd2">build_directory</span>}
+<span style="color:#268bd2">cmake</span> -<span style="color:#268bd2">G</span><span style="color:#2aa198">&#34;Unix Makefiles&#34;</span> \
+  -<span style="color:#268bd2">DANDROID_ABI</span>=<span style="color:#268bd2">armeabi</span>-<span style="color:#268bd2">v7a</span> \
+  -<span style="color:#268bd2">DANDROID_ARM_MODE</span>=<span style="color:#268bd2">arm</span> \
+  -<span style="color:#268bd2">DANDROID_PLATFORM</span>=<span style="color:#268bd2">android</span>-${<span style="color:#268bd2">ANDROID_VERSION</span>} \
+  -<span style="color:#268bd2">DANDROID_TOOLCHAIN</span>=${<span style="color:#268bd2">TOOLCHAIN</span>} \
+  -<span style="color:#268bd2">DCMAKE_ASM_FLAGS</span>=<span style="color:#2aa198">&#34;--target=arm-linux-androideabi${ANDROID_VERSION}&#34;</span> \
+  -<span style="color:#268bd2">DCMAKE_TOOLCHAIN_FILE</span>=${<span style="color:#268bd2">NDK_PATH</span>}/<span style="color:#268bd2">build</span>/<span style="color:#268bd2">cmake</span>/<span style="color:#268bd2">android</span>.<span style="color:#268bd2">toolchain</span>.<span style="color:#268bd2">cmake</span> \
+  [<span style="color:#268bd2">additional</span> <span style="color:#268bd2">CMake</span> <span style="color:#268bd2">flags</span>] {<span style="color:#268bd2">source_directory</span>}
+<span style="color:#268bd2">make</span>
+</code></pre></div>
 <p>由于 CMake 跨平台编译的特性，在进行交叉编译时要设置很多相关参数，比如编译的目标系统平台、交叉编译工具链、NDK 目录等。</p>
 
 <p>详细的编译脚本可以参考项目中的：</p>
@@ -360,15 +370,13 @@ make
 <p>另外如果是在 Android Studio 中用 CMake 编译 so，你会发现很少要设置那些参数，这是因为 Android Studio 中的 CMake 默认就设置好了那些参数。</p>
 
 <p>因此还有一种更简单的方式进行编译，直接将 libjpeg-turbo 源码内容复制到 Android Studio 工程目录的 cpp 文件夹下，然后把 app 的 build.gradle 中 cmake path 改成 libjpeg-turbo 的 CMakeLists.txt 路径，如下所示：</p>
-
-<pre><code class="language-cpp">    externalNativeBuild {
-        cmake {
-            path &quot;src/main/cpp/libjpeg_turbo_source/CMakeLists.txt&quot;
-//            path &quot;CMakeLists.txt&quot;
-        }
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">externalNativeBuild</span> {
+        <span style="color:#268bd2">cmake</span> {
+            <span style="color:#268bd2">path</span> <span style="color:#2aa198">&#34;src/main/cpp/libjpeg_turbo_source/CMakeLists.txt&#34;</span>
+<span style="color:#93a1a1;font-style:italic">//            path &#34;CMakeLists.txt&#34;
+</span><span style="color:#93a1a1;font-style:italic"></span>        }
     }
-</code></pre>
-
+</code></pre></div>
 <p>然后直接编译，在 build/intermediates/cmake 路径下依旧可以找到编译好的 so 文件。</p>
 
 <p>以上两种方式都可以实现 libjpeg-turbo 的编译，看个人喜好了。而且这种库一旦编译好了，以后也很少去更改，一劳永逸~~~</p>
@@ -384,10 +392,7 @@ make
 <p>在 Android 中通过 Java 方法也可以实现 Jpeg 的文件，因为底层就是基于 libjpeg 的。而 libjpeg-turbo 的压缩速度会比 Android 原生的速度更快了。</p>
 
 <p>Android 中 Jpeg 文件压缩的方法如下：</p>
-
-<pre><code class="language-java">compress(CompressFormat format, int quality, OutputStream stream)
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">compress</span>(<span style="color:#268bd2">CompressFormat</span> <span style="color:#268bd2">format</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">quality</span>, <span style="color:#268bd2">OutputStream</span> <span style="color:#268bd2">stream</span>)</code></pre></div>
 <p>其中重要的参数就是 quality ，代表要压缩的质量，而在 libjpeg-turbo 也会有这样的参数要设置。</p>
 
 <p>libjpeg-turbo 的使用逻辑和 libpng 有点类似，首先都是要设置一个错误返回点，并且有一个结构体来存储信息。</p>
@@ -406,66 +411,57 @@ make
 </ol>
 
 <p>对应到代码的逻辑如下：</p>
-
-<pre><code class="language-cpp">    struct jpeg_compress_struct jpegCompressStruct;
-    // 创建代表压缩的结构体
-    jpeg_create_compress(&amp;jpegCompressStruct);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900">struct</span> <span style="color:#268bd2">jpeg_compress_struct</span> <span style="color:#268bd2">jpegCompressStruct</span>;
+    <span style="color:#93a1a1;font-style:italic">// 创建代表压缩的结构体
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jpeg_create_compress</span>(&amp;<span style="color:#268bd2">jpegCompressStruct</span>);
     
-    // 文件方式输出 还有一种是内存方式
-    jpeg_stdio_dest(&amp;jpegCompressStruct, fp);
-    // 设置压缩的相关参数信息
-    jpegCompressStruct.image_width = w;
-    jpegCompressStruct.image_height = h;
-    jpegCompressStruct.arith_code = false;
-    jpegCompressStruct.input_components = nComponent;
-    // 设置解压的颜色
-    jpegCompressStruct.in_color_space = JCS_RGB;
-    jpeg_set_defaults(&amp;jpegCompressStruct);
-    // 压缩的质量
-    jpegCompressStruct.optimize_coding = quality;
-    jpeg_set_quality(&amp;jpegCompressStruct, quality, true);
-</code></pre>
-
+    <span style="color:#93a1a1;font-style:italic">// 文件方式输出 还有一种是内存方式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jpeg_stdio_dest</span>(&amp;<span style="color:#268bd2">jpegCompressStruct</span>, <span style="color:#268bd2">fp</span>);
+    <span style="color:#93a1a1;font-style:italic">// 设置压缩的相关参数信息
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jpegCompressStruct</span>.<span style="color:#268bd2">image_width</span> = <span style="color:#268bd2">w</span>;
+    <span style="color:#268bd2">jpegCompressStruct</span>.<span style="color:#268bd2">image_height</span> = <span style="color:#268bd2">h</span>;
+    <span style="color:#268bd2">jpegCompressStruct</span>.<span style="color:#268bd2">arith_code</span> = <span style="color:#cb4b16">false</span>;
+    <span style="color:#268bd2">jpegCompressStruct</span>.<span style="color:#268bd2">input_components</span> = <span style="color:#268bd2">nComponent</span>;
+    <span style="color:#93a1a1;font-style:italic">// 设置解压的颜色
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jpegCompressStruct</span>.<span style="color:#268bd2">in_color_space</span> = <span style="color:#268bd2">JCS_RGB</span>;
+    <span style="color:#268bd2">jpeg_set_defaults</span>(&amp;<span style="color:#268bd2">jpegCompressStruct</span>);
+    <span style="color:#93a1a1;font-style:italic">// 压缩的质量
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jpegCompressStruct</span>.<span style="color:#268bd2">optimize_coding</span> = <span style="color:#268bd2">quality</span>;
+    <span style="color:#268bd2">jpeg_set_quality</span>(&amp;<span style="color:#268bd2">jpegCompressStruct</span>, <span style="color:#268bd2">quality</span>, <span style="color:#cb4b16">true</span>);
+</code></pre></div>
 <p>首先是创建结构体 jpeg_compress_struct ，通过该结构体来完成压缩数据输出、配置压缩选项操作。</p>
 
 <p>压缩数据输出有两种方式：</p>
-
-<pre><code class="language-cpp">    // 以文件的方式
-    jpeg_stdio_dest(j_compress_ptr cinfo, FILE *outfile);
-    // 以内存的方式
-    jpeg_mem_dest(j_compress_ptr cinfo, unsigned char **outbuffer,
-                           unsigned long *outsize)
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 以文件的方式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jpeg_stdio_dest</span>(<span style="color:#268bd2">j_compress_ptr</span> <span style="color:#268bd2">cinfo</span>, <span style="color:#268bd2">FILE</span> *<span style="color:#268bd2">outfile</span>);
+    <span style="color:#93a1a1;font-style:italic">// 以内存的方式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jpeg_mem_dest</span>(<span style="color:#268bd2">j_compress_ptr</span> <span style="color:#268bd2">cinfo</span>, <span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">char</span> **<span style="color:#268bd2">outbuffer</span>,
+                           <span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">long</span> *<span style="color:#268bd2">outsize</span>)
+</code></pre></div>
 <p>另外，压缩选项除了常见的宽高信息、颜色类型，还有最重要的图像质量参数，通过专门的方法进行设置。</p>
-
-<pre><code class="language-cpp">    jpeg_set_quality(j_compress_ptr cinfo, int quality,
-                                boolean force_baseline)
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">jpeg_set_quality</span>(<span style="color:#268bd2">j_compress_ptr</span> <span style="color:#268bd2">cinfo</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">quality</span>,
+                                <span style="color:#268bd2">boolean</span> <span style="color:#268bd2">force_baseline</span>)
+</code></pre></div>
 <p>设置完要压缩的相关信息后，就可以开始压缩了。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 开始压缩
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jpeg_start_compress</span>(&amp;<span style="color:#268bd2">jpegCompressStruct</span>, <span style="color:#cb4b16">true</span>);
+    <span style="color:#93a1a1;font-style:italic">// JSAMPROW 代表每行的数据
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">JSAMPROW</span> <span style="color:#268bd2">row_point</span>[<span style="color:#2aa198;font-weight:bold">1</span>];
+    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">row_stride</span> = <span style="color:#268bd2">jpegCompressStruct</span>.<span style="color:#268bd2">image_width</span> * <span style="color:#268bd2">nComponent</span>;
 
-<pre><code class="language-cpp">    // 开始压缩
-    jpeg_start_compress(&amp;jpegCompressStruct, true);
-    // JSAMPROW 代表每行的数据
-    JSAMPROW row_point[1];
-    int row_stride = jpegCompressStruct.image_width * nComponent;
-
-    while (jpegCompressStruct.next_scanline &lt; jpegCompressStruct.image_height) {
-        // data 参数就是要压缩的数据源
-        // 逐行读取像素内容
-        row_point[0] = &amp;data[jpegCompressStruct.next_scanline * row_stride];
-        // 写入数据
-        jpeg_write_scanlines(&amp;jpegCompressStruct, row_point, 1);
+    <span style="color:#859900">while</span> (<span style="color:#268bd2">jpegCompressStruct</span>.<span style="color:#268bd2">next_scanline</span> &lt; <span style="color:#268bd2">jpegCompressStruct</span>.<span style="color:#268bd2">image_height</span>) {
+        <span style="color:#93a1a1;font-style:italic">// data 参数就是要压缩的数据源
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// 逐行读取像素内容
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">row_point</span>[<span style="color:#2aa198;font-weight:bold">0</span>] = &amp;<span style="color:#268bd2">data</span>[<span style="color:#268bd2">jpegCompressStruct</span>.<span style="color:#268bd2">next_scanline</span> * <span style="color:#268bd2">row_stride</span>];
+        <span style="color:#93a1a1;font-style:italic">// 写入数据
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">jpeg_write_scanlines</span>(&amp;<span style="color:#268bd2">jpegCompressStruct</span>, <span style="color:#268bd2">row_point</span>, <span style="color:#2aa198;font-weight:bold">1</span>);
     }
     
-   // 完成压缩 
-   jpeg_finish_compress(&amp;jpegCompressStruct);
-   // 释放相应的结构体
-   jpeg_destroy_compress(&amp;jpegCompressStruct);
-
-</code></pre>
-
+   <span style="color:#93a1a1;font-style:italic">// 完成压缩 
+</span><span style="color:#93a1a1;font-style:italic"></span>   <span style="color:#268bd2">jpeg_finish_compress</span>(&amp;<span style="color:#268bd2">jpegCompressStruct</span>);
+   <span style="color:#93a1a1;font-style:italic">// 释放相应的结构体
+</span><span style="color:#93a1a1;font-style:italic"></span>   <span style="color:#268bd2">jpeg_destroy_compress</span>(&amp;<span style="color:#268bd2">jpegCompressStruct</span>);
+</code></pre></div>
 <p>主要的代码就在于 while 循环中。</p>
 
 <p><code>next_scanline</code> 类似于一个状态变量，需要逐行去扫描图像内容并写入，每次 jpeg_write_scanlines 方法之后，<code>next_scanline</code> 就会递增，直到退出循环。</p>
@@ -473,55 +469,45 @@ make
 <h3 id="解压缩">解压缩</h3>
 
 <p>解压和压缩的代码结构大致相同了。</p>
-
-<pre><code class="language-cpp">    jpeg_create_decompress(&amp;cinfo);
-    // 设置数据源数据方式 这里以文件的方式，也可以以内存数据的方式
-    jpeg_stdio_src(&amp;cinfo, fp);
-    // 读取文件信息，比如宽高之类的
-    jpeg_read_header(&amp;cinfo, TRUE);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">jpeg_create_decompress</span>(&amp;<span style="color:#268bd2">cinfo</span>);
+    <span style="color:#93a1a1;font-style:italic">// 设置数据源数据方式 这里以文件的方式，也可以以内存数据的方式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jpeg_stdio_src</span>(&amp;<span style="color:#268bd2">cinfo</span>, <span style="color:#268bd2">fp</span>);
+    <span style="color:#93a1a1;font-style:italic">// 读取文件信息，比如宽高之类的
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jpeg_read_header</span>(&amp;<span style="color:#268bd2">cinfo</span>, <span style="color:#268bd2">TRUE</span>);
+</code></pre></div>
 <p>其中 jpeg_read_header 方法可以获取要解压的文件相关信息。</p>
 
 <p>接下来设置解压的相关参数：</p>
-
-<pre><code class="language-cpp">    jpeg_start_decompress(&amp;cinfo);
-    unsigned long width = cinfo.output_width;
-    unsigned long height = cinfo.output_height;
-    unsigned short depth = cinfo.output_components;
-    row_stride = cinfo.output_width * cinfo.output_components;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">jpeg_start_decompress</span>(&amp;<span style="color:#268bd2">cinfo</span>);
+    <span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">long</span> <span style="color:#268bd2">width</span> = <span style="color:#268bd2">cinfo</span>.<span style="color:#268bd2">output_width</span>;
+    <span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">long</span> <span style="color:#268bd2">height</span> = <span style="color:#268bd2">cinfo</span>.<span style="color:#268bd2">output_height</span>;
+    <span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">short</span> <span style="color:#268bd2">depth</span> = <span style="color:#268bd2">cinfo</span>.<span style="color:#268bd2">output_components</span>;
+    <span style="color:#268bd2">row_stride</span> = <span style="color:#268bd2">cinfo</span>.<span style="color:#268bd2">output_width</span> * <span style="color:#268bd2">cinfo</span>.<span style="color:#268bd2">output_components</span>;
+</code></pre></div>
 <p>定义相关的数据变量，来保存解压的数据。</p>
-
-<pre><code class="language-cpp">    // 保存每行解压的数据内容    
-    JSAMPARRAY buffer;
-    // 初始化
-    buffer = (*cinfo.mem-&gt;alloc_sarray)((j_common_ptr) &amp;cinfo, JPOOL_IMAGE, row_stride, 1);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 保存每行解压的数据内容    
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">JSAMPARRAY</span> <span style="color:#268bd2">buffer</span>;
+    <span style="color:#93a1a1;font-style:italic">// 初始化
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">buffer</span> = (*<span style="color:#268bd2">cinfo</span>.<span style="color:#268bd2">mem</span>-&gt;<span style="color:#268bd2">alloc_sarray</span>)((<span style="color:#268bd2">j_common_ptr</span>) &amp;<span style="color:#268bd2">cinfo</span>, <span style="color:#268bd2">JPOOL_IMAGE</span>, <span style="color:#268bd2">row_stride</span>, <span style="color:#2aa198;font-weight:bold">1</span>);
     
-    // 保存图像的所有数据
-    unsigned char *src_buff;
-    // 初始化并置空
-    src_buff = static_cast&lt;unsigned char *&gt;(malloc(width * height * depth));
-    memset(src_buff, 0, sizeof(unsigned char) * width * height * depth);
-</code></pre>
-
+    <span style="color:#93a1a1;font-style:italic">// 保存图像的所有数据
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">char</span> *<span style="color:#268bd2">src_buff</span>;
+    <span style="color:#93a1a1;font-style:italic">// 初始化并置空
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">src_buff</span> = <span style="color:#859900">static_cast</span>&lt;<span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">char</span> *&gt;(<span style="color:#268bd2">malloc</span>(<span style="color:#268bd2">width</span> * <span style="color:#268bd2">height</span> * <span style="color:#268bd2">depth</span>));
+    <span style="color:#268bd2">memset</span>(<span style="color:#268bd2">src_buff</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#859900">sizeof</span>(<span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">char</span>) * <span style="color:#268bd2">width</span> * <span style="color:#268bd2">height</span> * <span style="color:#268bd2">depth</span>);
+</code></pre></div>
 <p>这里使用的是 <code>JSAMPARRAY</code> 来保存，在 libjpeg-turbo 中其实有多种结构来表示图像数据类型，压缩中用到的就是 <code>JSAMPROW</code> 。</p>
-
-<pre><code class="language-cpp">/* Data structures for images (arrays of samples and of DCT coefficients).
- */
-typedef unsigned char JSAMPLE;
-typedef JSAMPLE *JSAMPROW;      /* ptr to one image row of pixel samples. */
-typedef JSAMPROW *JSAMPARRAY;   /* ptr to some rows (a 2-D sample array) */
-typedef JSAMPARRAY *JSAMPIMAGE; /* a 3-D sample array: top index is color */
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">/* Data structures for images (arrays of samples and of DCT coefficients).
+</span><span style="color:#93a1a1;font-style:italic"> */</span>
+<span style="color:#859900">typedef</span> <span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">char</span> <span style="color:#268bd2">JSAMPLE</span>;
+<span style="color:#859900">typedef</span> <span style="color:#268bd2">JSAMPLE</span> *<span style="color:#268bd2">JSAMPROW</span>;      <span style="color:#93a1a1;font-style:italic">/* ptr to one image row of pixel samples. */</span>
+<span style="color:#859900">typedef</span> <span style="color:#268bd2">JSAMPROW</span> *<span style="color:#268bd2">JSAMPARRAY</span>;   <span style="color:#93a1a1;font-style:italic">/* ptr to some rows (a 2-D sample array) */</span>
+<span style="color:#859900">typedef</span> <span style="color:#268bd2">JSAMPARRAY</span> *<span style="color:#268bd2">JSAMPIMAGE</span>; <span style="color:#93a1a1;font-style:italic">/* a 3-D sample array: top index is color */</span>
+</code></pre></div>
 <p>通过上述代码不难看出，<code>JSAMPROW</code> 其实就是一维数组，而 <code>JSAMPARRAY</code> 就是二维数组。以下两行代码可以说是等价的：</p>
-
-<pre><code class="language-cpp">    JSAMPARRAY buffer = nullptr;
-    JSAMPROW *row_pointer = nullptr;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">JSAMPARRAY</span> <span style="color:#268bd2">buffer</span> = <span style="color:#859900">nullptr</span>;
+    <span style="color:#268bd2">JSAMPROW</span> *<span style="color:#268bd2">row_pointer</span> = <span style="color:#859900">nullptr</span>;
+</code></pre></div>
 <p>因为 <code>JSAMPARRAY</code> 的定义就是 <code>JSAMPROW *</code> 。</p>
 
 <p>具体用哪个更好，要看调用方法需要的参数类型了，<code>jpeg_write_scanlines</code> 和 <code>jpeg_read_scanlines</code> 这两个方法需要的都是 <code>JSAMPARRAY</code> 类型。</p>
@@ -529,19 +515,17 @@ typedef JSAMPARRAY *JSAMPIMAGE; /* a 3-D sample array: top index is color */
 <p>另外，代码中还声明并初始化了 <code>src_buff</code> 变量，该变量就是用来表示解压后的图像数据。</p>
 
 <p>具体解压的逻辑也比较清楚了，逐行扫描图像，用 <code>buffer</code> 变量去存储图像每行解压的数据，然后把这个数据给到 <code>src_buff</code> 变量，如下代码所示：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">char</span> *<span style="color:#268bd2">point</span> = <span style="color:#268bd2">src_buff</span>;
 
-<pre><code class="language-cpp">    unsigned char *point = src_buff;
-
-    while (cinfo.output_scanline &lt; height) {
-        jpeg_read_scanlines(&amp;cinfo, buffer, 1);
-        memcpy(point, *buffer, width * depth);
-        point += width * depth;
+    <span style="color:#859900">while</span> (<span style="color:#268bd2">cinfo</span>.<span style="color:#268bd2">output_scanline</span> &lt; <span style="color:#268bd2">height</span>) {
+        <span style="color:#268bd2">jpeg_read_scanlines</span>(&amp;<span style="color:#268bd2">cinfo</span>, <span style="color:#268bd2">buffer</span>, <span style="color:#2aa198;font-weight:bold">1</span>);
+        <span style="color:#268bd2">memcpy</span>(<span style="color:#268bd2">point</span>, *<span style="color:#268bd2">buffer</span>, <span style="color:#268bd2">width</span> * <span style="color:#268bd2">depth</span>);
+        <span style="color:#268bd2">point</span> += <span style="color:#268bd2">width</span> * <span style="color:#268bd2">depth</span>;
     }
 
-    jpeg_finish_decompress(&amp;cinfo);
-    jpeg_destroy_decompress(&amp;cinfo);
-</code></pre>
-
+    <span style="color:#268bd2">jpeg_finish_decompress</span>(&amp;<span style="color:#268bd2">cinfo</span>);
+    <span style="color:#268bd2">jpeg_destroy_decompress</span>(&amp;<span style="color:#268bd2">cinfo</span>);
+</code></pre></div>
 <p>这里用到了 <code>point</code> 这样的临时变量，实际上，这样的用法在 C++ 开发中应该算比较常见的。</p>
 
 <p>因为把 <code>buffer</code> 的数据传到 <code>src_buff</code> 后，<code>src_buff</code> 指针要移动到下一个点去接收数据，这样一来，指针指向的位置就不是原始位置了，所以才需要临时变量去做移动操作，保证 <code>src_buff</code> 指向的位置为起始点。</p>
@@ -551,26 +535,22 @@ typedef JSAMPARRAY *JSAMPIMAGE; /* a 3-D sample array: top index is color */
 <h3 id="jpeg-上传纹理渲染">jpeg 上传纹理渲染</h3>
 
 <p>说完了压缩和解压缩，最后以一个例子来实际应用，也是之前文章中常用的例子，通过 libjpeg-turbo 读取 jpeg 文件图像内容并上传纹理渲染。</p>
-
-<pre><code class="language-cpp">    // 封装 jpeg 相关操作
-    JpegHelper jpegHelper;
-    // 读取的图像内容
-    unsigned char *jpegData;
-    int jpegSize;
-    int jpegWidth;
-    int jpegHeight;
-    // 读取操作
-    jpegHelper.read_jpeg_file(filePath, &amp;jpegData, &amp;jpegSize, &amp;jpegWidth, &amp;jpegHeight);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 封装 jpeg 相关操作
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">JpegHelper</span> <span style="color:#268bd2">jpegHelper</span>;
+    <span style="color:#93a1a1;font-style:italic">// 读取的图像内容
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">char</span> *<span style="color:#268bd2">jpegData</span>;
+    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">jpegSize</span>;
+    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">jpegWidth</span>;
+    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">jpegHeight</span>;
+    <span style="color:#93a1a1;font-style:italic">// 读取操作
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jpegHelper</span>.<span style="color:#268bd2">read_jpeg_file</span>(<span style="color:#268bd2">filePath</span>, &amp;<span style="color:#268bd2">jpegData</span>, &amp;<span style="color:#268bd2">jpegSize</span>, &amp;<span style="color:#268bd2">jpegWidth</span>, &amp;<span style="color:#268bd2">jpegHeight</span>);
+</code></pre></div>
 <p>最终要获取的就是 <code>jpegData</code> 图像内容，并通过 <code>glTexImage2D</code> 等方法渲染到纹理上。</p>
 
 <p><code>read_jpeg_file</code> 方法的声明如下：</p>
-
-<pre><code class="language-cpp">    int read_jpeg_file(const char *jpeg_file, unsigned char **rgb_buffer, 
-                       int *size, int *width,int *height)
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">read_jpeg_file</span>(<span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> *<span style="color:#268bd2">jpeg_file</span>, <span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">char</span> **<span style="color:#268bd2">rgb_buffer</span>, 
+                       <span style="color:#859900;font-weight:bold">int</span> *<span style="color:#268bd2">size</span>, <span style="color:#859900;font-weight:bold">int</span> *<span style="color:#268bd2">width</span>,<span style="color:#859900;font-weight:bold">int</span> *<span style="color:#268bd2">height</span>)
+</code></pre></div>
 <p><code>rgb_buffer</code> 参数的数据类型，既可以声明成 <code>unsigned char **</code> 这样指针的地址，也可以声明成引用 <code>unsigned char *&amp;</code> ，大同小异。</p>
 
 <p>至于具体的读取操作，和上面的解压缩过程大致相同，就不在阐述一遍了，可以查看我的项目代码实践：</p>
@@ -586,128 +566,81 @@ typedef JSAMPARRAY *JSAMPIMAGE; /* a 3-D sample array: top index is color */
 <p>这三种图像库各有特点，要根据实际需要，选择最合适的。但实际我们用到的无非就是图像的读写操作。读取特定格式图像的像素内容，或者将像素内容写入特定格式文件。</p>
 
 <p>平时写 demo ，追求简单方便的，就用 <code>stb_image</code>，对性能有要求的，针对特定格式的选择 <code>libpng</code> 或者 <code>libjpeg-turbo</code>。</p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/">图像库 libjpeg-turbo 编译与实践</a>
-
-                
-
-                
-
-
-        
-        
-        
-      </article>
-
-      
-        
+          
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/opengl/libpng-compile-and-practice/">图像库 libpng 编译与实践</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/libpng-compile-and-practice/">图像库 libpng 编译与实践</a></li>
     
 </ul>
 
-      
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/opengl/libpng-compile-and-practice/" data-toggle="tooltip" data-placement="top" title="图像库 libpng 编译与实践">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/opengl/opengl-draw-bezier-line/" data-toggle="tooltip" data-placement="top" title="OpenGL 实践之贝塞尔曲线绘制">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+        
 
-      
-      <ul class="pager blog-pager">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-          <li class="previous">
-            <a href="https://glumes.com/post/opengl/libpng-compile-and-practice/" data-toggle="tooltip" data-placement="top" title="图像库 libpng 编译与实践">&larr; Previous Post</a>
-          </li>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-draw-bezier-line/" data-toggle="tooltip" data-placement="top" title="OpenGL 实践之贝塞尔曲线绘制">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
-      
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+          
+
+        
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -716,8 +649,6 @@ typedef JSAMPARRAY *JSAMPIMAGE; /* a 3-D sample array: top index is color */
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -748,21 +679,8 @@ typedef JSAMPARRAY *JSAMPIMAGE; /* a 3-D sample array: top index is color */
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -770,22 +688,28 @@ typedef JSAMPARRAY *JSAMPIMAGE; /* a 3-D sample array: top index is color */
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -794,49 +718,66 @@ typedef JSAMPARRAY *JSAMPIMAGE; /* a 3-D sample array: top index is color */
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

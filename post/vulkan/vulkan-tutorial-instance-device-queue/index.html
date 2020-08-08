@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</title>
+  <title>进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue" />
   <meta name="twitter:title" content="进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue" />
 
@@ -55,33 +55,34 @@ Vulkan 开发的系列文章：
 
 
 这张图片很详细的概括了 Vulkan 中的重要组件以及它们的工作流程，接下来的文章中会针对每个组件进行学习讲解并配上相关的示例代码，首先是 Instance、Device 和 Queue 组 …">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/" />
+  <meta property="og:url" content="https://www.glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -96,23 +97,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -120,7 +109,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -131,15 +122,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -147,25 +138,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -181,9 +172,6 @@ if (!doNotTrack) {
 
   </div>
 </nav>
-
-
-
 
 
     
@@ -202,24 +190,21 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
-        
         <div class="container">
           <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</h1>
                   
-                     <h1>进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</h1>
-                     
+                  
                     <span class="post-meta">
-  Posted on January 7, 2019
+  
+    Posted on January 7, 2019
+  
   
 </span>
 
 
-                    
-                  
                   
               </div>
             </div>
@@ -228,45 +213,59 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</h1>
+              <h1>进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on January 7, 2019
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/vulkan/">Vulkan</a> &nbsp;
             
-          </h5>
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/vulkan/">Vulkan</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -283,8 +282,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <blockquote>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <blockquote>
 <p>Vulkan 开发的系列文章：</p>
 
 <ol>
@@ -305,14 +317,12 @@ if (!doNotTrack) {
 <p>在开始创建 Device 等组件之前，需要创建一个 <code>VkInstance</code> 对象。</p>
 
 <p>通过 <code>vkCreateInstance</code> 方法创建 <code>VKInstance</code> 对象，以下是函数原型，在 <code>&lt;vulkan.h&gt;</code> 头文件中。</p>
-
-<pre><code class="language-cpp">// 声明的函数指针的形式
-typedef VkResult (VKAPI_PTR *PFN_vkCreateInstance)
-(const VkInstanceCreateInfo* pCreateInfo, // 提供创建的信息
-const VkAllocationCallbacks* pAllocator, // 创建时的回调函数
-VkInstance* pInstance);                // 创建的实例
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 声明的函数指针的形式
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">typedef</span> <span style="color:#268bd2">VkResult</span> (<span style="color:#268bd2">VKAPI_PTR</span> *<span style="color:#268bd2">PFN_vkCreateInstance</span>)
+(<span style="color:#859900">const</span> <span style="color:#268bd2">VkInstanceCreateInfo</span>* <span style="color:#268bd2">pCreateInfo</span>, <span style="color:#93a1a1;font-style:italic">// 提供创建的信息
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">const</span> <span style="color:#268bd2">VkAllocationCallbacks</span>* <span style="color:#268bd2">pAllocator</span>, <span style="color:#93a1a1;font-style:italic">// 创建时的回调函数
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">VkInstance</span>* <span style="color:#268bd2">pInstance</span>);                <span style="color:#93a1a1;font-style:italic">// 创建的实例
+</span></code></pre></div>
 <p><vulkan.h> 的头文件把函数通过 <code>typedef</code> 关键字声明成了函数指针的形式，可能会有点难找。</p>
 
 <blockquote>
@@ -329,19 +339,17 @@ VkInstance* pInstance);                // 创建的实例
 <p>在 <code>vkCreateInstance</code> 函数中看到有个名为 <code>VkInstanceCreateInfo</code> 类型的参数，这就是包含了 <code>VKInstance</code> 要创建的信息。</p>
 
 <p>它的参数信息有点多：</p>
-
-<pre><code class="language-cpp">typedef struct VkInstanceCreateInfo {
-    VkStructureType             sType;  // 一般为方法对应的类型
-    const void*                 pNext; // 一般为 null 就好了
-    VkInstanceCreateFlags       flags;  // 留着以后用的，设为 0 就好了
-    const VkApplicationInfo*    pApplicationInfo; // 对应新的一个结构体 VkApplicationInfo
-    uint32_t                    enabledLayerCount; // layer 和 extension 用于调试和拓展
-    const char* const*          ppEnabledLayerNames;
-    uint32_t                    enabledExtensionCount;
-    const char* const*          ppEnabledExtensionNames;
-} VkInstanceCreateInfo;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">typedef</span> <span style="color:#859900">struct</span> <span style="color:#268bd2">VkInstanceCreateInfo</span> {
+    <span style="color:#268bd2">VkStructureType</span>             <span style="color:#268bd2">sType</span>;  <span style="color:#93a1a1;font-style:italic">// 一般为方法对应的类型
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">void</span>*                 <span style="color:#268bd2">pNext</span>; <span style="color:#93a1a1;font-style:italic">// 一般为 null 就好了
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkInstanceCreateFlags</span>       <span style="color:#268bd2">flags</span>;  <span style="color:#93a1a1;font-style:italic">// 留着以后用的，设为 0 就好了
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">const</span> <span style="color:#268bd2">VkApplicationInfo</span>*    <span style="color:#268bd2">pApplicationInfo</span>; <span style="color:#93a1a1;font-style:italic">// 对应新的一个结构体 VkApplicationInfo
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">uint32_t</span>                    <span style="color:#268bd2">enabledLayerCount</span>; <span style="color:#93a1a1;font-style:italic">// layer 和 extension 用于调试和拓展
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span>* <span style="color:#859900">const</span>*          <span style="color:#268bd2">ppEnabledLayerNames</span>;
+    <span style="color:#268bd2">uint32_t</span>                    <span style="color:#268bd2">enabledExtensionCount</span>;
+    <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span>* <span style="color:#859900">const</span>*          <span style="color:#268bd2">ppEnabledExtensionNames</span>;
+} <span style="color:#268bd2">VkInstanceCreateInfo</span>;
+</code></pre></div>
 <p>除了还需要创建一个 <code>VkApplicationInfo</code> 对象，还可以设置 <code>Layer</code> 和 <code>Extension</code> 。</p>
 
 <p>其中：<code>Layer</code> 是用来错误校验、调试输出的。为了提供性能，其中的方法之一就是减少驱动进行状态、错误校验，而 Vulkan 就把这一层单独抽出来了。</p>
@@ -355,47 +363,43 @@ VkInstance* pInstance);                // 创建的实例
 <p>关于 <code>Layer</code> 和 <code>Extension</code> 后续再细说。</p>
 
 <p>接着回到 <code>VkApplicationInfo</code> 结构体，也是创建 Instance 的必要参数之一。</p>
-
-<pre><code class="language-cpp">typedef struct VkApplicationInfo {
-    VkStructureType    sType;
-    const void*        pNext;
-    const char*        pApplicationName;
-    uint32_t           applicationVersion;
-    const char*        pEngineName;
-    uint32_t           engineVersion;
-    uint32_t           apiVersion;
-} VkApplicationInfo;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">typedef</span> <span style="color:#859900">struct</span> <span style="color:#268bd2">VkApplicationInfo</span> {
+    <span style="color:#268bd2">VkStructureType</span>    <span style="color:#268bd2">sType</span>;
+    <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">void</span>*        <span style="color:#268bd2">pNext</span>;
+    <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span>*        <span style="color:#268bd2">pApplicationName</span>;
+    <span style="color:#268bd2">uint32_t</span>           <span style="color:#268bd2">applicationVersion</span>;
+    <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span>*        <span style="color:#268bd2">pEngineName</span>;
+    <span style="color:#268bd2">uint32_t</span>           <span style="color:#268bd2">engineVersion</span>;
+    <span style="color:#268bd2">uint32_t</span>           <span style="color:#268bd2">apiVersion</span>;
+} <span style="color:#268bd2">VkApplicationInfo</span>;
+</code></pre></div>
 <p>它的参数释义就比较容易理解了，设置应用的名称、版本号等，有了它们就可以创建 <code>Instance</code> 对象了，代码可以参考 <a href="https://github.com/glumes/vulkan_tutorial/blob/master/instance_and_device/src/main/cpp/vulkan_tutorial_1.cpp">这里</a> 。</p>
 
 <p>具体的代码如下：</p>
-
-<pre><code class="language-cpp">    VkApplicationInfo app_info = {};
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">VkApplicationInfo</span> <span style="color:#268bd2">app_info</span> = {};
     
-    app_info.apiVersion = VK_API_VERSION_1_0;
-    app_info.applicationVersion = 1;
-    app_info.engineVersion = 1;
-    app_info.pNext = nullptr;
-    app_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-    app_info.pEngineName = APPLICATION_NAME;
-    app_info.pApplicationName = APPLICATION_NAME;
+    <span style="color:#268bd2">app_info</span>.<span style="color:#268bd2">apiVersion</span> = <span style="color:#268bd2">VK_API_VERSION_1_0</span>;
+    <span style="color:#268bd2">app_info</span>.<span style="color:#268bd2">applicationVersion</span> = <span style="color:#2aa198;font-weight:bold">1</span>;
+    <span style="color:#268bd2">app_info</span>.<span style="color:#268bd2">engineVersion</span> = <span style="color:#2aa198;font-weight:bold">1</span>;
+    <span style="color:#268bd2">app_info</span>.<span style="color:#268bd2">pNext</span> = <span style="color:#859900">nullptr</span>;
+    <span style="color:#268bd2">app_info</span>.<span style="color:#268bd2">sType</span> = <span style="color:#268bd2">VK_STRUCTURE_TYPE_APPLICATION_INFO</span>;
+    <span style="color:#268bd2">app_info</span>.<span style="color:#268bd2">pEngineName</span> = <span style="color:#268bd2">APPLICATION_NAME</span>;
+    <span style="color:#268bd2">app_info</span>.<span style="color:#268bd2">pApplicationName</span> = <span style="color:#268bd2">APPLICATION_NAME</span>;
 
-    VkInstanceCreateInfo instance_info = {};
-    // type 就是结构体的类型
-    instance_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-    instance_info.pNext = nullptr;
-    instance_info.pApplicationInfo = &amp;app_info;
-    instance_info.flags = 0;
-    // Extension and Layer 暂时不用,可空
-    instance_info.enabledExtensionCount = 0;
-    instance_info.ppEnabledExtensionNames = nullptr;
-    instance_info.ppEnabledLayerNames = nullptr;
-    instance_info.enabledLayerCount = 0;
+    <span style="color:#268bd2">VkInstanceCreateInfo</span> <span style="color:#268bd2">instance_info</span> = {};
+    <span style="color:#93a1a1;font-style:italic">// type 就是结构体的类型
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">sType</span> = <span style="color:#268bd2">VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO</span>;
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">pNext</span> = <span style="color:#859900">nullptr</span>;
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">pApplicationInfo</span> = &amp;<span style="color:#268bd2">app_info</span>;
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">flags</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
+    <span style="color:#93a1a1;font-style:italic">// Extension and Layer 暂时不用,可空
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">enabledExtensionCount</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">ppEnabledExtensionNames</span> = <span style="color:#859900">nullptr</span>;
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">ppEnabledLayerNames</span> = <span style="color:#859900">nullptr</span>;
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">enabledLayerCount</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
 
-    VkResult result = vkCreateInstance(&amp;instance_info, nullptr, &amp;instance);
-</code></pre>
-
+    <span style="color:#268bd2">VkResult</span> <span style="color:#268bd2">result</span> = <span style="color:#268bd2">vkCreateInstance</span>(&amp;<span style="color:#268bd2">instance_info</span>, <span style="color:#859900">nullptr</span>, &amp;<span style="color:#268bd2">instance</span>);
+</code></pre></div>
 <p>当每调用一个创建函数后，返回的类型都是 <code>VkResult</code> ，只要 VkResult 大于 0 ，那么执行就是成功的。</p>
 
 <p>另外还有个参数是 <code>VkAllocationCallbacks</code>，表示函数调用时的回调，需要传递一个函数指针，在后面的各种调用中都会看到它的身影，如果有用到可以传参，一般为 <code>nullptr</code> 就好了。</p>
@@ -411,22 +415,18 @@ VkInstance* pInstance);                // 创建的实例
 <p>在某些情况下，可能会具有多个物理设备，如下图所示，因此要先枚举一下所有的物理设备：</p>
 
 <p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fyt5sjje8tj203u03za9w.jpg" alt="" /></p>
-
-<pre><code class="language-cpp">    LOGI(&quot;enumerate gpu device&quot;);
-    uint32_t gpu_size = 0;
-    // 第一次调用只为了获得个数
-    VkResult res = vkEnumeratePhysicalDevices(instance, &amp;gpu_size, nullptr);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">LOGI</span>(<span style="color:#2aa198">&#34;enumerate gpu device&#34;</span>);
+    <span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">gpu_size</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
+    <span style="color:#93a1a1;font-style:italic">// 第一次调用只为了获得个数
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkResult</span> <span style="color:#268bd2">res</span> = <span style="color:#268bd2">vkEnumeratePhysicalDevices</span>(<span style="color:#268bd2">instance</span>, &amp;<span style="color:#268bd2">gpu_size</span>, <span style="color:#859900">nullptr</span>);
+</code></pre></div>
 <p>在 <code>vkEnumeratePhysicalDevices</code> 方法中，传入的第二个参数为 gpu 的个数，第三个参数为 null，这样的一次调用会返回 gpu 的个数到 <code>gpu_size</code> 变量。</p>
-
-<pre><code class="language-cpp">    vector&lt;VkPhysicalDevice&gt; gpus;
-    gpus.resize(gpu_size);
-    // vector.data() 方法转换成指针类型
-    // 第二次调用获得所有的数据
-    res = vkEnumeratePhysicalDevices(instance, &amp;gpu_size, gpus.data());
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">vector</span>&lt;<span style="color:#268bd2">VkPhysicalDevice</span>&gt; <span style="color:#268bd2">gpus</span>;
+    <span style="color:#268bd2">gpus</span>.<span style="color:#268bd2">resize</span>(<span style="color:#268bd2">gpu_size</span>);
+    <span style="color:#93a1a1;font-style:italic">// vector.data() 方法转换成指针类型
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#93a1a1;font-style:italic">// 第二次调用获得所有的数据
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">res</span> = <span style="color:#268bd2">vkEnumeratePhysicalDevices</span>(<span style="color:#268bd2">instance</span>, &amp;<span style="color:#268bd2">gpu_size</span>, <span style="color:#268bd2">gpus</span>.<span style="color:#268bd2">data</span>());
+</code></pre></div>
 <p>当再一次调用 <code>vkEnumeratePhysicalDevices</code> 函数时，第三个参数不为 null，而是相应的 <code>VkPhysicalDevice</code> 容器，那么 gpus 会填充 <code>gpu_size</code> 个的 <code>VkPhysicalDevice</code> 对象。</p>
 
 <p>这也算是 Vulkan API 调用的一个 <strong>固定套路</strong> 了，调用两次来获得数据，在后面的代码中也会经常看到这种方式。</p>
@@ -444,43 +444,37 @@ VkInstance* pInstance);                // 创建的实例
 <p>在这里需要用到的属性是 <code>QueueFamilyProperties</code> ，获得该属性的方法调用方式和获得 <code>VkPhysicalDevice</code> 数据方式一样，也是一个两次调用。</p>
 
 <p>如果有设备有多个 GPU，那么这里取第一个来获取它的相关属性：</p>
-
-<pre><code class="language-cpp">    // 第一次调用，获得个数
-    uint32_t queue_family_count = 0;
-    vkGetPhysicalDeviceQueueFamilyProperties(gpus[0], &amp;queue_family_count, nullptr);
-    assert(queue_family_count != 0);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 第一次调用，获得个数
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">queue_family_count</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
+    <span style="color:#268bd2">vkGetPhysicalDeviceQueueFamilyProperties</span>(<span style="color:#268bd2">gpus</span>[<span style="color:#2aa198;font-weight:bold">0</span>], &amp;<span style="color:#268bd2">queue_family_count</span>, <span style="color:#859900">nullptr</span>);
+    <span style="color:#268bd2">assert</span>(<span style="color:#268bd2">queue_family_count</span> != <span style="color:#2aa198;font-weight:bold">0</span>);
     
-    // 第二次调用，获得实际数据
-    vector&lt;VkQueueFamilyProperties&gt; queue_family_props;
-    queue_family_props.resize(queue_family_count);
-    vkGetPhysicalDeviceQueueFamilyProperties(gpus[0], &amp;queue_family_count, queue_family_props.data());
-    assert(queue_family_count != 0);
-</code></pre>
-
+    <span style="color:#93a1a1;font-style:italic">// 第二次调用，获得实际数据
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">vector</span>&lt;<span style="color:#268bd2">VkQueueFamilyProperties</span>&gt; <span style="color:#268bd2">queue_family_props</span>;
+    <span style="color:#268bd2">queue_family_props</span>.<span style="color:#268bd2">resize</span>(<span style="color:#268bd2">queue_family_count</span>);
+    <span style="color:#268bd2">vkGetPhysicalDeviceQueueFamilyProperties</span>(<span style="color:#268bd2">gpus</span>[<span style="color:#2aa198;font-weight:bold">0</span>], &amp;<span style="color:#268bd2">queue_family_count</span>, <span style="color:#268bd2">queue_family_props</span>.<span style="color:#268bd2">data</span>());
+    <span style="color:#268bd2">assert</span>(<span style="color:#268bd2">queue_family_count</span> != <span style="color:#2aa198;font-weight:bold">0</span>);
+</code></pre></div>
 <p><code>QueueFamilyProperties</code> 的结构体含义如下：</p>
-
-<pre><code class="language-cpp">typedef struct VkQueueFamilyProperties {
-    VkQueueFlags    queueFlags;      // 标识位：表示 Queue 的功能
-    uint32_t        queueCount;         
-    uint32_t        timestampValidBits;
-    VkExtent3D      minImageTransferGranularity;
-} VkQueueFamilyProperties;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">typedef</span> <span style="color:#859900">struct</span> <span style="color:#268bd2">VkQueueFamilyProperties</span> {
+    <span style="color:#268bd2">VkQueueFlags</span>    <span style="color:#268bd2">queueFlags</span>;      <span style="color:#93a1a1;font-style:italic">// 标识位：表示 Queue 的功能
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">uint32_t</span>        <span style="color:#268bd2">queueCount</span>;         
+    <span style="color:#268bd2">uint32_t</span>        <span style="color:#268bd2">timestampValidBits</span>;
+    <span style="color:#268bd2">VkExtent3D</span>      <span style="color:#268bd2">minImageTransferGranularity</span>;
+} <span style="color:#268bd2">VkQueueFamilyProperties</span>;
+</code></pre></div>
 <p>其中：<code>queueFlags</code> 表示该 Queue 的能力，有的 Queue 是用来渲染图像的，这个和我们的使用最为密切，还有的 Queue 是用来计算的。</p>
 
 <p>具体的 Flag 标识如下：</p>
-
-<pre><code class="language-cpp">typedef enum VkQueueFlagBits {
-    VK_QUEUE_GRAPHICS_BIT = 0x00000001,         // 图像相关
-    VK_QUEUE_COMPUTE_BIT = 0x00000002,          // 计算相关
-    VK_QUEUE_TRANSFER_BIT = 0x00000004,
-    VK_QUEUE_SPARSE_BINDING_BIT = 0x00000008,
-    VK_QUEUE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
-} VkQueueFlagBits;
-typedef VkFlags VkQueueFlags;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">typedef</span> <span style="color:#859900">enum</span> <span style="color:#268bd2">VkQueueFlagBits</span> {
+    <span style="color:#268bd2">VK_QUEUE_GRAPHICS_BIT</span> = <span style="color:#2aa198;font-weight:bold">0x00000001</span>,         <span style="color:#93a1a1;font-style:italic">// 图像相关
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VK_QUEUE_COMPUTE_BIT</span> = <span style="color:#2aa198;font-weight:bold">0x00000002</span>,          <span style="color:#93a1a1;font-style:italic">// 计算相关
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VK_QUEUE_TRANSFER_BIT</span> = <span style="color:#2aa198;font-weight:bold">0x00000004</span>,
+    <span style="color:#268bd2">VK_QUEUE_SPARSE_BINDING_BIT</span> = <span style="color:#2aa198;font-weight:bold">0x00000008</span>,
+    <span style="color:#268bd2">VK_QUEUE_FLAG_BITS_MAX_ENUM</span> = <span style="color:#2aa198;font-weight:bold">0x7FFFFFFF</span>
+} <span style="color:#268bd2">VkQueueFlagBits</span>;
+<span style="color:#859900">typedef</span> <span style="color:#268bd2">VkFlags</span> <span style="color:#268bd2">VkQueueFlags</span>;
+</code></pre></div>
 <p>一般来说，我们用的是 <code>queueFlags</code> 为 <code>VK_QUEUE_GRAPHICS_BIT</code> 标识位的 <code>Queue</code> 。</p>
 
 <p>那么 <code>Queue</code> 究竟是什么？</p>
@@ -490,87 +484,76 @@ typedef VkFlags VkQueueFlags;
 <p>在文章最开始的图中可以看到，<code>Command-buffer</code> 是提交到了 <code>Queue</code> ，<code>Queue</code> 再提交给 <code>Device</code> 去执行。<code>Queue</code> 可以看成是应用程序和物理设备沟通的桥梁，我们在 <code>Queue</code> 上提交命令，然后再交由 GPU 去执行。</p>
 
 <p>回到本小节的内容，创建 Device 组件，它的函数指针形式如下：</p>
-
-<pre><code class="language-cpp">// 创建 Device 的函数指针
-typedef VkResult (VKAPI_PTR *PFN_vkCreateDevice)
-(VkPhysicalDevice physicalDevice,       // 物理设备
-const VkDeviceCreateInfo* pCreateInfo,  // 调用套路里面的 CreateInfo
-const VkAllocationCallbacks* pAllocator,
-VkDevice* pDevice);                   // 要创建的 Device 类
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 创建 Device 的函数指针
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">typedef</span> <span style="color:#268bd2">VkResult</span> (<span style="color:#268bd2">VKAPI_PTR</span> *<span style="color:#268bd2">PFN_vkCreateDevice</span>)
+(<span style="color:#268bd2">VkPhysicalDevice</span> <span style="color:#268bd2">physicalDevice</span>,       <span style="color:#93a1a1;font-style:italic">// 物理设备
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">const</span> <span style="color:#268bd2">VkDeviceCreateInfo</span>* <span style="color:#268bd2">pCreateInfo</span>,  <span style="color:#93a1a1;font-style:italic">// 调用套路里面的 CreateInfo
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">const</span> <span style="color:#268bd2">VkAllocationCallbacks</span>* <span style="color:#268bd2">pAllocator</span>,
+<span style="color:#268bd2">VkDevice</span>* <span style="color:#268bd2">pDevice</span>);                   <span style="color:#93a1a1;font-style:italic">// 要创建的 Device 类
+</span></code></pre></div>
 <p>创建一个 <code>Device</code> 对象，不仅需要指定具体的物理设备 <code>VkPhysicalDevice</code>，另外还需要该物理设备上的 <code>Queue</code> 相关信息。</p>
 
 <p>在 <code>VkDeviceCreateInfo</code> 结构体中需要一个参数是 <code>VkDeviceQueueCreateInfo</code> ，它的创建如下：</p>
-
-<pre><code class="language-cpp">    // 创建 Queue 所需的相关信息
-    VkDeviceQueueCreateInfo queue_info = {};
-    // 找到属性为 VK_QUEUE_GRAPHICS_BIT 的索引
-    bool found = false; 
-    for (unsigned int i = 0; i &lt; queue_family_count; ++i) {
-        if (queue_family_props[i].queueFlags &amp; VK_QUEUE_GRAPHICS_BIT) {
-            queue_info.queueFamilyIndex = i;
-            found = true;
-            break;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 创建 Queue 所需的相关信息
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkDeviceQueueCreateInfo</span> <span style="color:#268bd2">queue_info</span> = {};
+    <span style="color:#93a1a1;font-style:italic">// 找到属性为 VK_QUEUE_GRAPHICS_BIT 的索引
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">found</span> = <span style="color:#cb4b16">false</span>; 
+    <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#268bd2">queue_family_count</span>; ++<span style="color:#268bd2">i</span>) {
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">queue_family_props</span>[<span style="color:#268bd2">i</span>].<span style="color:#268bd2">queueFlags</span> &amp; <span style="color:#268bd2">VK_QUEUE_GRAPHICS_BIT</span>) {
+            <span style="color:#268bd2">queue_info</span>.<span style="color:#268bd2">queueFamilyIndex</span> = <span style="color:#268bd2">i</span>;
+            <span style="color:#268bd2">found</span> = <span style="color:#cb4b16">true</span>;
+            <span style="color:#859900">break</span>;
         }
     }
 
-    float queue_priorities[1] = {0.0};
-    // 结构体的类型
-    queue_info.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-    queue_info.pNext = nullptr;
-    queue_info.queueCount = 1;
-    // Queue 的优先级
-    queue_info.pQueuePriorities = queue_priorities;
-</code></pre>
-
+    <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">queue_priorities</span>[<span style="color:#2aa198;font-weight:bold">1</span>] = {<span style="color:#2aa198;font-weight:bold">0.0</span>};
+    <span style="color:#93a1a1;font-style:italic">// 结构体的类型
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">queue_info</span>.<span style="color:#268bd2">sType</span> = <span style="color:#268bd2">VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO</span>;
+    <span style="color:#268bd2">queue_info</span>.<span style="color:#268bd2">pNext</span> = <span style="color:#859900">nullptr</span>;
+    <span style="color:#268bd2">queue_info</span>.<span style="color:#268bd2">queueCount</span> = <span style="color:#2aa198;font-weight:bold">1</span>;
+    <span style="color:#93a1a1;font-style:italic">// Queue 的优先级
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">queue_info</span>.<span style="color:#268bd2">pQueuePriorities</span> = <span style="color:#268bd2">queue_priorities</span>;
+</code></pre></div>
 <p>接下来就可以完成 <code>Queue</code> 的创建：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 创建 Device 所需的相关信息类
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkDeviceCreateInfo</span> <span style="color:#268bd2">device_info</span> = {};
 
-<pre><code class="language-cpp">    // 创建 Device 所需的相关信息类
-    VkDeviceCreateInfo device_info = {};
-
-    device_info.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-    device_info.pNext = nullptr;
-    // Device 所需的 Queue 相关信息
-    device_info.queueCreateInfoCount = 1;   // Queue 个数
-    device_info.pQueueCreateInfos = &amp;queue_info;    // Queue 相关信息
-    // Layer 和 Extension 暂时为空，不影响运行，后续再补上
-    device_info.enabledExtensionCount = 0;
-    device_info.ppEnabledExtensionNames = NULL;
-    device_info.enabledLayerCount = 0;
-    device_info.ppEnabledLayerNames = NULL;
-    device_info.pEnabledFeatures = NULL;
+    <span style="color:#268bd2">device_info</span>.<span style="color:#268bd2">sType</span> = <span style="color:#268bd2">VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO</span>;
+    <span style="color:#268bd2">device_info</span>.<span style="color:#268bd2">pNext</span> = <span style="color:#859900">nullptr</span>;
+    <span style="color:#93a1a1;font-style:italic">// Device 所需的 Queue 相关信息
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">device_info</span>.<span style="color:#268bd2">queueCreateInfoCount</span> = <span style="color:#2aa198;font-weight:bold">1</span>;   <span style="color:#93a1a1;font-style:italic">// Queue 个数
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">device_info</span>.<span style="color:#268bd2">pQueueCreateInfos</span> = &amp;<span style="color:#268bd2">queue_info</span>;    <span style="color:#93a1a1;font-style:italic">// Queue 相关信息
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#93a1a1;font-style:italic">// Layer 和 Extension 暂时为空，不影响运行，后续再补上
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">device_info</span>.<span style="color:#268bd2">enabledExtensionCount</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
+    <span style="color:#268bd2">device_info</span>.<span style="color:#268bd2">ppEnabledExtensionNames</span> = <span style="color:#cb4b16">NULL</span>;
+    <span style="color:#268bd2">device_info</span>.<span style="color:#268bd2">enabledLayerCount</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
+    <span style="color:#268bd2">device_info</span>.<span style="color:#268bd2">ppEnabledLayerNames</span> = <span style="color:#cb4b16">NULL</span>;
+    <span style="color:#268bd2">device_info</span>.<span style="color:#268bd2">pEnabledFeatures</span> = <span style="color:#cb4b16">NULL</span>;
     
-    res = vkCreateDevice(gpus[0], &amp;device_info, nullptr, &amp;device);
-</code></pre>
-
+    <span style="color:#268bd2">res</span> = <span style="color:#268bd2">vkCreateDevice</span>(<span style="color:#268bd2">gpus</span>[<span style="color:#2aa198;font-weight:bold">0</span>], &amp;<span style="color:#268bd2">device_info</span>, <span style="color:#859900">nullptr</span>, &amp;<span style="color:#268bd2">device</span>);
+</code></pre></div>
 <h2 id="queue-组件">Queue 组件</h2>
 
 <p>完成了 <code>Device</code> 创建之后，<code>Queue</code> 的创建也简单多了，直接调用如下函数就好了：</p>
-
-<pre><code class="language-cpp">typedef void (VKAPI_PTR *PFN_vkGetDeviceQueue)
-(VkDevice device,   // 创建的 Device 对象
-uint32_t queueFamilyIndex, // queueFlags 为 VK_QUEUE_GRAPHICS_BIT 的索引
-uint32_t queueIndex,        
-VkQueue* pQueue);       // 要创建的 Queue
-
-// 代码示例
-vkGetDeviceQueue(info.device, info.graphics_queue_family_index, 0, &amp;info.queue);
-
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">typedef</span> <span style="color:#268bd2">void</span> (<span style="color:#268bd2">VKAPI_PTR</span> *<span style="color:#268bd2">PFN_vkGetDeviceQueue</span>)
+(<span style="color:#268bd2">VkDevice</span> <span style="color:#268bd2">device</span>,   <span style="color:#93a1a1;font-style:italic">// 创建的 Device 对象
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">queueFamilyIndex</span>, <span style="color:#93a1a1;font-style:italic">// queueFlags 为 VK_QUEUE_GRAPHICS_BIT 的索引
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">queueIndex</span>,        
+<span style="color:#268bd2">VkQueue</span>* <span style="color:#268bd2">pQueue</span>);       <span style="color:#93a1a1;font-style:italic">// 要创建的 Queue
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#93a1a1;font-style:italic">// 代码示例
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">vkGetDeviceQueue</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">device</span>, <span style="color:#268bd2">info</span>.<span style="color:#268bd2">graphics_queue_family_index</span>, <span style="color:#2aa198;font-weight:bold">0</span>, &amp;<span style="color:#268bd2">info</span>.<span style="color:#268bd2">queue</span>);
+</code></pre></div>
 <h2 id="组件销毁">组件销毁</h2>
 
 <p>完成了 <code>Instance</code>、<code>Device</code>、<code>Queue</code> 组件的创建之后，还有一件要做的事情就是释放它们，销毁组件。</p>
 
 <p>按照先进后出的方式进行销毁，<code>Instance</code> 最先创建反而最后销毁，和 <code>Device</code> 相关联的 <code>Queue</code> 当 <code>Device</code> 销毁了，<code>Queue</code> 也随之销毁了。</p>
-
-<pre><code class="language-cpp">    // 销毁 Device
-    vkDestroyDevice(info.device, nullptr);
-    // 销毁 Instance
-    vkDestroyInstance(info.instance, nullptr);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 销毁 Device
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">vkDestroyDevice</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">device</span>, <span style="color:#859900">nullptr</span>);
+    <span style="color:#93a1a1;font-style:italic">// 销毁 Instance
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">vkDestroyInstance</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">instance</span>, <span style="color:#859900">nullptr</span>);
+</code></pre></div>
 <h2 id="参考">参考</h2>
 
 <p>这里有一些不错的参考地址和书籍：</p>
@@ -591,130 +574,83 @@ vkGetDeviceQueue(info.device, info.graphics_queue_family_index, 0, &amp;info.que
 <h2 id="总结">总结</h2>
 
 <p>敲一遍上述的代码，会发现 Vulkan 在 API 调用上还是有迹可循的，重点是要理解了每个参数的含义，多结合官方的文档来学习、实践、</p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/">进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</a>
-
-                
-
-                
-
-
-        
-        
-        
-      </article>
-
-      
-        
+          
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/vulkan/vulkan-tutorial-renderer/">进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解</a></li>
+    <li><a href="https://www.glumes.com/post/vulkan/vulkan-tutorial-renderer/">进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解</a></li>
     
-    <li><a href="/post/vulkan/vulkan-tutorial-concept/">进击的 Vulkan 移动开发（一）之今生前世</a></li>
+    <li><a href="https://www.glumes.com/post/vulkan/vulkan-tutorial-concept/">进击的 Vulkan 移动开发（一）之今生前世</a></li>
     
 </ul>
 
-      
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/vulkan/vulkan-tutorial-renderer/" data-toggle="tooltip" data-placement="top" title="进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/vulkan/vulkan-tutorial-command-buffer/" data-toggle="tooltip" data-placement="top" title="进击的 Vulkan 移动开发之 Command Buffer">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+        
 
-      
-      <ul class="pager blog-pager">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-          <li class="previous">
-            <a href="https://glumes.com/post/vulkan/vulkan-tutorial-renderer/" data-toggle="tooltip" data-placement="top" title="进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解">&larr; Previous Post</a>
-          </li>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/" data-toggle="tooltip" data-placement="top" title="进击的 Vulkan 移动开发之 Command Buffer">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
-      
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+          
+
+        
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -723,8 +659,6 @@ vkGetDeviceQueue(info.device, info.graphics_queue_family_index, 0, &amp;info.que
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -755,21 +689,8 @@ vkGetDeviceQueue(info.device, info.graphics_queue_family_index, 0, &amp;info.que
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -777,22 +698,28 @@ vkGetDeviceQueue(info.device, info.graphics_queue_family_index, 0, &amp;info.que
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -801,49 +728,66 @@ vkGetDeviceQueue(info.device, info.graphics_queue_family_index, 0, &amp;info.que
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

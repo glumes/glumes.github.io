@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Inflater on 技术开发进阶</title>
-    <link>https://glumes.com/tags/inflater/</link>
-    <description>Recent content in Inflater on 技术开发进阶</description>
+    <title>Inflater on 星陨的博客</title>
+    <link>https://www.glumes.com/tags/inflater/</link>
+    <description>Recent content in Inflater on 星陨的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
-    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <language>en-us</language>
     <lastBuildDate>Fri, 22 Dec 2017 15:55:08 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.com/tags/inflater/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glumes.com/tags/inflater/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Android 布局加载之 LayoutInflater</title>
-      <link>https://glumes.com/post/android/android-layout-inflater/</link>
+      <link>https://www.glumes.com/post/android/android-layout-inflater/</link>
       <pubDate>Fri, 22 Dec 2017 15:55:08 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/post/android/android-layout-inflater/</guid>
+      
+      <guid>https://www.glumes.com/post/android/android-layout-inflater/</guid>
       <description>&lt;p&gt;Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。&lt;/p&gt;
 
 &lt;p&gt;LayoutInflater 实例的获取有多种方式，但最终是通过&lt;code&gt;(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)&lt;/code&gt;来得到的，也就是说加载布局的 &lt;code&gt;LayoutInflater&lt;/code&gt; 是来自于系统服务的。&lt;/p&gt;</description>

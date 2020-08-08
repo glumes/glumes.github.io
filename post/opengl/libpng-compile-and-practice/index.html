@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>图像库 libpng 编译与实践</title>
+  <title>图像库 libpng 编译与实践-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="图像库 libpng 编译与实践" />
   <meta name="twitter:title" content="图像库 libpng 编译与实践" />
 
@@ -25,33 +25,34 @@ https://glumes.com/post/android/stb-image-introduce/">
 【简单易用的图像解码库介绍 —— stb_image】
 
 https://glumes.com/post/android/stb-image-introduce/">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/libpng-compile-and-practice/" />
+  <meta property="og:url" content="https://www.glumes.com/post/opengl/libpng-compile-and-practice/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/libpng-compile-and-practice/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/opengl/libpng-compile-and-practice/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -66,23 +67,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -90,7 +79,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -101,15 +92,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -117,25 +108,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -151,9 +142,6 @@ if (!doNotTrack) {
 
   </div>
 </nav>
-
-
-
 
 
     
@@ -172,24 +160,21 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
-        
         <div class="container">
           <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>图像库 libpng 编译与实践</h1>
                   
-                     <h1>图像库 libpng 编译与实践</h1>
-                     
+                  
                     <span class="post-meta">
-  Posted on July 12, 2019
+  
+    Posted on July 12, 2019
+  
   
 </span>
 
 
-                    
-                  
                   
               </div>
             </div>
@@ -198,47 +183,61 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">图像库 libpng 编译与实践</h1>
+              <h1>图像库 libpng 编译与实践</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on July 12, 2019
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/libpng/">libpng</a> &nbsp;
             
-                <a href="https://glumes.com/tags/image/">image</a> &nbsp;
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/libpng/">libpng</a> &nbsp;
+              
+                  <a href="https://www.glumes.com/tags/image/">image</a> &nbsp;
+              
+            </h5>
             
-          </h5>
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -266,8 +265,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p>在之前的文章中介绍了 <code>stb_image</code> 图像库，还顺带提到了 libpng 和 libjpeg ，这篇文章就是介绍如何在 Android 平台上用 CMake 编译 libpng 动态库以及 libpng 使用实践。</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>在之前的文章中介绍了 <code>stb_image</code> 图像库，还顺带提到了 libpng 和 libjpeg ，这篇文章就是介绍如何在 Android 平台上用 CMake 编译 libpng 动态库以及 libpng 使用实践。</p>
 
 <p>【<a href="https://glumes.com/post/android/stb-image-introduce/">简单易用的图像解码库介绍 —— stb_image</a>】</p>
 
@@ -298,52 +310,43 @@ if (!doNotTrack) {
 <p>在 libpng 的源代码中，就提供了 CMakeLists.txt 文件用以说明如何编译，但是却不能直接用在 Android 平台上，不过可以借鉴其源码作为参考。</p>
 
 <p>由于 CMake 跨平台编译的特性，一般大型项目代码编译都会针对平台做适配，常见代码结构如下：</p>
-
-<pre><code class="language-cmake">    if (CMAKE_SYSTEM_PROCESSOR MATCHES &quot;^arm&quot; OR
-            CMAKE_SYSTEM_PROCESSOR MATCHES &quot;^aarch64&quot;)
-        set(libpng_arm_sources
-                arm/arm_init.c
-                arm/filter_neon.S
-                arm/filter_neon_intrinsics.c
-                arm/palette_neon_intrinsics.c)
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmake" data-lang="cmake">    <span style="color:#cb4b16">if</span> (<span style="color:#2aa198">CMAKE_SYSTEM_PROCESSOR</span> <span style="color:#2aa198">MATCHES</span> <span style="color:#2aa198">&#34;^arm&#34;</span> <span style="color:#2aa198">OR</span>
+            <span style="color:#2aa198">CMAKE_SYSTEM_PROCESSOR</span> <span style="color:#2aa198">MATCHES</span> <span style="color:#2aa198">&#34;^aarch64&#34;</span>)
+        <span style="color:#cb4b16">set</span>(<span style="color:#2aa198">libpng_arm_sources</span>
+                <span style="color:#2aa198">arm/arm_init.c</span>
+                <span style="color:#2aa198">arm/filter_neon.S</span>
+                <span style="color:#2aa198">arm/filter_neon_intrinsics.c</span>
+                <span style="color:#2aa198">arm/palette_neon_intrinsics.c</span>)
         // 定义宏
-        add_definitions(-DPNG_ARM_NEON_OPT=2)
-    endif ()
-</code></pre>
-
+        <span style="color:#cb4b16">add_definitions</span>(<span style="color:#2aa198">-DPNG_ARM_NEON_OPT=2</span>)
+    <span style="color:#cb4b16">endif</span> ()</code></pre></div>
 <p>这段代码就是判断系统处理器平台，不同平台所需要编译的代码不一样。而 libpng 会有这样的适配，主要是因为它用到了 neon 相关优化，该优化主要是用在 <code>filter</code> 操作方面。</p>
-
-<pre><code class="language-cmake">// libpng 使用 neon 优化加速的方法
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmake" data-lang="cmake">// libpng 使用 neon 优化加速的方法
 void
-png_read_filter_row_up_neon(png_row_infop row_info, png_bytep row,
-   png_const_bytep prev_row)
+<span style="color:#cb4b16">png_read_filter_row_up_neon</span>(<span style="color:#2aa198">png_row_infop</span> <span style="color:#2aa198">row_info,</span> <span style="color:#2aa198">png_bytep</span> <span style="color:#2aa198">row,</span>
+   <span style="color:#2aa198">png_const_bytep</span> <span style="color:#2aa198">prev_row</span>)
 {
    png_bytep rp = row;
    png_bytep rp_stop = row + row_info-&gt;rowbytes;
    png_const_bytep pp = prev_row;
 
-   png_debug(1, &quot;in png_read_filter_row_up_neon&quot;);
+   <span style="color:#cb4b16">png_debug</span>(<span style="color:#2aa198">1,</span> <span style="color:#2aa198">&#34;in png_read_filter_row_up_neon&#34;</span>);
 
-   for (; rp &lt; rp_stop; rp += 16, pp += 16)
+   <span style="color:#cb4b16">for</span> (<span style="color:#2aa198">;</span> <span style="color:#2aa198">rp</span> <span style="color:#2aa198">&lt;</span> <span style="color:#2aa198">rp_stop;</span> <span style="color:#2aa198">rp</span> <span style="color:#2aa198">+=</span> <span style="color:#2aa198">16,</span> <span style="color:#2aa198">pp</span> <span style="color:#2aa198">+=</span> <span style="color:#2aa198">16</span>)
    {
       uint8x16_t qrp, qpp;
 
-      qrp = vld1q_u8(rp);
-      qpp = vld1q_u8(pp);
-      qrp = vaddq_u8(qrp, qpp);
-      vst1q_u8(rp, qrp);
+      qrp = <span style="color:#cb4b16">vld1q_u8</span>(<span style="color:#2aa198">rp</span>);
+      qpp = <span style="color:#cb4b16">vld1q_u8</span>(<span style="color:#2aa198">pp</span>);
+      qrp = <span style="color:#cb4b16">vaddq_u8</span>(<span style="color:#2aa198">qrp,</span> <span style="color:#2aa198">qpp</span>);
+      <span style="color:#cb4b16">vst1q_u8</span>(<span style="color:#2aa198">rp,</span> <span style="color:#2aa198">qrp</span>);
    }
-}
-</code></pre>
-
+}</code></pre></div>
 <p>通过查看 libpng 源代码，要启用 neon 优化，还必须通过 add_definitions 方法定义 DPNG_ARM_NEON_OPT 宏的值为 2 ，否则在源码中会认为不需要使用 neon 。</p>
 
 <p>要使用 neon 编译，还需要指定编译器相关参数：</p>
-
-<pre><code class="language-cmake">set_property(SOURCE ${libpng_arm_sources}
-        APPEND_STRING PROPERTY COMPILE_FLAGS &quot; -mfpu=neon&quot;)
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmake" data-lang="cmake"><span style="color:#cb4b16">set_property</span>(<span style="color:#2aa198">SOURCE</span> ${<span style="color:#268bd2">libpng_arm_sources</span>}
+        <span style="color:#2aa198">APPEND_STRING</span> <span style="color:#2aa198">PROPERTY</span> <span style="color:#2aa198">COMPILE_FLAGS</span> <span style="color:#2aa198">&#34; -mfpu=neon&#34;</span>)</code></pre></div>
 <p>不过看到网上一些 libpng 编译文章，基本没提到 neon 相关东西，估计这个优化加速功能用不上吧。</p>
 
 <p>但是，可以在我的 Demo 上看到如何启用 neon 去编译，以后也会写专门的文章来介绍 neon 的使用~~</p>
@@ -351,11 +354,8 @@ png_read_filter_row_up_neon(png_row_infop row_info, png_bytep row,
 <h3 id="zlip-库依赖">zlip 库依赖</h3>
 
 <p>libpng 动态库编译还依赖 zlip 库，要是在其他平台上需要单独下载这个库，但是 Android 上就不需要了，因为 Android 编译环境本身就提供了这个库，就像我们使用 log 库一样。</p>
-
-<pre><code class="language-cmake">// 指定要编译的 so 依赖哪些其他的 so , z 就是 zlib 库
-target_link_libraries(png z log )
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmake" data-lang="cmake">// 指定要编译的 so 依赖哪些其他的 so , z 就是 zlib 库
+<span style="color:#cb4b16">target_link_libraries</span>(<span style="color:#2aa198">png</span> <span style="color:#2aa198">z</span> <span style="color:#2aa198">log</span> )</code></pre></div>
 <p>Android 编译环境中 <code>z</code> 就是 zlip 库了。</p>
 
 <h3 id="源码编译">源码编译</h3>
@@ -377,106 +377,86 @@ target_link_libraries(png z log )
 <h3 id="linpng-初始化">linpng 初始化</h3>
 
 <p>首先是初始化 libpng ，得到 <code>png_structp</code> 结构体。它可以说是代表了 libpng 上下文，在方法调用时都需要把它作为第一个参数传入。</p>
-
-<pre><code class="language-cpp">    // 传 nullptr 的参数是用来自定义错误处理的，这里不需要
-    png_structp png = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 传 nullptr 的参数是用来自定义错误处理的，这里不需要
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">png_structp</span> <span style="color:#268bd2">png</span> = <span style="color:#268bd2">png_create_read_struct</span>(<span style="color:#268bd2">PNG_LIBPNG_VER_STRING</span>, <span style="color:#859900">nullptr</span>, <span style="color:#859900">nullptr</span>, <span style="color:#859900">nullptr</span>);
+</code></pre></div>
 <p>由于是读取，方法名中带有 read ,如果是写入，那就是 png_create_write_struct 方法了。</p>
 
 <h3 id="设置错误返回点">设置错误返回点</h3>
 
 <p>由于在创建 png 变量时，用来自定义错误处理的参数都传了 nullptr，所以需要设置错误返回点，这样当 libpng 发生错误时，程序将回到这个调用点，这时候可以做一些清理工作：</p>
-
-<pre><code class="language-cpp">    if (setjmp(png_jmpbuf(png))) {
-        png_destroy_read_struct(&amp;png, nullptr, nullptr);
-        fclose(fp);
-        return;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900">if</span> (<span style="color:#268bd2">setjmp</span>(<span style="color:#268bd2">png_jmpbuf</span>(<span style="color:#268bd2">png</span>))) {
+        <span style="color:#268bd2">png_destroy_read_struct</span>(&amp;<span style="color:#268bd2">png</span>, <span style="color:#859900">nullptr</span>, <span style="color:#859900">nullptr</span>);
+        <span style="color:#268bd2">fclose</span>(<span style="color:#268bd2">fp</span>);
+        <span style="color:#859900">return</span>;
     }
-</code></pre>
-
+</code></pre></div>
 <h3 id="判断文件是否是-png-格式">判断文件是否是 png 格式</h3>
 
 <p>libpng 提供了 png_sig_cmp 方法来检查文件是否 png 格式。</p>
-
-<pre><code class="language-cpp">    #define PNG_BYTES_TO_CHECK 4
-    char buf[PNG_BYTES_TO_CHECK];
-    // 读取 buffer
-    if (fread(buf, 1, PNG_BYTES_TO_CHECK, fp) != PNG_BYTES_TO_CHECK) {
-        return;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">#define PNG_BYTES_TO_CHECK 4
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900;font-weight:bold">char</span> <span style="color:#268bd2">buf</span>[<span style="color:#268bd2">PNG_BYTES_TO_CHECK</span>];
+    <span style="color:#93a1a1;font-style:italic">// 读取 buffer
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">if</span> (<span style="color:#268bd2">fread</span>(<span style="color:#268bd2">buf</span>, <span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">PNG_BYTES_TO_CHECK</span>, <span style="color:#268bd2">fp</span>) != <span style="color:#268bd2">PNG_BYTES_TO_CHECK</span>) {
+        <span style="color:#859900">return</span>;
     }
-    // 判断
-    if (!png_sig_cmp(reinterpret_cast&lt;png_const_bytep&gt;(buf), 0, PNG_BYTES_TO_CHECK)) {
-        // 返回值不等于 0 则是 png 文件格式
-    } 
-</code></pre>
-
+    <span style="color:#93a1a1;font-style:italic">// 判断
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">if</span> (!<span style="color:#268bd2">png_sig_cmp</span>(<span style="color:#859900">reinterpret_cast</span>&lt;<span style="color:#268bd2">png_const_bytep</span>&gt;(<span style="color:#268bd2">buf</span>), <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#268bd2">PNG_BYTES_TO_CHECK</span>)) {
+        <span style="color:#93a1a1;font-style:italic">// 返回值不等于 0 则是 png 文件格式
+</span><span style="color:#93a1a1;font-style:italic"></span>    } 
+</code></pre></div>
 <p>如果调用了该方法，需要通过 png_set_sig_bytes 方法告诉 libpng 该跳过相应的数据，否则会出现黑屏，或者通过 rewind 方法重置文件指针。</p>
 
 <h3 id="获取图像信息">获取图像信息</h3>
 
 <p>首先创建 png_infop 结构体来代表图像信息：</p>
-
-<pre><code class="language-cpp">    png_infop infop = png_create_info_struct(png);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">png_infop</span> <span style="color:#268bd2">infop</span> = <span style="color:#268bd2">png_create_info_struct</span>(<span style="color:#268bd2">png</span>);
+</code></pre></div>
 <p>然后是设置图像的数据源，前提是要得到文件路径：</p>
-
-<pre><code class="language-cpp">    // 根据文件路径打开文件
-    FILE *fp = fopen(mFileName.c_str(), &quot;rb&quot;);
-    // 设置图像数据源
-    png_init_io(png, fp);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 根据文件路径打开文件
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">FILE</span> *<span style="color:#268bd2">fp</span> = <span style="color:#268bd2">fopen</span>(<span style="color:#268bd2">mFileName</span>.<span style="color:#268bd2">c_str</span>(), <span style="color:#2aa198">&#34;rb&#34;</span>);
+    <span style="color:#93a1a1;font-style:italic">// 设置图像数据源
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">png_init_io</span>(<span style="color:#268bd2">png</span>, <span style="color:#268bd2">fp</span>);
+</code></pre></div>
 <p>接下来是读取信息：</p>
-
-<pre><code class="language-cpp">    png_read_png(png, infop,
-                 (PNG_TRANSFORM_STRIP_16 | PNG_TRANSFORM_PACKING | PNG_TRANSFORM_EXPAND),
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">png_read_png</span>(<span style="color:#268bd2">png</span>, <span style="color:#268bd2">infop</span>,
+                 (<span style="color:#268bd2">PNG_TRANSFORM_STRIP_16</span> | <span style="color:#268bd2">PNG_TRANSFORM_PACKING</span> | <span style="color:#268bd2">PNG_TRANSFORM_EXPAND</span>),
+</code></pre></div>
 <p>通过如下方法，能得到图像具体某方面信息：</p>
-
-<pre><code class="language-cpp">    mWidth = png_get_image_width(png, info);
-    mHeight = png_get_image_height(png, info);
-    mColorType = png_get_color_type(png, info);
-    mBitDepth = png_get_bit_depth(png, info);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">mWidth</span> = <span style="color:#268bd2">png_get_image_width</span>(<span style="color:#268bd2">png</span>, <span style="color:#268bd2">info</span>);
+    <span style="color:#268bd2">mHeight</span> = <span style="color:#268bd2">png_get_image_height</span>(<span style="color:#268bd2">png</span>, <span style="color:#268bd2">info</span>);
+    <span style="color:#268bd2">mColorType</span> = <span style="color:#268bd2">png_get_color_type</span>(<span style="color:#268bd2">png</span>, <span style="color:#268bd2">info</span>);
+    <span style="color:#268bd2">mBitDepth</span> = <span style="color:#268bd2">png_get_bit_depth</span>(<span style="color:#268bd2">png</span>, <span style="color:#268bd2">info</span>);
+</code></pre></div>
 <p>当然也可以通过 png_get_IHDR 方法去获得信息</p>
-
-<pre><code class="language-cpp">    png_get_IHDR(png, infop, &amp;mWidth, &amp;mHeight, &amp;mBitDepth, &amp;mColorType, &amp;mInterlaceType,
-                 &amp;mCompressionType, &amp;mFilterType);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">png_get_IHDR</span>(<span style="color:#268bd2">png</span>, <span style="color:#268bd2">infop</span>, &amp;<span style="color:#268bd2">mWidth</span>, &amp;<span style="color:#268bd2">mHeight</span>, &amp;<span style="color:#268bd2">mBitDepth</span>, &amp;<span style="color:#268bd2">mColorType</span>, &amp;<span style="color:#268bd2">mInterlaceType</span>,
+                 &amp;<span style="color:#268bd2">mCompressionType</span>, &amp;<span style="color:#268bd2">mFilterType</span>);
+</code></pre></div>
 <h3 id="获取像素内容">获取像素内容</h3>
 
 <p>通过 png_get_rows 方法按行获取所有的数据，然后赋值到像素指针上去。</p>
-
-<pre><code class="language-cpp">	// 代表像素内容的指针
-    unsigned char *mPixelData;
-    // 获取每行的字节数量
-    unsigned int row_bytes = png_get_rowbytes(png, infop);
-    mPixelData = new unsigned char[row_bytes * mHeight];
-    png_bytepp rows = png_get_rows(png, infop);
-    // 逐行读取，并填充到像素指针上去
-    for (int i = 0; i &lt; mHeight; ++i) {
-        memcpy(mPixelData + (row_bytes * i), rows[i], row_bytes);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">	<span style="color:#93a1a1;font-style:italic">// 代表像素内容的指针
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">char</span> *<span style="color:#268bd2">mPixelData</span>;
+    <span style="color:#93a1a1;font-style:italic">// 获取每行的字节数量
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">row_bytes</span> = <span style="color:#268bd2">png_get_rowbytes</span>(<span style="color:#268bd2">png</span>, <span style="color:#268bd2">infop</span>);
+    <span style="color:#268bd2">mPixelData</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">unsigned</span> <span style="color:#859900;font-weight:bold">char</span>[<span style="color:#268bd2">row_bytes</span> * <span style="color:#268bd2">mHeight</span>];
+    <span style="color:#268bd2">png_bytepp</span> <span style="color:#268bd2">rows</span> = <span style="color:#268bd2">png_get_rows</span>(<span style="color:#268bd2">png</span>, <span style="color:#268bd2">infop</span>);
+    <span style="color:#93a1a1;font-style:italic">// 逐行读取，并填充到像素指针上去
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#268bd2">mHeight</span>; ++<span style="color:#268bd2">i</span>) {
+        <span style="color:#268bd2">memcpy</span>(<span style="color:#268bd2">mPixelData</span> + (<span style="color:#268bd2">row_bytes</span> * <span style="color:#268bd2">i</span>), <span style="color:#268bd2">rows</span>[<span style="color:#268bd2">i</span>], <span style="color:#268bd2">row_bytes</span>);
     }
-</code></pre>
-
+</code></pre></div>
 <p>其实在前面的 png_read_png 方法中就已经得到了所有的像素内容，保存在 infop 变量的 row_pointers 中，具体的实现如下：</p>
 
 <p>通过 png_read_image 方式读取像素内容：</p>
-
-<pre><code class="language-cpp">    // row_pointers 当成了一维指针数组
-    png_bytep *row_pointers;
-    row_pointers = (png_bytep *) malloc(sizeof(png_bytep) * mHeight);
-    for (int y = 0; y &lt; mHeight; y++) {
-        row_pointers[y] = (png_byte *) malloc(png_get_rowbytes(png, info));
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// row_pointers 当成了一维指针数组
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">png_bytep</span> *<span style="color:#268bd2">row_pointers</span>;
+    <span style="color:#268bd2">row_pointers</span> = (<span style="color:#268bd2">png_bytep</span> *) <span style="color:#268bd2">malloc</span>(<span style="color:#859900">sizeof</span>(<span style="color:#268bd2">png_bytep</span>) * <span style="color:#268bd2">mHeight</span>);
+    <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">y</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">y</span> &lt; <span style="color:#268bd2">mHeight</span>; <span style="color:#268bd2">y</span>++) {
+        <span style="color:#268bd2">row_pointers</span>[<span style="color:#268bd2">y</span>] = (<span style="color:#268bd2">png_byte</span> *) <span style="color:#268bd2">malloc</span>(<span style="color:#268bd2">png_get_rowbytes</span>(<span style="color:#268bd2">png</span>, <span style="color:#268bd2">info</span>));
     }
-    png_read_image(png, row_pointers);
-</code></pre>
-
+    <span style="color:#268bd2">png_read_image</span>(<span style="color:#268bd2">png</span>, <span style="color:#268bd2">row_pointers</span>);
+</code></pre></div>
 <p>最后，别忘了调用 png_read_end 方法结束读取。</p>
 
 <p>有了像素内容，就可以做一个常见的渲染操作了，将像素内容渲染绘制到纹理上。</p>
@@ -484,21 +464,19 @@ target_link_libraries(png z log )
 <h3 id="保存图片">保存图片</h3>
 
 <p>最后介绍如何根据像素内容去保存图片，在 libpng 中也提供了相应的方法调用，流程就是如下方法：</p>
-
-<pre><code class="language-cpp">    png = png_create_write_struct()
-    infop = png_create_info_struct()
-    // 关联数据源，png 和要写入的文件
-    png_init_io(png,fp)
-    // 设置 infop 相关参数，代表最好要生成的图片文件相关信息
-    png_set_IHDR()
-    // 写入图片信息
-    png_write_info(png, infop);
-    // 写入图片像素内容
-    png_write_image(png, row_pointers);
-    // 结束写入
-    png_write_end(png, NULL);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">png</span> = <span style="color:#268bd2">png_create_write_struct</span>()
+    <span style="color:#268bd2">infop</span> = <span style="color:#268bd2">png_create_info_struct</span>()
+    <span style="color:#93a1a1;font-style:italic">// 关联数据源，png 和要写入的文件
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">png_init_io</span>(<span style="color:#268bd2">png</span>,<span style="color:#268bd2">fp</span>)
+    <span style="color:#93a1a1;font-style:italic">// 设置 infop 相关参数，代表最好要生成的图片文件相关信息
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">png_set_IHDR</span>()
+    <span style="color:#93a1a1;font-style:italic">// 写入图片信息
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">png_write_info</span>(<span style="color:#268bd2">png</span>, <span style="color:#268bd2">infop</span>);
+    <span style="color:#93a1a1;font-style:italic">// 写入图片像素内容
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">png_write_image</span>(<span style="color:#268bd2">png</span>, <span style="color:#268bd2">row_pointers</span>);
+    <span style="color:#93a1a1;font-style:italic">// 结束写入
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">png_write_end</span>(<span style="color:#268bd2">png</span>, <span style="color:#cb4b16">NULL</span>);
+</code></pre></div>
 <p>流程和读取像素内容恰好相反。</p>
 
 <p>其中 png 变量要通过 png_create_write_struct 创建。</p>
@@ -516,121 +494,74 @@ target_link_libraries(png z log )
 <p><a href="http://www.libpng.org/pub/png/libpng-manual.txt">http://www.libpng.org/pub/png/libpng-manual.txt</a></p>
 
 <p>有疑问的话，基本都可以在这个上面找到答案。</p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/libpng-compile-and-practice/">图像库 libpng 编译与实践</a>
-
-                
-
-                
-
+          
 
         
+  
         
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/android/google-jetpack-camerax/" data-toggle="tooltip" data-placement="top" title="Google Jetpack 新组件 CameraX 介绍与实践">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/" data-toggle="tooltip" data-placement="top" title="图像库 libjpeg-turbo 编译与实践">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
         
-      </article>
 
-      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
 
-      
+        
+          
 
-      
-      <ul class="pager blog-pager">
         
-          <li class="previous">
-            <a href="https://glumes.com/post/android/google-jetpack-camerax/" data-toggle="tooltip" data-placement="top" title="Google Jetpack 新组件 CameraX 介绍与实践">&larr; Previous Post</a>
-          </li>
-        
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/" data-toggle="tooltip" data-placement="top" title="图像库 libjpeg-turbo 编译与实践">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
-
-      
-        
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -639,8 +570,6 @@ target_link_libraries(png z log )
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -671,21 +600,8 @@ target_link_libraries(png z log )
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -693,22 +609,28 @@ target_link_libraries(png z log )
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -717,49 +639,66 @@ target_link_libraries(png z log )
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

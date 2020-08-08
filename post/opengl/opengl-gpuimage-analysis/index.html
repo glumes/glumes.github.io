@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>OpenGL 之 GPUImage 源码分析</title>
+  <title>OpenGL 之 GPUImage 源码分析-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="OpenGL 之 GPUImage 源码分析" />
   <meta name="twitter:title" content="OpenGL 之 GPUImage 源码分析" />
 
   <meta name="description" content="GPUImage 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 GPUImage ，本文也主要对 Android 版本的 GPUImage 进行分析。">
   <meta property="og:description" content="GPUImage 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 GPUImage ，本文也主要对 Android 版本的 GPUImage 进行分析。">
   <meta name="twitter:description" content="GPUImage 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 GPUImage ，本文也主要对 Android 版本的 GPUImage 进行分析。">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/opengl/opengl-gpuimage-analysis/" />
+  <meta property="og:url" content="https://www.glumes.com/post/opengl/opengl-gpuimage-analysis/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/opengl/opengl-gpuimage-analysis/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/opengl/opengl-gpuimage-analysis/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -54,23 +55,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -78,7 +67,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -89,15 +80,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -105,25 +96,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -139,9 +130,6 @@ if (!doNotTrack) {
 
   </div>
 </nav>
-
-
-
 
 
     
@@ -160,24 +148,21 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
-        
         <div class="container">
           <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>OpenGL 之 GPUImage 源码分析</h1>
                   
-                     <h1>OpenGL 之 GPUImage 源码分析</h1>
-                     
+                  
                     <span class="post-meta">
-  Posted on September 2, 2018
+  
+    Posted on September 2, 2018
+  
   
 </span>
 
 
-                    
-                  
                   
               </div>
             </div>
@@ -186,45 +171,59 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">OpenGL 之 GPUImage 源码分析</h1>
+              <h1>OpenGL 之 GPUImage 源码分析</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on September 2, 2018
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/opengl/">OpenGL</a> &nbsp;
             
-          </h5>
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/opengl/">OpenGL</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -246,8 +245,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p><a href="https://github.com/BradLarson/GPUImage">GPUImage</a> 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 <a href="https://github.com/CyberAgent/android-gpuimage">GPUImage</a> ，本文也主要对 Android 版本的 GPUImage 进行分析。</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p><a href="https://github.com/BradLarson/GPUImage">GPUImage</a> 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 <a href="https://github.com/CyberAgent/android-gpuimage">GPUImage</a> ，本文也主要对 Android 版本的 GPUImage 进行分析。</p>
 
 <h2 id="概要">概要</h2>
 
@@ -268,41 +280,32 @@ if (!doNotTrack) {
 </blockquote>
 
 <p>在相机的业务开发中，会给相机设置 <code>PreviewCallback</code> 回调方法，只要相机处于预览阶段，这个回调就会被重复调用，返回当前预览帧的内容。</p>
-
-<pre><code class="language-java">	camera.setPreviewCallback(GPUImageRenderer.this);
-    camera.startPreview();
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#268bd2">camera</span>.<span style="color:#268bd2">setPreviewCallback</span>(<span style="color:#268bd2">GPUImageRenderer</span>.<span style="color:#268bd2">this</span>);
+    <span style="color:#268bd2">camera</span>.<span style="color:#268bd2">startPreview</span>();</code></pre></div>
 <p>默认情况下，相机返回的数据是 <code>NV21</code> 格式，也就是 <code>YCbCr_420_SP</code> 格式，而 OpenGL 使用的纹理是 RGB 格式，所以在每一次的回调方法中需要将 <code>YUV</code> 格式的数据转换成 <code>RGB</code> 格式数据。</p>
-
-<pre><code class="language-java">GPUImageNativeLibrary.YUVtoRBGA(data, previewSize.width, previewSize.height,
-						     mGLRgbBuffer.array());
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">GPUImageNativeLibrary</span>.<span style="color:#268bd2">YUVtoRBGA</span>(<span style="color:#268bd2">data</span>, <span style="color:#268bd2">previewSize</span>.<span style="color:#268bd2">width</span>, <span style="color:#268bd2">previewSize</span>.<span style="color:#268bd2">height</span>,
+						     <span style="color:#268bd2">mGLRgbBuffer</span>.<span style="color:#268bd2">array</span>());</code></pre></div>
 <p>有了图像的 RGB 数据，就可以使用 <code>glGenTextures</code> 生成纹理，并用 <code>glTexImage2D</code> 方法将图像数据作为纹理。</p>
 
 <p>另外，如果纹理已经生成了，当再有图像数据过来时，只需要更新数据就好了，无需重复创建纹理。</p>
-
-<pre><code class="language-java">	// 根据图像数据加载纹理
-    public static int loadTexture(final IntBuffer data, final Size size, final int usedTexId) {
-        int textures[] = new int[1];
-        if (usedTexId == NO_TEXTURE) {
-            GLES20.glGenTextures(1, textures, 0);
-            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0]);
-	        // 省略部分代码
-            GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, size.width, size.height,
-                    0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, data);
-        } else {
-            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, usedTexId);
-            // 更新纹理数据就好，无需重复创建纹理
-            GLES20.glTexSubImage2D(GLES20.GL_TEXTURE_2D, 0, 0, 0, size.width,
-                    size.height, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, data);
-            textures[0] = usedTexId;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#93a1a1;font-style:italic">// 根据图像数据加载纹理
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">loadTexture</span>(<span style="color:#859900">final</span> <span style="color:#268bd2">IntBuffer</span> <span style="color:#268bd2">data</span>, <span style="color:#859900">final</span> <span style="color:#268bd2">Size</span> <span style="color:#268bd2">size</span>, <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">usedTexId</span>) {
+        <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">textures</span>[] = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">int</span>[<span style="color:#268bd2">1</span>];
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">usedTexId</span> == <span style="color:#268bd2">NO_TEXTURE</span>) {
+            <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glGenTextures</span>(<span style="color:#268bd2">1</span>, <span style="color:#268bd2">textures</span>, <span style="color:#268bd2">0</span>);
+            <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glBindTexture</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_TEXTURE_2D</span>, <span style="color:#268bd2">textures</span>[<span style="color:#268bd2">0</span>]);
+	        <span style="color:#93a1a1;font-style:italic">// 省略部分代码
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glTexImage2D</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_TEXTURE_2D</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_RGBA</span>, <span style="color:#268bd2">size</span>.<span style="color:#268bd2">width</span>, <span style="color:#268bd2">size</span>.<span style="color:#268bd2">height</span>,
+                    <span style="color:#268bd2">0</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_RGBA</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_UNSIGNED_BYTE</span>, <span style="color:#268bd2">data</span>);
+        } <span style="color:#859900">else</span> {
+            <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glBindTexture</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_TEXTURE_2D</span>, <span style="color:#268bd2">usedTexId</span>);
+            <span style="color:#93a1a1;font-style:italic">// 更新纹理数据就好，无需重复创建纹理
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glTexSubImage2D</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_TEXTURE_2D</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">size</span>.<span style="color:#268bd2">width</span>,
+                    <span style="color:#268bd2">size</span>.<span style="color:#268bd2">height</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_RGBA</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_UNSIGNED_BYTE</span>, <span style="color:#268bd2">data</span>);
+            <span style="color:#268bd2">textures</span>[<span style="color:#268bd2">0</span>] = <span style="color:#268bd2">usedTexId</span>;
         }
-        return textures[0];
-    }
-</code></pre>
-
+        <span style="color:#859900">return</span> <span style="color:#268bd2">textures</span>[<span style="color:#268bd2">0</span>];
+    }</code></pre></div>
 <p>通过在 <code>PreviewCallback</code> 回调方法中的操作，就完成了将图像数据转换为 OpenGL 的纹理。</p>
 
 <p>接下来就是如何将纹理数据进行处理，并且显示到屏幕上。</p>
@@ -318,23 +321,20 @@ if (!doNotTrack) {
 <p><a href="https://glumes.com/post/android/android-camera-aspect-ratio--and-orientation/">Android 相机开发中的尺寸和方向问题</a></p>
 
 <p>当我们把纹理坐标以左上角为原点，并相对于顶点坐标顺时针旋转 90 ° 之后，才能够正常的显示图像：</p>
-
-<pre><code class="language-java">	// 顶点坐标
-    static final float CUBE[] = {
-            -1.0f, -1.0f,
-            1.0f, -1.0f,
-            -1.0f, 1.0f,
-            1.0f, 1.0f,
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#93a1a1;font-style:italic">// 顶点坐标
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">static</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">CUBE</span>[] = {
+            -<span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>, -<span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>,
+            <span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>, -<span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>,
+            -<span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>, <span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>,
+            <span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>, <span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>,
     };
-    // 以左上角为原点，并相对于顶点坐标顺时针旋转 90° 后的纹理坐标
-    public static final float TEXTURE_ROTATED_90[] = {
-            1.0f, 1.0f,
-            1.0f, 0.0f,
-            0.0f, 1.0f,
-            0.0f, 0.0f,
-    };
-</code></pre>
-
+    <span style="color:#93a1a1;font-style:italic">// 以左上角为原点，并相对于顶点坐标顺时针旋转 90° 后的纹理坐标
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">TEXTURE_ROTATED_90</span>[] = {
+            <span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>, <span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>,
+            <span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>, <span style="color:#268bd2">0</span>.<span style="color:#268bd2">0f</span>,
+            <span style="color:#268bd2">0</span>.<span style="color:#268bd2">0f</span>, <span style="color:#268bd2">1</span>.<span style="color:#268bd2">0f</span>,
+            <span style="color:#268bd2">0</span>.<span style="color:#268bd2">0f</span>, <span style="color:#268bd2">0</span>.<span style="color:#268bd2">0f</span>,
+    };</code></pre></div>
 <h2 id="图像处理与显示">图像处理与显示</h2>
 
 <p>在有了纹理之后，需要明确的是，这个纹理就是相机采集到的图像内容，我们要将纹理绘制到屏幕上，实际上是绘制一个矩形，然后纹理是贴在这个矩形上的。</p>
@@ -355,36 +355,30 @@ if (!doNotTrack) {
 <li><code>onInit</code> 方法会创建 OpenGL 中的 Program，并且会绑定到着色器脚本中声明的 <code>attribute</code> 和 <code>uniform</code> 变量字段。</li>
 <li><code>onInitialized</code> 方法会给一些 <code>uniform</code> 字段变量赋值，在 GPUImageFilter 类中还对不同类型的变量赋值进行了对应的方法，比如对 <code>float</code> 变量：</li>
 </ul>
-
-<pre><code class="language-java">    protected void setFloat(final int location, final float floatValue) {
-        runOnDraw(new Runnable() {
-            @Override
-            public void run() {
-                GLES20.glUniform1f(location, floatValue);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">protected</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">setFloat</span>(<span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">location</span>, <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">float</span> <span style="color:#268bd2">floatValue</span>) {
+        <span style="color:#268bd2">runOnDraw</span>(<span style="color:#859900">new</span> <span style="color:#268bd2">Runnable</span>() {
+            <span style="color:#268bd2">@Override</span>
+            <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">run</span>() {
+                <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glUniform1f</span>(<span style="color:#268bd2">location</span>, <span style="color:#268bd2">floatValue</span>);
             }
         });
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p>在 onDraw 方法中就是执行具体的绘制了，在绘制的时候会执行 <code>runPendingOnDrawTasks</code> 方法，这是因为我们在 <code>init</code> 方法去中给着色器语言中的变量赋值，并没有立即生效，而是添加到了一个链表中，所以需要把链表中的任务执行完了才接着执行绘制。</p>
-
-<pre><code class="language-java">    public void onDraw(final int textureId, final FloatBuffer cubeBuffer,
-                       final FloatBuffer textureBuffer) {
-        GLES20.glUseProgram(mGLProgId);
-        // 执行赋值的任务
-        runPendingOnDrawTasks();
-		// 顶点和纹理坐标数据
-        GLES20.glVertexAttribPointer(mGLAttribPosition, 2, GLES20.GL_FLOAT, false, 0, cubeBuffer);
-        GLES20.glEnableVertexAttribArray(mGLAttribPosition);
-        GLES20.glVertexAttribPointer(mGLAttribTextureCoordinate, 2, GLES20.GL_FLOAT, false, 0, textureBuffer);
-        GLES20.glEnableVertexAttribArray(mGLAttribTextureCoordinate);
-		// 在绘制前的最后一波操作
-        onDrawArraysPre();
-        // 最终绘制
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
-    }
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">onDraw</span>(<span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">textureId</span>, <span style="color:#859900">final</span> <span style="color:#268bd2">FloatBuffer</span> <span style="color:#268bd2">cubeBuffer</span>,
+                       <span style="color:#859900">final</span> <span style="color:#268bd2">FloatBuffer</span> <span style="color:#268bd2">textureBuffer</span>) {
+        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glUseProgram</span>(<span style="color:#268bd2">mGLProgId</span>);
+        <span style="color:#93a1a1;font-style:italic">// 执行赋值的任务
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">runPendingOnDrawTasks</span>();
+		<span style="color:#93a1a1;font-style:italic">// 顶点和纹理坐标数据
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glVertexAttribPointer</span>(<span style="color:#268bd2">mGLAttribPosition</span>, <span style="color:#268bd2">2</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_FLOAT</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">cubeBuffer</span>);
+        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glEnableVertexAttribArray</span>(<span style="color:#268bd2">mGLAttribPosition</span>);
+        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glVertexAttribPointer</span>(<span style="color:#268bd2">mGLAttribTextureCoordinate</span>, <span style="color:#268bd2">2</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_FLOAT</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">textureBuffer</span>);
+        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glEnableVertexAttribArray</span>(<span style="color:#268bd2">mGLAttribTextureCoordinate</span>);
+		<span style="color:#93a1a1;font-style:italic">// 在绘制前的最后一波操作
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">onDrawArraysPre</span>();
+        <span style="color:#93a1a1;font-style:italic">// 最终绘制
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glDrawArrays</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_TRIANGLE_STRIP</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">4</span>);
+    }</code></pre></div>
 <p>在绘制时，还需要给顶点坐标赋值，给纹理坐标赋值，GPUImageFilter 并没有去管理顶点坐标和纹理坐标，而是通过传递参数的形式，这样就不用去处理在前置摄像头与后置前摄像头、手机竖立放置与横屏放置时的关系了。</p>
 
 <p>在执行具体的 <code>glDrawArrays</code> 方法之前，还提供了一个 <code>onDrawArraysPre</code> 方法，在这个方法里面还可以执行绘制前的最后一波操作，在某些滤镜的实现中有用到了。</p>
@@ -392,17 +386,14 @@ if (!doNotTrack) {
 <p>最后才是 <code>glDrawArrays</code> 方法去完成绘制。</p>
 
 <p>当我们不需要 GPUImageFilter 进行绘制时，需要将它销毁掉，在 destroy 方法去进行销毁，并且提供 onDestory 方法去为某些滤镜提供自定义的销毁。</p>
-
-<pre><code class="language-java">    public final void destroy() {
-        mIsInitialized = false;
-        GLES20.glDeleteProgram(mGLProgId);
-        onDestroy();
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">public</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">destroy</span>() {
+        <span style="color:#268bd2">mIsInitialized</span> = <span style="color:#859900;font-weight:bold">false</span>;
+        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glDeleteProgram</span>(<span style="color:#268bd2">mGLProgId</span>);
+        <span style="color:#268bd2">onDestroy</span>();
     }
 
-    public void onDestroy() {
-    }
-</code></pre>
-
+    <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">onDestroy</span>() {
+    }</code></pre></div>
 <p>在 GPUImageFilter 方法中定义了片段着色器脚本，这个脚本是将图像内容原样贴到了矩形上，并没有做特殊的图像处理操作。</p>
 
 <p>而其他滤镜中，更改了着色器脚本，也就会对图像进行其他的处理，在整个 GPUImage 项目中，最精华的也就是那些着色器脚本内容了，如何通过着色器去做图像处理又是一门高深的学问了~~~</p>
@@ -414,113 +405,98 @@ if (!doNotTrack) {
 <p>GPUImageFilterGroup 继承自 GPUImageFilter， 顾名思义就是一系列 GPUImageFilter 滤镜的组合，可以把它类比为 ViewGroup ，ViewGroup 即可以包含 View ，也可以包含 ViewGroup ，同样 GPUImageFilterGroup 即可以包含 GPUImageFilter，也可以包含 GPUImageFilterGroup。</p>
 
 <p>在用 GPUImageFilterGroup 进行绘制时，需要把所有的滤镜内容都进行一遍绘制，而对于 GPUImageFilterGroup 包含 GPUImageFilterGroup 的情况，就需要把子 GPUImageFilterGroup 内的滤镜内容拆分出来，最终是用 <code>mMergedFilters</code> 变量表示所有非 GPUImageFilterGroup 类型的 GPUImageFilter 。</p>
-
-<pre><code class="language-java">	// 拿到所有非 GPUImageFilterGroup 的 GPUImageFilter
-    public void updateMergedFilters() {
-        List&lt;GPUImageFilter&gt; filters;
-        for (GPUImageFilter filter : mFilters) {
-	        // 如果滤镜是 GPUImageFilterGroup 类型，就把它拆分了
-            if (filter instanceof GPUImageFilterGroup) {
-	            // 递归调用 updateMergedFilters 方法去拆分
-                ((GPUImageFilterGroup) filter).updateMergedFilters();
-                // 拿到所有非 GPUImageFilterGroup 的 GPUImageFilter
-                filters = ((GPUImageFilterGroup) filter).getMergedFilters();
-                if (filters == null || filters.isEmpty())
-                    continue;
-                // 把 GPUImageFilter 添加到 mMergedFilters 中
-                mMergedFilters.addAll(filters);
-                continue;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#93a1a1;font-style:italic">// 拿到所有非 GPUImageFilterGroup 的 GPUImageFilter
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">updateMergedFilters</span>() {
+        <span style="color:#268bd2">List</span>&lt;<span style="color:#268bd2">GPUImageFilter</span>&gt; <span style="color:#268bd2">filters</span>;
+        <span style="color:#859900">for</span> (<span style="color:#268bd2">GPUImageFilter</span> <span style="color:#268bd2">filter</span> : <span style="color:#268bd2">mFilters</span>) {
+	        <span style="color:#93a1a1;font-style:italic">// 如果滤镜是 GPUImageFilterGroup 类型，就把它拆分了
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#859900">if</span> (<span style="color:#268bd2">filter</span> <span style="color:#859900">instanceof</span> <span style="color:#268bd2">GPUImageFilterGroup</span>) {
+	            <span style="color:#93a1a1;font-style:italic">// 递归调用 updateMergedFilters 方法去拆分
+</span><span style="color:#93a1a1;font-style:italic"></span>                ((<span style="color:#268bd2">GPUImageFilterGroup</span>) <span style="color:#268bd2">filter</span>).<span style="color:#268bd2">updateMergedFilters</span>();
+                <span style="color:#93a1a1;font-style:italic">// 拿到所有非 GPUImageFilterGroup 的 GPUImageFilter
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">filters</span> = ((<span style="color:#268bd2">GPUImageFilterGroup</span>) <span style="color:#268bd2">filter</span>).<span style="color:#268bd2">getMergedFilters</span>();
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">filters</span> == <span style="color:#859900;font-weight:bold">null</span> || <span style="color:#268bd2">filters</span>.<span style="color:#268bd2">isEmpty</span>())
+                    <span style="color:#859900">continue</span>;
+                <span style="color:#93a1a1;font-style:italic">// 把 GPUImageFilter 添加到 mMergedFilters 中
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">mMergedFilters</span>.<span style="color:#268bd2">addAll</span>(<span style="color:#268bd2">filters</span>);
+                <span style="color:#859900">continue</span>;
             }
-            // 如果是非 GPUImageFilterGroup 直接添加了
-            mMergedFilters.add(filter);
+            <span style="color:#93a1a1;font-style:italic">// 如果是非 GPUImageFilterGroup 直接添加了
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">mMergedFilters</span>.<span style="color:#268bd2">add</span>(<span style="color:#268bd2">filter</span>);
         }
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p>在 GPUImageFilterGroup 执行具体的绘制之前，还创建了和滤镜数量一样多的 FrameBuffer 帧缓冲和 Texture 纹理。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">		<span style="color:#93a1a1;font-style:italic">// 遍历时，选择 mMergedFilters 的长度，因为 mMergedFilters 里面才是保存的所有的 滤镜的长度。
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">mMergedFilters</span> != <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; <span style="color:#268bd2">mMergedFilters</span>.<span style="color:#268bd2">size</span>() &gt; <span style="color:#268bd2">0</span>) {
+            <span style="color:#268bd2">size</span> = <span style="color:#268bd2">mMergedFilters</span>.<span style="color:#268bd2">size</span>();
+            <span style="color:#93a1a1;font-style:italic">// FrameBuffer 帧缓冲数量
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">mFrameBuffers</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">int</span>[<span style="color:#268bd2">size</span> - <span style="color:#268bd2">1</span>];
+            <span style="color:#93a1a1;font-style:italic">// 纹理数量
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">mFrameBufferTextures</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">int</span>[<span style="color:#268bd2">size</span> - <span style="color:#268bd2">1</span>];
 
-<pre><code class="language-java">		// 遍历时，选择 mMergedFilters 的长度，因为 mMergedFilters 里面才是保存的所有的 滤镜的长度。
-        if (mMergedFilters != null &amp;&amp; mMergedFilters.size() &gt; 0) {
-            size = mMergedFilters.size();
-            // FrameBuffer 帧缓冲数量
-            mFrameBuffers = new int[size - 1];
-            // 纹理数量
-            mFrameBufferTextures = new int[size - 1];
-
-            for (int i = 0; i &lt; size - 1; i++) {
-				// 生成 FrameBuffer 帧缓冲
-                GLES20.glGenFramebuffers(1, mFrameBuffers, i);
-                // 生成纹理
-                GLES20.glGenTextures(1, mFrameBufferTextures, i);
-                GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mFrameBufferTextures[i]);
-                GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, width, height, 0,
-                        GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null);
-                // 省略部分代码
-                GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffers[i]);
-                // 纹理绑定到帧缓冲上
-                GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,
-                        GLES20.GL_TEXTURE_2D, mFrameBufferTextures[i], 0);
-                // 省略部分代码
-            }
-        }
-</code></pre>
-
+            <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span> = <span style="color:#268bd2">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#268bd2">size</span> - <span style="color:#268bd2">1</span>; <span style="color:#268bd2">i</span>++) {
+				<span style="color:#93a1a1;font-style:italic">// 生成 FrameBuffer 帧缓冲
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glGenFramebuffers</span>(<span style="color:#268bd2">1</span>, <span style="color:#268bd2">mFrameBuffers</span>, <span style="color:#268bd2">i</span>);
+                <span style="color:#93a1a1;font-style:italic">// 生成纹理
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glGenTextures</span>(<span style="color:#268bd2">1</span>, <span style="color:#268bd2">mFrameBufferTextures</span>, <span style="color:#268bd2">i</span>);
+                <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glBindTexture</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_TEXTURE_2D</span>, <span style="color:#268bd2">mFrameBufferTextures</span>[<span style="color:#268bd2">i</span>]);
+                <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glTexImage2D</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_TEXTURE_2D</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_RGBA</span>, <span style="color:#268bd2">width</span>, <span style="color:#268bd2">height</span>, <span style="color:#268bd2">0</span>,
+                        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_RGBA</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_UNSIGNED_BYTE</span>, <span style="color:#859900;font-weight:bold">null</span>);
+                <span style="color:#93a1a1;font-style:italic">// 省略部分代码
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glBindFramebuffer</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_FRAMEBUFFER</span>, <span style="color:#268bd2">mFrameBuffers</span>[<span style="color:#268bd2">i</span>]);
+                <span style="color:#93a1a1;font-style:italic">// 纹理绑定到帧缓冲上
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glFramebufferTexture2D</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_FRAMEBUFFER</span>, <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_COLOR_ATTACHMENT0</span>,
+                        <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_TEXTURE_2D</span>, <span style="color:#268bd2">mFrameBufferTextures</span>[<span style="color:#268bd2">i</span>], <span style="color:#268bd2">0</span>);
+                <span style="color:#93a1a1;font-style:italic">// 省略部分代码
+</span><span style="color:#93a1a1;font-style:italic"></span>            }
+        }</code></pre></div>
 <p>如果对 FrameBuffer 的使用不熟悉的话，请参考这篇文章：</p>
 
 <p><a href="https://glumes.com/post/opengl/opengl-framebuffer-object-usage/">OpenGL 之 帧缓冲 使用实践</a></p>
-
-<pre><code class="language-java">        if (mMergedFilters != null) {
-            int size = mMergedFilters.size();
-            // 相机原始图像转换的纹理 ID
-            int previousTexture = textureId;
-            for (int i = 0; i &lt; size; i++) {
-                GPUImageFilter filter = mMergedFilters.get(i);
-                boolean isNotLast = i &lt; size - 1;
-                // 如果不是最后一个滤镜，绘制到 FrameBuffer 上，如果是最后一个，就绘制到了屏幕上
-                if (isNotLast) {
-                    GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffers[i]);
-                    GLES20.glClearColor(0, 0, 0, 0);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#859900">if</span> (<span style="color:#268bd2">mMergedFilters</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">size</span> = <span style="color:#268bd2">mMergedFilters</span>.<span style="color:#268bd2">size</span>();
+            <span style="color:#93a1a1;font-style:italic">// 相机原始图像转换的纹理 ID
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">previousTexture</span> = <span style="color:#268bd2">textureId</span>;
+            <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span> = <span style="color:#268bd2">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#268bd2">size</span>; <span style="color:#268bd2">i</span>++) {
+                <span style="color:#268bd2">GPUImageFilter</span> <span style="color:#268bd2">filter</span> = <span style="color:#268bd2">mMergedFilters</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">i</span>);
+                <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">isNotLast</span> = <span style="color:#268bd2">i</span> &lt; <span style="color:#268bd2">size</span> - <span style="color:#268bd2">1</span>;
+                <span style="color:#93a1a1;font-style:italic">// 如果不是最后一个滤镜，绘制到 FrameBuffer 上，如果是最后一个，就绘制到了屏幕上
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#859900">if</span> (<span style="color:#268bd2">isNotLast</span>) {
+                    <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glBindFramebuffer</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_FRAMEBUFFER</span>, <span style="color:#268bd2">mFrameBuffers</span>[<span style="color:#268bd2">i</span>]);
+                    <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glClearColor</span>(<span style="color:#268bd2">0</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">0</span>);
                 }
-				// 滤镜绘制代码
-                if (i == 0) {
-	                // 第一个滤镜绘制使用相机的原始图像纹理 ID 和参数传递过来的顶点以及纹理坐标
-                    filter.onDraw(previousTexture, cubeBuffer, textureBuffer);
-                } else if (i == size - 1) {
-	                // 
-                    filter.onDraw(previousTexture, mGLCubeBuffer, (size % 2 == 0) ? mGLTextureFlipBuffer : mGLTextureBuffer);
-                } else {
-	                // 中间的滤镜绘制在之前纹理基础上继续绘制，使用 mGLTextureBuffer 纹理坐标
-                    filter.onDraw(previousTexture, mGLCubeBuffer, mGLTextureBuffer);
+				<span style="color:#93a1a1;font-style:italic">// 滤镜绘制代码
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#859900">if</span> (<span style="color:#268bd2">i</span> == <span style="color:#268bd2">0</span>) {
+	                <span style="color:#93a1a1;font-style:italic">// 第一个滤镜绘制使用相机的原始图像纹理 ID 和参数传递过来的顶点以及纹理坐标
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#268bd2">filter</span>.<span style="color:#268bd2">onDraw</span>(<span style="color:#268bd2">previousTexture</span>, <span style="color:#268bd2">cubeBuffer</span>, <span style="color:#268bd2">textureBuffer</span>);
+                } <span style="color:#859900">else</span> <span style="color:#859900">if</span> (<span style="color:#268bd2">i</span> == <span style="color:#268bd2">size</span> - <span style="color:#268bd2">1</span>) {
+	                <span style="color:#93a1a1;font-style:italic">// 
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#268bd2">filter</span>.<span style="color:#268bd2">onDraw</span>(<span style="color:#268bd2">previousTexture</span>, <span style="color:#268bd2">mGLCubeBuffer</span>, (<span style="color:#268bd2">size</span> % <span style="color:#268bd2">2</span> == <span style="color:#268bd2">0</span>) ? <span style="color:#268bd2">mGLTextureFlipBuffer</span> : <span style="color:#268bd2">mGLTextureBuffer</span>);
+                } <span style="color:#859900">else</span> {
+	                <span style="color:#93a1a1;font-style:italic">// 中间的滤镜绘制在之前纹理基础上继续绘制，使用 mGLTextureBuffer 纹理坐标
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#268bd2">filter</span>.<span style="color:#268bd2">onDraw</span>(<span style="color:#268bd2">previousTexture</span>, <span style="color:#268bd2">mGLCubeBuffer</span>, <span style="color:#268bd2">mGLTextureBuffer</span>);
                 }
 
-                if (isNotLast) {
-	                // 绑定到屏幕上
-                    GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
-                    previousTexture = mFrameBufferTextures[i];
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">isNotLast</span>) {
+	                <span style="color:#93a1a1;font-style:italic">// 绑定到屏幕上
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glBindFramebuffer</span>(<span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">GL_FRAMEBUFFER</span>, <span style="color:#268bd2">0</span>);
+                    <span style="color:#268bd2">previousTexture</span> = <span style="color:#268bd2">mFrameBufferTextures</span>[<span style="color:#268bd2">i</span>];
                 }
             }
-        }
-</code></pre>
-
+        }</code></pre></div>
 <p>在执行具体的绘制时，只要不是最后一个滤镜，那么就会先绑定到 FrameBuffer 上，然后在 FrameBuffer 上进行绘制，这时绘制是绘制到了 FrameBuffer 绑定的纹理上，绘制结束后再接着解绑，绑定到屏幕上。</p>
 
 <p>如果是最后一个滤镜，那么就不用绑定到 FrameBuffer 上了，直接绘制到屏幕上即可。</p>
 
 <p>在这里有个细节，就是如下的代码：</p>
-
-<pre><code class="language-java">    filter.onDraw(previousTexture, mGLCubeBuffer, (size % 2 == 0) ? mGLTextureFlipBuffer : mGLTextureBuffer);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#268bd2">filter</span>.<span style="color:#268bd2">onDraw</span>(<span style="color:#268bd2">previousTexture</span>, <span style="color:#268bd2">mGLCubeBuffer</span>, (<span style="color:#268bd2">size</span> % <span style="color:#268bd2">2</span> == <span style="color:#268bd2">0</span>) ? <span style="color:#268bd2">mGLTextureFlipBuffer</span> : <span style="color:#268bd2">mGLTextureBuffer</span>);</code></pre></div>
 <p>如果是最后一个滤镜，并且滤镜个数为偶数，则使用 mGLTextureFlipBuffer 的纹理坐标，否则使用 mGLTextureBuffer 的纹理坐标。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">// 对应的纹理坐标为 TEXTURE_NO_ROTATION
+</span><span style="color:#93a1a1;font-style:italic"></span> <span style="color:#268bd2">mGLTextureBuffer</span>.<span style="color:#268bd2">put</span>(<span style="color:#268bd2">TEXTURE_NO_ROTATION</span>).<span style="color:#268bd2">position</span>(<span style="color:#268bd2">0</span>);
 
-<pre><code class="language-java">// 对应的纹理坐标为 TEXTURE_NO_ROTATION
- mGLTextureBuffer.put(TEXTURE_NO_ROTATION).position(0);
-
-// 对应的纹理坐标为 TEXTURE_NO_ROTATION，并且 true 的参数表示进行垂直上下翻转
-float[] flipTexture = TextureRotationUtil.getRotation(Rotation.NORMAL, false, true);
-mGLTextureFlipBuffer.put(flipTexture).position(0);
-</code></pre>
-
+<span style="color:#93a1a1;font-style:italic">// 对应的纹理坐标为 TEXTURE_NO_ROTATION，并且 true 的参数表示进行垂直上下翻转
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900;font-weight:bold">float</span>[] <span style="color:#268bd2">flipTexture</span> = <span style="color:#268bd2">TextureRotationUtil</span>.<span style="color:#268bd2">getRotation</span>(<span style="color:#268bd2">Rotation</span>.<span style="color:#268bd2">NORMAL</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#859900;font-weight:bold">true</span>);
+<span style="color:#268bd2">mGLTextureFlipBuffer</span>.<span style="color:#268bd2">put</span>(<span style="color:#268bd2">flipTexture</span>).<span style="color:#268bd2">position</span>(<span style="color:#268bd2">0</span>);</code></pre></div>
 <p>在第一个滤镜绘制时，使用的是参数传递过来的顶点坐标和纹理坐标，中间部分的滤镜使用的是 mGLTextureBuffer 纹理坐标，它对应的纹理坐标数组为 <code>TEXTURE_NO_ROTATION</code>。</p>
 
 <p>在前面讲到过，GPUImage 的纹理坐标原点是位于左上角的，所以使用 <code>TEXTURE_NO_ROTATION</code> 的纹理坐标实质上是将图像进行了上下翻转，两次调用<code>TEXTURE_NO_ROTATION</code>纹理坐标时，又将图像复原了，这也就可以解释为什么滤镜个数为偶数时，需要使用 <code>mGLTextureFlipBuffer</code> 纹理坐标将图像再进行一次翻转，而 <code>mGLTextureBuffer</code> 纹理坐标不需要了。</p>
@@ -530,182 +506,129 @@ mGLTextureFlipBuffer.put(flipTexture).position(0);
 <p>在 <code>onSurfaceCreated</code> 和 <code>onSurfaceChanged</code> 方法中分别对滤镜进行初始化以及设定宽、高，在 onDrawFrame 方法中调用具体的绘制。</p>
 
 <p>当切换滤镜时，先将上一个滤镜销毁掉，然后初始化新的滤镜并设定宽、高。</p>
-
-<pre><code class="language-java">				final GPUImageFilter oldFilter = mFilter;
-                mFilter = filter;
-                if (oldFilter != null) {
-                    oldFilter.destroy();
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">				<span style="color:#859900">final</span> <span style="color:#268bd2">GPUImageFilter</span> <span style="color:#268bd2">oldFilter</span> = <span style="color:#268bd2">mFilter</span>;
+                <span style="color:#268bd2">mFilter</span> = <span style="color:#268bd2">filter</span>;
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">oldFilter</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+                    <span style="color:#268bd2">oldFilter</span>.<span style="color:#268bd2">destroy</span>();
                 }
-                mFilter.init();
-                GLES20.glUseProgram(mFilter.getProgram());
-                mFilter.onOutputSizeChanged(mOutputWidth, mOutputHeight);
-</code></pre>
-
+                <span style="color:#268bd2">mFilter</span>.<span style="color:#268bd2">init</span>();
+                <span style="color:#268bd2">GLES20</span>.<span style="color:#268bd2">glUseProgram</span>(<span style="color:#268bd2">mFilter</span>.<span style="color:#268bd2">getProgram</span>());
+                <span style="color:#268bd2">mFilter</span>.<span style="color:#268bd2">onOutputSizeChanged</span>(<span style="color:#268bd2">mOutputWidth</span>, <span style="color:#268bd2">mOutputHeight</span>);</code></pre></div>
 <h2 id="图像拍摄保存处理">图像拍摄保存处理</h2>
 
 <p>在 GPUImage 中相机的拍摄是调用 Camera 的 <code>takePicture</code> 方法，在该方法中返回相机采集的原始图像数据，然后再对该数据进行一遍滤镜处理后并保存。</p>
 
 <p>调用的最后都是通过 <code>glReadPixels</code> 方法将处理后的图像读取出来，并保存为 Bitmap 。</p>
-
-<pre><code class="language-java">    private void convertToBitmap() {
-        int[] iat = new int[mWidth * mHeight];
-        IntBuffer ib = IntBuffer.allocate(mWidth * mHeight);
-        mGL.glReadPixels(0, 0, mWidth, mHeight, GL_RGBA, GL_UNSIGNED_BYTE, ib);
-        int[] ia = ib.array();
-		// glReadPixels 读取的内容是上下翻转的，要处理一下
-        for (int i = 0; i &lt; mHeight; i++) {
-            for (int j = 0; j &lt; mWidth; j++) {
-                iat[(mHeight - i - 1) * mWidth + j] = ia[i * mWidth + j];
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">convertToBitmap</span>() {
+        <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">iat</span> = <span style="color:#859900">new</span> <span style="color:#859900;font-weight:bold">int</span>[<span style="color:#268bd2">mWidth</span> * <span style="color:#268bd2">mHeight</span>];
+        <span style="color:#268bd2">IntBuffer</span> <span style="color:#268bd2">ib</span> = <span style="color:#268bd2">IntBuffer</span>.<span style="color:#268bd2">allocate</span>(<span style="color:#268bd2">mWidth</span> * <span style="color:#268bd2">mHeight</span>);
+        <span style="color:#268bd2">mGL</span>.<span style="color:#268bd2">glReadPixels</span>(<span style="color:#268bd2">0</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">mWidth</span>, <span style="color:#268bd2">mHeight</span>, <span style="color:#268bd2">GL_RGBA</span>, <span style="color:#268bd2">GL_UNSIGNED_BYTE</span>, <span style="color:#268bd2">ib</span>);
+        <span style="color:#859900;font-weight:bold">int</span>[] <span style="color:#268bd2">ia</span> = <span style="color:#268bd2">ib</span>.<span style="color:#268bd2">array</span>();
+		<span style="color:#93a1a1;font-style:italic">// glReadPixels 读取的内容是上下翻转的，要处理一下
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span> = <span style="color:#268bd2">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#268bd2">mHeight</span>; <span style="color:#268bd2">i</span>++) {
+            <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">j</span> = <span style="color:#268bd2">0</span>; <span style="color:#268bd2">j</span> &lt; <span style="color:#268bd2">mWidth</span>; <span style="color:#268bd2">j</span>++) {
+                <span style="color:#268bd2">iat</span>[(<span style="color:#268bd2">mHeight</span> - <span style="color:#268bd2">i</span> - <span style="color:#268bd2">1</span>) * <span style="color:#268bd2">mWidth</span> + <span style="color:#268bd2">j</span>] = <span style="color:#268bd2">ia</span>[<span style="color:#268bd2">i</span> * <span style="color:#268bd2">mWidth</span> + <span style="color:#268bd2">j</span>];
             }
         }
-        mBitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
-        mBitmap.copyPixelsFromBuffer(IntBuffer.wrap(iat));
-    }
-</code></pre>
-
+        <span style="color:#268bd2">mBitmap</span> = <span style="color:#268bd2">Bitmap</span>.<span style="color:#268bd2">createBitmap</span>(<span style="color:#268bd2">mWidth</span>, <span style="color:#268bd2">mHeight</span>, <span style="color:#268bd2">Bitmap</span>.<span style="color:#268bd2">Config</span>.<span style="color:#268bd2">ARGB_8888</span>);
+        <span style="color:#268bd2">mBitmap</span>.<span style="color:#268bd2">copyPixelsFromBuffer</span>(<span style="color:#268bd2">IntBuffer</span>.<span style="color:#268bd2">wrap</span>(<span style="color:#268bd2">iat</span>));
+    }</code></pre></div>
 <h2 id="小结">小结</h2>
 
 <p>对 GPUImage 的分析以及滤镜架构的设计大致就是这样了，这些都还不是它的精华啦，重要的还是它的那些着色器脚本，从那些着色器脚本中学会如果通过 <code>GLSL</code> 去实现图像处理算法。</p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/opengl-gpuimage-analysis/">OpenGL 之 GPUImage 源码分析</a>
-
-                
-
-                
-
-
-        
-        
-        
-      </article>
-
-      
-        
+          
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/opengl/opengl-axially-aligned-bounding-box/">《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-axially-aligned-bounding-box/">《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</a></li>
     
-    <li><a href="/post/opengl/opengl-tutorial-light-mix/">《OpenGL ES 3.x 游戏开发》光照系列之效果混合</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-tutorial-light-mix/">《OpenGL ES 3.x 游戏开发》光照系列之效果混合</a></li>
     
-    <li><a href="/post/opengl/opengl-tutorial-specular-light/">《OpenGL ES 3.x 游戏开发》光照系列之镜面光</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-tutorial-specular-light/">《OpenGL ES 3.x 游戏开发》光照系列之镜面光</a></li>
     
-    <li><a href="/post/opengl/opengl-tutorial-diffuse-light/"> 《OpenGL ES 3.x 游戏开发》 光照系列之散射光</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-tutorial-diffuse-light/"> 《OpenGL ES 3.x 游戏开发》 光照系列之散射光</a></li>
     
-    <li><a href="/post/opengl/opengl-tutorial-ambient-light/">《OpenGL ES 3.x 游戏开发》光照系列之环境光</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-tutorial-ambient-light/">《OpenGL ES 3.x 游戏开发》光照系列之环境光</a></li>
     
-    <li><a href="/post/opengl/opengl-depth-test/">OpenGL 深度测试与精度值的那些事</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-depth-test/">OpenGL 深度测试与精度值的那些事</a></li>
     
-    <li><a href="/post/opengl/opengl-tutorial-face-culling-usage/">OpenGL 优化项之面剔除和注意点</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-tutorial-face-culling-usage/">OpenGL 优化项之面剔除和注意点</a></li>
     
-    <li><a href="/post/opengl/opengl-tutorial-vertex-array-object-usage/">《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/">《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用</a></li>
     
-    <li><a href="/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用</a></li>
     
-    <li><a href="/post/opengl/opengl-tutorial-color-blend/">《OpenGL ES 3.x 游戏开发》之颜色混合和使用</a></li>
+    <li><a href="https://www.glumes.com/post/opengl/opengl-tutorial-color-blend/">《OpenGL ES 3.x 游戏开发》之颜色混合和使用</a></li>
     
 </ul>
 
-      
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/android/java-proxy-design-pattern/" data-toggle="tooltip" data-placement="top" title="Java 中的静态代理和动态代理">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/opengl/opengl-egl-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 之 EGL 使用实践">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+        
 
-      
-      <ul class="pager blog-pager">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-          <li class="previous">
-            <a href="https://glumes.com/post/android/java-proxy-design-pattern/" data-toggle="tooltip" data-placement="top" title="Java 中的静态代理和动态代理">&larr; Previous Post</a>
-          </li>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/opengl-egl-usage/" data-toggle="tooltip" data-placement="top" title="OpenGL 之 EGL 使用实践">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
-      
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+          
+
+        
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -714,8 +637,6 @@ mGLTextureFlipBuffer.put(flipTexture).position(0);
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -746,21 +667,8 @@ mGLTextureFlipBuffer.put(flipTexture).position(0);
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -768,22 +676,28 @@ mGLTextureFlipBuffer.put(flipTexture).position(0);
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -792,49 +706,66 @@ mGLTextureFlipBuffer.put(flipTexture).position(0);
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

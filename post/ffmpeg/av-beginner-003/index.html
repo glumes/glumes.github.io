@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</title>
+  <title>【音视频连载-003】基础学习篇-SDL 消息循环和事件响应-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="【音视频连载-003】基础学习篇-SDL 消息循环和事件响应" />
   <meta name="twitter:title" content="【音视频连载-003】基础学习篇-SDL 消息循环和事件响应" />
 
@@ -21,7 +21,6 @@
 在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
 
 为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。
-
     SDL_Event windowEvent;
     while (true){
         if (SDL_PollEvent(&amp;windowEvent)){
@@ -42,7 +41,6 @@
 在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
 
 为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。
-
     SDL_Event windowEvent;
     while (true){
         if (SDL_PollEvent(&amp;windowEvent)){
@@ -63,35 +61,35 @@
 在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
 
 为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。
-
-    SDL_Event …">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+    SDL_Event windowEvent; …">
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/ffmpeg/av-beginner-003/" />
+  <meta property="og:url" content="https://www.glumes.com/post/ffmpeg/av-beginner-003/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/ffmpeg/av-beginner-003/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/ffmpeg/av-beginner-003/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -106,23 +104,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -130,7 +116,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -141,15 +129,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -157,25 +145,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -191,9 +179,6 @@ if (!doNotTrack) {
 
   </div>
 </nav>
-
-
-
 
 
     
@@ -212,24 +197,21 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
-        
         <div class="container">
           <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</h1>
                   
-                     <h1>【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</h1>
-                     
+                  
                     <span class="post-meta">
-  Posted on March 3, 2020
+  
+    Posted on March 3, 2020
+  
   
 </span>
 
 
-                    
-                  
                   
               </div>
             </div>
@@ -238,45 +220,59 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</h1>
+              <h1>【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on March 3, 2020
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/sdl/">SDL</a> &nbsp;
             
-          </h5>
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/sdl/">SDL</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -295,8 +291,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p>音视频学习入门技术文章连载：</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>音视频学习入门技术文章连载：</p>
 
 <ul>
 <li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
@@ -307,17 +316,15 @@ if (!doNotTrack) {
 <p>在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。</p>
 
 <p>为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。</p>
-
-<pre><code class="language-cpp">    SDL_Event windowEvent;
-    while (true){
-        if (SDL_PollEvent(&amp;windowEvent)){
-            if (SDL_QUIT == windowEvent.type){
-                break;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">SDL_Event</span> <span style="color:#268bd2">windowEvent</span>;
+    <span style="color:#859900">while</span> (<span style="color:#cb4b16">true</span>){
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">SDL_PollEvent</span>(&amp;<span style="color:#268bd2">windowEvent</span>)){
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">SDL_QUIT</span> == <span style="color:#268bd2">windowEvent</span>.<span style="color:#268bd2">type</span>){
+                <span style="color:#859900">break</span>;
             }
         }
     }
-</code></pre>
-
+</code></pre></div>
 <h3 id="sdl-消息循环和事件响应">SDL 消息循环和事件响应</h3>
 
 <p>和 Android 中的 Handler 机制有些类似，Handler 会关联一个线程，线程内部维护一个消息队列 MessageQueue，通过 Handler 像 MessageQueue 发送消息，然后再从 MessageQueue 中取出 Message 进行处理。</p>
@@ -325,60 +332,54 @@ if (!doNotTrack) {
 <p>在 SDL 中通过 <code>SDL_PollEvent</code> 从消息队列取出消息，如果有则返回 1，没用则返回 0。</p>
 
 <p><code>SDL_Event</code> 结构体代表消息事件，其中的 <code>type</code> 指定具体的事件类型，在 <code>SDL_events.h</code> 文件中能看到所有的事件类型，抄录一些比较典型的：</p>
-
-<pre><code class="language-cpp">typedef enum
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">typedef</span> <span style="color:#859900">enum</span>
 {
-   /* Application events */
-    SDL_QUIT           = 0x100, /**&lt; User-requested quit */
+   <span style="color:#93a1a1;font-style:italic">/* Application events */</span>
+    <span style="color:#268bd2">SDL_QUIT</span>           = <span style="color:#2aa198;font-weight:bold">0x100</span>, <span style="color:#93a1a1;font-style:italic">/**&lt; User-requested quit */</span>
     
-   /* Keyboard events */
-    SDL_KEYDOWN        = 0x300, /**&lt; Key pressed */
-    SDL_KEYUP,                  /**&lt; Key released */
+   <span style="color:#93a1a1;font-style:italic">/* Keyboard events */</span>
+    <span style="color:#268bd2">SDL_KEYDOWN</span>        = <span style="color:#2aa198;font-weight:bold">0x300</span>, <span style="color:#93a1a1;font-style:italic">/**&lt; Key pressed */</span>
+    <span style="color:#268bd2">SDL_KEYUP</span>,                  <span style="color:#93a1a1;font-style:italic">/**&lt; Key released */</span>
 
-    /* Mouse events */
-    SDL_MOUSEMOTION    = 0x400, /**&lt; Mouse moved */
-    SDL_MOUSEBUTTONDOWN,        /**&lt; Mouse button pressed */
-    SDL_MOUSEBUTTONUP,          /**&lt; Mouse button released */
-    SDL_MOUSEWHEEL,             /**&lt; Mouse wheel motion */
+    <span style="color:#93a1a1;font-style:italic">/* Mouse events */</span>
+    <span style="color:#268bd2">SDL_MOUSEMOTION</span>    = <span style="color:#2aa198;font-weight:bold">0x400</span>, <span style="color:#93a1a1;font-style:italic">/**&lt; Mouse moved */</span>
+    <span style="color:#268bd2">SDL_MOUSEBUTTONDOWN</span>,        <span style="color:#93a1a1;font-style:italic">/**&lt; Mouse button pressed */</span>
+    <span style="color:#268bd2">SDL_MOUSEBUTTONUP</span>,          <span style="color:#93a1a1;font-style:italic">/**&lt; Mouse button released */</span>
+    <span style="color:#268bd2">SDL_MOUSEWHEEL</span>,             <span style="color:#93a1a1;font-style:italic">/**&lt; Mouse wheel motion */</span>
     
-    /* Window events */
-    SDL_WINDOWEVENT    = 0x200, /**&lt; Window state change */
-    SDL_SYSWMEVENT,             /**&lt; System specific event */
-} SDL_EventType;
-</code></pre>
-
+    <span style="color:#93a1a1;font-style:italic">/* Window events */</span>
+    <span style="color:#268bd2">SDL_WINDOWEVENT</span>    = <span style="color:#2aa198;font-weight:bold">0x200</span>, <span style="color:#93a1a1;font-style:italic">/**&lt; Window state change */</span>
+    <span style="color:#268bd2">SDL_SYSWMEVENT</span>,             <span style="color:#93a1a1;font-style:italic">/**&lt; System specific event */</span>
+} <span style="color:#268bd2">SDL_EventType</span>;
+</code></pre></div>
 <p>如上所示，有键盘、鼠标事件还有窗口事件和应用退出的事件，基本上也就用到这些了。</p>
 
 <p>当用户点击了窗口左上角 <code>叉</code> 的时候，对应 SDL_Event 的 type 就是 <code>SDL_QUIT</code> ，这个 type 是一定要添加处理的，不然点叉就关闭不了窗口了。</p>
-
-<pre><code class="language-cpp">    bool bQuit = false;
-    while (!bQuit){
-        while (SDL_PollEvent(&amp;windowEvent)){
-            switch (windowEvent.type){
-                case SDL_QUIT:
-                    bQuit = true;
-                    break;
-                default:
-                    break;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">bQuit</span> = <span style="color:#cb4b16">false</span>;
+    <span style="color:#859900">while</span> (!<span style="color:#268bd2">bQuit</span>){
+        <span style="color:#859900">while</span> (<span style="color:#268bd2">SDL_PollEvent</span>(&amp;<span style="color:#268bd2">windowEvent</span>)){
+            <span style="color:#859900">switch</span> (<span style="color:#268bd2">windowEvent</span>.<span style="color:#268bd2">type</span>){
+                <span style="color:#859900">case</span> <span style="color:#268bd2">SDL_QUIT</span>:
+                    <span style="color:#268bd2">bQuit</span> = <span style="color:#cb4b16">true</span>;
+                    <span style="color:#859900">break</span>;
+                <span style="color:#859900">default</span>:
+                    <span style="color:#859900">break</span>;
             }
         }
     }
-</code></pre>
-
+</code></pre></div>
 <p>除了 <code>SDL_PollEvent</code> 方法去取消息外，还有 <code>SDL_WaitEvent</code> 方法。顾名思义，该方法会阻塞当前调用的线程，直到取出一个消息为止。</p>
-
-<pre><code class="language-cpp">    bool bQuit = false;
-    while (!bQuit){
-        SDL_WaitEvent(&amp;windowEvent);
-        if (windowEvent.type == SDL_QUIT){
-            bQuit = true;
-            break;
-        } else{
-            cout &lt;&lt; &quot;get event&quot; &lt;&lt; endl;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">bQuit</span> = <span style="color:#cb4b16">false</span>;
+    <span style="color:#859900">while</span> (!<span style="color:#268bd2">bQuit</span>){
+        <span style="color:#268bd2">SDL_WaitEvent</span>(&amp;<span style="color:#268bd2">windowEvent</span>);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">windowEvent</span>.<span style="color:#268bd2">type</span> == <span style="color:#268bd2">SDL_QUIT</span>){
+            <span style="color:#268bd2">bQuit</span> = <span style="color:#cb4b16">true</span>;
+            <span style="color:#859900">break</span>;
+        } <span style="color:#859900">else</span>{
+            <span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#2aa198">&#34;get event&#34;</span> &lt;&lt; <span style="color:#268bd2">endl</span>;
         }
     }
-</code></pre>
-
+</code></pre></div>
 <p>使用方法如上所示，但实际上程序不会一直卡在 <code>SDL_WaitEvent</code> 上，因为它没有限制监听的事件类型，所以只要有窗口在运行显示，哪怕你鼠标在窗口上滑过、或者按下了键盘，都能算是收到了消息事件，<code>cout</code> 方法打印的 log 日志会不断出现的。</p>
 
 <p>同样的，在 <code>SDL_WaitEvent</code> 方法中监听了 <code>SDL_QUIT</code> 类型的事件，当点击窗口左上角的叉时，也要退出循环，结束程序。</p>
@@ -392,42 +393,38 @@ if (!doNotTrack) {
 <p>而具体用户点击键盘上什么按键，这个信息就在 SDL_Event 的 <code>SDL_KeyboardEvent</code> 中。</p>
 
 <p>对于不同类型的事件所包含的具体信息，SDL_Event 都有对应的结构体去存储。</p>
-
-<pre><code class="language-cpp">typedef union SDL_Event
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">typedef</span> <span style="color:#859900">union</span> <span style="color:#268bd2">SDL_Event</span>
 {
-    Uint32 type;                    /**&lt; Event type, shared with all events */
-    SDL_CommonEvent common;         /**&lt; Common event data */
-    SDL_DisplayEvent display;       /**&lt; Window event data */
-    SDL_WindowEvent window;         /**&lt; Window event data */
-    // 键盘事件的信息
-    SDL_KeyboardEvent key;          /**&lt; Keyboard event data */
-    // 鼠标事件的信息
-    SDL_MouseButtonEvent button;    /**&lt; Mouse button event data */
-    SDL_MouseMotionEvent motion;    /**&lt; Mouse motion event data */
+    <span style="color:#268bd2">Uint32</span> <span style="color:#268bd2">type</span>;                    <span style="color:#93a1a1;font-style:italic">/**&lt; Event type, shared with all events */</span>
+    <span style="color:#268bd2">SDL_CommonEvent</span> <span style="color:#268bd2">common</span>;         <span style="color:#93a1a1;font-style:italic">/**&lt; Common event data */</span>
+    <span style="color:#268bd2">SDL_DisplayEvent</span> <span style="color:#268bd2">display</span>;       <span style="color:#93a1a1;font-style:italic">/**&lt; Window event data */</span>
+    <span style="color:#268bd2">SDL_WindowEvent</span> <span style="color:#268bd2">window</span>;         <span style="color:#93a1a1;font-style:italic">/**&lt; Window event data */</span>
+    <span style="color:#93a1a1;font-style:italic">// 键盘事件的信息
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">SDL_KeyboardEvent</span> <span style="color:#268bd2">key</span>;          <span style="color:#93a1a1;font-style:italic">/**&lt; Keyboard event data */</span>
+    <span style="color:#93a1a1;font-style:italic">// 鼠标事件的信息
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">SDL_MouseButtonEvent</span> <span style="color:#268bd2">button</span>;    <span style="color:#93a1a1;font-style:italic">/**&lt; Mouse button event data */</span>
+    <span style="color:#268bd2">SDL_MouseMotionEvent</span> <span style="color:#268bd2">motion</span>;    <span style="color:#93a1a1;font-style:italic">/**&lt; Mouse motion event data */</span>
 }
-</code></pre>
-
+</code></pre></div>
 <p>所以想要知道用户点击了哪个按键，去找 <code>SDL_KeyboardEvent</code> 对应的信息就好了。</p>
-
-<pre><code class="language-cpp">    bool bQuit = false;
-    while (!bQuit){
-        while (SDL_PollEvent(&amp;windowEvent)){
-            switch (windowEvent.type){
-                case SDL_QUIT:
-                    bQuit = true;
-                    break;
-                case SDL_KEYDOWN:
-                    if (windowEvent.key.keysym.sym == SDLK_SPACE){
-                        cout &lt;&lt; &quot;user click space \n&quot; ;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">bQuit</span> = <span style="color:#cb4b16">false</span>;
+    <span style="color:#859900">while</span> (!<span style="color:#268bd2">bQuit</span>){
+        <span style="color:#859900">while</span> (<span style="color:#268bd2">SDL_PollEvent</span>(&amp;<span style="color:#268bd2">windowEvent</span>)){
+            <span style="color:#859900">switch</span> (<span style="color:#268bd2">windowEvent</span>.<span style="color:#268bd2">type</span>){
+                <span style="color:#859900">case</span> <span style="color:#268bd2">SDL_QUIT</span>:
+                    <span style="color:#268bd2">bQuit</span> = <span style="color:#cb4b16">true</span>;
+                    <span style="color:#859900">break</span>;
+                <span style="color:#859900">case</span> <span style="color:#268bd2">SDL_KEYDOWN</span>:
+                    <span style="color:#859900">if</span> (<span style="color:#268bd2">windowEvent</span>.<span style="color:#268bd2">key</span>.<span style="color:#268bd2">keysym</span>.<span style="color:#268bd2">sym</span> == <span style="color:#268bd2">SDLK_SPACE</span>){
+                        <span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#2aa198">&#34;user click space </span><span style="color:#2aa198">\n</span><span style="color:#2aa198">&#34;</span> ;
                     }
-                    break;
-                default:
-                    break;
+                    <span style="color:#859900">break</span>;
+                <span style="color:#859900">default</span>:
+                    <span style="color:#859900">break</span>;
             }
         }
     }
-</code></pre>
-
+</code></pre></div>
 <p>以上代码监听用户是否点击空格键，如果是就输出对应的 log 。</p>
 
 <h2 id="鼠标响应">鼠标响应</h2>
@@ -437,24 +434,22 @@ if (!doNotTrack) {
 <p>对应的事件类型是 <code>SDL_MOUSEMOTION</code> 、<code>SDL_MOUSEBUTTONDOWN</code> 、<code>SDL_MOUSEBUTTONUP</code> 、<code>SDL_MOUSEBUTTONUP</code> ，按自己的需求去监听了。</p>
 
 <p>事件包含的具体信息在 <code>SDL_MouseMotionEvent</code> 、<code>SDL_MouseButtonEvent</code> 和 <code>SDL_MouseWheelEvent</code> 里面。</p>
-
-<pre><code class="language-cpp">    bool bQuit = false;
-    while (!bQuit){
-        while (SDL_PollEvent(&amp;windowEvent)){
-            switch (windowEvent.type){
-                case SDL_QUIT:
-                    bQuit = true;
-                    break;
-                case SDL_MOUSEBUTTONDOWN:
-                    printf(&quot;button index  is %d\n&quot;,windowEvent.button.button);
-                    break;
-                default:
-                    break;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">bQuit</span> = <span style="color:#cb4b16">false</span>;
+    <span style="color:#859900">while</span> (!<span style="color:#268bd2">bQuit</span>){
+        <span style="color:#859900">while</span> (<span style="color:#268bd2">SDL_PollEvent</span>(&amp;<span style="color:#268bd2">windowEvent</span>)){
+            <span style="color:#859900">switch</span> (<span style="color:#268bd2">windowEvent</span>.<span style="color:#268bd2">type</span>){
+                <span style="color:#859900">case</span> <span style="color:#268bd2">SDL_QUIT</span>:
+                    <span style="color:#268bd2">bQuit</span> = <span style="color:#cb4b16">true</span>;
+                    <span style="color:#859900">break</span>;
+                <span style="color:#859900">case</span> <span style="color:#268bd2">SDL_MOUSEBUTTONDOWN</span>:
+                    <span style="color:#268bd2">printf</span>(<span style="color:#2aa198">&#34;button index  is %d</span><span style="color:#2aa198">\n</span><span style="color:#2aa198">&#34;</span>,<span style="color:#268bd2">windowEvent</span>.<span style="color:#268bd2">button</span>.<span style="color:#268bd2">button</span>);
+                    <span style="color:#859900">break</span>;
+                <span style="color:#859900">default</span>:
+                    <span style="color:#859900">break</span>;
             }
         }
     }
-</code></pre>
-
+</code></pre></div>
 <p>以上代码就是监听鼠标点击事件，并且打印出点击按键的 index ,鼠标的左键、右键和中间滚轮按下去对应的 index 不同。</p>
 
 <h2 id="自定义事件响应">自定义事件响应</h2>
@@ -462,44 +457,38 @@ if (!doNotTrack) {
 <p>除了系统事件，还可以自定义事件。</p>
 
 <p>首先定义一个事件类型的宏：</p>
-
-<pre><code class="language-cpp">#define SDL_CUSTOM_EVENT  (SDL_USEREVENT + 1)
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#define SDL_CUSTOM_EVENT  (SDL_USEREVENT + 1)
+</span></code></pre></div>
 <p>其次，要创建一个线程，让它延时五秒后，发送自定义事件，在主线程中去接收到这个事件。</p>
-
-<pre><code class="language-cpp">// 线程运行函数
-int sdl_thread_custom_event(void *){
-    // 延时 5 秒
-    SDL_Delay(5000);
-    // 创建自定义事件并发送到消息队列中去
-    SDL_Event sdlEvent;
-    sdlEvent.type = SDL_CUSTOM_EVENT;
-    SDL_PushEvent(&amp;sdlEvent);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 线程运行函数
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">sdl_thread_custom_event</span>(<span style="color:#859900;font-weight:bold">void</span> *){
+    <span style="color:#93a1a1;font-style:italic">// 延时 5 秒
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">SDL_Delay</span>(<span style="color:#2aa198;font-weight:bold">5000</span>);
+    <span style="color:#93a1a1;font-style:italic">// 创建自定义事件并发送到消息队列中去
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">SDL_Event</span> <span style="color:#268bd2">sdlEvent</span>;
+    <span style="color:#268bd2">sdlEvent</span>.<span style="color:#268bd2">type</span> = <span style="color:#268bd2">SDL_CUSTOM_EVENT</span>;
+    <span style="color:#268bd2">SDL_PushEvent</span>(&amp;<span style="color:#268bd2">sdlEvent</span>);
 }
-// 创建线程并运行
-SDL_CreateThread(sdl_thread_custom_event, &quot;custom_event&quot;, nullptr);
-</code></pre>
-
+<span style="color:#93a1a1;font-style:italic">// 创建线程并运行
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">SDL_CreateThread</span>(<span style="color:#268bd2">sdl_thread_custom_event</span>, <span style="color:#2aa198">&#34;custom_event&#34;</span>, <span style="color:#859900">nullptr</span>);
+</code></pre></div>
 <p>线程运行函数如上所示，定义一个 SDL_Event ，把它的 type 赋值为自定义的类型，然后通过 <code>SDL_PushEvent</code> 方法把该消息事件放到消息队列中去。</p>
-
-<pre><code class="language-cpp">    bool bQuit = false;
-    while (!bQuit){
-        while (SDL_PollEvent(&amp;windowEvent)){
-            switch (windowEvent.type){
-                case SDL_QUIT:
-                    bQuit = true;
-                    break;
-                case SDL_CUSTOM_EVENT:
-                    cout &lt;&lt; &quot;receive user custom event\n&quot;;
-                    break;
-                default:
-                    break;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">bQuit</span> = <span style="color:#cb4b16">false</span>;
+    <span style="color:#859900">while</span> (!<span style="color:#268bd2">bQuit</span>){
+        <span style="color:#859900">while</span> (<span style="color:#268bd2">SDL_PollEvent</span>(&amp;<span style="color:#268bd2">windowEvent</span>)){
+            <span style="color:#859900">switch</span> (<span style="color:#268bd2">windowEvent</span>.<span style="color:#268bd2">type</span>){
+                <span style="color:#859900">case</span> <span style="color:#268bd2">SDL_QUIT</span>:
+                    <span style="color:#268bd2">bQuit</span> = <span style="color:#cb4b16">true</span>;
+                    <span style="color:#859900">break</span>;
+                <span style="color:#859900">case</span> <span style="color:#268bd2">SDL_CUSTOM_EVENT</span>:
+                    <span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#2aa198">&#34;receive user custom event</span><span style="color:#2aa198">\n</span><span style="color:#2aa198">&#34;</span>;
+                    <span style="color:#859900">break</span>;
+                <span style="color:#859900">default</span>:
+                    <span style="color:#859900">break</span>;
             }
         }
     }
-</code></pre>
-
+</code></pre></div>
 <p>SDL_PollEvent 方法会从消息队列中取到我们自定义的消息事件，这时候就能做一些想要的操作呢，比如打印 log 之类的。</p>
 
 <h2 id="总结">总结</h2>
@@ -515,130 +504,83 @@ SDL_CreateThread(sdl_thread_custom_event, &quot;custom_event&quot;, nullptr);
 <p>本篇文章对应的提交 <code>tag</code> 为 <code>av-beginner-003</code>，可切换至对应源码查看。</p>
 
 <p>能力有限，文中有不对之处，欢迎加我微信 ezglumes 进行交流~~</p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ffmpeg/av-beginner-003/">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a>
-
-                
-
-                
-
-
-        
-        
-        
-      </article>
-
-      
-        
+          
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/ffmpeg/av-beginner-002/">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
+    <li><a href="https://www.glumes.com/post/ffmpeg/av-beginner-002/">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
     
-    <li><a href="/post/ffmpeg/av-beginner-001/">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</a></li>
+    <li><a href="https://www.glumes.com/post/ffmpeg/av-beginner-001/">【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</a></li>
     
 </ul>
 
-      
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/ffmpeg/av-beginner-002/" data-toggle="tooltip" data-placement="top" title="【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/ffmpeg/av-beginner-004/" data-toggle="tooltip" data-placement="top" title="【音视频连载-004】基础学习篇-SDL 加载图片并显示">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+        
 
-      
-      <ul class="pager blog-pager">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-          <li class="previous">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-002/" data-toggle="tooltip" data-placement="top" title="【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色">&larr; Previous Post</a>
-          </li>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/ffmpeg/av-beginner-004/" data-toggle="tooltip" data-placement="top" title="【音视频连载-004】基础学习篇-SDL 加载图片并显示">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
-      
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+          
+
+        
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -647,8 +589,6 @@ SDL_CreateThread(sdl_thread_custom_event, &quot;custom_event&quot;, nullptr);
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -679,21 +619,8 @@ SDL_CreateThread(sdl_thread_custom_event, &quot;custom_event&quot;, nullptr);
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -701,22 +628,28 @@ SDL_CreateThread(sdl_thread_custom_event, &quot;custom_event&quot;, nullptr);
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -725,49 +658,66 @@ SDL_CreateThread(sdl_thread_custom_event, &quot;custom_event&quot;, nullptr);
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

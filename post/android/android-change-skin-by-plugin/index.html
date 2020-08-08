@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android 插件换肤原理及源码分析</title>
+  <title>Android 插件换肤原理及源码分析-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="Android 插件换肤原理及源码分析" />
   <meta name="twitter:title" content="Android 插件换肤原理及源码分析" />
 
   <meta name="description" content="在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。">
   <meta property="og:description" content="在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。">
   <meta name="twitter:description" content="在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-change-skin-by-plugin/" />
+  <meta property="og:url" content="https://www.glumes.com/post/android/android-change-skin-by-plugin/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-change-skin-by-plugin/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/android/android-change-skin-by-plugin/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -54,23 +55,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -78,7 +67,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -89,15 +80,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -105,25 +96,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -141,9 +132,6 @@ if (!doNotTrack) {
 </nav>
 
 
-
-
-
     
   
   
@@ -156,45 +144,59 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">Android 插件换肤原理及源码分析</h1>
+              <h1>Android 插件换肤原理及源码分析</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on December 22, 2017
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
             
-          </h5>
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -212,8 +214,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p>在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。</p>
 
 <h2 id="插件换肤原理概述">插件换肤原理概述</h2>
 
@@ -241,25 +256,22 @@ if (!doNotTrack) {
 <h2 id="动态加载插件资源">动态加载插件资源</h2>
 
 <p>在 <code>SkinManager</code>的<code>load</code>方法中，加载了插件包，并且得到了插件的资源<code>Resource</code>。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">						<span style="color:#268bd2">PackageManager</span> <span style="color:#268bd2">mPm</span> = <span style="color:#268bd2">context</span>.<span style="color:#268bd2">getPackageManager</span>();
+						<span style="color:#268bd2">PackageInfo</span> <span style="color:#268bd2">mInfo</span> = <span style="color:#268bd2">mPm</span>.<span style="color:#268bd2">getPackageArchiveInfo</span>(<span style="color:#268bd2">skinPkgPath</span>, <span style="color:#268bd2">PackageManager</span>.<span style="color:#268bd2">GET_ACTIVITIES</span>);
+						<span style="color:#93a1a1;font-style:italic">// 得到插件包名，根据包名和资源 ID 得到资源
+</span><span style="color:#93a1a1;font-style:italic"></span>						<span style="color:#268bd2">skinPackageName</span> = <span style="color:#268bd2">mInfo</span>.<span style="color:#268bd2">packageName</span>;
 
-<pre><code class="language-java">						PackageManager mPm = context.getPackageManager();
-						PackageInfo mInfo = mPm.getPackageArchiveInfo(skinPkgPath, PackageManager.GET_ACTIVITIES);
-						// 得到插件包名，根据包名和资源 ID 得到资源
-						skinPackageName = mInfo.packageName;
-
-						// 通过反射构造 AssetManager 类
-						AssetManager assetManager = AssetManager.class.newInstance();
-						Method addAssetPath = assetManager.getClass().getMethod(&quot;addAssetPath&quot;, String.class);
-						// 反射调用 addAssetPath 方法
-						addAssetPath.invoke(assetManager, skinPkgPath);
-						// 得到皮肤插件的 Resource
-						Resources superRes = context.getResources();
-						Resources skinResource = new Resources(assetManager,superRes.getDisplayMetrics(),superRes.getConfiguration());
+						<span style="color:#93a1a1;font-style:italic">// 通过反射构造 AssetManager 类
+</span><span style="color:#93a1a1;font-style:italic"></span>						<span style="color:#268bd2">AssetManager</span> <span style="color:#268bd2">assetManager</span> = <span style="color:#268bd2">AssetManager</span>.<span style="color:#268bd2">class</span>.<span style="color:#268bd2">newInstance</span>();
+						<span style="color:#268bd2">Method</span> <span style="color:#268bd2">addAssetPath</span> = <span style="color:#268bd2">assetManager</span>.<span style="color:#268bd2">getClass</span>().<span style="color:#268bd2">getMethod</span>(<span style="color:#2aa198">&#34;addAssetPath&#34;</span>, <span style="color:#268bd2">String</span>.<span style="color:#268bd2">class</span>);
+						<span style="color:#93a1a1;font-style:italic">// 反射调用 addAssetPath 方法
+</span><span style="color:#93a1a1;font-style:italic"></span>						<span style="color:#268bd2">addAssetPath</span>.<span style="color:#268bd2">invoke</span>(<span style="color:#268bd2">assetManager</span>, <span style="color:#268bd2">skinPkgPath</span>);
+						<span style="color:#93a1a1;font-style:italic">// 得到皮肤插件的 Resource
+</span><span style="color:#93a1a1;font-style:italic"></span>						<span style="color:#268bd2">Resources</span> <span style="color:#268bd2">superRes</span> = <span style="color:#268bd2">context</span>.<span style="color:#268bd2">getResources</span>();
+						<span style="color:#268bd2">Resources</span> <span style="color:#268bd2">skinResource</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">Resources</span>(<span style="color:#268bd2">assetManager</span>,<span style="color:#268bd2">superRes</span>.<span style="color:#268bd2">getDisplayMetrics</span>(),<span style="color:#268bd2">superRes</span>.<span style="color:#268bd2">getConfiguration</span>());
 						
-						// 保存皮肤包路径
-						SkinConfig.saveSkinPath(context, skinPkgPath);
-</code></pre>
-
+						<span style="color:#93a1a1;font-style:italic">// 保存皮肤包路径
+</span><span style="color:#93a1a1;font-style:italic"></span>						<span style="color:#268bd2">SkinConfig</span>.<span style="color:#268bd2">saveSkinPath</span>(<span style="color:#268bd2">context</span>, <span style="color:#268bd2">skinPkgPath</span>);</code></pre></div>
 <p>有了插件资源<code>Resource</code>，就可以去得到想要的资源了。</p>
 
 <h2 id="换肤控件及属性的标识">换肤控件及属性的标识</h2>
@@ -267,60 +279,54 @@ if (!doNotTrack) {
 <p>Android-Skin-Loader 框架自定义了一个 <code>enable</code>的属性，用在 XML 文件中来标识哪些控件需要进行换肤。</p>
 
 <p>并且 Android-Skin-Loader 在需要继承的基类 <code>BaseActivity</code>、<code>BaseFragment</code>、<code>BaseFragmentActivity</code>中都设置了<code>LayoutInflater.Factory</code>，以便在布局加载之前进行预操作，也就是保存那些 需要换肤的控件 和识别 需要换肤的属性，这里 <em>换肤控件</em> 和 <em>换肤属性</em> 两个东西要区别开，它们所要进行的操作是不一样的，要先找到 *换肤控件*，然后再去找它的 <em>换肤属性</em> 。</p>
-
-<pre><code class="language-java">@Override
-	public View onCreateView(String name, Context context, AttributeSet attrs) {
-		// 从 AttributeSet 中得到换肤属性，判断是否需要进行换肤
-		boolean isSkinEnable = attrs.getAttributeBooleanValue(SkinConfig.NAMESPACE, SkinConfig.ATTR_SKIN_ENABLE, false);
-        if (!isSkinEnable){
-        		return null; // 不需要换肤的，则返回 null，由系统构造
-        }
-		// 构造需要换肤的 View
-		View view = createView(context, name, attrs);
-		if (view == null){
-			return null;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">@Override</span>
+	<span style="color:#859900">public</span> <span style="color:#268bd2">View</span> <span style="color:#268bd2">onCreateView</span>(<span style="color:#268bd2">String</span> <span style="color:#268bd2">name</span>, <span style="color:#268bd2">Context</span> <span style="color:#268bd2">context</span>, <span style="color:#268bd2">AttributeSet</span> <span style="color:#268bd2">attrs</span>) {
+		<span style="color:#93a1a1;font-style:italic">// 从 AttributeSet 中得到换肤属性，判断是否需要进行换肤
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">isSkinEnable</span> = <span style="color:#268bd2">attrs</span>.<span style="color:#268bd2">getAttributeBooleanValue</span>(<span style="color:#268bd2">SkinConfig</span>.<span style="color:#268bd2">NAMESPACE</span>, <span style="color:#268bd2">SkinConfig</span>.<span style="color:#268bd2">ATTR_SKIN_ENABLE</span>, <span style="color:#859900;font-weight:bold">false</span>);
+        <span style="color:#859900">if</span> (!<span style="color:#268bd2">isSkinEnable</span>){
+        		<span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>; <span style="color:#93a1a1;font-style:italic">// 不需要换肤的，则返回 null，由系统构造
+</span><span style="color:#93a1a1;font-style:italic"></span>        }
+		<span style="color:#93a1a1;font-style:italic">// 构造需要换肤的 View
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span> = <span style="color:#268bd2">createView</span>(<span style="color:#268bd2">context</span>, <span style="color:#268bd2">name</span>, <span style="color:#268bd2">attrs</span>);
+		<span style="color:#859900">if</span> (<span style="color:#268bd2">view</span> == <span style="color:#859900;font-weight:bold">null</span>){
+			<span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
 		}
-		// 解析需要换肤 View 的属性
-		parseSkinAttr(context, attrs, view);
-		return view;
-	}
-</code></pre>
-
+		<span style="color:#93a1a1;font-style:italic">// 解析需要换肤 View 的属性
+</span><span style="color:#93a1a1;font-style:italic"></span>		<span style="color:#268bd2">parseSkinAttr</span>(<span style="color:#268bd2">context</span>, <span style="color:#268bd2">attrs</span>, <span style="color:#268bd2">view</span>);
+		<span style="color:#859900">return</span> <span style="color:#268bd2">view</span>;
+	}</code></pre></div>
 <p>以上代码就是我们所说的侵入式编程，干扰了系统构造 View 的过程，所做的工作就是找出需要换肤的 View 并交由下一步进行解析。</p>
-
-<pre><code class="language-java">private void parseSkinAttr(Context context, AttributeSet attrs, View view) {
-		List&lt;SkinAttr&gt; viewAttrs = new ArrayList&lt;SkinAttr&gt;();
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">parseSkinAttr</span>(<span style="color:#268bd2">Context</span> <span style="color:#268bd2">context</span>, <span style="color:#268bd2">AttributeSet</span> <span style="color:#268bd2">attrs</span>, <span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span>) {
+		<span style="color:#268bd2">List</span>&lt;<span style="color:#268bd2">SkinAttr</span>&gt; <span style="color:#268bd2">viewAttrs</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">ArrayList</span>&lt;<span style="color:#268bd2">SkinAttr</span>&gt;();
 		
-		for (int i = 0; i &lt; attrs.getAttributeCount(); i++){
-			String attrName = attrs.getAttributeName(i);
-			String attrValue = attrs.getAttributeValue(i);
+		<span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span> = <span style="color:#268bd2">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#268bd2">attrs</span>.<span style="color:#268bd2">getAttributeCount</span>(); <span style="color:#268bd2">i</span>++){
+			<span style="color:#268bd2">String</span> <span style="color:#268bd2">attrName</span> = <span style="color:#268bd2">attrs</span>.<span style="color:#268bd2">getAttributeName</span>(<span style="color:#268bd2">i</span>);
+			<span style="color:#268bd2">String</span> <span style="color:#268bd2">attrValue</span> = <span style="color:#268bd2">attrs</span>.<span style="color:#268bd2">getAttributeValue</span>(<span style="color:#268bd2">i</span>);
 			
-			if(!AttrFactory.isSupportedAttr(attrName)){
-				continue; // AttrFactory 定义了哪些属性支持换肤，若该属性不支持换肤就跳过继续
-			}
-		    if(attrValue.startsWith(&quot;@&quot;)){ // 表明是引用类型，例如 @color/red
-					int id = Integer.parseInt(attrValue.substring(1));
-					String typeName = context.getResources().getResourceTypeName(id); // 类型名
-					String entryName = context.getResources().getResourceEntryName(id); // 入口名
-					SkinAttr mSkinAttr = AttrFactory.get(attrName, id, entryName, typeName);
-					if (mSkinAttr != null) {
-						viewAttrs.add(mSkinAttr);
+			<span style="color:#859900">if</span>(!<span style="color:#268bd2">AttrFactory</span>.<span style="color:#268bd2">isSupportedAttr</span>(<span style="color:#268bd2">attrName</span>)){
+				<span style="color:#859900">continue</span>; <span style="color:#93a1a1;font-style:italic">// AttrFactory 定义了哪些属性支持换肤，若该属性不支持换肤就跳过继续
+</span><span style="color:#93a1a1;font-style:italic"></span>			}
+		    <span style="color:#859900">if</span>(<span style="color:#268bd2">attrValue</span>.<span style="color:#268bd2">startsWith</span>(<span style="color:#2aa198">&#34;@&#34;</span>)){ <span style="color:#93a1a1;font-style:italic">// 表明是引用类型，例如 @color/red
+</span><span style="color:#93a1a1;font-style:italic"></span>					<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">id</span> = <span style="color:#268bd2">Integer</span>.<span style="color:#268bd2">parseInt</span>(<span style="color:#268bd2">attrValue</span>.<span style="color:#268bd2">substring</span>(<span style="color:#268bd2">1</span>));
+					<span style="color:#268bd2">String</span> <span style="color:#268bd2">typeName</span> = <span style="color:#268bd2">context</span>.<span style="color:#268bd2">getResources</span>().<span style="color:#268bd2">getResourceTypeName</span>(<span style="color:#268bd2">id</span>); <span style="color:#93a1a1;font-style:italic">// 类型名
+</span><span style="color:#93a1a1;font-style:italic"></span>					<span style="color:#268bd2">String</span> <span style="color:#268bd2">entryName</span> = <span style="color:#268bd2">context</span>.<span style="color:#268bd2">getResources</span>().<span style="color:#268bd2">getResourceEntryName</span>(<span style="color:#268bd2">id</span>); <span style="color:#93a1a1;font-style:italic">// 入口名
+</span><span style="color:#93a1a1;font-style:italic"></span>					<span style="color:#268bd2">SkinAttr</span> <span style="color:#268bd2">mSkinAttr</span> = <span style="color:#268bd2">AttrFactory</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">attrName</span>, <span style="color:#268bd2">id</span>, <span style="color:#268bd2">entryName</span>, <span style="color:#268bd2">typeName</span>);
+					<span style="color:#859900">if</span> (<span style="color:#268bd2">mSkinAttr</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+						<span style="color:#268bd2">viewAttrs</span>.<span style="color:#268bd2">add</span>(<span style="color:#268bd2">mSkinAttr</span>);
 					}
 		    }
 		    }
-		if(!ListUtils.isEmpty(viewAttrs)){
-			SkinItem skinItem = new SkinItem();
-			skinItem.view = view;
-			skinItem.attrs = viewAttrs;
-			// 将需要 换肤的控件 和 换肤的属性 这两个东西进行保存
-			mSkinItems.add(skinItem);
-			if(SkinManager.getInstance().isExternalSkin()){
-				skinItem.apply(); // 如果是外部的皮肤，则要 apply 一下，防止换肤不及时
-			}
+		<span style="color:#859900">if</span>(!<span style="color:#268bd2">ListUtils</span>.<span style="color:#268bd2">isEmpty</span>(<span style="color:#268bd2">viewAttrs</span>)){
+			<span style="color:#268bd2">SkinItem</span> <span style="color:#268bd2">skinItem</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">SkinItem</span>();
+			<span style="color:#268bd2">skinItem</span>.<span style="color:#268bd2">view</span> = <span style="color:#268bd2">view</span>;
+			<span style="color:#268bd2">skinItem</span>.<span style="color:#268bd2">attrs</span> = <span style="color:#268bd2">viewAttrs</span>;
+			<span style="color:#93a1a1;font-style:italic">// 将需要 换肤的控件 和 换肤的属性 这两个东西进行保存
+</span><span style="color:#93a1a1;font-style:italic"></span>			<span style="color:#268bd2">mSkinItems</span>.<span style="color:#268bd2">add</span>(<span style="color:#268bd2">skinItem</span>);
+			<span style="color:#859900">if</span>(<span style="color:#268bd2">SkinManager</span>.<span style="color:#268bd2">getInstance</span>().<span style="color:#268bd2">isExternalSkin</span>()){
+				<span style="color:#268bd2">skinItem</span>.<span style="color:#268bd2">apply</span>(); <span style="color:#93a1a1;font-style:italic">// 如果是外部的皮肤，则要 apply 一下，防止换肤不及时
+</span><span style="color:#93a1a1;font-style:italic"></span>			}
 		}
-	}
-</code></pre>
-
+	}</code></pre></div>
 <p>上述代码的作用就是从需要换肤的控件中，找到那些需要更改的属性，并将它保存在<code>mSkinItems</code>全局变量中。</p>
 
 <p>Android-Skin-Loader 框架中有一个抽象基类<code>SkinAttr</code>表示需要更改的属性，而具体需要更改的属性都是继承自<code>SkinAttr</code>，所以如果想要更改更多的属性，就必须自己添加对应的<code>SkinAttr</code>类了。</p>
@@ -334,41 +340,38 @@ if (!doNotTrack) {
 <p>AndroidChangeSkin 框架并没有使用 <code>LayoutInflater.Factory</code>方案了，采用了一种无侵入的方案。</p>
 
 <p>对于标识需要换肤的控件这一问题，AndroidChangeSkin 并没有再添加自定义属性，而是使用 View 自带的 <code>tag</code>属性。并在在<code>tag</code>属性的字符串值中，传递了要换肤的标识、要换肤的属性、要换肤的属性名。通过解析这三者来完成标识的任务。这样就不必要对每个属性都进行操作了。</p>
-
-<pre><code class="language-java">	//传入activity，找到content元素，递归遍历所有的子View，根据tag命名，记录需要换肤的View
-	public static List&lt;SkinView&gt; getSkinViews(Activity activity)
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">	<span style="color:#93a1a1;font-style:italic">//传入activity，找到content元素，递归遍历所有的子View，根据tag命名，记录需要换肤的View
+</span><span style="color:#93a1a1;font-style:italic"></span>	<span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#268bd2">List</span>&lt;<span style="color:#268bd2">SkinView</span>&gt; <span style="color:#268bd2">getSkinViews</span>(<span style="color:#268bd2">Activity</span> <span style="color:#268bd2">activity</span>)
     {
-        List&lt;SkinView&gt; skinViews = new ArrayList&lt;SkinView&gt;();
-        ViewGroup content = (ViewGroup) activity.findViewById(android.R.id.content);
-        addSkinViews(content, skinViews); // 找到需要换肤的 View 放到 skinViews 里面
-        return skinViews;
+        <span style="color:#268bd2">List</span>&lt;<span style="color:#268bd2">SkinView</span>&gt; <span style="color:#268bd2">skinViews</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">ArrayList</span>&lt;<span style="color:#268bd2">SkinView</span>&gt;();
+        <span style="color:#268bd2">ViewGroup</span> <span style="color:#268bd2">content</span> = (<span style="color:#268bd2">ViewGroup</span>) <span style="color:#268bd2">activity</span>.<span style="color:#268bd2">findViewById</span>(<span style="color:#268bd2">android</span>.<span style="color:#268bd2">R</span>.<span style="color:#268bd2">id</span>.<span style="color:#268bd2">content</span>);
+        <span style="color:#268bd2">addSkinViews</span>(<span style="color:#268bd2">content</span>, <span style="color:#268bd2">skinViews</span>); <span style="color:#93a1a1;font-style:italic">// 找到需要换肤的 View 放到 skinViews 里面
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">return</span> <span style="color:#268bd2">skinViews</span>;
     }
     
-	 /**
-     * 得到换肤的 View ，如果 tag 为 null 或者 tag 不是字符串，则返回 null
-     * 解析需要换肤的 View ，得到所有需要更改的属性 SkinAttr
-     */
-    public static SkinView getSkinView(View view)
+	 <span style="color:#93a1a1;font-style:italic">/**
+</span><span style="color:#93a1a1;font-style:italic">     * 得到换肤的 View ，如果 tag 为 null 或者 tag 不是字符串，则返回 null
+</span><span style="color:#93a1a1;font-style:italic">     * 解析需要换肤的 View ，得到所有需要更改的属性 SkinAttr
+</span><span style="color:#93a1a1;font-style:italic">     */</span>
+    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#268bd2">SkinView</span> <span style="color:#268bd2">getSkinView</span>(<span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span>)
     {
-        Object tag = view.getTag(R.id.skin_tag_id);
-        if (tag == null)
+        <span style="color:#268bd2">Object</span> <span style="color:#268bd2">tag</span> = <span style="color:#268bd2">view</span>.<span style="color:#268bd2">getTag</span>(<span style="color:#268bd2">R</span>.<span style="color:#268bd2">id</span>.<span style="color:#268bd2">skin_tag_id</span>);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">tag</span> == <span style="color:#859900;font-weight:bold">null</span>)
         {
-            tag = view.getTag();
+            <span style="color:#268bd2">tag</span> = <span style="color:#268bd2">view</span>.<span style="color:#268bd2">getTag</span>();
         }
-        if (tag == null) return null;
-        if (!(tag instanceof String)) return null;
-        String tagStr = (String) tag;
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">tag</span> == <span style="color:#859900;font-weight:bold">null</span>) <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
+        <span style="color:#859900">if</span> (!(<span style="color:#268bd2">tag</span> <span style="color:#859900">instanceof</span> <span style="color:#268bd2">String</span>)) <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
+        <span style="color:#268bd2">String</span> <span style="color:#268bd2">tagStr</span> = (<span style="color:#268bd2">String</span>) <span style="color:#268bd2">tag</span>;
 
-        List&lt;SkinAttr&gt; skinAttrs = parseTag(tagStr);
-        if (!skinAttrs.isEmpty())
+        <span style="color:#268bd2">List</span>&lt;<span style="color:#268bd2">SkinAttr</span>&gt; <span style="color:#268bd2">skinAttrs</span> = <span style="color:#268bd2">parseTag</span>(<span style="color:#268bd2">tagStr</span>);
+        <span style="color:#859900">if</span> (!<span style="color:#268bd2">skinAttrs</span>.<span style="color:#268bd2">isEmpty</span>())
         {
-            changeViewTag(view);
-            return new SkinView(view, skinAttrs);
+            <span style="color:#268bd2">changeViewTag</span>(<span style="color:#268bd2">view</span>);
+            <span style="color:#859900">return</span> <span style="color:#859900">new</span> <span style="color:#268bd2">SkinView</span>(<span style="color:#268bd2">view</span>, <span style="color:#268bd2">skinAttrs</span>);
         }
-        return null;
-    }
-</code></pre>
-
+        <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
+    }</code></pre></div>
 <p>AndroidChangeSkin 完成查找*换肤控件*和*换肤属性*两大任务，之所以说是无侵入性，就是因为它是从 Activity 布局的顶层开始遍历的，是在布局文件加载完成之后。</p>
 
 <h2 id="换肤操作及响应回调">换肤操作及响应回调</h2>
@@ -382,36 +385,30 @@ if (!doNotTrack) {
 <p>在此之前，我们找到了需要换肤的 View 和需要更改的属性，那么最终的换肤操作也就是由这些 View 来设置它的新属性，插件资源的加载也就是发生在这里了。也只有在这个时候，才会去加载皮肤插件中的资源，而之前的第一步只是构造插件的<code>Resource</code>并没有加载资源。</p>
 
 <p>Android-Skin-Loader 是为每一个需要更改的属性定义了一个类，并在此类中去加载资源。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900">class</span> <span style="color:#cb4b16">TextColorAttr</span> <span style="color:#859900">extends</span> <span style="color:#268bd2">SkinAttr</span> {
 
-<pre><code class="language-java">public class TextColorAttr extends SkinAttr {
-
-	@Override
-	public void apply(View view) {
-		if(view instanceof TextView){
-			TextView tv = (TextView)view;
-			if(RES_TYPE_NAME_COLOR.equals(attrValueTypeName)){
-		 tv.setTextColor(SkinManager.getInstance().convertToColorStateList(attrValueRefId));
-</code></pre>
-
+	<span style="color:#268bd2">@Override</span>
+	<span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">apply</span>(<span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span>) {
+		<span style="color:#859900">if</span>(<span style="color:#268bd2">view</span> <span style="color:#859900">instanceof</span> <span style="color:#268bd2">TextView</span>){
+			<span style="color:#268bd2">TextView</span> <span style="color:#268bd2">tv</span> = (<span style="color:#268bd2">TextView</span>)<span style="color:#268bd2">view</span>;
+			<span style="color:#859900">if</span>(<span style="color:#268bd2">RES_TYPE_NAME_COLOR</span>.<span style="color:#268bd2">equals</span>(<span style="color:#268bd2">attrValueTypeName</span>)){
+		 <span style="color:#268bd2">tv</span>.<span style="color:#268bd2">setTextColor</span>(<span style="color:#268bd2">SkinManager</span>.<span style="color:#268bd2">getInstance</span>().<span style="color:#268bd2">convertToColorStateList</span>(<span style="color:#268bd2">attrValueRefId</span>));</code></pre></div>
 <p>而 androidChangeSkin 则没有编写那么多类，采用了枚举类型来更改属性，同样也是在属性中加载资源。</p>
-
-<pre><code class="language-java">public enum SkinAttrType
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900">enum</span> <span style="color:#268bd2">SkinAttrType</span>
 {
-    BACKGROUND(&quot;background&quot;){
-                @Override
-                public void apply(View view, String resName)
+    <span style="color:#268bd2">BACKGROUND</span>(<span style="color:#2aa198">&#34;background&#34;</span>){
+                <span style="color:#268bd2">@Override</span>
+                <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">apply</span>(<span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resName</span>)
                 {
-                    Drawable drawable = getResourceManager().getDrawableByName(resName);
-                    if (drawable != null)
+                    <span style="color:#268bd2">Drawable</span> <span style="color:#268bd2">drawable</span> = <span style="color:#268bd2">getResourceManager</span>().<span style="color:#268bd2">getDrawableByName</span>(<span style="color:#268bd2">resName</span>);
+                    <span style="color:#859900">if</span> (<span style="color:#268bd2">drawable</span> != <span style="color:#859900;font-weight:bold">null</span>)
                     {
-                        view.setBackgroundDrawable(drawable);
-                    } else{
-					try{
-	                     int color = getResourceManager().getColor(resName);
-	                     view.setBackgroundColor(color);
-					},
-</code></pre>
-
+                        <span style="color:#268bd2">view</span>.<span style="color:#268bd2">setBackgroundDrawable</span>(<span style="color:#268bd2">drawable</span>);
+                    } <span style="color:#859900">else</span>{
+					<span style="color:#859900">try</span>{
+	                     <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">color</span> = <span style="color:#268bd2">getResourceManager</span>().<span style="color:#268bd2">getColor</span>(<span style="color:#268bd2">resName</span>);
+	                     <span style="color:#268bd2">view</span>.<span style="color:#268bd2">setBackgroundColor</span>(<span style="color:#268bd2">color</span>);
+					},</code></pre></div>
 <p>至于，基于观察者模式来响应换肤操作就比较简单了，看过代码很容易知道是怎么一个编程方式了。</p>
 
 <h2 id="动态添加-view-的换肤">动态添加 View 的换肤</h2>
@@ -431,146 +428,99 @@ if (!doNotTrack) {
 <li><a href="http://blog.csdn.net/zhi184816/article/details/53436761">http://blog.csdn.net/zhi184816/article/details/53436761</a></li>
 <li><a href="http://www.jianshu.com/p/af7c0585dd5b">http://www.jianshu.com/p/af7c0585dd5b</a></li>
 </ol>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-change-skin-by-plugin/">Android 插件换肤原理及源码分析</a>
-
-                
-
-                
-
-
-        
-        
-        
-      </article>
-
-      
-        
+          
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/android/android-start-service/">Android 6.0 Service 启动过程源码分析（一）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-service/">Android 6.0 Service 启动过程源码分析（一）</a></li>
     
-    <li><a href="/post/android/android-statemachine/">Android StateMachine 状态机分析</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-statemachine/">Android StateMachine 状态机分析</a></li>
     
-    <li><a href="/post/android/android-lrucache/">Android LruCache实现分析</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-lrucache/">Android LruCache实现分析</a></li>
     
-    <li><a href="/post/android/android-window-and-view/">Android Activity 创建 Window 及添加 View 流程分析</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-window-and-view/">Android Activity 创建 Window 及添加 View 流程分析</a></li>
     
-    <li><a href="/post/android/android-system-server/">Android 系统服务启动 SystemServer</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-system-server/">Android 系统服务启动 SystemServer</a></li>
     
-    <li><a href="/post/android/android-service-manager/">Android 系统服务管理 ServiceManager</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-service-manager/">Android 系统服务管理 ServiceManager</a></li>
     
-    <li><a href="/post/android/android-material-design-summary-2/">Android Material Desing 控件小结-2</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-material-design-summary-2/">Android Material Desing 控件小结-2</a></li>
     
-    <li><a href="/post/android/android-material-design-summary-1/">Android Material Desing 控件小结-1</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-material-design-summary-1/">Android Material Desing 控件小结-1</a></li>
     
-    <li><a href="/post/android/android-binder-summary/">Android Binder Summary</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-binder-summary/">Android Binder Summary</a></li>
     
-    <li><a href="/post/android/android-dagger-use/">Dagger2 在 Android 中的使用</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-dagger-use/">Dagger2 在 Android 中的使用</a></li>
     
 </ul>
 
-      
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/android/android-start-service/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Service 启动过程源码分析（一）">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/android/android-layout-inflater/" data-toggle="tooltip" data-placement="top" title="Android 布局加载之 LayoutInflater">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+        
 
-      
-      <ul class="pager blog-pager">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-          <li class="previous">
-            <a href="https://glumes.com/post/android/android-start-service/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Service 启动过程源码分析（一）">&larr; Previous Post</a>
-          </li>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/android-layout-inflater/" data-toggle="tooltip" data-placement="top" title="Android 布局加载之 LayoutInflater">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
-      
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+          
+
+        
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -579,8 +529,6 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -611,21 +559,8 @@ if (!doNotTrack) {
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -633,22 +568,28 @@ if (!doNotTrack) {
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -657,49 +598,66 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

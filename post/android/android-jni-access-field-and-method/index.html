@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android 通过 JNI 访问 Java 字段和方法调用</title>
+  <title>Android 通过 JNI 访问 Java 字段和方法调用-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="Android 通过 JNI 访问 Java 字段和方法调用" />
   <meta name="twitter:title" content="Android 通过 JNI 访问 Java 字段和方法调用" />
 
@@ -19,33 +19,34 @@
   <meta name="twitter:description" content="在前面的两篇文章中，介绍了 Android 通过 JNI 进行基础类型、字符串和数组的相关操作，并描述了 Java 和 Native 在类型和签名之间的转换关系。
 
 有了之前那些基础，就可以实现 Java 和 Native 的相互调用了，在 Native 中去访问 Java 类的字段并调用相应的方法。">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-jni-access-field-and-method/" />
+  <meta property="og:url" content="https://www.glumes.com/post/android/android-jni-access-field-and-method/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-jni-access-field-and-method/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/android/android-jni-access-field-and-method/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -60,23 +61,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -84,7 +73,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -95,15 +86,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -111,25 +102,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -145,9 +136,6 @@ if (!doNotTrack) {
 
   </div>
 </nav>
-
-
-
 
 
     
@@ -166,24 +154,21 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
-        
         <div class="container">
           <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Android 通过 JNI 访问 Java 字段和方法调用</h1>
                   
-                     <h1>Android 通过 JNI 访问 Java 字段和方法调用</h1>
-                     
+                  
                     <span class="post-meta">
-  Posted on May 7, 2018
+  
+    Posted on May 7, 2018
+  
   
 </span>
 
 
-                    
-                  
                   
               </div>
             </div>
@@ -192,47 +177,61 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">Android 通过 JNI 访问 Java 字段和方法调用</h1>
+              <h1>Android 通过 JNI 访问 Java 字段和方法调用</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on May 7, 2018
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
             
-                <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+              
+                  <a href="https://www.glumes.com/tags/jni/">JNI</a> &nbsp;
+              
+            </h5>
             
-          </h5>
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -254,8 +253,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p>在前面的两篇文章中，介绍了 Android 通过 JNI 进行基础类型、字符串和数组的相关操作，并描述了 Java 和 Native 在类型和签名之间的转换关系。</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>在前面的两篇文章中，介绍了 Android 通过 JNI 进行基础类型、字符串和数组的相关操作，并描述了 Java 和 Native 在类型和签名之间的转换关系。</p>
 
 <p>有了之前那些基础，就可以实现 Java 和 Native 的相互调用了，在 Native 中去访问 Java 类的字段并调用相应的方法。</p>
 
@@ -266,22 +278,19 @@ if (!doNotTrack) {
 <p>Native 方法访问 Java 的字段有两种形式，分别是访问类的实例字段和访问类的静态字段。</p>
 
 <p>不管哪种操作，首先要定义一个具体的 Java 类型，其中，有实例的字段类型和方法，也有静态的字段类型和方法。</p>
-
-<pre><code class="language-java">public class Animal {
-    protected String name;
-    public static int num = 0;
-    public Animal(String name) {
-        this.name = name;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900">class</span> <span style="color:#cb4b16">Animal</span> {
+    <span style="color:#859900">protected</span> <span style="color:#268bd2">String</span> <span style="color:#268bd2">name</span>;
+    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">num</span> = <span style="color:#268bd2">0</span>;
+    <span style="color:#859900">public</span> <span style="color:#268bd2">Animal</span>(<span style="color:#268bd2">String</span> <span style="color:#268bd2">name</span>) {
+        <span style="color:#859900">this</span>.<span style="color:#268bd2">name</span> = <span style="color:#268bd2">name</span>;
     }
-    public String getName() {
-        return this.name;
+    <span style="color:#859900">public</span> <span style="color:#268bd2">String</span> <span style="color:#268bd2">getName</span>() {
+        <span style="color:#859900">return</span> <span style="color:#859900">this</span>.<span style="color:#268bd2">name</span>;
     }
-    public int getNum() {
-        return num;
+    <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">getNum</span>() {
+        <span style="color:#859900">return</span> <span style="color:#268bd2">num</span>;
     }
-}
-</code></pre>
-
+}</code></pre></div>
 <h3 id="访问类的实例字段">访问类的实例字段</h3>
 
 <p>访问 Java 类的字段，大致步骤如下：</p>
@@ -293,38 +302,33 @@ if (!doNotTrack) {
 </ol>
 
 <p>以访问以上 Animal 类的 name 字段，并将其修改为例：</p>
-
-<pre><code class="language-java">private native void accessInstanceFiled(Animal animal);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">private</span> <span style="color:#859900">native</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">accessInstanceFiled</span>(<span style="color:#268bd2">Animal</span> <span style="color:#268bd2">animal</span>);</code></pre></div>
 <p>对应的 C++ 代码如下：</p>
-
-<pre><code class="language-cpp">extern &quot;C&quot;
-JNIEXPORT void JNICALL
-Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_accessInstanceFiled(JNIEnv *env,jobject instance, jobject animal) {
-    jfieldID fid; // 想要获取的字段 id
-    jstring jstr; // 字段对应的具体的值
-    const char *str; // 将 Java 的字符串转换为 Native 的字符串
-    jclass cls = env-&gt;GetObjectClass(animal); // 获取 Java 对象的类
-    fid = env-&gt;GetFieldID(cls, &quot;name&quot;, &quot;Ljava/lang/String;&quot;); // 获取对应字段的 id
-    if (fid == NULL) { // 如果字段为 NULL ，直接退出，查找失败
-        return;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">extern</span> <span style="color:#2aa198">&#34;C&#34;</span>
+<span style="color:#268bd2">JNIEXPORT</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">JNICALL</span>
+<span style="color:#268bd2">Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_accessInstanceFiled</span>(<span style="color:#268bd2">JNIEnv</span> *<span style="color:#268bd2">env</span>,<span style="color:#268bd2">jobject</span> <span style="color:#268bd2">instance</span>, <span style="color:#268bd2">jobject</span> <span style="color:#268bd2">animal</span>) {
+    <span style="color:#268bd2">jfieldID</span> <span style="color:#268bd2">fid</span>; <span style="color:#93a1a1;font-style:italic">// 想要获取的字段 id
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jstring</span> <span style="color:#268bd2">jstr</span>; <span style="color:#93a1a1;font-style:italic">// 字段对应的具体的值
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> *<span style="color:#268bd2">str</span>; <span style="color:#93a1a1;font-style:italic">// 将 Java 的字符串转换为 Native 的字符串
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jclass</span> <span style="color:#268bd2">cls</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetObjectClass</span>(<span style="color:#268bd2">animal</span>); <span style="color:#93a1a1;font-style:italic">// 获取 Java 对象的类
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">fid</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetFieldID</span>(<span style="color:#268bd2">cls</span>, <span style="color:#2aa198">&#34;name&#34;</span>, <span style="color:#2aa198">&#34;Ljava/lang/String;&#34;</span>); <span style="color:#93a1a1;font-style:italic">// 获取对应字段的 id
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">if</span> (<span style="color:#268bd2">fid</span> == <span style="color:#cb4b16">NULL</span>) { <span style="color:#93a1a1;font-style:italic">// 如果字段为 NULL ，直接退出，查找失败
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">return</span>;
     }
-    jstr = (jstring) env-&gt;GetObjectField(animal, fid); // 获取字段对应的值
-    str = env-&gt;GetStringUTFChars(jstr, NULL);
-    if (str == NULL) {
-        return;
+    <span style="color:#268bd2">jstr</span> = (<span style="color:#268bd2">jstring</span>) <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetObjectField</span>(<span style="color:#268bd2">animal</span>, <span style="color:#268bd2">fid</span>); <span style="color:#93a1a1;font-style:italic">// 获取字段对应的值
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">str</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetStringUTFChars</span>(<span style="color:#268bd2">jstr</span>, <span style="color:#cb4b16">NULL</span>);
+    <span style="color:#859900">if</span> (<span style="color:#268bd2">str</span> == <span style="color:#cb4b16">NULL</span>) {
+        <span style="color:#859900">return</span>;
     }
-    LOGD(&quot;name is %s&quot;, str);
-    env-&gt;ReleaseStringUTFChars(jstr, str);
-    jstr = env-&gt;NewStringUTF(&quot;replaced name&quot;);
-    if (jstr == NULL) {
-        return;
+    <span style="color:#268bd2">LOGD</span>(<span style="color:#2aa198">&#34;name is %s&#34;</span>, <span style="color:#268bd2">str</span>);
+    <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">ReleaseStringUTFChars</span>(<span style="color:#268bd2">jstr</span>, <span style="color:#268bd2">str</span>);
+    <span style="color:#268bd2">jstr</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">NewStringUTF</span>(<span style="color:#2aa198">&#34;replaced name&#34;</span>);
+    <span style="color:#859900">if</span> (<span style="color:#268bd2">jstr</span> == <span style="color:#cb4b16">NULL</span>) {
+        <span style="color:#859900">return</span>;
     }
-    env-&gt;SetObjectField(animal, fid, jstr); // 修改字段对应的值 
-}
-</code></pre>
-
+    <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">SetObjectField</span>(<span style="color:#268bd2">animal</span>, <span style="color:#268bd2">fid</span>, <span style="color:#268bd2">jstr</span>); <span style="color:#93a1a1;font-style:italic">// 修改字段对应的值 
+</span><span style="color:#93a1a1;font-style:italic"></span>}
+</code></pre></div>
 <p>在上面的代码中，首先通过 <code>GetObjectClass</code> 函数获取对应的 Java 类，其参数就是要获得的对象类型 jobject ，然后得到的结果就是一个 jclass 类型的值，代表 Java 的 Class 类型。</p>
 
 <p>其次是通过 <code>GetFieldID</code> 方法获得 Java 类型对应的字段 id 。其中，第一个参数就是之前获得的 Java 类型，第二个参数就是在 Java 中字段的具体名字，第三个参数就是字段对应的具体类型，这个类型的签名描述要转换成 Native 的表示形式，也就是之前提到的 Java 和 Native 的签名转换。</p>
@@ -340,28 +344,23 @@ Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_accessInstanceFiled(JNIEnv
 <h3 id="访问类的静态字段">访问类的静态字段</h3>
 
 <p>访问类的静态字段，大致步骤和类的实例字段类似：</p>
-
-<pre><code class="language-java">private native void accessStaticField(Animal animal);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">private</span> <span style="color:#859900">native</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">accessStaticField</span>(<span style="color:#268bd2">Animal</span> <span style="color:#268bd2">animal</span>);</code></pre></div>
 <p>对应的 C++ 代码如下：</p>
-
-<pre><code class="language-cpp">extern &quot;C&quot;
-JNIEXPORT void JNICALL
-Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_accessStaticField(JNIEnv *env, jobject instance,jobject animal) {
-    jfieldID fid;
-    jint num;
-    jclass cls = env-&gt;GetObjectClass(animal);
-    fid = env-&gt;GetStaticFieldID(cls, &quot;num&quot;, &quot;I&quot;);
-    if (fid == NULL) {
-        return;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">extern</span> <span style="color:#2aa198">&#34;C&#34;</span>
+<span style="color:#268bd2">JNIEXPORT</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">JNICALL</span>
+<span style="color:#268bd2">Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_accessStaticField</span>(<span style="color:#268bd2">JNIEnv</span> *<span style="color:#268bd2">env</span>, <span style="color:#268bd2">jobject</span> <span style="color:#268bd2">instance</span>,<span style="color:#268bd2">jobject</span> <span style="color:#268bd2">animal</span>) {
+    <span style="color:#268bd2">jfieldID</span> <span style="color:#268bd2">fid</span>;
+    <span style="color:#268bd2">jint</span> <span style="color:#268bd2">num</span>;
+    <span style="color:#268bd2">jclass</span> <span style="color:#268bd2">cls</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetObjectClass</span>(<span style="color:#268bd2">animal</span>);
+    <span style="color:#268bd2">fid</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetStaticFieldID</span>(<span style="color:#268bd2">cls</span>, <span style="color:#2aa198">&#34;num&#34;</span>, <span style="color:#2aa198">&#34;I&#34;</span>);
+    <span style="color:#859900">if</span> (<span style="color:#268bd2">fid</span> == <span style="color:#cb4b16">NULL</span>) {
+        <span style="color:#859900">return</span>;
     }
-    num = env-&gt;GetStaticIntField(cls, fid);
-    LOGD(&quot;get static field num is %d&quot;, num);
-    env-&gt;SetStaticIntField(cls, fid, ++num);
+    <span style="color:#268bd2">num</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetStaticIntField</span>(<span style="color:#268bd2">cls</span>, <span style="color:#268bd2">fid</span>);
+    <span style="color:#268bd2">LOGD</span>(<span style="color:#2aa198">&#34;get static field num is %d&#34;</span>, <span style="color:#268bd2">num</span>);
+    <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">SetStaticIntField</span>(<span style="color:#268bd2">cls</span>, <span style="color:#268bd2">fid</span>, ++<span style="color:#268bd2">num</span>);
 }
-</code></pre>
-
+</code></pre></div>
 <p>类的静态和实例字段的访问最大不同就在于，JNI 调用对应的方法不同。对于类的静态字段，JNI 的方法多了 <code>Static</code> 的标志来表明这个对应于类的静态字段访问。</p>
 
 <h2 id="方法调用">方法调用</h2>
@@ -381,25 +380,20 @@ Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_accessStaticField(JNIEnv *
 <h3 id="调用类的实例方法">调用类的实例方法</h3>
 
 <p>JNI 调用 Java 类的实例方法</p>
-
-<pre><code class="language-java">    private native void callInstanceMethod(Animal animal);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900">native</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">callInstanceMethod</span>(<span style="color:#268bd2">Animal</span> <span style="color:#268bd2">animal</span>);</code></pre></div>
 <p>对应 C++ 代码如下：</p>
-
-<pre><code class="language-cpp">// Native 访问 Java 的类实例方法
-extern &quot;C&quot;
-JNIEXPORT void JNICALL
-Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callInstanceMethod(JNIEnv *env, jobject instance,jobject animal) {
-    jclass cls = env-&gt;GetObjectClass(animal); // 获得具体的类
-    jmethodID mid = env-&gt;GetMethodID(cls, &quot;callInstanceMethod&quot;, &quot;(I)V&quot;); // 获得具体的方法 id
-    if (mid == NULL) {
-        return;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// Native 访问 Java 的类实例方法
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">extern</span> <span style="color:#2aa198">&#34;C&#34;</span>
+<span style="color:#268bd2">JNIEXPORT</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">JNICALL</span>
+<span style="color:#268bd2">Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callInstanceMethod</span>(<span style="color:#268bd2">JNIEnv</span> *<span style="color:#268bd2">env</span>, <span style="color:#268bd2">jobject</span> <span style="color:#268bd2">instance</span>,<span style="color:#268bd2">jobject</span> <span style="color:#268bd2">animal</span>) {
+    <span style="color:#268bd2">jclass</span> <span style="color:#268bd2">cls</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetObjectClass</span>(<span style="color:#268bd2">animal</span>); <span style="color:#93a1a1;font-style:italic">// 获得具体的类
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">jmethodID</span> <span style="color:#268bd2">mid</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetMethodID</span>(<span style="color:#268bd2">cls</span>, <span style="color:#2aa198">&#34;callInstanceMethod&#34;</span>, <span style="color:#2aa198">&#34;(I)V&#34;</span>); <span style="color:#93a1a1;font-style:italic">// 获得具体的方法 id
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">if</span> (<span style="color:#268bd2">mid</span> == <span style="color:#cb4b16">NULL</span>) {
+        <span style="color:#859900">return</span>;
     }
-    env-&gt;CallVoidMethod(animal, mid, 2); // 调用方法
-}
-</code></pre>
-
+    <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">CallVoidMethod</span>(<span style="color:#268bd2">animal</span>, <span style="color:#268bd2">mid</span>, <span style="color:#2aa198;font-weight:bold">2</span>); <span style="color:#93a1a1;font-style:italic">// 调用方法
+</span><span style="color:#93a1a1;font-style:italic"></span>}
+</code></pre></div>
 <p>与访问字段不同的是，<code>GetFieldID</code> 方法换成了 <code>GetMethodID</code> 方法，另外由 <code>CallVoidMethod</code> 函数来调用具体的方法，前面两个参数是获得的类和方法 id，最后的参数是具体调用方法的参数。</p>
 
 <p><code>GetMethodID</code> 方法的第一个参数就是具体的 Java 类型，第二个参数是该 Java 类的对应实例方法的名称，第三个参数就是该方法对应的返回类型和参数签名转换成 Native 对应的描述。</p>
@@ -409,26 +403,21 @@ Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callInstanceMethod(JNIEnv 
 <h3 id="调用类的静态方法">调用类的静态方法</h3>
 
 <p>对于调用类的静态方法和调用类的实例方法类似：</p>
-
-<pre><code class="language-java">    private native void callStaticMethod(Animal animal);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900">native</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">callStaticMethod</span>(<span style="color:#268bd2">Animal</span> <span style="color:#268bd2">animal</span>);</code></pre></div>
 <p>对应 C++ 代码如下：</p>
-
-<pre><code class="language-cpp">// Native 访问 Java 的静态方法
-extern &quot;C&quot;
-JNIEXPORT void JNICALL
-Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callStaticMethod(JNIEnv *env,jobject instance, jobject animal) {
-    jclass cls = env-&gt;GetObjectClass(animal);
-    jmethodID argsmid = env-&gt;GetStaticMethodID(cls, &quot;callStaticMethod&quot;,
-                                               &quot;(Ljava/lang/String;)Ljava/lang/String;&quot;);
-    if (argsmid == NULL) {
-        return;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// Native 访问 Java 的静态方法
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">extern</span> <span style="color:#2aa198">&#34;C&#34;</span>
+<span style="color:#268bd2">JNIEXPORT</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">JNICALL</span>
+<span style="color:#268bd2">Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callStaticMethod</span>(<span style="color:#268bd2">JNIEnv</span> *<span style="color:#268bd2">env</span>,<span style="color:#268bd2">jobject</span> <span style="color:#268bd2">instance</span>, <span style="color:#268bd2">jobject</span> <span style="color:#268bd2">animal</span>) {
+    <span style="color:#268bd2">jclass</span> <span style="color:#268bd2">cls</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetObjectClass</span>(<span style="color:#268bd2">animal</span>);
+    <span style="color:#268bd2">jmethodID</span> <span style="color:#268bd2">argsmid</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">GetStaticMethodID</span>(<span style="color:#268bd2">cls</span>, <span style="color:#2aa198">&#34;callStaticMethod&#34;</span>,
+                                               <span style="color:#2aa198">&#34;(Ljava/lang/String;)Ljava/lang/String;&#34;</span>);
+    <span style="color:#859900">if</span> (<span style="color:#268bd2">argsmid</span> == <span style="color:#cb4b16">NULL</span>) {
+        <span style="color:#859900">return</span>;
     }
-    jstring jstr = env-&gt;NewStringUTF(&quot;jstring&quot;);
-    env-&gt;CallStaticObjectMethod(cls, argsmid, jstr);
-</code></pre>
-
+    <span style="color:#268bd2">jstring</span> <span style="color:#268bd2">jstr</span> = <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">NewStringUTF</span>(<span style="color:#2aa198">&#34;jstring&#34;</span>);
+    <span style="color:#268bd2">env</span>-&gt;<span style="color:#268bd2">CallStaticObjectMethod</span>(<span style="color:#268bd2">cls</span>, <span style="color:#268bd2">argsmid</span>, <span style="color:#268bd2">jstr</span>);
+</code></pre></div>
 <p>调用类的静态方法 callStaticMethod，该方法需要传递一个 String 字符串参数，同时返回一个字符串参数。</p>
 
 <p>具体的调用过程和调用类的实例方法类似，差别也只是在于调用方法名多加了一个 Static 的标识。</p>
@@ -440,146 +429,99 @@ Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callStaticMethod(JNIEnv *e
 <p>可以看到，从 JNI 中访问 Java 的字段和访问，两者的步骤都是大致相似的，只是调用的 JNI 方法有所区别。</p>
 
 <p>具体示例代码可参考我的 Github 项目 <a href="https://github.com/glumes/AndroidDevWithCpp">https://github.com/glumes/AndroidDevWithCpp</a>，欢迎 Star。</p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-jni-access-field-and-method/">Android 通过 JNI 访问 Java 字段和方法调用</a>
-
-                
-
-                
-
-
-        
-        
-        
-      </article>
-
-      
-        
+          
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/android/android-jni-array-operation/">Android JNI 数组 操作</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-jni-array-operation/">Android JNI 数组 操作</a></li>
     
-    <li><a href="/post/android/android-jni-basic-operation/">Android JNI 基本操作 </a></li>
+    <li><a href="https://www.glumes.com/post/android/android-jni-basic-operation/">Android JNI 基本操作 </a></li>
     
-    <li><a href="/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-camrea-api-evolution/">Android Camera 模型及 API 接口演变</a></li>
     
-    <li><a href="/post/android/build-android-source-code/">编译安卓源码</a></li>
+    <li><a href="https://www.glumes.com/post/android/build-android-source-code/">编译安卓源码</a></li>
     
-    <li><a href="/post/android/android-rxjava/">安卓异步之RxJava</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-rxjava/">安卓异步之RxJava</a></li>
     
-    <li><a href="/post/android/rxjava-wrapper-dialog/">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</a></li>
+    <li><a href="https://www.glumes.com/post/android/rxjava-wrapper-dialog/">用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</a></li>
     
-    <li><a href="/post/android/android-layout-inflater/">Android 布局加载之 LayoutInflater</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-layout-inflater/">Android 布局加载之 LayoutInflater</a></li>
     
-    <li><a href="/post/android/android-change-skin-by-plugin/">Android 插件换肤原理及源码分析</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-change-skin-by-plugin/">Android 插件换肤原理及源码分析</a></li>
     
-    <li><a href="/post/android/android-start-service/">Android 6.0 Service 启动过程源码分析（一）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-service/">Android 6.0 Service 启动过程源码分析（一）</a></li>
     
-    <li><a href="/post/android/android-statemachine/">Android StateMachine 状态机分析</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-statemachine/">Android StateMachine 状态机分析</a></li>
     
 </ul>
 
-      
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/android/android-jni-array-operation/" data-toggle="tooltip" data-placement="top" title="Android JNI 数组 操作">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/" data-toggle="tooltip" data-placement="top" title="Android 通过 JNI 调用 Java 类的构造方法和父类的方法">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+        
 
-      
-      <ul class="pager blog-pager">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-          <li class="previous">
-            <a href="https://glumes.com/post/android/android-jni-array-operation/" data-toggle="tooltip" data-placement="top" title="Android JNI 数组 操作">&larr; Previous Post</a>
-          </li>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/" data-toggle="tooltip" data-placement="top" title="Android 通过 JNI 调用 Java 类的构造方法和父类的方法">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
-      
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+          
+
+        
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -588,8 +530,6 @@ Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callStaticMethod(JNIEnv *e
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -620,21 +560,8 @@ Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callStaticMethod(JNIEnv *e
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -642,22 +569,28 @@ Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callStaticMethod(JNIEnv *e
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -666,49 +599,66 @@ Java_com_glumes_cppso_jnioperations_FieldAndMethodOps_callStaticMethod(JNIEnv *e
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

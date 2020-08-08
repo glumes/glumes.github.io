@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>StateMachine on 技术开发进阶</title>
-    <link>https://glumes.com/tags/statemachine/</link>
-    <description>Recent content in StateMachine on 技术开发进阶</description>
+    <title>StateMachine on 星陨的博客</title>
+    <link>https://www.glumes.com/tags/statemachine/</link>
+    <description>Recent content in StateMachine on 星陨的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
-    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <language>en-us</language>
     <lastBuildDate>Wed, 31 Jan 2018 15:20:14 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.com/tags/statemachine/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glumes.com/tags/statemachine/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>理解状态机</title>
-      <link>https://glumes.com/post/android/understand-state-machine/</link>
+      <link>https://www.glumes.com/post/android/understand-state-machine/</link>
       <pubDate>Wed, 31 Jan 2018 15:20:14 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/post/android/understand-state-machine/</guid>
+      
+      <guid>https://www.glumes.com/post/android/understand-state-machine/</guid>
       <description>&lt;p&gt;理解状态机的原理及使用。&lt;/p&gt;</description>
     </item>
     

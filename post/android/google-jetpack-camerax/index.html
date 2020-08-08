@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Google Jetpack 新组件 CameraX 介绍与实践</title>
+  <title>Google Jetpack 新组件 CameraX 介绍与实践-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="Google Jetpack 新组件 CameraX 介绍与实践" />
   <meta name="twitter:title" content="Google Jetpack 新组件 CameraX 介绍与实践" />
 
@@ -63,33 +63,34 @@ https://www.youtube.com/watch?v=kuv8uK-5CLY
 CameraX 介绍
 
 官方有给出一个示例的工程，我 fork 了之后，加入使用 OpenGL 黑白滤镜渲染 …">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/google-jetpack-camerax/" />
+  <meta property="og:url" content="https://www.glumes.com/post/android/google-jetpack-camerax/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/android/google-jetpack-camerax/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/android/google-jetpack-camerax/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -104,23 +105,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -128,7 +117,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -139,15 +130,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -155,25 +146,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -189,9 +180,6 @@ if (!doNotTrack) {
 
   </div>
 </nav>
-
-
-
 
 
     
@@ -210,24 +198,21 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
-        
         <div class="container">
           <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Google Jetpack 新组件 CameraX 介绍与实践</h1>
                   
-                     <h1>Google Jetpack 新组件 CameraX 介绍与实践</h1>
-                     
+                  
                     <span class="post-meta">
-  Posted on May 23, 2019
+  
+    Posted on May 23, 2019
+  
   
 </span>
 
 
-                    
-                  
                   
               </div>
             </div>
@@ -236,39 +221,53 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">Google Jetpack 新组件 CameraX 介绍与实践</h1>
+              <h1>Google Jetpack 新组件 CameraX 介绍与实践</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on May 23, 2019
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
+        <div>
+            
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-          
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -290,8 +289,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p>近期，Google 的 Jetpack 组件又出了新的库：CameraX 。</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>近期，Google 的 Jetpack 组件又出了新的库：CameraX 。</p>
 
 <p>顾名思义：CameraX 就是用来进行 Camera 开发的官方库了，而且后续会有 Google 进行维护和升级。这对于广大 Camera 开发工程师和即将成为 Camera 的程序员来说，真是个好消息~~~</p>
 
@@ -340,13 +352,10 @@ if (!doNotTrack) {
 <h2 id="camerax-开发实践">CameraX 开发实践</h2>
 
 <p>CameraX 目前的版本是 <code>1.0.0-alpha01</code> ，在使用时要添加如下的依赖：</p>
-
-<pre><code class="language-kotlin">    // CameraX
-    def camerax_version = &quot;1.0.0-alpha01&quot;
-    implementation &quot;androidx.camera:camera-core:${camerax_version}&quot;
-    implementation &quot;androidx.camera:camera-camera2:${camerax_version}&quot;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">    <span style="color:#93a1a1;font-style:italic">// CameraX
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">def</span> <span style="color:#268bd2">camerax_version</span> = <span style="color:#2aa198">&#34;1.0.0-alpha01&#34;</span>
+    <span style="color:#268bd2">implementation</span> <span style="color:#2aa198">&#34;androidx.camera:camera-core:${camerax_version}&#34;</span>
+    <span style="color:#268bd2">implementation</span> <span style="color:#2aa198">&#34;androidx.camera:camera-camera2:${camerax_version}&#34;</span></code></pre></div>
 <p>CameraX 向后兼容到 Android 5.0（API Level 21），并且它是基于 Camera 2.0 的 API 进行封装的，解决了市面上绝大部分手机的兼容性问题~~~</p>
 
 <p>相比 Camera 2.0 复杂的调用流程，CameraX 就简化很多，只关心我们需要的内容就好了，不像前者得自己维护 CameraSession 会话等状态，并且 CameraX 和 Jetpack 主打的 Lifecycle 绑定在一起了，什么时候该打开相机，什么时候该释放相机，都交给 Lifecycle 生命周期去管理吧</p>
@@ -362,78 +371,66 @@ if (!doNotTrack) {
 <h3 id="预览">预览</h3>
 
 <p>不管是 预览 还是 图像分析、图像拍摄，CameraX 都是通过一个建造者模式来构建参数 Config 类，再由 Config 类创建预览、分析器、拍摄的类，并在绑定生命周期时将它们传过去。</p>
-
-<pre><code class="language-kotlin">// // Apply declared configs to CameraX using the same lifecycle owner
-CameraX.bindToLifecycle(
-               lifecycleOwner: this, preview, imageCapture, imageAnalyzer)
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#93a1a1;font-style:italic">// // Apply declared configs to CameraX using the same lifecycle owner
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">CameraX</span>.<span style="color:#268bd2">bindToLifecycle</span>(
+               <span style="color:#268bd2">lifecycleOwner</span>: <span style="color:#859900">this</span>, <span style="color:#268bd2">preview</span>, <span style="color:#268bd2">imageCapture</span>, <span style="color:#268bd2">imageAnalyzer</span>)</code></pre></div>
 <p>既可以绑定 Activity 的 Lifecycle，也可以绑定 Fragment 的。</p>
 
 <p>当需要解除绑定时：</p>
-
-<pre><code class="language-kotlin">// Unbinds all use cases from the lifecycle and removes them from CameraX.
- CameraX.unbindAll()
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#93a1a1;font-style:italic">// Unbinds all use cases from the lifecycle and removes them from CameraX.
+</span><span style="color:#93a1a1;font-style:italic"></span> <span style="color:#268bd2">CameraX</span>.<span style="color:#268bd2">unbindAll</span>()</code></pre></div>
 <p>关于预览的参数配置，如果你有看过之前的文章：<a href="https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/">Android 相机开发中的尺寸和方向问题</a> 想必就会很了解了。</p>
 
 <p>提供我们的目标参数，由 CameraX 去判断当前 Camera 是否支持，并选择最符合的。</p>
-
-<pre><code class="language-kotlin">fun buildPreviewUseCase(): Preview {
-    val previewConfig = PreviewConfig.Builder()
-        // 宽高比
-        .setTargetAspectRatio(aspectRatio)
-        // 旋转
-        .setTargetRotation(rotation)
-        // 分辨率
-        .setTargetResolution(resolution)
-        // 前后摄像头
-        .setLensFacing(lensFacing)
-        .build()
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#859900">fun</span> <span style="color:#268bd2">buildPreviewUseCase</span>(): <span style="color:#268bd2">Preview</span> {
+    <span style="color:#859900">val</span> <span style="color:#268bd2">previewConfig</span> = <span style="color:#268bd2">PreviewConfig</span>.<span style="color:#268bd2">Builder</span>()
+        <span style="color:#93a1a1;font-style:italic">// 宽高比
+</span><span style="color:#93a1a1;font-style:italic"></span>        .<span style="color:#268bd2">setTargetAspectRatio</span>(<span style="color:#268bd2">aspectRatio</span>)
+        <span style="color:#93a1a1;font-style:italic">// 旋转
+</span><span style="color:#93a1a1;font-style:italic"></span>        .<span style="color:#268bd2">setTargetRotation</span>(<span style="color:#268bd2">rotation</span>)
+        <span style="color:#93a1a1;font-style:italic">// 分辨率
+</span><span style="color:#93a1a1;font-style:italic"></span>        .<span style="color:#268bd2">setTargetResolution</span>(<span style="color:#268bd2">resolution</span>)
+        <span style="color:#93a1a1;font-style:italic">// 前后摄像头
+</span><span style="color:#93a1a1;font-style:italic"></span>        .<span style="color:#268bd2">setLensFacing</span>(<span style="color:#268bd2">lensFacing</span>)
+        .<span style="color:#268bd2">build</span>()
     
-    // 创建 Preview 对象
-    val preview = Preview(previewConfig)
-    // 设置监听
-    preview.setOnPreviewOutputUpdateListener { previewOutput -&gt;
-        // PreviewOutput 会返回一个 SurfaceTexture
-        cameraTextureView.surfaceTexture = previewOutput.surfaceTexture
+    <span style="color:#93a1a1;font-style:italic">// 创建 Preview 对象
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">val</span> <span style="color:#268bd2">preview</span> = <span style="color:#268bd2">Preview</span>(<span style="color:#268bd2">previewConfig</span>)
+    <span style="color:#93a1a1;font-style:italic">// 设置监听
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">preview</span>.<span style="color:#268bd2">setOnPreviewOutputUpdateListener</span> { <span style="color:#268bd2">previewOutput</span> -&gt;
+        <span style="color:#93a1a1;font-style:italic">// PreviewOutput 会返回一个 SurfaceTexture
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">cameraTextureView</span>.<span style="color:#268bd2">surfaceTexture</span> = <span style="color:#268bd2">previewOutput</span>.<span style="color:#268bd2">surfaceTexture</span>
     }
 
-    return preview
-}
-</code></pre>
-
+    <span style="color:#859900">return</span> <span style="color:#268bd2">preview</span>
+}</code></pre></div>
 <p>通过建造者模式创建 <code>Preview</code> 对象，并且一定要给 Preview 对象设置 <code>OnPreviewOutputUpdateListener</code> 接口回调。</p>
 
 <p>相机预览的图像流是通过 SurfaceTexture 来返回的，而在项目例子中，是通过把 TextureView 的 SurfaceTexture 替换成 CameraX 返回的 SurfaceTexture，这样实现了 TextureView 控件显示 Camera 预览内容。</p>
 
 <p>另外，还需要考虑到设备的选择方向，当设备横屏变为竖屏了，TextureView 也要相应的做旋转。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#268bd2">preview</span>.<span style="color:#268bd2">setOnPreviewOutputUpdateListener</span> { <span style="color:#268bd2">previewOutput</span> -&gt;
+    <span style="color:#268bd2">cameraTextureView</span>.<span style="color:#268bd2">surfaceTexture</span> = <span style="color:#268bd2">previewOutput</span>.<span style="color:#268bd2">surfaceTexture</span>
 
-<pre><code class="language-kotlin">preview.setOnPreviewOutputUpdateListener { previewOutput -&gt;
-    cameraTextureView.surfaceTexture = previewOutput.surfaceTexture
+    <span style="color:#93a1a1;font-style:italic">// Compute the center of preview (TextureView)
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">val</span> <span style="color:#268bd2">centerX</span> = <span style="color:#268bd2">cameraTextureView</span>.<span style="color:#268bd2">width</span>.<span style="color:#268bd2">toFloat</span>() / <span style="color:#2aa198;font-weight:bold">2</span>
+    <span style="color:#859900">val</span> <span style="color:#268bd2">centerY</span> = <span style="color:#268bd2">cameraTextureView</span>.<span style="color:#268bd2">height</span>.<span style="color:#268bd2">toFloat</span>() / <span style="color:#2aa198;font-weight:bold">2</span>
 
-    // Compute the center of preview (TextureView)
-    val centerX = cameraTextureView.width.toFloat() / 2
-    val centerY = cameraTextureView.height.toFloat() / 2
-
-    // Correct preview output to account for display rotation
-    val rotationDegrees = when (cameraTextureView.display.rotation) {
-        Surface.ROTATION_0 -&gt; 0
-        Surface.ROTATION_90 -&gt; 90
-        Surface.ROTATION_180 -&gt; 180
-        Surface.ROTATION_270 -&gt; 270
-        else -&gt; return@setOnPreviewOutputUpdateListener
+    <span style="color:#93a1a1;font-style:italic">// Correct preview output to account for display rotation
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">val</span> <span style="color:#268bd2">rotationDegrees</span> = <span style="color:#859900">when</span> (<span style="color:#268bd2">cameraTextureView</span>.<span style="color:#268bd2">display</span>.<span style="color:#268bd2">rotation</span>) {
+        <span style="color:#268bd2">Surface</span>.<span style="color:#268bd2">ROTATION_0</span> -&gt; <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#268bd2">Surface</span>.<span style="color:#268bd2">ROTATION_90</span> -&gt; <span style="color:#2aa198;font-weight:bold">90</span>
+        <span style="color:#268bd2">Surface</span>.<span style="color:#268bd2">ROTATION_180</span> -&gt; <span style="color:#2aa198;font-weight:bold">180</span>
+        <span style="color:#268bd2">Surface</span>.<span style="color:#268bd2">ROTATION_270</span> -&gt; <span style="color:#2aa198;font-weight:bold">270</span>
+        <span style="color:#859900">else</span> -&gt; <span style="color:#859900">return</span><span style="color:#268bd2">@setOnPreviewOutputUpdateListener</span>
     }
 
-    val matrix = Matrix()
-    matrix.postRotate(-rotationDegrees.toFloat(), centerX, centerY)
+    <span style="color:#859900">val</span> <span style="color:#268bd2">matrix</span> = <span style="color:#268bd2">Matrix</span>()
+    <span style="color:#268bd2">matrix</span>.<span style="color:#268bd2">postRotate</span>(-<span style="color:#268bd2">rotationDegrees</span>.<span style="color:#268bd2">toFloat</span>(), <span style="color:#268bd2">centerX</span>, <span style="color:#268bd2">centerY</span>)
 
-    // Finally, apply transformations to TextureView
-    cameraTextureView.setTransform(matrix)
-}
-</code></pre>
-
+    <span style="color:#93a1a1;font-style:italic">// Finally, apply transformations to TextureView
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">cameraTextureView</span>.<span style="color:#268bd2">setTransform</span>(<span style="color:#268bd2">matrix</span>)
+}</code></pre></div>
 <p>TextureView 旋转的设置同样在 <code>OnPreviewOutputUpdateListener</code> 接口中去完成。</p>
 
 <h3 id="图像分析">图像分析</h3>
@@ -441,41 +438,38 @@ CameraX.bindToLifecycle(
 <p>在 <code>bindToLifecycle</code> 方法中，<code>imageAnalyzer</code> 参数并不是必需的。</p>
 
 <p><code>ImageAnalysis</code> 可以帮助我们做一些图像质量的分析，需要我们去实现 <code>ImageAnalysis.Analyzer</code> 接口的 <code>analyze</code> 方法。</p>
-
-<pre><code class="language-kotlin">fun buildImageAnalysisUseCase(): ImageAnalysis {
-    // 分析器配置 Config 的建造者
-    val analysisConfig = ImageAnalysisConfig.Builder()
-        // 宽高比例
-        .setTargetAspectRatio(aspectRatio)
-        // 旋转
-        .setTargetRotation(rotation)
-        // 分辨率
-        .setTargetResolution(resolution)
-        // 图像渲染模式
-        .setImageReaderMode(readerMode)
-        // 图像队列深度
-        .setImageQueueDepth(queueDepth)
-        // 设置回调的线程
-        .setCallbackHandler(handler)
-        .build()
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#859900">fun</span> <span style="color:#268bd2">buildImageAnalysisUseCase</span>(): <span style="color:#268bd2">ImageAnalysis</span> {
+    <span style="color:#93a1a1;font-style:italic">// 分析器配置 Config 的建造者
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">val</span> <span style="color:#268bd2">analysisConfig</span> = <span style="color:#268bd2">ImageAnalysisConfig</span>.<span style="color:#268bd2">Builder</span>()
+        <span style="color:#93a1a1;font-style:italic">// 宽高比例
+</span><span style="color:#93a1a1;font-style:italic"></span>        .<span style="color:#268bd2">setTargetAspectRatio</span>(<span style="color:#268bd2">aspectRatio</span>)
+        <span style="color:#93a1a1;font-style:italic">// 旋转
+</span><span style="color:#93a1a1;font-style:italic"></span>        .<span style="color:#268bd2">setTargetRotation</span>(<span style="color:#268bd2">rotation</span>)
+        <span style="color:#93a1a1;font-style:italic">// 分辨率
+</span><span style="color:#93a1a1;font-style:italic"></span>        .<span style="color:#268bd2">setTargetResolution</span>(<span style="color:#268bd2">resolution</span>)
+        <span style="color:#93a1a1;font-style:italic">// 图像渲染模式
+</span><span style="color:#93a1a1;font-style:italic"></span>        .<span style="color:#268bd2">setImageReaderMode</span>(<span style="color:#268bd2">readerMode</span>)
+        <span style="color:#93a1a1;font-style:italic">// 图像队列深度
+</span><span style="color:#93a1a1;font-style:italic"></span>        .<span style="color:#268bd2">setImageQueueDepth</span>(<span style="color:#268bd2">queueDepth</span>)
+        <span style="color:#93a1a1;font-style:italic">// 设置回调的线程
+</span><span style="color:#93a1a1;font-style:italic"></span>        .<span style="color:#268bd2">setCallbackHandler</span>(<span style="color:#268bd2">handler</span>)
+        .<span style="color:#268bd2">build</span>()
     
-    // 创建分析器 ImageAnalysis 对象
-    val analysis = ImageAnalysis(analysisConfig)
+    <span style="color:#93a1a1;font-style:italic">// 创建分析器 ImageAnalysis 对象
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">val</span> <span style="color:#268bd2">analysis</span> = <span style="color:#268bd2">ImageAnalysis</span>(<span style="color:#268bd2">analysisConfig</span>)
     
-    // setAnalyzer 传入实现了 analyze 接口的类
-    analysis.setAnalyzer { image, rotationDegrees -&gt;
-        // 可以得到的一些图像信息，参见 ImageProxy 类相关方法
-        val rect = image.cropRect
-        val format = image.format
-        val width = image.width
-        val height = image.height
-        val planes = image.planes
+    <span style="color:#93a1a1;font-style:italic">// setAnalyzer 传入实现了 analyze 接口的类
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">analysis</span>.<span style="color:#268bd2">setAnalyzer</span> { <span style="color:#268bd2">image</span>, <span style="color:#268bd2">rotationDegrees</span> -&gt;
+        <span style="color:#93a1a1;font-style:italic">// 可以得到的一些图像信息，参见 ImageProxy 类相关方法
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">val</span> <span style="color:#268bd2">rect</span> = <span style="color:#268bd2">image</span>.<span style="color:#268bd2">cropRect</span>
+        <span style="color:#859900">val</span> <span style="color:#268bd2">format</span> = <span style="color:#268bd2">image</span>.<span style="color:#268bd2">format</span>
+        <span style="color:#859900">val</span> <span style="color:#268bd2">width</span> = <span style="color:#268bd2">image</span>.<span style="color:#268bd2">width</span>
+        <span style="color:#859900">val</span> <span style="color:#268bd2">height</span> = <span style="color:#268bd2">image</span>.<span style="color:#268bd2">height</span>
+        <span style="color:#859900">val</span> <span style="color:#268bd2">planes</span> = <span style="color:#268bd2">image</span>.<span style="color:#268bd2">planes</span>
     }
 
-    return analysis
-}
-</code></pre>
-
+    <span style="color:#859900">return</span> <span style="color:#268bd2">analysis</span>
+}</code></pre></div>
 <p>在图像分析器的相关配置中，有个 <code>ImageReaderMode</code> 和 <code>ImageQueueDepth</code> 的设置。</p>
 
 <p>ImageQueueDepth 会指定相机管线中图像的个数，提高 ImageQueueDepth 的数量会对相机的性能和内存的使用造成影响</p>
@@ -500,41 +494,38 @@ CameraX.bindToLifecycle(
 <h3 id="拍摄">拍摄</h3>
 
 <p>拍摄同样有一个 Config 参数构建者类，而且设定的参数和预览相差不大，也是图像宽高比例、旋转方向、分辨率，除此之外还有闪光灯等配置项。</p>
-
-<pre><code class="language-kotlin">fun buildImageCaptureUseCase(): ImageCapture {
-    val captureConfig = ImageCaptureConfig.Builder()
-        .setTargetAspectRatio(aspectRatio)
-        .setTargetRotation(rotation)
-        .setTargetResolution(resolution)
-        .setFlashMode(flashMode)
-        // 拍摄模式
-        .setCaptureMode(captureMode)
-        .build()
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#859900">fun</span> <span style="color:#268bd2">buildImageCaptureUseCase</span>(): <span style="color:#268bd2">ImageCapture</span> {
+    <span style="color:#859900">val</span> <span style="color:#268bd2">captureConfig</span> = <span style="color:#268bd2">ImageCaptureConfig</span>.<span style="color:#268bd2">Builder</span>()
+        .<span style="color:#268bd2">setTargetAspectRatio</span>(<span style="color:#268bd2">aspectRatio</span>)
+        .<span style="color:#268bd2">setTargetRotation</span>(<span style="color:#268bd2">rotation</span>)
+        .<span style="color:#268bd2">setTargetResolution</span>(<span style="color:#268bd2">resolution</span>)
+        .<span style="color:#268bd2">setFlashMode</span>(<span style="color:#268bd2">flashMode</span>)
+        <span style="color:#93a1a1;font-style:italic">// 拍摄模式
+</span><span style="color:#93a1a1;font-style:italic"></span>        .<span style="color:#268bd2">setCaptureMode</span>(<span style="color:#268bd2">captureMode</span>)
+        .<span style="color:#268bd2">build</span>()
     
-    // 创建 ImageCapture 对象
-    val capture = ImageCapture(captureConfig)
-    cameraCaptureImageButton.setOnClickListener {
-        // Create temporary file
-        val fileName = System.currentTimeMillis().toString()
-        val fileFormat = &quot;.jpg&quot;
-        val imageFile = createTempFile(fileName, fileFormat)
+    <span style="color:#93a1a1;font-style:italic">// 创建 ImageCapture 对象
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">val</span> <span style="color:#268bd2">capture</span> = <span style="color:#268bd2">ImageCapture</span>(<span style="color:#268bd2">captureConfig</span>)
+    <span style="color:#268bd2">cameraCaptureImageButton</span>.<span style="color:#268bd2">setOnClickListener</span> {
+        <span style="color:#93a1a1;font-style:italic">// Create temporary file
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">val</span> <span style="color:#268bd2">fileName</span> = <span style="color:#268bd2">System</span>.<span style="color:#268bd2">currentTimeMillis</span>().<span style="color:#268bd2">toString</span>()
+        <span style="color:#859900">val</span> <span style="color:#268bd2">fileFormat</span> = <span style="color:#2aa198">&#34;.jpg&#34;</span>
+        <span style="color:#859900">val</span> <span style="color:#268bd2">imageFile</span> = <span style="color:#268bd2">createTempFile</span>(<span style="color:#268bd2">fileName</span>, <span style="color:#268bd2">fileFormat</span>)
         
-        // Store captured image in the temporary file
-        capture.takePicture(imageFile, object : ImageCapture.OnImageSavedListener {
-            override fun onImageSaved(file: File) {
-                // You may display the image for example using its path file.absolutePath
-            }
+        <span style="color:#93a1a1;font-style:italic">// Store captured image in the temporary file
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">capture</span>.<span style="color:#268bd2">takePicture</span>(<span style="color:#268bd2">imageFile</span>, <span style="color:#859900">object</span> : <span style="color:#cb4b16">ImageCapture</span>.<span style="color:#268bd2">OnImageSavedListener</span> {
+            <span style="color:#859900">override</span> <span style="color:#859900">fun</span> <span style="color:#268bd2">onImageSaved</span>(<span style="color:#268bd2">file</span>: <span style="color:#268bd2">File</span>) {
+                <span style="color:#93a1a1;font-style:italic">// You may display the image for example using its path file.absolutePath
+</span><span style="color:#93a1a1;font-style:italic"></span>            }
 
-            override fun onError(useCaseError: ImageCapture.UseCaseError, message: String, cause: Throwable?) {
-                // Display error message
-            }
+            <span style="color:#859900">override</span> <span style="color:#859900">fun</span> <span style="color:#268bd2">onError</span>(<span style="color:#268bd2">useCaseError</span>: <span style="color:#268bd2">ImageCapture</span>.<span style="color:#268bd2">UseCaseError</span>, <span style="color:#268bd2">message</span>: <span style="color:#268bd2">String</span>, <span style="color:#268bd2">cause</span>: <span style="color:#268bd2">Throwable</span>?) {
+                <span style="color:#93a1a1;font-style:italic">// Display error message
+</span><span style="color:#93a1a1;font-style:italic"></span>            }
         })
     }
 
-    return capture
-}
-</code></pre>
-
+    <span style="color:#859900">return</span> <span style="color:#268bd2">capture</span>
+}</code></pre></div>
 <p>在图像拍摄的相关配置中，也有个 <code>CaptureMode</code> 的设置。</p>
 
 <p>它有两种选项：</p>
@@ -588,121 +579,74 @@ CameraX.bindToLifecycle(
 <li><a href="https://www.youtube.com/watch?v=kuv8uK-5CLY">https://www.youtube.com/watch?v=kuv8uK-5CLY</a></li>
 <li><a href="https://proandroiddev.com/android-camerax-preview-analyze-capture-1b3f403a9395">https://proandroiddev.com/android-camerax-preview-analyze-capture-1b3f403a9395</a></li>
 </ol>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/google-jetpack-camerax/">Google Jetpack 新组件 CameraX 介绍与实践</a>
-
-                
-
-                
-
+          
 
         
+  
         
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/android/rust-compile-so-library/" data-toggle="tooltip" data-placement="top" title="rust 开发编译 Android 动态库实践">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/opengl/libpng-compile-and-practice/" data-toggle="tooltip" data-placement="top" title="图像库 libpng 编译与实践">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
         
-      </article>
 
-      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
 
-      
+        
+          
 
-      
-      <ul class="pager blog-pager">
         
-          <li class="previous">
-            <a href="https://glumes.com/post/android/rust-compile-so-library/" data-toggle="tooltip" data-placement="top" title="rust 开发编译 Android 动态库实践">&larr; Previous Post</a>
-          </li>
-        
-        
-          <li class="next">
-            <a href="https://glumes.com/post/opengl/libpng-compile-and-practice/" data-toggle="tooltip" data-placement="top" title="图像库 libpng 编译与实践">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
-
-      
-        
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -711,8 +655,6 @@ CameraX.bindToLifecycle(
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -743,21 +685,8 @@ CameraX.bindToLifecycle(
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -765,22 +694,28 @@ CameraX.bindToLifecycle(
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -789,49 +724,66 @@ CameraX.bindToLifecycle(
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

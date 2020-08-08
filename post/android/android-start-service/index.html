@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Android 6.0 Service 启动过程源码分析（一）</title>
+  <title>Android 6.0 Service 启动过程源码分析（一）-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="Android 6.0 Service 启动过程源码分析（一）" />
   <meta name="twitter:title" content="Android 6.0 Service 启动过程源码分析（一）" />
 
@@ -19,33 +19,34 @@ Service 组件可以被 Activity 组件启动，也可以被其他的 Service �
   <meta name="twitter:description" content="Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。
 
 Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在 …">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/android/android-start-service/" />
+  <meta property="og:url" content="https://www.glumes.com/post/android/android-start-service/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/android/android-start-service/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/android/android-start-service/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -60,23 +61,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -84,7 +73,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -95,15 +86,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -111,25 +102,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -147,9 +138,6 @@ if (!doNotTrack) {
 </nav>
 
 
-
-
-
     
   
   
@@ -162,47 +150,61 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">Android 6.0 Service 启动过程源码分析（一）</h1>
+              <h1>Android 6.0 Service 启动过程源码分析（一）</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on December 22, 2017
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
             
-                <a href="https://glumes.com/tags/framework/">Framework</a> &nbsp;
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/android/">Android</a> &nbsp;
+              
+                  <a href="https://www.glumes.com/tags/framework/">Framework</a> &nbsp;
+              
+            </h5>
             
-          </h5>
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -228,8 +230,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <p>Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。</p>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。</p>
 
 <p>Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。</p>
 
@@ -240,272 +255,252 @@ if (!doNotTrack) {
 <p>所以直接从<code>ContextImpl</code>方法开始分析即可。</p>
 
 <h3 id="contextimpl-类的-startservice-方法">ContextImpl 类的 startService() 方法</h3>
-
-<pre><code class="language-java">@Override
-    public ComponentName startService(Intent service) {
-        warnIfCallingFromSystemProcess();
-        return startServiceCommon(service, mUser);
-    }
-
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#268bd2">@Override</span>
+    <span style="color:#859900">public</span> <span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">startService</span>(<span style="color:#268bd2">Intent</span> <span style="color:#268bd2">service</span>) {
+        <span style="color:#268bd2">warnIfCallingFromSystemProcess</span>();
+        <span style="color:#859900">return</span> <span style="color:#268bd2">startServiceCommon</span>(<span style="color:#268bd2">service</span>, <span style="color:#268bd2">mUser</span>);
+    }</code></pre></div>
 <p>显然最后还是调用的<code>startServiceCommon</code>方法了。</p>
 
 <h3 id="contextimpl-类的-startservicecommon-方法">ContextImpl 类的 startServiceCommon() 方法</h3>
-
-<pre><code class="language-java">private ComponentName startServiceCommon(Intent service, UserHandle user) {
-        try {
-            validateServiceIntent(service);
-            service.prepareToLeaveProcess();
-            // 向 ActivityManagerService 发送请求启动 Service 组件
-            ComponentName cn = ActivityManagerNative.getDefault().startService(
-                mMainThread.getApplicationThread(), service, service.resolveTypeIfNeeded(
-                            getContentResolver()), getOpPackageName(), user.getIdentifier());
-            if (cn != null) {
-                if (cn.getPackageName().equals(&quot;!&quot;)) {
-                    throw new SecurityException( &quot;Not allowed to start service &quot; + service
-                            + &quot; without permission &quot; + cn.getClassName());
-                } else if (cn.getPackageName().equals(&quot;!!&quot;)) {
-                    throw new SecurityException( &quot;Unable to start service &quot; + service
-                            + &quot;: &quot; + cn.getClassName());
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">private</span> <span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">startServiceCommon</span>(<span style="color:#268bd2">Intent</span> <span style="color:#268bd2">service</span>, <span style="color:#268bd2">UserHandle</span> <span style="color:#268bd2">user</span>) {
+        <span style="color:#859900">try</span> {
+            <span style="color:#268bd2">validateServiceIntent</span>(<span style="color:#268bd2">service</span>);
+            <span style="color:#268bd2">service</span>.<span style="color:#268bd2">prepareToLeaveProcess</span>();
+            <span style="color:#93a1a1;font-style:italic">// 向 ActivityManagerService 发送请求启动 Service 组件
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">cn</span> = <span style="color:#268bd2">ActivityManagerNative</span>.<span style="color:#268bd2">getDefault</span>().<span style="color:#268bd2">startService</span>(
+                <span style="color:#268bd2">mMainThread</span>.<span style="color:#268bd2">getApplicationThread</span>(), <span style="color:#268bd2">service</span>, <span style="color:#268bd2">service</span>.<span style="color:#268bd2">resolveTypeIfNeeded</span>(
+                            <span style="color:#268bd2">getContentResolver</span>()), <span style="color:#268bd2">getOpPackageName</span>(), <span style="color:#268bd2">user</span>.<span style="color:#268bd2">getIdentifier</span>());
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">cn</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">cn</span>.<span style="color:#268bd2">getPackageName</span>().<span style="color:#268bd2">equals</span>(<span style="color:#2aa198">&#34;!&#34;</span>)) {
+                    <span style="color:#859900">throw</span> <span style="color:#859900">new</span> <span style="color:#268bd2">SecurityException</span>( <span style="color:#2aa198">&#34;Not allowed to start service &#34;</span> + <span style="color:#268bd2">service</span>
+                            + <span style="color:#2aa198">&#34; without permission &#34;</span> + <span style="color:#268bd2">cn</span>.<span style="color:#268bd2">getClassName</span>());
+                } <span style="color:#859900">else</span> <span style="color:#859900">if</span> (<span style="color:#268bd2">cn</span>.<span style="color:#268bd2">getPackageName</span>().<span style="color:#268bd2">equals</span>(<span style="color:#2aa198">&#34;!!&#34;</span>)) {
+                    <span style="color:#859900">throw</span> <span style="color:#859900">new</span> <span style="color:#268bd2">SecurityException</span>( <span style="color:#2aa198">&#34;Unable to start service &#34;</span> + <span style="color:#268bd2">service</span>
+                            + <span style="color:#2aa198">&#34;: &#34;</span> + <span style="color:#268bd2">cn</span>.<span style="color:#268bd2">getClassName</span>());
                 }
             }
-            return cn;
-        } catch (RemoteException e) {
-            throw new RuntimeException(&quot;Failure from system&quot;, e);
+            <span style="color:#859900">return</span> <span style="color:#268bd2">cn</span>;
+        } <span style="color:#859900">catch</span> (<span style="color:#268bd2">RemoteException</span> <span style="color:#268bd2">e</span>) {
+            <span style="color:#859900">throw</span> <span style="color:#859900">new</span> <span style="color:#268bd2">RuntimeException</span>(<span style="color:#2aa198">&#34;Failure from system&#34;</span>, <span style="color:#268bd2">e</span>);
         }
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p>在<code>startServiceCommon</code>方法内又是 IPC 进程间通信了，通过<code>ActivityManagerProxy</code>向 Binder 驱动发送类型为<code>START_SERVICE_TRANSACTION</code>的消息，在<code>ActivityManagerService</code>响应对应消息。</p>
 
 <h3 id="activitymanagerservice-类的-startservice-方法">ActivityManagerService 类的 startService() 方法</h3>
-
-<pre><code class="language-java">public ComponentName startService(IApplicationThread caller, Intent service,
-            String resolvedType, String callingPackage, int userId)
-            throws TransactionTooLargeException {
-        enforceNotIsolatedCaller(&quot;startService&quot;);
-        // Refuse possible leaked file descriptors
-        if (service != null &amp;&amp; service.hasFileDescriptors() == true) {
-            throw new IllegalArgumentException(&quot;File descriptors passed in Intent&quot;);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">startService</span>(<span style="color:#268bd2">IApplicationThread</span> <span style="color:#268bd2">caller</span>, <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">service</span>,
+            <span style="color:#268bd2">String</span> <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">callingPackage</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">userId</span>)
+            <span style="color:#859900">throws</span> <span style="color:#268bd2">TransactionTooLargeException</span> {
+        <span style="color:#268bd2">enforceNotIsolatedCaller</span>(<span style="color:#2aa198">&#34;startService&#34;</span>);
+        <span style="color:#93a1a1;font-style:italic">// Refuse possible leaked file descriptors
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">service</span> != <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; <span style="color:#268bd2">service</span>.<span style="color:#268bd2">hasFileDescriptors</span>() == <span style="color:#859900;font-weight:bold">true</span>) {
+            <span style="color:#859900">throw</span> <span style="color:#859900">new</span> <span style="color:#268bd2">IllegalArgumentException</span>(<span style="color:#2aa198">&#34;File descriptors passed in Intent&#34;</span>);
         }
 
-        if (callingPackage == null) {
-            throw new IllegalArgumentException(&quot;callingPackage cannot be null&quot;);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">callingPackage</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#859900">throw</span> <span style="color:#859900">new</span> <span style="color:#268bd2">IllegalArgumentException</span>(<span style="color:#2aa198">&#34;callingPackage cannot be null&#34;</span>);
         }
-        synchronized(this) {
-            final int callingPid = Binder.getCallingPid();
-            final int callingUid = Binder.getCallingUid();
-            final long origId = Binder.clearCallingIdentity();
-            ComponentName res = mServices.startServiceLocked(caller, service,
-                    resolvedType, callingPid, callingUid, callingPackage, userId);
-            Binder.restoreCallingIdentity(origId);
-            return res;
+        <span style="color:#859900">synchronized</span>(<span style="color:#859900">this</span>) {
+            <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">callingPid</span> = <span style="color:#268bd2">Binder</span>.<span style="color:#268bd2">getCallingPid</span>();
+            <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">callingUid</span> = <span style="color:#268bd2">Binder</span>.<span style="color:#268bd2">getCallingUid</span>();
+            <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">long</span> <span style="color:#268bd2">origId</span> = <span style="color:#268bd2">Binder</span>.<span style="color:#268bd2">clearCallingIdentity</span>();
+            <span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">res</span> = <span style="color:#268bd2">mServices</span>.<span style="color:#268bd2">startServiceLocked</span>(<span style="color:#268bd2">caller</span>, <span style="color:#268bd2">service</span>,
+                    <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">callingPid</span>, <span style="color:#268bd2">callingUid</span>, <span style="color:#268bd2">callingPackage</span>, <span style="color:#268bd2">userId</span>);
+            <span style="color:#268bd2">Binder</span>.<span style="color:#268bd2">restoreCallingIdentity</span>(<span style="color:#268bd2">origId</span>);
+            <span style="color:#859900">return</span> <span style="color:#268bd2">res</span>;
         }
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p>在 ActivityManagerService 内又是调用 ActivityServices 类的 <code>startServiceLocked()</code> 方法，将调用者的<code>pid</code>和<code>uid</code>传入。</p>
 
 <h3 id="activeservices-类的-startservicelocked-方法">ActiveServices 类的 startServiceLocked() 方法</h3>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">startServiceLocked</span>(<span style="color:#268bd2">IApplicationThread</span> <span style="color:#268bd2">caller</span>, <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">service</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">resolvedType</span>,
+            <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">callingPid</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">callingUid</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">callingPackage</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">userId</span>)
+            <span style="color:#859900">throws</span> <span style="color:#268bd2">TransactionTooLargeException</span> {
+        <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">callerFg</span>;
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">caller</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#859900">final</span> <span style="color:#268bd2">ProcessRecord</span> <span style="color:#268bd2">callerApp</span> = <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">getRecordForAppLocked</span>(<span style="color:#268bd2">caller</span>);
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">callerApp</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+                <span style="color:#859900">throw</span> <span style="color:#859900">new</span> <span style="color:#268bd2">SecurityException</span>(<span style="color:#2aa198">&#34;&#34;</span>);<span style="color:#93a1a1;font-style:italic">// 省略字符串内容
+</span><span style="color:#93a1a1;font-style:italic"></span>            }
+            <span style="color:#268bd2">callerFg</span> = <span style="color:#268bd2">callerApp</span>.<span style="color:#268bd2">setSchedGroup</span> != <span style="color:#268bd2">Process</span>.<span style="color:#268bd2">THREAD_GROUP_BG_NONINTERACTIVE</span>;
+        } <span style="color:#859900">else</span> {
+            <span style="color:#268bd2">callerFg</span> = <span style="color:#859900;font-weight:bold">true</span>;
+        }
+        <span style="color:#93a1a1;font-style:italic">// 查找是否存在于 service 对应的 ServiceRecord 对象，没有则封装一个
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">ServiceLookupResult</span> <span style="color:#268bd2">res</span> =
+            <span style="color:#268bd2">retrieveServiceLocked</span>(<span style="color:#268bd2">service</span>, <span style="color:#268bd2">resolvedType</span>, <span style="color:#268bd2">callingPackage</span>,
+                    <span style="color:#268bd2">callingPid</span>, <span style="color:#268bd2">callingUid</span>, <span style="color:#268bd2">userId</span>, <span style="color:#859900;font-weight:bold">true</span>, <span style="color:#268bd2">callerFg</span>);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">res</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
+        }
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">res</span>.<span style="color:#268bd2">record</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#859900">return</span> <span style="color:#859900">new</span> <span style="color:#268bd2">ComponentName</span>(<span style="color:#2aa198">&#34;!&#34;</span>, <span style="color:#268bd2">res</span>.<span style="color:#268bd2">permission</span> != <span style="color:#859900;font-weight:bold">null</span>
+                    ? <span style="color:#268bd2">res</span>.<span style="color:#268bd2">permission</span> : <span style="color:#2aa198">&#34;private to package&#34;</span>);
+        }
+        <span style="color:#268bd2">ServiceRecord</span> <span style="color:#268bd2">r</span> = <span style="color:#268bd2">res</span>.<span style="color:#268bd2">record</span>;
+        <span style="color:#859900">if</span> (!<span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">getUserManagerLocked</span>().<span style="color:#268bd2">exists</span>(<span style="color:#268bd2">r</span>.<span style="color:#268bd2">userId</span>)) { <span style="color:#93a1a1;font-style:italic">// 用户是否存在检查
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">Slog</span>.<span style="color:#268bd2">d</span>(<span style="color:#268bd2">TAG</span>, <span style="color:#2aa198">&#34;Trying to start service with non-existent user! &#34;</span> + <span style="color:#268bd2">r</span>.<span style="color:#268bd2">userId</span>);
+            <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
+        }
 
-<pre><code class="language-java">    ComponentName startServiceLocked(IApplicationThread caller, Intent service, String resolvedType,
-            int callingPid, int callingUid, String callingPackage, int userId)
-            throws TransactionTooLargeException {
-        final boolean callerFg;
-        if (caller != null) {
-            final ProcessRecord callerApp = mAm.getRecordForAppLocked(caller);
-            if (callerApp == null) {
-                throw new SecurityException(&quot;&quot;);// 省略字符串内容
-            }
-            callerFg = callerApp.setSchedGroup != Process.THREAD_GROUP_BG_NONINTERACTIVE;
-        } else {
-            callerFg = true;
+        <span style="color:#268bd2">NeededUriGrants</span> <span style="color:#268bd2">neededGrants</span> = <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">checkGrantUriPermissionFromIntentLocked</span>(
+                <span style="color:#268bd2">callingUid</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">packageName</span>, <span style="color:#268bd2">service</span>, <span style="color:#268bd2">service</span>.<span style="color:#268bd2">getFlags</span>(), <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">userId</span>);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">unscheduleServiceRestartLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">callingUid</span>, <span style="color:#859900;font-weight:bold">false</span>)) {
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">DEBUG_SERVICE</span>) <span style="color:#268bd2">Slog</span>.<span style="color:#268bd2">v</span>(<span style="color:#268bd2">TAG_SERVICE</span>, <span style="color:#2aa198">&#34;START SERVICE WHILE RESTART PENDING: &#34;</span> + <span style="color:#268bd2">r</span>);
         }
-        // 查找是否存在于 service 对应的 ServiceRecord 对象，没有则封装一个
-        ServiceLookupResult res =
-            retrieveServiceLocked(service, resolvedType, callingPackage,
-                    callingPid, callingUid, userId, true, callerFg);
-        if (res == null) {
-            return null;
-        }
-        if (res.record == null) {
-            return new ComponentName(&quot;!&quot;, res.permission != null
-                    ? res.permission : &quot;private to package&quot;);
-        }
-        ServiceRecord r = res.record;
-        if (!mAm.getUserManagerLocked().exists(r.userId)) { // 用户是否存在检查
-            Slog.d(TAG, &quot;Trying to start service with non-existent user! &quot; + r.userId);
-            return null;
-        }
+        <span style="color:#268bd2">r</span>.<span style="color:#268bd2">lastActivity</span> = <span style="color:#268bd2">SystemClock</span>.<span style="color:#268bd2">uptimeMillis</span>();
+        <span style="color:#268bd2">r</span>.<span style="color:#268bd2">startRequested</span> = <span style="color:#859900;font-weight:bold">true</span>;
+        <span style="color:#268bd2">r</span>.<span style="color:#268bd2">delayedStop</span> = <span style="color:#859900;font-weight:bold">false</span>;
+        <span style="color:#268bd2">r</span>.<span style="color:#268bd2">pendingStarts</span>.<span style="color:#268bd2">add</span>(<span style="color:#859900">new</span> <span style="color:#268bd2">ServiceRecord</span>.<span style="color:#268bd2">StartItem</span>(<span style="color:#268bd2">r</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">makeNextStartId</span>(),
+                <span style="color:#268bd2">service</span>, <span style="color:#268bd2">neededGrants</span>));
 
-        NeededUriGrants neededGrants = mAm.checkGrantUriPermissionFromIntentLocked(
-                callingUid, r.packageName, service, service.getFlags(), null, r.userId);
-        if (unscheduleServiceRestartLocked(r, callingUid, false)) {
-            if (DEBUG_SERVICE) Slog.v(TAG_SERVICE, &quot;START SERVICE WHILE RESTART PENDING: &quot; + r);
-        }
-        r.lastActivity = SystemClock.uptimeMillis();
-        r.startRequested = true;
-        r.delayedStop = false;
-        r.pendingStarts.add(new ServiceRecord.StartItem(r, false, r.makeNextStartId(),
-                service, neededGrants));
-
-        final ServiceMap smap = getServiceMap(r.userId);
-        boolean addToStarting = false;
-        if (!callerFg &amp;&amp; r.app == null &amp;&amp; mAm.mStartedUsers.get(r.userId) != null) {
-            ProcessRecord proc = mAm.getProcessRecordLocked(r.processName, r.appInfo.uid, false);
-            if (proc == null || proc.curProcState &gt; ActivityManager.PROCESS_STATE_RECEIVER) {
-                if (r.delayed) {
-                    // This service is already scheduled for a delayed start; just leave
-                    // it still waiting.
-                    return r.name;
+        <span style="color:#859900">final</span> <span style="color:#268bd2">ServiceMap</span> <span style="color:#268bd2">smap</span> = <span style="color:#268bd2">getServiceMap</span>(<span style="color:#268bd2">r</span>.<span style="color:#268bd2">userId</span>);
+        <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">addToStarting</span> = <span style="color:#859900;font-weight:bold">false</span>;
+        <span style="color:#859900">if</span> (!<span style="color:#268bd2">callerFg</span> &amp;&amp; <span style="color:#268bd2">r</span>.<span style="color:#268bd2">app</span> == <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">mStartedUsers</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">r</span>.<span style="color:#268bd2">userId</span>) != <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#268bd2">ProcessRecord</span> <span style="color:#268bd2">proc</span> = <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">getProcessRecordLocked</span>(<span style="color:#268bd2">r</span>.<span style="color:#268bd2">processName</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">appInfo</span>.<span style="color:#268bd2">uid</span>, <span style="color:#859900;font-weight:bold">false</span>);
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">proc</span> == <span style="color:#859900;font-weight:bold">null</span> || <span style="color:#268bd2">proc</span>.<span style="color:#268bd2">curProcState</span> &gt; <span style="color:#268bd2">ActivityManager</span>.<span style="color:#268bd2">PROCESS_STATE_RECEIVER</span>) {
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">delayed</span>) {
+                    <span style="color:#93a1a1;font-style:italic">// This service is already scheduled for a delayed start; just leave
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#93a1a1;font-style:italic">// it still waiting.
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#859900">return</span> <span style="color:#268bd2">r</span>.<span style="color:#268bd2">name</span>;
                 }
-                if (smap.mStartingBackground.size() &gt;= mMaxStartingBackground) {
-                    // Something else is starting, delay!
-                    smap.mDelayedStartList.add(r);
-                    r.delayed = true;
-                    return r.name;
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">smap</span>.<span style="color:#268bd2">mStartingBackground</span>.<span style="color:#268bd2">size</span>() &gt;= <span style="color:#268bd2">mMaxStartingBackground</span>) {
+                    <span style="color:#93a1a1;font-style:italic">// Something else is starting, delay!
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#268bd2">smap</span>.<span style="color:#268bd2">mDelayedStartList</span>.<span style="color:#268bd2">add</span>(<span style="color:#268bd2">r</span>);
+                    <span style="color:#268bd2">r</span>.<span style="color:#268bd2">delayed</span> = <span style="color:#859900;font-weight:bold">true</span>;
+                    <span style="color:#859900">return</span> <span style="color:#268bd2">r</span>.<span style="color:#268bd2">name</span>;
                 }
-                addToStarting = true;
-            } else if (proc.curProcState &gt;= ActivityManager.PROCESS_STATE_SERVICE) {
-                addToStarting = true;
+                <span style="color:#268bd2">addToStarting</span> = <span style="color:#859900;font-weight:bold">true</span>;
+            } <span style="color:#859900">else</span> <span style="color:#859900">if</span> (<span style="color:#268bd2">proc</span>.<span style="color:#268bd2">curProcState</span> &gt;= <span style="color:#268bd2">ActivityManager</span>.<span style="color:#268bd2">PROCESS_STATE_SERVICE</span>) {
+                <span style="color:#268bd2">addToStarting</span> = <span style="color:#859900;font-weight:bold">true</span>;
             } 
         } 
 
-        return startServiceInnerLocked(smap, service, r, callerFg, addToStarting);
-    }
-</code></pre>
-
+        <span style="color:#859900">return</span> <span style="color:#268bd2">startServiceInnerLocked</span>(<span style="color:#268bd2">smap</span>, <span style="color:#268bd2">service</span>, <span style="color:#268bd2">r</span>, <span style="color:#268bd2">callerFg</span>, <span style="color:#268bd2">addToStarting</span>);
+    }</code></pre></div>
 <p>在 <code>startServiceLocked</code> 方法内的调用 <code>retrieveServiceLocked</code>方法在 ActivityManagerService 检查是否存在与参数 <code>service</code>对应的一个<code>ServiceRecord</code>对象。如果不存在，那么 ActivityManagerService 就会到 PackageManagerService 中去获取与参数<code>service</code>对应的一个 Service 组件的信息，然后将这些信息封装成一个<code>ServiceRecord</code>对象，最后将这个<code>ServiceRecord</code>对象封装成一个<code>ServiceLookupResult</code>对象返回给调用者。</p>
 
 <p>接着就是对用户是否存在进行检查，最后调用<code>startServiceInnerLocked</code>方法。</p>
 
 <h3 id="activeservices-类的-startserviceinnerlocked-方法">ActiveServices 类的 startServiceInnerLocked() 方法</h3>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#268bd2">ComponentName</span> <span style="color:#268bd2">startServiceInnerLocked</span>(<span style="color:#268bd2">ServiceMap</span> <span style="color:#268bd2">smap</span>, <span style="color:#268bd2">Intent</span> <span style="color:#268bd2">service</span>, <span style="color:#268bd2">ServiceRecord</span> <span style="color:#268bd2">r</span>,
+            <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">callerFg</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">addToStarting</span>) <span style="color:#859900">throws</span> <span style="color:#268bd2">TransactionTooLargeException</span> {
+        <span style="color:#268bd2">ProcessStats</span>.<span style="color:#268bd2">ServiceState</span> <span style="color:#268bd2">stracker</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">getTracker</span>();
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">stracker</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#268bd2">stracker</span>.<span style="color:#268bd2">setStarted</span>(<span style="color:#859900;font-weight:bold">true</span>, <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">mProcessStats</span>.<span style="color:#268bd2">getMemFactorLocked</span>(), <span style="color:#268bd2">r</span>.<span style="color:#268bd2">lastActivity</span>);
+        }
+        <span style="color:#268bd2">r</span>.<span style="color:#268bd2">callStart</span> = <span style="color:#859900;font-weight:bold">false</span>;
+        <span style="color:#859900">synchronized</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">stats</span>.<span style="color:#268bd2">getBatteryStats</span>()) {
+            <span style="color:#268bd2">r</span>.<span style="color:#268bd2">stats</span>.<span style="color:#268bd2">startRunningLocked</span>();
+        }
+        <span style="color:#268bd2">String</span> <span style="color:#268bd2">error</span> = <span style="color:#268bd2">bringUpServiceLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">service</span>.<span style="color:#268bd2">getFlags</span>(), <span style="color:#268bd2">callerFg</span>, <span style="color:#859900;font-weight:bold">false</span>);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">error</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#859900">return</span> <span style="color:#859900">new</span> <span style="color:#268bd2">ComponentName</span>(<span style="color:#2aa198">&#34;!!&#34;</span>, <span style="color:#268bd2">error</span>);
+        }
 
-<pre><code class="language-java"> ComponentName startServiceInnerLocked(ServiceMap smap, Intent service, ServiceRecord r,
-            boolean callerFg, boolean addToStarting) throws TransactionTooLargeException {
-        ProcessStats.ServiceState stracker = r.getTracker();
-        if (stracker != null) {
-            stracker.setStarted(true, mAm.mProcessStats.getMemFactorLocked(), r.lastActivity);
-        }
-        r.callStart = false;
-        synchronized (r.stats.getBatteryStats()) {
-            r.stats.startRunningLocked();
-        }
-        String error = bringUpServiceLocked(r, service.getFlags(), callerFg, false);
-        if (error != null) {
-            return new ComponentName(&quot;!!&quot;, error);
-        }
-
-        if (r.startRequested &amp;&amp; addToStarting) {
-            boolean first = smap.mStartingBackground.size() == 0;
-            smap.mStartingBackground.add(r);
-            r.startingBgTimeout = SystemClock.uptimeMillis() + BG_START_TIMEOUT;
-            if (first) {
-                smap.rescheduleDelayedStarts();
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">startRequested</span> &amp;&amp; <span style="color:#268bd2">addToStarting</span>) {
+            <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">first</span> = <span style="color:#268bd2">smap</span>.<span style="color:#268bd2">mStartingBackground</span>.<span style="color:#268bd2">size</span>() == <span style="color:#268bd2">0</span>;
+            <span style="color:#268bd2">smap</span>.<span style="color:#268bd2">mStartingBackground</span>.<span style="color:#268bd2">add</span>(<span style="color:#268bd2">r</span>);
+            <span style="color:#268bd2">r</span>.<span style="color:#268bd2">startingBgTimeout</span> = <span style="color:#268bd2">SystemClock</span>.<span style="color:#268bd2">uptimeMillis</span>() + <span style="color:#268bd2">BG_START_TIMEOUT</span>;
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">first</span>) {
+                <span style="color:#268bd2">smap</span>.<span style="color:#268bd2">rescheduleDelayedStarts</span>();
             }
-        } else if (callerFg) {
-            smap.ensureNotStartingBackground(r);
+        } <span style="color:#859900">else</span> <span style="color:#859900">if</span> (<span style="color:#268bd2">callerFg</span>) {
+            <span style="color:#268bd2">smap</span>.<span style="color:#268bd2">ensureNotStartingBackground</span>(<span style="color:#268bd2">r</span>);
         }
-        return r.name;
-    }
-</code></pre>
-
+        <span style="color:#859900">return</span> <span style="color:#268bd2">r</span>.<span style="color:#268bd2">name</span>;
+    }</code></pre></div>
 <p>该方法内调用<code>bringUpServiceLocked</code>方法。</p>
 
 <h3 id="activeservices-类的-bringupservicelocked-方法">ActiveServices 类的 bringUpServiceLocked() 方法</h3>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">private</span> <span style="color:#859900">final</span> <span style="color:#268bd2">String</span> <span style="color:#268bd2">bringUpServiceLocked</span>(<span style="color:#268bd2">ServiceRecord</span> <span style="color:#268bd2">r</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">intentFlags</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">execInFg</span>,
+            <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">whileRestarting</span>) <span style="color:#859900">throws</span> <span style="color:#268bd2">TransactionTooLargeException</span> {
 
-<pre><code class="language-java">private final String bringUpServiceLocked(ServiceRecord r, int intentFlags, boolean execInFg,
-            boolean whileRestarting) throws TransactionTooLargeException {
-
-        if (r.app != null &amp;&amp; r.app.thread != null) {// 满足条件，执行 service 的 onStartCommand 方法
-            sendServiceArgsLocked(r, execInFg, false);
-            return null;
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">app</span> != <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; <span style="color:#268bd2">r</span>.<span style="color:#268bd2">app</span>.<span style="color:#268bd2">thread</span> != <span style="color:#859900;font-weight:bold">null</span>) {<span style="color:#93a1a1;font-style:italic">// 满足条件，执行 service 的 onStartCommand 方法
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">sendServiceArgsLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">execInFg</span>, <span style="color:#859900;font-weight:bold">false</span>);
+            <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
         }
 
-        if (!whileRestarting &amp;&amp; r.restartDelay &gt; 0) {
-            // If waiting for a restart, then do nothing.
-            return null;
+        <span style="color:#859900">if</span> (!<span style="color:#268bd2">whileRestarting</span> &amp;&amp; <span style="color:#268bd2">r</span>.<span style="color:#268bd2">restartDelay</span> &gt; <span style="color:#268bd2">0</span>) {
+            <span style="color:#93a1a1;font-style:italic">// If waiting for a restart, then do nothing.
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
         }
-        // We are now bringing the service up, so no longer in the
-        // restarting state.
-        if (mRestartingServices.remove(r)) {
-            r.resetRestartCounter();
-            clearRestartingIfNeededLocked(r);
-        }
-
-        // Make sure this service is no longer considered delayed, we are starting it now.
-        if (r.delayed) {
-            getServiceMap(r.userId).mDelayedStartList.remove(r);
-            r.delayed = false;
+        <span style="color:#93a1a1;font-style:italic">// We are now bringing the service up, so no longer in the
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// restarting state.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">mRestartingServices</span>.<span style="color:#268bd2">remove</span>(<span style="color:#268bd2">r</span>)) {
+            <span style="color:#268bd2">r</span>.<span style="color:#268bd2">resetRestartCounter</span>();
+            <span style="color:#268bd2">clearRestartingIfNeededLocked</span>(<span style="color:#268bd2">r</span>);
         }
 
-        // Make sure that the user who owns this service is started.  If not,
-        // we don't want to allow it to run.
-        if (mAm.mStartedUsers.get(r.userId) == null) {
-            bringDownServiceLocked(r);
-            return msg;
+        <span style="color:#93a1a1;font-style:italic">// Make sure this service is no longer considered delayed, we are starting it now.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">delayed</span>) {
+            <span style="color:#268bd2">getServiceMap</span>(<span style="color:#268bd2">r</span>.<span style="color:#268bd2">userId</span>).<span style="color:#268bd2">mDelayedStartList</span>.<span style="color:#268bd2">remove</span>(<span style="color:#268bd2">r</span>);
+            <span style="color:#268bd2">r</span>.<span style="color:#268bd2">delayed</span> = <span style="color:#859900;font-weight:bold">false</span>;
         }
 
-        // Service is now being launched, its package can't be stopped.
-        try {
-            AppGlobals.getPackageManager().setPackageStoppedState(
-                    r.packageName, false, r.userId);
-        } catch (RemoteException e) {
-        } catch (IllegalArgumentException e) {
+        <span style="color:#93a1a1;font-style:italic">// Make sure that the user who owns this service is started.  If not,
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// we don&#39;t want to allow it to run.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">mStartedUsers</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">r</span>.<span style="color:#268bd2">userId</span>) == <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#268bd2">bringDownServiceLocked</span>(<span style="color:#268bd2">r</span>);
+            <span style="color:#859900">return</span> <span style="color:#268bd2">msg</span>;
         }
 
-        final boolean isolated = (r.serviceInfo.flags&amp;ServiceInfo.FLAG_ISOLATED_PROCESS) != 0;
-        final String procName = r.processName;
-        ProcessRecord app;
+        <span style="color:#93a1a1;font-style:italic">// Service is now being launched, its package can&#39;t be stopped.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">try</span> {
+            <span style="color:#268bd2">AppGlobals</span>.<span style="color:#268bd2">getPackageManager</span>().<span style="color:#268bd2">setPackageStoppedState</span>(
+                    <span style="color:#268bd2">r</span>.<span style="color:#268bd2">packageName</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">userId</span>);
+        } <span style="color:#859900">catch</span> (<span style="color:#268bd2">RemoteException</span> <span style="color:#268bd2">e</span>) {
+        } <span style="color:#859900">catch</span> (<span style="color:#268bd2">IllegalArgumentException</span> <span style="color:#268bd2">e</span>) {
+        }
 
-        if (!isolated) {
-            app = mAm.getProcessRecordLocked(procName, r.appInfo.uid, false);
-            if (app != null &amp;&amp; app.thread != null) {
-                try {
-                    app.addPackage(r.appInfo.packageName, r.appInfo.versionCode, mAm.mProcessStats);
-                    realStartServiceLocked(r, app, execInFg);
-                    return null;
-                } catch (TransactionTooLargeException e) {
-                    throw e;
-                } catch (RemoteException e) {
-                    Slog.w(TAG, &quot;Exception when starting service &quot; + r.shortName, e);
+        <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">isolated</span> = (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">serviceInfo</span>.<span style="color:#268bd2">flags</span>&amp;<span style="color:#268bd2">ServiceInfo</span>.<span style="color:#268bd2">FLAG_ISOLATED_PROCESS</span>) != <span style="color:#268bd2">0</span>;
+        <span style="color:#859900">final</span> <span style="color:#268bd2">String</span> <span style="color:#268bd2">procName</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">processName</span>;
+        <span style="color:#268bd2">ProcessRecord</span> <span style="color:#268bd2">app</span>;
+
+        <span style="color:#859900">if</span> (!<span style="color:#268bd2">isolated</span>) {
+            <span style="color:#268bd2">app</span> = <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">getProcessRecordLocked</span>(<span style="color:#268bd2">procName</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">appInfo</span>.<span style="color:#268bd2">uid</span>, <span style="color:#859900;font-weight:bold">false</span>);
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">app</span> != <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; <span style="color:#268bd2">app</span>.<span style="color:#268bd2">thread</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+                <span style="color:#859900">try</span> {
+                    <span style="color:#268bd2">app</span>.<span style="color:#268bd2">addPackage</span>(<span style="color:#268bd2">r</span>.<span style="color:#268bd2">appInfo</span>.<span style="color:#268bd2">packageName</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">appInfo</span>.<span style="color:#268bd2">versionCode</span>, <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">mProcessStats</span>);
+                    <span style="color:#268bd2">realStartServiceLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">app</span>, <span style="color:#268bd2">execInFg</span>);
+                    <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
+                } <span style="color:#859900">catch</span> (<span style="color:#268bd2">TransactionTooLargeException</span> <span style="color:#268bd2">e</span>) {
+                    <span style="color:#859900">throw</span> <span style="color:#268bd2">e</span>;
+                } <span style="color:#859900">catch</span> (<span style="color:#268bd2">RemoteException</span> <span style="color:#268bd2">e</span>) {
+                    <span style="color:#268bd2">Slog</span>.<span style="color:#268bd2">w</span>(<span style="color:#268bd2">TAG</span>, <span style="color:#2aa198">&#34;Exception when starting service &#34;</span> + <span style="color:#268bd2">r</span>.<span style="color:#268bd2">shortName</span>, <span style="color:#268bd2">e</span>);
                 }
             }
-        } else {
-            app = r.isolatedProc;
+        } <span style="color:#859900">else</span> {
+            <span style="color:#268bd2">app</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">isolatedProc</span>;
         }
 
-        // Not running -- get it started, and enqueue this service record
-        // to be executed when the app comes up.
-        if (app == null) {
-            if ((app=mAm.startProcessLocked(procName, r.appInfo, true, intentFlags,
-                    &quot;service&quot;, r.name, false, isolated, false)) == null) {
-                bringDownServiceLocked(r);
-                return msg;
+        <span style="color:#93a1a1;font-style:italic">// Not running -- get it started, and enqueue this service record
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// to be executed when the app comes up.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">app</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#859900">if</span> ((<span style="color:#268bd2">app</span>=<span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">startProcessLocked</span>(<span style="color:#268bd2">procName</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">appInfo</span>, <span style="color:#859900;font-weight:bold">true</span>, <span style="color:#268bd2">intentFlags</span>,
+                    <span style="color:#2aa198">&#34;service&#34;</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">name</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#268bd2">isolated</span>, <span style="color:#859900;font-weight:bold">false</span>)) == <span style="color:#859900;font-weight:bold">null</span>) {
+                <span style="color:#268bd2">bringDownServiceLocked</span>(<span style="color:#268bd2">r</span>);
+                <span style="color:#859900">return</span> <span style="color:#268bd2">msg</span>;
             }
-            if (isolated) {
-                r.isolatedProc = app;
-            }
-        }
-
-        if (!mPendingServices.contains(r)) {
-            mPendingServices.add(r);
-        }
-
-        if (r.delayedStop) {
-            // Oh and hey we've already been asked to stop!
-            r.delayedStop = false;
-            if (r.startRequested) {
-                stopServiceLocked(r);
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">isolated</span>) {
+                <span style="color:#268bd2">r</span>.<span style="color:#268bd2">isolatedProc</span> = <span style="color:#268bd2">app</span>;
             }
         }
 
-        return null;
-    }
+        <span style="color:#859900">if</span> (!<span style="color:#268bd2">mPendingServices</span>.<span style="color:#268bd2">contains</span>(<span style="color:#268bd2">r</span>)) {
+            <span style="color:#268bd2">mPendingServices</span>.<span style="color:#268bd2">add</span>(<span style="color:#268bd2">r</span>);
+        }
 
-</code></pre>
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">delayedStop</span>) {
+            <span style="color:#93a1a1;font-style:italic">// Oh and hey we&#39;ve already been asked to stop!
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">r</span>.<span style="color:#268bd2">delayedStop</span> = <span style="color:#859900;font-weight:bold">false</span>;
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">startRequested</span>) {
+                <span style="color:#268bd2">stopServiceLocked</span>(<span style="color:#268bd2">r</span>);
+            }
+        }
 
+        <span style="color:#859900">return</span> <span style="color:#859900;font-weight:bold">null</span>;
+    }</code></pre></div>
 <p>在<code>bringUpServiceLocked</code>方法内先判断<code>ServiceRecord</code>的变量<code>app</code>和<code>thread</code>变量是否为<code>null</code>，也就是检查<code>service</code>对应的进程<code>ProcessRecord</code>和<code>ApplicationThread</code>对象是否存在，若存在，则直接执行<code>service</code>的<code>onStartCommand</code>方法。</p>
 
 <p>若不存在，则将<code>service</code>从重启和延时启动队列中移开，因为它正在启动中了，最后再确保拥有该<code>service</code>的用户已经启动了。</p>
@@ -526,219 +521,204 @@ if (!doNotTrack) {
 <p>在<code>attachApplicationLocked</code>方法内，首先会进行 Binder 跨进程调用，执行 <code>ApplicationThread</code>的<code>bindApplication</code>方法，然后再依次调度应用的<code>Activity</code>、<code>Service</code>、<code>Broadcast</code>组件。</p>
 
 <p>其中，调度<code>Service</code>组件的代码如下：</p>
-
-<pre><code class="language-java">    // Find any services that should be running in this process...
-        if (!badApp) {
-            try {
-	            // mServices 的类型为 ActivityServices
-                didSomething |= mServices.attachApplicationLocked(app, processName);
-            } catch (Exception e) {
-                Slog.wtf(TAG, &quot;Exception thrown starting services in &quot; + app, e);
-                badApp = true;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#93a1a1;font-style:italic">// Find any services that should be running in this process...
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (!<span style="color:#268bd2">badApp</span>) {
+            <span style="color:#859900">try</span> {
+	            <span style="color:#93a1a1;font-style:italic">// mServices 的类型为 ActivityServices
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">didSomething</span> |= <span style="color:#268bd2">mServices</span>.<span style="color:#268bd2">attachApplicationLocked</span>(<span style="color:#268bd2">app</span>, <span style="color:#268bd2">processName</span>);
+            } <span style="color:#859900">catch</span> (<span style="color:#268bd2">Exception</span> <span style="color:#268bd2">e</span>) {
+                <span style="color:#268bd2">Slog</span>.<span style="color:#268bd2">wtf</span>(<span style="color:#268bd2">TAG</span>, <span style="color:#2aa198">&#34;Exception thrown starting services in &#34;</span> + <span style="color:#268bd2">app</span>, <span style="color:#268bd2">e</span>);
+                <span style="color:#268bd2">badApp</span> = <span style="color:#859900;font-weight:bold">true</span>;
             }
-        }
-</code></pre>
-
+        }</code></pre></div>
 <h3 id="activityservices-类的-attachapplicationlocked-方法">ActivityServices 类的 attachApplicationLocked() 方法</h3>
-
-<pre><code class="language-java">    boolean attachApplicationLocked(ProcessRecord proc, String processName)
-            throws RemoteException {
-        boolean didSomething = false;
-        // Collect any services that are waiting for this process to come up.
-        if (mPendingServices.size() &gt; 0) {
-            ServiceRecord sr = null;
-            try {
-                for (int i=0; i&lt;mPendingServices.size(); i++) {
-                    sr = mPendingServices.get(i);
-                    if (proc != sr.isolatedProc &amp;&amp; (proc.uid != sr.appInfo.uid
-                            || !processName.equals(sr.processName))) {
-                        continue;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">attachApplicationLocked</span>(<span style="color:#268bd2">ProcessRecord</span> <span style="color:#268bd2">proc</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">processName</span>)
+            <span style="color:#859900">throws</span> <span style="color:#268bd2">RemoteException</span> {
+        <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">didSomething</span> = <span style="color:#859900;font-weight:bold">false</span>;
+        <span style="color:#93a1a1;font-style:italic">// Collect any services that are waiting for this process to come up.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">mPendingServices</span>.<span style="color:#268bd2">size</span>() &gt; <span style="color:#268bd2">0</span>) {
+            <span style="color:#268bd2">ServiceRecord</span> <span style="color:#268bd2">sr</span> = <span style="color:#859900;font-weight:bold">null</span>;
+            <span style="color:#859900">try</span> {
+                <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span>=<span style="color:#268bd2">0</span>; <span style="color:#268bd2">i</span>&lt;<span style="color:#268bd2">mPendingServices</span>.<span style="color:#268bd2">size</span>(); <span style="color:#268bd2">i</span>++) {
+                    <span style="color:#268bd2">sr</span> = <span style="color:#268bd2">mPendingServices</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">i</span>);
+                    <span style="color:#859900">if</span> (<span style="color:#268bd2">proc</span> != <span style="color:#268bd2">sr</span>.<span style="color:#268bd2">isolatedProc</span> &amp;&amp; (<span style="color:#268bd2">proc</span>.<span style="color:#268bd2">uid</span> != <span style="color:#268bd2">sr</span>.<span style="color:#268bd2">appInfo</span>.<span style="color:#268bd2">uid</span>
+                            || !<span style="color:#268bd2">processName</span>.<span style="color:#268bd2">equals</span>(<span style="color:#268bd2">sr</span>.<span style="color:#268bd2">processName</span>))) {
+                        <span style="color:#859900">continue</span>;
                     }
-                    mPendingServices.remove(i);
-                    i--;
-                    proc.addPackage(sr.appInfo.packageName, sr.appInfo.versionCode,
-                            mAm.mProcessStats);
-                    realStartServiceLocked(sr, proc, sr.createdFromFg);
-                    didSomething = true;
-                    if (!isServiceNeeded(sr, false, false)) {// 不需要的服务就丢弃
-                        bringDownServiceLocked(sr);
+                    <span style="color:#268bd2">mPendingServices</span>.<span style="color:#268bd2">remove</span>(<span style="color:#268bd2">i</span>);
+                    <span style="color:#268bd2">i</span>--;
+                    <span style="color:#268bd2">proc</span>.<span style="color:#268bd2">addPackage</span>(<span style="color:#268bd2">sr</span>.<span style="color:#268bd2">appInfo</span>.<span style="color:#268bd2">packageName</span>, <span style="color:#268bd2">sr</span>.<span style="color:#268bd2">appInfo</span>.<span style="color:#268bd2">versionCode</span>,
+                            <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">mProcessStats</span>);
+                    <span style="color:#268bd2">realStartServiceLocked</span>(<span style="color:#268bd2">sr</span>, <span style="color:#268bd2">proc</span>, <span style="color:#268bd2">sr</span>.<span style="color:#268bd2">createdFromFg</span>);
+                    <span style="color:#268bd2">didSomething</span> = <span style="color:#859900;font-weight:bold">true</span>;
+                    <span style="color:#859900">if</span> (!<span style="color:#268bd2">isServiceNeeded</span>(<span style="color:#268bd2">sr</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#859900;font-weight:bold">false</span>)) {<span style="color:#93a1a1;font-style:italic">// 不需要的服务就丢弃
+</span><span style="color:#93a1a1;font-style:italic"></span>                        <span style="color:#268bd2">bringDownServiceLocked</span>(<span style="color:#268bd2">sr</span>);
                     }
                 }
-            } catch (RemoteException e) {
-                throw e;
+            } <span style="color:#859900">catch</span> (<span style="color:#268bd2">RemoteException</span> <span style="color:#268bd2">e</span>) {
+                <span style="color:#859900">throw</span> <span style="color:#268bd2">e</span>;
             }
         }
-        // Also, if there are any services that are waiting to restart and
-        // would run in this process, now is a good time to start them.  It would
-        // be weird to bring up the process but arbitrarily not let the services
-        // run at this point just because their restart time hasn't come up.
-        if (mRestartingServices.size() &gt; 0) {
-            ServiceRecord sr;
-            for (int i=0; i&lt;mRestartingServices.size(); i++) {
-                sr = mRestartingServices.get(i);
-                if (proc != sr.isolatedProc &amp;&amp; (proc.uid != sr.appInfo.uid
-                        || !processName.equals(sr.processName))) {
-                    continue;
+        <span style="color:#93a1a1;font-style:italic">// Also, if there are any services that are waiting to restart and
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// would run in this process, now is a good time to start them.  It would
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// be weird to bring up the process but arbitrarily not let the services
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// run at this point just because their restart time hasn&#39;t come up.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">mRestartingServices</span>.<span style="color:#268bd2">size</span>() &gt; <span style="color:#268bd2">0</span>) {
+            <span style="color:#268bd2">ServiceRecord</span> <span style="color:#268bd2">sr</span>;
+            <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span>=<span style="color:#268bd2">0</span>; <span style="color:#268bd2">i</span>&lt;<span style="color:#268bd2">mRestartingServices</span>.<span style="color:#268bd2">size</span>(); <span style="color:#268bd2">i</span>++) {
+                <span style="color:#268bd2">sr</span> = <span style="color:#268bd2">mRestartingServices</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">i</span>);
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">proc</span> != <span style="color:#268bd2">sr</span>.<span style="color:#268bd2">isolatedProc</span> &amp;&amp; (<span style="color:#268bd2">proc</span>.<span style="color:#268bd2">uid</span> != <span style="color:#268bd2">sr</span>.<span style="color:#268bd2">appInfo</span>.<span style="color:#268bd2">uid</span>
+                        || !<span style="color:#268bd2">processName</span>.<span style="color:#268bd2">equals</span>(<span style="color:#268bd2">sr</span>.<span style="color:#268bd2">processName</span>))) {
+                    <span style="color:#859900">continue</span>;
                 }
-                mAm.mHandler.removeCallbacks(sr.restarter);
-                mAm.mHandler.post(sr.restarter);
+                <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">mHandler</span>.<span style="color:#268bd2">removeCallbacks</span>(<span style="color:#268bd2">sr</span>.<span style="color:#268bd2">restarter</span>);
+                <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">mHandler</span>.<span style="color:#268bd2">post</span>(<span style="color:#268bd2">sr</span>.<span style="color:#268bd2">restarter</span>);
             }
         }
-        return didSomething;
-    }
-</code></pre>
-
+        <span style="color:#859900">return</span> <span style="color:#268bd2">didSomething</span>;
+    }</code></pre></div>
 <p><code>attachApplicationLocked</code>方法内启动<code>mPendingServices</code>队列中的服务和<code>mRestartingServices</code>中的服务。</p>
 
 <p>真正启动服务的方法就是<code>realStartServiceLocked</code>。</p>
 
 <h3 id="activityservices-类的-realstartservicelocked-方法">ActivityServices 类的 realStartServiceLocked() 方法</h3>
-
-<pre><code class="language-java">    private final void realStartServiceLocked(ServiceRecord r,
-            ProcessRecord app, boolean execInFg) throws RemoteException {
-        if (app.thread == null) {
-            throw new RemoteException();
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">realStartServiceLocked</span>(<span style="color:#268bd2">ServiceRecord</span> <span style="color:#268bd2">r</span>,
+            <span style="color:#268bd2">ProcessRecord</span> <span style="color:#268bd2">app</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">execInFg</span>) <span style="color:#859900">throws</span> <span style="color:#268bd2">RemoteException</span> {
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">app</span>.<span style="color:#268bd2">thread</span> == <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#859900">throw</span> <span style="color:#859900">new</span> <span style="color:#268bd2">RemoteException</span>();
         }
-        r.app = app;
-        r.restartTime = r.lastActivity = SystemClock.uptimeMillis();
+        <span style="color:#268bd2">r</span>.<span style="color:#268bd2">app</span> = <span style="color:#268bd2">app</span>;
+        <span style="color:#268bd2">r</span>.<span style="color:#268bd2">restartTime</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">lastActivity</span> = <span style="color:#268bd2">SystemClock</span>.<span style="color:#268bd2">uptimeMillis</span>();
 
-        final boolean newService = app.services.add(r);
-        // 发送一个延时消息 SERVICE_TIMEOUT_MSG，Service 若没有启动超时，则回告诉 AMS 取消该消息
-        bumpServiceExecutingLocked(r, execInFg, &quot;create&quot;);
-        mAm.updateLruProcessLocked(app, false, null);
-        mAm.updateOomAdjLocked();
+        <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">newService</span> = <span style="color:#268bd2">app</span>.<span style="color:#268bd2">services</span>.<span style="color:#268bd2">add</span>(<span style="color:#268bd2">r</span>);
+        <span style="color:#93a1a1;font-style:italic">// 发送一个延时消息 SERVICE_TIMEOUT_MSG，Service 若没有启动超时，则回告诉 AMS 取消该消息
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">bumpServiceExecutingLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">execInFg</span>, <span style="color:#2aa198">&#34;create&#34;</span>);
+        <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">updateLruProcessLocked</span>(<span style="color:#268bd2">app</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#859900;font-weight:bold">null</span>);
+        <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">updateOomAdjLocked</span>();
 
-        boolean created = false;
-        try {
-            if (LOG_SERVICE_START_STOP) {
-                String nameTerm;
-                int lastPeriod = r.shortName.lastIndexOf('.');
-                nameTerm = lastPeriod &gt;= 0 ? r.shortName.substring(lastPeriod) : r.shortName;
-                EventLogTags.writeAmCreateService(
-                        r.userId, System.identityHashCode(r), nameTerm, r.app.uid, r.app.pid);
+        <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">created</span> = <span style="color:#859900;font-weight:bold">false</span>;
+        <span style="color:#859900">try</span> {
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">LOG_SERVICE_START_STOP</span>) {
+                <span style="color:#268bd2">String</span> <span style="color:#268bd2">nameTerm</span>;
+                <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">lastPeriod</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">shortName</span>.<span style="color:#268bd2">lastIndexOf</span>(<span style="color:#2aa198">&#39;.&#39;</span>);
+                <span style="color:#268bd2">nameTerm</span> = <span style="color:#268bd2">lastPeriod</span> &gt;= <span style="color:#268bd2">0</span> ? <span style="color:#268bd2">r</span>.<span style="color:#268bd2">shortName</span>.<span style="color:#268bd2">substring</span>(<span style="color:#268bd2">lastPeriod</span>) : <span style="color:#268bd2">r</span>.<span style="color:#268bd2">shortName</span>;
+                <span style="color:#268bd2">EventLogTags</span>.<span style="color:#268bd2">writeAmCreateService</span>(
+                        <span style="color:#268bd2">r</span>.<span style="color:#268bd2">userId</span>, <span style="color:#268bd2">System</span>.<span style="color:#268bd2">identityHashCode</span>(<span style="color:#268bd2">r</span>), <span style="color:#268bd2">nameTerm</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">app</span>.<span style="color:#268bd2">uid</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">app</span>.<span style="color:#268bd2">pid</span>);
             }
-            synchronized (r.stats.getBatteryStats()) {
-                r.stats.startLaunchedLocked();
+            <span style="color:#859900">synchronized</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">stats</span>.<span style="color:#268bd2">getBatteryStats</span>()) {
+                <span style="color:#268bd2">r</span>.<span style="color:#268bd2">stats</span>.<span style="color:#268bd2">startLaunchedLocked</span>();
             }
-            mAm.ensurePackageDexOpt(r.serviceInfo.packageName);
-            app.forceProcessStateUpTo(ActivityManager.PROCESS_STATE_SERVICE);
-            // 进入 Service 的 onCreate 
-            app.thread.scheduleCreateService(r, r.serviceInfo,
-                    mAm.compatibilityInfoForPackageLocked(r.serviceInfo.applicationInfo),
-                    app.repProcState);
-            r.postNotification();
-            created = true;
-        } catch (DeadObjectException e) {
-            Slog.w(TAG, &quot;Application dead when creating service &quot; + r);
-            mAm.appDiedLocked(app); // 创建服务时，应用挂了
-            throw e;
-        } finally {
-            if (!created) {
-                // Keep the executeNesting count accurate.
-                final boolean inDestroying = mDestroyingServices.contains(r);
-                serviceDoneExecutingLocked(r, inDestroying, inDestroying);
+            <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">ensurePackageDexOpt</span>(<span style="color:#268bd2">r</span>.<span style="color:#268bd2">serviceInfo</span>.<span style="color:#268bd2">packageName</span>);
+            <span style="color:#268bd2">app</span>.<span style="color:#268bd2">forceProcessStateUpTo</span>(<span style="color:#268bd2">ActivityManager</span>.<span style="color:#268bd2">PROCESS_STATE_SERVICE</span>);
+            <span style="color:#93a1a1;font-style:italic">// 进入 Service 的 onCreate 
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">app</span>.<span style="color:#268bd2">thread</span>.<span style="color:#268bd2">scheduleCreateService</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">serviceInfo</span>,
+                    <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">compatibilityInfoForPackageLocked</span>(<span style="color:#268bd2">r</span>.<span style="color:#268bd2">serviceInfo</span>.<span style="color:#268bd2">applicationInfo</span>),
+                    <span style="color:#268bd2">app</span>.<span style="color:#268bd2">repProcState</span>);
+            <span style="color:#268bd2">r</span>.<span style="color:#268bd2">postNotification</span>();
+            <span style="color:#268bd2">created</span> = <span style="color:#859900;font-weight:bold">true</span>;
+        } <span style="color:#859900">catch</span> (<span style="color:#268bd2">DeadObjectException</span> <span style="color:#268bd2">e</span>) {
+            <span style="color:#268bd2">Slog</span>.<span style="color:#268bd2">w</span>(<span style="color:#268bd2">TAG</span>, <span style="color:#2aa198">&#34;Application dead when creating service &#34;</span> + <span style="color:#268bd2">r</span>);
+            <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">appDiedLocked</span>(<span style="color:#268bd2">app</span>); <span style="color:#93a1a1;font-style:italic">// 创建服务时，应用挂了
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#859900">throw</span> <span style="color:#268bd2">e</span>;
+        } <span style="color:#859900">finally</span> {
+            <span style="color:#859900">if</span> (!<span style="color:#268bd2">created</span>) {
+                <span style="color:#93a1a1;font-style:italic">// Keep the executeNesting count accurate.
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">inDestroying</span> = <span style="color:#268bd2">mDestroyingServices</span>.<span style="color:#268bd2">contains</span>(<span style="color:#268bd2">r</span>);
+                <span style="color:#268bd2">serviceDoneExecutingLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">inDestroying</span>, <span style="color:#268bd2">inDestroying</span>);
 
-                // Cleanup.
-                if (newService) {
-                    app.services.remove(r);
-                    r.app = null;
+                <span style="color:#93a1a1;font-style:italic">// Cleanup.
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#859900">if</span> (<span style="color:#268bd2">newService</span>) {
+                    <span style="color:#268bd2">app</span>.<span style="color:#268bd2">services</span>.<span style="color:#268bd2">remove</span>(<span style="color:#268bd2">r</span>);
+                    <span style="color:#268bd2">r</span>.<span style="color:#268bd2">app</span> = <span style="color:#859900;font-weight:bold">null</span>;
                 }
 
-                // Retry.
-                if (!inDestroying) {
-                    scheduleServiceRestartLocked(r, false);
+                <span style="color:#93a1a1;font-style:italic">// Retry.
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#859900">if</span> (!<span style="color:#268bd2">inDestroying</span>) {
+                    <span style="color:#268bd2">scheduleServiceRestartLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#859900;font-weight:bold">false</span>);
                 }
             }
         }
 
-        requestServiceBindingsLocked(r, execInFg);
-        updateServiceClientActivitiesLocked(app, null, true);
+        <span style="color:#268bd2">requestServiceBindingsLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">execInFg</span>);
+        <span style="color:#268bd2">updateServiceClientActivitiesLocked</span>(<span style="color:#268bd2">app</span>, <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#859900;font-weight:bold">true</span>);
 
-        // If the service is in the started state, and there are no
-        // pending arguments, then fake up one so its onStartCommand() will
-        // be called.
-        if (r.startRequested &amp;&amp; r.callStart &amp;&amp; r.pendingStarts.size() == 0) {
-            r.pendingStarts.add(new ServiceRecord.StartItem(r, false, r.makeNextStartId(),
-                    null, null));
+        <span style="color:#93a1a1;font-style:italic">// If the service is in the started state, and there are no
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// pending arguments, then fake up one so its onStartCommand() will
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// be called.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">startRequested</span> &amp;&amp; <span style="color:#268bd2">r</span>.<span style="color:#268bd2">callStart</span> &amp;&amp; <span style="color:#268bd2">r</span>.<span style="color:#268bd2">pendingStarts</span>.<span style="color:#268bd2">size</span>() == <span style="color:#268bd2">0</span>) {
+            <span style="color:#268bd2">r</span>.<span style="color:#268bd2">pendingStarts</span>.<span style="color:#268bd2">add</span>(<span style="color:#859900">new</span> <span style="color:#268bd2">ServiceRecord</span>.<span style="color:#268bd2">StartItem</span>(<span style="color:#268bd2">r</span>, <span style="color:#859900;font-weight:bold">false</span>, <span style="color:#268bd2">r</span>.<span style="color:#268bd2">makeNextStartId</span>(),
+                    <span style="color:#859900;font-weight:bold">null</span>, <span style="color:#859900;font-weight:bold">null</span>));
         }
-		// 进入 Service 的 onStartCommand 
-        sendServiceArgsLocked(r, execInFg, true);
+		<span style="color:#93a1a1;font-style:italic">// 进入 Service 的 onStartCommand 
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">sendServiceArgsLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">execInFg</span>, <span style="color:#859900;font-weight:bold">true</span>);
 
-        if (r.delayed) {
-            getServiceMap(r.userId).mDelayedStartList.remove(r);
-            r.delayed = false;
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">delayed</span>) {
+            <span style="color:#268bd2">getServiceMap</span>(<span style="color:#268bd2">r</span>.<span style="color:#268bd2">userId</span>).<span style="color:#268bd2">mDelayedStartList</span>.<span style="color:#268bd2">remove</span>(<span style="color:#268bd2">r</span>);
+            <span style="color:#268bd2">r</span>.<span style="color:#268bd2">delayed</span> = <span style="color:#859900;font-weight:bold">false</span>;
         }
 
-        if (r.delayedStop) {
-            // Oh and hey we've already been asked to stop!
-            r.delayedStop = false;
-            if (r.startRequested) {
-                stopServiceLocked(r);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">delayedStop</span>) {
+            <span style="color:#93a1a1;font-style:italic">// Oh and hey we&#39;ve already been asked to stop!
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">r</span>.<span style="color:#268bd2">delayedStop</span> = <span style="color:#859900;font-weight:bold">false</span>;
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">startRequested</span>) {
+                <span style="color:#268bd2">stopServiceLocked</span>(<span style="color:#268bd2">r</span>);
             }
         }
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p>在<code>realStartServiceLocked</code>方法内，首先会通过<code>bumpServiceExecutingLocked</code>方法，然后再调用<code>scheduleServiceTimeoutLocked</code>方法，向 ActivityManagerService 的 <code>MainHandler</code>类型的 <code>mHandler</code> 发送一个消息 <code>SERVICE_TIMEOUT_MSG</code>。若 Service 在启动过程中没有及时向 ActivityManagerService 返回消息，把<code>SERVICE_TIMEOUT_MSG</code>消息给取消掉，那么则认为 Service 启动超时了。</p>
 
 <p>标记完了时间后，就通过<code>scheduleCreateService</code>方法来启动 Service ，让 Service 进去<code>onCreate</code>状态。</p>
 
 <p>新创建的进程把自己的 Binder 本地对象 ApplicationThread 传递给了 ActivityManagerService ，ActivityManagerService 就通过它来与新进程通信了，<code>scheduleCreateService</code>方法向 Binder 驱动发送了一个类型为 <code>SCHEDULE_CREATE_SERVICE_TRANSACTION</code>的消息，而在 <code>ApplicationThread</code>响应了该消息。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#859900">public</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">scheduleCreateService</span>(<span style="color:#268bd2">IBinder</span> <span style="color:#268bd2">token</span>,
+                <span style="color:#268bd2">ServiceInfo</span> <span style="color:#268bd2">info</span>, <span style="color:#268bd2">CompatibilityInfo</span> <span style="color:#268bd2">compatInfo</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">processState</span>) {
+            <span style="color:#268bd2">updateProcessState</span>(<span style="color:#268bd2">processState</span>, <span style="color:#859900;font-weight:bold">false</span>);
+            <span style="color:#268bd2">CreateServiceData</span> <span style="color:#268bd2">s</span> = <span style="color:#859900">new</span> <span style="color:#268bd2">CreateServiceData</span>();
+            <span style="color:#268bd2">s</span>.<span style="color:#268bd2">token</span> = <span style="color:#268bd2">token</span>;
+            <span style="color:#268bd2">s</span>.<span style="color:#268bd2">info</span> = <span style="color:#268bd2">info</span>;
+            <span style="color:#268bd2">s</span>.<span style="color:#268bd2">compatInfo</span> = <span style="color:#268bd2">compatInfo</span>;
 
-<pre><code class="language-java">public final void scheduleCreateService(IBinder token,
-                ServiceInfo info, CompatibilityInfo compatInfo, int processState) {
-            updateProcessState(processState, false);
-            CreateServiceData s = new CreateServiceData();
-            s.token = token;
-            s.info = info;
-            s.compatInfo = compatInfo;
-
-            sendMessage(H.CREATE_SERVICE, s);
-        }
-</code></pre>
-
+            <span style="color:#268bd2">sendMessage</span>(<span style="color:#268bd2">H</span>.<span style="color:#268bd2">CREATE_SERVICE</span>, <span style="color:#268bd2">s</span>);
+        }</code></pre></div>
 <p>ApplicationThread 的 <code>scheduleCreateService</code>方法向 ActivityThread 的主线程 <code>mH</code>发送了消息<code>CREATE_SERVICE</code>。ActivityThread 最终响应该消息。</p>
 
 <h3 id="activitythread-类的-handlecreateservice-方法">ActivityThread 类的 handleCreateService() 方法</h3>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">handleCreateService</span>(<span style="color:#268bd2">CreateServiceData</span> <span style="color:#268bd2">data</span>) {
+        <span style="color:#93a1a1;font-style:italic">// If we are getting ready to gc after going to the background, well
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// we are back active so skip it.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">unscheduleGcIdler</span>();
 
-<pre><code class="language-java"> private void handleCreateService(CreateServiceData data) {
-        // If we are getting ready to gc after going to the background, well
-        // we are back active so skip it.
-        unscheduleGcIdler();
-
-        LoadedApk packageInfo = getPackageInfoNoCheck(
-                data.info.applicationInfo, data.compatInfo);
-        Service service = null;
-        try {
-            java.lang.ClassLoader cl = packageInfo.getClassLoader();
-            // 通过反射创建目标服务对象
-            service = (Service) cl.loadClass(data.info.name).newInstance();
-        } catch (Exception e) {
+        <span style="color:#268bd2">LoadedApk</span> <span style="color:#268bd2">packageInfo</span> = <span style="color:#268bd2">getPackageInfoNoCheck</span>(
+                <span style="color:#268bd2">data</span>.<span style="color:#268bd2">info</span>.<span style="color:#268bd2">applicationInfo</span>, <span style="color:#268bd2">data</span>.<span style="color:#268bd2">compatInfo</span>);
+        <span style="color:#268bd2">Service</span> <span style="color:#268bd2">service</span> = <span style="color:#859900;font-weight:bold">null</span>;
+        <span style="color:#859900">try</span> {
+            <span style="color:#268bd2">java</span>.<span style="color:#268bd2">lang</span>.<span style="color:#268bd2">ClassLoader</span> <span style="color:#268bd2">cl</span> = <span style="color:#268bd2">packageInfo</span>.<span style="color:#268bd2">getClassLoader</span>();
+            <span style="color:#93a1a1;font-style:italic">// 通过反射创建目标服务对象
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">service</span> = (<span style="color:#268bd2">Service</span>) <span style="color:#268bd2">cl</span>.<span style="color:#268bd2">loadClass</span>(<span style="color:#268bd2">data</span>.<span style="color:#268bd2">info</span>.<span style="color:#268bd2">name</span>).<span style="color:#268bd2">newInstance</span>();
+        } <span style="color:#859900">catch</span> (<span style="color:#268bd2">Exception</span> <span style="color:#268bd2">e</span>) {
         }
 
-        try {
-            // 创建 ContextImpl
-            ContextImpl context = ContextImpl.createAppContext(this, packageInfo);
-            context.setOuterContext(service);
-			// 创建 Application 对象
-            Application app = packageInfo.makeApplication(false, mInstrumentation);
-            service.attach(context, this, data.info.name, data.token, app,
-                    ActivityManagerNative.getDefault());
-            // Service 进入 onCreate 状态
-            service.onCreate();
-            mServices.put(data.token, service);
-            try {
-	            // 向 ActivityManagerService 发送消息取消 Service 启动延时消息
-                ActivityManagerNative.getDefault().serviceDoneExecuting(
-                        data.token, SERVICE_DONE_EXECUTING_ANON, 0, 0);
-            } catch (RemoteException e) {
-                // nothing to do.
-            }
-        } catch (Exception e) {
+        <span style="color:#859900">try</span> {
+            <span style="color:#93a1a1;font-style:italic">// 创建 ContextImpl
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">ContextImpl</span> <span style="color:#268bd2">context</span> = <span style="color:#268bd2">ContextImpl</span>.<span style="color:#268bd2">createAppContext</span>(<span style="color:#859900">this</span>, <span style="color:#268bd2">packageInfo</span>);
+            <span style="color:#268bd2">context</span>.<span style="color:#268bd2">setOuterContext</span>(<span style="color:#268bd2">service</span>);
+			<span style="color:#93a1a1;font-style:italic">// 创建 Application 对象
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">Application</span> <span style="color:#268bd2">app</span> = <span style="color:#268bd2">packageInfo</span>.<span style="color:#268bd2">makeApplication</span>(<span style="color:#859900;font-weight:bold">false</span>, <span style="color:#268bd2">mInstrumentation</span>);
+            <span style="color:#268bd2">service</span>.<span style="color:#268bd2">attach</span>(<span style="color:#268bd2">context</span>, <span style="color:#859900">this</span>, <span style="color:#268bd2">data</span>.<span style="color:#268bd2">info</span>.<span style="color:#268bd2">name</span>, <span style="color:#268bd2">data</span>.<span style="color:#268bd2">token</span>, <span style="color:#268bd2">app</span>,
+                    <span style="color:#268bd2">ActivityManagerNative</span>.<span style="color:#268bd2">getDefault</span>());
+            <span style="color:#93a1a1;font-style:italic">// Service 进入 onCreate 状态
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">service</span>.<span style="color:#268bd2">onCreate</span>();
+            <span style="color:#268bd2">mServices</span>.<span style="color:#268bd2">put</span>(<span style="color:#268bd2">data</span>.<span style="color:#268bd2">token</span>, <span style="color:#268bd2">service</span>);
+            <span style="color:#859900">try</span> {
+	            <span style="color:#93a1a1;font-style:italic">// 向 ActivityManagerService 发送消息取消 Service 启动延时消息
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">ActivityManagerNative</span>.<span style="color:#268bd2">getDefault</span>().<span style="color:#268bd2">serviceDoneExecuting</span>(
+                        <span style="color:#268bd2">data</span>.<span style="color:#268bd2">token</span>, <span style="color:#268bd2">SERVICE_DONE_EXECUTING_ANON</span>, <span style="color:#268bd2">0</span>, <span style="color:#268bd2">0</span>);
+            } <span style="color:#859900">catch</span> (<span style="color:#268bd2">RemoteException</span> <span style="color:#268bd2">e</span>) {
+                <span style="color:#93a1a1;font-style:italic">// nothing to do.
+</span><span style="color:#93a1a1;font-style:italic"></span>            }
+        } <span style="color:#859900">catch</span> (<span style="color:#268bd2">Exception</span> <span style="color:#268bd2">e</span>) {
         }
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p>ActivityThread 类的<code>handleCreateService</code>主要是创建了 Service 对象，并且创建了<code>ContextImpl</code>对象和<code>Application</code>对象。同时调用了 Service 的<code>onCreate</code>方法。我们继承的 Service 的<code>onCreate</code>方法也是在这里被系统回调的。</p>
 
 <p>随后向 ActivityManagerService 发送消息，取消 Service 延时启动的消息。</p>
@@ -746,91 +726,85 @@ if (!doNotTrack) {
 <p>Service 进入 <code>onCreate</code>状态后，接下来该进入<code>onStartCommand</code>状态。</p>
 
 <h3 id="activityservices-类的-sendserviceargslocked-方法">ActivityServices 类的 sendServiceArgsLocked() 方法</h3>
-
-<pre><code class="language-java">    private final void sendServiceArgsLocked(ServiceRecord r, boolean execInFg,
-            boolean oomAdjusted) throws TransactionTooLargeException {
-        final int N = r.pendingStarts.size();
-        if (N == 0) {
-            return;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">sendServiceArgsLocked</span>(<span style="color:#268bd2">ServiceRecord</span> <span style="color:#268bd2">r</span>, <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">execInFg</span>,
+            <span style="color:#859900;font-weight:bold">boolean</span> <span style="color:#268bd2">oomAdjusted</span>) <span style="color:#859900">throws</span> <span style="color:#268bd2">TransactionTooLargeException</span> {
+        <span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">N</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">pendingStarts</span>.<span style="color:#268bd2">size</span>();
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">N</span> == <span style="color:#268bd2">0</span>) {
+            <span style="color:#859900">return</span>;
         }
 
-        while (r.pendingStarts.size() &gt; 0) {
-            Exception caughtException = null;
-            ServiceRecord.StartItem si;
-            try {
-                si = r.pendingStarts.remove(0);
-                if (si.intent == null &amp;&amp; N &gt; 1) {
-                    // If somehow we got a dummy null intent in the middle,
-                    // then skip it.  DO NOT skip a null intent when it is
-                    // the only one in the list -- this is to support the
-                    // onStartCommand(null) case.
-                    continue;
+        <span style="color:#859900">while</span> (<span style="color:#268bd2">r</span>.<span style="color:#268bd2">pendingStarts</span>.<span style="color:#268bd2">size</span>() &gt; <span style="color:#268bd2">0</span>) {
+            <span style="color:#268bd2">Exception</span> <span style="color:#268bd2">caughtException</span> = <span style="color:#859900;font-weight:bold">null</span>;
+            <span style="color:#268bd2">ServiceRecord</span>.<span style="color:#268bd2">StartItem</span> <span style="color:#268bd2">si</span>;
+            <span style="color:#859900">try</span> {
+                <span style="color:#268bd2">si</span> = <span style="color:#268bd2">r</span>.<span style="color:#268bd2">pendingStarts</span>.<span style="color:#268bd2">remove</span>(<span style="color:#268bd2">0</span>);
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">si</span>.<span style="color:#268bd2">intent</span> == <span style="color:#859900;font-weight:bold">null</span> &amp;&amp; <span style="color:#268bd2">N</span> &gt; <span style="color:#268bd2">1</span>) {
+                    <span style="color:#93a1a1;font-style:italic">// If somehow we got a dummy null intent in the middle,
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#93a1a1;font-style:italic">// then skip it.  DO NOT skip a null intent when it is
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#93a1a1;font-style:italic">// the only one in the list -- this is to support the
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#93a1a1;font-style:italic">// onStartCommand(null) case.
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#859900">continue</span>;
                 }
-                si.deliveredTime = SystemClock.uptimeMillis();
-                r.deliveredStarts.add(si);
-                si.deliveryCount++;
-                if (si.neededGrants != null) {
-                    mAm.grantUriPermissionUncheckedFromIntentLocked(si.neededGrants,
-                            si.getUriPermissionsLocked());
+                <span style="color:#268bd2">si</span>.<span style="color:#268bd2">deliveredTime</span> = <span style="color:#268bd2">SystemClock</span>.<span style="color:#268bd2">uptimeMillis</span>();
+                <span style="color:#268bd2">r</span>.<span style="color:#268bd2">deliveredStarts</span>.<span style="color:#268bd2">add</span>(<span style="color:#268bd2">si</span>);
+                <span style="color:#268bd2">si</span>.<span style="color:#268bd2">deliveryCount</span>++;
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">si</span>.<span style="color:#268bd2">neededGrants</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+                    <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">grantUriPermissionUncheckedFromIntentLocked</span>(<span style="color:#268bd2">si</span>.<span style="color:#268bd2">neededGrants</span>,
+                            <span style="color:#268bd2">si</span>.<span style="color:#268bd2">getUriPermissionsLocked</span>());
                 }
-                // 添加延时处理，类似于 onCreate 
-                bumpServiceExecutingLocked(r, execInFg, &quot;start&quot;);
-                if (!oomAdjusted) {
-                    oomAdjusted = true;
-                    mAm.updateOomAdjLocked(r.app);
+                <span style="color:#93a1a1;font-style:italic">// 添加延时处理，类似于 onCreate 
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">bumpServiceExecutingLocked</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">execInFg</span>, <span style="color:#2aa198">&#34;start&#34;</span>);
+                <span style="color:#859900">if</span> (!<span style="color:#268bd2">oomAdjusted</span>) {
+                    <span style="color:#268bd2">oomAdjusted</span> = <span style="color:#859900;font-weight:bold">true</span>;
+                    <span style="color:#268bd2">mAm</span>.<span style="color:#268bd2">updateOomAdjLocked</span>(<span style="color:#268bd2">r</span>.<span style="color:#268bd2">app</span>);
                 }
-                int flags = 0;
-                if (si.deliveryCount &gt; 1) {
-                    flags |= Service.START_FLAG_RETRY;
+                <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">flags</span> = <span style="color:#268bd2">0</span>;
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">si</span>.<span style="color:#268bd2">deliveryCount</span> &gt; <span style="color:#268bd2">1</span>) {
+                    <span style="color:#268bd2">flags</span> |= <span style="color:#268bd2">Service</span>.<span style="color:#268bd2">START_FLAG_RETRY</span>;
                 }
-                if (si.doneExecutingCount &gt; 0) {
-                    flags |= Service.START_FLAG_REDELIVERY;
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">si</span>.<span style="color:#268bd2">doneExecutingCount</span> &gt; <span style="color:#268bd2">0</span>) {
+                    <span style="color:#268bd2">flags</span> |= <span style="color:#268bd2">Service</span>.<span style="color:#268bd2">START_FLAG_REDELIVERY</span>;
                 }
-	            // 跨进程 Service 进入 onStartCommand 状态
-                r.app.thread.scheduleServiceArgs(r, si.taskRemoved, si.id, flags, si.intent);
-            } catch (TransactionTooLargeException e) {
-            } catch (RemoteException e) {
-            } catch (Exception e) {
+	            <span style="color:#93a1a1;font-style:italic">// 跨进程 Service 进入 onStartCommand 状态
+</span><span style="color:#93a1a1;font-style:italic"></span>                <span style="color:#268bd2">r</span>.<span style="color:#268bd2">app</span>.<span style="color:#268bd2">thread</span>.<span style="color:#268bd2">scheduleServiceArgs</span>(<span style="color:#268bd2">r</span>, <span style="color:#268bd2">si</span>.<span style="color:#268bd2">taskRemoved</span>, <span style="color:#268bd2">si</span>.<span style="color:#268bd2">id</span>, <span style="color:#268bd2">flags</span>, <span style="color:#268bd2">si</span>.<span style="color:#268bd2">intent</span>);
+            } <span style="color:#859900">catch</span> (<span style="color:#268bd2">TransactionTooLargeException</span> <span style="color:#268bd2">e</span>) {
+            } <span style="color:#859900">catch</span> (<span style="color:#268bd2">RemoteException</span> <span style="color:#268bd2">e</span>) {
+            } <span style="color:#859900">catch</span> (<span style="color:#268bd2">Exception</span> <span style="color:#268bd2">e</span>) {
             }
         }
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p>在<code>sendServiceArgsLocked</code>方法内通过跨进程<code>scheduleServiceArgs</code>方法，向 ActivityThread 发送消息。</p>
 
 <h3 id="activitythread-类的-handleserviceargs-方法">ActivityThread 类的 handleServiceArgs() 方法</h3>
-
-<pre><code class="language-java">    private void handleServiceArgs(ServiceArgsData data) {
-        Service s = mServices.get(data.token);
-        if (s != null) {
-            try {
-                if (data.args != null) {
-                    data.args.setExtrasClassLoader(s.getClassLoader());
-                    data.args.prepareToEnterProcess();
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">handleServiceArgs</span>(<span style="color:#268bd2">ServiceArgsData</span> <span style="color:#268bd2">data</span>) {
+        <span style="color:#268bd2">Service</span> <span style="color:#268bd2">s</span> = <span style="color:#268bd2">mServices</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">data</span>.<span style="color:#268bd2">token</span>);
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">s</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+            <span style="color:#859900">try</span> {
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">data</span>.<span style="color:#268bd2">args</span> != <span style="color:#859900;font-weight:bold">null</span>) {
+                    <span style="color:#268bd2">data</span>.<span style="color:#268bd2">args</span>.<span style="color:#268bd2">setExtrasClassLoader</span>(<span style="color:#268bd2">s</span>.<span style="color:#268bd2">getClassLoader</span>());
+                    <span style="color:#268bd2">data</span>.<span style="color:#268bd2">args</span>.<span style="color:#268bd2">prepareToEnterProcess</span>();
                 }
-                int res;
-                if (!data.taskRemoved) {
-	                // Service 进入 onStartCommand 状态
-                    res = s.onStartCommand(data.args, data.flags, data.startId);
-                } else {
-                    s.onTaskRemoved(data.args);
-                    res = Service.START_TASK_REMOVED_COMPLETE;
+                <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">res</span>;
+                <span style="color:#859900">if</span> (!<span style="color:#268bd2">data</span>.<span style="color:#268bd2">taskRemoved</span>) {
+	                <span style="color:#93a1a1;font-style:italic">// Service 进入 onStartCommand 状态
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#268bd2">res</span> = <span style="color:#268bd2">s</span>.<span style="color:#268bd2">onStartCommand</span>(<span style="color:#268bd2">data</span>.<span style="color:#268bd2">args</span>, <span style="color:#268bd2">data</span>.<span style="color:#268bd2">flags</span>, <span style="color:#268bd2">data</span>.<span style="color:#268bd2">startId</span>);
+                } <span style="color:#859900">else</span> {
+                    <span style="color:#268bd2">s</span>.<span style="color:#268bd2">onTaskRemoved</span>(<span style="color:#268bd2">data</span>.<span style="color:#268bd2">args</span>);
+                    <span style="color:#268bd2">res</span> = <span style="color:#268bd2">Service</span>.<span style="color:#268bd2">START_TASK_REMOVED_COMPLETE</span>;
                 }
-                QueuedWork.waitToFinish();
-                try {
-                // 向 ActivityManagerService 发送消息取消延时
-                    ActivityManagerNative.getDefault().serviceDoneExecuting(
-                            data.token, SERVICE_DONE_EXECUTING_START, data.startId, res);
-                } catch (RemoteException e) {
-                    // nothing to do.
-                }
-                ensureJitEnabled();
-            } catch (Exception e) {
+                <span style="color:#268bd2">QueuedWork</span>.<span style="color:#268bd2">waitToFinish</span>();
+                <span style="color:#859900">try</span> {
+                <span style="color:#93a1a1;font-style:italic">// 向 ActivityManagerService 发送消息取消延时
+</span><span style="color:#93a1a1;font-style:italic"></span>                    <span style="color:#268bd2">ActivityManagerNative</span>.<span style="color:#268bd2">getDefault</span>().<span style="color:#268bd2">serviceDoneExecuting</span>(
+                            <span style="color:#268bd2">data</span>.<span style="color:#268bd2">token</span>, <span style="color:#268bd2">SERVICE_DONE_EXECUTING_START</span>, <span style="color:#268bd2">data</span>.<span style="color:#268bd2">startId</span>, <span style="color:#268bd2">res</span>);
+                } <span style="color:#859900">catch</span> (<span style="color:#268bd2">RemoteException</span> <span style="color:#268bd2">e</span>) {
+                    <span style="color:#93a1a1;font-style:italic">// nothing to do.
+</span><span style="color:#93a1a1;font-style:italic"></span>                }
+                <span style="color:#268bd2">ensureJitEnabled</span>();
+            } <span style="color:#859900">catch</span> (<span style="color:#268bd2">Exception</span> <span style="color:#268bd2">e</span>) {
             }
         }
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p>ActivityThread 响应 Binder 驱动发送来的消息，仍然通过类型为<code>H</code>的<code>mH</code>处理消息，处理消息的方法就是<code>handleServiceArgs</code>。在方法内，回调了 Service 的<code>onStartCommand</code>方法，并且向 ActivityManagerService 发送消息取消了延时操作。</p>
 
 <p>至此，Service 在新进程中的启动过程就分析结束了，从调用者的<code>startService</code>方法，再到 ActivityManagerService 的处理，再到 Service 进程的<code>onCreate</code>和<code>onStartCommand</code>方法。</p>
@@ -842,146 +816,99 @@ if (!doNotTrack) {
 <li>《Android 系统源代码情景分析》</li>
 <li><a href="http://gityuan.com/2016/03/06/start-service/">http://gityuan.com/2016/03/06/start-service/</a></li>
 </ol>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-start-service/">Android 6.0 Service 启动过程源码分析（一）</a>
-
-                
-
-                
-
-
-        
-        
-        
-      </article>
-
-      
-        
+          
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/android/android-start-activity-from-launcher-4/"> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-4/"> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</a></li>
     
-    <li><a href="/post/android/android-start-activity-from-launcher-3/">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-3/">Android 6.0 Launcher 启动 Activity 过程源码分析（三）</a></li>
     
-    <li><a href="/post/android/android-start-activity-from-launcher-2/">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-2/">Android 6.0 Launcher 启动 Activity 过程源码分析（二）</a></li>
     
-    <li><a href="/post/android/android-start-activity-from-launcher-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-start-activity-from-launcher-1/">Android 6.0 Launcher 启动 Activity 过程源码分析（一）</a></li>
     
-    <li><a href="/post/android/android-statemachine/">Android StateMachine 状态机分析</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-statemachine/">Android StateMachine 状态机分析</a></li>
     
-    <li><a href="/post/android/android-lrucache/">Android LruCache实现分析</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-lrucache/">Android LruCache实现分析</a></li>
     
-    <li><a href="/post/android/android-window-and-view/">Android Activity 创建 Window 及添加 View 流程分析</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-window-and-view/">Android Activity 创建 Window 及添加 View 流程分析</a></li>
     
-    <li><a href="/post/android/android-system-server/">Android 系统服务启动 SystemServer</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-system-server/">Android 系统服务启动 SystemServer</a></li>
     
-    <li><a href="/post/android/android-service-manager/">Android 系统服务管理 ServiceManager</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-service-manager/">Android 系统服务管理 ServiceManager</a></li>
     
-    <li><a href="/post/android/android-material-design-summary-2/">Android Material Desing 控件小结-2</a></li>
+    <li><a href="https://www.glumes.com/post/android/android-material-design-summary-2/">Android Material Desing 控件小结-2</a></li>
     
 </ul>
 
-      
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/android/android-statemachine/" data-toggle="tooltip" data-placement="top" title="Android StateMachine 状态机分析">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/android/android-change-skin-by-plugin/" data-toggle="tooltip" data-placement="top" title="Android 插件换肤原理及源码分析">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+        
 
-      
-      <ul class="pager blog-pager">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-          <li class="previous">
-            <a href="https://glumes.com/post/android/android-statemachine/" data-toggle="tooltip" data-placement="top" title="Android StateMachine 状态机分析">&larr; Previous Post</a>
-          </li>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/android/android-change-skin-by-plugin/" data-toggle="tooltip" data-placement="top" title="Android 插件换肤原理及源码分析">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
-      
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+          
+
+        
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -990,8 +917,6 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -1022,21 +947,8 @@ if (!doNotTrack) {
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -1044,22 +956,28 @@ if (!doNotTrack) {
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -1068,49 +986,66 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

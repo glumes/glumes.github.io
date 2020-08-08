@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>进击的 Vulkan 移动开发之 SwapChain</title>
+  <title>进击的 Vulkan 移动开发之 SwapChain-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
   <meta property="og:title" content="进击的 Vulkan 移动开发之 SwapChain" />
   <meta name="twitter:title" content="进击的 Vulkan 移动开发之 SwapChain" />
 
@@ -59,33 +59,34 @@ Vulkan 开发的系列文章：
 
 
 在之前的文章中，讲到了 Command-Buffer 提交给 Queue 去 …">
-  <meta name="author" content="Glumes"/>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="author" content=""/>
+      <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/vulkan/vulkan-tutorial-swap-chain/" />
+  <meta property="og:url" content="https://www.glumes.com/post/vulkan/vulkan-tutorial-swap-chain/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="技术开发进阶" />
+  <meta property="og:site_name" content="星陨的博客" />
 
   <meta name="generator" content="Hugo 0.55.6" />
-  <link rel="canonical" href="https://glumes.com/post/vulkan/vulkan-tutorial-swap-chain/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="技术开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="canonical" href="https://www.glumes.com/post/vulkan/vulkan-tutorial-swap-chain/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+
   
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
   
+
+  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.eb25aa9bb33f0eb3e9a49c3d5c1ec03fda3aae20449ea0c43f6a456e79c1a6c8.css' integrity='sha256-6yWqm7M/DrPppJw9XB7AP9o6riBEnqDEP2pFbnnBpsg='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
-
-
-
 
 
 
@@ -100,23 +101,11 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
-
-
-
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -124,7 +113,9 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">技术开发进阶</a>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="星陨的博客">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="星陨的博客">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -135,15 +126,15 @@ if (!doNotTrack) {
               <a class="navlinks-parent" href="javascript:void(0)">目录</a>
               <div class="navlinks-children">
                 
-                  <a href="/categories/android">Android</a>
+                  <a href="https://www.glumes.com/categories/android">Android</a>
                 
-                  <a href="/categories/opencv">opencv</a>
+                  <a href="https://www.glumes.com/categories/opencv">opencv</a>
                 
-                  <a href="/categories/opengl">opengl</a>
+                  <a href="https://www.glumes.com/categories/opengl">opengl</a>
                 
-                  <a href="/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                  <a href="https://www.glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
                 
-                  <a href="/categories/python">python</a>
+                  <a href="https://www.glumes.com/categories/python">python</a>
                 
               </div>
             </li>
@@ -151,25 +142,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="/categories/life">生活</a>
+              <a title="生活" href="https://www.glumes.com/categories/life">生活</a>
             </li>
           
         
           
             <li>
-              <a title="标签" href="/tags">标签</a>
+              <a title="标签" href="https://www.glumes.com/tags">标签</a>
             </li>
           
         
           
             <li>
-              <a title="关于" href="/about/">关于</a>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="文章集" href="/post/">文章集</a>
+              <a title="文章集" href="https://www.glumes.com/post/">文章集</a>
             </li>
           
         
@@ -185,9 +176,6 @@ if (!doNotTrack) {
 
   </div>
 </nav>
-
-
-
 
 
     
@@ -206,24 +194,21 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
-        
         <div class="container">
           <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>进击的 Vulkan 移动开发之 SwapChain</h1>
                   
-                     <h1>进击的 Vulkan 移动开发之 SwapChain</h1>
-                     
+                  
                     <span class="post-meta">
-  Posted on April 7, 2019
+  
+    Posted on April 7, 2019
+  
   
 </span>
 
 
-                    
-                  
                   
               </div>
             </div>
@@ -232,45 +217,59 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
+    
+    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-                <h1 align="center">进击的 Vulkan 移动开发之 SwapChain</h1>
+              <h1>进击的 Vulkan 移动开发之 SwapChain</h1>
                 
+                
+                  <span class="post-meta">
+  
+    Posted on April 7, 2019
+  
+  
+</span>
+
+
                 
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    
   </header>
 
 
     
+
+
+
 <div class="container" role="main">
   <div class="row">
+
+    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-
-
-        
-      <div>
-          
-          
-          <h5 id="tags" style="margin-top: 0px;">标签:
+        <div>
             
-                <a href="https://glumes.com/tags/vulkan/">Vulkan</a> &nbsp;
             
-          </h5>
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/vulkan/">Vulkan</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
-      </div>
-
-      <article role="main" class="blog-post" itemprop="articleBody" id="content">
-        
-          
+            
 <aside class="toc">
   <nav id="TableOfContents">
 <ul>
@@ -298,8 +297,21 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-        
-        <blockquote>
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <blockquote>
 <p>Vulkan 开发的系列文章：</p>
 
 <ol>
@@ -324,56 +336,50 @@ if (!doNotTrack) {
 <h2 id="开启-swapchain-的拓展">开启 SwapChain 的拓展</h2>
 
 <p>还记得在  <a href="https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/">进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</a> 文章中创建 <code>Instance</code>、<code>Device</code> 组件时的 <code>VkXXXXCreateInfo</code> 结构体中都有表示拓展的一些字段，之前就没有用到就直接忽略了，现在就得开启这个拓展来启用 <code>SwapChain</code> ，需要分别为 <code>Instance</code> 和 <code>Device</code> 指定拓展。</p>
-
-<pre><code class="language-cpp">    // 定义两个容器来 指定对应的 拓展
-    // instance 的 extension 拓展
-    std::vector&lt;const char *&gt; instance_extension_names;
-    // device 的 extension 拓展
-    std::vector&lt;const char *&gt; device_extension_names;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 定义两个容器来 指定对应的 拓展
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#93a1a1;font-style:italic">// instance 的 extension 拓展
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">vector</span>&lt;<span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> *&gt; <span style="color:#268bd2">instance_extension_names</span>;
+    <span style="color:#93a1a1;font-style:italic">// device 的 extension 拓展
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">vector</span>&lt;<span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">char</span> *&gt; <span style="color:#268bd2">device_extension_names</span>;
     
-    // 初始化 Instance 和 Device 的拓展
-    void vulkan_init_instance_extension_name(struct vulkan_tutorial_info &amp;info) {
-        info.instance_extension_names.push_back(VK_KHR_SURFACE_EXTENSION_NAME);
-        info.instance_extension_names.push_back(VK_KHR_ANDROID_SURFACE_EXTENSION_NAME);
+    <span style="color:#93a1a1;font-style:italic">// 初始化 Instance 和 Device 的拓展
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">vulkan_init_instance_extension_name</span>(<span style="color:#859900">struct</span> <span style="color:#268bd2">vulkan_tutorial_info</span> &amp;<span style="color:#268bd2">info</span>) {
+        <span style="color:#268bd2">info</span>.<span style="color:#268bd2">instance_extension_names</span>.<span style="color:#268bd2">push_back</span>(<span style="color:#268bd2">VK_KHR_SURFACE_EXTENSION_NAME</span>);
+        <span style="color:#268bd2">info</span>.<span style="color:#268bd2">instance_extension_names</span>.<span style="color:#268bd2">push_back</span>(<span style="color:#268bd2">VK_KHR_ANDROID_SURFACE_EXTENSION_NAME</span>);
     }
 
-    void vulkan_init_device_extension_name(struct vulkan_tutorial_info &amp;info) {
-        info.device_extension_names.push_back(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
+    <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">vulkan_init_device_extension_name</span>(<span style="color:#859900">struct</span> <span style="color:#268bd2">vulkan_tutorial_info</span> &amp;<span style="color:#268bd2">info</span>) {
+        <span style="color:#268bd2">info</span>.<span style="color:#268bd2">device_extension_names</span>.<span style="color:#268bd2">push_back</span>(<span style="color:#268bd2">VK_KHR_SWAPCHAIN_EXTENSION_NAME</span>);
     }
-</code></pre>
-
+</code></pre></div>
 <p>要注意，这里的拓展，其实是对应的宏所代表的字符串数组指针，并不是要搞什么特殊的标志位之类的，而且这些字符串宏在都在 <code>vulkan.h</code> 和 <code>vulkan_android.h</code> 头文件中都包含了。</p>
 
 <p>如果是在 Android 平台上，那么就照着上面的写就好了，并不需要修改什么了，都是固定的。</p>
 
 <p>另外，在创建 <code>Instance</code> 组件的时候就可以启用这些拓展了：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">VkInstanceCreateInfo</span> <span style="color:#268bd2">instance_info</span> = {};
 
-<pre><code class="language-cpp">    VkInstanceCreateInfo instance_info = {};
-
-    // Extension and Layer
-    instance_info.enabledExtensionCount = info.instance_extension_names.size();
-    instance_info.ppEnabledExtensionNames = info.instance_extension_names.data();
-    // 这里没有用到 Layer 就还是设为 null 就好了
-    instance_info.ppEnabledLayerNames = nullptr;
-    instance_info.enabledLayerCount = 0;
-</code></pre>
-
+    <span style="color:#93a1a1;font-style:italic">// Extension and Layer
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">enabledExtensionCount</span> = <span style="color:#268bd2">info</span>.<span style="color:#268bd2">instance_extension_names</span>.<span style="color:#268bd2">size</span>();
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">ppEnabledExtensionNames</span> = <span style="color:#268bd2">info</span>.<span style="color:#268bd2">instance_extension_names</span>.<span style="color:#268bd2">data</span>();
+    <span style="color:#93a1a1;font-style:italic">// 这里没有用到 Layer 就还是设为 null 就好了
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">ppEnabledLayerNames</span> = <span style="color:#859900">nullptr</span>;
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">enabledLayerCount</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
+</code></pre></div>
 <p>接下来在 <code>VkInstanceCreateInfo</code> 结构中去声明要启用拓展。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">VkInstanceCreateInfo</span> <span style="color:#268bd2">instance_info</span> = {};
 
-<pre><code class="language-cpp">    VkInstanceCreateInfo instance_info = {};
-
-    instance_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-    instance_info.pNext = nullptr;
-    instance_info.pApplicationInfo = &amp;app_info;
-    instance_info.flags = 0;
-    // 在这里启用拓展相关设定
-    instance_info.enabledExtensionCount = info.instance_extension_names.size();
-    instance_info.ppEnabledExtensionNames = info.instance_extension_names.data();
-    // 这里没有用到 Layer 就还是设为 null 就好了
-    instance_info.ppEnabledLayerNames = nullptr;
-    instance_info.enabledLayerCount = 0;
-</code></pre>
-
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">sType</span> = <span style="color:#268bd2">VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO</span>;
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">pNext</span> = <span style="color:#859900">nullptr</span>;
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">pApplicationInfo</span> = &amp;<span style="color:#268bd2">app_info</span>;
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">flags</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
+    <span style="color:#93a1a1;font-style:italic">// 在这里启用拓展相关设定
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">enabledExtensionCount</span> = <span style="color:#268bd2">info</span>.<span style="color:#268bd2">instance_extension_names</span>.<span style="color:#268bd2">size</span>();
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">ppEnabledExtensionNames</span> = <span style="color:#268bd2">info</span>.<span style="color:#268bd2">instance_extension_names</span>.<span style="color:#268bd2">data</span>();
+    <span style="color:#93a1a1;font-style:italic">// 这里没有用到 Layer 就还是设为 null 就好了
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">ppEnabledLayerNames</span> = <span style="color:#859900">nullptr</span>;
+    <span style="color:#268bd2">instance_info</span>.<span style="color:#268bd2">enabledLayerCount</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
+</code></pre></div>
 <h2 id="创建-swapchain-的步骤">创建 SwapChain 的步骤</h2>
 
 <p>创建 SwapChain 有的基本步骤如下：</p>
@@ -414,101 +420,87 @@ if (!doNotTrack) {
 </blockquote>
 
 <p>Android 的 Surface 在 Native 中对应的是 <code>ANativeWindow</code>，根据它创建 <code>VkSurfaceKHR</code> 。</p>
-
-<pre><code class="language-cpp">    // 宏定义的函数
-    GET_INSTANCE_PROC_ADDR(info.instance, CreateAndroidSurfaceKHR);
-    VkAndroidSurfaceCreateInfoKHR createInfo{};
-    createInfo.sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
-    createInfo.pNext = nullptr;
-    createInfo.flags = 0;
-    // window 参数就是 ANativeWindow
-    createInfo.window = window;
-    // fpCreateAndroidSurfaceKHR 其实是一个函数指针
-    VkResult res = info.fpCreateAndroidSurfaceKHR(info.instance, &amp;createInfo, nullptr, &amp;info.surface);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 宏定义的函数
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">GET_INSTANCE_PROC_ADDR</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">instance</span>, <span style="color:#268bd2">CreateAndroidSurfaceKHR</span>);
+    <span style="color:#268bd2">VkAndroidSurfaceCreateInfoKHR</span> <span style="color:#268bd2">createInfo</span>{};
+    <span style="color:#268bd2">createInfo</span>.<span style="color:#268bd2">sType</span> = <span style="color:#268bd2">VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR</span>;
+    <span style="color:#268bd2">createInfo</span>.<span style="color:#268bd2">pNext</span> = <span style="color:#859900">nullptr</span>;
+    <span style="color:#268bd2">createInfo</span>.<span style="color:#268bd2">flags</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
+    <span style="color:#93a1a1;font-style:italic">// window 参数就是 ANativeWindow
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">createInfo</span>.<span style="color:#268bd2">window</span> = <span style="color:#268bd2">window</span>;
+    <span style="color:#93a1a1;font-style:italic">// fpCreateAndroidSurfaceKHR 其实是一个函数指针
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkResult</span> <span style="color:#268bd2">res</span> = <span style="color:#268bd2">info</span>.<span style="color:#268bd2">fpCreateAndroidSurfaceKHR</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">instance</span>, &amp;<span style="color:#268bd2">createInfo</span>, <span style="color:#859900">nullptr</span>, &amp;<span style="color:#268bd2">info</span>.<span style="color:#268bd2">surface</span>);
+</code></pre></div>
 <p>通过 <code>VkSurfaceKHR</code> 相当于就屏蔽了不同平台上的实现，统一了调用对象。</p>
 
 <p>要注意一个调用方式：在 <code>fpCreateAndroidSurfaceKHR</code> 函数执行之前，要运行 <code>GET_INSTANCE_PROC_ADDR</code> 宏函数，它的定义如下：</p>
-
-<pre><code class="language-cpp">#define GET_INSTANCE_PROC_ADDR(inst, entrypoint)                               \
-    {                                                                          \
-        info.fp##entrypoint =                                                  \
-            (PFN_vk##entrypoint)vkGetInstanceProcAddr(inst, &quot;vk&quot; #entrypoint); \
-        if (info.fp##entrypoint == nullptr) {                                  \
-            LOGE(&quot;entry point is null&quot;);                                       \
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#define GET_INSTANCE_PROC_ADDR(inst, entrypoint)                               \
+</span><span style="color:#93a1a1;font-style:italic"></span>    {                                                                          \
+        <span style="color:#268bd2">info</span>.<span style="color:#268bd2">fp</span><span style="color:#93a1a1;font-style:italic">##entrypoint =                                                  \
+</span><span style="color:#93a1a1;font-style:italic"></span>            (<span style="color:#268bd2">PFN_vk</span><span style="color:#93a1a1;font-style:italic">##entrypoint)vkGetInstanceProcAddr(inst, &#34;vk&#34; #entrypoint); \
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> (<span style="color:#268bd2">info</span>.<span style="color:#268bd2">fp</span><span style="color:#93a1a1;font-style:italic">##entrypoint == nullptr) {                                  \
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#268bd2">LOGE</span>(<span style="color:#2aa198">&#34;entry point is null&#34;</span>);                                       \
         }                                                                      \
     }
-</code></pre>
-
+</code></pre></div>
 <p>这段宏函数的作用就是将 <code>fpCreateAndroidSurfaceKHR</code> 的函数指针指向具体的地址，不然就会报 null pointer exception 。</p>
 
 <h3 id="present-queue-和-graphics-queue-的索引">present queue 和 graphics queue 的索引</h3>
 
 <p>接下来就是从所有的 <code>Queue</code> 中找到 <code>present queue</code> 和 <code>graphics queue</code> 的索引。</p>
-
-<pre><code class="language-cpp">    // 先将所有的 index 都初始化到一个最大值，好用于后续的判断过程
-    info.graphics_queue_family_index = UINT32_MAX;
-    info.present_queue_family_index = UINT32_MAX;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 先将所有的 index 都初始化到一个最大值，好用于后续的判断过程
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">info</span>.<span style="color:#268bd2">graphics_queue_family_index</span> = <span style="color:#268bd2">UINT32_MAX</span>;
+    <span style="color:#268bd2">info</span>.<span style="color:#268bd2">present_queue_family_index</span> = <span style="color:#268bd2">UINT32_MAX</span>;
+</code></pre></div>
 <p>这里是要找到两个索引，那么就先初始化到最大值，好用于后续的比较过程。</p>
 
 <p>接下来从所有的 <code>Queue</code> 找到支持 <code>呈现（present）</code> 的 。</p>
-
-<pre><code class="language-cpp">    // 分配个数为 queue size 大小的数组，数组元素是 VkBool32 类型
-    VkBool32 *supportPresent = static_cast&lt;VkBool32 *&gt;(malloc(info.queue_family_size * sizeof(VkBool32)));
-    // queue_family_size 为所有 queue 的个数
-    for (uint32_t i = 0; i &lt; info.queue_family_size; i++) {
-        // physical device 的 queue 是否支持 surface
-        vkGetPhysicalDeviceSurfaceSupportKHR(info.gpu_physical_devices[0], i, info.surface, &amp;supportPresent[i]);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 分配个数为 queue size 大小的数组，数组元素是 VkBool32 类型
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkBool32</span> *<span style="color:#268bd2">supportPresent</span> = <span style="color:#859900">static_cast</span>&lt;<span style="color:#268bd2">VkBool32</span> *&gt;(<span style="color:#268bd2">malloc</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">queue_family_size</span> * <span style="color:#859900">sizeof</span>(<span style="color:#268bd2">VkBool32</span>)));
+    <span style="color:#93a1a1;font-style:italic">// queue_family_size 为所有 queue 的个数
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">for</span> (<span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">i</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#268bd2">info</span>.<span style="color:#268bd2">queue_family_size</span>; <span style="color:#268bd2">i</span>++) {
+        <span style="color:#93a1a1;font-style:italic">// physical device 的 queue 是否支持 surface
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">vkGetPhysicalDeviceSurfaceSupportKHR</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">gpu_physical_devices</span>[<span style="color:#2aa198;font-weight:bold">0</span>], <span style="color:#268bd2">i</span>, <span style="color:#268bd2">info</span>.<span style="color:#268bd2">surface</span>, &amp;<span style="color:#268bd2">supportPresent</span>[<span style="color:#268bd2">i</span>]);
     }
-</code></pre>
-
+</code></pre></div>
 <p>通过 <code>vkGetPhysicalDeviceSurfaceSupportKHR</code> 函数判断该物理设备的某个 <code>Queue</code> 是否支持上面创建的 <code>VkSurfaceKHR</code> ，也就是该 Queue 是否支持 <code>呈现（present）</code>，并把结果记录到 <code>supportPresent</code> 数组中。</p>
 
 <p>至于判断该 Queue 是否支持 <code>图像（Graphics）</code>，在前面的文章中已经提过了，只要判断 <code>queueFlags</code> 与 <code>VK_QUEUE_GRAPHICS_BIT</code> 相与 <code>&amp;</code> 的结果就好了。</p>
-
-<pre><code class="language-cpp">    for (uint32_t i = 0; i &lt; info.queue_family_size; ++i) {
-        // queue 是否图像，通过 queueFlags 来判断
-        if ((info.queue_family_props[i].queueFlags &amp; VK_QUEUE_GRAPHICS_BIT) != 0) {
-            if (info.graphics_queue_family_index == UINT32_MAX) {
-                info.graphics_queue_family_index = i;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900">for</span> (<span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">i</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#268bd2">info</span>.<span style="color:#268bd2">queue_family_size</span>; ++<span style="color:#268bd2">i</span>) {
+        <span style="color:#93a1a1;font-style:italic">// queue 是否图像，通过 queueFlags 来判断
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">if</span> ((<span style="color:#268bd2">info</span>.<span style="color:#268bd2">queue_family_props</span>[<span style="color:#268bd2">i</span>].<span style="color:#268bd2">queueFlags</span> &amp; <span style="color:#268bd2">VK_QUEUE_GRAPHICS_BIT</span>) != <span style="color:#2aa198;font-weight:bold">0</span>) {
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">info</span>.<span style="color:#268bd2">graphics_queue_family_index</span> == <span style="color:#268bd2">UINT32_MAX</span>) {
+                <span style="color:#268bd2">info</span>.<span style="color:#268bd2">graphics_queue_family_index</span> = <span style="color:#268bd2">i</span>;
             }
 
-            // 找到了即支持 graphics 也支持 present 的 queue index
-            if (supportPresent[i] == VK_TRUE) {
-                info.graphics_queue_family_index = i;
-                info.present_queue_family_index = i;
-                break;
+            <span style="color:#93a1a1;font-style:italic">// 找到了即支持 graphics 也支持 present 的 queue index
+</span><span style="color:#93a1a1;font-style:italic"></span>            <span style="color:#859900">if</span> (<span style="color:#268bd2">supportPresent</span>[<span style="color:#268bd2">i</span>] == <span style="color:#268bd2">VK_TRUE</span>) {
+                <span style="color:#268bd2">info</span>.<span style="color:#268bd2">graphics_queue_family_index</span> = <span style="color:#268bd2">i</span>;
+                <span style="color:#268bd2">info</span>.<span style="color:#268bd2">present_queue_family_index</span> = <span style="color:#268bd2">i</span>;
+                <span style="color:#859900">break</span>;
             }
         }
     }
-</code></pre>
-
+</code></pre></div>
 <p>在查找 <code>Queue</code> 是否支持 <code>图像（Graphics）</code> 的同时，也顺便判断一下该 <code>Queue</code> 是否支持 <code>呈现（present）</code> ，如果两者都满足，那是最好了。</p>
-
-<pre><code class="language-cpp">   // 没有找到一个 queue 两者都支持，那么找到一个支持 present 的 queue  index
-    if (info.present_queue_family_index == UINT32_MAX) {
-        for (size_t i = 0; i &lt; info.queue_family_size; ++i) {
-            if (supportPresent[i] == VK_TRUE) {
-                info.present_queue_family_index = i;
-                break;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">   <span style="color:#93a1a1;font-style:italic">// 没有找到一个 queue 两者都支持，那么找到一个支持 present 的 queue  index
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">if</span> (<span style="color:#268bd2">info</span>.<span style="color:#268bd2">present_queue_family_index</span> == <span style="color:#268bd2">UINT32_MAX</span>) {
+        <span style="color:#859900">for</span> (<span style="color:#268bd2">size_t</span> <span style="color:#268bd2">i</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#268bd2">info</span>.<span style="color:#268bd2">queue_family_size</span>; ++<span style="color:#268bd2">i</span>) {
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">supportPresent</span>[<span style="color:#268bd2">i</span>] == <span style="color:#268bd2">VK_TRUE</span>) {
+                <span style="color:#268bd2">info</span>.<span style="color:#268bd2">present_queue_family_index</span> = <span style="color:#268bd2">i</span>;
+                <span style="color:#859900">break</span>;
             }
         }
     }
-    // 释放创建的数组，及时释放，后续用不到了
-    free(supportPresent);
-</code></pre>
-
+    <span style="color:#93a1a1;font-style:italic">// 释放创建的数组，及时释放，后续用不到了
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">free</span>(<span style="color:#268bd2">supportPresent</span>);
+</code></pre></div>
 <p>如果 <code>present_queue_family_index</code> 仍为初始值，那说明没有 <code>Queue</code> 同时满足两者，两个 index 只能各取不同的值了。</p>
-
-<pre><code class="language-cpp">    // 如果都没找到，就报错了
-    if (info.graphics_queue_family_index == UINT32_MAX || info.present_queue_family_index == UINT32_MAX) {
-        LOGE(&quot;could not find a queue for graphics and present&quot;);
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 如果都没找到，就报错了
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">if</span> (<span style="color:#268bd2">info</span>.<span style="color:#268bd2">graphics_queue_family_index</span> == <span style="color:#268bd2">UINT32_MAX</span> || <span style="color:#268bd2">info</span>.<span style="color:#268bd2">present_queue_family_index</span> == <span style="color:#268bd2">UINT32_MAX</span>) {
+        <span style="color:#268bd2">LOGE</span>(<span style="color:#2aa198">&#34;could not find a queue for graphics and present&#34;</span>);
     }
-</code></pre>
-
+</code></pre></div>
 <p>如果都为初始值，那么就可以报错了。</p>
 
 <p>另外要注意的是，之前创建 Device 需要支持 <code>图像（Graphics）</code> 的队列索引，而现在可以把创建 Device 和 Queue 的工作放到完成 <code>Present</code> 和 <code>Graphics</code> 索引检索之后了。</p>
@@ -516,39 +508,33 @@ if (!doNotTrack) {
 <h3 id="查找-vkformat-格式">查找 VkFormat 格式</h3>
 
 <p>接下来要查询物理设备所支持的 <code>SurfaceFormat</code> 格式，也就是用来绘制的 Surface 支持哪些 <code>色彩空间格式(ColorSpace)</code> ，查询的操作调用还是 Vulkan 的固定套路：</p>
-
-<pre><code class="language-cpp">    // 先获得数量
-    uint32_t formatCount;
-    res = vkGetPhysicalDeviceSurfaceFormatsKHR(info.gpu_physical_devices[0], info.surface, &amp;formatCount, nullptr);
-    // 再获得具体内容 VkSurfaceFormatKHR
-    VkSurfaceFormatKHR *surfaceFormats = static_cast&lt;VkSurfaceFormatKHR *&gt;(malloc(
-            formatCount * sizeof(VkSurfaceFormatKHR)));
-    // 获得物理设备的 SurfaceFormat
-    res = vkGetPhysicalDeviceSurfaceFormatsKHR(info.gpu_physical_devices[0], info.surface, &amp;formatCount,
-                                               surfaceFormats);    
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 先获得数量
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">formatCount</span>;
+    <span style="color:#268bd2">res</span> = <span style="color:#268bd2">vkGetPhysicalDeviceSurfaceFormatsKHR</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">gpu_physical_devices</span>[<span style="color:#2aa198;font-weight:bold">0</span>], <span style="color:#268bd2">info</span>.<span style="color:#268bd2">surface</span>, &amp;<span style="color:#268bd2">formatCount</span>, <span style="color:#859900">nullptr</span>);
+    <span style="color:#93a1a1;font-style:italic">// 再获得具体内容 VkSurfaceFormatKHR
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkSurfaceFormatKHR</span> *<span style="color:#268bd2">surfaceFormats</span> = <span style="color:#859900">static_cast</span>&lt;<span style="color:#268bd2">VkSurfaceFormatKHR</span> *&gt;(<span style="color:#268bd2">malloc</span>(
+            <span style="color:#268bd2">formatCount</span> * <span style="color:#859900">sizeof</span>(<span style="color:#268bd2">VkSurfaceFormatKHR</span>)));
+    <span style="color:#93a1a1;font-style:italic">// 获得物理设备的 SurfaceFormat
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">res</span> = <span style="color:#268bd2">vkGetPhysicalDeviceSurfaceFormatsKHR</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">gpu_physical_devices</span>[<span style="color:#2aa198;font-weight:bold">0</span>], <span style="color:#268bd2">info</span>.<span style="color:#268bd2">surface</span>, &amp;<span style="color:#268bd2">formatCount</span>,
+                                               <span style="color:#268bd2">surfaceFormats</span>);    
+</code></pre></div>
 <p><code>SurfaceFormat</code> 结构体包含了如下的信息：</p>
-
-<pre><code class="language-cpp">    typedef struct VkSurfaceFormatKHR {
-        VkFormat           format;
-        VkColorSpaceKHR    colorSpace;
-    } VkSurfaceFormatKHR;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900">typedef</span> <span style="color:#859900">struct</span> <span style="color:#268bd2">VkSurfaceFormatKHR</span> {
+        <span style="color:#268bd2">VkFormat</span>           <span style="color:#268bd2">format</span>;
+        <span style="color:#268bd2">VkColorSpaceKHR</span>    <span style="color:#268bd2">colorSpace</span>;
+    } <span style="color:#268bd2">VkSurfaceFormatKHR</span>;
+</code></pre></div>
 <p>主要就是 <code>VkFormat</code> 和 <code>VkColorSpaceKHR</code> 两个属性。</p>
 
 <p>接下来是对获取的格式做处理，主要是得到 <code>VkFormat</code> 格式信息：</p>
-
-<pre><code class="language-cpp">    if (formatCount == 1 &amp;&amp; surfFormats[0].format == VK_FORMAT_UNDEFINED) {
-        info.format = VK_FORMAT_B8G8R8A8_UNORM;
-    } else {
-        assert(formatCount &gt;= 1);
-        info.format = surfFormats[0].format;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#859900">if</span> (<span style="color:#268bd2">formatCount</span> == <span style="color:#2aa198;font-weight:bold">1</span> &amp;&amp; <span style="color:#268bd2">surfFormats</span>[<span style="color:#2aa198;font-weight:bold">0</span>].<span style="color:#268bd2">format</span> == <span style="color:#268bd2">VK_FORMAT_UNDEFINED</span>) {
+        <span style="color:#268bd2">info</span>.<span style="color:#268bd2">format</span> = <span style="color:#268bd2">VK_FORMAT_B8G8R8A8_UNORM</span>;
+    } <span style="color:#859900">else</span> {
+        <span style="color:#268bd2">assert</span>(<span style="color:#268bd2">formatCount</span> &gt;= <span style="color:#2aa198;font-weight:bold">1</span>);
+        <span style="color:#268bd2">info</span>.<span style="color:#268bd2">format</span> = <span style="color:#268bd2">surfFormats</span>[<span style="color:#2aa198;font-weight:bold">0</span>].<span style="color:#268bd2">format</span>;
     }
-    free(surfFormats);
-</code></pre>
-
+    <span style="color:#268bd2">free</span>(<span style="color:#268bd2">surfFormats</span>);
+</code></pre></div>
 <p>如果支持的格式数量只有一个，并且它还是 <code>VK_FORMAT_UNDEFINED</code> ，说明 Surface 并没有一个首选的格式，此时可以使用任何一个有效的格式。</p>
 
 <p>如果数量大于一个，那使用第一个就好了。</p>
@@ -556,139 +542,121 @@ if (!doNotTrack) {
 <h3 id="vksurfacecapabilitieskhr-和-vkpresentmodekhr-以及相关参数的设定">VkSurfaceCapabilitiesKHR 和 VkPresentModeKHR 以及相关参数的设定</h3>
 
 <p>除了 Surface 的 <code>VkFormat</code> 格式 ，还需要查询它的<code>能力(Capabilities)</code> ，得到 <code>VkSurfaceCapabilitiesKHR</code> 对象。</p>
-
-<pre><code class="language-cpp">    VkSurfaceCapabilitiesKHR surfaceCapabilitiesKHR;
-    res = vkGetPhysicalDeviceSurfaceCapabilitiesKHR(info.gpu_physical_devices[0], info.surface,&amp;surfaceCapabilitiesKHR);    
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">VkSurfaceCapabilitiesKHR</span> <span style="color:#268bd2">surfaceCapabilitiesKHR</span>;
+    <span style="color:#268bd2">res</span> = <span style="color:#268bd2">vkGetPhysicalDeviceSurfaceCapabilitiesKHR</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">gpu_physical_devices</span>[<span style="color:#2aa198;font-weight:bold">0</span>], <span style="color:#268bd2">info</span>.<span style="color:#268bd2">surface</span>,&amp;<span style="color:#268bd2">surfaceCapabilitiesKHR</span>);    
+</code></pre></div>
 <p><code>VkSurfaceCapabilitiesKHR</code> 对象包含了很多属性，如下：</p>
-
-<pre><code class="language-cpp">typedef struct VkSurfaceCapabilitiesKHR {
-    // 交换链 SwapChain 能够创建的最小的 Image 数量，最少是 1
-    uint32_t                         minImageCount;
-    // 交换链 SwapChain 能够创建的最大的 Image 数量
-    uint32_t                         maxImageCount;
-    // Surface 当前的宽和高，如果宽高都是是 0xFFFFFFFF，表明宽高由交换链拓展的目标 Surface 来决定
-    VkExtent2D                       currentExtent;
-    // 最小的
-    VkExtent2D                       minImageExtent;
-    VkExtent2D                       maxImageExtent;
-    uint32_t                         maxImageArrayLayers;
-    // 支持的旋转模式
-    VkSurfaceTransformFlagsKHR       supportedTransforms;
-    // 当前的旋转模式
-    VkSurfaceTransformFlagBitsKHR    currentTransform;
-    // Surface 透明度的设定
-    VkCompositeAlphaFlagsKHR         supportedCompositeAlpha;
-    VkImageUsageFlags                supportedUsageFlags;
-} VkSurfaceCapabilitiesKHR;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">typedef</span> <span style="color:#859900">struct</span> <span style="color:#268bd2">VkSurfaceCapabilitiesKHR</span> {
+    <span style="color:#93a1a1;font-style:italic">// 交换链 SwapChain 能够创建的最小的 Image 数量，最少是 1
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">uint32_t</span>                         <span style="color:#268bd2">minImageCount</span>;
+    <span style="color:#93a1a1;font-style:italic">// 交换链 SwapChain 能够创建的最大的 Image 数量
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">uint32_t</span>                         <span style="color:#268bd2">maxImageCount</span>;
+    <span style="color:#93a1a1;font-style:italic">// Surface 当前的宽和高，如果宽高都是是 0xFFFFFFFF，表明宽高由交换链拓展的目标 Surface 来决定
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkExtent2D</span>                       <span style="color:#268bd2">currentExtent</span>;
+    <span style="color:#93a1a1;font-style:italic">// 最小的
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkExtent2D</span>                       <span style="color:#268bd2">minImageExtent</span>;
+    <span style="color:#268bd2">VkExtent2D</span>                       <span style="color:#268bd2">maxImageExtent</span>;
+    <span style="color:#268bd2">uint32_t</span>                         <span style="color:#268bd2">maxImageArrayLayers</span>;
+    <span style="color:#93a1a1;font-style:italic">// 支持的旋转模式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkSurfaceTransformFlagsKHR</span>       <span style="color:#268bd2">supportedTransforms</span>;
+    <span style="color:#93a1a1;font-style:italic">// 当前的旋转模式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkSurfaceTransformFlagBitsKHR</span>    <span style="color:#268bd2">currentTransform</span>;
+    <span style="color:#93a1a1;font-style:italic">// Surface 透明度的设定
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkCompositeAlphaFlagsKHR</span>         <span style="color:#268bd2">supportedCompositeAlpha</span>;
+    <span style="color:#268bd2">VkImageUsageFlags</span>                <span style="color:#268bd2">supportedUsageFlags</span>;
+} <span style="color:#268bd2">VkSurfaceCapabilitiesKHR</span>;
+</code></pre></div>
 <p>当我们创建 SwapChain 的时候，需要设定很多的参数，比如 Surface 旋转和透明度等，而这些参数就要考虑到 <code>VkSurfaceCapabilitiesKHR</code> 是不是支持了，这也是为什么要查询 SurfaceCapabilities 的原因。</p>
 
 <h4 id="关于-surface-透明度合成的设定">关于 Surface 透明度合成的设定</h4>
 
 <p>关于 Surface 透明度合成的模式，在 Vulkan 中定义了如下几种模式：</p>
-
-<pre><code class="language-cpp">typedef enum VkCompositeAlphaFlagBitsKHR {
-    VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR = 0x00000001,
-    VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR = 0x00000002,
-    VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR = 0x00000004,
-    VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR = 0x00000008,
-    VK_COMPOSITE_ALPHA_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
-} VkCompositeAlphaFlagBitsKHR;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">typedef</span> <span style="color:#859900">enum</span> <span style="color:#268bd2">VkCompositeAlphaFlagBitsKHR</span> {
+    <span style="color:#268bd2">VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x00000001</span>,
+    <span style="color:#268bd2">VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x00000002</span>,
+    <span style="color:#268bd2">VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x00000004</span>,
+    <span style="color:#268bd2">VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x00000008</span>,
+    <span style="color:#268bd2">VK_COMPOSITE_ALPHA_FLAG_BITS_MAX_ENUM_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x7FFFFFFF</span>
+} <span style="color:#268bd2">VkCompositeAlphaFlagBitsKHR</span>;
+</code></pre></div>
 <p>我们要根据 <code>VkSurfaceCapabilitiesKHR</code> 的支持能力去选择最合适的。</p>
-
-<pre><code class="language-cpp">    // 预定义 VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR 模式
-    VkCompositeAlphaFlagBitsKHR compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
-    // 在以下四种模式去选择 VkSurfaceCapabilitiesKHR 所支持的
-    VkCompositeAlphaFlagBitsKHR compositeAlphaFlags[4] = {
-            VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
-            VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR,
-            VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR,
-            VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR,
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 预定义 VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR 模式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkCompositeAlphaFlagBitsKHR</span> <span style="color:#268bd2">compositeAlpha</span> = <span style="color:#268bd2">VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR</span>;
+    <span style="color:#93a1a1;font-style:italic">// 在以下四种模式去选择 VkSurfaceCapabilitiesKHR 所支持的
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkCompositeAlphaFlagBitsKHR</span> <span style="color:#268bd2">compositeAlphaFlags</span>[<span style="color:#2aa198;font-weight:bold">4</span>] = {
+            <span style="color:#268bd2">VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR</span>,
+            <span style="color:#268bd2">VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR</span>,
+            <span style="color:#268bd2">VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR</span>,
+            <span style="color:#268bd2">VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR</span>,
     };
-    // 通过相与 &amp; 的操作去判断，找到合适的就退出
-    for (uint32_t i = 0; i &lt; sizeof(compositeAlphaFlags); i++) {
-        if (surfaceCapabilitiesKHR.supportedCompositeAlpha &amp; compositeAlphaFlags[i]) {
-            compositeAlpha = compositeAlphaFlags[i];
-            break;
+    <span style="color:#93a1a1;font-style:italic">// 通过相与 &amp; 的操作去判断，找到合适的就退出
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#859900">for</span> (<span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">i</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#859900">sizeof</span>(<span style="color:#268bd2">compositeAlphaFlags</span>); <span style="color:#268bd2">i</span>++) {
+        <span style="color:#859900">if</span> (<span style="color:#268bd2">surfaceCapabilitiesKHR</span>.<span style="color:#268bd2">supportedCompositeAlpha</span> &amp; <span style="color:#268bd2">compositeAlphaFlags</span>[<span style="color:#268bd2">i</span>]) {
+            <span style="color:#268bd2">compositeAlpha</span> = <span style="color:#268bd2">compositeAlphaFlags</span>[<span style="color:#268bd2">i</span>];
+            <span style="color:#859900">break</span>;
         }
     }
-</code></pre>
-
+</code></pre></div>
 <h4 id="关于-surface-旋转的设定">关于 Surface 旋转的设定</h4>
 
 <p>关于 Surface 的旋转模式，在 Vulkan 中也定义了如下几种模式：</p>
-
-<pre><code class="language-cpp">typedef enum VkSurfaceTransformFlagBitsKHR {
-    // 不旋转
-    VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR = 0x00000001,
-    // 旋转 90°
-    VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR = 0x00000002,
-    // 旋转 180°
-    VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR = 0x00000004,
-    // 旋转 270°
-    VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR = 0x00000008,
-    // 水平镜像
-    VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR = 0x00000010,
-    VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR = 0x00000020,
-    VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR = 0x00000040,
-    VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR = 0x00000080,
-    VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR = 0x00000100,
-    VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
-} VkSurfaceTransformFlagBitsKHR;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">typedef</span> <span style="color:#859900">enum</span> <span style="color:#268bd2">VkSurfaceTransformFlagBitsKHR</span> {
+    <span style="color:#93a1a1;font-style:italic">// 不旋转
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x00000001</span>,
+    <span style="color:#93a1a1;font-style:italic">// 旋转 90°
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x00000002</span>,
+    <span style="color:#93a1a1;font-style:italic">// 旋转 180°
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x00000004</span>,
+    <span style="color:#93a1a1;font-style:italic">// 旋转 270°
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x00000008</span>,
+    <span style="color:#93a1a1;font-style:italic">// 水平镜像
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x00000010</span>,
+    <span style="color:#268bd2">VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x00000020</span>,
+    <span style="color:#268bd2">VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x00000040</span>,
+    <span style="color:#268bd2">VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x00000080</span>,
+    <span style="color:#268bd2">VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x00000100</span>,
+    <span style="color:#268bd2">VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x7FFFFFFF</span>
+} <span style="color:#268bd2">VkSurfaceTransformFlagBitsKHR</span>;
+</code></pre></div>
 <p>同样也要根据 <code>VkSurfaceCapabilitiesKHR</code> 的支持能力去选择最合适的。</p>
-
-<pre><code class="language-cpp">    // 如果 Surface 支持不旋转，那么就不旋转，否则使用当前的旋转模式
-    VkSurfaceTransformFlagBitsKHR preTransform;
-    if (surfaceCapabilitiesKHR.supportedTransforms &amp; VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR) {
-        preTransform = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR;
-    } else {
-        preTransform = surfaceCapabilitiesKHR.currentTransform;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 如果 Surface 支持不旋转，那么就不旋转，否则使用当前的旋转模式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkSurfaceTransformFlagBitsKHR</span> <span style="color:#268bd2">preTransform</span>;
+    <span style="color:#859900">if</span> (<span style="color:#268bd2">surfaceCapabilitiesKHR</span>.<span style="color:#268bd2">supportedTransforms</span> &amp; <span style="color:#268bd2">VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR</span>) {
+        <span style="color:#268bd2">preTransform</span> = <span style="color:#268bd2">VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR</span>;
+    } <span style="color:#859900">else</span> {
+        <span style="color:#268bd2">preTransform</span> = <span style="color:#268bd2">surfaceCapabilitiesKHR</span>.<span style="color:#268bd2">currentTransform</span>;
     }
-</code></pre>
-
+</code></pre></div>
 <p>接下来是获得 <code>Surface</code> 的呈现模式 <code>VkPresentModeKHR</code>。</p>
-
-<pre><code class="language-cpp">    // 呈现模式个数
-    uint32_t presentModeCount;
-    // 先获取数量
-    res = vkGetPhysicalDeviceSurfacePresentModesKHR(info.gpus[0], info.surface, &amp;presentModeCount, NULL);
-    assert(res == VK_SUCCESS);
-    // 再获取具体值
-    VkPresentModeKHR *presentModes = (VkPresentModeKHR *)malloc(presentModeCount * sizeof(VkPresentModeKHR));
-    res = vkGetPhysicalDeviceSurfacePresentModesKHR(info.gpus[0], info.surface, &amp;presentModeCount, presentModes);
-    assert(res == VK_SUCCESS);
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 呈现模式个数
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">presentModeCount</span>;
+    <span style="color:#93a1a1;font-style:italic">// 先获取数量
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">res</span> = <span style="color:#268bd2">vkGetPhysicalDeviceSurfacePresentModesKHR</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">gpus</span>[<span style="color:#2aa198;font-weight:bold">0</span>], <span style="color:#268bd2">info</span>.<span style="color:#268bd2">surface</span>, &amp;<span style="color:#268bd2">presentModeCount</span>, <span style="color:#cb4b16">NULL</span>);
+    <span style="color:#268bd2">assert</span>(<span style="color:#268bd2">res</span> == <span style="color:#268bd2">VK_SUCCESS</span>);
+    <span style="color:#93a1a1;font-style:italic">// 再获取具体值
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkPresentModeKHR</span> *<span style="color:#268bd2">presentModes</span> = (<span style="color:#268bd2">VkPresentModeKHR</span> *)<span style="color:#268bd2">malloc</span>(<span style="color:#268bd2">presentModeCount</span> * <span style="color:#859900">sizeof</span>(<span style="color:#268bd2">VkPresentModeKHR</span>));
+    <span style="color:#268bd2">res</span> = <span style="color:#268bd2">vkGetPhysicalDeviceSurfacePresentModesKHR</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">gpus</span>[<span style="color:#2aa198;font-weight:bold">0</span>], <span style="color:#268bd2">info</span>.<span style="color:#268bd2">surface</span>, &amp;<span style="color:#268bd2">presentModeCount</span>, <span style="color:#268bd2">presentModes</span>);
+    <span style="color:#268bd2">assert</span>(<span style="color:#268bd2">res</span> == <span style="color:#268bd2">VK_SUCCESS</span>);
+</code></pre></div>
 <h4 id="关于-surface-呈现模式的设定">关于 Surface 呈现模式的设定</h4>
 
 <p>关于 Surface 的呈现模式，在 Vulkan 中定义了很多种：</p>
-
-<pre><code class="language-cpp">typedef enum VkPresentModeKHR {
-    VK_PRESENT_MODE_IMMEDIATE_KHR = 0,
-    VK_PRESENT_MODE_MAILBOX_KHR = 1,
-    VK_PRESENT_MODE_FIFO_KHR = 2,
-    VK_PRESENT_MODE_FIFO_RELAXED_KHR = 3,
-    VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR = 1000111000,
-    VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR = 1000111001,
-    VK_PRESENT_MODE_BEGIN_RANGE_KHR = VK_PRESENT_MODE_IMMEDIATE_KHR,
-    VK_PRESENT_MODE_END_RANGE_KHR = VK_PRESENT_MODE_FIFO_RELAXED_KHR,
-    VK_PRESENT_MODE_RANGE_SIZE_KHR = (VK_PRESENT_MODE_FIFO_RELAXED_KHR - VK_PRESENT_MODE_IMMEDIATE_KHR + 1),
-    VK_PRESENT_MODE_MAX_ENUM_KHR = 0x7FFFFFFF
-} VkPresentModeKHR;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">typedef</span> <span style="color:#859900">enum</span> <span style="color:#268bd2">VkPresentModeKHR</span> {
+    <span style="color:#268bd2">VK_PRESENT_MODE_IMMEDIATE_KHR</span> = <span style="color:#2aa198;font-weight:bold">0</span>,
+    <span style="color:#268bd2">VK_PRESENT_MODE_MAILBOX_KHR</span> = <span style="color:#2aa198;font-weight:bold">1</span>,
+    <span style="color:#268bd2">VK_PRESENT_MODE_FIFO_KHR</span> = <span style="color:#2aa198;font-weight:bold">2</span>,
+    <span style="color:#268bd2">VK_PRESENT_MODE_FIFO_RELAXED_KHR</span> = <span style="color:#2aa198;font-weight:bold">3</span>,
+    <span style="color:#268bd2">VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR</span> = <span style="color:#2aa198;font-weight:bold">1000111000</span>,
+    <span style="color:#268bd2">VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR</span> = <span style="color:#2aa198;font-weight:bold">1000111001</span>,
+    <span style="color:#268bd2">VK_PRESENT_MODE_BEGIN_RANGE_KHR</span> = <span style="color:#268bd2">VK_PRESENT_MODE_IMMEDIATE_KHR</span>,
+    <span style="color:#268bd2">VK_PRESENT_MODE_END_RANGE_KHR</span> = <span style="color:#268bd2">VK_PRESENT_MODE_FIFO_RELAXED_KHR</span>,
+    <span style="color:#268bd2">VK_PRESENT_MODE_RANGE_SIZE_KHR</span> = (<span style="color:#268bd2">VK_PRESENT_MODE_FIFO_RELAXED_KHR</span> - <span style="color:#268bd2">VK_PRESENT_MODE_IMMEDIATE_KHR</span> + <span style="color:#2aa198;font-weight:bold">1</span>),
+    <span style="color:#268bd2">VK_PRESENT_MODE_MAX_ENUM_KHR</span> = <span style="color:#2aa198;font-weight:bold">0x7FFFFFFF</span>
+} <span style="color:#268bd2">VkPresentModeKHR</span>;
+</code></pre></div>
 <p>一般来说，我们就只要使用 <code>VK_PRESENT_MODE_FIFO_KHR</code> 模式就行了。</p>
-
-<pre><code class="language-cpp">    VkPresentModeKHR swapchainPresentMode = VK_PRESENT_MODE_FIFO_KHR;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">VkPresentModeKHR</span> <span style="color:#268bd2">swapchainPresentMode</span> = <span style="color:#268bd2">VK_PRESENT_MODE_FIFO_KHR</span>;
+</code></pre></div>
 <p>当然，也可以通过 <code>vkGetPhysicalDeviceSurfacePresentModesKHR</code> 函数得到所有的呈现模式，通过判断看自己想要的模式是否支持。</p>
 
 <p>除了上面，还有其他很多参数设定，就不一一的阐述了，在创建 SwapChain 的时候都会遇到的。</p>
@@ -698,84 +666,80 @@ if (!doNotTrack) {
 <p>完成了相关的准备工作之后，就可以调用 <code>vkCreateSwapchainKHR</code> 来创建 SwapChain 了。在此之前，还需要创建 <code>VkSwapchainCreateInfoKHR</code> 对象来包含所需要的参数。</p>
 
 <p><code>VkSwapchainCreateInfoKHR</code> 定义了很多的相关参数，有的是上面讨论过的，有的没有讨论但是一般都是用固定值了，想要了解的话，也可以查阅官方的文档。</p>
-
-<pre><code class="language-cpp">typedef struct VkSwapchainCreateInfoKHR {
-    VkStructureType                  sType;
-    const void*                      pNext;
-    VkSwapchainCreateFlagsKHR        flags;
-    VkSurfaceKHR                     surface;
-    uint32_t                         minImageCount;
-    // format 格式，上面讨论过的
-    VkFormat                         imageFormat;
-    // colorspace 颜色空间，
-    VkColorSpaceKHR                  imageColorSpace;
-    VkExtent2D                       imageExtent;
-    uint32_t                         imageArrayLayers;
-    VkImageUsageFlags                imageUsage;
-    VkSharingMode                    imageSharingMode;
-    uint32_t                         queueFamilyIndexCount;
-    const uint32_t*                  pQueueFamilyIndices;
-    // 旋转模式
-    VkSurfaceTransformFlagBitsKHR    preTransform;
-    // 透明度合成模式
-    VkCompositeAlphaFlagBitsKHR      compositeAlpha;
-    // 呈现模式
-    VkPresentModeKHR                 presentMode;
-    VkBool32                         clipped;
-    VkSwapchainKHR                   oldSwapchain;
-} VkSwapchainCreateInfoKHR;
-</code></pre>
-
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">typedef</span> <span style="color:#859900">struct</span> <span style="color:#268bd2">VkSwapchainCreateInfoKHR</span> {
+    <span style="color:#268bd2">VkStructureType</span>                  <span style="color:#268bd2">sType</span>;
+    <span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">void</span>*                      <span style="color:#268bd2">pNext</span>;
+    <span style="color:#268bd2">VkSwapchainCreateFlagsKHR</span>        <span style="color:#268bd2">flags</span>;
+    <span style="color:#268bd2">VkSurfaceKHR</span>                     <span style="color:#268bd2">surface</span>;
+    <span style="color:#268bd2">uint32_t</span>                         <span style="color:#268bd2">minImageCount</span>;
+    <span style="color:#93a1a1;font-style:italic">// format 格式，上面讨论过的
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkFormat</span>                         <span style="color:#268bd2">imageFormat</span>;
+    <span style="color:#93a1a1;font-style:italic">// colorspace 颜色空间，
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkColorSpaceKHR</span>                  <span style="color:#268bd2">imageColorSpace</span>;
+    <span style="color:#268bd2">VkExtent2D</span>                       <span style="color:#268bd2">imageExtent</span>;
+    <span style="color:#268bd2">uint32_t</span>                         <span style="color:#268bd2">imageArrayLayers</span>;
+    <span style="color:#268bd2">VkImageUsageFlags</span>                <span style="color:#268bd2">imageUsage</span>;
+    <span style="color:#268bd2">VkSharingMode</span>                    <span style="color:#268bd2">imageSharingMode</span>;
+    <span style="color:#268bd2">uint32_t</span>                         <span style="color:#268bd2">queueFamilyIndexCount</span>;
+    <span style="color:#859900">const</span> <span style="color:#268bd2">uint32_t</span>*                  <span style="color:#268bd2">pQueueFamilyIndices</span>;
+    <span style="color:#93a1a1;font-style:italic">// 旋转模式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkSurfaceTransformFlagBitsKHR</span>    <span style="color:#268bd2">preTransform</span>;
+    <span style="color:#93a1a1;font-style:italic">// 透明度合成模式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkCompositeAlphaFlagBitsKHR</span>      <span style="color:#268bd2">compositeAlpha</span>;
+    <span style="color:#93a1a1;font-style:italic">// 呈现模式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkPresentModeKHR</span>                 <span style="color:#268bd2">presentMode</span>;
+    <span style="color:#268bd2">VkBool32</span>                         <span style="color:#268bd2">clipped</span>;
+    <span style="color:#268bd2">VkSwapchainKHR</span>                   <span style="color:#268bd2">oldSwapchain</span>;
+} <span style="color:#268bd2">VkSwapchainCreateInfoKHR</span>;
+</code></pre></div>
 <p>具体的代码和相关参数的设定如下：</p>
-
-<pre><code class="language-cpp">    // 包含了创建 SwapChain 所需要的信息
-    VkSwapchainCreateInfoKHR swapchain_ci = {};
-    swapchain_ci.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
-    swapchain_ci.pNext = NULL;
-    swapchain_ci.surface = info.surface;
-    // swapchain 最小的 image 数量
-    // 这里就使用了 VkSurfaceCapabilitiesKHR 的最小数量
-    swapchain_ci.minImageCount = desiredNumberOfSwapChainImages;
-    // Image 的格式
-    swapchain_ci.imageFormat = info.format;
-    // Image 的宽高信息
-    swapchain_ci.imageExtent.width = swapchainExtent.width;
-    swapchain_ci.imageExtent.height = swapchainExtent.height;
-    // 旋转模式
-    swapchain_ci.preTransform = preTransform;
-    // alpha 混合模式
-    swapchain_ci.compositeAlpha = compositeAlpha;
-    swapchain_ci.imageArrayLayers = 1;
-    // 呈现模式
-    swapchain_ci.presentMode = swapchainPresentMode;
-    swapchain_ci.oldSwapchain = VK_NULL_HANDLE;
-    swapchain_ci.clipped = true;
-    // Image 颜色空间
-    swapchain_ci.imageColorSpace = VK_COLORSPACE_SRGB_NONLINEAR_KHR;
-    // Image 的用途
-    swapchain_ci.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
-    swapchain_ci.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
-    // 设定 swapchain 需要的 Queue 信息
-    swapchain_ci.queueFamilyIndexCount = 0;
-    swapchain_ci.pQueueFamilyIndices = NULL;
-    // 如果图像和显示的 Queue 索引不一致，就要设置 Image 为共享模式
-    uint32_t queueFamilyIndices[2] = {(uint32_t) info.graphics_queue_family_index,
-                                      (uint32_t) info.present_queue_family_index};
-    if (info.graphics_queue_family_index != info.present_queue_family_index) {
-        // If the graphics and present queues are from different queue families,
-        // we either have to explicitly transfer ownership of images between
-        // the queues, or we have to create the swapchain with imageSharingMode
-        // as VK_SHARING_MODE_CONCURRENT
-        swapchain_ci.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
-        swapchain_ci.queueFamilyIndexCount = 2;
-        swapchain_ci.pQueueFamilyIndices = queueFamilyIndices;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#93a1a1;font-style:italic">// 包含了创建 SwapChain 所需要的信息
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">VkSwapchainCreateInfoKHR</span> <span style="color:#268bd2">swapchain_ci</span> = {};
+    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">sType</span> = <span style="color:#268bd2">VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR</span>;
+    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">pNext</span> = <span style="color:#cb4b16">NULL</span>;
+    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">surface</span> = <span style="color:#268bd2">info</span>.<span style="color:#268bd2">surface</span>;
+    <span style="color:#93a1a1;font-style:italic">// swapchain 最小的 image 数量
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#93a1a1;font-style:italic">// 这里就使用了 VkSurfaceCapabilitiesKHR 的最小数量
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">minImageCount</span> = <span style="color:#268bd2">desiredNumberOfSwapChainImages</span>;
+    <span style="color:#93a1a1;font-style:italic">// Image 的格式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">imageFormat</span> = <span style="color:#268bd2">info</span>.<span style="color:#268bd2">format</span>;
+    <span style="color:#93a1a1;font-style:italic">// Image 的宽高信息
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">imageExtent</span>.<span style="color:#268bd2">width</span> = <span style="color:#268bd2">swapchainExtent</span>.<span style="color:#268bd2">width</span>;
+    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">imageExtent</span>.<span style="color:#268bd2">height</span> = <span style="color:#268bd2">swapchainExtent</span>.<span style="color:#268bd2">height</span>;
+    <span style="color:#93a1a1;font-style:italic">// 旋转模式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">preTransform</span> = <span style="color:#268bd2">preTransform</span>;
+    <span style="color:#93a1a1;font-style:italic">// alpha 混合模式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">compositeAlpha</span> = <span style="color:#268bd2">compositeAlpha</span>;
+    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">imageArrayLayers</span> = <span style="color:#2aa198;font-weight:bold">1</span>;
+    <span style="color:#93a1a1;font-style:italic">// 呈现模式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">presentMode</span> = <span style="color:#268bd2">swapchainPresentMode</span>;
+    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">oldSwapchain</span> = <span style="color:#268bd2">VK_NULL_HANDLE</span>;
+    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">clipped</span> = <span style="color:#cb4b16">true</span>;
+    <span style="color:#93a1a1;font-style:italic">// Image 颜色空间
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">imageColorSpace</span> = <span style="color:#268bd2">VK_COLORSPACE_SRGB_NONLINEAR_KHR</span>;
+    <span style="color:#93a1a1;font-style:italic">// Image 的用途
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">imageUsage</span> = <span style="color:#268bd2">VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</span>;
+    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">imageSharingMode</span> = <span style="color:#268bd2">VK_SHARING_MODE_EXCLUSIVE</span>;
+    <span style="color:#93a1a1;font-style:italic">// 设定 swapchain 需要的 Queue 信息
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">queueFamilyIndexCount</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
+    <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">pQueueFamilyIndices</span> = <span style="color:#cb4b16">NULL</span>;
+    <span style="color:#93a1a1;font-style:italic">// 如果图像和显示的 Queue 索引不一致，就要设置 Image 为共享模式
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">uint32_t</span> <span style="color:#268bd2">queueFamilyIndices</span>[<span style="color:#2aa198;font-weight:bold">2</span>] = {(<span style="color:#268bd2">uint32_t</span>) <span style="color:#268bd2">info</span>.<span style="color:#268bd2">graphics_queue_family_index</span>,
+                                      (<span style="color:#268bd2">uint32_t</span>) <span style="color:#268bd2">info</span>.<span style="color:#268bd2">present_queue_family_index</span>};
+    <span style="color:#859900">if</span> (<span style="color:#268bd2">info</span>.<span style="color:#268bd2">graphics_queue_family_index</span> != <span style="color:#268bd2">info</span>.<span style="color:#268bd2">present_queue_family_index</span>) {
+        <span style="color:#93a1a1;font-style:italic">// If the graphics and present queues are from different queue families,
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// we either have to explicitly transfer ownership of images between
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// the queues, or we have to create the swapchain with imageSharingMode
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#93a1a1;font-style:italic">// as VK_SHARING_MODE_CONCURRENT
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">imageSharingMode</span> = <span style="color:#268bd2">VK_SHARING_MODE_CONCURRENT</span>;
+        <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">queueFamilyIndexCount</span> = <span style="color:#2aa198;font-weight:bold">2</span>;
+        <span style="color:#268bd2">swapchain_ci</span>.<span style="color:#268bd2">pQueueFamilyIndices</span> = <span style="color:#268bd2">queueFamilyIndices</span>;
     }
-    // 创建 SwapChain 需要用到 Device，创建 Device 又需要用到 图像队列 的索引值
-    res = vkCreateSwapchainKHR(info.device, &amp;swapchain_ci, NULL, &amp;info.swap_chain);
-    // 判断创建是否成功
-    assert(res == VK_SUCCESS);
-</code></pre>
-
+    <span style="color:#93a1a1;font-style:italic">// 创建 SwapChain 需要用到 Device，创建 Device 又需要用到 图像队列 的索引值
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">res</span> = <span style="color:#268bd2">vkCreateSwapchainKHR</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">device</span>, &amp;<span style="color:#268bd2">swapchain_ci</span>, <span style="color:#cb4b16">NULL</span>, &amp;<span style="color:#268bd2">info</span>.<span style="color:#268bd2">swap_chain</span>);
+    <span style="color:#93a1a1;font-style:italic">// 判断创建是否成功
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">assert</span>(<span style="color:#268bd2">res</span> == <span style="color:#268bd2">VK_SUCCESS</span>);
+</code></pre></div>
 <p>由此，就完成了 SwapChain 的创建。</p>
 
 <p>可以看到创建 SwapChain 在前期还是需要不少的准备工作，猜想是因为 Vulkan 要做到跨平台，所以就会把很多硬件方面的设定暴露出来，导致在 API 层面上更接近于硬件底层，开发者在使用时也要了解更多的细节。比如有一些参数设定有很多个选项，但针对某一特定平台，只有两三个选项是有效的，其他选项是为了给其他平台的。</p>
@@ -801,134 +765,87 @@ if (!doNotTrack) {
 <p>SwapChain 顾名思义就是交换链，那么拿什么去交换呢？这就是后续内容中会讲到的 <code>Image</code> 对象。可以先简单理解成从 SwapChain 中申请一个 Image，然后对它进行渲染绘制，之后再把它放到 SwapChain 中去渲染呈现。</p>
 
 <p>等我继续更新下去，你就会看到的~~~</p>
-        
-          <div class="entry-shang text-center">
-    <p>「真诚赞赏，手留余香」</p>
-    <button class="zs show-zs btn btn-bred">赞赏</button>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
+
+  
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
 </div>
-<div class="zs-modal-bg"></div>
-<div class="zs-modal-box">
-    <div class="zs-modal-head">
-        <button type="button" class="close">×</button>
-        <span class="author"><img src="/img/avatar.jpeg"/>Glumes</span>
-        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
-    </div>
-    <div class="zs-modal-body">
-        <div class="zs-modal-btns">
-            <button class="btn btn-blink" data-num="2">2元</button>
-            <button class="btn btn-blink" data-num="5">5元</button>
-            <button class="btn btn-blink" data-num="10">10元</button>
-            <button class="btn btn-blink" data-num="50">50元</button>
-            <button class="btn btn-blink" data-num="100">100元</button>
-            <button class="btn btn-blink" data-num="1">任意金额</button>
-        </div>
-        <div class="zs-modal-pay">
-            <button class="btn btn-bred" id="pay-text">2元</button>
-            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
-            <img src="/img/wechat-2.png" id="pay-image"/>
-        </div>
-    </div>
-    <div class="zs-modal-footer">
-        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
-    </div>
-</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
         
-
-
-                
-
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
-
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
-
-                
-
-                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/vulkan/vulkan-tutorial-swap-chain/">进击的 Vulkan 移动开发之 SwapChain</a>
-
-                
-
-                
-
-
-        
-        
-        
-      </article>
-
-      
-        
+          
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/vulkan/vulkan-tutorial-command-buffer/">进击的 Vulkan 移动开发之 Command Buffer</a></li>
+    <li><a href="https://www.glumes.com/post/vulkan/vulkan-tutorial-command-buffer/">进击的 Vulkan 移动开发之 Command Buffer</a></li>
     
-    <li><a href="/post/vulkan/vulkan-tutorial-instance-device-queue/">进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</a></li>
+    <li><a href="https://www.glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/">进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</a></li>
     
-    <li><a href="/post/vulkan/vulkan-tutorial-renderer/">进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解</a></li>
+    <li><a href="https://www.glumes.com/post/vulkan/vulkan-tutorial-renderer/">进击的 Vulkan 移动开发（二）之谈谈对渲染流程的理解</a></li>
     
-    <li><a href="/post/vulkan/vulkan-tutorial-concept/">进击的 Vulkan 移动开发（一）之今生前世</a></li>
+    <li><a href="https://www.glumes.com/post/vulkan/vulkan-tutorial-concept/">进击的 Vulkan 移动开发（一）之今生前世</a></li>
     
 </ul>
 
-      
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/vulkan/vulkan-tutorial-command-buffer/" data-toggle="tooltip" data-placement="top" title="进击的 Vulkan 移动开发之 Command Buffer">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/life/blog-image-migrate/" data-toggle="tooltip" data-placement="top" title="博客图床迁移记">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+        
 
-      
-      <ul class="pager blog-pager">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-          <li class="previous">
-            <a href="https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/" data-toggle="tooltip" data-placement="top" title="进击的 Vulkan 移动开发之 Command Buffer">&larr; Previous Post</a>
-          </li>
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
         
-        
-          <li class="next">
-            <a href="https://glumes.com/post/life/blog-image-migrate/" data-toggle="tooltip" data-placement="top" title="博客图床迁移记">Next Post &rarr;</a>
-          </li>
-        
-      </ul>
-      
 
-      
         
-          <div class="disqus-comments">
-            <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+          
+
+        
+  
+      </div>
     
     
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "glumes" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-          </div>
-        
-      
-
-
-
-
-
-    </div>
   </div>
 </div>
 
@@ -937,8 +854,6 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
-
-          
           
           
               <li>
@@ -969,21 +884,8 @@ if (!doNotTrack) {
               </li>
           
           
-          <li>
-            <a href="https://glumes.com/index.xml" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
         </ul>
         <p class="credits copyright text-muted">
-          
-            
-              <a href="http://www.glumes.com">Glumes</a>
-            
           
 
           &nbsp;&bull;&nbsp;
@@ -991,22 +893,28 @@ if (!doNotTrack) {
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">技术开发进阶</a>
+            <a href="https://www.glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
-            <a href="/sitemap.xml">网站地图</a>
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            &nbsp;&bull;&nbsp;
+
+      
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-
-
-
-       <p class="credits copyright text-muted">
-            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
-       </p>
-
-
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          <a href="http://gohugo.io">Hugo v0.55.6</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -1015,49 +923,66 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://glumes.com/js/bootstrap.min.js"></script>
-<script src="https://glumes.com/js/main.min.js"></script>
-<script src="https://glumes.com/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script src="https://glumes.com/js/prism.js?t=123"></script>
-
-<script src="https://glumes.com/js/reward.js"></script>
+<script src='https://www.glumes.com/js/bundle.min.b46b60da18f73f7e9d1080b89dfe165ac80c8c5bacd454add271a38adc873d8f.js' integrity='sha256-tGtg2hj3P36dEIC4nf4WWsgMjFus1FSt0nGjityHPY8='></script>
 
 
-
-
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
 </script>
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
 });
 </script>
-
-
-
-
-
-
-
-  
-
-
-
-
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

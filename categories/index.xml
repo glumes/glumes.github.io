@@ -1,96 +1,94 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on 技术开发进阶</title>
-    <link>https://glumes.com/categories/</link>
-    <description>Recent content in Categories on 技术开发进阶</description>
+    <title>Categories on 星陨的博客</title>
+    <link>https://www.glumes.com/categories/</link>
+    <description>Recent content in Categories on 星陨的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
-    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <language>en-us</language>
     <lastBuildDate>Mon, 03 Aug 2020 20:22:39 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glumes.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>android</title>
-      <link>https://glumes.com/categories/android/</link>
+      <link>https://www.glumes.com/categories/android/</link>
       <pubDate>Mon, 03 Aug 2020 20:22:39 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/categories/android/</guid>
+      
+      <guid>https://www.glumes.com/categories/android/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>opengl</title>
-      <link>https://glumes.com/categories/opengl/</link>
+      <title>OpenGL</title>
+      <link>https://www.glumes.com/categories/opengl/</link>
       <pubDate>Fri, 22 May 2020 14:33:35 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/categories/opengl/</guid>
+      
+      <guid>https://www.glumes.com/categories/opengl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>FFmpeg</title>
-      <link>https://glumes.com/categories/ffmpeg/</link>
+      <link>https://www.glumes.com/categories/ffmpeg/</link>
       <pubDate>Mon, 18 May 2020 11:37:09 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/categories/ffmpeg/</guid>
+      
+      <guid>https://www.glumes.com/categories/ffmpeg/</guid>
       <description></description>
     </item>
     
     <item>
       <title>音视频开发</title>
-      <link>https://glumes.com/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/</link>
+      <link>https://www.glumes.com/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/</link>
       <pubDate>Sun, 22 Mar 2020 18:38:09 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/</guid>
+      
+      <guid>https://www.glumes.com/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Life</title>
-      <link>https://glumes.com/categories/life/</link>
+      <link>https://www.glumes.com/categories/life/</link>
       <pubDate>Fri, 27 Dec 2019 15:40:54 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/categories/life/</guid>
+      
+      <guid>https://www.glumes.com/categories/life/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vulkan</title>
-      <link>https://glumes.com/categories/vulkan/</link>
+      <link>https://www.glumes.com/categories/vulkan/</link>
       <pubDate>Sun, 07 Apr 2019 15:39:14 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/categories/vulkan/</guid>
+      
+      <guid>https://www.glumes.com/categories/vulkan/</guid>
       <description></description>
     </item>
     
     <item>
       <title>docker</title>
-      <link>https://glumes.com/categories/docker/</link>
+      <link>https://www.glumes.com/categories/docker/</link>
       <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/categories/docker/</guid>
+      
+      <guid>https://www.glumes.com/categories/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>python</title>
-      <link>https://glumes.com/categories/python/</link>
+      <link>https://www.glumes.com/categories/python/</link>
       <pubDate>Fri, 22 Dec 2017 16:10:57 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/categories/python/</guid>
+      
+      <guid>https://www.glumes.com/categories/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>opencv</title>
-      <link>https://glumes.com/categories/opencv/</link>
+      <link>https://www.glumes.com/categories/opencv/</link>
       <pubDate>Fri, 22 Dec 2017 09:53:04 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/categories/opencv/</guid>
+      
+      <guid>https://www.glumes.com/categories/opencv/</guid>
       <description></description>
     </item>
     

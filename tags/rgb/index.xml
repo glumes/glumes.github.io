@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>RGB on 技术开发进阶</title>
-    <link>https://glumes.com/tags/rgb/</link>
-    <description>Recent content in RGB on 技术开发进阶</description>
+    <title>RGB on 星陨的博客</title>
+    <link>https://www.glumes.com/tags/rgb/</link>
+    <description>Recent content in RGB on 星陨的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <managingEditor>zhaoying9402@gmail.com (Glumes)</managingEditor>
-    <webMaster>zhaoying9402@gmail.com (Glumes)</webMaster>
+    <language>en-us</language>
     <lastBuildDate>Wed, 19 Sep 2018 23:12:45 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.com/tags/rgb/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glumes.com/tags/rgb/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>一文读懂 YUV 的采样与格式</title>
-      <link>https://glumes.com/post/ffmpeg/understand-yuv-format/</link>
+      <link>https://www.glumes.com/post/ffmpeg/understand-yuv-format/</link>
       <pubDate>Wed, 19 Sep 2018 23:12:45 +0800</pubDate>
-      <author>zhaoying9402@gmail.com (Glumes)</author>
-      <guid>https://glumes.com/post/ffmpeg/understand-yuv-format/</guid>
+      
+      <guid>https://www.glumes.com/post/ffmpeg/understand-yuv-format/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;防止图片链接丢失，建议观看微信原文，获得更好的阅读体验：&lt;/p&gt;
 
