@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SDL on 星陨的博客</title>
-    <link>https://www.glumes.com/tags/sdl/</link>
+    <link>https://glumes.com/tags/sdl/</link>
     <description>Recent content in SDL on 星陨的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 22 Mar 2020 18:38:09 +0800</lastBuildDate>
     
-	<atom:link href="https://www.glumes.com/tags/sdl/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://glumes.com/tags/sdl/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-008/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-008/</link>
       <pubDate>Sun, 22 Mar 2020 18:38:09 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-008/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-008/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
@@ -33,10 +33,10 @@
     
     <item>
       <title>【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-007/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-007/</link>
       <pubDate>Mon, 16 Mar 2020 09:47:30 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-007/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-007/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
@@ -56,10 +56,10 @@
     
     <item>
       <title>【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-006/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-006/</link>
       <pubDate>Sun, 15 Mar 2020 18:38:03 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-006/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-006/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
@@ -84,10 +84,10 @@
     
     <item>
       <title>【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-005/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-005/</link>
       <pubDate>Tue, 10 Mar 2020 00:05:03 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-005/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-005/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
@@ -115,10 +115,10 @@
     
     <item>
       <title>【音视频连载-004】基础学习篇-SDL 加载图片并显示</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-004/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-004/</link>
       <pubDate>Sun, 08 Mar 2020 21:44:09 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-004/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-004/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
@@ -132,10 +132,10 @@
     
     <item>
       <title>【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-003/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-003/</link>
       <pubDate>Tue, 03 Mar 2020 22:54:26 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-003/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-003/</guid>
       <description>&lt;p&gt;音视频学习入门技术文章连载：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
@@ -157,10 +157,10 @@
     
     <item>
       <title>【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-002/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-002/</link>
       <pubDate>Mon, 02 Mar 2020 20:40:02 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-002/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-002/</guid>
       <description>&lt;p&gt;音视频技术文章连载：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/li&gt;
@@ -172,10 +172,10 @@
     
     <item>
       <title>【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-001/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-001/</link>
       <pubDate>Wed, 26 Feb 2020 23:33:35 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-001/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-001/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/8ob0zrHs9_2pmQTOHXPfjg&#34;&gt;技术开发故事会连载&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。&lt;/p&gt;
 &lt;h3 id=&#34;sdl-简介&#34;&gt;SDL 简介&lt;/h3&gt;

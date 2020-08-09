@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>libpng on 星陨的博客</title>
-    <link>https://www.glumes.com/tags/libpng/</link>
+    <link>https://glumes.com/tags/libpng/</link>
     <description>Recent content in libpng on 星陨的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 12 Jul 2019 23:26:58 +0800</lastBuildDate>
     
-	<atom:link href="https://www.glumes.com/tags/libpng/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://glumes.com/tags/libpng/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>图像库 libpng 编译与实践</title>
-      <link>https://www.glumes.com/post/opengl/libpng-compile-and-practice/</link>
+      <link>https://glumes.com/post/opengl/libpng-compile-and-practice/</link>
       <pubDate>Fri, 12 Jul 2019 23:26:58 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/libpng-compile-and-practice/</guid>
+      <guid>https://glumes.com/post/opengl/libpng-compile-and-practice/</guid>
       <description>&lt;p&gt;在之前的文章中介绍了 &lt;code&gt;stb_image&lt;/code&gt; 图像库，还顺带提到了 libpng 和 libjpeg ，这篇文章就是介绍如何在 Android 平台上用 CMake 编译 libpng 动态库以及 libpng 使用实践。&lt;/p&gt;
 &lt;p&gt;【&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;简单易用的图像解码库介绍 —— stb_image&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;https://glumes.com/post/android/stb-image-introduce/&lt;/a&gt;&lt;/p&gt;</description>

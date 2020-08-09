@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java on 星陨的博客</title>
-    <link>https://www.glumes.com/tags/java/</link>
+    <link>https://glumes.com/tags/java/</link>
     <description>Recent content in Java on 星陨的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 19 Nov 2018 15:58:17 +0800</lastBuildDate>
     
-	<atom:link href="https://www.glumes.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://glumes.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Java 显式锁 Lock 与条件队列</title>
-      <link>https://www.glumes.com/post/java/java-multithread-overview/</link>
+      <link>https://glumes.com/post/java/java-multithread-overview/</link>
       <pubDate>Mon, 19 Nov 2018 15:58:17 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/java/java-multithread-overview/</guid>
+      <guid>https://glumes.com/post/java/java-multithread-overview/</guid>
       <description>&lt;p&gt;在 Java 5.0 之前，在协调对共享对象的访问时可以使用的机制只有 &lt;code&gt;synchronized&lt;/code&gt; 内置锁和 &lt;code&gt;volatile&lt;/code&gt; 关键字。&lt;/p&gt;
 &lt;p&gt;Java 5.0 增加了一种新的机制：&lt;code&gt;Lock&lt;/code&gt;  显式锁，当内置锁 &lt;code&gt;synchronized&lt;/code&gt; 不适用时，它就可以作为一种新的选择。&lt;/p&gt;
 &lt;p&gt;回顾一下内置锁 synchronized 的使用：&lt;/p&gt;
@@ -44,10 +44,10 @@
     
     <item>
       <title>Java 中的静态代理和动态代理</title>
-      <link>https://www.glumes.com/post/android/java-proxy-design-pattern/</link>
+      <link>https://glumes.com/post/android/java-proxy-design-pattern/</link>
       <pubDate>Tue, 28 Aug 2018 22:55:49 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/android/java-proxy-design-pattern/</guid>
+      <guid>https://glumes.com/post/android/java-proxy-design-pattern/</guid>
       <description>&lt;p&gt;代理模式的使用场景如下：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。&lt;/p&gt;

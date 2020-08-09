@@ -2,399 +2,399 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 星陨的博客</title>
-    <link>https://www.glumes.com/tags/</link>
+    <link>https://glumes.com/tags/</link>
     <description>Recent content in Tags on 星陨的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 03 Aug 2020 20:22:39 +0800</lastBuildDate>
     
-	<atom:link href="https://www.glumes.com/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://glumes.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Life</title>
-      <link>https://www.glumes.com/tags/life/</link>
+      <link>https://glumes.com/tags/life/</link>
       <pubDate>Mon, 03 Aug 2020 20:22:39 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/life/</guid>
+      <guid>https://glumes.com/tags/life/</guid>
       <description></description>
     </item>
     
     <item>
       <title>OpenGL</title>
-      <link>https://www.glumes.com/tags/opengl/</link>
+      <link>https://glumes.com/tags/opengl/</link>
       <pubDate>Fri, 22 May 2020 14:33:35 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/opengl/</guid>
+      <guid>https://glumes.com/tags/opengl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>FFmpeg</title>
-      <link>https://www.glumes.com/tags/ffmpeg/</link>
+      <link>https://glumes.com/tags/ffmpeg/</link>
       <pubDate>Mon, 18 May 2020 11:37:09 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/ffmpeg/</guid>
+      <guid>https://glumes.com/tags/ffmpeg/</guid>
       <description></description>
     </item>
     
     <item>
       <title>SDL</title>
-      <link>https://www.glumes.com/tags/sdl/</link>
+      <link>https://glumes.com/tags/sdl/</link>
       <pubDate>Sun, 22 Mar 2020 18:38:09 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/sdl/</guid>
+      <guid>https://glumes.com/tags/sdl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>年终总结</title>
-      <link>https://www.glumes.com/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</link>
+      <link>https://glumes.com/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</link>
       <pubDate>Fri, 27 Dec 2019 15:40:54 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</guid>
+      <guid>https://glumes.com/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</guid>
       <description></description>
     </item>
     
     <item>
       <title>视频课程</title>
-      <link>https://www.glumes.com/tags/%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/</link>
+      <link>https://glumes.com/tags/%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/</link>
       <pubDate>Fri, 27 Dec 2019 10:58:55 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/</guid>
+      <guid>https://glumes.com/tags/%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/</guid>
       <description></description>
     </item>
     
     <item>
       <title>bezier</title>
-      <link>https://www.glumes.com/tags/bezier/</link>
+      <link>https://glumes.com/tags/bezier/</link>
       <pubDate>Tue, 20 Aug 2019 23:51:59 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/bezier/</guid>
+      <guid>https://glumes.com/tags/bezier/</guid>
       <description></description>
     </item>
     
     <item>
       <title>oepngl</title>
-      <link>https://www.glumes.com/tags/oepngl/</link>
+      <link>https://glumes.com/tags/oepngl/</link>
       <pubDate>Tue, 20 Aug 2019 23:51:59 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/oepngl/</guid>
+      <guid>https://glumes.com/tags/oepngl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>image</title>
-      <link>https://www.glumes.com/tags/image/</link>
+      <link>https://glumes.com/tags/image/</link>
       <pubDate>Sat, 13 Jul 2019 00:08:18 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/image/</guid>
+      <guid>https://glumes.com/tags/image/</guid>
       <description></description>
     </item>
     
     <item>
       <title>libjpeg-turbo</title>
-      <link>https://www.glumes.com/tags/libjpeg-turbo/</link>
+      <link>https://glumes.com/tags/libjpeg-turbo/</link>
       <pubDate>Sat, 13 Jul 2019 00:08:18 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/libjpeg-turbo/</guid>
+      <guid>https://glumes.com/tags/libjpeg-turbo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>libpng</title>
-      <link>https://www.glumes.com/tags/libpng/</link>
+      <link>https://glumes.com/tags/libpng/</link>
       <pubDate>Fri, 12 Jul 2019 23:26:58 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/libpng/</guid>
+      <guid>https://glumes.com/tags/libpng/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rust</title>
-      <link>https://www.glumes.com/tags/rust/</link>
+      <link>https://glumes.com/tags/rust/</link>
       <pubDate>Sun, 19 May 2019 23:25:31 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/rust/</guid>
+      <guid>https://glumes.com/tags/rust/</guid>
       <description></description>
     </item>
     
     <item>
       <title>so</title>
-      <link>https://www.glumes.com/tags/so/</link>
+      <link>https://glumes.com/tags/so/</link>
       <pubDate>Sun, 19 May 2019 23:25:31 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/so/</guid>
+      <guid>https://glumes.com/tags/so/</guid>
       <description></description>
     </item>
     
     <item>
       <title>JNI</title>
-      <link>https://www.glumes.com/tags/jni/</link>
+      <link>https://glumes.com/tags/jni/</link>
       <pubDate>Tue, 14 May 2019 23:16:45 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/jni/</guid>
+      <guid>https://glumes.com/tags/jni/</guid>
       <description></description>
     </item>
     
     <item>
       <title>stb_image</title>
-      <link>https://www.glumes.com/tags/stb_image/</link>
+      <link>https://glumes.com/tags/stb_image/</link>
       <pubDate>Sun, 12 May 2019 21:57:07 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/stb_image/</guid>
+      <guid>https://glumes.com/tags/stb_image/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>https://www.glumes.com/tags/python/</link>
+      <link>https://glumes.com/tags/python/</link>
       <pubDate>Thu, 02 May 2019 21:21:40 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/python/</guid>
+      <guid>https://glumes.com/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vulkan</title>
-      <link>https://www.glumes.com/tags/vulkan/</link>
+      <link>https://glumes.com/tags/vulkan/</link>
       <pubDate>Sun, 07 Apr 2019 15:39:14 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/vulkan/</guid>
+      <guid>https://glumes.com/tags/vulkan/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Java</title>
-      <link>https://www.glumes.com/tags/java/</link>
+      <link>https://glumes.com/tags/java/</link>
       <pubDate>Mon, 19 Nov 2018 15:58:17 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/java/</guid>
+      <guid>https://glumes.com/tags/java/</guid>
       <description></description>
     </item>
     
     <item>
       <title>C&#43;&#43;</title>
-      <link>https://www.glumes.com/tags/c&#43;&#43;/</link>
+      <link>https://glumes.com/tags/c&#43;&#43;/</link>
       <pubDate>Mon, 19 Nov 2018 10:23:00 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/c&#43;&#43;/</guid>
+      <guid>https://glumes.com/tags/c&#43;&#43;/</guid>
       <description></description>
     </item>
     
     <item>
       <title>STL</title>
-      <link>https://www.glumes.com/tags/stl/</link>
+      <link>https://glumes.com/tags/stl/</link>
       <pubDate>Mon, 19 Nov 2018 10:23:00 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/stl/</guid>
+      <guid>https://glumes.com/tags/stl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Camera</title>
-      <link>https://www.glumes.com/tags/camera/</link>
+      <link>https://glumes.com/tags/camera/</link>
       <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/camera/</guid>
+      <guid>https://glumes.com/tags/camera/</guid>
       <description></description>
     </item>
     
     <item>
       <title>H264</title>
-      <link>https://www.glumes.com/tags/h264/</link>
+      <link>https://glumes.com/tags/h264/</link>
       <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/h264/</guid>
+      <guid>https://glumes.com/tags/h264/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MediaCodec</title>
-      <link>https://www.glumes.com/tags/mediacodec/</link>
+      <link>https://glumes.com/tags/mediacodec/</link>
       <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/mediacodec/</guid>
+      <guid>https://glumes.com/tags/mediacodec/</guid>
       <description></description>
     </item>
     
     <item>
       <title>YUV</title>
-      <link>https://www.glumes.com/tags/yuv/</link>
+      <link>https://glumes.com/tags/yuv/</link>
       <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/yuv/</guid>
+      <guid>https://glumes.com/tags/yuv/</guid>
       <description></description>
     </item>
     
     <item>
       <title>RGB</title>
-      <link>https://www.glumes.com/tags/rgb/</link>
+      <link>https://glumes.com/tags/rgb/</link>
       <pubDate>Wed, 19 Sep 2018 23:12:45 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/rgb/</guid>
+      <guid>https://glumes.com/tags/rgb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>CMake</title>
-      <link>https://www.glumes.com/tags/cmake/</link>
+      <link>https://glumes.com/tags/cmake/</link>
       <pubDate>Wed, 12 Sep 2018 09:19:09 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/cmake/</guid>
+      <guid>https://glumes.com/tags/cmake/</guid>
       <description></description>
     </item>
     
     <item>
       <title>NDK</title>
-      <link>https://www.glumes.com/tags/ndk/</link>
+      <link>https://glumes.com/tags/ndk/</link>
       <pubDate>Wed, 12 Sep 2018 09:19:09 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/ndk/</guid>
+      <guid>https://glumes.com/tags/ndk/</guid>
       <description></description>
     </item>
     
     <item>
       <title>OkHttp</title>
-      <link>https://www.glumes.com/tags/okhttp/</link>
+      <link>https://glumes.com/tags/okhttp/</link>
       <pubDate>Tue, 11 Sep 2018 22:13:45 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/okhttp/</guid>
+      <guid>https://glumes.com/tags/okhttp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>GLSL</title>
-      <link>https://www.glumes.com/tags/glsl/</link>
+      <link>https://glumes.com/tags/glsl/</link>
       <pubDate>Sun, 09 Sep 2018 15:20:42 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/glsl/</guid>
+      <guid>https://glumes.com/tags/glsl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Retrofit</title>
-      <link>https://www.glumes.com/tags/retrofit/</link>
+      <link>https://glumes.com/tags/retrofit/</link>
       <pubDate>Sun, 09 Sep 2018 14:54:57 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/retrofit/</guid>
+      <guid>https://glumes.com/tags/retrofit/</guid>
       <description></description>
     </item>
     
     <item>
       <title>FBO</title>
-      <link>https://www.glumes.com/tags/fbo/</link>
+      <link>https://glumes.com/tags/fbo/</link>
       <pubDate>Tue, 04 Sep 2018 22:28:11 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/fbo/</guid>
+      <guid>https://glumes.com/tags/fbo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>EGL</title>
-      <link>https://www.glumes.com/tags/egl/</link>
+      <link>https://glumes.com/tags/egl/</link>
       <pubDate>Sun, 02 Sep 2018 21:26:55 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/egl/</guid>
+      <guid>https://glumes.com/tags/egl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Android</title>
-      <link>https://www.glumes.com/tags/android/</link>
+      <link>https://glumes.com/tags/android/</link>
       <pubDate>Wed, 25 Jul 2018 13:36:50 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/android/</guid>
+      <guid>https://glumes.com/tags/android/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kotlin</title>
-      <link>https://www.glumes.com/tags/kotlin/</link>
+      <link>https://glumes.com/tags/kotlin/</link>
       <pubDate>Fri, 29 Jun 2018 20:31:53 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/kotlin/</guid>
+      <guid>https://glumes.com/tags/kotlin/</guid>
       <description></description>
     </item>
     
     <item>
       <title>crack</title>
-      <link>https://www.glumes.com/tags/crack/</link>
+      <link>https://glumes.com/tags/crack/</link>
       <pubDate>Wed, 31 Jan 2018 15:47:59 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/crack/</guid>
+      <guid>https://glumes.com/tags/crack/</guid>
       <description></description>
     </item>
     
     <item>
       <title>architecture</title>
-      <link>https://www.glumes.com/tags/architecture/</link>
+      <link>https://glumes.com/tags/architecture/</link>
       <pubDate>Wed, 31 Jan 2018 15:42:28 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/architecture/</guid>
+      <guid>https://glumes.com/tags/architecture/</guid>
       <description></description>
     </item>
     
     <item>
       <title>RxJava</title>
-      <link>https://www.glumes.com/tags/rxjava/</link>
+      <link>https://glumes.com/tags/rxjava/</link>
       <pubDate>Wed, 31 Jan 2018 15:26:16 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/rxjava/</guid>
+      <guid>https://glumes.com/tags/rxjava/</guid>
       <description></description>
     </item>
     
     <item>
       <title>StateMachine</title>
-      <link>https://www.glumes.com/tags/statemachine/</link>
+      <link>https://glumes.com/tags/statemachine/</link>
       <pubDate>Wed, 31 Jan 2018 15:20:14 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/statemachine/</guid>
+      <guid>https://glumes.com/tags/statemachine/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Docker</title>
-      <link>https://www.glumes.com/tags/docker/</link>
+      <link>https://glumes.com/tags/docker/</link>
       <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/docker/</guid>
+      <guid>https://glumes.com/tags/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Inflater</title>
-      <link>https://www.glumes.com/tags/inflater/</link>
+      <link>https://glumes.com/tags/inflater/</link>
       <pubDate>Fri, 22 Dec 2017 15:55:08 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/inflater/</guid>
+      <guid>https://glumes.com/tags/inflater/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Framework</title>
-      <link>https://www.glumes.com/tags/framework/</link>
+      <link>https://glumes.com/tags/framework/</link>
       <pubDate>Fri, 22 Dec 2017 15:40:19 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/framework/</guid>
+      <guid>https://glumes.com/tags/framework/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dagger2</title>
-      <link>https://www.glumes.com/tags/dagger2/</link>
+      <link>https://glumes.com/tags/dagger2/</link>
       <pubDate>Fri, 22 Dec 2017 10:47:52 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/dagger2/</guid>
+      <guid>https://glumes.com/tags/dagger2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Opencv</title>
-      <link>https://www.glumes.com/tags/opencv/</link>
+      <link>https://glumes.com/tags/opencv/</link>
       <pubDate>Fri, 22 Dec 2017 09:53:04 +0800</pubDate>
       
-      <guid>https://www.glumes.com/tags/opencv/</guid>
+      <guid>https://glumes.com/tags/opencv/</guid>
       <description></description>
     </item>
     
