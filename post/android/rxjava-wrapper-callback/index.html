@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>用 RxJava 封装回调方法 CallBack-星陨的博客|音视频|图像渲染|移动开发|FFmpeg|OpenGL|C++</title>
+  <title>用 RxJava 封装回调方法 CallBack</title>
   <meta property="og:title" content="用 RxJava 封装回调方法 CallBack" />
   <meta name="twitter:title" content="用 RxJava 封装回调方法 CallBack" />
 
@@ -14,7 +14,7 @@
   <meta property="og:description" content="在知乎上看到这样一个问题：RxJava正确的封装callback的方式应该是怎么样的？。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。">
   <meta name="twitter:description" content="在知乎上看到这样一个问题：RxJava正确的封装callback的方式应该是怎么样的？。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。">
   <meta name="author" content=""/>
-      <meta name="referrer" content="origin" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/android/rxjava-wrapper-callback/" />
   <meta property="og:type" content="website" />
@@ -23,24 +23,21 @@
   <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://glumes.com/post/android/rxjava-wrapper-callback/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
-
+  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
   
-  
-
-  <link rel="stylesheet" href='https://glumes.com/css/bundle.min.fb9e227ddbeead55275b2028c55c2dd4b6b4e09ded2b8c8e4dc5c8c417bc97de.css' integrity='sha256-&#43;54ifdvurVUnWyAoxVwt1La04J3tK4yOTcXIxBe8l94='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  
-  
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
 
 
 
@@ -55,11 +52,23 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
 </head>
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -67,7 +76,6 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-
       <a class="navbar-brand" href="https://glumes.com/">星陨的博客</a>
     </div>
 
@@ -122,13 +130,16 @@ if (!doNotTrack) {
 
         
 
-
+        
 
       </ul>
     </div>
 
   </div>
 </nav>
+
+
+
 
 
     
@@ -143,61 +154,47 @@ if (!doNotTrack) {
 
   <header class="header-section ">
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>用 RxJava 封装回调方法 CallBack</h1>
+                <h1 align="center">用 RxJava 封装回调方法 CallBack</h1>
                 
-                
-                  <span class="post-meta">
-  
-    Posted on December 22, 2017
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
-              
-                  <a href="https://glumes.com/tags/rxjava/">RxJava</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+
+
+
+        
+      <div>
           
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
             
+                <a href="https://glumes.com/tags/android/">Android</a> &nbsp;
+            
+                <a href="https://glumes.com/tags/rxjava/">RxJava</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
 <aside class="toc">
   <nav id="TableOfContents">
   <ul>
@@ -209,21 +206,8 @@ if (!doNotTrack) {
 </nav>
 </aside>
 
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
-
-          <p>在知乎上看到这样一个问题：<a href="https://www.zhihu.com/question/39492234">RxJava正确的封装callback的方式应该是怎么样的？</a>。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。</p>
+        
+        <p>在知乎上看到这样一个问题：<a href="https://www.zhihu.com/question/39492234">RxJava正确的封装callback的方式应该是怎么样的？</a>。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。</p>
 <p>最近在处理蓝牙操作时，也想着如何把 RxJava 优势用到蓝牙开发中来。</p>
 <p>使用 RxJava 能够简化我们的编程，有效的避免回调地狱 (<code>Callback Hell</code>) 的情况。将回调操作交给观察者 Observer 的 onNext 中去处理，同时还有着丰富的操作符进行各项处理。</p>
 <p>但是有些现成的操作已经处理好回调方法了，例如蓝牙扫描，只要在 onLeScan 方法中处理返回的蓝牙设备即可，其他方法也大致如此，发出请求，在回调中处理请求。</p>
@@ -333,34 +317,40 @@ if (!doNotTrack) {
 <h2 id="参考">参考</h2>
 <p>1、http://ryanharter.com/blog/2015/07/07/wrapping-existing-libraries-with-rxjava/
 2、http://blog.chengyunfeng.com/?p=1019</p>
-
-          <h2>微信公众号</h2>
-<p>扫描下面的二维码关注我的微信公众帐号，添加我的微信 ezglumes 拉你入群一起交流学习~</p>
-<img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png" alt="wechat-account-qrcode">
-
-  
-
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-
-          
-        </article>
-  
         
-          
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/rxjava-wrapper-callback/">用 RxJava 封装回调方法 CallBack</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -373,45 +363,32 @@ if (!doNotTrack) {
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://glumes.com/post/android/android-hal-summary/" data-toggle="tooltip" data-placement="top" title="Android 硬件抽象层调用流程小结">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://glumes.com/post/android/android-start-activity-from-launcher-1/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（一）">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://glumes.com/post/android/android-hal-summary/" data-toggle="tooltip" data-placement="top" title="Android 硬件抽象层调用流程小结">&larr; Previous Post</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://glumes.com/post/android/android-start-activity-from-launcher-1/" data-toggle="tooltip" data-placement="top" title="Android 6.0 Launcher 启动 Activity 过程源码分析（一）">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
+      
         
-          
+      
 
-        
-  
-      </div>
-    
-    
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -420,6 +397,8 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
+
+          
           
           
               <li>
@@ -462,25 +441,19 @@ if (!doNotTrack) {
             <a href="https://glumes.com/">星陨的博客</a>
             &nbsp;&bull;&nbsp;
             <a href="https://glumes.com/sitemap.xml">网站地图</a>
-            &nbsp;&bull;&nbsp;
-
-      
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备20067247号</a>
           
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+
+
+
+       <p class="credits copyright text-muted">
+            <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+       </p>
+
+
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
           
         </p>
       </div>
@@ -489,30 +462,47 @@ if (!doNotTrack) {
 </footer>
 
 
-<script src='https://glumes.com/js/bundle.min.dd00fc477b5e611b3b15869e7f4ffa218efd3a1b6f00902db8b25e1e9a1d90fc.js' integrity='sha256-3QD8R3teYRs7FYaef0/6IY79OhtvAJAtuLJeHpodkPw='></script>
+<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://glumes.com/js/bootstrap.min.js"></script>
+<script src="https://glumes.com/js/main.min.js"></script>
+<script src="https://glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://glumes.com/js/prism.js?t=123"></script>
 
 
 
 
 
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
 });
 </script>
+
+
+
+
+
+
+
+  
+
+
+
+
 
   </body>
 </html>
