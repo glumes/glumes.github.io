@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>WebRTC &amp; Android 开发学习环境搭建~</title>
+  <meta property="og:title" content="WebRTC &amp; Android 开发学习环境搭建~" />
+  <meta name="twitter:title" content="WebRTC &amp; Android 开发学习环境搭建~" />
+
+  <meta name="description" content="最近开始折腾 WebRTC 了。
+先介绍一下 WebRTC 源码编译以及 Android 开发环境的搭建。
+整个下载编译过程都需要能够正常访问外网，这需要自己想办法克服了。">
+  <meta property="og:description" content="最近开始折腾 WebRTC 了。
+先介绍一下 WebRTC 源码编译以及 Android 开发环境的搭建。
+整个下载编译过程都需要能够正常访问外网，这需要自己想办法克服了。">
+  <meta name="twitter:description" content="最近开始折腾 WebRTC 了。
+先介绍一下 WebRTC 源码编译以及 Android 开发环境的搭建。
+整个下载编译过程都需要能够正常访问外网，这需要自己想办法克服了。">
+  <meta name="author" content=""/>
+  <meta name="referrer" content="origin" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/webrtc/webrtc-android-setup/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="星陨的博客" />
+
+  <meta name="generator" content="Hugo 0.74.3" />
+  <link rel="canonical" href="https://glumes.com/post/webrtc/webrtc-android-setup/" />
+  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/highlight.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/prism.css?t=123" />
+  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-84590324-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/">星陨的博客</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">目录</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://glumes.com/categories/android">Android</a>
+                
+                  <a href="https://glumes.com/categories/opencv">opencv</a>
+                
+                  <a href="https://glumes.com/categories/opengl">opengl</a>
+                
+                  <a href="https://glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
+                
+                  <a href="https://glumes.com/categories/python">python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="生活" href="https://glumes.com/categories/life">生活</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="https://glumes.com/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="https://glumes.com/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="文章集" href="https://glumes.com/post/">文章集</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ae01.alicdn.com/kf/U63974cc923674332ab8751e2b18d9b9fd.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
+                  
+                     <h1>WebRTC &amp; Android 开发学习环境搭建~</h1>
+                     
+                    <span class="post-meta">
+  Posted on August 10, 2020
+  
+</span>
+
+
+                    
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+                <h1 align="center">WebRTC &amp; Android 开发学习环境搭建~</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+
+
+        
+      <div>
+          
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://glumes.com/tags/webrtc/">webrtc</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
+        
+        <p>最近开始折腾 WebRTC 了。</p>
+<p>先介绍一下 WebRTC 源码编译以及 Android 开发环境的搭建。</p>
+<p>整个下载编译过程都需要能够正常访问外网，这需要自己想办法克服了。</p>
+<h2 id="安装-depot_tools-工具包">安装 depot_tools 工具包</h2>
+<p>首先需要下载 <code>depot_tools</code> 工具包，Git 命令如下：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+</code></pre></div><p>之后要把 <code>depot_tools</code> 目录添加到系统环境变量中。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#cb4b16">export</span> <span style="color:#268bd2">PATH</span>=<span style="color:#268bd2">$PATH</span>:/path/depot_tools
+</code></pre></div><p>通过如下命令验证是否安装成功</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">fetch</span> --<span style="color:#268bd2">help</span>
+</code></pre></div><p>显示如下内容说明 <code>depot_tools</code> 配置好了。</p>
+<p><img src="https://image.glumes.com/config-depot-tolos.png" alt=""></p>
+<h2 id="下载-webrtc-源码">下载 WebRTC 源码</h2>
+<p>接下来就要用到 <code>depot_tools</code> 去下载 WebRTC 源码了。</p>
+<p>WebRTC 的源码地址如下：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">https</span>:<span style="color:#93a1a1;font-style:italic">//webrtc.googlesource.com/src/+/refs/heads/master/tools_webrtc/
+</span></code></pre></div><p>下载执行如下命令：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">mkdir</span> <span style="color:#268bd2">webrtc</span>
+<span style="color:#268bd2">cd</span> <span style="color:#268bd2">webrtc</span>
+<span style="color:#268bd2">fetch</span> --<span style="color:#268bd2">nohooks</span> <span style="color:#268bd2">webrtc_android</span>
+<span style="color:#268bd2">gclient</span> <span style="color:#268bd2">sync</span>
+</code></pre></div><p>中间的下载过程耗时取决于你的网速了。</p>
+<p>执行完如上命令后，就已经在本地拉取 WebRTC 源码了。</p>
+<p>如果你对以上命令感到疑惑，不知道为什么这么写的话，可以参考一下 depot_tools 的使用。</p>
+<p>如下文章：</p>
+<blockquote>
+<p><a href="https://www.pianshen.com/article/3086804649/">https://www.pianshen.com/article/3086804649/</a></p>
+</blockquote>
+<h3 id="fetch-命令">fetch 命令</h3>
+<p>其中 fetch 命令是用来获取源码的，有如下两个可选参数：</p>
+<ul>
+<li>–nohooks。这个参数表示获取代码完成之后不执行runhooks动作。也就仅仅获取代码。</li>
+<li>–no-history。这个参数表示对代码仓库执行git shallow clones，就不会获得原仓库的全部历史提交，这样可以减少拷贝代码仓库的大小。</li>
+</ul>
+<h3 id="gclient-命令">gclient 命令</h3>
+<p>其中 gclient 命令是用来管理多个模块源代码仓库的工具。它封装了一些常用的 git 命令，对所有的模块生效。除了 sync 外，还有如下参数：</p>
+<ul>
+<li>config。创建一个.gclient配置文件。</li>
+<li>diff。类似git的diff命令，用来比较所有模块提交代码的差异。</li>
+<li>fetch。获取所有模块上游的提交。</li>
+<li>help。显示命令的帮助。</li>
+<li>revert。revert一个提交。</li>
+<li>runhooks。根据DEPS文件的描述执行hook任务。</li>
+<li>stauts。类似git status命令，用来显示所有模块代码的状态。</li>
+<li>sync。用来同步所有模块的代码。</li>
+</ul>
+<p>这里下载的是 Android 源码，如果是其他平台源码只需要改一下 fetch 命令最后的参数就行：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 下载 iOS 平台源码
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">fetch</span> --<span style="color:#268bd2">nohooks</span> <span style="color:#268bd2">webrtc_ios</span>
+</code></pre></div><h3 id="安装依赖">安装依赖</h3>
+<p>下载完 WebRTC 后需要安装相关的依赖，进入到 WebRTC 源码的 <code>src</code> 目录中，执行如下命令：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">cd</span> <span style="color:#268bd2">src</span>
+./<span style="color:#268bd2">build</span>/<span style="color:#268bd2">install</span>-<span style="color:#268bd2">build</span>-<span style="color:#268bd2">deps</span>.<span style="color:#268bd2">sh</span>
+./<span style="color:#268bd2">build</span>/<span style="color:#268bd2">install</span>-<span style="color:#268bd2">build</span>-<span style="color:#268bd2">deps</span>-<span style="color:#268bd2">android</span>.<span style="color:#268bd2">sh</span>
+</code></pre></div><p>执行如上两个命令就可以下载好相关依赖了。</p>
+<blockquote>
+<p>要注意的是，如果用的 MAC 电脑下载不了依赖，这个命令是给 Linux 系统用的。</p>
+</blockquote>
+<p><img src="https://image.glumes.com/mac-no-lsb-release.png" alt=""></p>
+<p>要下载的话，就得在 Mac 上安装虚拟机，走虚拟机的方式了，这里不是很推荐。</p>
+<h2 id="webrtc-源码编译">WebRTC 源码编译</h2>
+<p>通过如下命令进行编译：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">./<span style="color:#268bd2">build</span>/<span style="color:#268bd2">android</span>/<span style="color:#268bd2">envsetup</span>.<span style="color:#268bd2">h</span>
+<span style="color:#268bd2">gn</span> <span style="color:#268bd2">gen</span> <span style="color:#268bd2">out</span>/<span style="color:#268bd2">release</span>/<span style="color:#268bd2">armeabi</span>-<span style="color:#268bd2">v7a</span> --<span style="color:#268bd2">args</span>=&#39;<span style="color:#268bd2">target_os</span>=<span style="color:#2aa198">&#34;android&#34;</span> <span style="color:#268bd2">target_cpu</span>=“<span style="color:#268bd2">arm</span><span style="color:#2aa198">&#34; is_debug=false&#39;</span>
+<span style="color:#268bd2">ninja</span> -<span style="color:#268bd2">C</span> <span style="color:#268bd2">out</span>/<span style="color:#268bd2">release</span>/<span style="color:#268bd2">armeabi</span>-<span style="color:#268bd2">v7a</span>
+</code></pre></div><p>编译成功后会输出两个文件：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">out</span>/<span style="color:#268bd2">release</span>/<span style="color:#268bd2">armeabi</span>-<span style="color:#268bd2">v7a</span>/<span style="color:#268bd2">lib</span>.<span style="color:#268bd2">java</span>/<span style="color:#268bd2">sdk</span>/<span style="color:#268bd2">android</span>/<span style="color:#268bd2">libwebrtc</span>.<span style="color:#268bd2">jar</span>
+<span style="color:#268bd2">out</span>/<span style="color:#268bd2">release</span>/<span style="color:#268bd2">armeabi</span>-<span style="color:#268bd2">v7a</span>/<span style="color:#268bd2">libjingle_peerconnection_so</span>.<span style="color:#268bd2">so</span>
+</code></pre></div><p>一个 jar 包和一个 so 动态库，这就是最终的编译产物。利用 WebRTC 进行开发就需要导入编译产物。</p>
+<h2 id="android-环境搭建">Android 环境搭建</h2>
+<p>除了编译 WebRTC  源码得到 so 动态库和 jar 包之外，WebRTC 还提供了 Maven 仓库供我们下载，就像引入其他开源库一样：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 目前版本
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">implementation</span> &#39;<span style="color:#268bd2">org</span>.<span style="color:#268bd2">webrtc</span>:<span style="color:#268bd2">google</span>-<span style="color:#268bd2">webrtc</span>:<span style="color:#2aa198;font-weight:bold">1.0.28513</span>&#39;
+<span style="color:#93a1a1;font-style:italic">// 仓库地址：
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">https</span>:<span style="color:#93a1a1;font-style:italic">//bintray.com/google/webrtc/google-webrtc/1.0.28513
+</span></code></pre></div><p>一行代码就能把编译的产物引入进来，省去了那么多编译步骤。</p>
+<p><img src="https://image.glumes.com/webrtc-library-for-android.png" alt=""></p>
+<p>这个 <code>1.0.28513</code> 对应的实现可能不是最新的，但是对于学习 WebRTC 代码来说已经足够了，毕竟大家都是基于 WebRTC 进行二次开发，而 Android 层的代码仅仅是对外的 API 接口而已，更多的是要去探究其 Natice 底层代码。</p>
+<p>好在我们已经下载了源码，完全可以通过 API 的调用去深入研究 Native 层源码。</p>
+<p>源码路径如下：</p>
+<blockquote>
+<p>src/sdk/android/</p>
+</blockquote>
+<p>如下图：</p>
+<p><img src="https://image.glumes.com/webrtc-android-source-code.png" alt=""></p>
+<h2 id="参考文章">参考文章：</h2>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/56233917">https://zhuanlan.zhihu.com/p/56233917</a></li>
+<li><a href="https://www.pianshen.com/article/3086804649/">https://www.pianshen.com/article/3086804649/</a></li>
+</ol>
+        
+
+
+                
+
+                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
+
+                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
+                  
+                  <br/>
+
+                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
+
+                  <br/>
+
+                
+
+
+                
+
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/webrtc/webrtc-android-setup/">WebRTC &amp; Android 开发学习环境搭建~</a>
+
+                
+
+                
+
+
+        
+        
+        
+      </article>
+
+      
+        
+
+      
+
+      
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="https://glumes.com/post/life/domain-name-register/" data-toggle="tooltip" data-placement="top" title="【喜大普奔】域名终于备案通过啦">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+      
+
+      
+        
+      
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          
+          
+              <li>
+                <a href="mailto:zhaoying9402@outlook.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/u/3157458295" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+
+          &nbsp;&bull;&nbsp;
+          2020
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">星陨的博客</a>
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/sitemap.xml">网站地图</a>
+          
+             &nbsp;&bull;&nbsp;
+                      <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+        </p>
+
+
+
+
+
+
+                <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+          &nbsp;&bull;&nbsp;
+                 <span id="busuanzi_container_page_pv" style="display:none">
+            阅读量<span id="busuanzi_value_page_pv"></span>人次
+          </span>
+        </p>
+
+<p>
+<a target="_blank"; href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral";>
+<img style="height:20px;width:auto;"; src="https://www.upyun.com/static/img/%E6%A0%B7%E5%BC%8F%E5%9B%BE.7cf927c.png"; />
+</a>
+</P>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          
+        </p>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://glumes.com/js/bootstrap.min.js"></script>
+<script src="https://glumes.com/js/main.min.js"></script>
+<script src="https://glumes.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="https://glumes.com/js/prism.js?t=123"></script>
+
+
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  </body>
+</html>
+

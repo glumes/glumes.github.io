@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>webrtc on 星陨的博客</title>
+    <link>https://glumes.com/categories/webrtc/</link>
+    <description>Recent content in webrtc on 星陨的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 10 Aug 2020 21:01:28 +0800</lastBuildDate>
+    
+	<atom:link href="https://glumes.com/categories/webrtc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>WebRTC &amp; Android 开发学习环境搭建~</title>
+      <link>https://glumes.com/post/webrtc/webrtc-android-setup/</link>
+      <pubDate>Mon, 10 Aug 2020 21:01:28 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/webrtc/webrtc-android-setup/</guid>
+      <description>&lt;p&gt;最近开始折腾 WebRTC 了。&lt;/p&gt;
+&lt;p&gt;先介绍一下 WebRTC 源码编译以及 Android 开发环境的搭建。&lt;/p&gt;
+&lt;p&gt;整个下载编译过程都需要能够正常访问外网，这需要自己想办法克服了。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
