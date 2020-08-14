@@ -313,7 +313,7 @@ if (!doNotTrack) {
 </ol>
 </blockquote>
 <p>在 Vulkan 的系列文章中出现过如下的图片：</p>
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fx80mwln17j21to110woq.jpg" alt=""></p>
+<p><img src="https://image.glumes.com/blog_image/vulkan-instance-device-queue.webp" alt=""></p>
 <p>这张图片很详细的概括了 Vulkan 中的重要组件以及它们的工作流程，接下来的文章中会针对每个组件进行学习讲解并配上相关的示例代码，首先是 Instance、Device 和 Queue 组件。</p>
 <h2 id="instance-组件">Instance 组件</h2>
 <p>在开始创建 Device 等组件之前，需要创建一个 <code>VkInstance</code> 对象。</p>
@@ -346,7 +346,7 @@ if (!doNotTrack) {
 } <span style="color:#268bd2">VkInstanceCreateInfo</span>;
 </code></pre></div><p>除了还需要创建一个 <code>VkApplicationInfo</code> 对象，还可以设置 <code>Layer</code> 和 <code>Extension</code> 。</p>
 <p>其中：<code>Layer</code> 是用来错误校验、调试输出的。为了提供性能，其中的方法之一就是减少驱动进行状态、错误校验，而 Vulkan 就把这一层单独抽出来了。</p>
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fysj4tgc0xj20a80jkmyt.jpg" alt=""></p>
+<p><img src="https://image.glumes.com/blog_image/vulkan-layer.webp" alt=""></p>
 <p><code>Layer</code> 在整个架构中的位置如上图，Vulkan API 直接和驱动对话，而 <code>Layer</code> 处于应用和 Vulkan API 之间，供开发者进行调试。</p>
 <p>另外，<code>Extension</code> 就是 Vulkan 支持的拓展，最典型的就是 Vulkan 的跨平台渲染显示，就是通过拓展来完成的，比如在 Android、Windows 上使用 Vulkan 都需要使用不同的拓展才可以把内容显示到屏幕上。</p>
 <p>关于 <code>Layer</code> 和 <code>Extension</code> 后续再细说。</p>
@@ -361,7 +361,7 @@ if (!doNotTrack) {
     <span style="color:#859900;font-weight:bold">uint32_t</span>           <span style="color:#268bd2">apiVersion</span>;
 } <span style="color:#268bd2">VkApplicationInfo</span>;
 </code></pre></div><p>它的参数释义就比较容易理解了，设置应用的名称、版本号等，有了它们就可以创建 <code>Instance</code> 对象了，代码可以参考 <a href="https://github.com/glumes/vulkan_tutorial/blob/master/instance_and_device/src/main/cpp/vulkan_tutorial_1.cpp">这里</a> 。</p>
-<p>具体的代码如下：</p>
+<p>具体的代码如下</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">VkApplicationInfo</span> <span style="color:#268bd2">app_info</span> = {};
     
     <span style="color:#268bd2">app_info</span>.<span style="color:#268bd2">apiVersion</span> = <span style="color:#268bd2">VK_API_VERSION_1_0</span>;
@@ -392,7 +392,7 @@ if (!doNotTrack) {
 <p>有了 <code>Instance</code> 组件，就可以创建 <code>Device</code> 组件了，按照调用的套路，肯定还会有一个 <code>VkDeviceCreateInfo</code> 的结构体表示 <code>Device</code> 的创建信息。</p>
 <p>而 <code>Device</code> 具体指的是逻辑上的设备，可以说是对物理设备的一个逻辑上的封装，而物理设备就是 <code>VkPhysicalDevice</code> 对象。</p>
 <p>在某些情况下，可能会具有多个物理设备，如下图所示，因此要先枚举一下所有的物理设备：</p>
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fyt5sjje8tj203u03za9w.jpg" alt=""></p>
+<p><img src="https://image.glumes.com/blog_image/vulkan-device-image.webp" alt=""></p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">LOGI</span>(<span style="color:#2aa198">&#34;enumerate gpu device&#34;</span>);
     <span style="color:#859900;font-weight:bold">uint32_t</span> <span style="color:#268bd2">gpu_size</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
     <span style="color:#93a1a1;font-style:italic">// 第一次调用只为了获得个数
@@ -519,7 +519,7 @@ if (!doNotTrack) {
 <blockquote>
 <p><a href="https://github.com/glumes/vulkan_tutorial">https://github.com/glumes/vulkan_tutorial</a></p>
 </blockquote>
-<p>以上是个人的学习经验，仅供参考，有讲的不对之处，欢迎指出，也可以加我微信一起交流学习: <code>zh_ying_13</code> (备注博客).</p>
+<p>以上是个人的学习经验，仅供参考，有讲的不对之处，欢迎指出，也可以加我微信一起交流学习: <code>ezglumes</code> (备注博客).</p>
 <h2 id="总结">总结</h2>
 <p>敲一遍上述的代码，会发现 Vulkan 在 API 调用上还是有迹可循的，重点是要理解了每个参数的含义，多结合官方的文档来学习、实践、</p>
         

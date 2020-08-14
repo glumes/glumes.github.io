@@ -356,7 +356,7 @@ if (!doNotTrack) {
 </ol>
 </blockquote>
 <p>在之前的文章中，讲到了 <code>Command-Buffer</code> 提交给 <code>Queue</code> 去执行，也提到了 Vulkan 实现跨平台机制，是有一些拓展的，这里就讲讲 Vulkan 窗口系统的拓展（Vulkan Window System Integration WSI），如下图所示：</p>
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fyuhrs5xlwj21j00uywl8.jpg" alt=""></p>
+<p><img src="https://image.glumes.com/blog_image/vulkan-swap-chain.jpg" alt=""></p>
 <p>回顾一下在 Android 中我们是需要 <code>EGL</code> 机制为 OpenGL ES 建立渲染环境，好让 OpenGL ES 渲染后的结果可以呈现在 Surface 上，而 iOS 上肯定是没有 <code>EGL</code> 机制的，当然它肯定也有其他方法呈现 OpenGL ES 渲染结果。</p>
 <p>为了实现这一机制的统一，做到跨平台，Vulkan 就把这部分抽出来做成了一个拓展的形式，实现了接口调用上的统一，那么接下来就一起了解一下 Vulkan 的 SwapChain 交换链机制。</p>
 <h2 id="开启-swapchain-的拓展">开启 SwapChain 的拓展</h2>

@@ -334,7 +334,7 @@ if (!doNotTrack) {
 </ol>
 </blockquote>
 <p>此篇文章继续学习 Vulkan 中的组件：Command-Buffer 。</p>
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fytl33ku2vj21c40r4n49.jpg" alt=""></p>
+<p><img src="https://image.glumes.com/blog_image/vulkan-command-buffer.webp" alt=""></p>
 <p>在前面的文章中，我们已经创建了 <code>Instance</code>、<code>Device</code>、<code>Queue</code> 三个组件，并且知道了 <code>Queue</code> 组件是用来和物理设备沟通的桥梁，而具体的沟通过程就需要 <code>Command-Buffer</code> （命令缓冲区）组件，它是若干命令的集合，我们向 <code>Queue</code> 提交 <code>Command-Buffer</code>，然后才交由物理设备 GPU 进行处理。</p>
 <h2 id="command-pool-组件">Command-Pool 组件</h2>
 <p>在创建  <code>Command-Buffer</code> 之前，需要创建 <code>Command-Pool</code> 组件，从 <code>Command-Pool</code> 中去分配 <code>Command-Buffer</code> 。</p>
@@ -407,7 +407,7 @@ if (!doNotTrack) {
     <span style="color:#268bd2">vkAllocateCommandBuffers</span>(<span style="color:#268bd2">info</span>.<span style="color:#268bd2">device</span>, &amp;<span style="color:#268bd2">command_buffer_allocate_info</span>, <span style="color:#268bd2">commandBuffer</span>);
 </code></pre></div><h2 id="command-buffer-的生命周期">Command-Buffer 的生命周期</h2>
 <p>创建了 <code>Command-Buffer</code> 之后，来了解一下它的生命周期，如下图：</p>
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fytmcwfgywj20wl0e5myz.jpg" alt=""></p>
+<p><img src="https://image.glumes.com/blog_image/vulkan-command-buffer-lifecycle.webp" alt=""></p>
 <ul>
 <li>Initial 状态</li>
 </ul>
@@ -430,7 +430,7 @@ if (!doNotTrack) {
 <p>一些操作会使得 <code>Command-Buffer</code> 进入到此状态，该状态下，<code>Command-Buffer</code> 只能重置、或者释放。</p>
 <h2 id="command-buffer-的记录与提交">Command-Buffer 的记录与提交</h2>
 <p>现在可以尝试着记录一些命令，提交到 <code>Queue</code> 上了，命令记录的调用过程如下图：</p>
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fytn1nbd2gj20q30fgah3.jpg" alt=""></p>
+<p><img src="https://image.glumes.com/blog_image/vulkan-command-buffer-queue.webp" alt=""></p>
 <p>在 <code>vkBeginCommandBuffer</code> 和 <code>vkEndCommandBuffer</code> 方法之间可以记录和渲染相关的命令，这里先不考虑中间的过程，直接创建提交。</p>
 <h4 id="begin-阶段">begin 阶段</h4>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">        <span style="color:#268bd2">VkCommandBufferBeginInfo</span> <span style="color:#268bd2">beginInfo</span> = {};
@@ -471,7 +471,7 @@ if (!doNotTrack) {
 </span><span style="color:#93a1a1;font-style:italic"></span>} <span style="color:#268bd2">VkSubmitInfo</span>;
 </code></pre></div><p>它的参数比较多，并且涉及到 <code>Command-Buffer</code> 之间的同步关系了，这里简单说一下，后面再细说这一块。</p>
 <p>如下图，Vulkan 中有 <code>Semaphore</code>、<code>Fences</code>、<code>Event</code>、<code>Barrier</code> 四种机制来保证同步。</p>
-<p><img src="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fyubwo7iaqj21is0umjzo.jpg" alt=""></p>
+<p><img src="https://image.glumes.com/blog_image/vulkan-command-buffer-sync.webp" alt=""></p>
 <p>简单说一下 <code>Semaphore</code> 和 <code>Fence</code> 。</p>
 <ul>
 <li>
