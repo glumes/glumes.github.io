@@ -21,11 +21,11 @@
     </item>
     
     <item>
-      <title>android</title>
-      <link>https://glumes.com/categories/android/</link>
+      <title>Life</title>
+      <link>https://glumes.com/categories/life/</link>
       <pubDate>Mon, 03 Aug 2020 20:22:39 +0800</pubDate>
       
-      <guid>https://glumes.com/categories/android/</guid>
+      <guid>https://glumes.com/categories/life/</guid>
       <description></description>
     </item>
     
@@ -39,7 +39,7 @@
     </item>
     
     <item>
-      <title>FFmpeg</title>
+      <title>ffmpeg</title>
       <link>https://glumes.com/categories/ffmpeg/</link>
       <pubDate>Mon, 18 May 2020 11:37:09 +0800</pubDate>
       
@@ -48,20 +48,11 @@
     </item>
     
     <item>
-      <title>音视频开发</title>
-      <link>https://glumes.com/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/</link>
-      <pubDate>Sun, 22 Mar 2020 18:38:09 +0800</pubDate>
+      <title>android</title>
+      <link>https://glumes.com/categories/android/</link>
+      <pubDate>Wed, 06 May 2020 23:10:48 +0800</pubDate>
       
-      <guid>https://glumes.com/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Life</title>
-      <link>https://glumes.com/categories/life/</link>
-      <pubDate>Fri, 27 Dec 2019 15:40:54 +0800</pubDate>
-      
-      <guid>https://glumes.com/categories/life/</guid>
+      <guid>https://glumes.com/categories/android/</guid>
       <description></description>
     </item>
     
@@ -71,6 +62,15 @@
       <pubDate>Sun, 07 Apr 2019 15:39:14 +0800</pubDate>
       
       <guid>https://glumes.com/categories/vulkan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>c&#43;&#43;</title>
+      <link>https://glumes.com/categories/c&#43;&#43;/</link>
+      <pubDate>Mon, 19 Nov 2018 10:23:00 +0800</pubDate>
+      
+      <guid>https://glumes.com/categories/c&#43;&#43;/</guid>
       <description></description>
     </item>
     

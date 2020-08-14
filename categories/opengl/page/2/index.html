@@ -81,18 +81,35 @@ if (!doNotTrack) {
         
           
             <li class="navlinks-container">
-              <a class="navlinks-parent" href="javascript:void(0)">目录</a>
+              <a class="navlinks-parent" href="javascript:void(0)">音视频开发</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://glumes.com/categories/opengl">OpenGL </a>
+                
+                  <a href="https://glumes.com/categories/ffmpeg">FFmpeg</a>
+                
+                  <a href="https://glumes.com/categories/vulkan">Vulkan </a>
+                
+                  <a href="https://glumes.com/categories/webrtc">WebRTC </a>
+                
+                  <a href="https://glumes.com/categories/opencv">opencv </a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">移动开发</a>
               <div class="navlinks-children">
                 
                   <a href="https://glumes.com/categories/android">Android</a>
                 
-                  <a href="https://glumes.com/categories/opencv">opencv</a>
+                  <a href="https://glumes.com/categories/ios">ios</a>
                 
-                  <a href="https://glumes.com/categories/opengl">opengl</a>
+                  <a href="https://glumes.com/categories/c&#43;&#43;">C&#43;&#43;</a>
                 
-                  <a href="https://glumes.com/categories/%e9%9f%b3%e8%a7%86%e9%a2%91%e5%bc%80%e5%8f%91">ffmpeg</a>
-                
-                  <a href="https://glumes.com/categories/python">python</a>
+                  <a href="https://glumes.com/categories/python">Python</a>
                 
               </div>
             </li>
@@ -100,7 +117,7 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="生活" href="https://glumes.com/categories/life">生活</a>
+              <a title="程序人生" href="https://glumes.com/categories/life">程序人生</a>
             </li>
           
         
@@ -161,6 +178,64 @@ if (!doNotTrack) {
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
         <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-gpuimage-analysis/">
+                <h2 class="post-title">OpenGL 之 GPUImage 源码分析</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on September 2, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p><a href="https://github.com/BradLarson/GPUImage">GPUImage</a> 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 <a href="https://github.com/CyberAgent/android-gpuimage">GPUImage</a> ，本文也主要对 Android 版本的 GPUImage 进行分析。</p>
+                  <a href="https://glumes.com/post/opengl/opengl-gpuimage-analysis/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/">
+                <h2 class="post-title">《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</h2>
+
+                
+                  <h3 class="post-subtitle">
+                    学习笔记内容摘录
+                  </h3>
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on July 26, 2018
+              </p>
+              <div class="post-entry">
+                
+                  <p>在 OpenGL 的世界模型中，同时绘制了多个物体，那么怎么去检测物体之间是否触碰了，不同于在平面之间的触碰，OpenGL 是在三维世界里面的触碰，接下来就继续深入理解 OpenGL 中的碰撞检测相关知识~~~</p>
+                  <a href="https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
           
             <article class="post-preview">
               <a href="https://glumes.com/post/opengl/opengl-tutorial-light-mix/">
@@ -468,60 +543,6 @@ if (!doNotTrack) {
 <p>除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。</p>
 <p>关于 Alpha 透明度测试，在 用 <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">OpenGL 对视频帧内容进行替换</a> 也用实践用到过。</p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">
-                <h2 class="post-title">用 OpenGL 对视频帧内容进行替换</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 12, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？</p>
-                  <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="https://glumes.com/post/opengl/opengl-tutorial-share/">
-                <h2 class="post-title">OpenGL ES 学习资源分享</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 11, 2018
-              </p>
-              <div class="post-entry">
-                
-                  <p>学习了一段时间的 OpenGL ES，并在公司的项目中得到了运用，也算是有了一些积累，现在分享一些当初学习的资源，大家一起来学习，共同交流进步。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-share/" class="post-read-more">[Read More]</a>
                 
               </div>
 

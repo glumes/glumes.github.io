@@ -6,10 +6,25 @@
     <description>Recent content in Life on 星陨的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Dec 2019 15:40:54 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 03 Aug 2020 20:22:39 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/categories/life/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【喜大普奔】域名终于备案通过啦</title>
+      <link>https://glumes.com/post/life/domain-name-register/</link>
+      <pubDate>Mon, 03 Aug 2020 20:22:39 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/life/domain-name-register/</guid>
+      <description>&lt;p&gt;前段时间博客网站一直无法访问，还有不少朋友特意发微信告诉我，感谢大家的好意了!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;网站是：https://glumes.com&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;其实是博客域名在备案啦。&lt;/p&gt;
+&lt;p&gt;之前博客搭建用的是 Github Pages 方案，访问速度一直被人诟病。&lt;/p&gt;
+&lt;p&gt;上个月就决定把服务器换成阿里云了，访问速度如火箭般提升🚀🚀🚀~~&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>2019 年终总结与回顾</title>
@@ -55,15 +70,6 @@
 &lt;p&gt;还好图片链接是可以访问的，这就意味着图片还在，还来得及做迁移和备份。&lt;/p&gt;
 &lt;p&gt;回顾之前用了好多免(hao)费(yang)图(mao)床，从最早的 &lt;a href=&#34;https://www.qiniu.com/&#34;&gt;七牛&lt;/a&gt;，到 &lt;a href=&#34;https://cloudinary.com/&#34;&gt;Cloudinary&lt;/a&gt;，再到 微博图床。七牛由于是临时域名，没有及时备份图片，导致图都没了，而 &lt;a href=&#34;https://cloudinary.com/&#34;&gt;Cloudinary&lt;/a&gt; 和 微博图床 倒还是可以继续访问的。不过这种薅羊毛总不是个办法，万一服务商政策变了，又得再迁移图片了。&lt;/p&gt;
 &lt;p&gt;果然，免费的才是最贵的。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>泸沽湖-丽江之行</title>
-      <link>https://glumes.com/post/life/journey-with-lover/</link>
-      <pubDate>Thu, 04 Jan 2018 14:20:04 +0800</pubDate>
-      
-      <guid>https://glumes.com/post/life/journey-with-lover/</guid>
-      <description>&lt;p&gt;元旦假期和亲爱的去了趟 泸沽湖-丽江。&lt;/p&gt;</description>
     </item>
     
   </channel>

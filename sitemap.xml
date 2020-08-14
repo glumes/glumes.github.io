@@ -39,12 +39,12 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/android/</loc>
+    <loc>https://glumes.com/tags/life/</loc>
     <lastmod>2020-08-03T20:22:39+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/life/</loc>
+    <loc>https://glumes.com/categories/life/</loc>
     <lastmod>2020-08-03T20:22:39+08:00</lastmod>
   </url>
   
@@ -89,6 +89,11 @@
   </url>
   
   <url>
+    <loc>https://glumes.com/categories/android/</loc>
+    <lastmod>2020-05-06T23:10:48+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/post/android/android-av-beginner-resource/</loc>
     <lastmod>2020-05-06T23:10:48+08:00</lastmod>
   </url>
@@ -105,11 +110,6 @@
   
   <url>
     <loc>https://glumes.com/post/ffmpeg/av-beginner-008/</loc>
-    <lastmod>2020-03-22T18:38:09+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2020-03-22T18:38:09+08:00</lastmod>
   </url>
   
@@ -155,11 +155,6 @@
   
   <url>
     <loc>https://glumes.com/post/life/2019-review/</loc>
-    <lastmod>2019-12-27T15:40:54+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/categories/life/</loc>
     <lastmod>2019-12-27T15:40:54+08:00</lastmod>
   </url>
   
@@ -320,6 +315,11 @@
   
   <url>
     <loc>https://glumes.com/tags/c&#43;&#43;/</loc>
+    <lastmod>2018-11-19T10:23:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/c&#43;&#43;/</loc>
     <lastmod>2018-11-19T10:23:00+08:00</lastmod>
   </url>
   
@@ -661,11 +661,6 @@
   <url>
     <loc>https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/</loc>
     <lastmod>2018-01-23T17:44:53+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/post/life/journey-with-lover/</loc>
-    <lastmod>2018-01-04T14:20:04+08:00</lastmod>
   </url>
   
   <url>

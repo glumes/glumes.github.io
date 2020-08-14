@@ -53,6 +53,46 @@
     </item>
     
     <item>
+      <title>LearnOpenGL 源码在 MAC 上的编译与调试</title>
+      <link>https://glumes.com/post/opengl/run-learnopengl-code-on-xcode/</link>
+      <pubDate>Sat, 04 Jan 2020 22:53:52 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/opengl/run-learnopengl-code-on-xcode/</guid>
+      <description>&lt;p&gt;学习 OpenGL ，相信肯定有不少人看过这个网站：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://learnopengl.com/&#34;&gt;https://learnopengl.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2020/01/04/WechatIMG585.jpg&#34; alt=&#34;https://learnopengl.com/&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这是它的英文原版网站，后来又有了不同语言的翻译版本，对应中文就是：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://learnopengl-cn.github.io/&#34;&gt;https://learnopengl-cn.github.io/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2020/01/04/WechatIMG586.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这两个网站对于学习 OpenGL 帮助非常大，既可以用作入门的教材，也可以作为工具书，后续进行查漏补缺。&lt;/p&gt;
+&lt;p&gt;并且它的内容很全面，除了 OpenGL 基础知识、坐标系统、纹理、Shader、模型加载等，还有高级光照、PBR 等渲染技巧，这些在渲染引擎的开发中都是会用到的，后面会继续和大家分享。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>OpenGL 实现视频编辑中的转场效果</title>
+      <link>https://glumes.com/post/opengl/opengl-transition/</link>
+      <pubDate>Sun, 20 Oct 2019 22:49:00 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/opengl/opengl-transition/</guid>
+      <description>&lt;h2 id=&#34;转场介绍&#34;&gt;转场介绍&lt;/h2&gt;
+&lt;p&gt;转场效果是什么？&lt;/p&gt;
+&lt;p&gt;转场效果，简单来说就是两段视频之间的衔接过渡效果。&lt;/p&gt;
+&lt;p&gt;现在拍摄 vlog 的玩家越来越多，要是视频没有一两个炫酷的转场效果，都不好意思拿出来炫酷了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/glumes-com/image/upload/v1578201670/transition_hpaktx.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;那么如何在视频编辑软件中实现转场效果呢？&lt;/p&gt;
+&lt;p&gt;这里提供使用 OpenGL 实现视频转场的一个小示例，我们可以通过自定义 GLSL 来实现不同的转场效果。&lt;/p&gt;
+&lt;p&gt;以在 Android 平台上作为演示，但其实不管是 Android 还是 iOS，实现的原理都是一样的。&lt;/p&gt;
+&lt;p&gt;首先要有两段视频，视频 A 和视频 B，先播放视频 A 后播放视频 B，中间有一段过程称为 C ，C 就是视频 A、B 做转场动画的时间段。&lt;/p&gt;
+&lt;p&gt;如下所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/10/14/transition_model.jpg&#34; alt=&#34;transition_model.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;播放器按照时间顺序，从 A -&amp;gt; C -&amp;gt; B 的播放，这样就有了转场的效果。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>OpenGL 实践之贝塞尔曲线绘制</title>
       <link>https://glumes.com/post/opengl/opengl-draw-bezier-line/</link>
       <pubDate>Tue, 20 Aug 2019 23:51:59 +0800</pubDate>
