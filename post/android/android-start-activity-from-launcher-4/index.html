@@ -381,23 +381,23 @@ if (!doNotTrack) {
 <p>当 ActivityManagerService 将 Activity 的 Application 创建完成后，又开始调度 Activity 的生命周期了。通过 StackSupervisor 类的 <code>attachApplicationLocked</code>方法，找到位于栈顶的 <code>ActivityRecord</code>对象，检查这个 Activity 组件的用户 ID 和进程名是否与 ProcessRecord 对象所描述的一致，如果一致，则调用<code>realStartActivityLocked</code>真正的开启一个 Activity 组件了。</p>
 <p>开启一个 Activity 组件的生命周期当然是在应用程序进程内了，此时又是 ActivityManagerService 的跨进程通信，执行 ApplicationThread 的 <code>scheduleLaunchActivity</code>，ActivityThread 的消息循环响应方法为 <code>handleLaunchActivity</code>。在该方法内又继续执行 <code>performLaunchActivity</code>将 Activity 组件启动起来。通过反射创建了一个 Activity 对象，并且创建了 Activity 的运行环境上下文，通过 <code>Instrumentation</code> 执行了 Activity 的 onCreate 方法、onStart 方法。接着又执行了<code>handleResumeActivity</code>方法让 Activity 运行到 <code>Resumed</code>状态，真正执行操作的是<code>performResumeActivity</code>方法，而最终还是调用 <code>Instrumentation</code>类的<code>callActivityOnResume</code>方法。</p>
 <p>至此，一个 Activity 组件就已经创建成功了，里面具体的代码细节暂不深入讨论了，比如 Activity 的加载之类的。</p>
+
+                  <h2>微信公众号</h2>
+
+<p>扫描下面的二维码关注我的微信公众帐号</p>
+
+<p>添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+
+<img src="https://image.glumes.com/blog_image/wexin-logo.png" alt="wechat-account-qrcode">
+
+
+
         
 
 
-                
 
-                  <h4>欢迎扫码关注微信公众号：【音视频开发进阶】，获得最新文章推送~~~</h4>
 
-                  <h4>技术问题欢迎加我微信 ezglumes ，拉你进群交流~~~</h4>
-                  
-                  <br/>
-
-                  <img src="https://glumes2blog.oss-cn-shenzhen.aliyuncs.com/wexin-public.png">
-
-                  <br/>
-
-                
-
+                <br/>
 
                 
 
