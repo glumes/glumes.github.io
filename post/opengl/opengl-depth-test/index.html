@@ -10,24 +10,35 @@
   <meta property="og:title" content="OpenGL 深度测试与精度值的那些事" />
   <meta name="twitter:title" content="OpenGL 深度测试与精度值的那些事" />
 
-  <meta name="description" content="在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。
+  <meta name="description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/PpLzxm7hPHDbaQLmAniCzQ
+
+在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。
 直接看一个没有使用深度测试的绘制：
 
 按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。
 这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。
 要解决这种问题，就得使用深度测试了。">
-  <meta property="og:description" content="在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。
+  <meta property="og:description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/PpLzxm7hPHDbaQLmAniCzQ
+
+在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。
 直接看一个没有使用深度测试的绘制：
 
 按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。
 这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。
 要解决这种问题，就得使用深度测试了。">
-  <meta name="twitter:description" content="在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。
+  <meta name="twitter:description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/PpLzxm7hPHDbaQLmAniCzQ
+
+在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。
 直接看一个没有使用深度测试的绘制：
 
 按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。
-这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。
-要解决这种问题，就得使用深度测试了。">
+这就是在没有开 …">
   <meta name="author" content=""/>
   <meta name="referrer" content="origin" />
   <meta name="twitter:card" content="summary" />
@@ -183,38 +194,8 @@ if (!doNotTrack) {
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/pexels-photo-137132.jpg" ></div>
-  
 
-  <header class="header-section has-img">
-    
-      <div class="intro-header big-img">
-        
-        
-        <div class="container">
-          <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
-                  
-                     <h1>OpenGL 深度测试与精度值的那些事</h1>
-                     
-                    <span class="post-meta">
-  Posted on July 20, 2018
-  
-</span>
-
-
-                    
-                  
-                  
-              </div>
-            </div>
-          </div>
-        </div>
-        <span class="img-desc" style="display: inline;"></span>
-      </div>
+  <header class="header-section ">
     
     <div class="intro-header no-img">
       
@@ -256,7 +237,11 @@ if (!doNotTrack) {
         
           
         
-        <p>在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。</p>
+        <blockquote>
+<p>避免图片丢失，建议阅读微信原文：</p>
+<p><a href="https://mp.weixin.qq.com/s/PpLzxm7hPHDbaQLmAniCzQ">https://mp.weixin.qq.com/s/PpLzxm7hPHDbaQLmAniCzQ</a></p>
+</blockquote>
+<p>在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。</p>
 <p>直接看一个没有使用深度测试的绘制：</p>
 <p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532052034/code/undepth_test.gif" alt="未开启深度测试的情况"></p>
 <p>按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。</p>

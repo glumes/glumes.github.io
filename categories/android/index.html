@@ -191,7 +191,11 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p>在 <strong><a href="https://mp.weixin.qq.com/s/HlbGGOyfixc8wgoDjTY0Qw">直播</a></strong> 中有提到几个不错的开源项目，这里再重点推荐一下：</p>
+                  <blockquote>
+<p>避免图片丢失，建议阅读微信原文：</p>
+<p><a href="https://mp.weixin.qq.com/s/Bb0fgFMgH5QOBqYhOj0uqA">https://mp.weixin.qq.com/s/Bb0fgFMgH5QOBqYhOj0uqA</a></p>
+</blockquote>
+<p>在 <strong><a href="https://mp.weixin.qq.com/s/HlbGGOyfixc8wgoDjTY0Qw">直播</a></strong> 中有提到几个不错的开源项目，这里再重点推荐一下：</p>
 <p>目前，市面上关于音视频学习的相关书籍并不多，而且即使看了书籍学了理论，最终还是要回归到代码上来。</p>
 <p>毕竟 IT 行业实践性要求高，强调动手能力，音视频这方面就更得多操作和探索了。</p>
 <p>推荐下面几个项目会各有侧重，分别涵盖了 Android 音视频录制 API 、OpenGL 渲染和综合运用的例子。</p>
@@ -215,7 +219,11 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p>近期，Google 的 Jetpack 组件又出了新的库：CameraX 。</p>
+                  <blockquote>
+<p>避免图片丢失，建议阅读微信原文：</p>
+<p><a href="https://mp.weixin.qq.com/s/geCmI9XovmxyaA437JIewg">https://mp.weixin.qq.com/s/geCmI9XovmxyaA437JIewg</a></p>
+</blockquote>
+<p>近期，Google 的 Jetpack 组件又出了新的库：CameraX 。</p>
 <p>顾名思义：CameraX 就是用来进行 Camera 开发的官方库了，而且后续会有 Google 进行维护和升级。这对于广大 Camera 开发工程师和即将成为 Camera 的程序员来说，真是个好消息~~~</p>
 <h2 id="camerax-介绍">CameraX 介绍</h2>
 <p>官方有给出一个示例的工程，我 fork 了之后，加入使用 OpenGL 黑白滤镜渲染的操作，具体地址如下：</p>
@@ -304,7 +312,11 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p>说到图像解码库，最容易想起的就是 <code>libpng</code> 和 <code>libjpeg</code> 这两个老牌图像解码库了。</p>
+                  <blockquote>
+<p>避免图片丢失，建议阅读微信原文：</p>
+<p><a href="https://mp.weixin.qq.com/s/Mh_cLQeRy5J5AufeaGaOmA">https://mp.weixin.qq.com/s/Mh_cLQeRy5J5AufeaGaOmA</a></p>
+</blockquote>
+<p>说到图像解码库，最容易想起的就是 <code>libpng</code> 和 <code>libjpeg</code> 这两个老牌图像解码库了。</p>
 <p><code>libpng</code> 和 <code>libjpeg</code> 分别各自对应 <code>png</code> 和 <code>jpeg</code> 两种图像格式。这两种格式的区别如下：</p>
 <p><code>png</code> 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。</p>
 <p><code>jpg</code> 不支持透明度，有损压缩的图片格式，有损压缩会使得原始图片数据质量下载，也因此它占用的内存小，在网页应用中加速速度快。</p>
@@ -385,7 +397,11 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p>在 Android 4.1 版本提供了 MediaCodec 接口来访问设备的编解码器，不同于 FFmpeg 的软件编解码，它采用的是硬件编解码能力，因此在速度上会比软解更具有优势，但是由于 Android 的碎片化问题，机型众多，版本各异，导致 MediaCodec 在机型兼容性上需要花精力去适配，并且编解码流程不可控，全交由厂商的底层硬件去实现，最终得到的视频质量不一定很理想。</p>
+                  <blockquote>
+<p>避免图片丢失，建议阅读微信原文：</p>
+<p><a href="https://mp.weixin.qq.com/s/8Kq9JgvGhlJCpNIyb7zK2w">https://mp.weixin.qq.com/s/8Kq9JgvGhlJCpNIyb7zK2w</a></p>
+</blockquote>
+<p>在 Android 4.1 版本提供了 MediaCodec 接口来访问设备的编解码器，不同于 FFmpeg 的软件编解码，它采用的是硬件编解码能力，因此在速度上会比软解更具有优势，但是由于 Android 的碎片化问题，机型众多，版本各异，导致 MediaCodec 在机型兼容性上需要花精力去适配，并且编解码流程不可控，全交由厂商的底层硬件去实现，最终得到的视频质量不一定很理想。</p>
 <p>虽然 MediaCodec 仍然存在一定的弊端，但是对于快速实现编解码需求，还是很值得参考的。</p>
 <p>以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。</p>
                   <a href="https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/" class="post-read-more">[Read More]</a>

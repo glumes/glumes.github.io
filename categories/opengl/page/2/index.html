@@ -191,7 +191,11 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p><a href="https://github.com/BradLarson/GPUImage">GPUImage</a> 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 <a href="https://github.com/CyberAgent/android-gpuimage">GPUImage</a> ，本文也主要对 Android 版本的 GPUImage 进行分析。</p>
+                  <blockquote>
+<p>避免图片丢失，建议阅读微信原文：</p>
+<p><a href="https://mp.weixin.qq.com/s/2EeI91pu6y6Z7pnLPToXYA">https://mp.weixin.qq.com/s/2EeI91pu6y6Z7pnLPToXYA</a></p>
+</blockquote>
+<p><a href="https://github.com/BradLarson/GPUImage">GPUImage</a> 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 <a href="https://github.com/CyberAgent/android-gpuimage">GPUImage</a> ，本文也主要对 Android 版本的 GPUImage 进行分析。</p>
                   <a href="https://glumes.com/post/opengl/opengl-gpuimage-analysis/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -376,7 +380,11 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p>在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。</p>
+                  <blockquote>
+<p>避免图片丢失，建议阅读微信原文：</p>
+<p><a href="https://mp.weixin.qq.com/s/PpLzxm7hPHDbaQLmAniCzQ">https://mp.weixin.qq.com/s/PpLzxm7hPHDbaQLmAniCzQ</a></p>
+</blockquote>
+<p>在 OpenGL 世界里，使用深度测试可以来防止被阻挡的面渲染到其他面的前面。</p>
 <p>直接看一个没有使用深度测试的绘制：</p>
 <p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1532052034/code/undepth_test.gif" alt="未开启深度测试的情况"></p>
 <p>按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。</p>
@@ -408,7 +416,11 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p>现在我们用 OpenGL 绘制了如下的立方体：</p>
+                  <blockquote>
+<p>避免图片丢失，建议阅读微信原文：</p>
+<p><a href="https://mp.weixin.qq.com/s/mMUS1ewazFqCqtRgOchDYw">https://mp.weixin.qq.com/s/mMUS1ewazFqCqtRgOchDYw</a></p>
+</blockquote>
+<p>现在我们用 OpenGL 绘制了如下的立方体：</p>
 <p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif" alt=""></p>
 <p>不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。</p>
 <p>那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。</p>
@@ -507,7 +519,11 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p>在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。</p>
+                  <blockquote>
+<p>避免图片丢失，建议阅读微信原文：</p>
+<p><a href="https://mp.weixin.qq.com/s/40ss1fbLh3Qr5X4o76GTjA">https://mp.weixin.qq.com/s/40ss1fbLh3Qr5X4o76GTjA</a></p>
+</blockquote>
+<p>在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。</p>
 <p>在 OpenGL 中同样有这样颜色混合的问题。</p>
                   <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" class="post-read-more">[Read More]</a>
                 

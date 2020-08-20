@@ -17,7 +17,11 @@
       <pubDate>Sun, 12 May 2019 21:57:07 +0800</pubDate>
       
       <guid>https://glumes.com/post/android/stb-image-introduce/</guid>
-      <description>&lt;p&gt;说到图像解码库，最容易想起的就是 &lt;code&gt;libpng&lt;/code&gt; 和 &lt;code&gt;libjpeg&lt;/code&gt; 这两个老牌图像解码库了。&lt;/p&gt;
+      <description>&lt;blockquote&gt;
+&lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/Mh_cLQeRy5J5AufeaGaOmA&#34;&gt;https://mp.weixin.qq.com/s/Mh_cLQeRy5J5AufeaGaOmA&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;说到图像解码库，最容易想起的就是 &lt;code&gt;libpng&lt;/code&gt; 和 &lt;code&gt;libjpeg&lt;/code&gt; 这两个老牌图像解码库了。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;libpng&lt;/code&gt; 和 &lt;code&gt;libjpeg&lt;/code&gt; 分别各自对应 &lt;code&gt;png&lt;/code&gt; 和 &lt;code&gt;jpeg&lt;/code&gt; 两种图像格式。这两种格式的区别如下：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;png&lt;/code&gt; 支持透明度，无损压缩的图片格式，能在保证不失真的情况下尽可能压缩图像文件的大小，因此图像质量高，在一些贴纸应用中也大部分用的是 png 图片。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;jpg&lt;/code&gt; 不支持透明度，有损压缩的图片格式，有损压缩会使得原始图片数据质量下载，也因此它占用的内存小，在网页应用中加速速度快。&lt;/p&gt;

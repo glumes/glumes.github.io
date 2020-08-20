@@ -10,9 +10,21 @@
   <meta property="og:title" content="OpenGL 之 GPUImage 源码分析" />
   <meta name="twitter:title" content="OpenGL 之 GPUImage 源码分析" />
 
-  <meta name="description" content="GPUImage 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 GPUImage ，本文也主要对 Android 版本的 GPUImage 进行分析。">
-  <meta property="og:description" content="GPUImage 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 GPUImage ，本文也主要对 Android 版本的 GPUImage 进行分析。">
-  <meta name="twitter:description" content="GPUImage 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 GPUImage ，本文也主要对 Android 版本的 GPUImage 进行分析。">
+  <meta name="description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/2EeI91pu6y6Z7pnLPToXYA
+
+GPUImage 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 GPUImage ，本文也主要对 Android 版本的 GPUImage 进行分析。">
+  <meta property="og:description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/2EeI91pu6y6Z7pnLPToXYA
+
+GPUImage 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 GPUImage ，本文也主要对 Android 版本的 GPUImage 进行分析。">
+  <meta name="twitter:description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/2EeI91pu6y6Z7pnLPToXYA
+
+GPUImage 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 GPUImage ，本文也主要对 Android 版本的 GPUImage 进行分析。">
   <meta name="author" content=""/>
   <meta name="referrer" content="origin" />
   <meta name="twitter:card" content="summary" />
@@ -168,38 +180,8 @@ if (!doNotTrack) {
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/images/2019/04/27/bc32fd77gy1fuvigpdvurj20zk0c8772.jpg" ></div>
-  
 
-  <header class="header-section has-img">
-    
-      <div class="intro-header big-img">
-        
-        
-        <div class="container">
-          <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
-                  
-                     <h1>OpenGL 之 GPUImage 源码分析</h1>
-                     
-                    <span class="post-meta">
-  Posted on September 2, 2018
-  
-</span>
-
-
-                    
-                  
-                  
-              </div>
-            </div>
-          </div>
-        </div>
-        <span class="img-desc" style="display: inline;"></span>
-      </div>
+  <header class="header-section ">
     
     <div class="intro-header no-img">
       
@@ -261,7 +243,11 @@ if (!doNotTrack) {
 </aside>
 
         
-        <p><a href="https://github.com/BradLarson/GPUImage">GPUImage</a> 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 <a href="https://github.com/CyberAgent/android-gpuimage">GPUImage</a> ，本文也主要对 Android 版本的 GPUImage 进行分析。</p>
+        <blockquote>
+<p>避免图片丢失，建议阅读微信原文：</p>
+<p><a href="https://mp.weixin.qq.com/s/2EeI91pu6y6Z7pnLPToXYA">https://mp.weixin.qq.com/s/2EeI91pu6y6Z7pnLPToXYA</a></p>
+</blockquote>
+<p><a href="https://github.com/BradLarson/GPUImage">GPUImage</a> 是 iOS 上一个基于 OpenGL 进行图像处理的开源框架，后来有人借鉴它的想法实现了一个 Android 版本的 <a href="https://github.com/CyberAgent/android-gpuimage">GPUImage</a> ，本文也主要对 Android 版本的 GPUImage 进行分析。</p>
 <h2 id="概要">概要</h2>
 <p>在 GPUImage 中既有对图像进行处理的，也有对相机内容进行处理的，这里主要以相机处理为例进行分析。</p>
 <p>大致会分为三个部分：</p>

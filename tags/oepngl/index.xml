@@ -17,7 +17,11 @@
       <pubDate>Tue, 20 Aug 2019 23:51:59 +0800</pubDate>
       
       <guid>https://glumes.com/post/opengl/opengl-draw-bezier-line/</guid>
-      <description>&lt;p&gt;说到贝塞尔曲线，大家肯定都不陌生，网上有很多关于介绍和理解贝塞尔曲线的优秀文章和动态图。&lt;/p&gt;
+      <description>&lt;blockquote&gt;
+&lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/m7BMF1dSiJ5BeHTU1etDqw&#34;&gt;https://mp.weixin.qq.com/s/m7BMF1dSiJ5BeHTU1etDqw&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;说到贝塞尔曲线，大家肯定都不陌生，网上有很多关于介绍和理解贝塞尔曲线的优秀文章和动态图。&lt;/p&gt;
 &lt;p&gt;以下两个是比较经典的动图了。&lt;/p&gt;
 &lt;p&gt;二阶贝塞尔曲线：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://yalantis.com/uploads/ckeditor/pictures/502/content_image04.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;

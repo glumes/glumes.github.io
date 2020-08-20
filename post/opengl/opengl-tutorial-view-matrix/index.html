@@ -10,18 +10,28 @@
   <meta property="og:title" content="OpenGL 学习系列---观察矩阵" />
   <meta name="twitter:title" content="OpenGL 学习系列---观察矩阵" />
 
-  <meta name="description" content="在 OpenGL 投影矩阵 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。
+  <meta name="description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/0cWh3IF_7wa5PHoGsh8ZcQ
+
+在 OpenGL 投影矩阵 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。
 这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：https://glumpy.github.io/modern-gl.html）
 
 当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于视点的，视点也就是我们这篇文章要讲到的摄像机。">
-  <meta property="og:description" content="在 OpenGL 投影矩阵 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。
+  <meta property="og:description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/0cWh3IF_7wa5PHoGsh8ZcQ
+
+在 OpenGL 投影矩阵 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。
 这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：https://glumpy.github.io/modern-gl.html）
 
 当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于视点的，视点也就是我们这篇文章要讲到的摄像机。">
-  <meta name="twitter:description" content="在 OpenGL 投影矩阵 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。
-这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：https://glumpy.github.io/modern-gl.html）
+  <meta name="twitter:description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/0cWh3IF_7wa5PHoGsh8ZcQ
 
-当定义裁剪空间视景体时，我们都需要提供近平面和 …">
+在 OpenGL 投影矩阵 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。
+这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图 …">
   <meta name="author" content=""/>
   <meta name="referrer" content="origin" />
   <meta name="twitter:card" content="summary" />
@@ -238,7 +248,11 @@ if (!doNotTrack) {
 </aside>
 
         
-        <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 投影矩阵</a> 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。</p>
+        <blockquote>
+<p>避免图片丢失，建议阅读微信原文：</p>
+<p><a href="https://mp.weixin.qq.com/s/0cWh3IF_7wa5PHoGsh8ZcQ">https://mp.weixin.qq.com/s/0cWh3IF_7wa5PHoGsh8ZcQ</a></p>
+</blockquote>
+<p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/">OpenGL 投影矩阵</a> 这篇文章中，讲述了 OpenGL 坐标系统中的投影矩阵，有两种类型的投影矩阵，分别是正交投影和透视投影。</p>
 <p>这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：<a href="https://glumpy.github.io/modern-gl.html">https://glumpy.github.io/modern-gl.html</a>）</p>
 <p><img src="https://image.glumes.com/images/2019/04/27/ViewFrustum_gvy6aq.png" alt=""></p>
 <p>当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于<code>视点</code>的，视点也就是我们这篇文章要讲到的摄像机。</p>

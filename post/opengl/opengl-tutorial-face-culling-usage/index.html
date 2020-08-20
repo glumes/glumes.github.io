@@ -10,15 +10,27 @@
   <meta property="og:title" content="OpenGL 优化项之面剔除和注意点" />
   <meta name="twitter:title" content="OpenGL 优化项之面剔除和注意点" />
 
-  <meta name="description" content="现在我们用 OpenGL 绘制了如下的立方体：
+  <meta name="description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/mMUS1ewazFqCqtRgOchDYw
+
+现在我们用 OpenGL 绘制了如下的立方体：
 
 不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。
 那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。">
-  <meta property="og:description" content="现在我们用 OpenGL 绘制了如下的立方体：
+  <meta property="og:description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/mMUS1ewazFqCqtRgOchDYw
+
+现在我们用 OpenGL 绘制了如下的立方体：
 
 不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。
 那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。">
-  <meta name="twitter:description" content="现在我们用 OpenGL 绘制了如下的立方体：
+  <meta name="twitter:description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/mMUS1ewazFqCqtRgOchDYw
+
+现在我们用 OpenGL 绘制了如下的立方体：
 
 不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。
 那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。">
@@ -250,7 +262,11 @@ if (!doNotTrack) {
         
           
         
-        <p>现在我们用 OpenGL 绘制了如下的立方体：</p>
+        <blockquote>
+<p>避免图片丢失，建议阅读微信原文：</p>
+<p><a href="https://mp.weixin.qq.com/s/mMUS1ewazFqCqtRgOchDYw">https://mp.weixin.qq.com/s/mMUS1ewazFqCqtRgOchDYw</a></p>
+</blockquote>
+<p>现在我们用 OpenGL 绘制了如下的立方体：</p>
 <p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif" alt=""></p>
 <p>不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。</p>
 <p>那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。</p>

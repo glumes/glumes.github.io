@@ -10,7 +10,11 @@
   <meta property="og:title" content="OpenGL 学习系列---投影矩阵" />
   <meta name="twitter:title" content="OpenGL 学习系列---投影矩阵" />
 
-  <meta name="description" content="在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
+  <meta name="description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/AVyNmsO7s6rGPZw3WH5kcA
+
+在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
 
 这个公式每左乘一个矩阵，都代表了一种坐标系的变换。
 转化为着色器脚本语言如下：
@@ -23,7 +27,11 @@ void main()
     gl_Position  = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
 }
 本篇文章就主要是对投影矩阵来分析的。">
-  <meta property="og:description" content="在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
+  <meta property="og:description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/AVyNmsO7s6rGPZw3WH5kcA
+
+在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
 
 这个公式每左乘一个矩阵，都代表了一种坐标系的变换。
 转化为着色器脚本语言如下：
@@ -36,15 +44,16 @@ void main()
     gl_Position  = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
 }
 本篇文章就主要是对投影矩阵来分析的。">
-  <meta name="twitter:description" content="在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
+  <meta name="twitter:description" content="
+避免图片丢失，建议阅读微信原文：
+https://mp.weixin.qq.com/s/AVyNmsO7s6rGPZw3WH5kcA
+
+在 OpenGL 坐标系统 文章中，根据点的坐标变换得出了如下的公式：
 
 这个公式每左乘一个矩阵，都代表了一种坐标系的变换。
 转化为着色器脚本语言如下：
 attribute vec4 a_Position;
-uniform mat4 u_ModelMatrix;
-uniform mat4 u_ProjectionMatrix;
-uniform mat4 u_ViewMatrix;
-void …&lt;/!--&gt;">
+uniform mat4 u_ModelMatrix; …&lt;/!--&gt;">
   <meta name="author" content=""/>
   <meta name="referrer" content="origin" />
   <meta name="twitter:card" content="summary" />
@@ -259,7 +268,11 @@ if (!doNotTrack) {
 </aside>
 
         
-        <p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate/">OpenGL 坐标系统</a> 文章中，根据点的坐标变换得出了如下的公式：</p>
+        <blockquote>
+<p>避免图片丢失，建议阅读微信原文：</p>
+<p><a href="https://mp.weixin.qq.com/s/AVyNmsO7s6rGPZw3WH5kcA">https://mp.weixin.qq.com/s/AVyNmsO7s6rGPZw3WH5kcA</a></p>
+</blockquote>
+<p>在 <a href="https://glumes.com/post/opengl/opengl-tutorial-coordinate/">OpenGL 坐标系统</a> 文章中，根据点的坐标变换得出了如下的公式：</p>
 <!-- raw HTML omitted -->
 <p>这个公式每左乘一个矩阵，都代表了一种坐标系的变换。</p>
 <p>转化为着色器脚本语言如下：</p>
