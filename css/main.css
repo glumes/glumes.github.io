@@ -27,6 +27,11 @@ p {
     margin: 20px 0 10px 0;
 }
 
+p-archive {
+    line-height: 1.5;
+    margin: 0 0 10px 0;
+}
+
 p a {
     /* text-decoration: underline */
     color: #008AFF;
