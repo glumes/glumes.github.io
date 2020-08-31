@@ -6,10 +6,21 @@
     <description>Recent content in Posts on 星陨的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Aug 2020 21:01:28 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 31 Aug 2020 21:01:28 +0800</lastBuildDate>
     
 	<atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>音视频交流群又来啦~~~</title>
+      <link>https://glumes.com/post/life/av-beginner-wechat-group/</link>
+      <pubDate>Mon, 31 Aug 2020 21:01:28 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/life/av-beginner-wechat-group/</guid>
+      <description>&lt;p&gt;最近有不少朋友加我微信，要求进群交流学习的。&lt;/p&gt;
+&lt;p&gt;可是早先创建的技术交流群，渐渐地都开始满员了。&lt;/p&gt;
+&lt;p&gt;于是乎，要开始创建第三群啦~~~&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>WebRTC &amp; Android 开发学习环境搭建~</title>
