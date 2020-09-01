@@ -21,15 +21,7 @@
 
 在前面的文章中，我们已经能够加载 YUV 帧并显示了，那是把一张图片转换成 YUV 帧得到的素材。
 如果是一个 YUV 视频文件的话，那就是很多 YUV 帧连续在一起，既然能展示一帧，那肯定可以连续展示多帧。
-接下来就要这样的操作。
-YUV 视频文件素材
-还是要准备一下 YUV 视频素材，不用网上到处去下载，用 FFmpeg 命令将 mp4 文件转换成 yuv 文件就好了。
-ffmpeg -i file_name.mp4 filename.yuv
-命令很简单，其中 file_name 是文件的名称，使用时记得替换。
-由于生成的 yuv 文件是未经过压缩的，文件过大不方便传 Github ，所以在程序运行前要自己去生成一下文件。
-同样，也可以用 ffplay 验证一下 yuv 文件转换是否正确。
-ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
-以上命令会打开一个窗口去播放视频内容，如果播放的和原来 mp4 文件内容一致，说明转换是成功的，YUV 文件可用。">
+接下来就要这样的操作。">
   <meta property="og:description" content="音视频学习入门技术文章连载：
 
 技术开发故事会连载
@@ -41,15 +33,7 @@ ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
 
 在前面的文章中，我们已经能够加载 YUV 帧并显示了，那是把一张图片转换成 YUV 帧得到的素材。
 如果是一个 YUV 视频文件的话，那就是很多 YUV 帧连续在一起，既然能展示一帧，那肯定可以连续展示多帧。
-接下来就要这样的操作。
-YUV 视频文件素材
-还是要准备一下 YUV 视频素材，不用网上到处去下载，用 FFmpeg 命令将 mp4 文件转换成 yuv 文件就好了。
-ffmpeg -i file_name.mp4 filename.yuv
-命令很简单，其中 file_name 是文件的名称，使用时记得替换。
-由于生成的 yuv 文件是未经过压缩的，文件过大不方便传 Github ，所以在程序运行前要自己去生成一下文件。
-同样，也可以用 ffplay 验证一下 yuv 文件转换是否正确。
-ffplay -f rawvideo -video_size  100x100 yuv_filename.yuv
-以上命令会打开一个窗口去播放视频内容，如果播放的和原来 mp4 文件内容一致，说明转换是成功的，YUV 文件可用。">
+接下来就要这样的操作。">
   <meta name="twitter:description" content="音视频学习入门技术文章连载：
 
 技术开发故事会连载
