@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://glumes.com/post/life/av-beginner-wechat-group/</loc>
+    <lastmod>2020-08-31T21:01:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/webrtc/webrtc-android-setup/</loc>
+    <lastmod>2020-08-10T21:01:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/ffmpeg/av-beginner-007/</loc>
+    <lastmod>2020-03-16T09:47:30+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://glumes.com/</loc>
     <lastmod>2020-08-31T21:01:28+08:00</lastmod>
     <priority>0</priority>
@@ -34,22 +49,12 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/post/life/av-beginner-wechat-group/</loc>
-    <lastmod>2020-08-31T21:01:28+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://glumes.com/tags/webrtc/</loc>
     <lastmod>2020-08-10T21:01:28+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/webrtc/</loc>
-    <lastmod>2020-08-10T21:01:28+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/post/webrtc/webrtc-android-setup/</loc>
     <lastmod>2020-08-10T21:01:28+08:00</lastmod>
   </url>
   
@@ -121,11 +126,6 @@
   <url>
     <loc>https://glumes.com/post/ffmpeg/av-beginner-008/</loc>
     <lastmod>2020-03-22T18:38:09+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/post/ffmpeg/av-beginner-007/</loc>
-    <lastmod>2020-03-16T09:47:30+08:00</lastmod>
   </url>
   
   <url>

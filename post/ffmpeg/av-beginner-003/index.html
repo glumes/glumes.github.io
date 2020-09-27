@@ -10,13 +10,7 @@
   <meta property="og:title" content="【音视频连载-003】基础学习篇-SDL 消息循环和事件响应" />
   <meta name="twitter:title" content="【音视频连载-003】基础学习篇-SDL 消息循环和事件响应" />
 
-  <meta name="description" content="音视频学习入门技术文章连载：
-
-技术开发故事会连载
-【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
-【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
-
-在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
+  <meta name="description" content="在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
 为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。
     SDL_Event windowEvent;
     while (true){
@@ -27,13 +21,7 @@
         }
     }
 ">
-  <meta property="og:description" content="音视频学习入门技术文章连载：
-
-技术开发故事会连载
-【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
-【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
-
-在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
+  <meta property="og:description" content="在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
 为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。
     SDL_Event windowEvent;
     while (true){
@@ -44,15 +32,12 @@
         }
     }
 ">
-  <meta name="twitter:description" content="音视频学习入门技术文章连载：
-
-技术开发故事会连载
-【音视频连载-001】基础学习篇-SDL 介绍以及工程配置
-【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色
-
-在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
+  <meta name="twitter:description" content="在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。
 为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。
-    SDL_Event windowEvent; …">
+    SDL_Event windowEvent;
+    while (true){
+        if (SDL_PollEvent(&amp;windowEvent)){
+            if (SDL_QUIT …">
   <meta name="author" content=""/>
   <meta name="referrer" content="origin" />
   <meta name="twitter:card" content="summary" />
@@ -307,13 +292,7 @@ if (!doNotTrack) {
 
             
 
-        <p>音视频学习入门技术文章连载：</p>
-<ul>
-<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
-<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
-<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
-</ul>
-<p>在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。</p>
+        <p>在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。</p>
 <p>为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">SDL_Event</span> <span style="color:#268bd2">windowEvent</span>;
     <span style="color:#859900">while</span> (<span style="color:#cb4b16">true</span>){

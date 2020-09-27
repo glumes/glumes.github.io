@@ -187,30 +187,23 @@ if (!doNotTrack) {
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="https://glumes.com/post/ffmpeg/av-beginner-008/">
-                <h2 class="post-title">【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</h2>
+              <a href="https://glumes.com/post/ffmpeg/av-beginner-007/">
+                <h2 class="post-title">【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</h2>
 
                 
               </a>
 
               <p class="post-meta">
-                Posted on March 22, 2020
+                Posted on March 16, 2020
               </p>
               <div class="post-entry">
                 
-                  <p>音视频学习入门技术文章连载：</p>
-<ul>
-<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
-<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
-<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
-<li><a href="https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
-<li><a href="https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw">【音视频连载-004】基础学习篇-SDL 加载图片并显示</a></li>
-<li><a href="https://mp.weixin.qq.com/s/nCidtYLmB8_LtAzbW14skg">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</a></li>
-<li><a href="https://mp.weixin.qq.com/s/9FSIVhd1TE3dDCIFmU02tw">【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件</a></li>
-<li><a href="https://mp.weixin.qq.com/s/VuWqZIG_HhghEsUYxnLwSw">【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</a></li>
-</ul>
-<p>接上篇 SDL 播放 PCM 音频文件，已经实现了 <code>推</code> 的模式去播放，接下来看看 <code>拉</code> 的模式如何实现。</p>
-                  <a href="https://glumes.com/post/ffmpeg/av-beginner-008/" class="post-read-more">[Read More]</a>
+                  <p>在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。</p>
+<p>SDL 播放音频文件有两种方法，可以理解成 <code>推(push)</code>和<code>拉(pull)</code>两种模式。</p>
+<p><code>推</code> 就是我们主动向设备缓冲区填充 Buffer ，而 <code>拉</code> 就是由设备拉取 Buffer 填充到缓冲区。</p>
+<p>在一些开发模型中，如果数据传递能够抽象成<code>流</code>的形式，那么肯定就会有<code>推</code>和<code>拉</code>两种模式。</p>
+<p>本篇文章主要是讲解 SDL 以推的形式播放音频文件。</p>
+                  <a href="https://glumes.com/post/ffmpeg/av-beginner-007/" class="post-read-more">[Read More]</a>
                 
               </div>
 
@@ -225,33 +218,19 @@ if (!doNotTrack) {
             </article>
           
             <article class="post-preview">
-              <a href="https://glumes.com/post/ffmpeg/av-beginner-007/">
-                <h2 class="post-title">【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</h2>
+              <a href="https://glumes.com/post/ffmpeg/av-beginner-008/">
+                <h2 class="post-title">【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</h2>
 
                 
               </a>
 
               <p class="post-meta">
-                Posted on March 16, 2020
+                Posted on March 22, 2020
               </p>
               <div class="post-entry">
                 
-                  <p>音视频学习入门技术文章连载：</p>
-<ul>
-<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
-<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
-<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
-<li><a href="https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
-<li><a href="https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw">【音视频连载-004】基础学习篇-SDL 加载图片并显示</a></li>
-<li><a href="https://mp.weixin.qq.com/s/nCidtYLmB8_LtAzbW14skg">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</a></li>
-<li><a href="https://mp.weixin.qq.com/s/9FSIVhd1TE3dDCIFmU02tw">【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件】</a>)</li>
-</ul>
-<p>在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。</p>
-<p>SDL 播放音频文件有两种方法，可以理解成 <code>推(push)</code>和<code>拉(pull)</code>两种模式。</p>
-<p><code>推</code> 就是我们主动向设备缓冲区填充 Buffer ，而 <code>拉</code> 就是由设备拉取 Buffer 填充到缓冲区。</p>
-<p>在一些开发模型中，如果数据传递能够抽象成<code>流</code>的形式，那么肯定就会有<code>推</code>和<code>拉</code>两种模式。</p>
-<p>本篇文章主要是讲解 SDL 以推的形式播放音频文件。</p>
-                  <a href="https://glumes.com/post/ffmpeg/av-beginner-007/" class="post-read-more">[Read More]</a>
+                  <p>接上篇 SDL 播放 PCM 音频文件，已经实现了 <code>推</code> 的模式去播放，接下来看看 <code>拉</code> 的模式如何实现。</p>
+                  <a href="https://glumes.com/post/ffmpeg/av-beginner-008/" class="post-read-more">[Read More]</a>
                 
               </div>
 
@@ -277,16 +256,7 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p>音视频学习入门技术文章连载：</p>
-<ul>
-<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
-<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
-<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
-<li><a href="https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
-<li><a href="https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw">【音视频连载-004】基础学习篇-SDL 加载图片并显示</a></li>
-<li><a href="https://mp.weixin.qq.com/s/nCidtYLmB8_LtAzbW14skg">【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</a></li>
-</ul>
-<p>在前面的文章中，我们已经能够加载 YUV 帧并显示了，那是把一张图片转换成 YUV 帧得到的素材。</p>
+                  <p>在前面的文章中，我们已经能够加载 YUV 帧并显示了，那是把一张图片转换成 YUV 帧得到的素材。</p>
 <p>如果是一个 YUV 视频文件的话，那就是很多 YUV 帧连续在一起，既然能展示一帧，那肯定可以连续展示多帧。</p>
 <p>接下来就要这样的操作。</p>
                   <a href="https://glumes.com/post/ffmpeg/av-beginner-006/" class="post-read-more">[Read More]</a>
@@ -315,15 +285,7 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p>音视频学习入门技术文章连载：</p>
-<ul>
-<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
-<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
-<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
-<li><a href="https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
-<li><a href="https://mp.weixin.qq.com/s/cJHfSK724zYhP65_WLh8Tw">【音视频连载-004】基础学习篇-SDL 加载图片并显示</a></li>
-</ul>
-<p>在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。</p>
+                  <p>在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。</p>
                   <a href="https://glumes.com/post/ffmpeg/av-beginner-005/" class="post-read-more">[Read More]</a>
                 
               </div>
@@ -350,14 +312,7 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p>音视频学习入门技术文章连载：</p>
-<ul>
-<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
-<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
-<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
-<li><a href="https://mp.weixin.qq.com/s/OfzfohB3L0zcFcJSLeLbQw">【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</a></li>
-</ul>
-<p>在前面的文章中已经介绍完 SDL 显示窗口、消息循环和事件响应这些基础内容，有了这些基础就可以进行功能性开发了。</p>
+                  <p>在前面的文章中已经介绍完 SDL 显示窗口、消息循环和事件响应这些基础内容，有了这些基础就可以进行功能性开发了。</p>
 <p>本篇的主要内容是利用 SDL 加载并显示一张图片，然后再去进行更多的音视频操作。</p>
                   <a href="https://glumes.com/post/ffmpeg/av-beginner-004/" class="post-read-more">[Read More]</a>
                 
@@ -385,13 +340,7 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p>音视频学习入门技术文章连载：</p>
-<ul>
-<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
-<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
-<li><a href="https://mp.weixin.qq.com/s/-Gh96TxhcQV9dQXDcQCqeA">【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</a></li>
-</ul>
-<p>在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。</p>
+                  <p>在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。</p>
 <p>为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#268bd2">SDL_Event</span> <span style="color:#268bd2">windowEvent</span>;
     <span style="color:#859900">while</span> (<span style="color:#cb4b16">true</span>){
@@ -428,12 +377,7 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p>音视频技术文章连载：</p>
-<ul>
-<li><a href="https://mp.weixin.qq.com/s/3uDZtUKngHbDBZd3jFyzpA">技术开发故事会连载</a></li>
-<li><a href="https://mp.weixin.qq.com/s/ZKrUiauxSKpfctFD4iHT8g">【音视频连载-001】基础学习篇-SDL 介绍以及工程配置</a></li>
-</ul>
-<p>在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。</p>
+                  <p>在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。</p>
 <p>本篇文章主要是创建一个应用程序窗口并显示。</p>
                   <a href="https://glumes.com/post/ffmpeg/av-beginner-002/" class="post-read-more">[Read More]</a>
                 
@@ -461,8 +405,7 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  <p><a href="https://mp.weixin.qq.com/s/8ob0zrHs9_2pmQTOHXPfjg">技术开发故事会连载</a></p>
-<p>这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。</p>
+                  <p>这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。</p>
 <h3 id="sdl-简介">SDL 简介</h3>
 <p>SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。</p>
 <p>SDL 提供了统一的针对音频、视频、键盘、鼠标、控制杆以及 3D 硬件的低级别访问接口，我们利用这些接口就能在不同系统上播放出音频、视频内容，而无需懂得系统特定的音视频接口。</p>
