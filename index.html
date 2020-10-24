@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>星陨的博客</title>
+  <title>音视频开发进阶</title>
   <meta name="keywords" content="Graphics,Video,Audio,FFmpeg,Android,Python,C++"/>
   <meta name="description" content="关注图形、图像、音视频、FFmpeg、Android、Python、C++等技术。">
-  <meta property="og:title" content="星陨的博客" />
-  <meta name="twitter:title" content="星陨的博客" />
+  <meta property="og:title" content="音视频开发进阶" />
+  <meta name="twitter:title" content="音视频开发进阶" />
   <meta name="baidu-site-verification" content="pXq00Oz0yr" />
 
   <meta name="description" content="多媒体开发工程师，分享 Android 应用开发、图形图像渲染、音视频等相关内容，目前就职于抖音，与你一同技术成长进阶~~~">
@@ -21,11 +21,11 @@
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="星陨的博客" />
+  <meta property="og:site_name" content="音视频开发进阶" />
 
   <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://glumes.com/" />
-  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="星陨的博客">
+  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="音视频开发进阶">
   <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
@@ -86,7 +86,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">星陨的博客</a>
+      <a class="navbar-brand" href="https://glumes.com/">音视频开发进阶</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -215,7 +215,7 @@ if (!doNotTrack) {
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="page-heading">
-                <h1 align="center">星陨的博客</h1>
+                <h1 align="center">音视频开发进阶</h1>
                 
                 
                   <span class="post-meta">
@@ -323,6 +323,43 @@ if (!doNotTrack) {
     <div class="blog-tags">
         
         <a href="https://glumes.com//tags/webrtc/">webrtc</a>&nbsp;
+        
+    </div>
+    
+
+</article>
+          
+            <article class="post-preview">
+    <a href="https://glumes.com/post/ffmpeg/av-beginner-007/">
+        <h2 class="post-title">【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</h2>
+        
+        
+        
+    </a>
+
+    <p class="post-meta">
+        <span class="post-meta">
+  Posted on March 16, 2020
+  
+</span>
+
+
+    </p>
+    <div class="post-entry">
+        
+        <p>在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。</p>
+<p>SDL 播放音频文件有两种方法，可以理解成 <code>推(push)</code>和<code>拉(pull)</code>两种模式。</p>
+<p><code>推</code> 就是我们主动向设备缓冲区填充 Buffer ，而 <code>拉</code> 就是由设备拉取 Buffer 填充到缓冲区。</p>
+<p>在一些开发模型中，如果数据传递能够抽象成<code>流</code>的形式，那么肯定就会有<code>推</code>和<code>拉</code>两种模式。</p>
+<p>本篇文章主要是讲解 SDL 以推的形式播放音频文件。</p>
+        <a href="https://glumes.com/post/ffmpeg/av-beginner-007/" class="post-read-more">[Read More]</a>
+        
+    </div>
+
+    
+    <div class="blog-tags">
+        
+        <a href="https://glumes.com//tags/sdl/">SDL</a>&nbsp;
         
     </div>
     
@@ -590,43 +627,6 @@ if (!doNotTrack) {
         
         <p>接上篇 SDL 播放 PCM 音频文件，已经实现了 <code>推</code> 的模式去播放，接下来看看 <code>拉</code> 的模式如何实现。</p>
         <a href="https://glumes.com/post/ffmpeg/av-beginner-008/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://glumes.com//tags/sdl/">SDL</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://glumes.com/post/ffmpeg/av-beginner-007/">
-        <h2 class="post-title">【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  Posted on March 16, 2020
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        <p>在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。</p>
-<p>SDL 播放音频文件有两种方法，可以理解成 <code>推(push)</code>和<code>拉(pull)</code>两种模式。</p>
-<p><code>推</code> 就是我们主动向设备缓冲区填充 Buffer ，而 <code>拉</code> 就是由设备拉取 Buffer 填充到缓冲区。</p>
-<p>在一些开发模型中，如果数据传递能够抽象成<code>流</code>的形式，那么肯定就会有<code>推</code>和<code>拉</code>两种模式。</p>
-<p>本篇文章主要是讲解 SDL 以推的形式播放音频文件。</p>
-        <a href="https://glumes.com/post/ffmpeg/av-beginner-007/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -1212,7 +1212,7 @@ if (!doNotTrack) {
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://glumes.com/">星陨的博客</a>
+            <a href="https://glumes.com/">音视频开发进阶</a>
             &nbsp;&bull;&nbsp;
             <a href="https://glumes.com/sitemap.xml">网站地图</a>
           
