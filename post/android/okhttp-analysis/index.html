@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>开源库之 OkHttp 源码分析-阳明的博客|Kubernetes|Istio|Prometheus|Python|Golang|云原生</title>
+  <title>开源库之 OkHttp 源码分析</title>
   <meta property="og:title" content="开源库之 OkHttp 源码分析" />
   <meta name="twitter:title" content="开源库之 OkHttp 源码分析" />
 
@@ -534,6 +534,7 @@
 <p>对于异步请求，对请求进行管理，限制请求最大数量，如果超出数量就排队候选，每次执行完一次异步请求，有空位就去处理排队的请求。</p>
 <p>对于具体的请求过程，通过责任链的模式，把请求分成多个过程，递归地对请求进行处理。</p>
 
+
           <h2>微信公众号</h2>
 
 <p>扫描下面的二维码关注我的微信公众帐号</p>
@@ -544,7 +545,15 @@
 
 
   
+
+
+                    <p>
+                      原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/okhttp-analysis/">开源库之 OkHttp 源码分析</a>
+                    </p>
+
+
           
+
           
             <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
     <center>

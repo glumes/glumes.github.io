@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title> Android 6.0 Launcher 启动 Activity 过程分析小结（四）-阳明的博客|Kubernetes|Istio|Prometheus|Python|Golang|云原生</title>
+  <title> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</title>
   <meta property="og:title" content=" Android 6.0 Launcher 启动 Activity 过程分析小结（四）" />
   <meta name="twitter:title" content=" Android 6.0 Launcher 启动 Activity 过程分析小结（四）" />
 
@@ -401,6 +401,7 @@
 <p>开启一个 Activity 组件的生命周期当然是在应用程序进程内了，此时又是 ActivityManagerService 的跨进程通信，执行 ApplicationThread 的 <code>scheduleLaunchActivity</code>，ActivityThread 的消息循环响应方法为 <code>handleLaunchActivity</code>。在该方法内又继续执行 <code>performLaunchActivity</code>将 Activity 组件启动起来。通过反射创建了一个 Activity 对象，并且创建了 Activity 的运行环境上下文，通过 <code>Instrumentation</code> 执行了 Activity 的 onCreate 方法、onStart 方法。接着又执行了<code>handleResumeActivity</code>方法让 Activity 运行到 <code>Resumed</code>状态，真正执行操作的是<code>performResumeActivity</code>方法，而最终还是调用 <code>Instrumentation</code>类的<code>callActivityOnResume</code>方法。</p>
 <p>至此，一个 Activity 组件就已经创建成功了，里面具体的代码细节暂不深入讨论了，比如 Activity 的加载之类的。</p>
 
+
           <h2>微信公众号</h2>
 
 <p>扫描下面的二维码关注我的微信公众帐号</p>
@@ -411,7 +412,15 @@
 
 
   
+
+
+                    <p>
+                      原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/android/android-start-activity-from-launcher-4/"> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</a>
+                    </p>
+
+
           
+
           
             <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
     <center>
