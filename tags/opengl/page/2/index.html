@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>OpenGL</title>
+  <title>OpenGL-阳明的博客|Kubernetes|Istio|Prometheus|Python|Golang|云原生</title>
   <meta property="og:title" content="OpenGL" />
   <meta name="twitter:title" content="OpenGL" />
 
   <meta name="author" content=""/>
-  <meta name="referrer" content="origin" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/tags/opengl/" />
   <meta property="og:type" content="website" />
@@ -20,51 +19,25 @@
   <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://glumes.com/tags/opengl/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="音视频开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-
- 
-
 
   
   
-  
 
+  <link rel="stylesheet" href='https://glumes.com/css/bundle.min.fb9e227ddbeead55275b2028c55c2dd4b6b4e09ded2b8c8e4dc5c8c417bc97de.css' integrity='sha256-&#43;54ifdvurVUnWyAoxVwt1La04J3tK4yOTcXIxBe8l94='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
 
-
-
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-84590324-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
 
 
 
@@ -72,15 +45,17 @@ if (!doNotTrack) {
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only">切换导航</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">音视频开发进阶</a>
+      <a class="navbar-brand" href="https://glumes.com/" title="音视频开发进阶">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="音视频开发进阶">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -173,9 +148,6 @@ if (!doNotTrack) {
 </nav>
 
 
-
-
-
     
   <header class="header-section ">
     <div class="intro-header no-img">
@@ -211,12 +183,12 @@ if (!doNotTrack) {
               </a>
 
               <p class="post-meta">
-                Posted on July 21, 2018
+                发表于 July 21, 2018
               </p>
               <div class="post-entry">
                 
                   <p>在 OpenGL 中使用光照。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/" class="post-read-more">[Read More]</a>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-ambient-light/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -238,7 +210,7 @@ if (!doNotTrack) {
               </a>
 
               <p class="post-meta">
-                Posted on July 20, 2018
+                发表于 July 20, 2018
               </p>
               <div class="post-entry">
                 
@@ -252,7 +224,7 @@ if (!doNotTrack) {
 <p>按照计划是绘制一个封闭的立方体，六个面都是有的，可从上面的效果来看并不是，立方体的有些面丢失了，只有后面的那个面，前面的面没了。</p>
 <p>这就是在没有开启深度测试的情况下，本来应该被遮挡的，绘制在后面的面却绘制到了其他面之上。</p>
 <p>要解决这种问题，就得使用深度测试了。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-depth-test/" class="post-read-more">[Read More]</a>
+                  <a href="https://glumes.com/post/opengl/opengl-depth-test/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -274,7 +246,7 @@ if (!doNotTrack) {
               </a>
 
               <p class="post-meta">
-                Posted on July 19, 2018
+                发表于 July 19, 2018
               </p>
               <div class="post-entry">
                 
@@ -286,7 +258,7 @@ if (!doNotTrack) {
 <p><img src="https://res.cloudinary.com/glumes-com/image/upload/v1526832824/code/rotate_camera_with_cube.gif" alt=""></p>
 <p>不管我们怎么旋转立方体，从任何一个方向去看它，最多都只能看到三个面。</p>
 <p>那么对于 OpenGL 来说，那看不到的另外三个面完全可以不用绘制它，从而提高绘制的性能。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" class="post-read-more">[Read More]</a>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -312,14 +284,14 @@ if (!doNotTrack) {
               </a>
 
               <p class="post-meta">
-                Posted on July 18, 2018
+                发表于 July 18, 2018
               </p>
               <div class="post-entry">
                 
                   <p>在之前使用 <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/">OpenGL 顶点缓冲区 VBO 的使用</a> 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。</p>
 <p>这就存在了一些重复的操作。</p>
 <p>在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/" class="post-read-more">[Read More]</a>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -345,13 +317,13 @@ if (!doNotTrack) {
               </a>
 
               <p class="post-meta">
-                Posted on July 17, 2018
+                发表于 July 17, 2018
               </p>
               <div class="post-entry">
                 
                   <p>在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 <code>glDrawArrays</code> 或 <code>glDrawElements</code> 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。</p>
 <p>可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" class="post-read-more">[Read More]</a>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -377,7 +349,7 @@ if (!doNotTrack) {
               </a>
 
               <p class="post-meta">
-                Posted on July 16, 2018
+                发表于 July 16, 2018
               </p>
               <div class="post-entry">
                 
@@ -387,7 +359,7 @@ if (!doNotTrack) {
 </blockquote>
 <p>在 Android 中有一个类 PorterDuffXfermode ，它是用来设置颜色混合方式的，也就是在已有颜色的基础上再绘制一笔颜色，这两个颜色是如何进行混合的，是新绘制的颜色覆盖了原有颜色，还是新绘制的颜色和原有颜色混合组成另一种颜色呢。</p>
 <p>在 OpenGL 中同样有这样颜色混合的问题。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" class="post-read-more">[Read More]</a>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-color-blend/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -413,14 +385,14 @@ if (!doNotTrack) {
               </a>
 
               <p class="post-meta">
-                Posted on July 13, 2018
+                发表于 July 13, 2018
               </p>
               <div class="post-entry">
                 
                   <p>在前面的博客文章中有提到 <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/">OpenGL 裁剪测试及注意点</a>，并且裁剪测试只能裁剪一个矩形区域，相当于就是把整个内容都绘制上去了，但是透过一个小矩形区域来看绘制的物体。</p>
 <p>除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。</p>
 <p>关于 Alpha 透明度测试，在 用 <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/">OpenGL 对视频帧内容进行替换</a> 也用实践用到过。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/" class="post-read-more">[Read More]</a>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-alpha-test/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -442,7 +414,7 @@ if (!doNotTrack) {
               </a>
 
               <p class="post-meta">
-                Posted on July 12, 2018
+                发表于 July 12, 2018
               </p>
               <div class="post-entry">
                 
@@ -451,7 +423,7 @@ if (!doNotTrack) {
 <p><a href="https://mp.weixin.qq.com/s/WZWY5Ml9YP9N9tv-iiFOqg">https://mp.weixin.qq.com/s/WZWY5Ml9YP9N9tv-iiFOqg</a></p>
 </blockquote>
 <p>在群里面有人提到了这么一个实现：现有一段素材视频，想要对视频中的某个内容进行替换，换成自己的图片，这个怎么用 OpenGL 去实现呢？</p>
-                  <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" class="post-read-more">[Read More]</a>
+                  <a href="https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -473,12 +445,12 @@ if (!doNotTrack) {
               </a>
 
               <p class="post-meta">
-                Posted on July 11, 2018
+                发表于 July 11, 2018
               </p>
               <div class="post-entry">
                 
                   <p>学习了一段时间的 OpenGL ES，并在公司的项目中得到了运用，也算是有了一些积累，现在分享一些当初学习的资源，大家一起来学习，共同交流进步。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-share/" class="post-read-more">[Read More]</a>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-share/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -504,12 +476,12 @@ if (!doNotTrack) {
               </a>
 
               <p class="post-meta">
-                Posted on July 3, 2018
+                发表于 July 3, 2018
               </p>
               <div class="post-entry">
                 
                   <p>在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" class="post-read-more">[Read More]</a>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-scissor-test/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -535,7 +507,7 @@ if (!doNotTrack) {
               </a>
 
               <p class="post-meta">
-                Posted on July 2, 2018
+                发表于 July 2, 2018
               </p>
               <div class="post-entry">
                 
@@ -544,7 +516,7 @@ if (!doNotTrack) {
 <p><a href="https://mp.weixin.qq.com/s/OCcTOJArxipvY-v_HuD0Eg">https://mp.weixin.qq.com/s/OCcTOJArxipvY-v_HuD0Eg</a></p>
 </blockquote>
 <p>在使用 OpenGL 绘制时，我们最多绘制的是一些简单的图形，比如三角形、圆形、立方体等，因为这些图形的顶点数量不多，还是可以手动的写出那些顶点的，可要是绘制一些复杂图形该怎么办呢？</p>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/" class="post-read-more">[Read More]</a>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -566,7 +538,7 @@ if (!doNotTrack) {
               </a>
 
               <p class="post-meta">
-                Posted on May 25, 2018
+                发表于 May 25, 2018
               </p>
               <div class="post-entry">
                 
@@ -614,7 +586,7 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-                  <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" class="post-read-more">[Read More]</a>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -633,12 +605,12 @@ if (!doNotTrack) {
           <ul class="pager main-pager">
             
               <li class="previous">
-                <a href="https://glumes.com/tags/opengl/page/1">&larr; Newer Posts</a>
+                <a href="https://glumes.com/tags/opengl/page/1">&larr; 上一页</a>
               </li>
             
             
               <li class="next">
-                <a href="https://glumes.com/tags/opengl/page/3">Older Posts &rarr;</a>
+                <a href="https://glumes.com/tags/opengl/page/3">下一页 &rarr;</a>
               </li>
             
           </ul>
@@ -728,7 +700,7 @@ if (!doNotTrack) {
 </P>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          由 <a href="http://gohugo.io">Hugo v0.74.3</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a> 移植自 <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a>
           
         </p>
 
@@ -782,6 +754,26 @@ MathJax.Hub.Config({
 
 
 
+
+
+<script src='https://glumes.com/js/bundle.min.dd00fc477b5e611b3b15869e7f4ffa218efd3a1b6f00902db8b25e1e9a1d90fc.js' integrity='sha256-3QD8R3teYRs7FYaef0/6IY79OhtvAJAtuLJeHpodkPw='></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>

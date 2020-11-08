@@ -6,7 +6,6 @@ http://prismjs.com/download.html?themes=prism-coy&languages=markup+css+clike+jav
  * @author Tim  Shedor
  */
 
-
 code[class*="language-"],
 pre[class*="language-"] {
 	color: black;

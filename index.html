@@ -1,23 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
   <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>音视频开发进阶</title>
-  <meta name="keywords" content="Graphics,Video,Audio,FFmpeg,Android,Python,C++"/>
-  <meta name="description" content="关注图形、图像、音视频、FFmpeg、Android、Python、C++等技术。">
+  <title>音视频开发进阶-Kubernetes|Docker|Istio|Python|Golang|云原生</title>
+  <meta name="keywords" content="Kubernetes,k8s,Docker,istio,Python,Django,Golang,Hugo,Prometheus,Cloud Native,云原生,微服务">
+  <meta name="description" content="阳明的博客是一个关注容器、kubernetes、istio、devops、prometheus、python、django、golang、云原生、微服务等技术的个人博客。">
   <meta property="og:title" content="音视频开发进阶" />
   <meta name="twitter:title" content="音视频开发进阶" />
-  <meta name="baidu-site-verification" content="pXq00Oz0yr" />
 
   <meta name="description" content="多媒体开发工程师，分享 Android 应用开发、图形图像渲染、音视频等相关内容，目前就职于抖音，与你一同技术成长进阶~~~">
   <meta property="og:description" content="多媒体开发工程师，分享 Android 应用开发、图形图像渲染、音视频等相关内容，目前就职于抖音，与你一同技术成长进阶~~~">
   <meta name="twitter:description" content="多媒体开发工程师，分享 Android 应用开发、图形图像渲染、音视频等相关内容，目前就职于抖音，与你一同技术成长进阶~~~">
   <meta name="author" content=""/>
-  <meta name="referrer" content="origin" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/" />
   <meta property="og:type" content="website" />
@@ -26,51 +24,25 @@
   <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://glumes.com/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="音视频开发进阶">
-  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
-  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
-  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
-
- 
-
 
   
   
-  
 
+  <link rel="stylesheet" href='https://glumes.com/css/bundle.min.fb9e227ddbeead55275b2028c55c2dd4b6b4e09ded2b8c8e4dc5c8c417bc97de.css' integrity='sha256-&#43;54ifdvurVUnWyAoxVwt1La04J3tK4yOTcXIxBe8l94='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
 
-
-
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-84590324-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-</script>
 
 
 
@@ -78,15 +50,17 @@ if (!doNotTrack) {
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only">切换导航</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/">音视频开发进阶</a>
+      <a class="navbar-brand" href="https://glumes.com/" title="音视频开发进阶">
+        <img src="" style="margin-top: -5px;height: 32px;" alt="音视频开发进阶">
+      </a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -179,9 +153,6 @@ if (!doNotTrack) {
 </nav>
 
 
-
-
-
     
   
   
@@ -198,15 +169,11 @@ if (!doNotTrack) {
     
       <div class="intro-header big-img">
         
-        
         <div class="container">
           <div class="row">
-              <div class="col-lg-12 col-md-12 col-md-offset-0">
-                
-                <div class="page-heading">
-                
-                  
-                     <h1 align="center"></h1>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="page-heading">
+                <h1>音视频开发进阶</h1>
                   
                   
               </div>
@@ -216,27 +183,9 @@ if (!doNotTrack) {
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    <div class="intro-header no-img">
-      
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-md-offset-0">
-            <div class="page-heading">
-                <h1 align="center">音视频开发进阶</h1>
-                
-                
-                  <span class="post-meta">
-  Posted on August 31, 2020
-  
-</span>
-
-
-                
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
+    
+    
   </header>
 
 
@@ -276,7 +225,9 @@ if (!doNotTrack) {
 
     <p class="post-meta">
         <span class="post-meta">
-  Posted on August 31, 2020
+  
+    发表于 August 31, 2020
+  
   
 </span>
 
@@ -287,7 +238,7 @@ if (!doNotTrack) {
         <p>最近有不少朋友加我微信，要求进群交流学习的。</p>
 <p>可是早先创建的技术交流群，渐渐地都开始满员了。</p>
 <p>于是乎，要开始创建第三群啦~~~</p>
-        <a href="https://glumes.com/post/life/av-beginner-wechat-group/" class="post-read-more">[Read More]</a>
+        <a href="https://glumes.com/post/life/av-beginner-wechat-group/" class="post-read-more">[阅读全文]</a>
         
     </div>
 
@@ -311,7 +262,9 @@ if (!doNotTrack) {
 
     <p class="post-meta">
         <span class="post-meta">
-  Posted on August 10, 2020
+  
+    发表于 August 10, 2020
+  
   
 </span>
 
@@ -322,7 +275,7 @@ if (!doNotTrack) {
         <p>最近开始折腾 WebRTC 了。</p>
 <p>先介绍一下 WebRTC 源码编译以及 Android 开发环境的搭建。</p>
 <p>整个下载编译过程都需要能够正常访问外网，这需要自己想办法克服了。</p>
-        <a href="https://glumes.com/post/webrtc/webrtc-android-setup/" class="post-read-more">[Read More]</a>
+        <a href="https://glumes.com/post/webrtc/webrtc-android-setup/" class="post-read-more">[阅读全文]</a>
         
     </div>
 
@@ -346,7 +299,9 @@ if (!doNotTrack) {
 
     <p class="post-meta">
         <span class="post-meta">
-  Posted on March 16, 2020
+  
+    发表于 March 16, 2020
+  
   
 </span>
 
@@ -359,7 +314,7 @@ if (!doNotTrack) {
 <p><code>推</code> 就是我们主动向设备缓冲区填充 Buffer ，而 <code>拉</code> 就是由设备拉取 Buffer 填充到缓冲区。</p>
 <p>在一些开发模型中，如果数据传递能够抽象成<code>流</code>的形式，那么肯定就会有<code>推</code>和<code>拉</code>两种模式。</p>
 <p>本篇文章主要是讲解 SDL 以推的形式播放音频文件。</p>
-        <a href="https://glumes.com/post/ffmpeg/av-beginner-007/" class="post-read-more">[Read More]</a>
+        <a href="https://glumes.com/post/ffmpeg/av-beginner-007/" class="post-read-more">[阅读全文]</a>
         
     </div>
 
@@ -383,7 +338,9 @@ if (!doNotTrack) {
 
     <p class="post-meta">
         <span class="post-meta">
-  Posted on August 3, 2020
+  
+    发表于 August 3, 2020
+  
   
 </span>
 
@@ -398,7 +355,7 @@ if (!doNotTrack) {
 <p>其实是博客域名在备案啦。</p>
 <p>之前博客搭建用的是 Github Pages 方案，访问速度一直被人诟病。</p>
 <p>上个月就决定把服务器换成阿里云了，访问速度如火箭般提升🚀🚀🚀~~</p>
-        <a href="https://glumes.com/post/life/domain-name-register/" class="post-read-more">[Read More]</a>
+        <a href="https://glumes.com/post/life/domain-name-register/" class="post-read-more">[阅读全文]</a>
         
     </div>
 
@@ -422,7 +379,9 @@ if (!doNotTrack) {
 
     <p class="post-meta">
         <span class="post-meta">
-  Posted on May 22, 2020
+  
+    发表于 May 22, 2020
+  
   
 </span>
 
@@ -447,7 +406,7 @@ if (!doNotTrack) {
 <blockquote>
 <p><a href="https://mp.weixin.qq.com/s/M4IiA-dTg1R68TeFaFvNPg">移动端技术交流喊你入群啦~~~</a></p>
 </blockquote>
-        <a href="https://glumes.com/post/opengl/opengl-draw-grid-optimize/" class="post-read-more">[Read More]</a>
+        <a href="https://glumes.com/post/opengl/opengl-draw-grid-optimize/" class="post-read-more">[阅读全文]</a>
         
     </div>
 
@@ -471,7 +430,9 @@ if (!doNotTrack) {
 
     <p class="post-meta">
         <span class="post-meta">
-  Posted on May 18, 2020
+  
+    发表于 May 18, 2020
+  
   
 </span>
 
@@ -495,7 +456,7 @@ if (!doNotTrack) {
 <p><img src="https://images.xiaozhuanlan.com/photo/2020/7d112ef33beccfe4fbf62e4879eabb25.png" alt=""></p>
 <p>有需要的同学可以去官网下载安装，它是需要购买 <strong>License</strong> 的，不过可以免费使用两个月。</p>
 <hr>
-        <a href="https://glumes.com/post/opengl/shader-tool-kodelife-introduce/" class="post-read-more">[Read More]</a>
+        <a href="https://glumes.com/post/opengl/shader-tool-kodelife-introduce/" class="post-read-more">[阅读全文]</a>
         
     </div>
 
@@ -519,7 +480,9 @@ if (!doNotTrack) {
 
     <p class="post-meta">
         <span class="post-meta">
-  Posted on May 18, 2020
+  
+    发表于 May 18, 2020
+  
   
 </span>
 
@@ -532,7 +495,7 @@ if (!doNotTrack) {
 <p>文件地址如下：</p>
 <p><a href="https://github.com/glumes/av-beginner/blob/master/resource/video/video-avi-320x320.avi">https://github.com/glumes/av-beginner/blob/master/resource/video/video-avi-320x320.avi</a></p>
 <p>这个文件很有意思，它的内容是一个时钟，每隔一秒，秒针都会跳动，同时还会发出滴答的声音，很方便后续做音视频同步处理。</p>
-        <a href="https://glumes.com/post/ffmpeg/av-beginner-011/" class="post-read-more">[Read More]</a>
+        <a href="https://glumes.com/post/ffmpeg/av-beginner-011/" class="post-read-more">[阅读全文]</a>
         
     </div>
 
@@ -556,7 +519,9 @@ if (!doNotTrack) {
 
     <p class="post-meta">
         <span class="post-meta">
-  Posted on May 6, 2020
+  
+    发表于 May 6, 2020
+  
   
 </span>
 
@@ -572,7 +537,7 @@ if (!doNotTrack) {
 <p>目前，市面上关于音视频学习的相关书籍并不多，而且即使看了书籍学了理论，最终还是要回归到代码上来。</p>
 <p>毕竟 IT 行业实践性要求高，强调动手能力，音视频这方面就更得多操作和探索了。</p>
 <p>推荐下面几个项目会各有侧重，分别涵盖了 Android 音视频录制 API 、OpenGL 渲染和综合运用的例子。</p>
-        <a href="https://glumes.com/post/android/android-av-beginner-resource/" class="post-read-more">[Read More]</a>
+        <a href="https://glumes.com/post/android/android-av-beginner-resource/" class="post-read-more">[阅读全文]</a>
         
     </div>
 
@@ -590,7 +555,9 @@ if (!doNotTrack) {
 
     <p class="post-meta">
         <span class="post-meta">
-  Posted on April 27, 2020
+  
+    发表于 April 27, 2020
+  
   
 </span>
 
@@ -600,7 +567,7 @@ if (!doNotTrack) {
         
         <p>音视频连载系列已经停更一段时间，再这么停下去估计就要掉粉了，捡起来继续更新~~~</p>
 <p>接下来主要是讲解 FFmpeg 相关的内容，比如这篇就从简单的日志打印开始说起。</p>
-        <a href="https://glumes.com/post/ffmpeg/av-beginner-010/" class="post-read-more">[Read More]</a>
+        <a href="https://glumes.com/post/ffmpeg/av-beginner-010/" class="post-read-more">[阅读全文]</a>
         
     </div>
 
@@ -624,7 +591,9 @@ if (!doNotTrack) {
 
     <p class="post-meta">
         <span class="post-meta">
-  Posted on March 22, 2020
+  
+    发表于 March 22, 2020
+  
   
 </span>
 
@@ -633,7 +602,7 @@ if (!doNotTrack) {
     <div class="post-entry">
         
         <p>接上篇 SDL 播放 PCM 音频文件，已经实现了 <code>推</code> 的模式去播放，接下来看看 <code>拉</code> 的模式如何实现。</p>
-        <a href="https://glumes.com/post/ffmpeg/av-beginner-008/" class="post-read-more">[Read More]</a>
+        <a href="https://glumes.com/post/ffmpeg/av-beginner-008/" class="post-read-more">[阅读全文]</a>
         
     </div>
 
@@ -657,7 +626,9 @@ if (!doNotTrack) {
 
     <p class="post-meta">
         <span class="post-meta">
-  Posted on March 15, 2020
+  
+    发表于 March 15, 2020
+  
   
 </span>
 
@@ -668,7 +639,7 @@ if (!doNotTrack) {
         <p>在前面的文章中，我们已经能够加载 YUV 帧并显示了，那是把一张图片转换成 YUV 帧得到的素材。</p>
 <p>如果是一个 YUV 视频文件的话，那就是很多 YUV 帧连续在一起，既然能展示一帧，那肯定可以连续展示多帧。</p>
 <p>接下来就要这样的操作。</p>
-        <a href="https://glumes.com/post/ffmpeg/av-beginner-006/" class="post-read-more">[Read More]</a>
+        <a href="https://glumes.com/post/ffmpeg/av-beginner-006/" class="post-read-more">[阅读全文]</a>
         
     </div>
 
@@ -692,7 +663,9 @@ if (!doNotTrack) {
 
     <p class="post-meta">
         <span class="post-meta">
-  Posted on March 10, 2020
+  
+    发表于 March 10, 2020
+  
   
 </span>
 
@@ -701,7 +674,7 @@ if (!doNotTrack) {
     <div class="post-entry">
         
         <p>在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。</p>
-        <a href="https://glumes.com/post/ffmpeg/av-beginner-005/" class="post-read-more">[Read More]</a>
+        <a href="https://glumes.com/post/ffmpeg/av-beginner-005/" class="post-read-more">[阅读全文]</a>
         
     </div>
 
@@ -1254,7 +1227,7 @@ if (!doNotTrack) {
 </P>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> adapted to <a href="https://github.com/glumes/glumes.com">glumes-blog</a>
+          由 <a href="http://gohugo.io">Hugo v0.74.3</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a> 移植自 <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a>
           
         </p>
 
@@ -1308,6 +1281,26 @@ MathJax.Hub.Config({
 
 
 
+
+
+<script src='https://glumes.com/js/bundle.min.dd00fc477b5e611b3b15869e7f4ffa218efd3a1b6f00902db8b25e1e9a1d90fc.js' integrity='sha256-3QD8R3teYRs7FYaef0/6IY79OhtvAJAtuLJeHpodkPw='></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
 
   </body>
 </html>
