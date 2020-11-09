@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
   <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
@@ -23,6 +23,7 @@
   <meta name="twitter:description" content="在 OpenGL 开发中，我们要渲染一张图片，通常先是得到一张图片对应的 Bitmap ,然后将该 Bitmap 作为纹理上传到 OpenGL 中。在 Android 中有封装好的 GLUtils 类的 texImage2D 方法供我们调用。
     public static void texImage2D(int target, int level, int internalformat, …">
   <meta name="author" content=""/>
+  <meta name="referrer" content="origin" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/" />
   <meta property="og:type" content="website" />
@@ -31,25 +32,40 @@
   <meta name="generator" content="Hugo 0.74.3" />
   <link rel="canonical" href="https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="音视频开发进阶">
+  <link rel="stylesheet" href="https://glumes.com/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/main.css?t=126" />
+  <link rel="stylesheet" href="https://glumes.com/css/reward.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/search.css" />
+  <link rel="stylesheet" href="https://glumes.com/css/pygment_highlights.css" />
+
+ 
+
 
   
   
-
-  <link rel="stylesheet" href='https://glumes.com/css/bundle.min.fb9e227ddbeead55275b2028c55c2dd4b6b4e09ded2b8c8e4dc5c8c417bc97de.css' integrity='sha256-&#43;54ifdvurVUnWyAoxVwt1La04J3tK4yOTcXIxBe8l94='>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   
+
   
-    
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <![endif]-->
 
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
 
+
+
+
+
+
+
+
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
 
 
 
@@ -57,7 +73,7 @@
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="sr-only">切换导航</span>
@@ -65,10 +81,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://glumes.com/" title="音视频开发进阶">
-        
-        音视频开发进阶
-      </a>
+      <a class="navbar-brand" href="https://glumes.com/">音视频开发进阶</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -161,6 +174,9 @@
 </nav>
 
 
+
+
+
     
   
   
@@ -177,21 +193,24 @@
     
       <div class="intro-header big-img">
         
+        
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <div class="post-heading">
-                <h1>Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</h1>
+              <div class="col-lg-12 col-md-12 col-md-offset-0">
+                
+                <div class="page-heading">
+                
                   
-                  
+                     <h1>Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</h1>
+                     
                     <span class="post-meta">
-  
-    发表于 May 14, 2019
-  
+  发表于 May 14, 2019
   
 </span>
 
 
+                    
+                  
                   
               </div>
             </div>
@@ -200,74 +219,58 @@
         <span class="img-desc" style="display: inline;"></span>
       </div>
     
-    
-    
     <div class="intro-header no-img">
       
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</h1>
+                <h1 align="center">Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</h1>
                 
-                
-                  <span class="post-meta">
-  
-    发表于 May 14, 2019
-  
-  
-</span>
-
-
                 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </header>
 
 
     
-
-
-
 <div class="container" role="main">
   <div class="row">
-
-    
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div>
-            
-            
-            <h5 id="tags" style="margin-top: 30px;">标签:
-              
-                  <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
-              
-            </h5>
-            
-        </div>
-  
-        <article role="main" class="blog-post" itemprop="articleBody" id="content">
-          
-            
-          
-  
-          
-          
-          
-  
-          
-          
-          
-  
-          
-          
-          
 
-          <p>在 OpenGL 开发中，我们要渲染一张图片，通常先是得到一张图片对应的 Bitmap ,然后将该 Bitmap 作为纹理上传到 OpenGL 中。在 Android 中有封装好的 <code>GLUtils</code> 类的 <code>texImage2D</code> 方法供我们调用。</p>
+
+
+        
+      <div>
+          
+          
+          <h5 id="tags" style="margin-top: 0px;">标签:
+            
+                <a href="https://glumes.com/tags/jni/">JNI</a> &nbsp;
+            
+          </h5>
+          
+      </div>
+
+      <article role="main" class="blog-post" itemprop="articleBody" id="content">
+        
+          
+        
+
+            <h3>当当开学季囤书活动</h3>
+<blockquote><p>又是开学季，当当百万自营图书大幅度优惠。</p>
+<p>每满100减50，满200减100，满300减150，满400减200。</p>
+<p>使用我的优惠码 【UPXPUQ】（注意区分大小写），可与满减叠加使用，花 160 即可买价值 400 的图书！！</p>
+<p>音视频方面的好书赶紧囤起来吧，<a href='https://mp.weixin.qq.com/s/ARTno0UaDbOaFL92rrB4Vw'>使用详情 和 好书推荐 点击这里</a></p>
+</blockquote>
+<hr />
+
+
+
+        <p>在 OpenGL 开发中，我们要渲染一张图片，通常先是得到一张图片对应的 Bitmap ,然后将该 Bitmap 作为纹理上传到 OpenGL 中。在 Android 中有封装好的 <code>GLUtils</code> 类的 <code>texImage2D</code> 方法供我们调用。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#859900">public</span> <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">texImage2D</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">target</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">level</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">internalformat</span>,
             <span style="color:#268bd2">Bitmap</span> <span style="color:#268bd2">bitmap</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">type</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">border</span>)
 </code></pre></div><p>该方法的底层原理实际上也是解析了该 Bitmap ，得到了 Bitmap 所有的像素数据，类似于 Android NDK 关于 Bitmap 操作的 <code>AndroidBitmap_lockPixels</code> 方法，如果你不太了解该方法，可以参考这篇文章：<a href="https://glumes.com/post/android/android-jni-bitmap-operation/">Android JNI 之 Bitmap 操作</a>。</p>
@@ -296,8 +299,40 @@
 <p><a href="https://github.com/glumes/InstantGLSL">https://github.com/glumes/InstantGLSL</a></p>
 </blockquote>
 
+ <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="https://glumes.com/img/avatar.jpeg"/>Glumes</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？加微信好友 ezglumes </span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="https://glumes.com/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="https://glumes.com/img/wechat-btn.png"/></span>
+    </div>
+</div>
 
-          <h2>微信公众号</h2>
+
+
+                  <h2>微信公众号</h2>
 
 <p>扫描下面的二维码关注我的微信公众帐号</p>
 
@@ -306,18 +341,20 @@
 <img src="https://image.glumes.com/blog_image/wexin-logo.png" alt="wechat-account-qrcode">
 
 
-  
 
+        
 
-                    <p>
-                      原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/">Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</a>
-                    </p>
+                
 
+                
 
-          
+                原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/">Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</a>
 
-          
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+                
+
+                
+        
+        <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
     <center>
     <a href="#" class="social-share-icon icon-weibo"></a>
     <a href="#" class="social-share-icon icon-wechat"></a>
@@ -332,11 +369,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
 
-          
-        </article>
-  
         
-          
+      </article>
+
+      
+        
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
@@ -361,45 +398,31 @@
     
 </ul>
 
-        
-  
-        
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://glumes.com/post/android/stb-image-introduce/" data-toggle="tooltip" data-placement="top" title="简单易用的图像解码库介绍 —— stb_image">&larr; 前一篇</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://glumes.com/post/android/rust-compile-so-library/" data-toggle="tooltip" data-placement="top" title="rust 开发编译 Android 动态库实践">后一篇 &rarr;</a>
-            </li>
-          
-        </ul>
-        
+      
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      
+      <ul class="pager blog-pager">
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-  
+          <li class="previous">
+            <a href="https://glumes.com/post/android/stb-image-introduce/" data-toggle="tooltip" data-placement="top" title="简单易用的图像解码库介绍 —— stb_image">&larr; 前一篇</a>
+          </li>
         
+        
+          <li class="next">
+            <a href="https://glumes.com/post/android/rust-compile-so-library/" data-toggle="tooltip" data-placement="top" title="rust 开发编译 Android 动态库实践">后一篇 &rarr;</a>
+          </li>
+        
+      </ul>
+      
 
-        
-          
 
-        
   
-      </div>
-    
-    
+
+
+
+
+
+    </div>
   </div>
 </div>
 
@@ -484,7 +507,7 @@
 </P>
         
         <p class="credits theme-by text-muted">
-          由 <a href="http://gohugo.io">Hugo v0.74.3</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a> 移植自 <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a>
+          由 <a href="http://gohugo.io">Hugo v0.74.3</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/cnych/qikqiak-blog">qikqiak-blog</a> 移植自 <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a>
           
         </p>
 
@@ -532,32 +555,21 @@ MathJax.Hub.Config({
 
 
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TRLK1SYTZ1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TRLK1SYTZ1');
+</script>
+
 
   
 
 
 
 
-
-
-<script src='https://glumes.com/js/bundle.min.dd00fc477b5e611b3b15869e7f4ffa218efd3a1b6f00902db8b25e1e9a1d90fc.js' integrity='sha256-3QD8R3teYRs7FYaef0/6IY79OhtvAJAtuLJeHpodkPw='></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
 
   </body>
 </html>
