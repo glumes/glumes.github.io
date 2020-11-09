@@ -60,7 +60,8 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="https://glumes.com/" title="音视频开发进阶">
-        <img src="" style="margin-top: -5px;height: 32px;" alt="音视频开发进阶">
+        
+        音视频开发进阶
       </a>
     </div>
 
@@ -314,6 +315,45 @@
     <div class="blog-tags">
         
         <a href="https://glumes.com//tags/webrtc/">webrtc</a>&nbsp;
+        
+    </div>
+    
+
+</article>
+          
+            <article class="post-preview">
+    <a href="https://glumes.com/post/ffmpeg/av-beginner-007/">
+        <h2 class="post-title">【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</h2>
+        
+        
+        
+    </a>
+
+    <p class="post-meta">
+        <span class="post-meta">
+  
+    发表于 March 16, 2020
+  
+  
+</span>
+
+
+    </p>
+    <div class="post-entry">
+        
+        <p>在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。</p>
+<p>SDL 播放音频文件有两种方法，可以理解成 <code>推(push)</code>和<code>拉(pull)</code>两种模式。</p>
+<p><code>推</code> 就是我们主动向设备缓冲区填充 Buffer ，而 <code>拉</code> 就是由设备拉取 Buffer 填充到缓冲区。</p>
+<p>在一些开发模型中，如果数据传递能够抽象成<code>流</code>的形式，那么肯定就会有<code>推</code>和<code>拉</code>两种模式。</p>
+<p>本篇文章主要是讲解 SDL 以推的形式播放音频文件。</p>
+        <a href="https://glumes.com/post/ffmpeg/av-beginner-007/" class="post-read-more">[阅读全文]</a>
+        
+    </div>
+
+    
+    <div class="blog-tags">
+        
+        <a href="https://glumes.com//tags/sdl/">SDL</a>&nbsp;
         
     </div>
     
@@ -595,45 +635,6 @@
         
         <p>接上篇 SDL 播放 PCM 音频文件，已经实现了 <code>推</code> 的模式去播放，接下来看看 <code>拉</code> 的模式如何实现。</p>
         <a href="https://glumes.com/post/ffmpeg/av-beginner-008/" class="post-read-more">[阅读全文]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://glumes.com//tags/sdl/">SDL</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://glumes.com/post/ffmpeg/av-beginner-007/">
-        <h2 class="post-title">【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-    发表于 March 16, 2020
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        <p>在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。</p>
-<p>SDL 播放音频文件有两种方法，可以理解成 <code>推(push)</code>和<code>拉(pull)</code>两种模式。</p>
-<p><code>推</code> 就是我们主动向设备缓冲区填充 Buffer ，而 <code>拉</code> 就是由设备拉取 Buffer 填充到缓冲区。</p>
-<p>在一些开发模型中，如果数据传递能够抽象成<code>流</code>的形式，那么肯定就会有<code>推</code>和<code>拉</code>两种模式。</p>
-<p>本篇文章主要是讲解 SDL 以推的形式播放音频文件。</p>
-        <a href="https://glumes.com/post/ffmpeg/av-beginner-007/" class="post-read-more">[阅读全文]</a>
         
     </div>
 
