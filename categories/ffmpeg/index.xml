@@ -12,19 +12,6 @@
     
     
     <item>
-      <title>【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</title>
-      <link>https://glumes.com/post/ffmpeg/av-beginner-007/</link>
-      <pubDate>Mon, 16 Mar 2020 09:47:30 +0800</pubDate>
-      
-      <guid>https://glumes.com/post/ffmpeg/av-beginner-007/</guid>
-      <description>&lt;p&gt;在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。&lt;/p&gt;
-&lt;p&gt;SDL 播放音频文件有两种方法，可以理解成 &lt;code&gt;推(push)&lt;/code&gt;和&lt;code&gt;拉(pull)&lt;/code&gt;两种模式。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;推&lt;/code&gt; 就是我们主动向设备缓冲区填充 Buffer ，而 &lt;code&gt;拉&lt;/code&gt; 就是由设备拉取 Buffer 填充到缓冲区。&lt;/p&gt;
-&lt;p&gt;在一些开发模型中，如果数据传递能够抽象成&lt;code&gt;流&lt;/code&gt;的形式，那么肯定就会有&lt;code&gt;推&lt;/code&gt;和&lt;code&gt;拉&lt;/code&gt;两种模式。&lt;/p&gt;
-&lt;p&gt;本篇文章主要是讲解 SDL 以推的形式播放音频文件。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>【音视频连载-011】第二季 FFmpeg 一层一层获取文件信息</title>
       <link>https://glumes.com/post/ffmpeg/av-beginner-011/</link>
       <pubDate>Mon, 18 May 2020 11:37:09 +0800</pubDate>
@@ -54,6 +41,19 @@
       
       <guid>https://glumes.com/post/ffmpeg/av-beginner-008/</guid>
       <description>&lt;p&gt;接上篇 SDL 播放 PCM 音频文件，已经实现了 &lt;code&gt;推&lt;/code&gt; 的模式去播放，接下来看看 &lt;code&gt;拉&lt;/code&gt; 的模式如何实现。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</title>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-007/</link>
+      <pubDate>Mon, 16 Mar 2020 09:47:30 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-007/</guid>
+      <description>&lt;p&gt;在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。&lt;/p&gt;
+&lt;p&gt;SDL 播放音频文件有两种方法，可以理解成 &lt;code&gt;推(push)&lt;/code&gt;和&lt;code&gt;拉(pull)&lt;/code&gt;两种模式。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;推&lt;/code&gt; 就是我们主动向设备缓冲区填充 Buffer ，而 &lt;code&gt;拉&lt;/code&gt; 就是由设备拉取 Buffer 填充到缓冲区。&lt;/p&gt;
+&lt;p&gt;在一些开发模型中，如果数据传递能够抽象成&lt;code&gt;流&lt;/code&gt;的形式，那么肯定就会有&lt;code&gt;推&lt;/code&gt;和&lt;code&gt;拉&lt;/code&gt;两种模式。&lt;/p&gt;
+&lt;p&gt;本篇文章主要是讲解 SDL 以推的形式播放音频文件。&lt;/p&gt;</description>
     </item>
     
     <item>
