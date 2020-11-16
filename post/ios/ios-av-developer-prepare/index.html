@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>iOS 音视频开发的一些基础准备工作</title>
+  <meta property="og:title" content="iOS 音视频开发的一些基础准备工作" />
+  <meta name="twitter:title" content="iOS 音视频开发的一些基础准备工作" />
+
+  <meta name="description" content="最近在捣鼓 iOS 上的音视频开发，由于之前并没有 iOS 开发经验，直接上手写代码的话压力还是挺大的，因此也趁机看了下 iOS 开发的内容，算是做一些准备工作吧。">
+  <meta property="og:description" content="最近在捣鼓 iOS 上的音视频开发，由于之前并没有 iOS 开发经验，直接上手写代码的话压力还是挺大的，因此也趁机看了下 iOS 开发的内容，算是做一些准备工作吧。">
+  <meta name="twitter:description" content="最近在捣鼓 iOS 上的音视频开发，由于之前并没有 iOS 开发经验，直接上手写代码的话压力还是挺大的，因此也趁机看了下 iOS 开发的内容，算是做一些准备工作吧。">
+  <meta name="author" content=""/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/ios/ios-av-developer-prepare/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="音视频开发进阶" />
+
+  <meta name="generator" content="Hugo 0.74.3" />
+  <link rel="canonical" href="https://glumes.com/post/ios/ios-av-developer-prepare/" />
+  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="音视频开发进阶">
+
+  
+  
+
+  <link rel="stylesheet" href='https://glumes.com/css/bundle.min.fb9e227ddbeead55275b2028c55c2dd4b6b4e09ded2b8c8e4dc5c8c417bc97de.css' integrity='sha256-&#43;54ifdvurVUnWyAoxVwt1La04J3tK4yOTcXIxBe8l94='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/" title="音视频开发进阶">
+        
+        音视频开发进阶
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">音视频开发</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://glumes.com/categories/opengl">OpenGL </a>
+                
+                  <a href="https://glumes.com/categories/ffmpeg">FFmpeg</a>
+                
+                  <a href="https://glumes.com/categories/vulkan">Vulkan </a>
+                
+                  <a href="https://glumes.com/categories/webrtc">WebRTC </a>
+                
+                  <a href="https://glumes.com/categories/opencv">opencv </a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">移动开发</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://glumes.com/categories/android">Android</a>
+                
+                  <a href="https://glumes.com/categories/ios">ios</a>
+                
+                  <a href="https://glumes.com/categories/c&#43;&#43;">C&#43;&#43;</a>
+                
+                  <a href="https://glumes.com/categories/python">Python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="程序人生" href="https://glumes.com/categories/life">程序人生</a>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">我的视频教学</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://space.bilibili.com/105478237">B 站视频</a>
+                
+                  <a href="http://www.imooc.com/learn/1212">慕课网视频</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="小专栏" href="https://xiaozhuanlan.com/glumes">小专栏</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="https://glumes.com/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="所有文章" href="https://glumes.com/post/">所有文章</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+              <h1>iOS 音视频开发的一些基础准备工作</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 November 17, 2020
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ios-应用创建和移除-scenedelegate">iOS 应用创建和移除 SceneDelegate</a></li>
+    <li><a href="#uitableview-的使用">UITableView 的使用</a></li>
+    <li><a href="#uitableview-跳转详情页和返回">UITableView 跳转详情页和返回</a>
+      <ul>
+        <li><a href="#segue-使用">Segue 使用</a></li>
+        <li><a href="#segue-数据传递">Segue 数据传递</a></li>
+      </ul>
+    </li>
+    <li><a href="#uinavigationcontroller-使用">UINavigationController 使用</a>
+      <ul>
+        <li><a href="#navigationitem-设置">NavigationItem 设置</a></li>
+        <li><a href="#通过-navigationcontroller-实现页面跳转">通过 NavigationController 实现页面跳转</a></li>
+      </ul>
+    </li>
+    <li><a href="#小结">小结</a></li>
+  </ul>
+</nav>
+</aside>
+
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>最近在捣鼓 iOS 上的音视频开发，由于之前并没有 iOS 开发经验，直接上手写代码的话压力还是挺大的，因此也趁机看了下 iOS 开发的内容，算是做一些准备工作吧。</p>
+<p>iOS 开发语言用的是 Swift ，一些语法和 Kotlin 还是挺像的，上手难道小了很多，而且也实在受不了 OC 的中括号 <code>[]</code> 调用方式，写不习惯。</p>
+<p>在应用开发上，新手入门当然就是学习调用各种控件了。像 Button、Label 这样的单控件都还比较简单，看看就会。像 UITableView、UINavigationViewController 这些复合控件就相对复杂了，需要实际练练手才行，包括 XCode、StoryBoard 等工具的使用，也需要有一定的熟练度才好。这也是本篇文章的主要目的了，通过博客记录的形式来提高熟练度。</p>
+<p>基础准备工作就先从界面编程开始吧，能折腾出一个简单的应用。至于更深层次的 iOS 应用生命周期、性能优化、图形图像那些就等后面碰到了再研究吧。</p>
+<h2 id="ios-应用创建和移除-scenedelegate">iOS 应用创建和移除 SceneDelegate</h2>
+<p>当前使用的 XCode 版本是 12.1 ，创建 iOS 应用默认使用了 SceneDelegate ，这里用不上它，先把它移除了。</p>
+<p><img src="https://image.glumes.com/blog_image/ios-simple-app.png" alt=""></p>
+<p>步骤如下：</p>
+<ul>
+<li>删除 SceneDelegate.swift 文件</li>
+<li>在 Info.plist 文件里面移除 Application Scene Manifest
+<img src="https://image.glumes.com/blog_image/remove-scene-manifest.png" alt=""></li>
+<li>删除 AppDelegate.Swift 中的 connectingSceneSession 和 didDiscardSceneSessions 方法。</li>
+<li>在 AppDelegate.swift 中添加 UIWindow 变量。</li>
+</ul>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -&gt; Bool {
+        // Override point <span style="color:#859900">for</span> customization after application launch.
+        <span style="color:#859900">return</span> <span style="color:#cb4b16">true</span>
+    }
+
+}
+</code></pre></div><h2 id="uitableview-的使用">UITableView 的使用</h2>
+<p>从 UITableView 开始搞起。在默认的 Main.storyboard 对应的 ViewController 里面添加一个 UITableView 类。</p>
+<p>然后通过 Auto Layout 将它铺满整个应用，这个时候启动应用的话会显示黑屏的，因为没有给它填充数据。</p>
+<p>UITableView 通过 UITableViewDataSource 和 UITableViewDelegate 分别来控制它的数据和交互逻辑。</p>
+<p>其中 UITableViewDataSource 有如下方法是必现要实现的，指定要展示的数据内容和 TableView 中 Item ，而 UITableViewDelegate 就没强制要求实现方法了，至于协议中的其他方法都可以查看具体源码，有具体的应用场景再使用了。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int {
+        &lt;<span style="color:#93a1a1;font-style:italic">#code#&gt;</span>
+}  
+
+func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell {
+        &lt;<span style="color:#93a1a1;font-style:italic">#code#&gt;</span>
+}
+</code></pre></div><p>通过 <code>extension</code> 语法来实现以上两个协议：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int {
+    <span style="color:#859900">return</span> 100;
+}
+
+func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell {
+    <span style="color:#cb4b16">let</span> <span style="color:#268bd2">cell</span> = tableView.dequeueReusableCell(withIdentifier: <span style="color:#2aa198">&#34;reuse&#34;</span>, <span style="color:#859900">for</span>: indexPath)
+    cell.textLabel?.text = <span style="color:#2aa198">&#34;hello tableview&#34;</span>
+    <span style="color:#859900">return</span> cell
+}
+</code></pre></div><p>这里要指定 StoryBoard 中的 UITableView 对应单元格的 <code>Identifer</code> ，它代表了 TableView 中单元格的复用标识，<code>dequeueReusableCell</code> 方法就是通过这个字符串标识来复用的。</p>
+<p><img src="https://image.glumes.com/blog_image/reuse-identifier.png" alt=""></p>
+<p>TableView 的复用逻辑类似于 Android 中的 RecyclerView 了，都是复用移出屏幕外的单元格来节省内存的。</p>
+<p>最后在 StoryBoard 中将 UITableView 与 ViewController 建立起关联，并给 UITableView 指定具体协议的实现。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    @IBOutlet weak var mTableView: UITableView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        mTableView.dataSource = self
+        mTableView.delegate = self
+    }
+</code></pre></div><p>这个时候再启动应用就能看到 TableView 中充满内容了。</p>
+<p><img src="https://image.glumes.com/blog_image/tableview-display-success.png" alt=""></p>
+<p>当然，这里也省略了很多内容。比如自定义单元格样式、通过代码来添加 UITableView 等。</p>
+<h2 id="uitableview-跳转详情页和返回">UITableView 跳转详情页和返回</h2>
+<p>在实现了 UITableView 的基础上，继续开发实现点击某个单元格跳转到详情页并返回的功能。</p>
+<p>在 Main.storyboard 中添加一个 ViewController ，并添加一个 Label，一个 Button，分别展示内容和返回。</p>
+<p>完成详情页的展示如下：</p>
+<p><img src="https://image.glumes.com/blog_image/table-detail-view-controller.png" alt=""></p>
+<p>接下来要实现 UITableView 到详情页的跳转，通过 Segue 的方式进行连接。</p>
+<h3 id="segue-使用">Segue 使用</h3>
+<p>iOS 实现页面跳转有多种方式，比如 UINavigationController、UITarBarController 等控制器，或者在 StoryBoard 上进行连线。</p>
+<h4 id="segue-跳转到详情页">Segue 跳转到详情页</h4>
+<p>连线的方式也比较简单，鼠标点击要连接的控件，然后按住 Control 键拖曳到另一个 ViewController 上，在弹出的 Segue 页面中选择跳转样式。</p>
+<p><img src="https://image.glumes.com/blog_image/viewcontroller-segue-style.png" alt=""></p>
+<p>这里面有多种样式可以选择：</p>
+<ul>
+<li>Show</li>
+<li>Show Detail</li>
+<li>Present Modialy</li>
+<li>Present As Popover</li>
+<li>Custom</li>
+</ul>
+<p>简单点直接选择了 Show 就行了，连接后的样子如下：</p>
+<p><img src="https://image.glumes.com/blog_image/segue-style-show.png" alt=""></p>
+<p>这时候直接运行程序就能在 TableView 中点击某一项跳转到详情页了，接下来就是要从详情页返回到 TableView 界面。</p>
+<h4 id="segue-实现详情页返回">Segue 实现详情页返回</h4>
+<p>按照上面的逻辑，在详情页的 Back 按键上建立 Segue 就会返回了。但是这样会新建一个 ViewController 而不是返回到之前使用的，来回操作点击的话，不断新建页面，最终导致内存可能暴涨。</p>
+<p>这里要用到 Unwind Segue 方法了。在 DetailViewController 中添加如下方法：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">@IBAction func unwindSegue(segue: UIStoryboardSegue) {
+    NSLog(<span style="color:#2aa198">&#34;Back to Table View Controller!&#34;</span>)
+}
+</code></pre></div><p>然后，点击详情页的 Back 按键，再按住 Control 键拖曳到 TableView 对应 ViewController 的 Exit 方法处，会弹出上面写的 unwindSegue 方法，点击该方法即可建立连接。</p>
+<p><img src="https://image.glumes.com/blog_image/segue-exit-unwindsegue.png" alt=""></p>
+<p>这时候再运行应用，就能实现 TableView 到详情页的跳转了，点击 Back 按键返回到 TableView 界面，输出上面的 log 内容，并且不建立新的 ViewController 。</p>
+<h3 id="segue-数据传递">Segue 数据传递</h3>
+<p>当想在 ViewController 之间传递数据的话，也可以通过 Segue 进行，它提供了一些方法。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(nullable id)sender API_AVAILABLE(ios(5.0));
+</code></pre></div><p>通过实现 prepareForSegue 方法达到数据传输的目的。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">override func prepare(<span style="color:#859900">for</span> segue: UIStoryboardSegue, sender: Any?) {
+    <span style="color:#859900">if</span> segue.identifier == <span style="color:#2aa198">&#34;toDetailView&#34;</span> {
+        <span style="color:#cb4b16">let</span> <span style="color:#268bd2">cv</span> = segue.destination as! DetailViewController
+        cv.str = <span style="color:#2aa198">&#34;data&#34;</span>
+    }
+}
+</code></pre></div><p>在 Segue 进行跳转的时候，prepare 方法是必定会执行的，通过实现该方法就能传递数据了。</p>
+<p>当然，还有其他的一些方法去传递数据，这里就不阐述了。</p>
+<h2 id="uinavigationcontroller-使用">UINavigationController 使用</h2>
+<p>使用 UINavigationController 比较简单，在 Editor 菜单下面的 Embed In 选择 Navigation Controller ，就自动将 TableView 嵌入到 UINavigationController 里面去了。</p>
+<p><img src="https://image.glumes.com/blog_image/embed-in-navigation.png" alt=""></p>
+<p>这时再运行程序就能看到效果了，上层多了一个导航栏。</p>
+<h3 id="navigationitem-设置">NavigationItem 设置</h3>
+<p>上层看到的导航栏叫做 NatigationItem ，它有很多属性可以配置，如下图所示：</p>
+<p><img src="https://image.glumes.com/blog_image/navigationItem-design.png" alt=""></p>
+<p>可以设置左右按键名称和事件，可以设置中间的标题，还可以设置上层的提示内容以及背景颜色。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">self.navigationItem.prompt = <span style="color:#2aa198">&#34;loading&#34;</span> 
+self.navigationController?.navigationBar.barTintColor = UIColor.yellow;
+
+// 这里的 Button 其实是 UIBarButtionItem，要注意类型
+<span style="color:#cb4b16">let</span> <span style="color:#268bd2">leftItem</span> = UIBarButtonItem(title: <span style="color:#2aa198">&#34;left&#34;</span>, style: UIBarButtonItem.Style.done, target: self, action: <span style="color:#93a1a1;font-style:italic">#selector(leftAction))</span>        
+<span style="color:#cb4b16">let</span> <span style="color:#268bd2">rightItem</span> = UIBarButtonItem(title: <span style="color:#2aa198">&#34;right&#34;</span>, style: UIBarButtonItem.Style.done, target: self, action: <span style="color:#93a1a1;font-style:italic">#selector(rightAction))</span>
+self.navigationItem.leftBarButtonItem = leftItem
+self.navigationItem.rightBarButtonItem = rightItem
+
+self.navigationItem.title = <span style="color:#2aa198">&#34;NavigationItem&#34;</span>
+</code></pre></div><p>对应的左右按键事件代码如下：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">@objc func leftAction(){
+    print(<span style="color:#2aa198">&#34;click left action&#34;</span>)
+}
+    
+@objc func rightAction(){
+    print(<span style="color:#2aa198">&#34;click right action&#34;</span>)
+}
+</code></pre></div><p>这里只是简单地定义了一下样式，还可以弄得更加复杂花哨一点，比如带有图片的 UIBarButtonItem，自定义的 UIBarButtonItem 等。</p>
+<p>注意的是，当在 StoryBoard 中嵌入了 UINavigationController 之后，就可以通过 self.navigationController 来引用它了，如果没有嵌入，直接引用会 Crash 的。</p>
+<p>在详情页 DetailViewController 中同样能够通过 self.navigationController 来修改 NavigationItem 的样式。</p>
+<h3 id="通过-navigationcontroller-实现页面跳转">通过 NavigationController 实现页面跳转</h3>
+<p>除了使用 Segue 之外，还可以使用 NavigationController 来实现页面跳转，先把之前添加的 Segue 移除掉。</p>
+<p>NavigationController 是一个管理 UIViewController 的容器，以栈的形式进行管理，提供相应的方法如下：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">// 将 ViewController 压入栈中
+open func pushViewController(_ viewController: UIViewController, animated: Bool)
+
+// 弹出栈顶的 ViewController
+open func popViewController(animated: Bool) -&gt; UIViewController?
+
+// 弹出到指定的 ViewController
+open func popToViewController(_ viewController: UIViewController, animated: Bool) -&gt; [UIViewController]?
+
+// 弹出除 root ViewController 之外的所有 ViewController
+open func popToRootViewController(animated: Bool) -&gt; [UIViewController]?
+
+// 返回只读属性的栈顶 ViewController
+open var topViewController: UIViewController? { get }
+
+// 返回栈中当前可见的界面对应的 ViewController，也是只读属性
+open var visibleViewController: UIViewController? { get }
+
+// 返回栈中所有的 ViewController
+open var viewControllers: [UIViewController]
+</code></pre></div><p>实现页面跳转，要做的就是在 TableView 的 Item 点击事件中将详情页的 ViewController 压入栈中，然后在详情页 ViewController 的 Back 事件中进行出栈，把当前 ViewController 弹出栈顶，回到 TableView 界面。</p>
+<p>代码如下，在点击事件中进行初始化 ViewController ，并压入栈中。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    <span style="color:#cb4b16">let</span> <span style="color:#268bd2">storyboad</span> = UIStoryboard(name: <span style="color:#2aa198">&#34;Main&#34;</span>, bundle: nil)
+        
+    <span style="color:#cb4b16">let</span> <span style="color:#268bd2">vc</span> = storyboad.instantiateViewController(identifier: <span style="color:#2aa198">&#34;detailvc&#34;</span>)  as! DetailViewController
+    vc.str = <span style="color:#2aa198">&#34;data&#34;</span>
+    
+    self.navigationController?.pushViewController(vc, animated: <span style="color:#cb4b16">false</span>)
+}
+</code></pre></div><p>在 Back 按键的点击事件中进行出栈操作。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">@IBAction func back(_ sender: Any) {
+    self.navigationController?.popViewController(animated: <span style="color:#cb4b16">true</span>)
+}
+</code></pre></div><p>此时再运行代码，同样也能实现页面跳转，并且还传递了数据过去，和使用的 Segue 的效果基本一致。</p>
+<h2 id="小结">小结</h2>
+<p>通过以上简单的小例子，就基本算是了解 iOS 开发了。</p>
+<p>内容比较浅显，很多东西还是可以再继续拓展一下的，比如 TableView 中自定义单元格样式、通过代码来加载 NavigationController 等等。不过相信有了上面的基础，再到实践中去学习一些新的技巧也会更加快捷了。</p>
+<p>其实 iOS 和 Android 还是有不少相似之处的，毕竟都是移动平台上的应用开发，在一些设计思想有相同之处也不奇怪，比如 TableView 的回收之处、屏幕适配的布局约束等等，这也是要求程序员在学习的时候不仅能够知其然还要知其所以然，学会举一反三，这样再换到其他平台上去学习也能够得心应手，而不是疲于追赶技术。</p>
+<p>接下来就是进击 iOS 音视频开发啦~~~</p>
+
+
+          <h2>微信公众号</h2>
+
+<p>扫描下面的二维码关注我的微信公众帐号</p>
+
+<p>添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+
+<img src="https://image.glumes.com/blog_image/wexin-logo.png" alt="wechat-account-qrcode">
+
+
+  
+
+
+                    <p>
+                      原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/ios/ios-av-developer-prepare/">iOS 音视频开发的一些基础准备工作</a>
+                    </p>
+
+
+          
+
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://glumes.com/post/life/domain-name-register/" data-toggle="tooltip" data-placement="top" title="【喜大普奔】域名终于备案通过啦">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://glumes.com/post/webrtc/webrtc-android-setup/" data-toggle="tooltip" data-placement="top" title="WebRTC &amp; Android 开发学习环境搭建~">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          
+          
+              <li>
+                <a href="mailto:zhaoying9402@outlook.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/u/3157458295" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+
+          &nbsp;&bull;&nbsp;
+          2020
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">音视频开发进阶</a>
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/sitemap.xml">网站地图</a>
+          
+             &nbsp;&bull;&nbsp;
+                      <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+        </p>
+
+
+
+
+
+
+                <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+          &nbsp;&bull;&nbsp;
+                 <span id="busuanzi_container_page_pv" style="display:none">
+            阅读量<span id="busuanzi_value_page_pv"></span>人次
+          </span>
+        </p>
+
+<p>
+<a target="_blank"; href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral";>
+<img style="height:20px;width:auto;"; src="https://www.upyun.com/static/img/%E6%A0%B7%E5%BC%8F%E5%9B%BE.7cf927c.png"; />
+</a>
+</P>
+        
+        <p class="credits theme-by text-muted">
+          由 <a href="http://gohugo.io">Hugo v0.74.3</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a> 移植自 <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://glumes.com/js/bootstrap.min.js"></script>
+<script src="https://glumes.com/js/main.min.js"></script>
+<script src="https://glumes.com/js/reward.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script src='https://glumes.com/js/bundle.min.dd00fc477b5e611b3b15869e7f4ffa218efd3a1b6f00902db8b25e1e9a1d90fc.js' integrity='sha256-3QD8R3teYRs7FYaef0/6IY79OhtvAJAtuLJeHpodkPw='></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+
