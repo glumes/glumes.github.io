@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>android</title>
-      <link>https://glumes.com/categories/android/</link>
+      <title>ios</title>
+      <link>https://glumes.com/categories/ios/</link>
       <pubDate>Tue, 17 Nov 2020 00:22:12 +0800</pubDate>
       
-      <guid>https://glumes.com/categories/android/</guid>
+      <guid>https://glumes.com/categories/ios/</guid>
       <description></description>
     </item>
     
@@ -53,6 +53,15 @@
       <pubDate>Mon, 18 May 2020 11:37:09 +0800</pubDate>
       
       <guid>https://glumes.com/categories/ffmpeg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>android</title>
+      <link>https://glumes.com/categories/android/</link>
+      <pubDate>Wed, 06 May 2020 23:10:48 +0800</pubDate>
+      
+      <guid>https://glumes.com/categories/android/</guid>
       <description></description>
     </item>
     

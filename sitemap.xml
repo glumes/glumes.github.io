@@ -19,12 +19,17 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/android/</loc>
+    <loc>https://glumes.com/categories/</loc>
     <lastmod>2020-11-17T00:22:12+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/</loc>
+    <loc>https://glumes.com/tags/ios/</loc>
+    <lastmod>2020-11-17T00:22:12+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/ios/</loc>
     <lastmod>2020-11-17T00:22:12+08:00</lastmod>
   </url>
   
@@ -39,12 +44,12 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/life/</loc>
-    <lastmod>2020-08-31T21:01:28+08:00</lastmod>
+    <loc>https://glumes.com/tags/</loc>
+    <lastmod>2020-11-17T00:22:12+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://glumes.com/tags/</loc>
+    <loc>https://glumes.com/categories/life/</loc>
     <lastmod>2020-08-31T21:01:28+08:00</lastmod>
   </url>
   
@@ -106,6 +111,11 @@
   <url>
     <loc>https://glumes.com/post/ffmpeg/av-beginner-011/</loc>
     <lastmod>2020-05-18T11:37:09+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/android/</loc>
+    <lastmod>2020-05-06T23:10:48+08:00</lastmod>
   </url>
   
   <url>
