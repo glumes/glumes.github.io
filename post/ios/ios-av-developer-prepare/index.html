@@ -161,8 +161,35 @@
 
 
   
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/blog_image/ios-logo-free-medium.jpg" ></div>
+  
 
-  <header class="header-section ">
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-md-offset-0">
+              <div class="post-heading">
+                <h1>iOS 音视频开发的一些基础准备工作</h1>
+                  
+                  
+                    <span class="post-meta">
+  
+    发表于 November 17, 2020
+  
+  
+</span>
+
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
     
     
     
@@ -268,14 +295,14 @@
 <li>删除 AppDelegate.Swift 中的 connectingSceneSession 和 didDiscardSceneSessions 方法。</li>
 <li>在 AppDelegate.swift 中添加 UIWindow 变量。</li>
 </ul>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">@main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">@<span style="color:#268bd2">main</span>
+<span style="color:#859900">class</span> <span style="color:#cb4b16">AppDelegate</span>: <span style="color:#268bd2">UIResponder</span>, <span style="color:#268bd2">UIApplicationDelegate</span> {
 
-    var window: UIWindow?
+    <span style="color:#268bd2">var</span> <span style="color:#268bd2">window</span>: <span style="color:#268bd2">UIWindow</span>?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -&gt; Bool {
-        // Override point <span style="color:#859900">for</span> customization after application launch.
-        <span style="color:#859900">return</span> <span style="color:#cb4b16">true</span>
+    <span style="color:#268bd2">func</span> <span style="color:#268bd2">application</span>(<span style="color:#268bd2">_</span> <span style="color:#268bd2">application</span>: <span style="color:#268bd2">UIApplication</span>, <span style="color:#268bd2">didFinishLaunchingWithOptions</span> <span style="color:#268bd2">launchOptions</span>: [<span style="color:#268bd2">UIApplication</span>.<span style="color:#268bd2">LaunchOptionsKey</span>: <span style="color:#268bd2">Any</span>]?) -&gt; <span style="color:#268bd2">Bool</span> {
+        <span style="color:#93a1a1;font-style:italic">// Override point for customization after application launch.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#859900">return</span> <span style="color:#cb4b16">true</span>
     }
 
 }
@@ -284,33 +311,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 <p>然后通过 Auto Layout 将它铺满整个应用，这个时候启动应用的话会显示黑屏的，因为没有给它填充数据。</p>
 <p>UITableView 通过 UITableViewDataSource 和 UITableViewDelegate 分别来控制它的数据和交互逻辑。</p>
 <p>其中 UITableViewDataSource 有如下方法是必现要实现的，指定要展示的数据内容和 TableView 中 Item ，而 UITableViewDelegate 就没强制要求实现方法了，至于协议中的其他方法都可以查看具体源码，有具体的应用场景再使用了。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int {
-        &lt;<span style="color:#93a1a1;font-style:italic">#code#&gt;</span>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">func</span> <span style="color:#268bd2">tableView</span>(<span style="color:#268bd2">_</span> <span style="color:#268bd2">tableView</span>: <span style="color:#268bd2">UITableView</span>, <span style="color:#268bd2">numberOfRowsInSection</span> <span style="color:#268bd2">section</span>: <span style="color:#268bd2">Int</span>) -&gt; <span style="color:#268bd2">Int</span> {
+        &lt;#<span style="color:#268bd2">code</span>#&gt;
 }  
 
-func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell {
-        &lt;<span style="color:#93a1a1;font-style:italic">#code#&gt;</span>
+<span style="color:#268bd2">func</span> <span style="color:#268bd2">tableView</span>(<span style="color:#268bd2">_</span> <span style="color:#268bd2">tableView</span>: <span style="color:#268bd2">UITableView</span>, <span style="color:#268bd2">cellForRowAt</span> <span style="color:#268bd2">indexPath</span>: <span style="color:#268bd2">IndexPath</span>) -&gt; <span style="color:#268bd2">UITableViewCell</span> {
+        &lt;#<span style="color:#268bd2">code</span>#&gt;
 }
 </code></pre></div><p>通过 <code>extension</code> 语法来实现以上两个协议：</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int {
-    <span style="color:#859900">return</span> 100;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">func</span> <span style="color:#268bd2">tableView</span>(<span style="color:#268bd2">_</span> <span style="color:#268bd2">tableView</span>: <span style="color:#268bd2">UITableView</span>, <span style="color:#268bd2">numberOfRowsInSection</span> <span style="color:#268bd2">section</span>: <span style="color:#268bd2">Int</span>) -&gt; <span style="color:#268bd2">Int</span> {
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">100</span>;
 }
 
-func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell {
-    <span style="color:#cb4b16">let</span> <span style="color:#268bd2">cell</span> = tableView.dequeueReusableCell(withIdentifier: <span style="color:#2aa198">&#34;reuse&#34;</span>, <span style="color:#859900">for</span>: indexPath)
-    cell.textLabel?.text = <span style="color:#2aa198">&#34;hello tableview&#34;</span>
-    <span style="color:#859900">return</span> cell
+<span style="color:#268bd2">func</span> <span style="color:#268bd2">tableView</span>(<span style="color:#268bd2">_</span> <span style="color:#268bd2">tableView</span>: <span style="color:#268bd2">UITableView</span>, <span style="color:#268bd2">cellForRowAt</span> <span style="color:#268bd2">indexPath</span>: <span style="color:#268bd2">IndexPath</span>) -&gt; <span style="color:#268bd2">UITableViewCell</span> {
+    <span style="color:#268bd2">let</span> <span style="color:#268bd2">cell</span> = <span style="color:#268bd2">tableView</span>.<span style="color:#268bd2">dequeueReusableCell</span>(<span style="color:#268bd2">withIdentifier</span>: <span style="color:#2aa198">&#34;reuse&#34;</span>, <span style="color:#859900">for</span>: <span style="color:#268bd2">indexPath</span>)
+    <span style="color:#268bd2">cell</span>.<span style="color:#268bd2">textLabel</span>?.<span style="color:#268bd2">text</span> = <span style="color:#2aa198">&#34;hello tableview&#34;</span>
+    <span style="color:#859900">return</span> <span style="color:#268bd2">cell</span>
 }
 </code></pre></div><p>这里要指定 StoryBoard 中的 UITableView 对应单元格的 <code>Identifer</code> ，它代表了 TableView 中单元格的复用标识，<code>dequeueReusableCell</code> 方法就是通过这个字符串标识来复用的。</p>
 <p><img src="https://image.glumes.com/blog_image/reuse-identifier.png" alt=""></p>
 <p>TableView 的复用逻辑类似于 Android 中的 RecyclerView 了，都是复用移出屏幕外的单元格来节省内存的。</p>
 <p>最后在 StoryBoard 中将 UITableView 与 ViewController 建立起关联，并给 UITableView 指定具体协议的实现。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    @IBOutlet weak var mTableView: UITableView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        mTableView.dataSource = self
-        mTableView.delegate = self
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    @<span style="color:#268bd2">IBOutlet</span> <span style="color:#268bd2">weak</span> <span style="color:#268bd2">var</span> <span style="color:#268bd2">mTableView</span>: <span style="color:#268bd2">UITableView</span>!
+    <span style="color:#859900">override</span> <span style="color:#268bd2">func</span> <span style="color:#268bd2">viewDidLoad</span>() {
+        <span style="color:#268bd2">super</span>.<span style="color:#268bd2">viewDidLoad</span>()
+        <span style="color:#93a1a1;font-style:italic">// Do any additional setup after loading the view.
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">mTableView</span>.<span style="color:#268bd2">dataSource</span> = <span style="color:#268bd2">self</span>
+        <span style="color:#268bd2">mTableView</span>.<span style="color:#268bd2">delegate</span> = <span style="color:#268bd2">self</span>
     }
 </code></pre></div><p>这个时候再启动应用就能看到 TableView 中充满内容了。</p>
 <p><img src="https://image.glumes.com/blog_image/tableview-display-success.png" alt=""></p>
@@ -340,20 +367,20 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt
 <h4 id="segue-实现详情页返回">Segue 实现详情页返回</h4>
 <p>按照上面的逻辑，在详情页的 Back 按键上建立 Segue 就会返回了。但是这样会新建一个 ViewController 而不是返回到之前使用的，来回操作点击的话，不断新建页面，最终导致内存可能暴涨。</p>
 <p>这里要用到 Unwind Segue 方法了。在 DetailViewController 中添加如下方法：</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">@IBAction func unwindSegue(segue: UIStoryboardSegue) {
-    NSLog(<span style="color:#2aa198">&#34;Back to Table View Controller!&#34;</span>)
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">@<span style="color:#268bd2">IBAction</span> <span style="color:#268bd2">func</span> <span style="color:#268bd2">unwindSegue</span>(<span style="color:#268bd2">segue</span>: <span style="color:#268bd2">UIStoryboardSegue</span>) {
+    <span style="color:#268bd2">NSLog</span>(<span style="color:#2aa198">&#34;Back to Table View Controller!&#34;</span>)
 }
 </code></pre></div><p>然后，点击详情页的 Back 按键，再按住 Control 键拖曳到 TableView 对应 ViewController 的 Exit 方法处，会弹出上面写的 unwindSegue 方法，点击该方法即可建立连接。</p>
 <p><img src="https://image.glumes.com/blog_image/segue-exit-unwindsegue.png" alt=""></p>
 <p>这时候再运行应用，就能实现 TableView 到详情页的跳转了，点击 Back 按键返回到 TableView 界面，输出上面的 log 内容，并且不建立新的 ViewController 。</p>
 <h3 id="segue-数据传递">Segue 数据传递</h3>
 <p>当想在 ViewController 之间传递数据的话，也可以通过 Segue 进行，它提供了一些方法。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(nullable id)sender API_AVAILABLE(ios(5.0));
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">- (<span style="color:#859900;font-weight:bold">void</span>)<span style="color:#268bd2">prepareForSegue</span>:(<span style="color:#268bd2">UIStoryboardSegue</span> *)<span style="color:#268bd2">segue</span> <span style="color:#268bd2">sender</span>:(<span style="color:#268bd2">nullable</span> <span style="color:#268bd2">id</span>)<span style="color:#268bd2">sender</span> <span style="color:#268bd2">API_AVAILABLE</span>(<span style="color:#268bd2">ios</span>(<span style="color:#2aa198;font-weight:bold">5.0</span>));
 </code></pre></div><p>通过实现 prepareForSegue 方法达到数据传输的目的。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">override func prepare(<span style="color:#859900">for</span> segue: UIStoryboardSegue, sender: Any?) {
-    <span style="color:#859900">if</span> segue.identifier == <span style="color:#2aa198">&#34;toDetailView&#34;</span> {
-        <span style="color:#cb4b16">let</span> <span style="color:#268bd2">cv</span> = segue.destination as! DetailViewController
-        cv.str = <span style="color:#2aa198">&#34;data&#34;</span>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">override</span> <span style="color:#268bd2">func</span> <span style="color:#268bd2">prepare</span>(<span style="color:#859900">for</span> <span style="color:#268bd2">segue</span>: <span style="color:#268bd2">UIStoryboardSegue</span>, <span style="color:#268bd2">sender</span>: <span style="color:#268bd2">Any</span>?) {
+    <span style="color:#859900">if</span> <span style="color:#268bd2">segue</span>.<span style="color:#268bd2">identifier</span> == <span style="color:#2aa198">&#34;toDetailView&#34;</span> {
+        <span style="color:#268bd2">let</span> <span style="color:#268bd2">cv</span> = <span style="color:#268bd2">segue</span>.<span style="color:#268bd2">destination</span> <span style="color:#268bd2">as</span>! <span style="color:#268bd2">DetailViewController</span>
+        <span style="color:#268bd2">cv</span>.<span style="color:#268bd2">str</span> = <span style="color:#2aa198">&#34;data&#34;</span>
     }
 }
 </code></pre></div><p>在 Segue 进行跳转的时候，prepare 方法是必定会执行的，通过实现该方法就能传递数据了。</p>
@@ -366,23 +393,23 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt
 <p>上层看到的导航栏叫做 NatigationItem ，它有很多属性可以配置，如下图所示：</p>
 <p><img src="https://image.glumes.com/blog_image/navigationItem-design.png" alt=""></p>
 <p>可以设置左右按键名称和事件，可以设置中间的标题，还可以设置上层的提示内容以及背景颜色。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">self.navigationItem.prompt = <span style="color:#2aa198">&#34;loading&#34;</span> 
-self.navigationController?.navigationBar.barTintColor = UIColor.yellow;
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">self</span>.<span style="color:#268bd2">navigationItem</span>.<span style="color:#268bd2">prompt</span> = <span style="color:#2aa198">&#34;loading&#34;</span> 
+<span style="color:#268bd2">self</span>.<span style="color:#268bd2">navigationController</span>?.<span style="color:#268bd2">navigationBar</span>.<span style="color:#268bd2">barTintColor</span> = <span style="color:#268bd2">UIColor</span>.<span style="color:#268bd2">yellow</span>;
 
-// 这里的 Button 其实是 UIBarButtionItem，要注意类型
-<span style="color:#cb4b16">let</span> <span style="color:#268bd2">leftItem</span> = UIBarButtonItem(title: <span style="color:#2aa198">&#34;left&#34;</span>, style: UIBarButtonItem.Style.done, target: self, action: <span style="color:#93a1a1;font-style:italic">#selector(leftAction))</span>        
-<span style="color:#cb4b16">let</span> <span style="color:#268bd2">rightItem</span> = UIBarButtonItem(title: <span style="color:#2aa198">&#34;right&#34;</span>, style: UIBarButtonItem.Style.done, target: self, action: <span style="color:#93a1a1;font-style:italic">#selector(rightAction))</span>
-self.navigationItem.leftBarButtonItem = leftItem
-self.navigationItem.rightBarButtonItem = rightItem
+<span style="color:#93a1a1;font-style:italic">// 这里的 Button 其实是 UIBarButtionItem，要注意类型
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">let</span> <span style="color:#268bd2">leftItem</span> = <span style="color:#268bd2">UIBarButtonItem</span>(<span style="color:#268bd2">title</span>: <span style="color:#2aa198">&#34;left&#34;</span>, <span style="color:#268bd2">style</span>: <span style="color:#268bd2">UIBarButtonItem</span>.<span style="color:#268bd2">Style</span>.<span style="color:#268bd2">done</span>, <span style="color:#268bd2">target</span>: <span style="color:#268bd2">self</span>, <span style="color:#268bd2">action</span>: #<span style="color:#268bd2">selector</span>(<span style="color:#268bd2">leftAction</span>))        
+<span style="color:#268bd2">let</span> <span style="color:#268bd2">rightItem</span> = <span style="color:#268bd2">UIBarButtonItem</span>(<span style="color:#268bd2">title</span>: <span style="color:#2aa198">&#34;right&#34;</span>, <span style="color:#268bd2">style</span>: <span style="color:#268bd2">UIBarButtonItem</span>.<span style="color:#268bd2">Style</span>.<span style="color:#268bd2">done</span>, <span style="color:#268bd2">target</span>: <span style="color:#268bd2">self</span>, <span style="color:#268bd2">action</span>: #<span style="color:#268bd2">selector</span>(<span style="color:#268bd2">rightAction</span>))
+<span style="color:#268bd2">self</span>.<span style="color:#268bd2">navigationItem</span>.<span style="color:#268bd2">leftBarButtonItem</span> = <span style="color:#268bd2">leftItem</span>
+<span style="color:#268bd2">self</span>.<span style="color:#268bd2">navigationItem</span>.<span style="color:#268bd2">rightBarButtonItem</span> = <span style="color:#268bd2">rightItem</span>
 
-self.navigationItem.title = <span style="color:#2aa198">&#34;NavigationItem&#34;</span>
+<span style="color:#268bd2">self</span>.<span style="color:#268bd2">navigationItem</span>.<span style="color:#268bd2">title</span> = <span style="color:#2aa198">&#34;NavigationItem&#34;</span>
 </code></pre></div><p>对应的左右按键事件代码如下：</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">@objc func leftAction(){
-    print(<span style="color:#2aa198">&#34;click left action&#34;</span>)
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">@<span style="color:#268bd2">objc</span> <span style="color:#268bd2">func</span> <span style="color:#268bd2">leftAction</span>(){
+    <span style="color:#268bd2">print</span>(<span style="color:#2aa198">&#34;click left action&#34;</span>)
 }
     
-@objc func rightAction(){
-    print(<span style="color:#2aa198">&#34;click right action&#34;</span>)
+@<span style="color:#268bd2">objc</span> <span style="color:#268bd2">func</span> <span style="color:#268bd2">rightAction</span>(){
+    <span style="color:#268bd2">print</span>(<span style="color:#2aa198">&#34;click right action&#34;</span>)
 }
 </code></pre></div><p>这里只是简单地定义了一下样式，还可以弄得更加复杂花哨一点，比如带有图片的 UIBarButtonItem，自定义的 UIBarButtonItem 等。</p>
 <p>注意的是，当在 StoryBoard 中嵌入了 UINavigationController 之后，就可以通过 self.navigationController 来引用它了，如果没有嵌入，直接引用会 Crash 的。</p>
@@ -390,36 +417,36 @@ self.navigationItem.title = <span style="color:#2aa198">&#34;NavigationItem&#34;
 <h3 id="通过-navigationcontroller-实现页面跳转">通过 NavigationController 实现页面跳转</h3>
 <p>除了使用 Segue 之外，还可以使用 NavigationController 来实现页面跳转，先把之前添加的 Segue 移除掉。</p>
 <p>NavigationController 是一个管理 UIViewController 的容器，以栈的形式进行管理，提供相应的方法如下：</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">// 将 ViewController 压入栈中
-open func pushViewController(_ viewController: UIViewController, animated: Bool)
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 将 ViewController 压入栈中
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">open</span> <span style="color:#268bd2">func</span> <span style="color:#268bd2">pushViewController</span>(<span style="color:#268bd2">_</span> <span style="color:#268bd2">viewController</span>: <span style="color:#268bd2">UIViewController</span>, <span style="color:#268bd2">animated</span>: <span style="color:#268bd2">Bool</span>)
 
-// 弹出栈顶的 ViewController
-open func popViewController(animated: Bool) -&gt; UIViewController?
+<span style="color:#93a1a1;font-style:italic">// 弹出栈顶的 ViewController
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">open</span> <span style="color:#268bd2">func</span> <span style="color:#268bd2">popViewController</span>(<span style="color:#268bd2">animated</span>: <span style="color:#268bd2">Bool</span>) -&gt; <span style="color:#268bd2">UIViewController</span>?
 
-// 弹出到指定的 ViewController
-open func popToViewController(_ viewController: UIViewController, animated: Bool) -&gt; [UIViewController]?
+<span style="color:#93a1a1;font-style:italic">// 弹出到指定的 ViewController
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">open</span> <span style="color:#268bd2">func</span> <span style="color:#268bd2">popToViewController</span>(<span style="color:#268bd2">_</span> <span style="color:#268bd2">viewController</span>: <span style="color:#268bd2">UIViewController</span>, <span style="color:#268bd2">animated</span>: <span style="color:#268bd2">Bool</span>) -&gt; [<span style="color:#268bd2">UIViewController</span>]?
 
-// 弹出除 root ViewController 之外的所有 ViewController
-open func popToRootViewController(animated: Bool) -&gt; [UIViewController]?
+<span style="color:#93a1a1;font-style:italic">// 弹出除 root ViewController 之外的所有 ViewController
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">open</span> <span style="color:#268bd2">func</span> <span style="color:#268bd2">popToRootViewController</span>(<span style="color:#268bd2">animated</span>: <span style="color:#268bd2">Bool</span>) -&gt; [<span style="color:#268bd2">UIViewController</span>]?
 
-// 返回只读属性的栈顶 ViewController
-open var topViewController: UIViewController? { get }
+<span style="color:#93a1a1;font-style:italic">// 返回只读属性的栈顶 ViewController
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">open</span> <span style="color:#268bd2">var</span> <span style="color:#268bd2">topViewController</span>: <span style="color:#268bd2">UIViewController</span>? { <span style="color:#268bd2">get</span> }
 
-// 返回栈中当前可见的界面对应的 ViewController，也是只读属性
-open var visibleViewController: UIViewController? { get }
+<span style="color:#93a1a1;font-style:italic">// 返回栈中当前可见的界面对应的 ViewController，也是只读属性
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">open</span> <span style="color:#268bd2">var</span> <span style="color:#268bd2">visibleViewController</span>: <span style="color:#268bd2">UIViewController</span>? { <span style="color:#268bd2">get</span> }
 
-// 返回栈中所有的 ViewController
-open var viewControllers: [UIViewController]
+<span style="color:#93a1a1;font-style:italic">// 返回栈中所有的 ViewController
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">open</span> <span style="color:#268bd2">var</span> <span style="color:#268bd2">viewControllers</span>: [<span style="color:#268bd2">UIViewController</span>]
 </code></pre></div><p>实现页面跳转，要做的就是在 TableView 的 Item 点击事件中将详情页的 ViewController 压入栈中，然后在详情页 ViewController 的 Back 事件中进行出栈，把当前 ViewController 弹出栈顶，回到 TableView 界面。</p>
 <p>代码如下，在点击事件中进行初始化 ViewController ，并压入栈中。</p>
-<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">func</span> <span style="color:#268bd2">tableView</span>(<span style="color:#268bd2">_</span> <span style="color:#268bd2">tableView</span>: <span style="color:#268bd2">UITableView</span>, <span style="color:#268bd2">didSelectRowAt</span> <span style="color:#268bd2">indexPath</span>: <span style="color:#268bd2">IndexPath</span>) {
         
-    <span style="color:#cb4b16">let</span> <span style="color:#268bd2">storyboad</span> = UIStoryboard(name: <span style="color:#2aa198">&#34;Main&#34;</span>, bundle: nil)
+    <span style="color:#268bd2">let</span> <span style="color:#268bd2">storyboad</span> = <span style="color:#268bd2">UIStoryboard</span>(<span style="color:#268bd2">name</span>: <span style="color:#2aa198">&#34;Main&#34;</span>, <span style="color:#268bd2">bundle</span>: <span style="color:#268bd2">nil</span>)
         
-    <span style="color:#cb4b16">let</span> <span style="color:#268bd2">vc</span> = storyboad.instantiateViewController(identifier: <span style="color:#2aa198">&#34;detailvc&#34;</span>)  as! DetailViewController
-    vc.str = <span style="color:#2aa198">&#34;data&#34;</span>
+    <span style="color:#268bd2">let</span> <span style="color:#268bd2">vc</span> = <span style="color:#268bd2">storyboad</span>.<span style="color:#268bd2">instantiateViewController</span>(<span style="color:#268bd2">identifier</span>: <span style="color:#2aa198">&#34;detailvc&#34;</span>)  <span style="color:#268bd2">as</span>! <span style="color:#268bd2">DetailViewController</span>
+    <span style="color:#268bd2">vc</span>.<span style="color:#268bd2">str</span> = <span style="color:#2aa198">&#34;data&#34;</span>
     
-    self.navigationController?.pushViewController(vc, animated: <span style="color:#cb4b16">false</span>)
+    <span style="color:#268bd2">self</span>.<span style="color:#268bd2">navigationController</span>?.<span style="color:#268bd2">pushViewController</span>(<span style="color:#268bd2">vc</span>, <span style="color:#268bd2">animated</span>: <span style="color:#cb4b16">false</span>)
 }
 </code></pre></div><p>在 Back 按键的点击事件中进行出栈操作。</p>
 <div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">@IBAction func back(_ sender: Any) {
