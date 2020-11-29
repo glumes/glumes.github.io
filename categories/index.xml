@@ -2,111 +2,111 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 音视频开发进阶</title>
-    <link>https://www.glumes.com/categories/</link>
+    <link>https://glumes.com/categories/</link>
     <description>Recent content in Categories on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 17 Nov 2020 00:22:12 +0800</lastBuildDate>
     
-	<atom:link href="https://www.glumes.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://glumes.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>ios</title>
-      <link>https://www.glumes.com/categories/ios/</link>
+      <link>https://glumes.com/categories/ios/</link>
       <pubDate>Tue, 17 Nov 2020 00:22:12 +0800</pubDate>
       
-      <guid>https://www.glumes.com/categories/ios/</guid>
+      <guid>https://glumes.com/categories/ios/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Life</title>
-      <link>https://www.glumes.com/categories/life/</link>
+      <link>https://glumes.com/categories/life/</link>
       <pubDate>Mon, 31 Aug 2020 21:01:28 +0800</pubDate>
       
-      <guid>https://www.glumes.com/categories/life/</guid>
+      <guid>https://glumes.com/categories/life/</guid>
       <description></description>
     </item>
     
     <item>
       <title>webrtc</title>
-      <link>https://www.glumes.com/categories/webrtc/</link>
+      <link>https://glumes.com/categories/webrtc/</link>
       <pubDate>Mon, 10 Aug 2020 21:01:28 +0800</pubDate>
       
-      <guid>https://www.glumes.com/categories/webrtc/</guid>
+      <guid>https://glumes.com/categories/webrtc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>opengl</title>
-      <link>https://www.glumes.com/categories/opengl/</link>
+      <link>https://glumes.com/categories/opengl/</link>
       <pubDate>Fri, 22 May 2020 14:33:35 +0800</pubDate>
       
-      <guid>https://www.glumes.com/categories/opengl/</guid>
+      <guid>https://glumes.com/categories/opengl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ffmpeg</title>
-      <link>https://www.glumes.com/categories/ffmpeg/</link>
+      <link>https://glumes.com/categories/ffmpeg/</link>
       <pubDate>Mon, 18 May 2020 11:37:09 +0800</pubDate>
       
-      <guid>https://www.glumes.com/categories/ffmpeg/</guid>
+      <guid>https://glumes.com/categories/ffmpeg/</guid>
       <description></description>
     </item>
     
     <item>
       <title>android</title>
-      <link>https://www.glumes.com/categories/android/</link>
+      <link>https://glumes.com/categories/android/</link>
       <pubDate>Wed, 06 May 2020 23:10:48 +0800</pubDate>
       
-      <guid>https://www.glumes.com/categories/android/</guid>
+      <guid>https://glumes.com/categories/android/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vulkan</title>
-      <link>https://www.glumes.com/categories/vulkan/</link>
+      <link>https://glumes.com/categories/vulkan/</link>
       <pubDate>Sun, 07 Apr 2019 15:39:14 +0800</pubDate>
       
-      <guid>https://www.glumes.com/categories/vulkan/</guid>
+      <guid>https://glumes.com/categories/vulkan/</guid>
       <description></description>
     </item>
     
     <item>
       <title>c&#43;&#43;</title>
-      <link>https://www.glumes.com/categories/c&#43;&#43;/</link>
+      <link>https://glumes.com/categories/c&#43;&#43;/</link>
       <pubDate>Mon, 19 Nov 2018 10:23:00 +0800</pubDate>
       
-      <guid>https://www.glumes.com/categories/c&#43;&#43;/</guid>
+      <guid>https://glumes.com/categories/c&#43;&#43;/</guid>
       <description></description>
     </item>
     
     <item>
       <title>docker</title>
-      <link>https://www.glumes.com/categories/docker/</link>
+      <link>https://glumes.com/categories/docker/</link>
       <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
       
-      <guid>https://www.glumes.com/categories/docker/</guid>
+      <guid>https://glumes.com/categories/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>python</title>
-      <link>https://www.glumes.com/categories/python/</link>
+      <link>https://glumes.com/categories/python/</link>
       <pubDate>Fri, 22 Dec 2017 16:10:57 +0800</pubDate>
       
-      <guid>https://www.glumes.com/categories/python/</guid>
+      <guid>https://glumes.com/categories/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>opencv</title>
-      <link>https://www.glumes.com/categories/opencv/</link>
+      <link>https://glumes.com/categories/opencv/</link>
       <pubDate>Fri, 22 Dec 2017 09:53:04 +0800</pubDate>
       
-      <guid>https://www.glumes.com/categories/opencv/</guid>
+      <guid>https://glumes.com/categories/opencv/</guid>
       <description></description>
     </item>
     

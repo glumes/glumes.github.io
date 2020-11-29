@@ -12,18 +12,18 @@
 
   <meta name="author" content=""/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://www.glumes.com/tags/camera/" />
+  <meta property="og:url" content="https://glumes.com/tags/camera/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="音视频开发进阶" />
 
   <meta name="generator" content="Hugo 0.74.3" />
-  <link rel="canonical" href="https://www.glumes.com/tags/camera/" />
-  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="音视频开发进阶">
+  <link rel="canonical" href="https://glumes.com/tags/camera/" />
+  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="音视频开发进阶">
 
   
   
 
-  <link rel="stylesheet" href='https://www.glumes.com/css/bundle.min.fb9e227ddbeead55275b2028c55c2dd4b6b4e09ded2b8c8e4dc5c8c417bc97de.css' integrity='sha256-&#43;54ifdvurVUnWyAoxVwt1La04J3tK4yOTcXIxBe8l94='>
+  <link rel="stylesheet" href='https://glumes.com/css/bundle.min.fb9e227ddbeead55275b2028c55c2dd4b6b4e09ded2b8c8e4dc5c8c417bc97de.css' integrity='sha256-&#43;54ifdvurVUnWyAoxVwt1La04J3tK4yOTcXIxBe8l94='>
 
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   
@@ -79,7 +79,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://www.glumes.com/" title="音视频开发进阶">
+      <a class="navbar-brand" href="https://glumes.com/" title="音视频开发进阶">
         
         音视频开发进阶
       </a>
@@ -93,15 +93,15 @@
               <a class="navlinks-parent" href="javascript:void(0)">音视频开发</a>
               <div class="navlinks-children">
                 
-                  <a href="https://www.glumes.com/categories/opengl">OpenGL </a>
+                  <a href="https://glumes.com/categories/opengl">OpenGL </a>
                 
-                  <a href="https://www.glumes.com/categories/ffmpeg">FFmpeg</a>
+                  <a href="https://glumes.com/categories/ffmpeg">FFmpeg</a>
                 
-                  <a href="https://www.glumes.com/categories/vulkan">Vulkan </a>
+                  <a href="https://glumes.com/categories/vulkan">Vulkan </a>
                 
-                  <a href="https://www.glumes.com/categories/webrtc">WebRTC </a>
+                  <a href="https://glumes.com/categories/webrtc">WebRTC </a>
                 
-                  <a href="https://www.glumes.com/categories/opencv">opencv </a>
+                  <a href="https://glumes.com/categories/opencv">opencv </a>
                 
               </div>
             </li>
@@ -112,13 +112,13 @@
               <a class="navlinks-parent" href="javascript:void(0)">移动开发</a>
               <div class="navlinks-children">
                 
-                  <a href="https://www.glumes.com/categories/android">Android</a>
+                  <a href="https://glumes.com/categories/android">Android</a>
                 
-                  <a href="https://www.glumes.com/categories/ios">ios</a>
+                  <a href="https://glumes.com/categories/ios">ios</a>
                 
-                  <a href="https://www.glumes.com/categories/c&#43;&#43;">C&#43;&#43;</a>
+                  <a href="https://glumes.com/categories/c&#43;&#43;">C&#43;&#43;</a>
                 
-                  <a href="https://www.glumes.com/categories/python">Python</a>
+                  <a href="https://glumes.com/categories/python">Python</a>
                 
               </div>
             </li>
@@ -126,7 +126,7 @@
         
           
             <li>
-              <a title="程序人生" href="https://www.glumes.com/categories/life">程序人生</a>
+              <a title="程序人生" href="https://glumes.com/categories/life">程序人生</a>
             </li>
           
         
@@ -151,13 +151,13 @@
         
           
             <li>
-              <a title="关于" href="https://www.glumes.com/about/">关于</a>
+              <a title="关于" href="https://glumes.com/about/">关于</a>
             </li>
           
         
           
             <li>
-              <a title="所有文章" href="https://www.glumes.com/post/">所有文章</a>
+              <a title="所有文章" href="https://glumes.com/post/">所有文章</a>
             </li>
           
         
@@ -199,7 +199,7 @@
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/">
+              <a href="https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/">
                 <h2 class="post-title">MediaCodec 硬编码之相机内容编码成 H264 文件</h2>
 
                 
@@ -217,20 +217,20 @@
 <p>在 Android 4.1 版本提供了 MediaCodec 接口来访问设备的编解码器，不同于 FFmpeg 的软件编解码，它采用的是硬件编解码能力，因此在速度上会比软解更具有优势，但是由于 Android 的碎片化问题，机型众多，版本各异，导致 MediaCodec 在机型兼容性上需要花精力去适配，并且编解码流程不可控，全交由厂商的底层硬件去实现，最终得到的视频质量不一定很理想。</p>
 <p>虽然 MediaCodec 仍然存在一定的弊端，但是对于快速实现编解码需求，还是很值得参考的。</p>
 <p>以将相机预览的 YUV 数据编码成 H264 视频流为例来解析 MediaCodec 的使用。</p>
-                  <a href="https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/" class="post-read-more">[阅读全文]</a>
+                  <a href="https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
               
                 <span class="post-meta">
                   
-                    #<a href="https://www.glumes.com/tags/mediacodec/">MediaCodec</a>&nbsp;
+                    #<a href="https://glumes.com/tags/mediacodec/">MediaCodec</a>&nbsp;
                   
-                    #<a href="https://www.glumes.com/tags/yuv/">YUV</a>&nbsp;
+                    #<a href="https://glumes.com/tags/yuv/">YUV</a>&nbsp;
                   
-                    #<a href="https://www.glumes.com/tags/h264/">H264</a>&nbsp;
+                    #<a href="https://glumes.com/tags/h264/">H264</a>&nbsp;
                   
-                    #<a href="https://www.glumes.com/tags/camera/">Camera</a>&nbsp;
+                    #<a href="https://glumes.com/tags/camera/">Camera</a>&nbsp;
                   
                 </span>
               
@@ -238,7 +238,7 @@
             </article>
           
             <article class="post-preview">
-              <a href="https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/">
+              <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/">
                 <h2 class="post-title">OpenGL 学习系列---观察矩阵</h2>
 
                 
@@ -257,16 +257,16 @@
 <p>这两种投影实质上是两种类型的裁剪空间，分别创建对应视景体对物体坐标进行裁剪，位于裁剪空间内的才会被映射到屏幕上，如下图所示：（图片来源：<a href="https://glumpy.github.io/modern-gl.html">https://glumpy.github.io/modern-gl.html</a>）</p>
 <p><img src="https://image.glumes.com/images/2019/04/27/ViewFrustum_gvy6aq.png" alt=""></p>
 <p>当定义裁剪空间视景体时，我们都需要提供近平面和远平面的距离，这里的近和远都是指相对于<code>视点</code>的，视点也就是我们这篇文章要讲到的摄像机。</p>
-                  <a href="https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/" class="post-read-more">[阅读全文]</a>
+                  <a href="https://glumes.com/post/opengl/opengl-tutorial-view-matrix/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
               
                 <span class="post-meta">
                   
-                    #<a href="https://www.glumes.com/tags/opengl/">OpenGL</a>&nbsp;
+                    #<a href="https://glumes.com/tags/opengl/">OpenGL</a>&nbsp;
                   
-                    #<a href="https://www.glumes.com/tags/camera/">Camera</a>&nbsp;
+                    #<a href="https://glumes.com/tags/camera/">Camera</a>&nbsp;
                   
                 </span>
               
@@ -274,7 +274,7 @@
             </article>
           
             <article class="post-preview">
-              <a href="https://www.glumes.com/post/android/android-camrea-api-evolution/">
+              <a href="https://glumes.com/post/android/android-camrea-api-evolution/">
                 <h2 class="post-title">Android Camera 模型及 API 接口演变</h2>
 
                 
@@ -286,16 +286,16 @@
               <div class="post-entry">
                 
                   <p>要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。</p>
-                  <a href="https://www.glumes.com/post/android/android-camrea-api-evolution/" class="post-read-more">[阅读全文]</a>
+                  <a href="https://glumes.com/post/android/android-camrea-api-evolution/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
               
                 <span class="post-meta">
                   
-                    #<a href="https://www.glumes.com/tags/camera/">Camera</a>&nbsp;
+                    #<a href="https://glumes.com/tags/camera/">Camera</a>&nbsp;
                   
-                    #<a href="https://www.glumes.com/tags/android/">Android</a>&nbsp;
+                    #<a href="https://glumes.com/tags/android/">Android</a>&nbsp;
                   
                 </span>
               
@@ -303,7 +303,7 @@
             </article>
           
             <article class="post-preview">
-              <a href="https://www.glumes.com/post/android/android-camera-aspect-ratio-and-orientation/">
+              <a href="https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/">
                 <h2 class="post-title">Android 相机开发中的尺寸和方向问题</h2>
 
                 
@@ -318,14 +318,14 @@
 <p>*本篇文章已授权微信公众号 guolin_blog （郭霖）独家发布</p>
 </blockquote>
 <p>在 Android Camera 开发中，两个比较闹心的问题就是尺寸和方向了。</p>
-                  <a href="https://www.glumes.com/post/android/android-camera-aspect-ratio-and-orientation/" class="post-read-more">[阅读全文]</a>
+                  <a href="https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
               
                 <span class="post-meta">
                   
-                    #<a href="https://www.glumes.com/tags/camera/">Camera</a>&nbsp;
+                    #<a href="https://glumes.com/tags/camera/">Camera</a>&nbsp;
                   
                 </span>
               
@@ -384,9 +384,9 @@
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://www.glumes.com/">音视频开发进阶</a>
+            <a href="https://glumes.com/">音视频开发进阶</a>
             &nbsp;&bull;&nbsp;
-            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+            <a href="https://glumes.com/sitemap.xml">网站地图</a>
           
              &nbsp;&bull;&nbsp;
                       <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
@@ -429,10 +429,10 @@
 </footer>
 
 
-<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
-<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
-<script src="https://www.glumes.com/js/main.min.js"></script>
-<script src="https://www.glumes.com/js/reward.js"></script>
+<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://glumes.com/js/bootstrap.min.js"></script>
+<script src="https://glumes.com/js/main.min.js"></script>
+<script src="https://glumes.com/js/reward.js"></script>
 
 
 
@@ -475,7 +475,7 @@ MathJax.Hub.Config({
 
 
 
-<script src='https://www.glumes.com/js/bundle.min.dd00fc477b5e611b3b15869e7f4ffa218efd3a1b6f00902db8b25e1e9a1d90fc.js' integrity='sha256-3QD8R3teYRs7FYaef0/6IY79OhtvAJAtuLJeHpodkPw='></script>
+<script src='https://glumes.com/js/bundle.min.dd00fc477b5e611b3b15869e7f4ffa218efd3a1b6f00902db8b25e1e9a1d90fc.js' integrity='sha256-3QD8R3teYRs7FYaef0/6IY79OhtvAJAtuLJeHpodkPw='></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript">

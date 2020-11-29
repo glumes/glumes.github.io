@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SDL on 音视频开发进阶</title>
-    <link>https://www.glumes.com/tags/sdl/</link>
+    <link>https://glumes.com/tags/sdl/</link>
     <description>Recent content in SDL on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 22 Mar 2020 18:38:09 +0800</lastBuildDate>
     
-	<atom:link href="https://www.glumes.com/tags/sdl/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://glumes.com/tags/sdl/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-008/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-008/</link>
       <pubDate>Sun, 22 Mar 2020 18:38:09 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-008/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-008/</guid>
       <description>&lt;p&gt;接上篇 SDL 播放 PCM 音频文件，已经实现了 &lt;code&gt;推&lt;/code&gt; 的模式去播放，接下来看看 &lt;code&gt;拉&lt;/code&gt; 的模式如何实现。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-007/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-007/</link>
       <pubDate>Mon, 16 Mar 2020 09:47:30 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-007/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-007/</guid>
       <description>&lt;p&gt;在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。&lt;/p&gt;
 &lt;p&gt;SDL 播放音频文件有两种方法，可以理解成 &lt;code&gt;推(push)&lt;/code&gt;和&lt;code&gt;拉(pull)&lt;/code&gt;两种模式。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;推&lt;/code&gt; 就是我们主动向设备缓冲区填充 Buffer ，而 &lt;code&gt;拉&lt;/code&gt; 就是由设备拉取 Buffer 填充到缓冲区。&lt;/p&gt;
@@ -35,10 +35,10 @@
     
     <item>
       <title>【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-006/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-006/</link>
       <pubDate>Sun, 15 Mar 2020 18:38:03 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-006/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-006/</guid>
       <description>&lt;p&gt;在前面的文章中，我们已经能够加载 YUV 帧并显示了，那是把一张图片转换成 YUV 帧得到的素材。&lt;/p&gt;
 &lt;p&gt;如果是一个 YUV 视频文件的话，那就是很多 YUV 帧连续在一起，既然能展示一帧，那肯定可以连续展示多帧。&lt;/p&gt;
 &lt;p&gt;接下来就要这样的操作。&lt;/p&gt;</description>
@@ -46,29 +46,29 @@
     
     <item>
       <title>【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-005/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-005/</link>
       <pubDate>Tue, 10 Mar 2020 00:05:03 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-005/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-005/</guid>
       <description>&lt;p&gt;在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【音视频连载-004】基础学习篇-SDL 加载图片并显示</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-004/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-004/</link>
       <pubDate>Sun, 08 Mar 2020 21:44:09 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-004/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-004/</guid>
       <description>&lt;p&gt;在前面的文章中已经介绍完 SDL 显示窗口、消息循环和事件响应这些基础内容，有了这些基础就可以进行功能性开发了。&lt;/p&gt;
 &lt;p&gt;本篇的主要内容是利用 SDL 加载并显示一张图片，然后再去进行更多的音视频操作。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-003/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-003/</link>
       <pubDate>Tue, 03 Mar 2020 22:54:26 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-003/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-003/</guid>
       <description>&lt;p&gt;在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。&lt;/p&gt;
 &lt;p&gt;为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;    &lt;span style=&#34;color:#268bd2&#34;&gt;SDL_Event&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;windowEvent&lt;/span&gt;;
@@ -84,20 +84,20 @@
     
     <item>
       <title>【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-002/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-002/</link>
       <pubDate>Mon, 02 Mar 2020 20:40:02 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-002/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-002/</guid>
       <description>&lt;p&gt;在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。&lt;/p&gt;
 &lt;p&gt;本篇文章主要是创建一个应用程序窗口并显示。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</title>
-      <link>https://www.glumes.com/post/ffmpeg/av-beginner-001/</link>
+      <link>https://glumes.com/post/ffmpeg/av-beginner-001/</link>
       <pubDate>Wed, 26 Feb 2020 23:33:35 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-001/</guid>
+      <guid>https://glumes.com/post/ffmpeg/av-beginner-001/</guid>
       <description>&lt;p&gt;这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。&lt;/p&gt;
 &lt;h3 id=&#34;sdl-简介&#34;&gt;SDL 简介&lt;/h3&gt;
 &lt;p&gt;SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。&lt;/p&gt;
