@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>音视频开发进阶</title>
-    <link>https://glumes.com/</link>
+    <link>https://www.glumes.com/</link>
     <description>Recent content on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 17 Nov 2020 00:22:12 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glumes.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>音视频交流群又来啦~~~</title>
-      <link>https://glumes.com/post/life/av-beginner-wechat-group/</link>
+      <link>https://www.glumes.com/post/life/av-beginner-wechat-group/</link>
       <pubDate>Mon, 31 Aug 2020 21:01:28 +0800</pubDate>
       
-      <guid>https://glumes.com/post/life/av-beginner-wechat-group/</guid>
+      <guid>https://www.glumes.com/post/life/av-beginner-wechat-group/</guid>
       <description>&lt;p&gt;最近有不少朋友加我微信，要求进群交流学习的。&lt;/p&gt;
 &lt;p&gt;可是早先创建的技术交流群，渐渐地都开始满员了。&lt;/p&gt;
 &lt;p&gt;于是乎，要开始创建第三群啦~~~&lt;/p&gt;</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>WebRTC &amp; Android 开发学习环境搭建~</title>
-      <link>https://glumes.com/post/webrtc/webrtc-android-setup/</link>
+      <link>https://www.glumes.com/post/webrtc/webrtc-android-setup/</link>
       <pubDate>Mon, 10 Aug 2020 21:01:28 +0800</pubDate>
       
-      <guid>https://glumes.com/post/webrtc/webrtc-android-setup/</guid>
+      <guid>https://www.glumes.com/post/webrtc/webrtc-android-setup/</guid>
       <description>&lt;p&gt;最近开始折腾 WebRTC 了。&lt;/p&gt;
 &lt;p&gt;先介绍一下 WebRTC 源码编译以及 Android 开发环境的搭建。&lt;/p&gt;
 &lt;p&gt;整个下载编译过程都需要能够正常访问外网，这需要自己想办法克服了。&lt;/p&gt;</description>
@@ -35,19 +35,19 @@
     
     <item>
       <title>iOS 音视频开发的一些基础准备工作</title>
-      <link>https://glumes.com/post/ios/ios-av-developer-prepare/</link>
+      <link>https://www.glumes.com/post/ios/ios-av-developer-prepare/</link>
       <pubDate>Tue, 17 Nov 2020 00:22:12 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ios/ios-av-developer-prepare/</guid>
+      <guid>https://www.glumes.com/post/ios/ios-av-developer-prepare/</guid>
       <description>&lt;p&gt;最近在捣鼓 iOS 上的音视频开发，由于之前并没有 iOS 开发经验，直接上手写代码的话压力还是挺大的，因此也趁机看了下 iOS 开发的内容，算是做一些准备工作吧。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【喜大普奔】域名终于备案通过啦</title>
-      <link>https://glumes.com/post/life/domain-name-register/</link>
+      <link>https://www.glumes.com/post/life/domain-name-register/</link>
       <pubDate>Mon, 03 Aug 2020 20:22:39 +0800</pubDate>
       
-      <guid>https://glumes.com/post/life/domain-name-register/</guid>
+      <guid>https://www.glumes.com/post/life/domain-name-register/</guid>
       <description>&lt;p&gt;前段时间博客网站一直无法访问，还有不少朋友特意发微信告诉我，感谢大家的好意了!&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;网站是：https://glumes.com&lt;/p&gt;
@@ -59,10 +59,10 @@
     
     <item>
       <title>Shader 优化 | OpenGL 绘制网格效果</title>
-      <link>https://glumes.com/post/opengl/opengl-draw-grid-optimize/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-draw-grid-optimize/</link>
       <pubDate>Fri, 22 May 2020 14:33:35 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-draw-grid-optimize/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-draw-grid-optimize/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/FmILdXuy3HMpv8H1Kz_fPw&#34;&gt;https://mp.weixin.qq.com/s/FmILdXuy3HMpv8H1Kz_fPw&lt;/a&gt;&lt;/p&gt;
@@ -84,10 +84,10 @@
     
     <item>
       <title>KodeLife | Shader 实时编辑预览的强大工具使用实践</title>
-      <link>https://glumes.com/post/opengl/shader-tool-kodelife-introduce/</link>
+      <link>https://www.glumes.com/post/opengl/shader-tool-kodelife-introduce/</link>
       <pubDate>Mon, 18 May 2020 11:39:56 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/shader-tool-kodelife-introduce/</guid>
+      <guid>https://www.glumes.com/post/opengl/shader-tool-kodelife-introduce/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/6ZMP6Tc_MqggjAXS_GjV2Q&#34;&gt;https://mp.weixin.qq.com/s/6ZMP6Tc_MqggjAXS_GjV2Q&lt;/a&gt;&lt;/p&gt;
@@ -108,10 +108,10 @@
     
     <item>
       <title>【音视频连载-011】第二季 FFmpeg 一层一层获取文件信息</title>
-      <link>https://glumes.com/post/ffmpeg/av-beginner-011/</link>
+      <link>https://www.glumes.com/post/ffmpeg/av-beginner-011/</link>
       <pubDate>Mon, 18 May 2020 11:37:09 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/av-beginner-011/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-011/</guid>
       <description>&lt;p&gt;本篇文章主要是讲解如何通过 FFmpeg 代码来获取文件信息。&lt;/p&gt;
 &lt;p&gt;首先准备一个文件，用命令行来查看它的基本信息。&lt;/p&gt;
 &lt;p&gt;文件地址如下：&lt;/p&gt;
@@ -121,10 +121,10 @@
     
     <item>
       <title>推荐几个堪称教科书级别的 Android 音视频入门项目</title>
-      <link>https://glumes.com/post/android/android-av-beginner-resource/</link>
+      <link>https://www.glumes.com/post/android/android-av-beginner-resource/</link>
       <pubDate>Wed, 06 May 2020 23:10:48 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-av-beginner-resource/</guid>
+      <guid>https://www.glumes.com/post/android/android-av-beginner-resource/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/Bb0fgFMgH5QOBqYhOj0uqA&#34;&gt;https://mp.weixin.qq.com/s/Bb0fgFMgH5QOBqYhOj0uqA&lt;/a&gt;&lt;/p&gt;
@@ -137,29 +137,29 @@
     
     <item>
       <title>【音视频连载-010】第二季 FFmpeg 日志打印</title>
-      <link>https://glumes.com/post/ffmpeg/av-beginner-010/</link>
+      <link>https://www.glumes.com/post/ffmpeg/av-beginner-010/</link>
       <pubDate>Mon, 27 Apr 2020 23:37:03 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/av-beginner-010/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-010/</guid>
       <description>&lt;p&gt;音视频连载系列已经停更一段时间，再这么停下去估计就要掉粉了，捡起来继续更新~~~&lt;/p&gt;
 &lt;p&gt;接下来主要是讲解 FFmpeg 相关的内容，比如这篇就从简单的日志打印开始说起。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</title>
-      <link>https://glumes.com/post/ffmpeg/av-beginner-008/</link>
+      <link>https://www.glumes.com/post/ffmpeg/av-beginner-008/</link>
       <pubDate>Sun, 22 Mar 2020 18:38:09 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/av-beginner-008/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-008/</guid>
       <description>&lt;p&gt;接上篇 SDL 播放 PCM 音频文件，已经实现了 &lt;code&gt;推&lt;/code&gt; 的模式去播放，接下来看看 &lt;code&gt;拉&lt;/code&gt; 的模式如何实现。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【音视频连载-007】基础学习篇-SDL 播放 PCM 音频文件（上）</title>
-      <link>https://glumes.com/post/ffmpeg/av-beginner-007/</link>
+      <link>https://www.glumes.com/post/ffmpeg/av-beginner-007/</link>
       <pubDate>Mon, 16 Mar 2020 09:47:30 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/av-beginner-007/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-007/</guid>
       <description>&lt;p&gt;在前面的文章中已经能够利用 SDL 去播放 YUV 视频文件了，接下来要通过 SDL 去播放 PCM 音频文件。&lt;/p&gt;
 &lt;p&gt;SDL 播放音频文件有两种方法，可以理解成 &lt;code&gt;推(push)&lt;/code&gt;和&lt;code&gt;拉(pull)&lt;/code&gt;两种模式。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;推&lt;/code&gt; 就是我们主动向设备缓冲区填充 Buffer ，而 &lt;code&gt;拉&lt;/code&gt; 就是由设备拉取 Buffer 填充到缓冲区。&lt;/p&gt;
@@ -169,10 +169,10 @@
     
     <item>
       <title>【音视频连载-006】基础学习篇-SDL 播放 YUV 视频文件</title>
-      <link>https://glumes.com/post/ffmpeg/av-beginner-006/</link>
+      <link>https://www.glumes.com/post/ffmpeg/av-beginner-006/</link>
       <pubDate>Sun, 15 Mar 2020 18:38:03 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/av-beginner-006/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-006/</guid>
       <description>&lt;p&gt;在前面的文章中，我们已经能够加载 YUV 帧并显示了，那是把一张图片转换成 YUV 帧得到的素材。&lt;/p&gt;
 &lt;p&gt;如果是一个 YUV 视频文件的话，那就是很多 YUV 帧连续在一起，既然能展示一帧，那肯定可以连续展示多帧。&lt;/p&gt;
 &lt;p&gt;接下来就要这样的操作。&lt;/p&gt;</description>
@@ -180,29 +180,29 @@
     
     <item>
       <title>【音视频连载-005】基础学习篇-SDL 加载 YUV 文件并显示</title>
-      <link>https://glumes.com/post/ffmpeg/av-beginner-005/</link>
+      <link>https://www.glumes.com/post/ffmpeg/av-beginner-005/</link>
       <pubDate>Tue, 10 Mar 2020 00:05:03 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/av-beginner-005/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-005/</guid>
       <description>&lt;p&gt;在前面的文章中已经完成了图片的加载和显示，接下来要做的就是加载 YUV 文件并显示。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【音视频连载-004】基础学习篇-SDL 加载图片并显示</title>
-      <link>https://glumes.com/post/ffmpeg/av-beginner-004/</link>
+      <link>https://www.glumes.com/post/ffmpeg/av-beginner-004/</link>
       <pubDate>Sun, 08 Mar 2020 21:44:09 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/av-beginner-004/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-004/</guid>
       <description>&lt;p&gt;在前面的文章中已经介绍完 SDL 显示窗口、消息循环和事件响应这些基础内容，有了这些基础就可以进行功能性开发了。&lt;/p&gt;
 &lt;p&gt;本篇的主要内容是利用 SDL 加载并显示一张图片，然后再去进行更多的音视频操作。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【音视频连载-003】基础学习篇-SDL 消息循环和事件响应</title>
-      <link>https://glumes.com/post/ffmpeg/av-beginner-003/</link>
+      <link>https://www.glumes.com/post/ffmpeg/av-beginner-003/</link>
       <pubDate>Tue, 03 Mar 2020 22:54:26 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/av-beginner-003/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-003/</guid>
       <description>&lt;p&gt;在前面的文章中已经创建了一个 SDL 窗口并且显示指定的颜色。&lt;/p&gt;
 &lt;p&gt;为了让窗口显示出来，在程序中写了一个死循环，这几行代码就是 SDL 消息循环和事件响应的核心缩影了。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;    &lt;span style=&#34;color:#268bd2&#34;&gt;SDL_Event&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;windowEvent&lt;/span&gt;;
@@ -218,20 +218,20 @@
     
     <item>
       <title>【音视频连载-002】基础学习篇-SDL 创建窗口并显示颜色</title>
-      <link>https://glumes.com/post/ffmpeg/av-beginner-002/</link>
+      <link>https://www.glumes.com/post/ffmpeg/av-beginner-002/</link>
       <pubDate>Mon, 02 Mar 2020 20:40:02 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/av-beginner-002/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-002/</guid>
       <description>&lt;p&gt;在前面的文章中我们已经完成了 SDL 的工程配置，接下来就是 SDL 相关功能的开发。&lt;/p&gt;
 &lt;p&gt;本篇文章主要是创建一个应用程序窗口并显示。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【音视频连载-001】基础学习篇- SDL 介绍以及工程配置</title>
-      <link>https://glumes.com/post/ffmpeg/av-beginner-001/</link>
+      <link>https://www.glumes.com/post/ffmpeg/av-beginner-001/</link>
       <pubDate>Wed, 26 Feb 2020 23:33:35 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/av-beginner-001/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/av-beginner-001/</guid>
       <description>&lt;p&gt;这是音视频基础学习系列的第一篇文章，主要讲解 SDL 是什么以及为什么要用到它，看似和音视频没啥卵关系，其实必不可少。&lt;/p&gt;
 &lt;h3 id=&#34;sdl-简介&#34;&gt;SDL 简介&lt;/h3&gt;
 &lt;p&gt;SDL 是 “Simple DirectMedia Layer” 的缩写，它是一个跨平台的多媒体库，可以在 Mac、Windows、Linux 以及更多的系统上运行。&lt;/p&gt;
@@ -243,10 +243,10 @@
     
     <item>
       <title>LearnOpenGL 源码在 MAC 上的编译与调试</title>
-      <link>https://glumes.com/post/opengl/run-learnopengl-code-on-xcode/</link>
+      <link>https://www.glumes.com/post/opengl/run-learnopengl-code-on-xcode/</link>
       <pubDate>Sat, 04 Jan 2020 22:53:52 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/run-learnopengl-code-on-xcode/</guid>
+      <guid>https://www.glumes.com/post/opengl/run-learnopengl-code-on-xcode/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/Ah8bK4dELT-LDjwSk9dHiQ&#34;&gt;https://mp.weixin.qq.com/s/Ah8bK4dELT-LDjwSk9dHiQ&lt;/a&gt;&lt;/p&gt;
@@ -267,10 +267,10 @@
     
     <item>
       <title>2019 年终总结与回顾</title>
-      <link>https://glumes.com/post/life/2019-review/</link>
+      <link>https://www.glumes.com/post/life/2019-review/</link>
       <pubDate>Fri, 27 Dec 2019 15:40:54 +0800</pubDate>
       
-      <guid>https://glumes.com/post/life/2019-review/</guid>
+      <guid>https://www.glumes.com/post/life/2019-review/</guid>
       <description>&lt;p&gt;时光荏苒，岁月如梭。&lt;/p&gt;
 &lt;p&gt;又到了回顾过去，展望未来的(chui)高(niu)光(bi)时刻了~~&lt;/p&gt;
 &lt;h2 id=&#34;职业回顾&#34;&gt;职业回顾&lt;/h2&gt;
@@ -281,10 +281,10 @@
     
     <item>
       <title>Android NDK 开发的免费技术视频来啦~~</title>
-      <link>https://glumes.com/post/life/imooc-course-online/</link>
+      <link>https://www.glumes.com/post/life/imooc-course-online/</link>
       <pubDate>Fri, 27 Dec 2019 10:58:55 +0800</pubDate>
       
-      <guid>https://glumes.com/post/life/imooc-course-online/</guid>
+      <guid>https://www.glumes.com/post/life/imooc-course-online/</guid>
       <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
 &lt;p&gt;前段时间在慕课网上体验了一把做讲师的感觉，录制了一套免费技术视频~~&lt;/p&gt;
 &lt;p&gt;如下图所示：&lt;/p&gt;
@@ -297,10 +297,10 @@
     
     <item>
       <title>OpenGL 实现视频编辑中的转场效果</title>
-      <link>https://glumes.com/post/opengl/opengl-transition/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-transition/</link>
       <pubDate>Sun, 20 Oct 2019 22:49:00 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-transition/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-transition/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/OuyU_7ieecjdGyDKTx-iFg&#34;&gt;https://mp.weixin.qq.com/s/OuyU_7ieecjdGyDKTx-iFg&lt;/a&gt;&lt;/p&gt;
@@ -321,10 +321,10 @@
     
     <item>
       <title>OpenGL 实践之贝塞尔曲线绘制</title>
-      <link>https://glumes.com/post/opengl/opengl-draw-bezier-line/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-draw-bezier-line/</link>
       <pubDate>Tue, 20 Aug 2019 23:51:59 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-draw-bezier-line/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-draw-bezier-line/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/m7BMF1dSiJ5BeHTU1etDqw&#34;&gt;https://mp.weixin.qq.com/s/m7BMF1dSiJ5BeHTU1etDqw&lt;/a&gt;&lt;/p&gt;
@@ -341,10 +341,10 @@
     
     <item>
       <title>图像库 libjpeg-turbo 编译与实践</title>
-      <link>https://glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</link>
+      <link>https://www.glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</link>
       <pubDate>Sat, 13 Jul 2019 00:08:18 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</guid>
+      <guid>https://www.glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/x-dTLowXcqysnLxZ0BGA2g&#34;&gt;https://mp.weixin.qq.com/s/x-dTLowXcqysnLxZ0BGA2g&lt;/a&gt;&lt;/p&gt;
@@ -367,10 +367,10 @@
     
     <item>
       <title>图像库 libpng 编译与实践</title>
-      <link>https://glumes.com/post/opengl/libpng-compile-and-practice/</link>
+      <link>https://www.glumes.com/post/opengl/libpng-compile-and-practice/</link>
       <pubDate>Fri, 12 Jul 2019 23:26:58 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/libpng-compile-and-practice/</guid>
+      <guid>https://www.glumes.com/post/opengl/libpng-compile-and-practice/</guid>
       <description>&lt;p&gt;在之前的文章中介绍了 &lt;code&gt;stb_image&lt;/code&gt; 图像库，还顺带提到了 libpng 和 libjpeg ，这篇文章就是介绍如何在 Android 平台上用 CMake 编译 libpng 动态库以及 libpng 使用实践。&lt;/p&gt;
 &lt;p&gt;【&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;简单易用的图像解码库介绍 —— stb_image&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;https://glumes.com/post/android/stb-image-introduce/&lt;/a&gt;&lt;/p&gt;</description>
@@ -378,10 +378,10 @@
     
     <item>
       <title>Google Jetpack 新组件 CameraX 介绍与实践</title>
-      <link>https://glumes.com/post/android/google-jetpack-camerax/</link>
+      <link>https://www.glumes.com/post/android/google-jetpack-camerax/</link>
       <pubDate>Thu, 23 May 2019 08:50:23 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/google-jetpack-camerax/</guid>
+      <guid>https://www.glumes.com/post/android/google-jetpack-camerax/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/geCmI9XovmxyaA437JIewg&#34;&gt;https://mp.weixin.qq.com/s/geCmI9XovmxyaA437JIewg&lt;/a&gt;&lt;/p&gt;
@@ -404,10 +404,10 @@
     
     <item>
       <title>rust 开发编译 Android 动态库实践</title>
-      <link>https://glumes.com/post/android/rust-compile-so-library/</link>
+      <link>https://www.glumes.com/post/android/rust-compile-so-library/</link>
       <pubDate>Sun, 19 May 2019 23:25:31 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/rust-compile-so-library/</guid>
+      <guid>https://www.glumes.com/post/android/rust-compile-so-library/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/19/rust-mm.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -439,10 +439,10 @@
     
     <item>
       <title>Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</title>
-      <link>https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/</link>
+      <link>https://www.glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/</link>
       <pubDate>Tue, 14 May 2019 23:16:45 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/</guid>
+      <guid>https://www.glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/</guid>
       <description>&lt;p&gt;在 OpenGL 开发中，我们要渲染一张图片，通常先是得到一张图片对应的 Bitmap ,然后将该 Bitmap 作为纹理上传到 OpenGL 中。在 Android 中有封装好的 &lt;code&gt;GLUtils&lt;/code&gt; 类的 &lt;code&gt;texImage2D&lt;/code&gt; 方法供我们调用。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;    &lt;span style=&#34;color:#859900&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#859900&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;texImage2D&lt;/span&gt;(&lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;target&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;level&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;internalformat&lt;/span&gt;,
             &lt;span style=&#34;color:#268bd2&#34;&gt;Bitmap&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;bitmap&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;type&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;border&lt;/span&gt;)
@@ -452,10 +452,10 @@
     
     <item>
       <title>简单易用的图像解码库介绍 —— stb_image</title>
-      <link>https://glumes.com/post/android/stb-image-introduce/</link>
+      <link>https://www.glumes.com/post/android/stb-image-introduce/</link>
       <pubDate>Sun, 12 May 2019 21:57:07 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/stb-image-introduce/</guid>
+      <guid>https://www.glumes.com/post/android/stb-image-introduce/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/Mh_cLQeRy5J5AufeaGaOmA&#34;&gt;https://mp.weixin.qq.com/s/Mh_cLQeRy5J5AufeaGaOmA&lt;/a&gt;&lt;/p&gt;
@@ -470,10 +470,10 @@
     
     <item>
       <title>博客图床迁移记</title>
-      <link>https://glumes.com/post/life/blog-image-migrate/</link>
+      <link>https://www.glumes.com/post/life/blog-image-migrate/</link>
       <pubDate>Thu, 02 May 2019 21:21:40 +0800</pubDate>
       
-      <guid>https://glumes.com/post/life/blog-image-migrate/</guid>
+      <guid>https://www.glumes.com/post/life/blog-image-migrate/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;微博图床一时爽，迁移火葬场&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -486,10 +486,10 @@
     
     <item>
       <title>进击的 Vulkan 移动开发之 SwapChain</title>
-      <link>https://glumes.com/post/vulkan/vulkan-tutorial-swap-chain/</link>
+      <link>https://www.glumes.com/post/vulkan/vulkan-tutorial-swap-chain/</link>
       <pubDate>Sun, 07 Apr 2019 15:39:14 +0800</pubDate>
       
-      <guid>https://glumes.com/post/vulkan/vulkan-tutorial-swap-chain/</guid>
+      <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-swap-chain/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -519,10 +519,10 @@
     
     <item>
       <title>进击的 Vulkan 移动开发之 Command Buffer</title>
-      <link>https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/</link>
+      <link>https://www.glumes.com/post/vulkan/vulkan-tutorial-command-buffer/</link>
       <pubDate>Wed, 09 Jan 2019 09:50:20 +0800</pubDate>
       
-      <guid>https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/</guid>
+      <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-command-buffer/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -547,10 +547,10 @@
     
     <item>
       <title>进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</title>
-      <link>https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/</link>
+      <link>https://www.glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/</link>
       <pubDate>Mon, 07 Jan 2019 11:03:18 +0800</pubDate>
       
-      <guid>https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/</guid>
+      <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -571,19 +571,19 @@
     
     <item>
       <title>进击的 Vulkan 移动开发（一）之今生前世</title>
-      <link>https://glumes.com/post/vulkan/vulkan-tutorial-concept/</link>
+      <link>https://www.glumes.com/post/vulkan/vulkan-tutorial-concept/</link>
       <pubDate>Fri, 07 Dec 2018 22:31:49 +0800</pubDate>
       
-      <guid>https://glumes.com/post/vulkan/vulkan-tutorial-concept/</guid>
+      <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-concept/</guid>
       <description>&lt;p&gt;捋一捋 Vulkan 。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Java 显式锁 Lock 与条件队列</title>
-      <link>https://glumes.com/post/java/java-multithread-overview/</link>
+      <link>https://www.glumes.com/post/java/java-multithread-overview/</link>
       <pubDate>Mon, 19 Nov 2018 15:58:17 +0800</pubDate>
       
-      <guid>https://glumes.com/post/java/java-multithread-overview/</guid>
+      <guid>https://www.glumes.com/post/java/java-multithread-overview/</guid>
       <description>&lt;p&gt;在 Java 5.0 之前，在协调对共享对象的访问时可以使用的机制只有 &lt;code&gt;synchronized&lt;/code&gt; 内置锁和 &lt;code&gt;volatile&lt;/code&gt; 关键字。&lt;/p&gt;
 &lt;p&gt;Java 5.0 增加了一种新的机制：&lt;code&gt;Lock&lt;/code&gt;  显式锁，当内置锁 &lt;code&gt;synchronized&lt;/code&gt; 不适用时，它就可以作为一种新的选择。&lt;/p&gt;
 &lt;p&gt;回顾一下内置锁 synchronized 的使用：&lt;/p&gt;
@@ -611,19 +611,19 @@
     
     <item>
       <title>C&#43;&#43; 标准容器库小结</title>
-      <link>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/</link>
+      <link>https://www.glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/</link>
       <pubDate>Mon, 19 Nov 2018 10:23:00 +0800</pubDate>
       
-      <guid>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/</guid>
+      <guid>https://www.glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/</guid>
       <description>&lt;p&gt;《C++ Primer》 第五版笔记摘录~~~&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>MediaCodec 硬编码之相机内容编码成 H264 文件</title>
-      <link>https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/</link>
+      <link>https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/</link>
       <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/</guid>
+      <guid>https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/8Kq9JgvGhlJCpNIyb7zK2w&#34;&gt;https://mp.weixin.qq.com/s/8Kq9JgvGhlJCpNIyb7zK2w&lt;/a&gt;&lt;/p&gt;
@@ -635,10 +635,10 @@
     
     <item>
       <title>一文读懂 YUV 的采样与格式</title>
-      <link>https://glumes.com/post/ffmpeg/understand-yuv-format/</link>
+      <link>https://www.glumes.com/post/ffmpeg/understand-yuv-format/</link>
       <pubDate>Wed, 19 Sep 2018 23:12:45 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/understand-yuv-format/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/understand-yuv-format/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;防止图片链接丢失，建议观看微信原文，获得更好的阅读体验：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/KKfkS5QpwPAdYcEwFAN9VA&#34;&gt;一文读懂 YUV 的采样与格式&lt;/a&gt;&lt;/p&gt;
@@ -648,58 +648,58 @@
     
     <item>
       <title>Android NDK 开发之 CMake 必知必会</title>
-      <link>https://glumes.com/post/android/cmake-best-practices/</link>
+      <link>https://www.glumes.com/post/android/cmake-best-practices/</link>
       <pubDate>Wed, 12 Sep 2018 09:19:09 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/cmake-best-practices/</guid>
+      <guid>https://www.glumes.com/post/android/cmake-best-practices/</guid>
       <description>&lt;p&gt;Android Studio 从 2.2 版本起开始支持 CMake ,可以通过 CMake 和 NDK 将 C/C++ 代码编译成底层的库，然后再配合 Gradle 的编译将库打包到 APK 中。&lt;/p&gt;
 &lt;p&gt;这意味就不需要再编写 &lt;code&gt;.mk&lt;/code&gt; 文件来编译 &lt;code&gt;so&lt;/code&gt; 动态库了。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>开源库之 OkHttp 源码分析</title>
-      <link>https://glumes.com/post/android/okhttp-analysis/</link>
+      <link>https://www.glumes.com/post/android/okhttp-analysis/</link>
       <pubDate>Tue, 11 Sep 2018 22:13:45 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/okhttp-analysis/</guid>
+      <guid>https://www.glumes.com/post/android/okhttp-analysis/</guid>
       <description>&lt;p&gt;分析一波 OkHttp 的源码实现。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>OpenGL ES 3.0 着色器语言 GLSL 学习 Mark </title>
-      <link>https://glumes.com/post/opengl/opengl-glsl-3-mark/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-glsl-3-mark/</link>
       <pubDate>Sun, 09 Sep 2018 15:20:42 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-glsl-3-mark/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-glsl-3-mark/</guid>
       <description>&lt;p&gt;在之前的&lt;a href=&#34;https://glumes.com/post/opengl/opengl-glsl-2-mark/&#34;&gt;文章&lt;/a&gt;中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。&lt;/p&gt;
 &lt;p&gt;本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>OpenGL ES 2.0 着色器语言 GLSL 学习 Mark </title>
-      <link>https://glumes.com/post/opengl/opengl-glsl-2-mark/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-glsl-2-mark/</link>
       <pubDate>Sun, 09 Sep 2018 15:07:20 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-glsl-2-mark/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-glsl-2-mark/</guid>
       <description>&lt;p&gt;要想发挥 OpenGL ES 自定义渲染管线的功能，就得学会写 GLSL 着色器脚本。&lt;/p&gt;
 &lt;p&gt;本文中的内容来自于 《Android 3D 游戏开发技术宝典 OpenGL ES 2.0》。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>开源库之 Retrofit 源码分析</title>
-      <link>https://glumes.com/post/android/retrofit-analysis/</link>
+      <link>https://www.glumes.com/post/android/retrofit-analysis/</link>
       <pubDate>Sun, 09 Sep 2018 14:54:57 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/retrofit-analysis/</guid>
+      <guid>https://www.glumes.com/post/android/retrofit-analysis/</guid>
       <description>&lt;p&gt;分析一波 Retrofit 的源码实现。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>OpenGL 之 帧缓冲  使用实践</title>
-      <link>https://glumes.com/post/opengl/opengl-framebuffer-object-usage/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/</link>
       <pubDate>Tue, 04 Sep 2018 22:28:11 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-framebuffer-object-usage/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/l5eYzkYAzR-m21-iYBoyCw&#34;&gt;https://mp.weixin.qq.com/s/l5eYzkYAzR-m21-iYBoyCw&lt;/a&gt;&lt;/p&gt;
@@ -711,10 +711,10 @@
     
     <item>
       <title>OpenGL 之 EGL 使用实践</title>
-      <link>https://glumes.com/post/opengl/opengl-egl-usage/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-egl-usage/</link>
       <pubDate>Sun, 02 Sep 2018 21:26:55 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-egl-usage/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-egl-usage/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/AGMA4xvynzmdCNo-Caur-g&#34;&gt;https://mp.weixin.qq.com/s/AGMA4xvynzmdCNo-Caur-g&lt;/a&gt;&lt;/p&gt;
@@ -725,10 +725,10 @@
     
     <item>
       <title>OpenGL 之 GPUImage 源码分析</title>
-      <link>https://glumes.com/post/opengl/opengl-gpuimage-analysis/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-gpuimage-analysis/</link>
       <pubDate>Sun, 02 Sep 2018 21:14:09 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-gpuimage-analysis/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-gpuimage-analysis/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/2EeI91pu6y6Z7pnLPToXYA&#34;&gt;https://mp.weixin.qq.com/s/2EeI91pu6y6Z7pnLPToXYA&lt;/a&gt;&lt;/p&gt;
@@ -738,10 +738,10 @@
     
     <item>
       <title>Java 中的静态代理和动态代理</title>
-      <link>https://glumes.com/post/android/java-proxy-design-pattern/</link>
+      <link>https://www.glumes.com/post/android/java-proxy-design-pattern/</link>
       <pubDate>Tue, 28 Aug 2018 22:55:49 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/java-proxy-design-pattern/</guid>
+      <guid>https://www.glumes.com/post/android/java-proxy-design-pattern/</guid>
       <description>&lt;p&gt;代理模式的使用场景如下：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。&lt;/p&gt;
@@ -750,28 +750,28 @@
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</title>
-      <link>https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</link>
       <pubDate>Thu, 26 Jul 2018 12:47:49 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</guid>
       <description>&lt;p&gt;在 OpenGL 的世界模型中，同时绘制了多个物体，那么怎么去检测物体之间是否触碰了，不同于在平面之间的触碰，OpenGL 是在三维世界里面的触碰，接下来就继续深入理解 OpenGL 中的碰撞检测相关知识~~~&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android JNI 之 Bitmap 操作</title>
-      <link>https://glumes.com/post/android/android-jni-bitmap-operation/</link>
+      <link>https://www.glumes.com/post/android/android-jni-bitmap-operation/</link>
       <pubDate>Wed, 25 Jul 2018 13:36:50 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-bitmap-operation/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-bitmap-operation/</guid>
       <description>&lt;p&gt;在 Android 中通过 JNI 去操作 Bitmap。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》光照系列之效果混合</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-light-mix/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-light-mix/</link>
       <pubDate>Tue, 24 Jul 2018 09:39:10 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-light-mix/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-light-mix/</guid>
       <description>&lt;p&gt;在前面的系列文章中，分别介绍了 OpenGL 的环境光、散射光、镜面光。&lt;/p&gt;
 &lt;p&gt;现在尝试将这些光照效果混合起来，让整个场景显得更加逼真。&lt;/p&gt;
 &lt;p&gt;具体的效果如下：&lt;/p&gt;
@@ -780,37 +780,37 @@
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》光照系列之镜面光</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-specular-light/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-specular-light/</link>
       <pubDate>Mon, 23 Jul 2018 23:11:20 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-specular-light/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-specular-light/</guid>
       <description>&lt;p&gt;在前面的文章中介绍了 OpenGL 的&lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-ambient-light/&#34;&gt;环境光&lt;/a&gt;和&lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/&#34;&gt;散射光&lt;/a&gt;，现在就是最后一个镜面光了。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title> 《OpenGL ES 3.x 游戏开发》 光照系列之散射光</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-diffuse-light/</link>
       <pubDate>Sun, 22 Jul 2018 23:27:04 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-diffuse-light/</guid>
       <description>&lt;p&gt;在前面的文章中介绍了 OpenGL 中的环境光，现在就是散射光了。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》光照系列之环境光</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-ambient-light/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-ambient-light/</link>
       <pubDate>Sat, 21 Jul 2018 22:45:03 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-ambient-light/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-ambient-light/</guid>
       <description>&lt;p&gt;在 OpenGL 中使用光照。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>OpenGL 深度测试与精度值的那些事</title>
-      <link>https://glumes.com/post/opengl/opengl-depth-test/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-depth-test/</link>
       <pubDate>Fri, 20 Jul 2018 14:50:22 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-depth-test/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-depth-test/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/PpLzxm7hPHDbaQLmAniCzQ&#34;&gt;https://mp.weixin.qq.com/s/PpLzxm7hPHDbaQLmAniCzQ&lt;/a&gt;&lt;/p&gt;
@@ -825,10 +825,10 @@
     
     <item>
       <title>OpenGL 优化项之面剔除和注意点</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-face-culling-usage/</link>
       <pubDate>Thu, 19 Jul 2018 11:45:15 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-face-culling-usage/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/mMUS1ewazFqCqtRgOchDYw&#34;&gt;https://mp.weixin.qq.com/s/mMUS1ewazFqCqtRgOchDYw&lt;/a&gt;&lt;/p&gt;
@@ -841,10 +841,10 @@
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/</link>
       <pubDate>Wed, 18 Jul 2018 23:16:22 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/</guid>
       <description>&lt;p&gt;在之前使用 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/&#34;&gt;OpenGL 顶点缓冲区 VBO 的使用&lt;/a&gt; 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。&lt;/p&gt;
 &lt;p&gt;这就存在了一些重复的操作。&lt;/p&gt;
 &lt;p&gt;在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。&lt;/p&gt;</description>
@@ -852,20 +852,20 @@
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/</link>
       <pubDate>Tue, 17 Jul 2018 22:28:37 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/</guid>
       <description>&lt;p&gt;在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 &lt;code&gt;glDrawArrays&lt;/code&gt; 或 &lt;code&gt;glDrawElements&lt;/code&gt; 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。&lt;/p&gt;
 &lt;p&gt;可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》之颜色混合和使用</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-color-blend/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-color-blend/</link>
       <pubDate>Mon, 16 Jul 2018 11:13:19 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-color-blend/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-color-blend/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/40ss1fbLh3Qr5X4o76GTjA&#34;&gt;https://mp.weixin.qq.com/s/40ss1fbLh3Qr5X4o76GTjA&lt;/a&gt;&lt;/p&gt;
@@ -876,19 +876,19 @@
     
     <item>
       <title>Android JNI 中的线程操作</title>
-      <link>https://glumes.com/post/android/android-jni-thread-operation/</link>
+      <link>https://www.glumes.com/post/android/android-jni-thread-operation/</link>
       <pubDate>Sun, 15 Jul 2018 14:12:25 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-thread-operation/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-thread-operation/</guid>
       <description>&lt;p&gt;学习一下如何在 Native 代码中使用线程。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》之利用 Alpha 透明度进行测试</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-alpha-test/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-alpha-test/</link>
       <pubDate>Fri, 13 Jul 2018 09:41:22 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-alpha-test/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-alpha-test/</guid>
       <description>&lt;p&gt;在前面的博客文章中有提到 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-scissor-test/&#34;&gt;OpenGL 裁剪测试及注意点&lt;/a&gt;，并且裁剪测试只能裁剪一个矩形区域，相当于就是把整个内容都绘制上去了，但是透过一个小矩形区域来看绘制的物体。&lt;/p&gt;
 &lt;p&gt;除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。&lt;/p&gt;
 &lt;p&gt;关于 Alpha 透明度测试，在 用 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/&#34;&gt;OpenGL 对视频帧内容进行替换&lt;/a&gt; 也用实践用到过。&lt;/p&gt;</description>
@@ -896,10 +896,10 @@
     
     <item>
       <title>用 OpenGL 对视频帧内容进行替换</title>
-      <link>https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/</link>
       <pubDate>Thu, 12 Jul 2018 16:59:47 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/WZWY5Ml9YP9N9tv-iiFOqg&#34;&gt;https://mp.weixin.qq.com/s/WZWY5Ml9YP9N9tv-iiFOqg&lt;/a&gt;&lt;/p&gt;
@@ -909,28 +909,28 @@
     
     <item>
       <title>OpenGL ES 学习资源分享</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-share/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-share/</link>
       <pubDate>Wed, 11 Jul 2018 14:25:52 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-share/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-share/</guid>
       <description>&lt;p&gt;学习了一段时间的 OpenGL ES，并在公司的项目中得到了运用，也算是有了一些积累，现在分享一些当初学习的资源，大家一起来学习，共同交流进步。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》 裁剪测试及注意点</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-scissor-test/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-scissor-test/</link>
       <pubDate>Tue, 03 Jul 2018 21:35:34 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-scissor-test/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-scissor-test/</guid>
       <description>&lt;p&gt;在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》 3D 模型加载和渲染</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-import-3d-object/</link>
       <pubDate>Mon, 02 Jul 2018 23:37:16 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-import-3d-object/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/OCcTOJArxipvY-v_HuD0Eg&#34;&gt;https://mp.weixin.qq.com/s/OCcTOJArxipvY-v_HuD0Eg&lt;/a&gt;&lt;/p&gt;
@@ -940,20 +940,20 @@
     
     <item>
       <title>Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</title>
-      <link>https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</link>
+      <link>https://www.glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</link>
       <pubDate>Fri, 29 Jun 2018 20:31:53 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</guid>
+      <guid>https://www.glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</guid>
       <description>&lt;p&gt;在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。&lt;/p&gt;
 &lt;p&gt;再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>OpenGL 的 glDrawElements  绘制方法</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</link>
       <pubDate>Fri, 25 May 2018 19:47:29 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/WcWdYE5j8Ycw2dtJYS-Cxg&#34;&gt;https://mp.weixin.qq.com/s/WcWdYE5j8Ycw2dtJYS-Cxg&lt;/a&gt;&lt;/p&gt;
@@ -1002,10 +1002,10 @@
     
     <item>
       <title>OpenGL 学习系列---观察矩阵</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-view-matrix/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/</link>
       <pubDate>Tue, 22 May 2018 12:04:10 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-view-matrix/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/0cWh3IF_7wa5PHoGsh8ZcQ&#34;&gt;https://mp.weixin.qq.com/s/0cWh3IF_7wa5PHoGsh8ZcQ&lt;/a&gt;&lt;/p&gt;
@@ -1018,10 +1018,10 @@
     
     <item>
       <title>Android JNI 调用时的异常处理</title>
-      <link>https://glumes.com/post/android/android-jni-exception-handle/</link>
+      <link>https://www.glumes.com/post/android/android-jni-exception-handle/</link>
       <pubDate>Wed, 16 May 2018 17:55:52 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-exception-handle/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-exception-handle/</guid>
       <description>&lt;p&gt;Android JNI 调用时的异常主要有如下两种：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Native 代码调用 Java 层代码时发生了异常要处理&lt;/li&gt;
@@ -1031,20 +1031,20 @@
     
     <item>
       <title>Android JNI 中的引用管理</title>
-      <link>https://glumes.com/post/android/android-jni-reference-manage-rules/</link>
+      <link>https://www.glumes.com/post/android/android-jni-reference-manage-rules/</link>
       <pubDate>Wed, 16 May 2018 17:50:06 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-reference-manage-rules/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-reference-manage-rules/</guid>
       <description>&lt;p&gt;在 Native 代码中有时候会接收 Java 传入的引用类型参数，有时候也会通过 NewObject 方法来创建一个 Java 的引用类型变量。&lt;/p&gt;
 &lt;p&gt;在编写 Native 代码时，要注意这个代表 Java 数据结构类型的引用在使用时会被 GC 回收的可能性。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android  JNI 调用时缓存字段和方法 ID</title>
-      <link>https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/</link>
+      <link>https://www.glumes.com/post/android/android-jni-cache-fieldid-and-methodid/</link>
       <pubDate>Mon, 07 May 2018 10:39:50 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-cache-fieldid-and-methodid/</guid>
       <description>&lt;p&gt;在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。&lt;/p&gt;
 &lt;p&gt;事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。&lt;/p&gt;
 &lt;p&gt;缓存有两种方式，分别是使用时缓存和初始化时缓存。&lt;/p&gt;</description>
@@ -1052,56 +1052,56 @@
     
     <item>
       <title>Android 通过 JNI 调用 Java 类的构造方法和父类的方法</title>
-      <link>https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/</link>
+      <link>https://www.glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/</link>
       <pubDate>Mon, 07 May 2018 10:32:01 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/</guid>
       <description>&lt;p&gt;Android 还可以通过 JNI 来调用 Java 一个类的构造方法，从而创建一个 Java 类。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 通过 JNI 访问 Java 字段和方法调用</title>
-      <link>https://glumes.com/post/android/android-jni-access-field-and-method/</link>
+      <link>https://www.glumes.com/post/android/android-jni-access-field-and-method/</link>
       <pubDate>Mon, 07 May 2018 10:27:08 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-access-field-and-method/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-access-field-and-method/</guid>
       <description>&lt;p&gt;在前面的两篇文章中，介绍了 Android 通过 JNI 进行基础类型、字符串和数组的相关操作，并描述了 Java 和 Native 在类型和签名之间的转换关系。&lt;/p&gt;
 &lt;p&gt;有了之前那些基础，就可以实现 Java 和 Native 的相互调用了，在 Native 中去访问 Java 类的字段并调用相应的方法。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android JNI 数组 操作</title>
-      <link>https://glumes.com/post/android/android-jni-array-operation/</link>
+      <link>https://www.glumes.com/post/android/android-jni-array-operation/</link>
       <pubDate>Mon, 07 May 2018 10:21:22 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-array-operation/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-array-operation/</guid>
       <description>&lt;p&gt;JNI 中有两种数组操作，基础数据类型数组和对象数组，JNI 对待基础数据类型数组和对象数组是不一样的。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android JNI 基本操作 </title>
-      <link>https://glumes.com/post/android/android-jni-basic-operation/</link>
+      <link>https://www.glumes.com/post/android/android-jni-basic-operation/</link>
       <pubDate>Mon, 07 May 2018 09:44:57 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-basic-operation/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-basic-operation/</guid>
       <description>&lt;p&gt;自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C++ 方法，只要专注写好 C++ 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android Camera 模型及 API 接口演变</title>
-      <link>https://glumes.com/post/android/android-camrea-api-evolution/</link>
+      <link>https://www.glumes.com/post/android/android-camrea-api-evolution/</link>
       <pubDate>Thu, 12 Apr 2018 13:13:57 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-camrea-api-evolution/</guid>
+      <guid>https://www.glumes.com/post/android/android-camrea-api-evolution/</guid>
       <description>&lt;p&gt;要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 相机开发中的尺寸和方向问题</title>
-      <link>https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</link>
+      <link>https://www.glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</link>
       <pubDate>Tue, 10 Apr 2018 16:09:32 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</guid>
+      <guid>https://www.glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;*本篇文章已授权微信公众号 guolin_blog （郭霖）独家发布&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1110,10 +1110,10 @@
     
     <item>
       <title>OpenGL 学习系列---纹理</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-texture/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-texture/</link>
       <pubDate>Wed, 21 Mar 2018 23:08:02 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-texture/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-texture/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/Y3FsQrJJWQogD3PWWo1cVQ&#34;&gt;https://mp.weixin.qq.com/s/Y3FsQrJJWQogD3PWWo1cVQ&lt;/a&gt;&lt;/p&gt;
@@ -1123,55 +1123,55 @@
     
     <item>
       <title>搭建 Android 反编译环境</title>
-      <link>https://glumes.com/post/android/setup-android-crack-environment/</link>
+      <link>https://www.glumes.com/post/android/setup-android-crack-environment/</link>
       <pubDate>Wed, 31 Jan 2018 15:47:59 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/setup-android-crack-environment/</guid>
+      <guid>https://www.glumes.com/post/android/setup-android-crack-environment/</guid>
       <description>&lt;p&gt;在 MAC 上搭建 Android 反编译环境主要就是三个东西：&lt;code&gt;apktool&lt;/code&gt; 、&lt;code&gt;dex2jar&lt;/code&gt; 、&lt;code&gt;jd-gui&lt;/code&gt; 。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>理解使用MVP架构</title>
-      <link>https://glumes.com/post/android/understand-mvp-architecture/</link>
+      <link>https://www.glumes.com/post/android/understand-mvp-architecture/</link>
       <pubDate>Wed, 31 Jan 2018 15:42:28 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/understand-mvp-architecture/</guid>
+      <guid>https://www.glumes.com/post/android/understand-mvp-architecture/</guid>
       <description>&lt;p&gt;在安卓开发中使用 MVP 模式已经非常普遍了，网上关于 MVP 的讲解也相当多了，不过看得再多还是自己写一遍比较熟练。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>编译安卓源码</title>
-      <link>https://glumes.com/post/android/build-android-source-code/</link>
+      <link>https://www.glumes.com/post/android/build-android-source-code/</link>
       <pubDate>Wed, 31 Jan 2018 15:31:44 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/build-android-source-code/</guid>
+      <guid>https://www.glumes.com/post/android/build-android-source-code/</guid>
       <description>&lt;p&gt;花了一两天时间终于在 Mac 上成功编译了 Android 主线最新代码，中间遇到了不少问题，也查阅了好多资料，总算是成功了，看到模拟器启动的那一刻还是挺激动的。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>安卓异步之RxJava</title>
-      <link>https://glumes.com/post/android/android-rxjava/</link>
+      <link>https://www.glumes.com/post/android/android-rxjava/</link>
       <pubDate>Wed, 31 Jan 2018 15:26:16 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-rxjava/</guid>
+      <guid>https://www.glumes.com/post/android/android-rxjava/</guid>
       <description>&lt;p&gt;不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>理解状态机</title>
-      <link>https://glumes.com/post/android/understand-state-machine/</link>
+      <link>https://www.glumes.com/post/android/understand-state-machine/</link>
       <pubDate>Wed, 31 Jan 2018 15:20:14 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/understand-state-machine/</guid>
+      <guid>https://www.glumes.com/post/android/understand-state-machine/</guid>
       <description>&lt;p&gt;理解状态机的原理及使用。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>OpenGL 学习系列---投影矩阵</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-projection-matrix/</link>
       <pubDate>Wed, 24 Jan 2018 18:17:58 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-projection-matrix/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/AVyNmsO7s6rGPZw3WH5kcA&#34;&gt;https://mp.weixin.qq.com/s/AVyNmsO7s6rGPZw3WH5kcA&lt;/a&gt;&lt;/p&gt;
@@ -1193,10 +1193,10 @@
     
     <item>
       <title>OpenGL 学习系列---坐标系统</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-coordinate-system/</link>
       <pubDate>Tue, 23 Jan 2018 17:44:53 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-coordinate-system/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/0HZgyZra90LQLFAq6dQJ9A&#34;&gt;https://mp.weixin.qq.com/s/0HZgyZra90LQLFAq6dQJ9A&lt;/a&gt;&lt;/p&gt;
@@ -1208,10 +1208,10 @@
     
     <item>
       <title>Docker 基础知识</title>
-      <link>https://glumes.com/post/docker/docker-summary/</link>
+      <link>https://www.glumes.com/post/docker/docker-summary/</link>
       <pubDate>Fri, 22 Dec 2017 16:24:03 +0800</pubDate>
       
-      <guid>https://glumes.com/post/docker/docker-summary/</guid>
+      <guid>https://www.glumes.com/post/docker/docker-summary/</guid>
       <description>&lt;p&gt;可以简单地将 Docker 理解为一种沙盒 Sandbox 。每个容器内运行一个应用，不同的容器相互隔离，容器之间也可以建立通信机制。&lt;/p&gt;
 &lt;p&gt;容器的创建和停止都十分快速，容器自身对资源的需求也十分有限，远远低于虚拟机，甚至把容器当做应用本身也没问题。&lt;/p&gt;
 &lt;p&gt;Docker 容器在启动速度、硬盘使用、性能、系统支持量、隔离性等方面与传统的虚拟机相比都有明显的优势。&lt;/p&gt;</description>
@@ -1219,10 +1219,10 @@
     
     <item>
       <title>OpenGL 学习系列---基本形状的绘制</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/</link>
       <pubDate>Fri, 22 Dec 2017 16:21:16 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/XLbFvngRHqVoKbC22BJHGQ&#34;&gt;https://mp.weixin.qq.com/s/XLbFvngRHqVoKbC22BJHGQ&lt;/a&gt;&lt;/p&gt;
@@ -1232,10 +1232,10 @@
     
     <item>
       <title>OpenGL 学习系列---基础的绘制流程</title>
-      <link>https://glumes.com/post/opengl/opengl-tutorial-draw-point/</link>
+      <link>https://www.glumes.com/post/opengl/opengl-tutorial-draw-point/</link>
       <pubDate>Fri, 22 Dec 2017 16:19:28 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opengl/opengl-tutorial-draw-point/</guid>
+      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-draw-point/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/H6p3cLGpKys5ihF7ymBhJw&#34;&gt;https://mp.weixin.qq.com/s/H6p3cLGpKys5ihF7ymBhJw&lt;/a&gt;&lt;/p&gt;
@@ -1245,29 +1245,29 @@
     
     <item>
       <title>Python 函数式编程</title>
-      <link>https://glumes.com/post/python/python-functional-programming/</link>
+      <link>https://www.glumes.com/post/python/python-functional-programming/</link>
       <pubDate>Fri, 22 Dec 2017 16:10:57 +0800</pubDate>
       
-      <guid>https://glumes.com/post/python/python-functional-programming/</guid>
+      <guid>https://www.glumes.com/post/python/python-functional-programming/</guid>
       <description>&lt;p&gt;函数式编程是一种编程范式，不同于之前的面向对象编程。它是面向数学的抽象，也就是说，这里的&lt;code&gt;函数&lt;/code&gt;二字不再是我们编程语言中的函数，而是数学中的&lt;code&gt;函数&lt;/code&gt;了。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Python 命令行参数解析工具 docopt</title>
-      <link>https://glumes.com/post/python/python-docopt/</link>
+      <link>https://www.glumes.com/post/python/python-docopt/</link>
       <pubDate>Fri, 22 Dec 2017 16:08:45 +0800</pubDate>
       
-      <guid>https://glumes.com/post/python/python-docopt/</guid>
+      <guid>https://www.glumes.com/post/python/python-docopt/</guid>
       <description>&lt;p&gt;正如标题所言，docopt 是一个用来解析命令行参数的工具，当想要在 Python 程序后面附加参数时，就不需要再为此而发愁了。&lt;/p&gt;
 &lt;p&gt;docopt 是一个开源的库，代码地址：&lt;a href=&#34;https://github.com/docopt/docopt&#34;&gt;https://github.com/docopt/docopt&lt;/a&gt;。它在 README 中就已经做了详细的介绍，并且还附带了很多例子可供学习，这篇文章也是翻译一下 README 中内容&amp;hellip;&amp;hellip;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>FFmpeg 3.0 版本视频解码浅析 </title>
-      <link>https://glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/</link>
+      <link>https://www.glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/</link>
       <pubDate>Fri, 22 Dec 2017 16:05:30 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/ffmpeg-convert-mpeg-to-pcm/</guid>
       <description>&lt;p&gt;有了上一篇文章基础，这里就只关注 FFmpeg 如何解析的具体实践了。&lt;/p&gt;
 &lt;p&gt;在开始工程之前，第一步要做的就是编译 FFmpeg 源码，生成 Android 平台上使用的 so 库。&lt;/p&gt;
 &lt;p&gt;在生成完了之后，导入 Android 工程项目中，并且配置 CMake 文件，添加对应的库，就可以开始开发了。&lt;/p&gt;</description>
@@ -1275,20 +1275,20 @@
     
     <item>
       <title>音视频编解码的那些基础理论</title>
-      <link>https://glumes.com/post/ffmpeg/encode-and-decode-summary/</link>
+      <link>https://www.glumes.com/post/ffmpeg/encode-and-decode-summary/</link>
       <pubDate>Fri, 22 Dec 2017 16:03:10 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/encode-and-decode-summary/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/encode-and-decode-summary/</guid>
       <description>&lt;p&gt;最近在研究学习 FFmpeg，从网上参考了好多资料，其中最了不起的就当属——&lt;a href=&#34;http://blog.csdn.net/leixiaohua1020&#34;&gt;雷霄骅&lt;/a&gt;大神了，若没有他的博文，别说入门了，可能连门在哪里都不知道，在此还是要表达一下对雷神的敬佩和敬仰。&lt;/p&gt;
 &lt;p&gt;本文主要讲的是视频文件的解码，从视频文件的封装格式解码到原始数据格式，通过讲解涉及到的各种概念，从而理清整个思路和流程。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</title>
-      <link>https://glumes.com/post/android/rxjava-wrapper-dialog/</link>
+      <link>https://www.glumes.com/post/android/rxjava-wrapper-dialog/</link>
       <pubDate>Fri, 22 Dec 2017 16:00:05 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/rxjava-wrapper-dialog/</guid>
+      <guid>https://www.glumes.com/post/android/rxjava-wrapper-dialog/</guid>
       <description>&lt;p&gt;之前有写过一篇文章：&lt;a href=&#34;http://www.glumes.com/wrapper-callback-by-rxjava/&#34;&gt;用 RxJava 封装回调方法 CallBack&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。&lt;/p&gt;
 &lt;p&gt;这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。&lt;/p&gt;</description>
@@ -1296,58 +1296,58 @@
     
     <item>
       <title>Android 布局加载之 LayoutInflater</title>
-      <link>https://glumes.com/post/android/android-layout-inflater/</link>
+      <link>https://www.glumes.com/post/android/android-layout-inflater/</link>
       <pubDate>Fri, 22 Dec 2017 15:55:08 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-layout-inflater/</guid>
+      <guid>https://www.glumes.com/post/android/android-layout-inflater/</guid>
       <description>&lt;p&gt;Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。&lt;/p&gt;
 &lt;p&gt;LayoutInflater 实例的获取有多种方式，但最终是通过&lt;code&gt;(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)&lt;/code&gt;来得到的，也就是说加载布局的 &lt;code&gt;LayoutInflater&lt;/code&gt; 是来自于系统服务的。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 插件换肤原理及源码分析</title>
-      <link>https://glumes.com/post/android/android-change-skin-by-plugin/</link>
+      <link>https://www.glumes.com/post/android/android-change-skin-by-plugin/</link>
       <pubDate>Fri, 22 Dec 2017 15:51:44 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-change-skin-by-plugin/</guid>
+      <guid>https://www.glumes.com/post/android/android-change-skin-by-plugin/</guid>
       <description>&lt;p&gt;在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 6.0 Service 启动过程源码分析（一）</title>
-      <link>https://glumes.com/post/android/android-start-service/</link>
+      <link>https://www.glumes.com/post/android/android-start-service/</link>
       <pubDate>Fri, 22 Dec 2017 15:40:19 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-start-service/</guid>
+      <guid>https://www.glumes.com/post/android/android-start-service/</guid>
       <description>&lt;p&gt;Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。&lt;/p&gt;
 &lt;p&gt;Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android StateMachine 状态机分析</title>
-      <link>https://glumes.com/post/android/android-statemachine/</link>
+      <link>https://www.glumes.com/post/android/android-statemachine/</link>
       <pubDate>Fri, 22 Dec 2017 15:37:04 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-statemachine/</guid>
+      <guid>https://www.glumes.com/post/android/android-statemachine/</guid>
       <description>&lt;p&gt;之前就有写过一篇文章来学习状态机：&lt;a href=&#34;http://www.glumes.com/statemachine_learn/&#34;&gt;状态机学习&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android LruCache实现分析</title>
-      <link>https://glumes.com/post/android/android-lrucache/</link>
+      <link>https://www.glumes.com/post/android/android-lrucache/</link>
       <pubDate>Fri, 22 Dec 2017 15:35:23 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-lrucache/</guid>
+      <guid>https://www.glumes.com/post/android/android-lrucache/</guid>
       <description>&lt;p&gt;LruCache 是安卓开发中常用到的缓存技术，LRU 的全名是 Least Recently Used，表示最近最少使用算法，也就是说当内存快到达阈值时，若某个对象最近很少使用的，那么它就会被回收掉以释放内存。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android Activity 创建 Window 及添加 View 流程分析</title>
-      <link>https://glumes.com/post/android/android-window-and-view/</link>
+      <link>https://www.glumes.com/post/android/android-window-and-view/</link>
       <pubDate>Fri, 22 Dec 2017 15:33:22 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-window-and-view/</guid>
+      <guid>https://www.glumes.com/post/android/android-window-and-view/</guid>
       <description>&lt;p&gt;在之前有分析过 Android 6.0 Launcher 启动 Activity 过程，文章的链接如下：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-1/&#34;&gt;Android 6.0 Launcher 启动 Activity 过程源码分析（一）&lt;/a&gt;&lt;/li&gt;
@@ -1359,10 +1359,10 @@
     
     <item>
       <title>Android 系统服务启动 SystemServer</title>
-      <link>https://glumes.com/post/android/android-system-server/</link>
+      <link>https://www.glumes.com/post/android/android-system-server/</link>
       <pubDate>Fri, 22 Dec 2017 15:30:26 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-system-server/</guid>
+      <guid>https://www.glumes.com/post/android/android-system-server/</guid>
       <description>&lt;p&gt;在之前 &lt;a href=&#34;http://www.glumes.com/android-servicemanager/&#34;&gt;Android 系统服务管理 ServiceManager&lt;/a&gt; 中学习了各种系统服务 Service 都是通过 &lt;code&gt;ServiceManager&lt;/code&gt; 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 &lt;code&gt;ContextImpl&lt;/code&gt; 类、&lt;code&gt;SystemServiceRegistry&lt;/code&gt; 类、&lt;code&gt;ServiceManager&lt;/code&gt; 类、&lt;code&gt;ServiceManagerNative&lt;/code&gt; 类等等。&lt;/p&gt;
 &lt;p&gt;那么问题就来了，ServiceManager 所管理的那些 Service 的 Binder 对象引用又是何时注册添加的呢？&lt;/p&gt;
 &lt;p&gt;事实上这些服务 Service 是 SystemServer 进程中启动的。&lt;/p&gt;</description>
@@ -1370,56 +1370,56 @@
     
     <item>
       <title>Android 系统服务管理 ServiceManager</title>
-      <link>https://glumes.com/post/android/android-service-manager/</link>
+      <link>https://www.glumes.com/post/android/android-service-manager/</link>
       <pubDate>Fri, 22 Dec 2017 15:27:11 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-service-manager/</guid>
+      <guid>https://www.glumes.com/post/android/android-service-manager/</guid>
       <description>&lt;p&gt;在应用程序编程时，经常使用到 getSystemService(String serviceName) 方法来获得一个系统服务，它的实现也是在 ContextImpl 中的，根据不同的参数返回不同的系统服务，这些系统服务都是由 ServiceManager 管理的。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android Material Desing 控件小结-2</title>
-      <link>https://glumes.com/post/android/android-material-design-summary-2/</link>
+      <link>https://www.glumes.com/post/android/android-material-design-summary-2/</link>
       <pubDate>Fri, 22 Dec 2017 15:22:15 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-material-design-summary-2/</guid>
+      <guid>https://www.glumes.com/post/android/android-material-design-summary-2/</guid>
       <description>&lt;p&gt;总结一下 Material Design 控件使用。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android Material Desing 控件小结-1</title>
-      <link>https://glumes.com/post/android/android-material-design-summary-1/</link>
+      <link>https://www.glumes.com/post/android/android-material-design-summary-1/</link>
       <pubDate>Fri, 22 Dec 2017 15:19:03 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-material-design-summary-1/</guid>
+      <guid>https://www.glumes.com/post/android/android-material-design-summary-1/</guid>
       <description>&lt;p&gt;总结一下 Material Design 控件使用。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android Binder Summary</title>
-      <link>https://glumes.com/post/android/android-binder-summary/</link>
+      <link>https://www.glumes.com/post/android/android-binder-summary/</link>
       <pubDate>Fri, 22 Dec 2017 10:50:43 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-binder-summary/</guid>
+      <guid>https://www.glumes.com/post/android/android-binder-summary/</guid>
       <description>&lt;p&gt;Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。&lt;/p&gt;
 &lt;p&gt;它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 &lt;code&gt;/dev/binder&lt;/code&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Dagger2 在 Android 中的使用</title>
-      <link>https://glumes.com/post/android/android-dagger-use/</link>
+      <link>https://www.glumes.com/post/android/android-dagger-use/</link>
       <pubDate>Fri, 22 Dec 2017 10:47:52 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-dagger-use/</guid>
+      <guid>https://www.glumes.com/post/android/android-dagger-use/</guid>
       <description>&lt;p&gt;Dagger2 是一个进行依赖注入的框架，早先是由 Square 公司写的，后来由 Google 来维护了，能由 Google 亲自维护的东西，肯定值得学习。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</title>
-      <link>https://glumes.com/post/android/android-start-activity-from-launcher-4/</link>
+      <link>https://www.glumes.com/post/android/android-start-activity-from-launcher-4/</link>
       <pubDate>Fri, 22 Dec 2017 10:40:49 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-start-activity-from-launcher-4/</guid>
+      <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-4/</guid>
       <description>&lt;p&gt;在如下三篇文章中过了一遍 Launcher 启动 Activity 的代码流程。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;start-activity-from-launcher-in-android-1&#34;&gt; Android 6.0 Launcher 启动 Activity 过程源码分析（一）&lt;/a&gt;&lt;/li&gt;
@@ -1432,29 +1432,29 @@
     
     <item>
       <title>Android 6.0 Launcher 启动 Activity 过程源码分析（三）</title>
-      <link>https://glumes.com/post/android/android-start-activity-from-launcher-3/</link>
+      <link>https://www.glumes.com/post/android/android-start-activity-from-launcher-3/</link>
       <pubDate>Fri, 22 Dec 2017 10:40:45 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-start-activity-from-launcher-3/</guid>
+      <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-3/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-2/&#34;&gt; Android 6.0 Launcher 启动 Activity 过程源码分析（二）&lt;/a&gt; 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 &lt;code&gt;Resumed&lt;/code&gt;状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 &lt;code&gt;startSpecificActivityLocked&lt;/code&gt;方法创建进程。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 6.0 Launcher 启动 Activity 过程源码分析（二）</title>
-      <link>https://glumes.com/post/android/android-start-activity-from-launcher-2/</link>
+      <link>https://www.glumes.com/post/android/android-start-activity-from-launcher-2/</link>
       <pubDate>Fri, 22 Dec 2017 10:40:42 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-start-activity-from-launcher-2/</guid>
+      <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-2/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-1/&#34;&gt;Android 6.0 Launcher 启动 Activity 过程源码分析（一）&lt;/a&gt; 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。&lt;/p&gt;
 &lt;p&gt;通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 6.0 Launcher 启动 Activity 过程源码分析（一）</title>
-      <link>https://glumes.com/post/android/android-start-activity-from-launcher-1/</link>
+      <link>https://www.glumes.com/post/android/android-start-activity-from-launcher-1/</link>
       <pubDate>Fri, 22 Dec 2017 10:40:38 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-start-activity-from-launcher-1/</guid>
+      <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-1/</guid>
       <description>&lt;p&gt;当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。&lt;/p&gt;
 &lt;p&gt;这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。&lt;/p&gt;
 &lt;p&gt;而当我们点击应用程序图标时，也就开启了从 Launcher 启动 Activity 的过程。&lt;/p&gt;</description>
@@ -1462,58 +1462,58 @@
     
     <item>
       <title>用 RxJava 封装回调方法 CallBack</title>
-      <link>https://glumes.com/post/android/rxjava-wrapper-callback/</link>
+      <link>https://www.glumes.com/post/android/rxjava-wrapper-callback/</link>
       <pubDate>Fri, 22 Dec 2017 10:38:34 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/rxjava-wrapper-callback/</guid>
+      <guid>https://www.glumes.com/post/android/rxjava-wrapper-callback/</guid>
       <description>&lt;p&gt;在知乎上看到这样一个问题：&lt;a href=&#34;https://www.zhihu.com/question/39492234&#34;&gt;RxJava正确的封装callback的方式应该是怎么样的？&lt;/a&gt;。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 硬件抽象层调用流程小结</title>
-      <link>https://glumes.com/post/android/android-hal-summary/</link>
+      <link>https://www.glumes.com/post/android/android-hal-summary/</link>
       <pubDate>Fri, 22 Dec 2017 10:31:13 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-hal-summary/</guid>
+      <guid>https://www.glumes.com/post/android/android-hal-summary/</guid>
       <description>&lt;p&gt;Android 从 5.0 开始使用新的相机 API Camera2 来代替之前的旧版本，从而支持更多的特性。&lt;/p&gt;
 &lt;p&gt;在学习新的 API 调用之外，也还是要了解一下 Android 底层发生了哪些变化，从而能够让我们对 API 的调用流程更加的清晰，知其所以然。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Kotlin 函数式编程与 Anko 构建布局实现原理分析</title>
-      <link>https://glumes.com/post/android/kotlin-functional-programming-whth-anko/</link>
+      <link>https://www.glumes.com/post/android/kotlin-functional-programming-whth-anko/</link>
       <pubDate>Fri, 22 Dec 2017 10:26:57 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/kotlin-functional-programming-whth-anko/</guid>
+      <guid>https://www.glumes.com/post/android/kotlin-functional-programming-whth-anko/</guid>
       <description>&lt;p&gt;之前讲到了如何在 &lt;a href=&#34;http://www.glumes.com/kotlin-anko-usage/&#34;&gt;Kotlin 开发中使用 Anko 构建布局&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;这一篇将是分析其原理。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Kotlin 使用 Anko 布局那些事</title>
-      <link>https://glumes.com/post/android/kotlin-with-anko/</link>
+      <link>https://www.glumes.com/post/android/kotlin-with-anko/</link>
       <pubDate>Fri, 22 Dec 2017 10:21:26 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/kotlin-with-anko/</guid>
+      <guid>https://www.glumes.com/post/android/kotlin-with-anko/</guid>
       <description>&lt;p&gt;学习 Kotlin 应该都或多或少听过 Anko 这个开源库。&lt;/p&gt;
 &lt;p&gt;使用 Anko 来构建界面会更加简单、快捷。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Python、C&#43;&#43;、Android OpenCV 开发环境的配置</title>
-      <link>https://glumes.com/post/opencv/setup_opencv_environment/</link>
+      <link>https://www.glumes.com/post/opencv/setup_opencv_environment/</link>
       <pubDate>Fri, 22 Dec 2017 09:53:04 +0800</pubDate>
       
-      <guid>https://glumes.com/post/opencv/setup_opencv_environment/</guid>
+      <guid>https://www.glumes.com/post/opencv/setup_opencv_environment/</guid>
       <description>&lt;p&gt;在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>关于我</title>
-      <link>https://glumes.com/about/</link>
+      <link>https://www.glumes.com/about/</link>
       <pubDate>Wed, 20 Dec 2017 15:23:52 +0800</pubDate>
       
-      <guid>https://glumes.com/about/</guid>
+      <guid>https://www.glumes.com/about/</guid>
       <description>你好，我是星陨，欢迎访问我的博客！ 🎉🎉🎉
 毕业于西安电子科技大学🏫，曾就职于珠海魅族📱，后来到了广州CVTE搬砖🍭，目前在字节跳动深圳分部。珠三角都留下了我的踪迹~~~
 近期技术聚焦在 OpenGL ES 图形、图像和音视频领域💪，从事画板🎨和相机📷及相关 Android 应用开发，从事音视频编辑及相关应用开发。

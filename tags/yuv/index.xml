@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>YUV on 音视频开发进阶</title>
-    <link>https://glumes.com/tags/yuv/</link>
+    <link>https://www.glumes.com/tags/yuv/</link>
     <description>Recent content in YUV on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 19 Sep 2018 23:39:28 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.com/tags/yuv/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glumes.com/tags/yuv/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>MediaCodec 硬编码之相机内容编码成 H264 文件</title>
-      <link>https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/</link>
+      <link>https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/</link>
       <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/</guid>
+      <guid>https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/8Kq9JgvGhlJCpNIyb7zK2w&#34;&gt;https://mp.weixin.qq.com/s/8Kq9JgvGhlJCpNIyb7zK2w&lt;/a&gt;&lt;/p&gt;
@@ -28,10 +28,10 @@
     
     <item>
       <title>一文读懂 YUV 的采样与格式</title>
-      <link>https://glumes.com/post/ffmpeg/understand-yuv-format/</link>
+      <link>https://www.glumes.com/post/ffmpeg/understand-yuv-format/</link>
       <pubDate>Wed, 19 Sep 2018 23:12:45 +0800</pubDate>
       
-      <guid>https://glumes.com/post/ffmpeg/understand-yuv-format/</guid>
+      <guid>https://www.glumes.com/post/ffmpeg/understand-yuv-format/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;防止图片链接丢失，建议观看微信原文，获得更好的阅读体验：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/KKfkS5QpwPAdYcEwFAN9VA&#34;&gt;一文读懂 YUV 的采样与格式&lt;/a&gt;&lt;/p&gt;
