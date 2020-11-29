@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>android on 音视频开发进阶</title>
-    <link>https://glumes.com/categories/android/</link>
+    <link>https://www.glumes.com/categories/android/</link>
     <description>Recent content in android on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 06 May 2020 23:10:48 +0800</lastBuildDate>
     
-	<atom:link href="https://glumes.com/categories/android/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glumes.com/categories/android/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>推荐几个堪称教科书级别的 Android 音视频入门项目</title>
-      <link>https://glumes.com/post/android/android-av-beginner-resource/</link>
+      <link>https://www.glumes.com/post/android/android-av-beginner-resource/</link>
       <pubDate>Wed, 06 May 2020 23:10:48 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-av-beginner-resource/</guid>
+      <guid>https://www.glumes.com/post/android/android-av-beginner-resource/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/Bb0fgFMgH5QOBqYhOj0uqA&#34;&gt;https://mp.weixin.qq.com/s/Bb0fgFMgH5QOBqYhOj0uqA&lt;/a&gt;&lt;/p&gt;
@@ -29,10 +29,10 @@
     
     <item>
       <title>Google Jetpack 新组件 CameraX 介绍与实践</title>
-      <link>https://glumes.com/post/android/google-jetpack-camerax/</link>
+      <link>https://www.glumes.com/post/android/google-jetpack-camerax/</link>
       <pubDate>Thu, 23 May 2019 08:50:23 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/google-jetpack-camerax/</guid>
+      <guid>https://www.glumes.com/post/android/google-jetpack-camerax/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/geCmI9XovmxyaA437JIewg&#34;&gt;https://mp.weixin.qq.com/s/geCmI9XovmxyaA437JIewg&lt;/a&gt;&lt;/p&gt;
@@ -55,10 +55,10 @@
     
     <item>
       <title>rust 开发编译 Android 动态库实践</title>
-      <link>https://glumes.com/post/android/rust-compile-so-library/</link>
+      <link>https://www.glumes.com/post/android/rust-compile-so-library/</link>
       <pubDate>Sun, 19 May 2019 23:25:31 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/rust-compile-so-library/</guid>
+      <guid>https://www.glumes.com/post/android/rust-compile-so-library/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://image.glumes.com/images/2019/05/19/rust-mm.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;最近关注了一波 rust，一门目前还比较小众但却很强大的编程语言，官网地址如下：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -90,10 +90,10 @@
     
     <item>
       <title>简单易用的图像解码库介绍 —— stb_image</title>
-      <link>https://glumes.com/post/android/stb-image-introduce/</link>
+      <link>https://www.glumes.com/post/android/stb-image-introduce/</link>
       <pubDate>Sun, 12 May 2019 21:57:07 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/stb-image-introduce/</guid>
+      <guid>https://www.glumes.com/post/android/stb-image-introduce/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/Mh_cLQeRy5J5AufeaGaOmA&#34;&gt;https://mp.weixin.qq.com/s/Mh_cLQeRy5J5AufeaGaOmA&lt;/a&gt;&lt;/p&gt;
@@ -108,10 +108,10 @@
     
     <item>
       <title>Java 显式锁 Lock 与条件队列</title>
-      <link>https://glumes.com/post/java/java-multithread-overview/</link>
+      <link>https://www.glumes.com/post/java/java-multithread-overview/</link>
       <pubDate>Mon, 19 Nov 2018 15:58:17 +0800</pubDate>
       
-      <guid>https://glumes.com/post/java/java-multithread-overview/</guid>
+      <guid>https://www.glumes.com/post/java/java-multithread-overview/</guid>
       <description>&lt;p&gt;在 Java 5.0 之前，在协调对共享对象的访问时可以使用的机制只有 &lt;code&gt;synchronized&lt;/code&gt; 内置锁和 &lt;code&gt;volatile&lt;/code&gt; 关键字。&lt;/p&gt;
 &lt;p&gt;Java 5.0 增加了一种新的机制：&lt;code&gt;Lock&lt;/code&gt;  显式锁，当内置锁 &lt;code&gt;synchronized&lt;/code&gt; 不适用时，它就可以作为一种新的选择。&lt;/p&gt;
 &lt;p&gt;回顾一下内置锁 synchronized 的使用：&lt;/p&gt;
@@ -139,10 +139,10 @@
     
     <item>
       <title>MediaCodec 硬编码之相机内容编码成 H264 文件</title>
-      <link>https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/</link>
+      <link>https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/</link>
       <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/</guid>
+      <guid>https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/8Kq9JgvGhlJCpNIyb7zK2w&#34;&gt;https://mp.weixin.qq.com/s/8Kq9JgvGhlJCpNIyb7zK2w&lt;/a&gt;&lt;/p&gt;
@@ -154,38 +154,38 @@
     
     <item>
       <title>Android NDK 开发之 CMake 必知必会</title>
-      <link>https://glumes.com/post/android/cmake-best-practices/</link>
+      <link>https://www.glumes.com/post/android/cmake-best-practices/</link>
       <pubDate>Wed, 12 Sep 2018 09:19:09 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/cmake-best-practices/</guid>
+      <guid>https://www.glumes.com/post/android/cmake-best-practices/</guid>
       <description>&lt;p&gt;Android Studio 从 2.2 版本起开始支持 CMake ,可以通过 CMake 和 NDK 将 C/C++ 代码编译成底层的库，然后再配合 Gradle 的编译将库打包到 APK 中。&lt;/p&gt;
 &lt;p&gt;这意味就不需要再编写 &lt;code&gt;.mk&lt;/code&gt; 文件来编译 &lt;code&gt;so&lt;/code&gt; 动态库了。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>开源库之 OkHttp 源码分析</title>
-      <link>https://glumes.com/post/android/okhttp-analysis/</link>
+      <link>https://www.glumes.com/post/android/okhttp-analysis/</link>
       <pubDate>Tue, 11 Sep 2018 22:13:45 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/okhttp-analysis/</guid>
+      <guid>https://www.glumes.com/post/android/okhttp-analysis/</guid>
       <description>&lt;p&gt;分析一波 OkHttp 的源码实现。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>开源库之 Retrofit 源码分析</title>
-      <link>https://glumes.com/post/android/retrofit-analysis/</link>
+      <link>https://www.glumes.com/post/android/retrofit-analysis/</link>
       <pubDate>Sun, 09 Sep 2018 14:54:57 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/retrofit-analysis/</guid>
+      <guid>https://www.glumes.com/post/android/retrofit-analysis/</guid>
       <description>&lt;p&gt;分析一波 Retrofit 的源码实现。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Java 中的静态代理和动态代理</title>
-      <link>https://glumes.com/post/android/java-proxy-design-pattern/</link>
+      <link>https://www.glumes.com/post/android/java-proxy-design-pattern/</link>
       <pubDate>Tue, 28 Aug 2018 22:55:49 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/java-proxy-design-pattern/</guid>
+      <guid>https://www.glumes.com/post/android/java-proxy-design-pattern/</guid>
       <description>&lt;p&gt;代理模式的使用场景如下：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;当无法或不想直接访问某个对象或访问对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象与代理对象需要实现相同的接口。&lt;/p&gt;
@@ -194,38 +194,38 @@
     
     <item>
       <title>Android JNI 之 Bitmap 操作</title>
-      <link>https://glumes.com/post/android/android-jni-bitmap-operation/</link>
+      <link>https://www.glumes.com/post/android/android-jni-bitmap-operation/</link>
       <pubDate>Wed, 25 Jul 2018 13:36:50 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-bitmap-operation/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-bitmap-operation/</guid>
       <description>&lt;p&gt;在 Android 中通过 JNI 去操作 Bitmap。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android JNI 中的线程操作</title>
-      <link>https://glumes.com/post/android/android-jni-thread-operation/</link>
+      <link>https://www.glumes.com/post/android/android-jni-thread-operation/</link>
       <pubDate>Sun, 15 Jul 2018 14:12:25 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-thread-operation/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-thread-operation/</guid>
       <description>&lt;p&gt;学习一下如何在 Native 代码中使用线程。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Kotlin 中的 run、let、with、apply、also、takeIf、takeUnless 语法糖使用和原理分析</title>
-      <link>https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</link>
+      <link>https://www.glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</link>
       <pubDate>Fri, 29 Jun 2018 20:31:53 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</guid>
+      <guid>https://www.glumes.com/post/android/kotlin-syntactic-sugar-usage-and-analysis/</guid>
       <description>&lt;p&gt;在 Kotlin 有一些可以简化代码的语法糖，比如 run、let、with、apply、also、takeIf、takeUnless  等。&lt;/p&gt;
 &lt;p&gt;再不明白这些语法糖的情况下去看 Kotlin 代码就会一脸懵逼，可当明白之后就会觉得原来可以这样简化。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android JNI 调用时的异常处理</title>
-      <link>https://glumes.com/post/android/android-jni-exception-handle/</link>
+      <link>https://www.glumes.com/post/android/android-jni-exception-handle/</link>
       <pubDate>Wed, 16 May 2018 17:55:52 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-exception-handle/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-exception-handle/</guid>
       <description>&lt;p&gt;Android JNI 调用时的异常主要有如下两种：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Native 代码调用 Java 层代码时发生了异常要处理&lt;/li&gt;
@@ -235,20 +235,20 @@
     
     <item>
       <title>Android JNI 中的引用管理</title>
-      <link>https://glumes.com/post/android/android-jni-reference-manage-rules/</link>
+      <link>https://www.glumes.com/post/android/android-jni-reference-manage-rules/</link>
       <pubDate>Wed, 16 May 2018 17:50:06 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-reference-manage-rules/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-reference-manage-rules/</guid>
       <description>&lt;p&gt;在 Native 代码中有时候会接收 Java 传入的引用类型参数，有时候也会通过 NewObject 方法来创建一个 Java 的引用类型变量。&lt;/p&gt;
 &lt;p&gt;在编写 Native 代码时，要注意这个代表 Java 数据结构类型的引用在使用时会被 GC 回收的可能性。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android  JNI 调用时缓存字段和方法 ID</title>
-      <link>https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/</link>
+      <link>https://www.glumes.com/post/android/android-jni-cache-fieldid-and-methodid/</link>
       <pubDate>Mon, 07 May 2018 10:39:50 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-cache-fieldid-and-methodid/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-cache-fieldid-and-methodid/</guid>
       <description>&lt;p&gt;在 JNI 去调用 Java 的方法和访问字段时，最先要做的操作就是获得对应的类以及对应的方法 id。&lt;/p&gt;
 &lt;p&gt;事实上，通过 FindClass 、GetFieldID、GetMethodID 去找到对应的信息是很耗时的，如果方法被频繁调用，那么肯定不能每次都去查找对应的信息，有必要将它们缓存起来，在下一次调用时，直接使用缓存内容就好了。&lt;/p&gt;
 &lt;p&gt;缓存有两种方式，分别是使用时缓存和初始化时缓存。&lt;/p&gt;</description>
@@ -256,56 +256,56 @@
     
     <item>
       <title>Android 通过 JNI 调用 Java 类的构造方法和父类的方法</title>
-      <link>https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/</link>
+      <link>https://www.glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/</link>
       <pubDate>Mon, 07 May 2018 10:32:01 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-invoke-constructor-method-and-super-method/</guid>
       <description>&lt;p&gt;Android 还可以通过 JNI 来调用 Java 一个类的构造方法，从而创建一个 Java 类。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 通过 JNI 访问 Java 字段和方法调用</title>
-      <link>https://glumes.com/post/android/android-jni-access-field-and-method/</link>
+      <link>https://www.glumes.com/post/android/android-jni-access-field-and-method/</link>
       <pubDate>Mon, 07 May 2018 10:27:08 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-access-field-and-method/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-access-field-and-method/</guid>
       <description>&lt;p&gt;在前面的两篇文章中，介绍了 Android 通过 JNI 进行基础类型、字符串和数组的相关操作，并描述了 Java 和 Native 在类型和签名之间的转换关系。&lt;/p&gt;
 &lt;p&gt;有了之前那些基础，就可以实现 Java 和 Native 的相互调用了，在 Native 中去访问 Java 类的字段并调用相应的方法。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android JNI 数组 操作</title>
-      <link>https://glumes.com/post/android/android-jni-array-operation/</link>
+      <link>https://www.glumes.com/post/android/android-jni-array-operation/</link>
       <pubDate>Mon, 07 May 2018 10:21:22 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-array-operation/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-array-operation/</guid>
       <description>&lt;p&gt;JNI 中有两种数组操作，基础数据类型数组和对象数组，JNI 对待基础数据类型数组和对象数组是不一样的。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android JNI 基本操作 </title>
-      <link>https://glumes.com/post/android/android-jni-basic-operation/</link>
+      <link>https://www.glumes.com/post/android/android-jni-basic-operation/</link>
       <pubDate>Mon, 07 May 2018 09:44:57 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-jni-basic-operation/</guid>
+      <guid>https://www.glumes.com/post/android/android-jni-basic-operation/</guid>
       <description>&lt;p&gt;自从 Android Studio 升级到 2.3 版本以后，使用 CMake 进行编译就方便多了，不需要再写 Android.mk 了，也不需要用 javah 来生成头文件了，直接写好 native 方法，快捷方式就可以生成对应的 C++ 方法，只要专注写好 C++ 代码，CMake 就可以指定的 CPU 架构生成对应的 SO 库。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android Camera 模型及 API 接口演变</title>
-      <link>https://glumes.com/post/android/android-camrea-api-evolution/</link>
+      <link>https://www.glumes.com/post/android/android-camrea-api-evolution/</link>
       <pubDate>Thu, 12 Apr 2018 13:13:57 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-camrea-api-evolution/</guid>
+      <guid>https://www.glumes.com/post/android/android-camrea-api-evolution/</guid>
       <description>&lt;p&gt;要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 相机开发中的尺寸和方向问题</title>
-      <link>https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</link>
+      <link>https://www.glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</link>
       <pubDate>Tue, 10 Apr 2018 16:09:32 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</guid>
+      <guid>https://www.glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;*本篇文章已授权微信公众号 guolin_blog （郭霖）独家发布&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -314,55 +314,55 @@
     
     <item>
       <title>搭建 Android 反编译环境</title>
-      <link>https://glumes.com/post/android/setup-android-crack-environment/</link>
+      <link>https://www.glumes.com/post/android/setup-android-crack-environment/</link>
       <pubDate>Wed, 31 Jan 2018 15:47:59 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/setup-android-crack-environment/</guid>
+      <guid>https://www.glumes.com/post/android/setup-android-crack-environment/</guid>
       <description>&lt;p&gt;在 MAC 上搭建 Android 反编译环境主要就是三个东西：&lt;code&gt;apktool&lt;/code&gt; 、&lt;code&gt;dex2jar&lt;/code&gt; 、&lt;code&gt;jd-gui&lt;/code&gt; 。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>理解使用MVP架构</title>
-      <link>https://glumes.com/post/android/understand-mvp-architecture/</link>
+      <link>https://www.glumes.com/post/android/understand-mvp-architecture/</link>
       <pubDate>Wed, 31 Jan 2018 15:42:28 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/understand-mvp-architecture/</guid>
+      <guid>https://www.glumes.com/post/android/understand-mvp-architecture/</guid>
       <description>&lt;p&gt;在安卓开发中使用 MVP 模式已经非常普遍了，网上关于 MVP 的讲解也相当多了，不过看得再多还是自己写一遍比较熟练。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>编译安卓源码</title>
-      <link>https://glumes.com/post/android/build-android-source-code/</link>
+      <link>https://www.glumes.com/post/android/build-android-source-code/</link>
       <pubDate>Wed, 31 Jan 2018 15:31:44 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/build-android-source-code/</guid>
+      <guid>https://www.glumes.com/post/android/build-android-source-code/</guid>
       <description>&lt;p&gt;花了一两天时间终于在 Mac 上成功编译了 Android 主线最新代码，中间遇到了不少问题，也查阅了好多资料，总算是成功了，看到模拟器启动的那一刻还是挺激动的。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>安卓异步之RxJava</title>
-      <link>https://glumes.com/post/android/android-rxjava/</link>
+      <link>https://www.glumes.com/post/android/android-rxjava/</link>
       <pubDate>Wed, 31 Jan 2018 15:26:16 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-rxjava/</guid>
+      <guid>https://www.glumes.com/post/android/android-rxjava/</guid>
       <description>&lt;p&gt;不学习 RxJava 简直太落后了，参照网上的博客以及英文书籍《RxJavaEssentials》，开始了 RxJava 之旅 。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>理解状态机</title>
-      <link>https://glumes.com/post/android/understand-state-machine/</link>
+      <link>https://www.glumes.com/post/android/understand-state-machine/</link>
       <pubDate>Wed, 31 Jan 2018 15:20:14 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/understand-state-machine/</guid>
+      <guid>https://www.glumes.com/post/android/understand-state-machine/</guid>
       <description>&lt;p&gt;理解状态机的原理及使用。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>用 Rxjava 封装 Dialog 以及 RxBinding 实现简要分析</title>
-      <link>https://glumes.com/post/android/rxjava-wrapper-dialog/</link>
+      <link>https://www.glumes.com/post/android/rxjava-wrapper-dialog/</link>
       <pubDate>Fri, 22 Dec 2017 16:00:05 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/rxjava-wrapper-dialog/</guid>
+      <guid>https://www.glumes.com/post/android/rxjava-wrapper-dialog/</guid>
       <description>&lt;p&gt;之前有写过一篇文章：&lt;a href=&#34;http://www.glumes.com/wrapper-callback-by-rxjava/&#34;&gt;用 RxJava 封装回调方法 CallBack&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;RxJava 封装回调方法的大体思路就是：使用 Observable 的 create 方法来返回一个 Observable，在 create 方法内给事物设置回调接口，用 Observable 的 onNext 方法来接受回调接口所产生的内容。&lt;/p&gt;
 &lt;p&gt;这样一来，通过 onNext 方法就把事物的回调方法转换到 Rxjava 对应的事件流里面了，再可以通过其他操作符，如 Map、FlatMap 等对事件流进行相应的转换。&lt;/p&gt;</description>
@@ -370,58 +370,58 @@
     
     <item>
       <title>Android 布局加载之 LayoutInflater</title>
-      <link>https://glumes.com/post/android/android-layout-inflater/</link>
+      <link>https://www.glumes.com/post/android/android-layout-inflater/</link>
       <pubDate>Fri, 22 Dec 2017 15:55:08 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-layout-inflater/</guid>
+      <guid>https://www.glumes.com/post/android/android-layout-inflater/</guid>
       <description>&lt;p&gt;Activity 在界面创建时需要将 XML 布局文件中的内容加载进来，正如我们在 ListView 或者 RecyclerView 中需要将 Item 的布局加载进来一样，都是使用 LayoutInflater 来进行操作的。&lt;/p&gt;
 &lt;p&gt;LayoutInflater 实例的获取有多种方式，但最终是通过&lt;code&gt;(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)&lt;/code&gt;来得到的，也就是说加载布局的 &lt;code&gt;LayoutInflater&lt;/code&gt; 是来自于系统服务的。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 插件换肤原理及源码分析</title>
-      <link>https://glumes.com/post/android/android-change-skin-by-plugin/</link>
+      <link>https://www.glumes.com/post/android/android-change-skin-by-plugin/</link>
       <pubDate>Fri, 22 Dec 2017 15:51:44 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-change-skin-by-plugin/</guid>
+      <guid>https://www.glumes.com/post/android/android-change-skin-by-plugin/</guid>
       <description>&lt;p&gt;在学习安卓插件化开发的路上，有一处风景是肯定要观赏的，那就是基于插件的应用换肤了。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 6.0 Service 启动过程源码分析（一）</title>
-      <link>https://glumes.com/post/android/android-start-service/</link>
+      <link>https://www.glumes.com/post/android/android-start-service/</link>
       <pubDate>Fri, 22 Dec 2017 15:40:19 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-start-service/</guid>
+      <guid>https://www.glumes.com/post/android/android-start-service/</guid>
       <description>&lt;p&gt;Service 组件也是 Android 四大组件之一，它的启动过程分为显示和隐式两种。对于隐式启动的 Service 组件来说，我们只需要它的组件名称；对于显示启动的 Service 组件来说，我们需要知道它的类名称。&lt;/p&gt;
 &lt;p&gt;Service 组件可以被 Activity 组件启动，也可以被其他的 Service 组件启动。同时，它既可以在启动它的 Activity 组件或者 Service 组件所在的应用程序中启动，也可以在一个新的应用程序进程中启动。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android StateMachine 状态机分析</title>
-      <link>https://glumes.com/post/android/android-statemachine/</link>
+      <link>https://www.glumes.com/post/android/android-statemachine/</link>
       <pubDate>Fri, 22 Dec 2017 15:37:04 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-statemachine/</guid>
+      <guid>https://www.glumes.com/post/android/android-statemachine/</guid>
       <description>&lt;p&gt;之前就有写过一篇文章来学习状态机：&lt;a href=&#34;http://www.glumes.com/statemachine_learn/&#34;&gt;状态机学习&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;在之后的工作中多次用到了 StateMachine 状态机，简单记录其原理。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android LruCache实现分析</title>
-      <link>https://glumes.com/post/android/android-lrucache/</link>
+      <link>https://www.glumes.com/post/android/android-lrucache/</link>
       <pubDate>Fri, 22 Dec 2017 15:35:23 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-lrucache/</guid>
+      <guid>https://www.glumes.com/post/android/android-lrucache/</guid>
       <description>&lt;p&gt;LruCache 是安卓开发中常用到的缓存技术，LRU 的全名是 Least Recently Used，表示最近最少使用算法，也就是说当内存快到达阈值时，若某个对象最近很少使用的，那么它就会被回收掉以释放内存。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android Activity 创建 Window 及添加 View 流程分析</title>
-      <link>https://glumes.com/post/android/android-window-and-view/</link>
+      <link>https://www.glumes.com/post/android/android-window-and-view/</link>
       <pubDate>Fri, 22 Dec 2017 15:33:22 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-window-and-view/</guid>
+      <guid>https://www.glumes.com/post/android/android-window-and-view/</guid>
       <description>&lt;p&gt;在之前有分析过 Android 6.0 Launcher 启动 Activity 过程，文章的链接如下：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-1/&#34;&gt;Android 6.0 Launcher 启动 Activity 过程源码分析（一）&lt;/a&gt;&lt;/li&gt;
@@ -433,10 +433,10 @@
     
     <item>
       <title>Android 系统服务启动 SystemServer</title>
-      <link>https://glumes.com/post/android/android-system-server/</link>
+      <link>https://www.glumes.com/post/android/android-system-server/</link>
       <pubDate>Fri, 22 Dec 2017 15:30:26 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-system-server/</guid>
+      <guid>https://www.glumes.com/post/android/android-system-server/</guid>
       <description>&lt;p&gt;在之前 &lt;a href=&#34;http://www.glumes.com/android-servicemanager/&#34;&gt;Android 系统服务管理 ServiceManager&lt;/a&gt; 中学习了各种系统服务 Service 都是通过 &lt;code&gt;ServiceManager&lt;/code&gt; 来管理的，从 ServiceManager 中来获得系统服务的 Binder 对象引用。这内容涉及到了 &lt;code&gt;ContextImpl&lt;/code&gt; 类、&lt;code&gt;SystemServiceRegistry&lt;/code&gt; 类、&lt;code&gt;ServiceManager&lt;/code&gt; 类、&lt;code&gt;ServiceManagerNative&lt;/code&gt; 类等等。&lt;/p&gt;
 &lt;p&gt;那么问题就来了，ServiceManager 所管理的那些 Service 的 Binder 对象引用又是何时注册添加的呢？&lt;/p&gt;
 &lt;p&gt;事实上这些服务 Service 是 SystemServer 进程中启动的。&lt;/p&gt;</description>
@@ -444,56 +444,56 @@
     
     <item>
       <title>Android 系统服务管理 ServiceManager</title>
-      <link>https://glumes.com/post/android/android-service-manager/</link>
+      <link>https://www.glumes.com/post/android/android-service-manager/</link>
       <pubDate>Fri, 22 Dec 2017 15:27:11 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-service-manager/</guid>
+      <guid>https://www.glumes.com/post/android/android-service-manager/</guid>
       <description>&lt;p&gt;在应用程序编程时，经常使用到 getSystemService(String serviceName) 方法来获得一个系统服务，它的实现也是在 ContextImpl 中的，根据不同的参数返回不同的系统服务，这些系统服务都是由 ServiceManager 管理的。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android Material Desing 控件小结-2</title>
-      <link>https://glumes.com/post/android/android-material-design-summary-2/</link>
+      <link>https://www.glumes.com/post/android/android-material-design-summary-2/</link>
       <pubDate>Fri, 22 Dec 2017 15:22:15 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-material-design-summary-2/</guid>
+      <guid>https://www.glumes.com/post/android/android-material-design-summary-2/</guid>
       <description>&lt;p&gt;总结一下 Material Design 控件使用。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android Material Desing 控件小结-1</title>
-      <link>https://glumes.com/post/android/android-material-design-summary-1/</link>
+      <link>https://www.glumes.com/post/android/android-material-design-summary-1/</link>
       <pubDate>Fri, 22 Dec 2017 15:19:03 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-material-design-summary-1/</guid>
+      <guid>https://www.glumes.com/post/android/android-material-design-summary-1/</guid>
       <description>&lt;p&gt;总结一下 Material Design 控件使用。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android Binder Summary</title>
-      <link>https://glumes.com/post/android/android-binder-summary/</link>
+      <link>https://www.glumes.com/post/android/android-binder-summary/</link>
       <pubDate>Fri, 22 Dec 2017 10:50:43 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-binder-summary/</guid>
+      <guid>https://www.glumes.com/post/android/android-binder-summary/</guid>
       <description>&lt;p&gt;Binder 是什么？在英文中 Binder 是 粘合剂 的意思，表示将两样东西粘在一起。而在 Android 开发中，Binder 的意思多了去了。不同的角度有着不同的解释。&lt;/p&gt;
 &lt;p&gt;它既可以是 Android 中实现了 IBinder 接口的一个单纯的类，也可以是 Android 中进程跨进程通信（IPC）的一种方式，还可以看作是工作在内核态的 Linux 驱动 &lt;code&gt;/dev/binder&lt;/code&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Dagger2 在 Android 中的使用</title>
-      <link>https://glumes.com/post/android/android-dagger-use/</link>
+      <link>https://www.glumes.com/post/android/android-dagger-use/</link>
       <pubDate>Fri, 22 Dec 2017 10:47:52 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-dagger-use/</guid>
+      <guid>https://www.glumes.com/post/android/android-dagger-use/</guid>
       <description>&lt;p&gt;Dagger2 是一个进行依赖注入的框架，早先是由 Square 公司写的，后来由 Google 来维护了，能由 Google 亲自维护的东西，肯定值得学习。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title> Android 6.0 Launcher 启动 Activity 过程分析小结（四）</title>
-      <link>https://glumes.com/post/android/android-start-activity-from-launcher-4/</link>
+      <link>https://www.glumes.com/post/android/android-start-activity-from-launcher-4/</link>
       <pubDate>Fri, 22 Dec 2017 10:40:49 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-start-activity-from-launcher-4/</guid>
+      <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-4/</guid>
       <description>&lt;p&gt;在如下三篇文章中过了一遍 Launcher 启动 Activity 的代码流程。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;start-activity-from-launcher-in-android-1&#34;&gt; Android 6.0 Launcher 启动 Activity 过程源码分析（一）&lt;/a&gt;&lt;/li&gt;
@@ -506,29 +506,29 @@
     
     <item>
       <title>Android 6.0 Launcher 启动 Activity 过程源码分析（三）</title>
-      <link>https://glumes.com/post/android/android-start-activity-from-launcher-3/</link>
+      <link>https://www.glumes.com/post/android/android-start-activity-from-launcher-3/</link>
       <pubDate>Fri, 22 Dec 2017 10:40:45 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-start-activity-from-launcher-3/</guid>
+      <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-3/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-2/&#34;&gt; Android 6.0 Launcher 启动 Activity 过程源码分析（二）&lt;/a&gt; 分析完了对待启动 Activity 组件的验证过程，获得组件信息，以及 ActivityRecord 添加至栈顶，将其他 Activity 进入中止状态，最后将待启动的 Activity 组件进入 &lt;code&gt;Resumed&lt;/code&gt;状态，然而，由于待启动的 Activity 组件的应用程序进程尚未启动，最后执行 &lt;code&gt;startSpecificActivityLocked&lt;/code&gt;方法创建进程。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 6.0 Launcher 启动 Activity 过程源码分析（二）</title>
-      <link>https://glumes.com/post/android/android-start-activity-from-launcher-2/</link>
+      <link>https://www.glumes.com/post/android/android-start-activity-from-launcher-2/</link>
       <pubDate>Fri, 22 Dec 2017 10:40:42 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-start-activity-from-launcher-2/</guid>
+      <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-2/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;http://www.glumes.com/start-activity-from-launcher-in-android-1/&#34;&gt;Android 6.0 Launcher 启动 Activity 过程源码分析（一）&lt;/a&gt; 分析完了 Launcher 组件中启动的步骤，接下来的环节是该 ActivityManagerService 出场了。&lt;/p&gt;
 &lt;p&gt;通过 ActivityManagerNative.getDefault() 方法得到 ActivityManagerService 的代理对象后执行的 startActivity 方法，最终会发起进程间通信请求，通过 Binder 驱动，再调用 ActivityManagerService 中对应的方法。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 6.0 Launcher 启动 Activity 过程源码分析（一）</title>
-      <link>https://glumes.com/post/android/android-start-activity-from-launcher-1/</link>
+      <link>https://www.glumes.com/post/android/android-start-activity-from-launcher-1/</link>
       <pubDate>Fri, 22 Dec 2017 10:40:38 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-start-activity-from-launcher-1/</guid>
+      <guid>https://www.glumes.com/post/android/android-start-activity-from-launcher-1/</guid>
       <description>&lt;p&gt;当 Android 系统在启动时，会扫描系统特定目录，然后自动安装里面的 Android 应用程序。当系统启动完成之后，会启动一个 Home 应用程序来显示安装在系统中的 Android 应用程序。&lt;/p&gt;
 &lt;p&gt;这个应用程序就是 Launcher 应用，也就是手机屏幕上显示的各种应用图标，Launcher 是 Android 系统启动的第一个应用程序。&lt;/p&gt;
 &lt;p&gt;而当我们点击应用程序图标时，也就开启了从 Launcher 启动 Activity 的过程。&lt;/p&gt;</description>
@@ -536,39 +536,39 @@
     
     <item>
       <title>用 RxJava 封装回调方法 CallBack</title>
-      <link>https://glumes.com/post/android/rxjava-wrapper-callback/</link>
+      <link>https://www.glumes.com/post/android/rxjava-wrapper-callback/</link>
       <pubDate>Fri, 22 Dec 2017 10:38:34 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/rxjava-wrapper-callback/</guid>
+      <guid>https://www.glumes.com/post/android/rxjava-wrapper-callback/</guid>
       <description>&lt;p&gt;在知乎上看到这样一个问题：&lt;a href=&#34;https://www.zhihu.com/question/39492234&#34;&gt;RxJava正确的封装callback的方式应该是怎么样的？&lt;/a&gt;。虽说已经是个一年前的问题了，自己现在才遇到 (羞愧脸) 。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 硬件抽象层调用流程小结</title>
-      <link>https://glumes.com/post/android/android-hal-summary/</link>
+      <link>https://www.glumes.com/post/android/android-hal-summary/</link>
       <pubDate>Fri, 22 Dec 2017 10:31:13 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/android-hal-summary/</guid>
+      <guid>https://www.glumes.com/post/android/android-hal-summary/</guid>
       <description>&lt;p&gt;Android 从 5.0 开始使用新的相机 API Camera2 来代替之前的旧版本，从而支持更多的特性。&lt;/p&gt;
 &lt;p&gt;在学习新的 API 调用之外，也还是要了解一下 Android 底层发生了哪些变化，从而能够让我们对 API 的调用流程更加的清晰，知其所以然。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Kotlin 函数式编程与 Anko 构建布局实现原理分析</title>
-      <link>https://glumes.com/post/android/kotlin-functional-programming-whth-anko/</link>
+      <link>https://www.glumes.com/post/android/kotlin-functional-programming-whth-anko/</link>
       <pubDate>Fri, 22 Dec 2017 10:26:57 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/kotlin-functional-programming-whth-anko/</guid>
+      <guid>https://www.glumes.com/post/android/kotlin-functional-programming-whth-anko/</guid>
       <description>&lt;p&gt;之前讲到了如何在 &lt;a href=&#34;http://www.glumes.com/kotlin-anko-usage/&#34;&gt;Kotlin 开发中使用 Anko 构建布局&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;这一篇将是分析其原理。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Kotlin 使用 Anko 布局那些事</title>
-      <link>https://glumes.com/post/android/kotlin-with-anko/</link>
+      <link>https://www.glumes.com/post/android/kotlin-with-anko/</link>
       <pubDate>Fri, 22 Dec 2017 10:21:26 +0800</pubDate>
       
-      <guid>https://glumes.com/post/android/kotlin-with-anko/</guid>
+      <guid>https://www.glumes.com/post/android/kotlin-with-anko/</guid>
       <description>&lt;p&gt;学习 Kotlin 应该都或多或少听过 Anko 这个开源库。&lt;/p&gt;
 &lt;p&gt;使用 Anko 来构建界面会更加简单、快捷。&lt;/p&gt;</description>
     </item>
