@@ -11,6 +11,10 @@
   <meta name="twitter:title" content="STL" />
 
   <meta name="author" content=""/>
+  <link href="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/blog-favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/blog-favicon.png"/>
+  <meta property="og:image" content="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/blog-favicon.png" />
+  <meta name="twitter:image" content="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/blog-favicon.png" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://www.glumes.com/tags/stl/" />
   <meta property="og:type" content="website" />
@@ -21,6 +25,8 @@
   <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="音视频开发进阶">
 
   
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
   
 
   <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/bootstrap.min.css" />
@@ -47,7 +53,6 @@
 <link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
 
 
-<script data-ad-client="ca-pub-4260372210024819" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 
 
@@ -173,8 +178,20 @@
         
 
         
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span class="hidden-sm hidden-md hidden-lg">搜索</span> <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+        
 
         
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
 
       </ul>
     </div>
@@ -182,6 +199,51 @@
   </div>
 </nav>
 
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="https://www.glumes.com/js/algoliasearch.min.js"></script>
+<script src="https://www.glumes.com/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "true");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="https://www.glumes.com/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     
   <header class="header-section ">
@@ -278,6 +340,15 @@
               </li>
           
           
+          <li>
+            <a href="https://www.glumes.com/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
         </ul>
         <p class="credits copyright text-muted">
           
@@ -346,6 +417,8 @@
 
 
 
+
+
 <script type="text/javascript"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
@@ -369,6 +442,18 @@ MathJax.Hub.Config({
 
 
 
+<script>
+  (function() {
+    var cx = 'true';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
 
 
   
@@ -378,7 +463,7 @@ MathJax.Hub.Config({
 
 
 
-<script src='https://www.glumes.com/js/bundle.min.dd00fc477b5e611b3b15869e7f4ffa218efd3a1b6f00902db8b25e1e9a1d90fc.js' integrity='sha256-3QD8R3teYRs7FYaef0/6IY79OhtvAJAtuLJeHpodkPw='></script>
+<script src='https://www.glumes.com/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript">
