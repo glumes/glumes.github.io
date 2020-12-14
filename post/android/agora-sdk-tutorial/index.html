@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>声网 SDK 接入以及音视频通话应用开发指南</title>
+  <meta property="og:title" content="声网 SDK 接入以及音视频通话应用开发指南" />
+  <meta name="twitter:title" content="声网 SDK 接入以及音视频通话应用开发指南" />
+
+  <meta name="description" content="1. 简介
+在如今的移动互联网时代，音视频相关应用已经深入到我们日常生活的方方面面。
+而在它背后的音视频技术也是非常成熟了，短视频编辑、带货直播、视频语音通话等应用形式无不体现着音视频技术给我们生活带来的便利。
+而这次就去实际体验一下，接入声网的音频 SDK ，并打造一个音视频通话应用。
+">
+  <meta property="og:description" content="1. 简介
+在如今的移动互联网时代，音视频相关应用已经深入到我们日常生活的方方面面。
+而在它背后的音视频技术也是非常成熟了，短视频编辑、带货直播、视频语音通话等应用形式无不体现着音视频技术给我们生活带来的便利。
+而这次就去实际体验一下，接入声网的音频 SDK ，并打造一个音视频通话应用。
+">
+  <meta name="twitter:description" content="1. 简介
+在如今的移动互联网时代，音视频相关应用已经深入到我们日常生活的方方面面。
+而在它背后的音视频技术也是非常成熟了，短视频编辑、带货直播、视频语音通话等应用形式无不体现着音视频技术给我们生活带来的便利。
+而这次就去实际体验一下，接入声网的音频 SDK ，并打造一个音视频通话应用。
+">
+  <meta name="author" content=""/>
+  <link href="https://image.glumes.com/video-favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="https://image.glumes.com/video-favicon.png"/>
+  <meta property="og:image" content="https://image.glumes.com/video-favicon.png" />
+  <meta name="twitter:image" content="https://image.glumes.com/video-favicon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://www.glumes.com/post/android/agora-sdk-tutorial/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="音视频开发进阶" />
+
+  <meta name="generator" content="Hugo 0.74.3" />
+  <link rel="canonical" href="https://www.glumes.com/post/android/agora-sdk-tutorial/" />
+  <link rel="alternate" href="https://www.glumes.com/index.xml" type="application/rss+xml" title="音视频开发进阶">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/reward.css" />
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/search.css" />
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/main.css" />
+
+
+  
+  
+  
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+
+
+
+
+
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TRLK1SYTZ1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TRLK1SYTZ1');
+</script>
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://www.glumes.com/" title="音视频开发进阶">
+        
+        音视频开发进阶
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">音视频开发</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://www.glumes.com/categories/opengl">OpenGL </a>
+                
+                  <a href="https://www.glumes.com/categories/ffmpeg">FFmpeg</a>
+                
+                  <a href="https://www.glumes.com/categories/vulkan">Vulkan </a>
+                
+                  <a href="https://www.glumes.com/categories/webrtc">WebRTC </a>
+                
+                  <a href="https://www.glumes.com/categories/opencv">opencv </a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">移动开发</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://www.glumes.com/categories/android">Android</a>
+                
+                  <a href="https://www.glumes.com/categories/ios">ios</a>
+                
+                  <a href="https://www.glumes.com/categories/c&#43;&#43;">C&#43;&#43;</a>
+                
+                  <a href="https://www.glumes.com/categories/python">Python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="程序人生" href="https://www.glumes.com/categories/life">程序人生</a>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">我的视频教学</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://space.bilibili.com/105478237">B 站视频</a>
+                
+                  <a href="http://www.imooc.com/learn/1212">慕课网视频</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="小专栏" href="https://xiaozhuanlan.com/glumes">小专栏</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="https://www.glumes.com/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="所有文章" href="https://www.glumes.com/post/">所有文章</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+
+        
+
+          
+
+
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="https://www.glumes.com/js/algoliasearch.min.js"></script>
+<script src="https://www.glumes.com/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "true");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="https://www.glumes.com/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://ae01.alicdn.com/kf/U63974cc923674332ab8751e2b18d9b9fd.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-md-offset-0">
+              <div class="post-heading">
+                <h1>声网 SDK 接入以及音视频通话应用开发指南</h1>
+                  
+                  
+                    <span class="post-meta">
+  
+    发表于 December 14, 2020
+  
+  
+</span>
+
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+              <h1>声网 SDK 接入以及音视频通话应用开发指南</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 December 14, 2020
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://www.glumes.com/tags/sdk/">SDK</a> &nbsp;
+              
+                  <a href="https://www.glumes.com/tags/agora/">agora</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-简介">1. 简介</a></li>
+    <li><a href="#2-账户注册与项目创建">2. 账户注册与项目创建</a></li>
+    <li><a href="#3-sdk-下载与集成">3. SDK 下载与集成</a></li>
+    <li><a href="#4-应用开发">4. 应用开发</a>
+      <ul>
+        <li><a href="#41-权限申请">4.1 权限申请</a></li>
+        <li><a href="#42-引擎创建">4.2 引擎创建</a></li>
+        <li><a href="#43-实现-camera-画面预览">4.3 实现 Camera 画面预览</a></li>
+        <li><a href="#44-加入通话频道">4.4 加入通话频道</a></li>
+        <li><a href="#45-音视频数据编码格式参数设置">4.5 音视频数据编码格式参数设置</a></li>
+        <li><a href="#46-用户加入并显示对方画面">4.6 用户加入并显示对方画面</a></li>
+        <li><a href="#47-应用运行并视频通话">4.7 应用运行并视频通话</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-项目开发总结">5. 项目开发总结</a></li>
+  </ul>
+</nav>
+</aside>
+
+          
+  
+
+          
+
+
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h2 id="1-简介">1. 简介</h2>
+<p>在如今的移动互联网时代，音视频相关应用已经深入到我们日常生活的方方面面。</p>
+<p>而在它背后的音视频技术也是非常成熟了，短视频编辑、带货直播、视频语音通话等应用形式无不体现着音视频技术给我们生活带来的便利。</p>
+<p>而这次就去实际体验一下，接入声网的音频 SDK ，并打造一个音视频通话应用。</p>
+<p><img src="https://image.glumes.com/blog_image/agora_video_sdk_download.png" alt=""></p>
+<h2 id="2-账户注册与项目创建">2. 账户注册与项目创建</h2>
+<p>首先要做的就是在声网（<a href="https://www.agora.io/cn">https://www.agora.io/cn</a>）上注册账号，并完成实名认证。</p>
+<p>登录之后就进到管理界面了，在左侧有一系列选项可以操作，直接进到项目管理，创建我们的 VideoChat 项目。</p>
+<p><img src="https://image.glumes.com/blog_image/agora-create-project.png" alt=""></p>
+<p>在项目创建的安全模式上，选择 APPID + Token 的方式。为了提高项目的安全性，Agora 后续会取消对 APP ID 鉴权方案的支持。</p>
+<p>当项目创建完成后就有了对应的 APP ID ，这个在后续代码开发中会用到的。</p>
+<p><img src="https://image.glumes.com/blog_image/agora-project-appid.png" alt=""></p>
+<p>除此之外，我们还需要生成 Token ，在项目管理页去生成一个临时 Token 。</p>
+<p><img src="https://image.glumes.com/blog_image/agora-generate-token.png" alt=""></p>
+<p>这个临时 Token 是有时效的，仅供测试使用，如果有自己的后端开发，到生产环境再去生成正式 Token。同样，这个 Token 字符串在后续开发中也会用到的。</p>
+<h2 id="3-sdk-下载与集成">3. SDK 下载与集成</h2>
+<p>创建项目并准备好 APP ID 和 Token 之后，就可以在官网上下载音频 SDK 了。</p>
+<p><img src="https://image.glumes.com/blog_image/agora-sdk-download-dir.png" alt=""></p>
+<p>下载解压后的内容如上所示。libs 文件夹内有对应不同 CPU 架构的 so 动态库，还有动态库对应的头文件以及 Java 版本的 Jar 包，可分别进行 C++ 版本和 Java 版本的集成。</p>
+<p>这里就只用到 Java 版本来演示了，其实 Java 版本里面很多方法都是走到 native 调用了，而 native 调用的就是 so 动态库里面的方法。用 C++ 版本集成的话，还需要自己写 JNI 代码将 Java 与 C++ 连接起来，不如直接用 Java 版本来的快。</p>
+<p>SDK 集成有两种方式，一种是直接使用 JCenter 来集成，在 build.gradle 里面添加一行代码就行。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">dependencies</span> {
+    <span style="color:#268bd2">implementation</span> &#39;<span style="color:#268bd2">io</span>.<span style="color:#268bd2">agora</span>.<span style="color:#268bd2">rtc</span>:<span style="color:#268bd2">full</span>-<span style="color:#268bd2">sdk</span>:<span style="color:#2aa198;font-weight:bold">3.1.3</span>&#39;
+}
+</code></pre></div><p>版本号可以在官网上查询，目前最新版本就是 3.1.3 了。</p>
+<p>当然还可以通过加载 jar 包和 so 动态库的方式进行集成，把 agora-rtc-sdk.jar 和各版本 so 拷贝到对应目录下，如下图所示：</p>
+<p><img src="https://image.glumes.com/blog_image/copy-agora-sdk-to-dir.png" alt=""></p>
+<p>另外别忘了在 app 目录下的 build.gradle 中添加如下代码：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">dependencies</span> {
+    <span style="color:#268bd2">implementation</span> <span style="color:#268bd2">fileTree</span>(<span style="color:#268bd2">dir</span>: &#39;<span style="color:#268bd2">libs</span>&#39;, <span style="color:#268bd2">include</span>: [&#39;*.<span style="color:#268bd2">jar</span>&#39;])
+}
+</code></pre></div><p>少了这行代码，可解析不到添加的 jar 包。</p>
+<p>以上，就完成了整个 SDK 的工程接入，接下来就是代码开发环节了。</p>
+<h2 id="4-应用开发">4. 应用开发</h2>
+<p>我们要开发的是一款音视频通话应用，就像微信视频一样，想想会有哪些内容。</p>
+<p>首先要通过 Camera 采集我们的画面，然后通过麦克风录制我们的声音，再通过网络传输给到对方，并且能够听到对方的声音，在屏幕上显示画面。</p>
+<p>想一想这些内容要是纯 Android 开发的话，那涉及的东西可多了，四五个人都不一定能 hold 住，而使用专业的音视频 SDK ，一个人就能搞定大部分工作了。</p>
+<p>接下来就要去完成这样的开发工作，具体代码可以在 Github 上获取：</p>
+<blockquote>
+<p><a href="https://github.com/glumes/agora-sdk-demo">https://github.com/glumes/agora-sdk-demo</a></p>
+</blockquote>
+<h3 id="41-权限申请">4.1 权限申请</h3>
+<p>首先是权限申请，涉及到 Camera、网络、存储、录制等等内容，在官网上也有给出具体权限列表，如下：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">&lt;<span style="color:#268bd2">manifest</span> <span style="color:#268bd2">xmlns</span>:<span style="color:#268bd2">android</span>=<span style="color:#2aa198">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+   <span style="color:#268bd2">package</span>=<span style="color:#2aa198">&#34;io.agora.tutorials1v1acall&#34;</span>&gt;
+
+   &lt;<span style="color:#268bd2">uses</span>-<span style="color:#268bd2">permission</span> <span style="color:#268bd2">android</span>:<span style="color:#268bd2">name</span>=<span style="color:#2aa198">&#34;android.permission.READ_PHONE_STATE&#34;</span> /&gt;   
+   &lt;<span style="color:#268bd2">uses</span>-<span style="color:#268bd2">permission</span> <span style="color:#268bd2">android</span>:<span style="color:#268bd2">name</span>=<span style="color:#2aa198">&#34;android.permission.INTERNET&#34;</span> /&gt;
+   &lt;<span style="color:#268bd2">uses</span>-<span style="color:#268bd2">permission</span> <span style="color:#268bd2">android</span>:<span style="color:#268bd2">name</span>=<span style="color:#2aa198">&#34;android.permission.RECORD_AUDIO&#34;</span> /&gt;
+   &lt;<span style="color:#268bd2">uses</span>-<span style="color:#268bd2">permission</span> <span style="color:#268bd2">android</span>:<span style="color:#268bd2">name</span>=<span style="color:#2aa198">&#34;android.permission.CAMERA&#34;</span> /&gt;
+   &lt;<span style="color:#268bd2">uses</span>-<span style="color:#268bd2">permission</span> <span style="color:#268bd2">android</span>:<span style="color:#268bd2">name</span>=<span style="color:#2aa198">&#34;android.permission.MODIFY_AUDIO_SETTINGS&#34;</span> /&gt;
+   &lt;<span style="color:#268bd2">uses</span>-<span style="color:#268bd2">permission</span> <span style="color:#268bd2">android</span>:<span style="color:#268bd2">name</span>=<span style="color:#2aa198">&#34;android.permission.ACCESS_NETWORK_STATE&#34;</span> /&gt;
+   &lt;<span style="color:#268bd2">uses</span>-<span style="color:#268bd2">permission</span> <span style="color:#268bd2">android</span>:<span style="color:#268bd2">name</span>=<span style="color:#2aa198">&#34;android.permission.BLUETOOTH&#34;</span> /&gt;
+   &lt;<span style="color:#268bd2">uses</span>-<span style="color:#268bd2">permission</span> <span style="color:#268bd2">android</span>:<span style="color:#268bd2">name</span>=<span style="color:#2aa198">&#34;android.permission.ACCESS_WIFI_STATE&#34;</span> /&gt;
+   <span style="color:#93a1a1;font-style:italic">// 如果你的场景中涉及读取外部存储，需添加如下权限：
+</span><span style="color:#93a1a1;font-style:italic"></span>   &lt;<span style="color:#268bd2">uses</span>-<span style="color:#268bd2">permission</span> <span style="color:#268bd2">android</span>:<span style="color:#268bd2">name</span>=<span style="color:#2aa198">&#34;android.permission.READ_EXTERNAL_STORAGE&#34;</span> /&gt;
+   <span style="color:#93a1a1;font-style:italic">// 如果你使用的是 Android 10.0 及以上设备，还需要添加如下权限：
+</span><span style="color:#93a1a1;font-style:italic"></span>   &lt;<span style="color:#268bd2">uses</span>-<span style="color:#268bd2">permission</span> <span style="color:#268bd2">android</span>:<span style="color:#268bd2">name</span>=<span style="color:#2aa198">&#34;android.permission.READ_PRIVILEGED_PHONE_STATE&#34;</span> /&gt;
+...
+&lt;/<span style="color:#268bd2">manifest</span>&gt;
+</code></pre></div><p>具体代码可见 Github :</p>
+<p><a href="https://github.com/glumes/agora-sdk-demo/blob/main/app/src/main/java/com/glumes/videochat/MainActivity.kt">https://github.com/glumes/agora-sdk-demo/blob/main/app/src/main/java/com/glumes/videochat/MainActivity.kt</a></p>
+<h3 id="42-引擎创建">4.2 引擎创建</h3>
+<p>接下来就是创建 RtcEngine ，SDK 的很多方法都是通过 RtcEngine 来调用的。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 声明 RtcEngine 
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">private</span> <span style="color:#268bd2">RtcEngine</span> <span style="color:#268bd2">mRtcEngine</span>;
+<span style="color:#93a1a1;font-style:italic">// 创建 RtcEngine
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">initializeEngine</span>() {
+    <span style="color:#859900">try</span> {
+        <span style="color:#268bd2">mRtcEngine</span> = <span style="color:#268bd2">RtcEngine</span>.<span style="color:#268bd2">create</span>(<span style="color:#268bd2">getBaseContext</span>(), <span style="color:#268bd2">getString</span>(<span style="color:#268bd2">R</span>.<span style="color:#268bd2">string</span>.<span style="color:#268bd2">agora_app_id</span>), <span style="color:#268bd2">mRtcEventHandler</span>);
+    } <span style="color:#859900">catch</span> (<span style="color:#268bd2">Exception</span> <span style="color:#268bd2">e</span>) {
+        <span style="color:#268bd2">Log</span>.<span style="color:#268bd2">e</span>(<span style="color:#268bd2">TAG</span>, <span style="color:#268bd2">Log</span>.<span style="color:#268bd2">getStackTraceString</span>(<span style="color:#268bd2">e</span>));
+        <span style="color:#859900">throw</span> <span style="color:#859900">new</span> <span style="color:#268bd2">RuntimeException</span>(<span style="color:#2aa198">&#34;NEED TO check rtc sdk init fatal error</span><span style="color:#2aa198">\n</span><span style="color:#2aa198">&#34;</span> + <span style="color:#268bd2">Log</span>.<span style="color:#268bd2">getStackTraceString</span>(<span style="color:#268bd2">e</span>));
+    }
+}
+</code></pre></div><p>在创建 RtcEngine 的时候需要用到 APP ID ，前面已经提过，在创建项目时就已经有了。</p>
+<p>最后一个参数是 <code>mRtcEventHandler</code> ，它是一个 <code>IRtcEngineEventHandler</code> 类型的抽象类，类里面定义了很多方法，去响应 RtcEngine 不同状态的回调，比如连接成功，连接失败、加入频道、离开频道、网络状态改变等等。如果有需要对应用的性能做一些监视，那么就可以在 IRtcEngineEventHandler 的回调方法做相关统计和埋点。</p>
+<h3 id="43-实现-camera-画面预览">4.3 实现 Camera 画面预览</h3>
+<p>RtcEngine 把 Camera 相关操作都封装在 SDK 内了，通过几行代码就能实现 Camera 画面预览。</p>
+<h4 id="431-创建-camera-画面预览控件-view">4.3.1 创建 Camera 画面预览控件 View</h4>
+<p>首先要有一个控件去承接显示 Camera 的画面输出内容，可以用 SurfaceView 也可以用 TextureView ，但并不需要我们去创建控件，而是用 Agora SDK 提供的方法。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 使用 SurfaceView 的场景
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">SurfaceView</span> <span style="color:#268bd2">mLocalView</span> = <span style="color:#268bd2">RtcEngine</span>.<span style="color:#268bd2">CreateRendererView</span>(<span style="color:#268bd2">getBaseContext</span>());
+<span style="color:#93a1a1;font-style:italic">// 使用 TextureView 的场景
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">TextureView</span> <span style="color:#268bd2">mLocalView</span> = <span style="color:#268bd2">RtcEngine</span>.<span style="color:#268bd2">CreateTextureView</span>(<span style="color:#268bd2">getBaseContext</span>());
+</code></pre></div><p>TextureView 是 Agora SDK 在 3.1.0 版本才提供的，它与 SurfaceView 的区别在于 TextureView 可以对画面进行缩放、旋转和平移，而 SurfaceView 更适合在视频通话和直播场景使用。</p>
+<p>有了显示的 View 之后，要把它添加到当前 Activity 的控件树上，后面 Camera 画面就会输出到这里。</p>
+<h4 id="432-配置-camera-输出并开启预览">4.3.2 配置 Camera 输出并开启预览</h4>
+<p>接下来就是让 Camera 输出画面了，可实际上不用写一行关于 Camera 的代码，三行代码就可以搞定。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">// 开启视频
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">mRtcEngine</span>.<span style="color:#268bd2">enableVideo</span>();
+<span style="color:#93a1a1;font-style:italic">// 初始化本地视图
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">mRtcEngine</span>.<span style="color:#268bd2">setupLocalVideo</span>(<span style="color:#859900">new</span> <span style="color:#268bd2">VideoCanvas</span>(<span style="color:#268bd2">mLocalView</span>, <span style="color:#268bd2">VideoCanvas</span>.<span style="color:#268bd2">RENDER_MODE_HIDDEN</span>, <span style="color:#268bd2">0</span>));
+<span style="color:#93a1a1;font-style:italic">// 开启预览
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">mRtcEngine</span>.<span style="color:#268bd2">startPreview</span>();
+</code></pre></div><p>通过以上代码就能在屏幕上显示我们的画面了，默认是前置摄像头的内容。</p>
+<p>具体代码可见 Github :</p>
+<p><a href="https://github.com/glumes/agora-sdk-demo/blob/main/app/src/main/java/com/glumes/videochat/CameraPreviewActivity.kt">https://github.com/glumes/agora-sdk-demo/blob/main/app/src/main/java/com/glumes/videochat/CameraPreviewActivity.kt</a></p>
+<p>在代码开发中，首先要启用视频模块，默认是关闭的，通过 disableVideo 也可以关闭。而音频模块默认就是开启的，也可以通过 enableAudio 和 disableAudio 来开启关闭音频模块。</p>
+<p>之后就是通过 setupLocalVideo 方法来初始化本地视图，主要是设置本地用户视频信息的，也就是我们的画面要在 SurfaceView 中如何显示，配置信息都是通过 VideoCanvas 类下发的，它有多种参数类型。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// VideoCanvas 构造函数类型
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">VideoCanvas</span> (<span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span>)
+<span style="color:#268bd2">VideoCanvas</span> (<span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">renderMode</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">uid</span>)
+<span style="color:#268bd2">VideoCanvas</span> (<span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">renderMode</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">channelId</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">uid</span>)
+<span style="color:#268bd2">VideoCanvas</span> (<span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">renderMode</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">uid</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">mirrorMode</span>)
+<span style="color:#268bd2">VideoCanvas</span> (<span style="color:#268bd2">View</span> <span style="color:#268bd2">view</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">renderMode</span>, <span style="color:#268bd2">String</span> <span style="color:#268bd2">channelId</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">uid</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">mirrorMode</span>)
+</code></pre></div><p>其中 renderMode 就是指定我们的画面在 SurfaceView 如何显示，有如下类型：</p>
+<ul>
+<li>RENDER_MODE_HIDDEN
+<ul>
+<li>优先保证视窗被填满。视频尺寸等比缩放，直至整个视窗被视频填满。如果视频长宽与显示窗口不同，多出的视频将被截掉。</li>
+</ul>
+</li>
+<li>RENDER_MODE_FIT
+<ul>
+<li>优先保证视频内容全部显示。视频尺寸等比缩放，直至视频窗口的一边与视窗边框对齐。如果视频长宽与显示窗口不同，视窗上未被填满的区域将被涂黑</li>
+</ul>
+</li>
+<li>RENDER_MODE_FILL
+<ul>
+<li>视频尺寸进行缩放和拉伸以充满显示视窗</li>
+</ul>
+</li>
+</ul>
+<p>默认情况下都是使用 RENDER_MODE_HIDDEN 模式的。另外还有 mirrorMode 这样的属性来设置是否要画面镜像。</p>
+<p>完成了画面显示配置之后，直接调用 startPreview 就能在屏幕上看到画面啦，是不是很简单！</p>
+<h4 id="433-camera-更多的配置操作">4.3.3 Camera 更多的配置操作</h4>
+<p>简单的背后其实是 Agora SDK 做了很多封装工作，比如 Camera1 和 Camera2 的调用逻辑、Camera 输出的分辨率策略、前后摄像头选择等等。</p>
+<p>我们可以在开启预览前通过 setCameraCapturerConfiguration 方法来配置自己想要的 Camera 信息。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#93a1a1;font-style:italic">// 配置 Camera 信息
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">mRtcEngine</span>.<span style="color:#268bd2">setCameraCapturerConfiguration</span>(<span style="color:#859900">new</span> <span style="color:#268bd2">CameraCapturerConfiguration</span>(<span style="color:#268bd2">CAPTURER_OUTPUT_PREFERENCE_AUTO</span>,<span style="color:#268bd2">CAMERA_FRONT</span>));
+</code></pre></div><p>Camera 参数信息主要是在 CameraCapturerConfiguration 类中，它的两个参数都是枚举类型，其中第二个参数指定了使用前置还是后置摄像头。</p>
+<p>第一个参数就是关于 Camera 输出分辨率的一些策略，Agora SDK 并没有给出接口让我们指定 Camera 输出宽是多少，长是多少，而且根据使用场景组合了三个策略，更方面我们去调用了。</p>
+<ul>
+<li>
+<p>CAPTURER_OUTPUT_PREFERENCE_AUTO</p>
+<ul>
+<li>（默认）自动调整采集参数。</li>
+</ul>
+</li>
+<li>
+<p>CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE</p>
+<ul>
+<li>优先保证设备性能。</li>
+</ul>
+</li>
+<li>
+<p>CAPTURER_OUTPUT_PREFERENCE_PREVIEW</p>
+<ul>
+<li>优先保证视频预览质量。</li>
+</ul>
+</li>
+</ul>
+<p>通过以上操作，就完成了 Camera 画面预览显示。</p>
+<h3 id="44-加入通话频道">4.4 加入通话频道</h3>
+<p>接下来就要去加入一个频道，并和同一频道内的朋友进行通信。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 函数原型
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">joinChannel</span>	(	<span style="color:#268bd2">String</span> 	<span style="color:#268bd2">token</span>,<span style="color:#268bd2">String</span> <span style="color:#268bd2">channelName</span>,<span style="color:#268bd2">String</span> <span style="color:#268bd2">optionalInfo</span>,<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">optionalUid</span>) 
+
+<span style="color:#93a1a1;font-style:italic">// 具体调用
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">private</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">joinChannel</span>() {
+    <span style="color:#93a1a1;font-style:italic">// 得到 Token
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">String</span> <span style="color:#268bd2">token</span> = <span style="color:#268bd2">getString</span>(<span style="color:#268bd2">R</span>.<span style="color:#268bd2">string</span>.<span style="color:#268bd2">agora_access_token</span>);
+    <span style="color:#93a1a1;font-style:italic">// Token 和 频道名要匹配
+</span><span style="color:#93a1a1;font-style:italic"></span>    <span style="color:#268bd2">mRtcEngine</span>.<span style="color:#268bd2">joinChannel</span>(<span style="color:#268bd2">token</span>, <span style="color:#2aa198">&#34;demoChannel1&#34;</span>, <span style="color:#2aa198">&#34;&#34;</span>, <span style="color:#2aa198;font-weight:bold">0</span>);
+}
+</code></pre></div><p>通过 <code>joinChannel</code> 方法加入，其中 token 就是我们之前创建好的，而频道名称也是创建 token 时指定的，这两者要匹配起来。optionalInfo 是可选的字符串。optionalUid 是用户 ID，也是可选项，如果不指定（设为 0），SDK 会自动分配一个，并在 onJoinChannelSuccess 回调方法中返回。</p>
+<p>当我们加入频道成功后，会回调 IRtcEngineEventHandler 中的 onJoinChannelSuccess 方法。</p>
+<p>通过 <code>leaveChannel</code> 方法，我们可以离开当前频道，同样会回调 IRtcEngineEventHandler 中的 onLeaveChannel 方法。</p>
+<h3 id="45-音视频数据编码格式参数设置">4.5 音视频数据编码格式参数设置</h3>
+<p>加入频道后，我们就要和频道内的朋友们通信。要把我们的画面和声音发送给对方，那肯定要将数据进行编码，然后经过网络传输送给对方。</p>
+<blockquote>
+<p>注意：音频和视频的参数都一定要在加入频道前设定好，也就是 joinChannel 方法调用之前，在其之后调用是不生效的。</p>
+</blockquote>
+<h4 id="451-视频编码参数设置">4.5.1 视频编码参数设置</h4>
+<p>这里我们要指定视频编码的分辨率、帧率、码率、视频等信息，通过 <code>setVideoEncoderConfiguration</code> 方法。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">mRtcEngine</span>.<span style="color:#268bd2">setVideoEncoderConfiguration</span>(<span style="color:#859900">new</span> <span style="color:#268bd2">VideoEncoderConfiguration</span>(
+        <span style="color:#93a1a1;font-style:italic">// 视频分辨率
+</span><span style="color:#93a1a1;font-style:italic"></span>       <span style="color:#268bd2">VideoEncoderConfiguration</span>.<span style="color:#268bd2">VD_640x360</span>,
+        <span style="color:#93a1a1;font-style:italic">// 帧率
+</span><span style="color:#93a1a1;font-style:italic"></span>       <span style="color:#268bd2">VideoEncoderConfiguration</span>.<span style="color:#268bd2">FRAME_RATE</span>.<span style="color:#268bd2">FRAME_RATE_FPS_15</span>,
+        <span style="color:#93a1a1;font-style:italic">// 码率
+</span><span style="color:#93a1a1;font-style:italic"></span>       <span style="color:#268bd2">VideoEncoderConfiguration</span>.<span style="color:#268bd2">STANDARD_BITRATE</span>,
+        <span style="color:#93a1a1;font-style:italic">// 视频方向
+</span><span style="color:#93a1a1;font-style:italic"></span>       <span style="color:#268bd2">VideoEncoderConfiguration</span>.<span style="color:#268bd2">ORIENTATION_MODE</span>.<span style="color:#268bd2">ORIENTATION_MODE_FIXED_PORTRAIT</span>));
+</code></pre></div><p>在更早的 Agora SDK 版本中是通过 setVideoProfile 来设定的，还可以指定具体的宽高、帧率数值。</p>
+<p>最新版本换成了 VideoEncoderConfiguration 来配置，并且配置的参数是都已经定义好了相关的常量，不用自己写 720、1280 这样的 Magic Number 了。</p>
+<p>参数的设置并不是一成不变的，因为网络或者性能等因素会有一些波动，但还是会取最接近我们设定的值。</p>
+<h4 id="452-音频编码参数设置">4.5.2 音频编码参数设置</h4>
+<p>而音频相关的参数，则是通过 <code>setAudioProfile</code> 方法来设置。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">mRtcEngine</span>.<span style="color:#268bd2">setAudioProfile</span>(
+        <span style="color:#93a1a1;font-style:italic">// 设置音频采样率、码率、编码模式和声道数
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">Constants</span>.<span style="color:#268bd2">AudioProfile</span>.<span style="color:#268bd2">DEFAULT</span>.<span style="color:#268bd2">ordinal</span>(),
+        <span style="color:#93a1a1;font-style:italic">// 设置音频的应用场景
+</span><span style="color:#93a1a1;font-style:italic"></span>        <span style="color:#268bd2">Constants</span>.<span style="color:#268bd2">AudioScenario</span>.<span style="color:#268bd2">DEFAULT</span>.<span style="color:#268bd2">ordinal</span>());
+</code></pre></div><p>音频我们可以设置采样率、码率、编码模式以及声道数。和视频参数设置一样，我们不用指定具体的数值，Agora SDK 都根据业务使用场景做了封装，根据需要来设置就好啦。</p>
+<p>音频 AudioProfile 有如下的配置：</p>
+<ul>
+<li>
+<p>DEFAULT</p>
+<ul>
+<li>通信场景下，该选项代表指定 32 kHz 采样率，语音编码，单声道，编码码率最大值为 18 Kbps。</li>
+<li>直播场景下，该选项代表指定 48 kHz 采样率，音乐编码，单声道，编码码率最大值为 64 Kbps。</li>
+</ul>
+</li>
+<li>
+<p>SPEECH_STANDARD</p>
+<ul>
+<li>指定 32 kHz 采样率，语音编码, 单声道，编码码率最大值为 18 Kbps。</li>
+</ul>
+</li>
+<li>
+<p>MUSIC_STANDARD_STEREO</p>
+<ul>
+<li>指定 48 kHz 采样率，音乐编码, 单声道，编码码率最大值为 64 Kbps。</li>
+</ul>
+</li>
+<li>
+<p>MUSIC_HIGH_QUALITY</p>
+<ul>
+<li>指定 48 kHz 采样率，音乐编码, 单声道，编码码率最大值为 96 Kbps。</li>
+</ul>
+</li>
+<li>
+<p>MUSIC_HIGH_QUALITY_STEREO</p>
+<ul>
+<li>指定 48 kHz 采样率，音乐编码, 双声道，编码码率最大值为 128 Kbps。</li>
+</ul>
+</li>
+</ul>
+<p>音频的应用场景也有如下：</p>
+<ul>
+<li>
+<p>DEFAULT</p>
+<ul>
+<li>默认的音频应用场景</li>
+</ul>
+</li>
+<li>
+<p>CHATROOM_ENTERTAINMENT</p>
+<ul>
+<li>娱乐应用，需要频繁上下麦的场景</li>
+</ul>
+</li>
+<li>
+<p>EDUCATION</p>
+<ul>
+<li>教育应用，流畅度和稳定性优先</li>
+</ul>
+</li>
+<li>
+<p>GAME_STREAMING</p>
+<ul>
+<li>高音质语聊房应用</li>
+</ul>
+</li>
+<li>
+<p>SHOWROOM</p>
+<ul>
+<li>秀场应用，音质优先和更好的专业外设支持</li>
+</ul>
+</li>
+<li>
+<p>CHATROOM_GAMING</p>
+<ul>
+<li>游戏开黑</li>
+</ul>
+</li>
+</ul>
+<p>一般来说，我们使用默认的配置 DEFAULT 就好了。</p>
+<h3 id="46-用户加入并显示对方画面">4.6 用户加入并显示对方画面</h3>
+<p>当设置好了自己的数据编码参数，并且也成功加入了频道，接下来就是去接收频道内其他人的画面和信息了。</p>
+<p>具体代码可见 Github：</p>
+<p><a href="https://github.com/glumes/agora-sdk-demo/blob/main/app/src/main/java/com/glumes/videochat/VideoChatActivity.kt">https://github.com/glumes/agora-sdk-demo/blob/main/app/src/main/java/com/glumes/videochat/VideoChatActivity.kt</a></p>
+<h4 id="461-判断是否有用户加入频道">4.6.1 判断是否有用户加入频道</h4>
+<p>当 IRtcEngineEventHandler 中的 onUserJoined 方法回调时，代表有人加入了当前频道，此时就可以建立并初始化远端用户视图了。</p>
+<p>如果启用了视频录制功能，视频录制服务也会回调 onUserJoined 方法，相当于有个机器人加入该频道，此时要区分开来，不能为机器人建立远端视频，然后它不会发送视频流的，建立了也是黑屏的。</p>
+<p>为了避免机器人加入带来的误判，在 2.9.0 版本后更建议在 onRemoteVideoStateChanged 方法回调中去建立远端用户视图。</p>
+<p>onRemoteVideoStateChanged 方法顾名思义就是当远端用户状态发生改变时就会调用，其中定义了如下几个状态：</p>
+<ul>
+<li>
+<p>REMOTE_VIDEO_STATE_STARTING</p>
+<ul>
+<li>本地用户已接收远端视频首包</li>
+</ul>
+</li>
+<li>
+<p>REMOTE_VIDEO_STATE_DECODING</p>
+<ul>
+<li>远端视频流正在解码，正常播放</li>
+</ul>
+</li>
+<li>
+<p>REMOTE_VIDEO_STATE_STOPPED</p>
+<ul>
+<li>远端视频默认初始状态</li>
+</ul>
+</li>
+<li>
+<p>REMOTE_VIDEO_STATE_FROZEN</p>
+<ul>
+<li>远端视频流卡顿</li>
+</ul>
+</li>
+<li>
+<p>REMOTE_VIDEO_STATE_FAILED</p>
+<ul>
+<li>远端视频流播放失败</li>
+</ul>
+</li>
+</ul>
+<p>当状态是 REMOTE_VIDEO_STATE_STARTING 或者 REMOTE_VIDEO_STATE_DECODING 时，我们认定有朋友加入频道了，此时建立远端用户视图。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">@<span style="color:#268bd2">Override</span>
+<span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">onRemoteVideoStateChanged</span>(<span style="color:#859900">final</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">uid</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">state</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">reason</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">elapsed</span>) {
+      <span style="color:#859900">if</span> (<span style="color:#268bd2">state</span> == <span style="color:#268bd2">Constants</span>.<span style="color:#268bd2">REMOTE_VIDEO_STATE_STARTING</span>){
+           <span style="color:#268bd2">runOnUiThread</span>(<span style="color:#859900">new</span> <span style="color:#268bd2">Runnable</span>() {
+               @<span style="color:#268bd2">Override</span>
+               <span style="color:#859900">public</span> <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">run</span>() {
+                    <span style="color:#268bd2">setupRemoteVideo</span>(<span style="color:#268bd2">uid</span>);
+               }
+           });
+      }
+}
+</code></pre></div><p>其中 onRemoteVideoStateChanged 回调方法中 state 参数代表状态，uid 用来标识远端用户 id，如果有多个朋友加入了该频道，我们就要用 uid 来区分一下用户，避免漏了或者重复建立远端用户视图。</p>
+<h4 id="462-建立远端用户视图">4.6.2 建立远端用户视图</h4>
+<p>接下来建立远端用户视图，和建立 Camera 预览视图方法基本一致。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 由 Agora SDK 创建 SurfaceView
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">mRemoteView</span> = <span style="color:#268bd2">RtcEngine</span>.<span style="color:#268bd2">CreateRendererView</span>(<span style="color:#268bd2">getBaseContext</span>());
+<span style="color:#93a1a1;font-style:italic">// 把 SurfaceView 添加到当前 Activity 的布局控件树上
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">mRemoteContainer</span>.<span style="color:#268bd2">addView</span>(<span style="color:#268bd2">mRemoteView</span>);
+<span style="color:#93a1a1;font-style:italic">// Camera 画面预览就用 setupLocalVideo 方法，远端用户就用 setupRemoteVideo 方法
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#268bd2">mRtcEngine</span>.<span style="color:#268bd2">setupRemoteVideo</span>(<span style="color:#859900">new</span> <span style="color:#268bd2">VideoCanvas</span>(<span style="color:#268bd2">mRemoteView</span>, <span style="color:#268bd2">VideoCanvas</span>.<span style="color:#268bd2">RENDER_MODE_HIDDEN</span>, <span style="color:#268bd2">uid</span>));     
+</code></pre></div><p>同样是由 Agora SDK 去创建 SurfaceView ，把它添加到控件容器上，最后通过 setupRemoteVideo 方法完成建立，整个逻辑和 Camera 视图建立是类似的，就是最后调用的方法不一样了。</p>
+<h3 id="47-应用运行并视频通话">4.7 应用运行并视频通话</h3>
+<p>当建立好了远端用户视图，理论上现在就可以显示自己和对方的画面了，并互相听到声音了。</p>
+<p>用两台手机分别运行程序，可以验证效果如下：</p>
+<p><img src="https://image.glumes.com/blog_image/agora-video-chat-demo.jpeg" alt=""></p>
+<p>另外在官网上还可以查看当前项目的流量使用情况：</p>
+<p><img src="https://image.glumes.com/blog_image/agora-usage-analysis.png" alt=""></p>
+<p>初次使用会有流量赠送的，超过一定额度就要付费了。</p>
+<h2 id="5-项目开发总结">5. 项目开发总结</h2>
+<p>通过以上的 SDK 接入和代码示例就已经完成了一个简单的双人音视频通话。</p>
+<p>而 Agora SDK 提供的功能远非如此。</p>
+<p>我们还可以对当前频道的音视频进行控制，选择是否静音、是否关闭画面等等；我们还可以切换频道，参与频道的通话；我们还可以将项目打造成多人的音视频通话，为每个加入频道的用户建立远端视图。</p>
+<p>更多的音视频相关功能都可以通过 Agora SDK 来实现了。</p>
+<p>总结一下整体的接入流程也是非常方便的：</p>
+<blockquote>
+<p>SDK 集成 -&gt; 权限设置 -&gt; Camera 预览 -&gt; 加入频道 -&gt; 显示画面 -&gt; 在线通话</p>
+</blockquote>
+<p>以上的每个步骤在文章中都有讲解，希望在你的使用过程中会有一些帮助！！！</p>
+
+
+          <h2>微信公众号</h2>
+
+<p>扫描下面的二维码关注我的微信公众帐号</p>
+
+<p>添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+
+<img src="https://image.glumes.com/blog_image/wexin-logo.png" alt="wechat-account-qrcode">
+
+
+  
+
+
+                    <p>
+                      原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://www.glumes.com/post/android/agora-sdk-tutorial/">声网 SDK 接入以及音视频通话应用开发指南</a>
+                    </p>
+
+
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="https://www.glumes.com/img/avatar.jpeg"/>Glumes</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？加微信好友 ezglumes </span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="https://www.glumes.com/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="https://www.glumes.com/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="https://www.glumes.com/post/ios/ios-av-developer-prepare/">iOS 音视频开发的一些基础准备工作</a></li>
+    
+    <li><a href="https://www.glumes.com/post/life/av-beginner-wechat-group/">音视频交流群又来啦~~~</a></li>
+    
+    <li><a href="https://www.glumes.com/post/webrtc/webrtc-android-setup/">WebRTC &amp; Android 开发学习环境搭建~</a></li>
+    
+    <li><a href="https://www.glumes.com/post/life/domain-name-register/">【喜大普奔】域名终于备案通过啦</a></li>
+    
+    <li><a href="https://www.glumes.com/post/opengl/opengl-draw-grid-optimize/">Shader 优化 | OpenGL 绘制网格效果</a></li>
+    
+    <li><a href="https://www.glumes.com/post/opengl/shader-tool-kodelife-introduce/">KodeLife | Shader 实时编辑预览的强大工具使用实践</a></li>
+    
+    <li><a href="https://www.glumes.com/post/ffmpeg/av-beginner-011/">【音视频连载-011】第二季 FFmpeg 一层一层获取文件信息</a></li>
+    
+    <li><a href="https://www.glumes.com/post/android/android-av-beginner-resource/">推荐几个堪称教科书级别的 Android 音视频入门项目</a></li>
+    
+    <li><a href="https://www.glumes.com/post/ffmpeg/av-beginner-010/">【音视频连载-010】第二季 FFmpeg 日志打印</a></li>
+    
+    <li><a href="https://www.glumes.com/post/ffmpeg/av-beginner-008/">【音视频连载-008】基础学习篇-SDL 播放 PCM 音频文件（下）</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.glumes.com/post/ios/ios-av-developer-prepare/" data-toggle="tooltip" data-placement="top" title="iOS 音视频开发的一些基础准备工作">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://www.glumes.com/post/webrtc/webrtc-android-setup/" data-toggle="tooltip" data-placement="top" title="WebRTC &amp; Android 开发学习环境搭建~">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        
+        
+        
+
+
+        
+
+        
+  
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          
+          
+              <li>
+                <a href="mailto:zhaoying9402@outlook.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/u/3157458295" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="https://www.glumes.com/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+
+          &nbsp;&bull;&nbsp;
+          2020
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://www.glumes.com/">音视频开发进阶</a>
+            &nbsp;&bull;&nbsp;
+            <a href="https://www.glumes.com/sitemap.xml">网站地图</a>
+          
+             &nbsp;&bull;&nbsp;
+                      <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+        </p>
+
+
+
+
+
+
+                <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+          &nbsp;&bull;&nbsp;
+                 <span id="busuanzi_container_page_pv" style="display:none">
+            阅读量<span id="busuanzi_value_page_pv"></span>人次
+          </span>
+        </p>
+
+<p>
+<a target="_blank"; href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral";>
+<img style="height:20px;width:auto;"; src="https://www.upyun.com/static/img/%E6%A0%B7%E5%BC%8F%E5%9B%BE.7cf927c.png"; />
+</a>
+</P>
+        
+        <p class="credits theme-by text-muted">
+          由 <a href="http://gohugo.io">Hugo v0.74.3</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a> 移植自 <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://www.glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://www.glumes.com/js/bootstrap.min.js"></script>
+<script src="https://www.glumes.com/js/main.min.js"></script>
+<script src="https://www.glumes.com/js/reward.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+<script>
+  (function() {
+    var cx = 'true';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+  
+
+
+
+
+
+
+<script src='https://www.glumes.com/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+
