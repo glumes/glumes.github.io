@@ -14,8 +14,38 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2020-12-14T18:29:40+08:00</lastmod>
+    <lastmod>2021-01-06T19:44:28+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/engine/2021-render-engine/</loc>
+    <lastmod>2021-01-06T19:44:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/</loc>
+    <lastmod>2021-01-06T19:44:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/engine/</loc>
+    <lastmod>2021-01-06T19:44:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/engine/</loc>
+    <lastmod>2021-01-06T19:44:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/</loc>
+    <lastmod>2021-01-06T19:44:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/</loc>
+    <lastmod>2021-01-06T19:44:28+08:00</lastmod>
   </url>
   
   <url>
@@ -29,22 +59,7 @@
   </url>
   
   <url>
-    <loc>https://glumes.com/categories/</loc>
-    <lastmod>2020-12-14T18:29:40+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/post/</loc>
-    <lastmod>2020-12-14T18:29:40+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://glumes.com/tags/sdk/</loc>
-    <lastmod>2020-12-14T18:29:40+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/tags/</loc>
     <lastmod>2020-12-14T18:29:40+08:00</lastmod>
   </url>
   

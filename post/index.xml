@@ -6,7 +6,7 @@
     <description>Recent content in Posts on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 14 Dec 2020 18:29:40 +0800</lastBuildDate><atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Jan 2021 19:44:28 +0800</lastBuildDate><atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>音视频交流群又来啦~~~</title>
       <link>https://glumes.com/post/life/av-beginner-wechat-group/</link>
@@ -27,6 +27,17 @@
       <description>&lt;p&gt;最近开始折腾 WebRTC 了。&lt;/p&gt;
 &lt;p&gt;先介绍一下 WebRTC 源码编译以及 Android 开发环境的搭建。&lt;/p&gt;
 &lt;p&gt;整个下载编译过程都需要能够正常访问外网，这需要自己想办法克服了。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2021 技术新番 - 从零打造渲染引擎系列</title>
+      <link>https://glumes.com/post/engine/2021-render-engine/</link>
+      <pubDate>Wed, 06 Jan 2021 19:44:28 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/engine/2021-render-engine/</guid>
+      <description>&lt;p&gt;2021 年的第一次公众号文章推送，它会迟到，但绝不缺席！！&lt;/p&gt;
+&lt;p&gt;2020 年已经成为过去，新的一年又该有新的规划了，沉思良久之后决定就是它啦~~&lt;/p&gt;
+&lt;p&gt;今年的发力点就是从零打造渲染引擎。&lt;/p&gt;</description>
     </item>
     
     <item>
