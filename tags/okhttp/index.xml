@@ -2,21 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>OkHttp on 音视频开发进阶</title>
-    <link>https://www.glumes.com/tags/okhttp/</link>
+    <link>https://glumes.com/tags/okhttp/</link>
     <description>Recent content in OkHttp on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Sep 2018 22:13:45 +0800</lastBuildDate>
-    
-	<atom:link href="https://www.glumes.com/tags/okhttp/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 11 Sep 2018 22:13:45 +0800</lastBuildDate><atom:link href="https://glumes.com/tags/okhttp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>开源库之 OkHttp 源码分析</title>
-      <link>https://www.glumes.com/post/android/okhttp-analysis/</link>
+      <link>https://glumes.com/post/android/okhttp-analysis/</link>
       <pubDate>Tue, 11 Sep 2018 22:13:45 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/android/okhttp-analysis/</guid>
+      <guid>https://glumes.com/post/android/okhttp-analysis/</guid>
       <description>&lt;p&gt;分析一波 OkHttp 的源码实现。&lt;/p&gt;</description>
     </item>
     

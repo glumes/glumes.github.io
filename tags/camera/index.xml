@@ -2,21 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Camera on 音视频开发进阶</title>
-    <link>https://www.glumes.com/tags/camera/</link>
+    <link>https://glumes.com/tags/camera/</link>
     <description>Recent content in Camera on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Sep 2018 23:39:28 +0800</lastBuildDate>
-    
-	<atom:link href="https://www.glumes.com/tags/camera/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 19 Sep 2018 23:39:28 +0800</lastBuildDate><atom:link href="https://glumes.com/tags/camera/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MediaCodec 硬编码之相机内容编码成 H264 文件</title>
-      <link>https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/</link>
+      <link>https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/</link>
       <pubDate>Wed, 19 Sep 2018 23:39:28 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/android/mediacodec-encode-yuv-to-h264/</guid>
+      <guid>https://glumes.com/post/android/mediacodec-encode-yuv-to-h264/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/8Kq9JgvGhlJCpNIyb7zK2w&#34;&gt;https://mp.weixin.qq.com/s/8Kq9JgvGhlJCpNIyb7zK2w&lt;/a&gt;&lt;/p&gt;
@@ -28,10 +24,10 @@
     
     <item>
       <title>OpenGL 学习系列---观察矩阵</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-view-matrix/</link>
       <pubDate>Tue, 22 May 2018 12:04:10 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-view-matrix/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/0cWh3IF_7wa5PHoGsh8ZcQ&#34;&gt;https://mp.weixin.qq.com/s/0cWh3IF_7wa5PHoGsh8ZcQ&lt;/a&gt;&lt;/p&gt;
@@ -44,19 +40,19 @@
     
     <item>
       <title>Android Camera 模型及 API 接口演变</title>
-      <link>https://www.glumes.com/post/android/android-camrea-api-evolution/</link>
+      <link>https://glumes.com/post/android/android-camrea-api-evolution/</link>
       <pubDate>Thu, 12 Apr 2018 13:13:57 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/android/android-camrea-api-evolution/</guid>
+      <guid>https://glumes.com/post/android/android-camrea-api-evolution/</guid>
       <description>&lt;p&gt;要了解 Android Camear 相机模型的演变，首先还是得了解硬件抽象层 HAL 相关的知识内容。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Android 相机开发中的尺寸和方向问题</title>
-      <link>https://www.glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</link>
+      <link>https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</link>
       <pubDate>Tue, 10 Apr 2018 16:09:32 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</guid>
+      <guid>https://glumes.com/post/android/android-camera-aspect-ratio-and-orientation/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;*本篇文章已授权微信公众号 guolin_blog （郭霖）独家发布&lt;/p&gt;
 &lt;/blockquote&gt;

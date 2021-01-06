@@ -2,21 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>libjpeg-turbo on 音视频开发进阶</title>
-    <link>https://www.glumes.com/tags/libjpeg-turbo/</link>
+    <link>https://glumes.com/tags/libjpeg-turbo/</link>
     <description>Recent content in libjpeg-turbo on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Jul 2019 00:08:18 +0800</lastBuildDate>
-    
-	<atom:link href="https://www.glumes.com/tags/libjpeg-turbo/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 13 Jul 2019 00:08:18 +0800</lastBuildDate><atom:link href="https://glumes.com/tags/libjpeg-turbo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>图像库 libjpeg-turbo 编译与实践</title>
-      <link>https://www.glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</link>
+      <link>https://glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</link>
       <pubDate>Sat, 13 Jul 2019 00:08:18 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</guid>
+      <guid>https://glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/x-dTLowXcqysnLxZ0BGA2g&#34;&gt;https://mp.weixin.qq.com/s/x-dTLowXcqysnLxZ0BGA2g&lt;/a&gt;&lt;/p&gt;

@@ -2,21 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>opengl on 音视频开发进阶</title>
-    <link>https://www.glumes.com/categories/opengl/</link>
+    <link>https://glumes.com/categories/opengl/</link>
     <description>Recent content in opengl on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 May 2020 14:33:35 +0800</lastBuildDate>
-    
-	<atom:link href="https://www.glumes.com/categories/opengl/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 22 May 2020 14:33:35 +0800</lastBuildDate><atom:link href="https://glumes.com/categories/opengl/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Shader 优化 | OpenGL 绘制网格效果</title>
-      <link>https://www.glumes.com/post/opengl/opengl-draw-grid-optimize/</link>
+      <link>https://glumes.com/post/opengl/opengl-draw-grid-optimize/</link>
       <pubDate>Fri, 22 May 2020 14:33:35 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-draw-grid-optimize/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-draw-grid-optimize/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/FmILdXuy3HMpv8H1Kz_fPw&#34;&gt;https://mp.weixin.qq.com/s/FmILdXuy3HMpv8H1Kz_fPw&lt;/a&gt;&lt;/p&gt;
@@ -38,10 +34,10 @@
     
     <item>
       <title>KodeLife | Shader 实时编辑预览的强大工具使用实践</title>
-      <link>https://www.glumes.com/post/opengl/shader-tool-kodelife-introduce/</link>
+      <link>https://glumes.com/post/opengl/shader-tool-kodelife-introduce/</link>
       <pubDate>Mon, 18 May 2020 11:39:56 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/shader-tool-kodelife-introduce/</guid>
+      <guid>https://glumes.com/post/opengl/shader-tool-kodelife-introduce/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/6ZMP6Tc_MqggjAXS_GjV2Q&#34;&gt;https://mp.weixin.qq.com/s/6ZMP6Tc_MqggjAXS_GjV2Q&lt;/a&gt;&lt;/p&gt;
@@ -62,10 +58,10 @@
     
     <item>
       <title>LearnOpenGL 源码在 MAC 上的编译与调试</title>
-      <link>https://www.glumes.com/post/opengl/run-learnopengl-code-on-xcode/</link>
+      <link>https://glumes.com/post/opengl/run-learnopengl-code-on-xcode/</link>
       <pubDate>Sat, 04 Jan 2020 22:53:52 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/run-learnopengl-code-on-xcode/</guid>
+      <guid>https://glumes.com/post/opengl/run-learnopengl-code-on-xcode/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/Ah8bK4dELT-LDjwSk9dHiQ&#34;&gt;https://mp.weixin.qq.com/s/Ah8bK4dELT-LDjwSk9dHiQ&lt;/a&gt;&lt;/p&gt;
@@ -86,10 +82,10 @@
     
     <item>
       <title>OpenGL 实现视频编辑中的转场效果</title>
-      <link>https://www.glumes.com/post/opengl/opengl-transition/</link>
+      <link>https://glumes.com/post/opengl/opengl-transition/</link>
       <pubDate>Sun, 20 Oct 2019 22:49:00 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-transition/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-transition/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/OuyU_7ieecjdGyDKTx-iFg&#34;&gt;https://mp.weixin.qq.com/s/OuyU_7ieecjdGyDKTx-iFg&lt;/a&gt;&lt;/p&gt;
@@ -110,10 +106,10 @@
     
     <item>
       <title>OpenGL 实践之贝塞尔曲线绘制</title>
-      <link>https://www.glumes.com/post/opengl/opengl-draw-bezier-line/</link>
+      <link>https://glumes.com/post/opengl/opengl-draw-bezier-line/</link>
       <pubDate>Tue, 20 Aug 2019 23:51:59 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-draw-bezier-line/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-draw-bezier-line/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/m7BMF1dSiJ5BeHTU1etDqw&#34;&gt;https://mp.weixin.qq.com/s/m7BMF1dSiJ5BeHTU1etDqw&lt;/a&gt;&lt;/p&gt;
@@ -130,10 +126,10 @@
     
     <item>
       <title>图像库 libjpeg-turbo 编译与实践</title>
-      <link>https://www.glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</link>
+      <link>https://glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</link>
       <pubDate>Sat, 13 Jul 2019 00:08:18 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</guid>
+      <guid>https://glumes.com/post/opengl/libjpeg-turbo-compile-and-practice/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/x-dTLowXcqysnLxZ0BGA2g&#34;&gt;https://mp.weixin.qq.com/s/x-dTLowXcqysnLxZ0BGA2g&lt;/a&gt;&lt;/p&gt;
@@ -156,10 +152,10 @@
     
     <item>
       <title>图像库 libpng 编译与实践</title>
-      <link>https://www.glumes.com/post/opengl/libpng-compile-and-practice/</link>
+      <link>https://glumes.com/post/opengl/libpng-compile-and-practice/</link>
       <pubDate>Fri, 12 Jul 2019 23:26:58 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/libpng-compile-and-practice/</guid>
+      <guid>https://glumes.com/post/opengl/libpng-compile-and-practice/</guid>
       <description>&lt;p&gt;在之前的文章中介绍了 &lt;code&gt;stb_image&lt;/code&gt; 图像库，还顺带提到了 libpng 和 libjpeg ，这篇文章就是介绍如何在 Android 平台上用 CMake 编译 libpng 动态库以及 libpng 使用实践。&lt;/p&gt;
 &lt;p&gt;【&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;简单易用的图像解码库介绍 —— stb_image&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://glumes.com/post/android/stb-image-introduce/&#34;&gt;https://glumes.com/post/android/stb-image-introduce/&lt;/a&gt;&lt;/p&gt;</description>
@@ -167,10 +163,10 @@
     
     <item>
       <title>Android NDK 开发 —— 从 Assets 文件夹加载图片并上传纹理</title>
-      <link>https://www.glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/</link>
+      <link>https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/</link>
       <pubDate>Tue, 14 May 2019 23:16:45 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/</guid>
+      <guid>https://glumes.com/post/opengl/load-texture-from-android-assets-by-ndk/</guid>
       <description>&lt;p&gt;在 OpenGL 开发中，我们要渲染一张图片，通常先是得到一张图片对应的 Bitmap ,然后将该 Bitmap 作为纹理上传到 OpenGL 中。在 Android 中有封装好的 &lt;code&gt;GLUtils&lt;/code&gt; 类的 &lt;code&gt;texImage2D&lt;/code&gt; 方法供我们调用。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;    &lt;span style=&#34;color:#859900&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#859900&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;texImage2D&lt;/span&gt;(&lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;target&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;level&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;internalformat&lt;/span&gt;,
             &lt;span style=&#34;color:#268bd2&#34;&gt;Bitmap&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;bitmap&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;type&lt;/span&gt;, &lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;border&lt;/span&gt;)
@@ -180,30 +176,30 @@
     
     <item>
       <title>OpenGL ES 3.0 着色器语言 GLSL 学习 Mark </title>
-      <link>https://www.glumes.com/post/opengl/opengl-glsl-3-mark/</link>
+      <link>https://glumes.com/post/opengl/opengl-glsl-3-mark/</link>
       <pubDate>Sun, 09 Sep 2018 15:20:42 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-glsl-3-mark/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-glsl-3-mark/</guid>
       <description>&lt;p&gt;在之前的&lt;a href=&#34;https://glumes.com/post/opengl/opengl-glsl-2-mark/&#34;&gt;文章&lt;/a&gt;中， 主要介绍了 OpenGL ES 2.0 的 GLSL 语法，在 OpenGL ES 3.0 中语法又有了一些变化。&lt;/p&gt;
 &lt;p&gt;本文的内容来自于《OpenGL ES 3.x 游戏开发 上卷》。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>OpenGL ES 2.0 着色器语言 GLSL 学习 Mark </title>
-      <link>https://www.glumes.com/post/opengl/opengl-glsl-2-mark/</link>
+      <link>https://glumes.com/post/opengl/opengl-glsl-2-mark/</link>
       <pubDate>Sun, 09 Sep 2018 15:07:20 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-glsl-2-mark/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-glsl-2-mark/</guid>
       <description>&lt;p&gt;要想发挥 OpenGL ES 自定义渲染管线的功能，就得学会写 GLSL 着色器脚本。&lt;/p&gt;
 &lt;p&gt;本文中的内容来自于 《Android 3D 游戏开发技术宝典 OpenGL ES 2.0》。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>OpenGL 之 帧缓冲  使用实践</title>
-      <link>https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/</link>
+      <link>https://glumes.com/post/opengl/opengl-framebuffer-object-usage/</link>
       <pubDate>Tue, 04 Sep 2018 22:28:11 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-framebuffer-object-usage/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-framebuffer-object-usage/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/l5eYzkYAzR-m21-iYBoyCw&#34;&gt;https://mp.weixin.qq.com/s/l5eYzkYAzR-m21-iYBoyCw&lt;/a&gt;&lt;/p&gt;
@@ -215,10 +211,10 @@
     
     <item>
       <title>OpenGL 之 EGL 使用实践</title>
-      <link>https://www.glumes.com/post/opengl/opengl-egl-usage/</link>
+      <link>https://glumes.com/post/opengl/opengl-egl-usage/</link>
       <pubDate>Sun, 02 Sep 2018 21:26:55 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-egl-usage/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-egl-usage/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/AGMA4xvynzmdCNo-Caur-g&#34;&gt;https://mp.weixin.qq.com/s/AGMA4xvynzmdCNo-Caur-g&lt;/a&gt;&lt;/p&gt;
@@ -229,10 +225,10 @@
     
     <item>
       <title>OpenGL 之 GPUImage 源码分析</title>
-      <link>https://www.glumes.com/post/opengl/opengl-gpuimage-analysis/</link>
+      <link>https://glumes.com/post/opengl/opengl-gpuimage-analysis/</link>
       <pubDate>Sun, 02 Sep 2018 21:14:09 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-gpuimage-analysis/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-gpuimage-analysis/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/2EeI91pu6y6Z7pnLPToXYA&#34;&gt;https://mp.weixin.qq.com/s/2EeI91pu6y6Z7pnLPToXYA&lt;/a&gt;&lt;/p&gt;
@@ -242,19 +238,19 @@
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》碰撞检测之 AABB 包围盒</title>
-      <link>https://www.glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</link>
+      <link>https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</link>
       <pubDate>Thu, 26 Jul 2018 12:47:49 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-axially-aligned-bounding-box/</guid>
       <description>&lt;p&gt;在 OpenGL 的世界模型中，同时绘制了多个物体，那么怎么去检测物体之间是否触碰了，不同于在平面之间的触碰，OpenGL 是在三维世界里面的触碰，接下来就继续深入理解 OpenGL 中的碰撞检测相关知识~~~&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》光照系列之效果混合</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-light-mix/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-light-mix/</link>
       <pubDate>Tue, 24 Jul 2018 09:39:10 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-light-mix/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-light-mix/</guid>
       <description>&lt;p&gt;在前面的系列文章中，分别介绍了 OpenGL 的环境光、散射光、镜面光。&lt;/p&gt;
 &lt;p&gt;现在尝试将这些光照效果混合起来，让整个场景显得更加逼真。&lt;/p&gt;
 &lt;p&gt;具体的效果如下：&lt;/p&gt;
@@ -263,37 +259,37 @@
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》光照系列之镜面光</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-specular-light/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-specular-light/</link>
       <pubDate>Mon, 23 Jul 2018 23:11:20 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-specular-light/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-specular-light/</guid>
       <description>&lt;p&gt;在前面的文章中介绍了 OpenGL 的&lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-ambient-light/&#34;&gt;环境光&lt;/a&gt;和&lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/&#34;&gt;散射光&lt;/a&gt;，现在就是最后一个镜面光了。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title> 《OpenGL ES 3.x 游戏开发》 光照系列之散射光</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-diffuse-light/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/</link>
       <pubDate>Sun, 22 Jul 2018 23:27:04 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-diffuse-light/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-diffuse-light/</guid>
       <description>&lt;p&gt;在前面的文章中介绍了 OpenGL 中的环境光，现在就是散射光了。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》光照系列之环境光</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-ambient-light/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-ambient-light/</link>
       <pubDate>Sat, 21 Jul 2018 22:45:03 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-ambient-light/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-ambient-light/</guid>
       <description>&lt;p&gt;在 OpenGL 中使用光照。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>OpenGL 深度测试与精度值的那些事</title>
-      <link>https://www.glumes.com/post/opengl/opengl-depth-test/</link>
+      <link>https://glumes.com/post/opengl/opengl-depth-test/</link>
       <pubDate>Fri, 20 Jul 2018 14:50:22 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-depth-test/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-depth-test/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/PpLzxm7hPHDbaQLmAniCzQ&#34;&gt;https://mp.weixin.qq.com/s/PpLzxm7hPHDbaQLmAniCzQ&lt;/a&gt;&lt;/p&gt;
@@ -308,10 +304,10 @@
     
     <item>
       <title>OpenGL 优化项之面剔除和注意点</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-face-culling-usage/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/</link>
       <pubDate>Thu, 19 Jul 2018 11:45:15 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-face-culling-usage/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-face-culling-usage/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/mMUS1ewazFqCqtRgOchDYw&#34;&gt;https://mp.weixin.qq.com/s/mMUS1ewazFqCqtRgOchDYw&lt;/a&gt;&lt;/p&gt;
@@ -324,10 +320,10 @@
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》 顶点数组对象 VAO 的使用</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/</link>
       <pubDate>Wed, 18 Jul 2018 23:16:22 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-vertex-array-object-usage/</guid>
       <description>&lt;p&gt;在之前使用 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/&#34;&gt;OpenGL 顶点缓冲区 VBO 的使用&lt;/a&gt; 为顶点坐标、纹理坐标分别绑定了顶点缓冲区，并且在 onDrawFrame 方法里面也要分别为顶点坐标、纹理坐标指定数据。&lt;/p&gt;
 &lt;p&gt;这就存在了一些重复的操作。&lt;/p&gt;
 &lt;p&gt;在 OpenGL ES 3.0 可以使用顶点数组对象来解决这一问题。&lt;/p&gt;</description>
@@ -335,20 +331,20 @@
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》顶点缓冲区 VBO 的使用</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/</link>
       <pubDate>Tue, 17 Jul 2018 22:28:37 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-vertex-buffer-object-usage/</guid>
       <description>&lt;p&gt;在之前的绘制过程中，首先都需要将物体的顶点数据保存在内存中，然后 &lt;code&gt;glDrawArrays&lt;/code&gt; 或 &lt;code&gt;glDrawElements&lt;/code&gt; 绘制前，将顶点数据送入到显存中，这样会存在 I/O 开销较大的问题，性能也不够好。&lt;/p&gt;
 &lt;p&gt;可以将顶点数据存放在顶点缓冲区中，就不需要在每次绘制前把顶点数据复制进显存，而是在初始化顶点缓冲区对象时一次性将顶点数据送入显存，每次绘制时直接使用显存中的数据，可以大大提高渲染性能。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》之颜色混合和使用</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-color-blend/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-color-blend/</link>
       <pubDate>Mon, 16 Jul 2018 11:13:19 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-color-blend/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-color-blend/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/40ss1fbLh3Qr5X4o76GTjA&#34;&gt;https://mp.weixin.qq.com/s/40ss1fbLh3Qr5X4o76GTjA&lt;/a&gt;&lt;/p&gt;
@@ -359,10 +355,10 @@
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》之利用 Alpha 透明度进行测试</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-alpha-test/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-alpha-test/</link>
       <pubDate>Fri, 13 Jul 2018 09:41:22 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-alpha-test/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-alpha-test/</guid>
       <description>&lt;p&gt;在前面的博客文章中有提到 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-tutorial-scissor-test/&#34;&gt;OpenGL 裁剪测试及注意点&lt;/a&gt;，并且裁剪测试只能裁剪一个矩形区域，相当于就是把整个内容都绘制上去了，但是透过一个小矩形区域来看绘制的物体。&lt;/p&gt;
 &lt;p&gt;除了透过矩形区域，还可以实现透过任意形状区域来观察物体，这就是要用到 OpenGL 的 Alpha 透明度测试。&lt;/p&gt;
 &lt;p&gt;关于 Alpha 透明度测试，在 用 &lt;a href=&#34;https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/&#34;&gt;OpenGL 对视频帧内容进行替换&lt;/a&gt; 也用实践用到过。&lt;/p&gt;</description>
@@ -370,10 +366,10 @@
     
     <item>
       <title>用 OpenGL 对视频帧内容进行替换</title>
-      <link>https://www.glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/</link>
+      <link>https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/</link>
       <pubDate>Thu, 12 Jul 2018 16:59:47 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-handle-video-frame-and-replace-content/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/WZWY5Ml9YP9N9tv-iiFOqg&#34;&gt;https://mp.weixin.qq.com/s/WZWY5Ml9YP9N9tv-iiFOqg&lt;/a&gt;&lt;/p&gt;
@@ -383,28 +379,28 @@
     
     <item>
       <title>OpenGL ES 学习资源分享</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-share/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-share/</link>
       <pubDate>Wed, 11 Jul 2018 14:25:52 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-share/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-share/</guid>
       <description>&lt;p&gt;学习了一段时间的 OpenGL ES，并在公司的项目中得到了运用，也算是有了一些积累，现在分享一些当初学习的资源，大家一起来学习，共同交流进步。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》 裁剪测试及注意点</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-scissor-test/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-scissor-test/</link>
       <pubDate>Tue, 03 Jul 2018 21:35:34 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-scissor-test/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-scissor-test/</guid>
       <description>&lt;p&gt;在 OpenGL 中启用裁剪测试可以在屏幕或者帧缓冲上指定一个矩形区域，然后在该矩形区域内绘制，只有在该区域内的片元才有机会最终进入帧缓冲，不在该区域内的将会被丢弃。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>《OpenGL ES 3.x 游戏开发》 3D 模型加载和渲染</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-import-3d-object/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/</link>
       <pubDate>Mon, 02 Jul 2018 23:37:16 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-import-3d-object/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-import-3d-object/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/OCcTOJArxipvY-v_HuD0Eg&#34;&gt;https://mp.weixin.qq.com/s/OCcTOJArxipvY-v_HuD0Eg&lt;/a&gt;&lt;/p&gt;
@@ -414,10 +410,10 @@
     
     <item>
       <title>OpenGL 的 glDrawElements  绘制方法</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</link>
       <pubDate>Fri, 25 May 2018 19:47:29 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-gldrawelements-method/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/WcWdYE5j8Ycw2dtJYS-Cxg&#34;&gt;https://mp.weixin.qq.com/s/WcWdYE5j8Ycw2dtJYS-Cxg&lt;/a&gt;&lt;/p&gt;
@@ -466,10 +462,10 @@
     
     <item>
       <title>OpenGL 学习系列---观察矩阵</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-view-matrix/</link>
       <pubDate>Tue, 22 May 2018 12:04:10 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-view-matrix/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-view-matrix/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/0cWh3IF_7wa5PHoGsh8ZcQ&#34;&gt;https://mp.weixin.qq.com/s/0cWh3IF_7wa5PHoGsh8ZcQ&lt;/a&gt;&lt;/p&gt;
@@ -482,10 +478,10 @@
     
     <item>
       <title>OpenGL 学习系列---纹理</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-texture/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-texture/</link>
       <pubDate>Wed, 21 Mar 2018 23:08:02 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-texture/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-texture/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/Y3FsQrJJWQogD3PWWo1cVQ&#34;&gt;https://mp.weixin.qq.com/s/Y3FsQrJJWQogD3PWWo1cVQ&lt;/a&gt;&lt;/p&gt;
@@ -495,10 +491,10 @@
     
     <item>
       <title>OpenGL 学习系列---投影矩阵</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-projection-matrix/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/</link>
       <pubDate>Wed, 24 Jan 2018 18:17:58 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-projection-matrix/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-projection-matrix/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/AVyNmsO7s6rGPZw3WH5kcA&#34;&gt;https://mp.weixin.qq.com/s/AVyNmsO7s6rGPZw3WH5kcA&lt;/a&gt;&lt;/p&gt;
@@ -520,10 +516,10 @@
     
     <item>
       <title>OpenGL 学习系列---坐标系统</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-coordinate-system/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/</link>
       <pubDate>Tue, 23 Jan 2018 17:44:53 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-coordinate-system/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-coordinate-system/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/0HZgyZra90LQLFAq6dQJ9A&#34;&gt;https://mp.weixin.qq.com/s/0HZgyZra90LQLFAq6dQJ9A&lt;/a&gt;&lt;/p&gt;
@@ -535,10 +531,10 @@
     
     <item>
       <title>OpenGL 学习系列---基本形状的绘制</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/</link>
       <pubDate>Fri, 22 Dec 2017 16:21:16 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-draw-basic-shape/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/XLbFvngRHqVoKbC22BJHGQ&#34;&gt;https://mp.weixin.qq.com/s/XLbFvngRHqVoKbC22BJHGQ&lt;/a&gt;&lt;/p&gt;
@@ -548,10 +544,10 @@
     
     <item>
       <title>OpenGL 学习系列---基础的绘制流程</title>
-      <link>https://www.glumes.com/post/opengl/opengl-tutorial-draw-point/</link>
+      <link>https://glumes.com/post/opengl/opengl-tutorial-draw-point/</link>
       <pubDate>Fri, 22 Dec 2017 16:19:28 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opengl/opengl-tutorial-draw-point/</guid>
+      <guid>https://glumes.com/post/opengl/opengl-tutorial-draw-point/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;避免图片丢失，建议阅读微信原文：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/H6p3cLGpKys5ihF7ymBhJw&#34;&gt;https://mp.weixin.qq.com/s/H6p3cLGpKys5ihF7ymBhJw&lt;/a&gt;&lt;/p&gt;

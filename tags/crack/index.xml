@@ -2,21 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>crack on 音视频开发进阶</title>
-    <link>https://www.glumes.com/tags/crack/</link>
+    <link>https://glumes.com/tags/crack/</link>
     <description>Recent content in crack on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 31 Jan 2018 15:47:59 +0800</lastBuildDate>
-    
-	<atom:link href="https://www.glumes.com/tags/crack/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 31 Jan 2018 15:47:59 +0800</lastBuildDate><atom:link href="https://glumes.com/tags/crack/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>搭建 Android 反编译环境</title>
-      <link>https://www.glumes.com/post/android/setup-android-crack-environment/</link>
+      <link>https://glumes.com/post/android/setup-android-crack-environment/</link>
       <pubDate>Wed, 31 Jan 2018 15:47:59 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/android/setup-android-crack-environment/</guid>
+      <guid>https://glumes.com/post/android/setup-android-crack-environment/</guid>
       <description>&lt;p&gt;在 MAC 上搭建 Android 反编译环境主要就是三个东西：&lt;code&gt;apktool&lt;/code&gt; 、&lt;code&gt;dex2jar&lt;/code&gt; 、&lt;code&gt;jd-gui&lt;/code&gt; 。&lt;/p&gt;</description>
     </item>
     

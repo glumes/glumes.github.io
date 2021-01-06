@@ -2,21 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vulkan on 音视频开发进阶</title>
-    <link>https://www.glumes.com/categories/vulkan/</link>
+    <link>https://glumes.com/categories/vulkan/</link>
     <description>Recent content in Vulkan on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Apr 2019 15:39:14 +0800</lastBuildDate>
-    
-	<atom:link href="https://www.glumes.com/categories/vulkan/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 07 Apr 2019 15:39:14 +0800</lastBuildDate><atom:link href="https://glumes.com/categories/vulkan/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>进击的 Vulkan 移动开发之 SwapChain</title>
-      <link>https://www.glumes.com/post/vulkan/vulkan-tutorial-swap-chain/</link>
+      <link>https://glumes.com/post/vulkan/vulkan-tutorial-swap-chain/</link>
       <pubDate>Sun, 07 Apr 2019 15:39:14 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-swap-chain/</guid>
+      <guid>https://glumes.com/post/vulkan/vulkan-tutorial-swap-chain/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -46,10 +42,10 @@
     
     <item>
       <title>进击的 Vulkan 移动开发之 Command Buffer</title>
-      <link>https://www.glumes.com/post/vulkan/vulkan-tutorial-command-buffer/</link>
+      <link>https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/</link>
       <pubDate>Wed, 09 Jan 2019 09:50:20 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-command-buffer/</guid>
+      <guid>https://glumes.com/post/vulkan/vulkan-tutorial-command-buffer/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -74,10 +70,10 @@
     
     <item>
       <title>进击的 Vulkan 移动开发之 Instance &amp; Device &amp; Queue</title>
-      <link>https://www.glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/</link>
+      <link>https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/</link>
       <pubDate>Mon, 07 Jan 2019 11:03:18 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/</guid>
+      <guid>https://glumes.com/post/vulkan/vulkan-tutorial-instance-device-queue/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Vulkan 开发的系列文章：&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -98,10 +94,10 @@
     
     <item>
       <title>进击的 Vulkan 移动开发（一）之今生前世</title>
-      <link>https://www.glumes.com/post/vulkan/vulkan-tutorial-concept/</link>
+      <link>https://glumes.com/post/vulkan/vulkan-tutorial-concept/</link>
       <pubDate>Fri, 07 Dec 2018 22:31:49 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/vulkan/vulkan-tutorial-concept/</guid>
+      <guid>https://glumes.com/post/vulkan/vulkan-tutorial-concept/</guid>
       <description>&lt;p&gt;捋一捋 Vulkan 。&lt;/p&gt;</description>
     </item>
     

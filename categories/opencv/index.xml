@@ -2,21 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>opencv on 音视频开发进阶</title>
-    <link>https://www.glumes.com/categories/opencv/</link>
+    <link>https://glumes.com/categories/opencv/</link>
     <description>Recent content in opencv on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 Dec 2017 09:53:04 +0800</lastBuildDate>
-    
-	<atom:link href="https://www.glumes.com/categories/opencv/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 22 Dec 2017 09:53:04 +0800</lastBuildDate><atom:link href="https://glumes.com/categories/opencv/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python、C&#43;&#43;、Android OpenCV 开发环境的配置</title>
-      <link>https://www.glumes.com/post/opencv/setup_opencv_environment/</link>
+      <link>https://glumes.com/post/opencv/setup_opencv_environment/</link>
       <pubDate>Fri, 22 Dec 2017 09:53:04 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/opencv/setup_opencv_environment/</guid>
+      <guid>https://glumes.com/post/opencv/setup_opencv_environment/</guid>
       <description>&lt;p&gt;在 Mac 上折腾了一下 OpenCV 的配置，分别配置了 Python 、C++ 和 Android 上的开发环境，中间还遇到点坑，简要记录一下。&lt;/p&gt;</description>
     </item>
     

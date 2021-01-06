@@ -2,21 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on 音视频开发进阶</title>
-    <link>https://www.glumes.com/tags/python/</link>
+    <link>https://glumes.com/tags/python/</link>
     <description>Recent content in Python on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 May 2019 21:21:40 +0800</lastBuildDate>
-    
-	<atom:link href="https://www.glumes.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 02 May 2019 21:21:40 +0800</lastBuildDate><atom:link href="https://glumes.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>博客图床迁移记</title>
-      <link>https://www.glumes.com/post/life/blog-image-migrate/</link>
+      <link>https://glumes.com/post/life/blog-image-migrate/</link>
       <pubDate>Thu, 02 May 2019 21:21:40 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/life/blog-image-migrate/</guid>
+      <guid>https://glumes.com/post/life/blog-image-migrate/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;微博图床一时爽，迁移火葬场&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -29,19 +25,19 @@
     
     <item>
       <title>Python 函数式编程</title>
-      <link>https://www.glumes.com/post/python/python-functional-programming/</link>
+      <link>https://glumes.com/post/python/python-functional-programming/</link>
       <pubDate>Fri, 22 Dec 2017 16:10:57 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/python/python-functional-programming/</guid>
+      <guid>https://glumes.com/post/python/python-functional-programming/</guid>
       <description>&lt;p&gt;函数式编程是一种编程范式，不同于之前的面向对象编程。它是面向数学的抽象，也就是说，这里的&lt;code&gt;函数&lt;/code&gt;二字不再是我们编程语言中的函数，而是数学中的&lt;code&gt;函数&lt;/code&gt;了。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Python 命令行参数解析工具 docopt</title>
-      <link>https://www.glumes.com/post/python/python-docopt/</link>
+      <link>https://glumes.com/post/python/python-docopt/</link>
       <pubDate>Fri, 22 Dec 2017 16:08:45 +0800</pubDate>
       
-      <guid>https://www.glumes.com/post/python/python-docopt/</guid>
+      <guid>https://glumes.com/post/python/python-docopt/</guid>
       <description>&lt;p&gt;正如标题所言，docopt 是一个用来解析命令行参数的工具，当想要在 Python 程序后面附加参数时，就不需要再为此而发愁了。&lt;/p&gt;
 &lt;p&gt;docopt 是一个开源的库，代码地址：&lt;a href=&#34;https://github.com/docopt/docopt&#34;&gt;https://github.com/docopt/docopt&lt;/a&gt;。它在 README 中就已经做了详细的介绍，并且还附带了很多例子可供学习，这篇文章也是翻译一下 README 中内容&amp;hellip;&amp;hellip;&lt;/p&gt;</description>
     </item>
