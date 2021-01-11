@@ -6,7 +6,18 @@
     <description>Recent content in ios on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Nov 2020 00:22:12 +0800</lastBuildDate><atom:link href="https://glumes.com/tags/ios/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Jan 2021 09:54:15 +0800</lastBuildDate><atom:link href="https://glumes.com/tags/ios/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>iOS开发 - 在 Swift 中去调用 C/C&#43;&#43; 代码</title>
+      <link>https://glumes.com/post/ios/swift-call-c-function/</link>
+      <pubDate>Mon, 11 Jan 2021 09:54:15 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/ios/swift-call-c-function/</guid>
+      <description>&lt;p&gt;众所周知，Swift 是不能直接调用 C/C++ 代码的，而 Objective-C 是可以直接调用的。&lt;/p&gt;
+&lt;p&gt;想要 Swift 调用 C++ 方法，需要走 Objective-C 中转才行，类似于 Java 调用 C++ 代码需要走 JNI 一样。&lt;/p&gt;
+&lt;p&gt;反而 Swift 调用 C 方法还要简单一些，不需要 Objective-C 中转，以下就是具体操作详情~&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>iOS 音视频开发的一些基础准备工作</title>
       <link>https://glumes.com/post/ios/ios-av-developer-prepare/</link>

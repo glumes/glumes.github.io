@@ -9,13 +9,38 @@
   
   <url>
     <loc>https://glumes.com/</loc>
-    <lastmod>2021-01-09T21:58:33+08:00</lastmod>
+    <lastmod>2021-01-11T09:54:15+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://glumes.com/categories/</loc>
-    <lastmod>2021-01-09T21:58:33+08:00</lastmod>
+    <lastmod>2021-01-11T09:54:15+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/ios/</loc>
+    <lastmod>2021-01-11T09:54:15+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/categories/ios/</loc>
+    <lastmod>2021-01-11T09:54:15+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/ios/swift-call-c-function/</loc>
+    <lastmod>2021-01-11T09:54:15+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/post/</loc>
+    <lastmod>2021-01-11T09:54:15+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://glumes.com/tags/</loc>
+    <lastmod>2021-01-11T09:54:15+08:00</lastmod>
   </url>
   
   <url>
@@ -25,16 +50,6 @@
   
   <url>
     <loc>https://glumes.com/categories/life/</loc>
-    <lastmod>2021-01-09T21:58:33+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/post/</loc>
-    <lastmod>2021-01-09T21:58:33+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/tags/</loc>
     <lastmod>2021-01-09T21:58:33+08:00</lastmod>
   </url>
   
@@ -76,16 +91,6 @@
   <url>
     <loc>https://glumes.com/post/android/agora-sdk-tutorial/</loc>
     <lastmod>2020-12-14T18:29:40+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/tags/ios/</loc>
-    <lastmod>2020-11-17T00:22:12+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://glumes.com/categories/ios/</loc>
-    <lastmod>2020-11-17T00:22:12+08:00</lastmod>
   </url>
   
   <url>
