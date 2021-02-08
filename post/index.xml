@@ -6,7 +6,7 @@
     <description>Recent content in Posts on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 Jan 2021 19:30:33 +0800</lastBuildDate><atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 Feb 2021 17:57:04 +0800</lastBuildDate><atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2021 技术新番 - 从零打造渲染引擎系列</title>
       <link>https://glumes.com/post/engine/2021-render-engine/</link>
@@ -16,6 +16,18 @@
       <description>&lt;p&gt;2021 年的第一次公众号文章推送，它会迟到，但绝不缺席！！&lt;/p&gt;
 &lt;p&gt;2020 年已经成为过去，新的一年又该有新的规划了，沉思良久之后决定就是它啦~~&lt;/p&gt;
 &lt;p&gt;今年的发力点就是从零打造渲染引擎。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; 模板系列小结-函数模板和类模板</title>
+      <link>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-1/</link>
+      <pubDate>Mon, 08 Feb 2021 17:57:04 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-1/</guid>
+      <description>&lt;p&gt;现如今，掌握 C++ 模板技巧并且熟练使用可以说是能力进阶的必备内容了。&lt;/p&gt;
+&lt;p&gt;在一些优秀的开源项目中经常能看到模板的使用，要是不了解其使用方法，对分析源码都会有些阻碍。&lt;/p&gt;
+&lt;p&gt;推荐阅读《C++ Templates 中文版》一书，或许可以让你对 C++ 模板有个更加系统的概念，同时辅助阅读网上相关的博客文章加深理解，在代码实践中去掌握提高。&lt;/p&gt;
+&lt;p&gt;C++ 模板主要可以分为函数模板和类模板，这次就是介绍它们两个。&lt;/p&gt;</description>
     </item>
     
     <item>

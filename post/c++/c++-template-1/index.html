@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>C&#43;&#43; 模板系列小结-函数模板和类模板</title>
+  <meta property="og:title" content="C&#43;&#43; 模板系列小结-函数模板和类模板" />
+  <meta name="twitter:title" content="C&#43;&#43; 模板系列小结-函数模板和类模板" />
+
+  <meta name="description" content="现如今，掌握 C&#43;&#43; 模板技巧并且熟练使用可以说是能力进阶的必备内容了。
+在一些优秀的开源项目中经常能看到模板的使用，要是不了解其使用方法，对分析源码都会有些阻碍。
+推荐阅读《C&#43;&#43; Templates 中文版》一书，或许可以让你对 C&#43;&#43; 模板有个更加系统的概念，同时辅助阅读网上相关的博客文章加深理解，在代码实践中去掌握提高。
+C&#43;&#43; 模板主要可以分为函数模板和类模板，这次就是介绍它们两个。">
+  <meta property="og:description" content="现如今，掌握 C&#43;&#43; 模板技巧并且熟练使用可以说是能力进阶的必备内容了。
+在一些优秀的开源项目中经常能看到模板的使用，要是不了解其使用方法，对分析源码都会有些阻碍。
+推荐阅读《C&#43;&#43; Templates 中文版》一书，或许可以让你对 C&#43;&#43; 模板有个更加系统的概念，同时辅助阅读网上相关的博客文章加深理解，在代码实践中去掌握提高。
+C&#43;&#43; 模板主要可以分为函数模板和类模板，这次就是介绍它们两个。">
+  <meta name="twitter:description" content="现如今，掌握 C&#43;&#43; 模板技巧并且熟练使用可以说是能力进阶的必备内容了。
+在一些优秀的开源项目中经常能看到模板的使用，要是不了解其使用方法，对分析源码都会有些阻碍。
+推荐阅读《C&#43;&#43; Templates 中文版》一书，或许可以让你对 C&#43;&#43; 模板有个更加系统的概念，同时辅助阅读网上相关的博客文章加深理解，在代码实践中去掌握提高。
+C&#43;&#43; 模板主要可以分为函数模板和类模板，这次就是介绍它们两个。">
+  <meta name="author" content=""/>
+  <link href="https://image.glumes.com/video-favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="https://image.glumes.com/video-favicon.png"/>
+  <meta property="og:image" content="https://image.glumes.com/video-favicon.png" />
+  <meta name="twitter:image" content="https://image.glumes.com/video-favicon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-1/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="音视频开发进阶" />
+
+  <meta name="generator" content="Hugo 0.80.0" />
+  <link rel="canonical" href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-1/" />
+  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="音视频开发进阶">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/reward.css" />
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/search.css" />
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/main.css" />
+
+
+  
+  
+  
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+
+
+
+
+
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TRLK1SYTZ1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TRLK1SYTZ1');
+</script>
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/" title="音视频开发进阶">
+        
+        音视频开发进阶
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">音视频开发</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://glumes.com/categories/opengl">OpenGL </a>
+                
+                  <a href="https://glumes.com/categories/ffmpeg">FFmpeg</a>
+                
+                  <a href="https://glumes.com/categories/vulkan">Vulkan </a>
+                
+                  <a href="https://glumes.com/categories/webrtc">WebRTC </a>
+                
+                  <a href="https://glumes.com/categories/opencv">opencv </a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">移动开发</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://glumes.com/categories/android">Android</a>
+                
+                  <a href="https://glumes.com/categories/ios">ios</a>
+                
+                  <a href="https://glumes.com/categories/c&#43;&#43;">C&#43;&#43;</a>
+                
+                  <a href="https://glumes.com/categories/python">Python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="程序人生" href="https://glumes.com/categories/life">程序人生</a>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">我的视频教学</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://space.bilibili.com/105478237">B 站视频</a>
+                
+                  <a href="http://www.imooc.com/learn/1212">慕课网视频</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="小专栏" href="https://xiaozhuanlan.com/glumes">小专栏</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="https://glumes.com/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="所有文章" href="https://glumes.com/post/">所有文章</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+
+        
+
+          
+
+
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="https://glumes.com/js/algoliasearch.min.js"></script>
+<script src="https://glumes.com/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "true");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="https://glumes.com/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/blog_image/610391b1gy1gmhbipn8w5j208x0sgtk7.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-md-offset-0">
+              <div class="post-heading">
+                <h1>C&#43;&#43; 模板系列小结-函数模板和类模板</h1>
+                  
+                  
+                    <span class="post-meta">
+  
+    
+  
+  
+</span>
+
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+              <h1>C&#43;&#43; 模板系列小结-函数模板和类模板</h1>
+                
+                
+                  <span class="post-meta">
+  
+    
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://glumes.com/tags/c&#43;&#43;/">C&#43;&#43;</a> &nbsp;
+              
+                  <a href="https://glumes.com/tags/template/">Template</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#函数模板">函数模板</a>
+      <ul>
+        <li><a href="#函数模板的重载">函数模板的重载</a></li>
+      </ul>
+    </li>
+    <li><a href="#类模板">类模板</a>
+      <ul>
+        <li><a href="#类模板的特化">类模板的特化</a></li>
+        <li><a href="#局部特化">局部特化</a></li>
+        <li><a href="#缺省模板实参">缺省模板实参</a></li>
+      </ul>
+    </li>
+    <li><a href="#小结">小结</a></li>
+  </ul>
+</nav>
+</aside>
+
+          
+  
+
+          
+
+
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>现如今，掌握 C++ 模板技巧并且熟练使用可以说是能力进阶的必备内容了。</p>
+<p>在一些优秀的开源项目中经常能看到模板的使用，要是不了解其使用方法，对分析源码都会有些阻碍。</p>
+<p>推荐阅读《C++ Templates 中文版》一书，或许可以让你对 C++ 模板有个更加系统的概念，同时辅助阅读网上相关的博客文章加深理解，在代码实践中去掌握提高。</p>
+<p>C++ 模板主要可以分为函数模板和类模板，这次就是介绍它们两个。</p>
+<h2 id="函数模板">函数模板</h2>
+<p>函数模板主要就是将它的参数用类型带代替，对每个不同的类型都会生成对应的函数，所以函数模板可以用多种不同的类型进行调用，它代表的其实是一个函数家族而不是一个函数。</p>
+<p>以下是个简单的函数模板示例：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;iostream&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#859900">template</span> &lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#268bd2">T</span> <span style="color:#268bd2">plus</span>(<span style="color:#268bd2">T</span> <span style="color:#268bd2">a</span>,<span style="color:#268bd2">T</span> <span style="color:#268bd2">b</span>){
+    <span style="color:#859900">return</span> <span style="color:#268bd2">a</span>+<span style="color:#268bd2">b</span>;
+}
+
+<span style="color:#93a1a1;font-style:italic">// 使用引用类型，减少拷贝操作
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#859900">inline</span> <span style="color:#268bd2">T</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">max</span>(<span style="color:#268bd2">T</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">a</span>, <span style="color:#268bd2">T</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">b</span>) {
+    <span style="color:#859900">return</span> <span style="color:#268bd2">a</span> &lt; <span style="color:#268bd2">b</span> ? <span style="color:#268bd2">b</span> : <span style="color:#268bd2">a</span>;
+}
+
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">main</span>() {
+    <span style="color:#268bd2">plus</span>(<span style="color:#2aa198;font-weight:bold">1.0</span>, <span style="color:#2aa198;font-weight:bold">1.0</span>);
+    <span style="color:#268bd2">plus</span>(<span style="color:#859900">static_cast</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt;(<span style="color:#2aa198;font-weight:bold">1.0</span>), <span style="color:#2aa198;font-weight:bold">2</span>);
+    <span style="color:#268bd2">plus</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt;(<span style="color:#2aa198;font-weight:bold">2.0</span>, <span style="color:#2aa198;font-weight:bold">3.0</span>);
+
+    <span style="color:#268bd2">max</span>(<span style="color:#2aa198;font-weight:bold">2</span>,<span style="color:#2aa198;font-weight:bold">1</span>);
+    <span style="color:#268bd2">max</span>(<span style="color:#859900">static_cast</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt;(<span style="color:#2aa198;font-weight:bold">2.0</span>),<span style="color:#2aa198;font-weight:bold">1</span>);
+    <span style="color:#268bd2">max</span>&lt;<span style="color:#859900;font-weight:bold">double</span>&gt;(<span style="color:#2aa198;font-weight:bold">2.0</span>,<span style="color:#2aa198;font-weight:bold">3.0</span>);
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
+}
+</code></pre></div><p>通常而言，并不是把模板编译成一个可以处理任何单一类型的单一实体，而是针对实例模板参数的每种类型，都从模板产生一个不同的实体。</p>
+<p>针对上面的使用，整型和浮点型都生成了一个对应的函数。</p>
+<p>对于函数模板的参数，是可以在调用时显示指定的，另外可以在调用时对类型做强制类型转换，这是因为模板不允许自动类型转换，所以需要我们手动来完成。</p>
+<h3 id="函数模板的重载">函数模板的重载</h3>
+<p>和普通函数一样，函数模板也可以重载，也就是相同函数名称可以具有不同的函数定义。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">inline</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">max</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">a</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">b</span>) {
+    <span style="color:#859900">return</span> <span style="color:#268bd2">a</span> &lt; <span style="color:#268bd2">b</span> ? <span style="color:#268bd2">b</span> : <span style="color:#268bd2">a</span>;
+}
+
+<span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#859900">inline</span> <span style="color:#268bd2">T</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">max</span>(<span style="color:#268bd2">T</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">a</span>, <span style="color:#268bd2">T</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">b</span>) {
+    <span style="color:#859900">return</span> <span style="color:#268bd2">a</span> &lt; <span style="color:#268bd2">b</span> ? <span style="color:#268bd2">b</span> : <span style="color:#268bd2">a</span>;
+}
+
+<span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#859900">inline</span> <span style="color:#268bd2">T</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">max</span>(<span style="color:#268bd2">T</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">a</span>, <span style="color:#268bd2">T</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">b</span>, <span style="color:#268bd2">T</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">c</span>) {
+    <span style="color:#859900">return</span> ::<span style="color:#268bd2">max</span>(::<span style="color:#268bd2">max</span>(<span style="color:#268bd2">a</span>,<span style="color:#268bd2">b</span>),<span style="color:#268bd2">c</span>);
+}
+</code></pre></div><p>如上所示，一个非函数模板可以合一个同名的函数模板同时存在，而且该函数模板还可以被实例化为这个非函数模板。</p>
+<p>对于非函数模板和同名的函数模板，如果其他条件都相同的话，那么在调用的时候，重载解析过程通常会调用非函数模板，而不会从该模板产生一个实例。</p>
+<p>对于函数的重载，一般来说改变的内容最好是下面两种情况：</p>
+<ul>
+<li>改变参数的数目</li>
+<li>显示地指定模板参数</li>
+</ul>
+<p>遵循以上两点，避免在重载函数调用过于复杂，从而导致匹配出差。</p>
+<h2 id="类模板">类模板</h2>
+<p>与函数模板相似，类可以被一种或者多种类型参数化。</p>
+<p>以下代码是一个简单的类模板示例：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Stack</span> {
+<span style="color:#859900">private</span>:
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">vector</span>&lt;<span style="color:#268bd2">T</span>&gt; <span style="color:#268bd2">elems</span>;
+<span style="color:#859900">public</span>:
+        <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">push</span>(<span style="color:#268bd2">T</span> <span style="color:#859900">const</span>&amp;);
+        <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">pop</span>();
+        <span style="color:#268bd2">T</span> <span style="color:#268bd2">top</span>() <span style="color:#859900">const</span>;
+        <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">empty</span>() <span style="color:#859900">const</span>{
+            <span style="color:#859900">return</span> <span style="color:#268bd2">elems</span>.<span style="color:#268bd2">empty</span>();
+        }
+};
+
+<span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">Stack</span>&lt;<span style="color:#268bd2">T</span>&gt;::<span style="color:#268bd2">push</span>(<span style="color:#859900">const</span> <span style="color:#268bd2">T</span> &amp; <span style="color:#268bd2">elem</span>) {
+    <span style="color:#268bd2">elems</span>.<span style="color:#268bd2">push_back</span>(<span style="color:#268bd2">elem</span>);
+}
+
+<span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">Stack</span>&lt;<span style="color:#268bd2">T</span>&gt;::<span style="color:#268bd2">pop</span>() {
+    <span style="color:#859900">if</span> (!<span style="color:#268bd2">elems</span>.<span style="color:#268bd2">empty</span>()){
+        <span style="color:#268bd2">elems</span>.<span style="color:#268bd2">pop_back</span>();
+    }
+}
+
+<span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#268bd2">T</span> <span style="color:#268bd2">Stack</span>&lt;<span style="color:#268bd2">T</span>&gt;::<span style="color:#268bd2">top</span>() <span style="color:#859900">const</span> {
+    <span style="color:#859900">if</span> (!<span style="color:#268bd2">elems</span>.<span style="color:#268bd2">empty</span>()){
+        <span style="color:#859900">return</span> <span style="color:#268bd2">elems</span>.<span style="color:#268bd2">back</span>();
+    }
+    <span style="color:#859900">throw</span> <span style="color:#268bd2">std</span>::<span style="color:#268bd2">out_of_range</span>(<span style="color:#2aa198">&#34;Stack::top(); empty Stack&#34;</span>);
+}
+
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">main</span>() {
+    <span style="color:#268bd2">Stack</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt; <span style="color:#268bd2">intStack</span>;
+    <span style="color:#268bd2">intStack</span>.<span style="color:#268bd2">push</span>(<span style="color:#2aa198;font-weight:bold">1</span>);
+    <span style="color:#268bd2">intStack</span>.<span style="color:#268bd2">top</span>();
+    <span style="color:#268bd2">intStack</span>.<span style="color:#268bd2">pop</span>();
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
+}
+</code></pre></div><p>类模板的声明和函数模板声明很类似，在声明之前都用 <code>typename</code> 声明作为类型参数的标识符。</p>
+<p>在定义类模板的成员函数时，关于成员函数的实现，可以在类声明里面去实现，也可以放到外面去实现。</p>
+<p>如果是在类外面声明的，那么必现要指定该成员函数是一个函数模板，而且还需要使用这个类模板的完整类型限定符。</p>
+<p>另外，只有那些被调用的成员函数，才会产生这些函数的实例化代码。</p>
+<h3 id="类模板的特化">类模板的特化</h3>
+<p>可以使用模板实参来特化类模板。</p>
+<p>和函数模板的重载类似，通过特化类模板，可以优化基于某种特定类型的实现，或者克服某种特定类型在实例化类模板时所出现的不足。</p>
+<p>另外，如果要特化一个类模板，还要特化该类模板的所有成员函数。虽然也可以只特化某个成员函数，但这个做法并没有特化整个类，也就没有特化整个类模板。</p>
+<p>为了特化一个类模板，必须在起始处声明一个 <code>template&lt;&gt;</code> ，接下来声明用特化类模板的类型。</p>
+<p>如下代码所示：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">template</span>&lt;&gt;
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Stack</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">string</span>&gt; {
+<span style="color:#859900">private</span>:
+        <span style="color:#268bd2">std</span>::<span style="color:#268bd2">deque</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">string</span>&gt; <span style="color:#268bd2">elems</span>;
+<span style="color:#859900">public</span>:
+        <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">push</span>(<span style="color:#268bd2">std</span>::<span style="color:#268bd2">string</span> <span style="color:#859900">const</span>&amp;);
+        <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">pop</span>();
+        <span style="color:#268bd2">std</span>::<span style="color:#268bd2">string</span> <span style="color:#268bd2">top</span>() <span style="color:#859900">const</span>;
+        <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">empty</span>() <span style="color:#859900">const</span>{
+            <span style="color:#859900">return</span> <span style="color:#268bd2">elems</span>.<span style="color:#268bd2">empty</span>();
+        }
+};
+
+<span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">Stack</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">string</span>&gt;::<span style="color:#268bd2">push</span>(<span style="color:#859900">const</span> <span style="color:#268bd2">std</span>::<span style="color:#268bd2">string</span> &amp;<span style="color:#268bd2">elem</span>) {
+    <span style="color:#268bd2">elems</span>.<span style="color:#268bd2">push_back</span>(<span style="color:#268bd2">elem</span>);
+}
+
+<span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">Stack</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">string</span>&gt;::<span style="color:#268bd2">pop</span>() {
+    <span style="color:#859900">if</span> (!<span style="color:#268bd2">elems</span>.<span style="color:#268bd2">empty</span>()){
+        <span style="color:#268bd2">elems</span>.<span style="color:#268bd2">pop_back</span>();
+    }
+}
+
+<span style="color:#268bd2">std</span>::<span style="color:#268bd2">string</span> <span style="color:#268bd2">Stack</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">string</span>&gt;::<span style="color:#268bd2">top</span>() <span style="color:#859900">const</span> {
+    <span style="color:#859900">if</span> (!<span style="color:#268bd2">elems</span>.<span style="color:#268bd2">empty</span>()){
+        <span style="color:#859900">return</span> <span style="color:#268bd2">elems</span>.<span style="color:#268bd2">back</span>();
+    }
+    <span style="color:#859900">throw</span> <span style="color:#268bd2">std</span>::<span style="color:#268bd2">out_of_range</span>(<span style="color:#2aa198">&#34;Stack&lt;std::string&gt;::top(); empty Stack&#34;</span>);
+}
+
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">main</span>() {
+    <span style="color:#268bd2">Stack</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">string</span>&gt; <span style="color:#268bd2">stringStack</span>;
+    <span style="color:#268bd2">intStack</span>.<span style="color:#268bd2">push</span>(<span style="color:#2aa198">&#34;string&#34;</span>);
+    <span style="color:#268bd2">intStack</span>.<span style="color:#268bd2">top</span>();
+    <span style="color:#268bd2">intStack</span>.<span style="color:#268bd2">pop</span>();
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
+}
+</code></pre></div><p>进行类模板的特化时，每个成员函数都必须重新定义为普通函数，原来函数模板中的每个 T 也相应地被进行特化的类型取代。</p>
+<h3 id="局部特化">局部特化</h3>
+<p>上面的特化可以称之为全特化，另外类模板还可以局部特化，在特定的环境下制定类模板的实现，并且要求某些模板参数仍然必须由用户来定义。</p>
+<p>如下代码所示：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T1</span>,<span style="color:#859900">typename</span> <span style="color:#268bd2">T2</span>&gt;
+<span style="color:#859900">class</span> <span style="color:#cb4b16">MyClass</span>{
+
+};
+
+<span style="color:#93a1a1;font-style:italic">// 局部特化，两个模板参数具有相同的类型
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#859900">class</span> <span style="color:#cb4b16">MyClass</span>&lt;<span style="color:#268bd2">T</span>,<span style="color:#268bd2">T</span>&gt;{
+
+};
+
+<span style="color:#93a1a1;font-style:italic">// 局部特化， 第二个模板参数的类型是 int
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#859900">class</span> <span style="color:#cb4b16">MyClass</span>&lt;<span style="color:#268bd2">T</span>,<span style="color:#859900;font-weight:bold">int</span>&gt;{
+
+};
+
+<span style="color:#93a1a1;font-style:italic">// 局部特化，两个模板参数都是指针类型
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T1</span>,<span style="color:#859900">typename</span> <span style="color:#268bd2">T2</span>&gt;
+<span style="color:#859900">class</span> <span style="color:#cb4b16">MyClass</span>&lt;<span style="color:#268bd2">T1</span>*,<span style="color:#268bd2">T2</span>*&gt;{
+
+};
+</code></pre></div><p>对于局部特化，其成员函数同样要指定是模板函数，并且要使用特化后的类模板完整类型限定符。</p>
+<h3 id="缺省模板实参">缺省模板实参</h3>
+<p>对于类模板，可以为类模板参数定义默认值。这些值就被称为缺省模板实参，而且它们还可以引用之前的目标参数。</p>
+<p>如下代码所示：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">template</span> &lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>,<span style="color:#859900">typename</span> <span style="color:#268bd2">CONT</span> = <span style="color:#268bd2">std</span>::<span style="color:#268bd2">vector</span>&lt;<span style="color:#268bd2">T</span>&gt; &gt;
+<span style="color:#859900">class</span> <span style="color:#cb4b16">MyStack</span>{
+<span style="color:#859900">private</span>:
+    <span style="color:#268bd2">CONT</span> <span style="color:#268bd2">elems</span>;
+<span style="color:#859900">public</span>:
+    <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">push</span>(<span style="color:#268bd2">T</span> <span style="color:#859900">const</span>&amp;);
+    <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">pop</span>();
+    <span style="color:#268bd2">T</span> <span style="color:#268bd2">top</span>() <span style="color:#859900">const</span>;
+    <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">empty</span>() <span style="color:#859900">const</span>{
+        <span style="color:#859900">return</span> <span style="color:#268bd2">elems</span>.<span style="color:#268bd2">empty</span>();
+    }
+};
+
+<span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>, <span style="color:#859900">typename</span> <span style="color:#268bd2">CONT</span>&gt;
+<span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">MyStack</span>&lt;<span style="color:#268bd2">T</span>, <span style="color:#268bd2">CONT</span>&gt;::<span style="color:#268bd2">push</span>(<span style="color:#859900">const</span> <span style="color:#268bd2">T</span> &amp;<span style="color:#268bd2">elem</span>) {
+    <span style="color:#268bd2">elems</span>.<span style="color:#268bd2">push_back</span>(<span style="color:#268bd2">elem</span>);
+}
+
+<span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>, <span style="color:#859900">typename</span> <span style="color:#268bd2">CONT</span>&gt;
+<span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">MyStack</span>&lt;<span style="color:#268bd2">T</span>, <span style="color:#268bd2">CONT</span>&gt;::<span style="color:#268bd2">pop</span>() {
+    <span style="color:#859900">if</span> (!<span style="color:#268bd2">elems</span>.<span style="color:#268bd2">empty</span>()){
+        <span style="color:#268bd2">elems</span>.<span style="color:#268bd2">pop_back</span>();
+    }
+}
+
+<span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>, <span style="color:#859900">typename</span> <span style="color:#268bd2">CONT</span>&gt;
+<span style="color:#268bd2">T</span> <span style="color:#268bd2">MyStack</span>&lt;<span style="color:#268bd2">T</span>, <span style="color:#268bd2">CONT</span>&gt;::<span style="color:#268bd2">top</span>() <span style="color:#859900">const</span> {
+    <span style="color:#859900">if</span> (!<span style="color:#268bd2">elems</span>.<span style="color:#268bd2">empty</span>()){
+        <span style="color:#859900">return</span> <span style="color:#268bd2">elems</span>.<span style="color:#268bd2">back</span>();
+    }
+    <span style="color:#859900">throw</span> <span style="color:#268bd2">std</span>::<span style="color:#268bd2">out_of_range</span>(<span style="color:#2aa198">&#34;MyStack&lt;&gt;::top(); empty Stack&#34;</span>);
+}
+
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">main</span>() {
+    <span style="color:#268bd2">MyStack</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt; <span style="color:#268bd2">intMyStack</span>;
+    <span style="color:#268bd2">intMyStack</span>.<span style="color:#268bd2">push</span>(<span style="color:#2aa198;font-weight:bold">1</span>);
+    <span style="color:#268bd2">intMyStack</span>.<span style="color:#268bd2">top</span>();
+    <span style="color:#268bd2">intMyStack</span>.<span style="color:#268bd2">pop</span>();
+
+    <span style="color:#268bd2">MyStack</span>&lt;<span style="color:#859900;font-weight:bold">double</span>, <span style="color:#268bd2">std</span>::<span style="color:#268bd2">deque</span>&lt;<span style="color:#859900;font-weight:bold">double</span>&gt;&gt; <span style="color:#268bd2">doubleMyStack</span>;
+    <span style="color:#268bd2">doubleMyStack</span>.<span style="color:#268bd2">push</span>(<span style="color:#2aa198;font-weight:bold">0.1</span>);
+    <span style="color:#268bd2">doubleMyStack</span>.<span style="color:#268bd2">top</span>();
+    <span style="color:#268bd2">doubleMyStack</span>.<span style="color:#268bd2">pop</span>();
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
+}
+</code></pre></div><p>以上代码中，如果不传递第二个模板参数，那么就使用默认的 vector 来管理元素。如果传了，就使用指定的类型来管理元素。</p>
+<h2 id="小结">小结</h2>
+<p>以上就是关于 C++ 模板中函数模板和类模板的小总结，基本上还是很容易理解的，就是用模板参数 T 代替具体的类型，并且还可以对函数模板进行重载，对类模板进行特化，类模板还可以指定默认类型参数。</p>
+
+
+          <h2>知识星球与微信公众号</h2>
+
+<p>扫描下面的二维码关注我的微信公众号《音视频开发进阶》，推送更多精彩内容！</p>
+
+<p>欢迎加入 <a link="https://wx.zsxq.com/dweb2/index/group/28514145855111?type=group"> 知识星球《音视频与图形图像的那些事》</a>，还有更多的互动回答和知识分享再等你！</p>
+
+<p>添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+
+
+
+<img src="https://image.glumes.com/wechat-planet.png" alt="wechat-account-qrcode">
+
+
+  
+
+
+                    <p>
+                      原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-1/">C&#43;&#43; 模板系列小结-函数模板和类模板</a>
+                    </p>
+
+
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="https://glumes.com/img/avatar.jpeg"/>Glumes</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？加微信好友 ezglumes </span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="https://glumes.com/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="https://glumes.com/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/">C&#43;&#43; 标准容器库小结</a></li>
+    
+    <li><a href="https://glumes.com/post/engine/01-what-is-render-engine/">从零打造渲染引擎系列01-什么是渲染引擎</a></li>
+    
+    <li><a href="https://glumes.com/post/ios/swift-call-c-function/">iOS开发 - 在 Swift 中去调用 C/C&#43;&#43; 代码</a></li>
+    
+    <li><a href="https://glumes.com/post/life/2020-review/">不一样的年终总结，2020 年吃过的那些药</a></li>
+    
+    <li><a href="https://glumes.com/post/engine/2021-render-engine/">2021 技术新番 - 从零打造渲染引擎系列</a></li>
+    
+    <li><a href="https://glumes.com/post/android/agora-sdk-tutorial/">声网 SDK 接入以及音视频通话应用开发指南</a></li>
+    
+    <li><a href="https://glumes.com/post/ios/ios-av-developer-prepare/">iOS 音视频开发的一些基础准备工作</a></li>
+    
+    <li><a href="https://glumes.com/post/life/av-beginner-wechat-group/">音视频交流群又来啦~~~</a></li>
+    
+    <li><a href="https://glumes.com/post/webrtc/webrtc-android-setup/">WebRTC &amp; Android 开发学习环境搭建~</a></li>
+    
+    <li><a href="https://glumes.com/post/life/domain-name-register/">【喜大普奔】域名终于备案通过啦</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://glumes.com/post/engine/01-what-is-render-engine/" data-toggle="tooltip" data-placement="top" title="从零打造渲染引擎系列01-什么是渲染引擎">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://glumes.com/post/engine/2021-render-engine/" data-toggle="tooltip" data-placement="top" title="2021 技术新番 - 从零打造渲染引擎系列">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        
+        
+        
+
+
+        
+
+        
+  
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          
+          
+              <li>
+                <a href="mailto:zhaoying9402@outlook.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/u/3157458295" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="https://glumes.com/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">音视频开发进阶</a>
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/sitemap.xml">网站地图</a>
+          
+             &nbsp;&bull;&nbsp;
+                      <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+        </p>
+
+
+
+
+
+
+                <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+          &nbsp;&bull;&nbsp;
+                 <span id="busuanzi_container_page_pv" style="display:none">
+            阅读量<span id="busuanzi_value_page_pv"></span>人次
+          </span>
+        </p>
+
+<p>
+<a target="_blank"; href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral";>
+<img style="height:20px;width:auto;"; src="https://www.upyun.com/static/img/%E6%A0%B7%E5%BC%8F%E5%9B%BE.7cf927c.png"; />
+</a>
+</P>
+        
+        <p class="credits theme-by text-muted">
+          由 <a href="http://gohugo.io">Hugo v0.80.0</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a> 移植自 <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://glumes.com/js/bootstrap.min.js"></script>
+<script src="https://glumes.com/js/main.min.js"></script>
+<script src="https://glumes.com/js/reward.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+<script>
+  (function() {
+    var cx = 'true';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+  
+
+
+
+
+
+
+<script src='https://glumes.com/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+
