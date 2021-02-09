@@ -6,9 +6,30 @@
     <description>Recent content in C&#43;&#43; on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 Feb 2021 17:57:04 +0800</lastBuildDate><atom:link href="https://glumes.com/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Feb 2021 10:19:51 +0800</lastBuildDate><atom:link href="https://glumes.com/tags/c++/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>C&#43;&#43; 模板系列小结-函数模板和类模板</title>
+      <title>C&#43;&#43; 模板系列小结03-在模板中指定变量类型</title>
+      <link>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-3/</link>
+      <pubDate>Tue, 09 Feb 2021 10:19:51 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-3/</guid>
+      <description>&lt;p&gt;在之前的代码示例中，频繁用到 &lt;code&gt;typename&lt;/code&gt; 关键字。&lt;/p&gt;
+&lt;p&gt;它的作用就是声明模板参数是类型参数（对于非类型参数，之前的文章也有提到了），也可以用 &lt;code&gt;class&lt;/code&gt; 关键字来代替，但为了避免歧义，大多还是使用 &lt;code&gt;typename&lt;/code&gt; 了。&lt;/p&gt;
+&lt;p&gt;除此之外，在模板的定义也可以使用 &lt;code&gt;typename&lt;/code&gt; 关键字，用来指定变量的类型。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; 模板系列小结02-非类型模板参数</title>
+      <link>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-2/</link>
+      <pubDate>Mon, 08 Feb 2021 20:14:18 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-2/</guid>
+      <description>&lt;p&gt;前面已经介绍了函数模板和类模板，还介绍了类模板的默认参数，在代码示例中都是用具体类型来作为模板参数的。&lt;/p&gt;
+&lt;p&gt;实际上，模板参数不局限于类型，普通值也可以作为模板参数，也就是本篇要讲的内容：非类型模板参数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; 模板系列小结01-函数模板和类模板</title>
       <link>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-1/</link>
       <pubDate>Mon, 08 Feb 2021 17:57:04 +0800</pubDate>
       

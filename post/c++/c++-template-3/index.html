@@ -6,31 +6,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>2021 技术新番 - 从零打造渲染引擎系列</title>
-  <meta property="og:title" content="2021 技术新番 - 从零打造渲染引擎系列" />
-  <meta name="twitter:title" content="2021 技术新番 - 从零打造渲染引擎系列" />
+  <title>C&#43;&#43; 模板系列小结03-在模板中指定变量类型</title>
+  <meta property="og:title" content="C&#43;&#43; 模板系列小结03-在模板中指定变量类型" />
+  <meta name="twitter:title" content="C&#43;&#43; 模板系列小结03-在模板中指定变量类型" />
 
-  <meta name="description" content="2021 年的第一次公众号文章推送，它会迟到，但绝不缺席！！
-2020 年已经成为过去，新的一年又该有新的规划了，沉思良久之后决定就是它啦~~
-今年的发力点就是从零打造渲染引擎。">
-  <meta property="og:description" content="2021 年的第一次公众号文章推送，它会迟到，但绝不缺席！！
-2020 年已经成为过去，新的一年又该有新的规划了，沉思良久之后决定就是它啦~~
-今年的发力点就是从零打造渲染引擎。">
-  <meta name="twitter:description" content="2021 年的第一次公众号文章推送，它会迟到，但绝不缺席！！
-2020 年已经成为过去，新的一年又该有新的规划了，沉思良久之后决定就是它啦~~
-今年的发力点就是从零打造渲染引擎。">
+  <meta name="description" content="在之前的代码示例中，频繁用到 typename 关键字。
+它的作用就是声明模板参数是类型参数（对于非类型参数，之前的文章也有提到了），也可以用 class 关键字来代替，但为了避免歧义，大多还是使用 typename 了。
+除此之外，在模板的定义也可以使用 typename 关键字，用来指定变量的类型。">
+  <meta property="og:description" content="在之前的代码示例中，频繁用到 typename 关键字。
+它的作用就是声明模板参数是类型参数（对于非类型参数，之前的文章也有提到了），也可以用 class 关键字来代替，但为了避免歧义，大多还是使用 typename 了。
+除此之外，在模板的定义也可以使用 typename 关键字，用来指定变量的类型。">
+  <meta name="twitter:description" content="在之前的代码示例中，频繁用到 typename 关键字。
+它的作用就是声明模板参数是类型参数（对于非类型参数，之前的文章也有提到了），也可以用 class 关键字来代替，但为了避免歧义，大多还是使用 typename 了。
+除此之外，在模板的定义也可以使用 typename 关键字，用来指定变量的类型。">
   <meta name="author" content=""/>
   <link href="https://image.glumes.com/video-favicon.png" rel="icon" type="image/x-icon" />
   <link rel="apple-touch-icon" href="https://image.glumes.com/video-favicon.png"/>
   <meta property="og:image" content="https://image.glumes.com/video-favicon.png" />
   <meta name="twitter:image" content="https://image.glumes.com/video-favicon.png" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://glumes.com/post/engine/2021-render-engine/" />
+  <meta property="og:url" content="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-3/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="音视频开发进阶" />
 
   <meta name="generator" content="Hugo 0.80.0" />
-  <link rel="canonical" href="https://glumes.com/post/engine/2021-render-engine/" />
+  <link rel="canonical" href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-3/" />
   <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="音视频开发进阶">
 
   
@@ -257,8 +257,35 @@ autocomplete('#aa-search-input',
 
 
   
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/blog_image/610391b1gy1gmhbipn8w5j208x0sgtk7.jpg" ></div>
+  
 
-  <header class="header-section ">
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-md-offset-0">
+              <div class="post-heading">
+                <h1>C&#43;&#43; 模板系列小结03-在模板中指定变量类型</h1>
+                  
+                  
+                    <span class="post-meta">
+  
+    
+  
+  
+</span>
+
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
     
     
     
@@ -268,7 +295,7 @@ autocomplete('#aa-search-input',
         <div class="row">
           <div class="col-lg-12 col-md-12 col-md-offset-0">
             <div class="post-heading">
-              <h1>2021 技术新番 - 从零打造渲染引擎系列</h1>
+              <h1>C&#43;&#43; 模板系列小结03-在模板中指定变量类型</h1>
                 
                 
                   <span class="post-meta">
@@ -304,7 +331,9 @@ autocomplete('#aa-search-input',
             
             <h5 id="tags" style="margin-top: 30px;">标签:
               
-                  <a href="https://glumes.com/tags/engine/">engine</a> &nbsp;
+                  <a href="https://glumes.com/tags/c&#43;&#43;/">C&#43;&#43;</a> &nbsp;
+              
+                  <a href="https://glumes.com/tags/template/">Template</a> &nbsp;
               
             </h5>
             
@@ -331,30 +360,51 @@ autocomplete('#aa-search-input',
           
           
 
-          <p>2021 年的第一次公众号文章推送，它会迟到，但绝不缺席！！</p>
-<p>2020 年已经成为过去，新的一年又该有新的规划了，沉思良久之后决定就是它啦~~</p>
-<p>今年的发力点就是从零打造渲染引擎。</p>
-<p>说实话，其实我都还不知道渲染引擎要怎么搞。</p>
-<p>前段时间在油管上看视频，刷到这位小哥的内容，跟进去看了很多，讲的不错，范围广，内容全。</p>
-<p><img src="https://image.glumes.com/wechat-talk.png" alt="https://image.glumes.com/wechat-talk.png"></p>
-<p>正好他讲的内容也是渲染引擎相关的，跟着学了一丢丢，知道点皮毛，有个大概框架脉络了。</p>
-<p>顺便说一下油管上类似的视频还挺多的，感觉他们是一个团伙的，录视频卖代码，也是个好思路。</p>
-<p>后来又在 Github 上搜了很多渲染引擎的开源库，认真研读一番，看的比写的还多，想的比看的多更多。</p>
-<p>想知道我看了哪些开源库，不妨直接 follow 我的 Github 地址，带你 Star 那些不错的音视频项目。</p>
-<blockquote>
-<p><a href="https://github.com/glumes">https://github.com/glumes</a></p>
-</blockquote>
-<p>俗话说：满瓶不响，半瓶咣当。学了几招，差不多有了三脚猫功夫，就可以出来装 X 立 Flag 了。</p>
-<hr>
-<p>当然，目的还是比较直接的。摸索尝试着去做一个渲染引擎，不断发展，动态演变，同时也学习一波优秀引擎的代码，提高眼界，拓展能力边界。</p>
-<p>另外，既然标题是技术新番，那么肯定不会草草结束啦，十几篇文章就写完了，太对不起新番这个称呼了，做好追番的准备吧！</p>
-<p>其实，在之前就已经尝试着去写过了部分代码，用 XCode 写的，如下图。</p>
-<p><img src="https://image.glumes.com/blog_image/render-engine-demo.png" alt=""></p>
-<p>不得不说给 XCode 跪了，编辑体验实在太差了，和 CLion 简直没法比，在库依赖和构建上也差很多。</p>
-<p>一开始我还图 XCode 上的工具好用，可以检测内存使用情况，避免有泄漏，CLion 这方面就有所欠缺。使用了一段时间就放弃了，还是切换回 CLion 吧，用着顺手，不想花心思捣鼓无关的了。</p>
-<p>如果有心追番，建议下载好 CLion ，我已经悄悄地写了不少代码了。</p>
-<p>黔驴技穷，没啥技术能拿得出手了，只能现学现卖，不断给大家带来有趣的新东西了 ~~~</p>
-<p>最后，2021 希望各位都可以技术爆栈，能力突飞猛进，早日暴富~~~</p>
+          <p>在之前的代码示例中，频繁用到 <code>typename</code> 关键字。</p>
+<p>它的作用就是声明模板参数是类型参数（对于非类型参数，之前的文章也有提到了），也可以用 <code>class</code> 关键字来代替，但为了避免歧义，大多还是使用 <code>typename</code> 了。</p>
+<p>除此之外，在模板的定义也可以使用 <code>typename</code> 关键字，用来指定变量的类型。</p>
+<p>举个例子：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">class</span> <span style="color:#cb4b16">Foo</span>{
+<span style="color:#859900">public</span>:
+    <span style="color:#859900">typedef</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">num</span>;
+    <span style="color:#859900">static</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">order</span>;
+};
+
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">main</span>(){
+    <span style="color:#268bd2">Foo</span>::<span style="color:#268bd2">num</span> <span style="color:#268bd2">a</span> = <span style="color:#2aa198;font-weight:bold">10</span>;
+    <span style="color:#268bd2">Foo</span>::<span style="color:#268bd2">order</span> = <span style="color:#2aa198;font-weight:bold">10</span>;
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
+}
+
+</code></pre></div><p>以上定义了一个类 Foo ，并且在类中定义了一个类型别名 <code>Foo::num</code> ，后续我们可以使用该类型别名。</p>
+<p>同时也定义了一个类变量 <code>order</code> ，后续也可以直接使用该类变量。</p>
+<p>类变量和类中声明的别名使用方式有相似之处，都是通过 <code>XX::XX</code> 的形式使用，但一个是变量，一个是类型名称，这是两者的根本差别。</p>
+<p>假设现在定义了如下的 MyClass 类模板：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#859900">class</span> <span style="color:#cb4b16">MyClass</span> {
+<span style="color:#859900">private</span>:
+    <span style="color:#268bd2">T</span>::<span style="color:#268bd2">num</span> * <span style="color:#268bd2">a</span>;
+};
+</code></pre></div><p>由于类变量和类中别名的相似之处，此时编译器将不知道 T::num 到底是变量还是类型，如果是变量的话，加上后面的 * 号会被当成是一个乘法操作。</p>
+<p>这时就需要在类模板定义中使用 <code>typename</code> 关键字指定 T::num 是一个类型而不是变量。</p>
+<p>如下所示:</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#859900">class</span> <span style="color:#cb4b16">MyClass</span> {
+<span style="color:#859900">private</span>:
+   <span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>::<span style="color:#268bd2">num</span> * <span style="color:#268bd2">a</span>;
+};
+</code></pre></div><p>通常而言，当某个依赖于模板参数的名称是一个类型时，就应该使用 <code>typename</code> 。</p>
+<p>一个典型的应用就是在模板代码中访问 STL 容器的迭代器：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">printcoll</span>(<span style="color:#268bd2">T</span> <span style="color:#859900">const</span> &amp;<span style="color:#268bd2">coll</span>) {
+    <span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>::<span style="color:#268bd2">const_iterator</span> <span style="color:#268bd2">pos</span>;
+    <span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>::<span style="color:#268bd2">const_iterator</span> <span style="color:#268bd2">end</span>(<span style="color:#268bd2">coll</span>.<span style="color:#268bd2">end</span>());
+
+    <span style="color:#859900">for</span> (<span style="color:#268bd2">pos</span> = <span style="color:#268bd2">coll</span>.<span style="color:#268bd2">begin</span>(); <span style="color:#268bd2">pos</span> != <span style="color:#268bd2">end</span>; <span style="color:#268bd2">pos</span>++) {
+        <span style="color:#268bd2">std</span>::<span style="color:#268bd2">cout</span> &lt;&lt; *<span style="color:#268bd2">pos</span> &lt;&lt; <span style="color:#268bd2">std</span>::<span style="color:#268bd2">endl</span>;
+    }
+}
+</code></pre></div>
 
 
           <h2>知识星球与微信公众号</h2>
@@ -374,7 +424,7 @@ autocomplete('#aa-search-input',
 
 
                     <p>
-                      原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/engine/2021-render-engine/">2021 技术新番 - 从零打造渲染引擎系列</a>
+                      原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-3/">C&#43;&#43; 模板系列小结03-在模板中指定变量类型</a>
                     </p>
 
 
@@ -437,25 +487,25 @@ autocomplete('#aa-search-input',
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-2/">C&#43;&#43; 模板系列小结02-非类型模板参数</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-1/">C&#43;&#43; 模板系列小结01-函数模板和类模板</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/">C&#43;&#43; 标准容器库小结</a></li>
+    
+    <li><a href="https://glumes.com/post/engine/01-what-is-render-engine/">从零打造渲染引擎系列01-什么是渲染引擎</a></li>
+    
+    <li><a href="https://glumes.com/post/ios/swift-call-c-function/">iOS开发 - 在 Swift 中去调用 C/C&#43;&#43; 代码</a></li>
+    
+    <li><a href="https://glumes.com/post/life/2020-review/">不一样的年终总结，2020 年吃过的那些药</a></li>
+    
+    <li><a href="https://glumes.com/post/engine/2021-render-engine/">2021 技术新番 - 从零打造渲染引擎系列</a></li>
+    
     <li><a href="https://glumes.com/post/android/agora-sdk-tutorial/">声网 SDK 接入以及音视频通话应用开发指南</a></li>
     
     <li><a href="https://glumes.com/post/ios/ios-av-developer-prepare/">iOS 音视频开发的一些基础准备工作</a></li>
     
     <li><a href="https://glumes.com/post/life/av-beginner-wechat-group/">音视频交流群又来啦~~~</a></li>
-    
-    <li><a href="https://glumes.com/post/webrtc/webrtc-android-setup/">WebRTC &amp; Android 开发学习环境搭建~</a></li>
-    
-    <li><a href="https://glumes.com/post/life/domain-name-register/">【喜大普奔】域名终于备案通过啦</a></li>
-    
-    <li><a href="https://glumes.com/post/opengl/opengl-draw-grid-optimize/">Shader 优化 | OpenGL 绘制网格效果</a></li>
-    
-    <li><a href="https://glumes.com/post/opengl/shader-tool-kodelife-introduce/">KodeLife | Shader 实时编辑预览的强大工具使用实践</a></li>
-    
-    <li><a href="https://glumes.com/post/ffmpeg/av-beginner-011/">【音视频连载-011】第二季 FFmpeg 一层一层获取文件信息</a></li>
-    
-    <li><a href="https://glumes.com/post/android/android-av-beginner-resource/">推荐几个堪称教科书级别的 Android 音视频入门项目</a></li>
-    
-    <li><a href="https://glumes.com/post/ffmpeg/av-beginner-010/">【音视频连载-010】第二季 FFmpeg 日志打印</a></li>
     
 </ul>
 
@@ -465,9 +515,13 @@ autocomplete('#aa-search-input',
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-3/" data-toggle="tooltip" data-placement="top" title="C&#43;&#43; 模板系列小结03-在模板中指定变量类型">&larr; 前一篇</a>
+              <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-2/" data-toggle="tooltip" data-placement="top" title="C&#43;&#43; 模板系列小结02-非类型模板参数">&larr; 前一篇</a>
             </li>
           
+          
+            <li class="next">
+              <a href="https://glumes.com/post/engine/2021-render-engine/" data-toggle="tooltip" data-placement="top" title="2021 技术新番 - 从零打造渲染引擎系列">后一篇 &rarr;</a>
+            </li>
           
         </ul>
         
