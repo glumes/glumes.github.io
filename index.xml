@@ -6,7 +6,7 @@
     <description>Recent content on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 Feb 2021 12:11:34 +0800</lastBuildDate><atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Feb 2021 16:38:48 +0800</lastBuildDate><atom:link href="https://glumes.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2021 技术新番 - 从零打造渲染引擎系列</title>
       <link>https://glumes.com/post/engine/2021-render-engine/</link>
@@ -16,6 +16,19 @@
       <description>&lt;p&gt;2021 年的第一次公众号文章推送，它会迟到，但绝不缺席！！&lt;/p&gt;
 &lt;p&gt;2020 年已经成为过去，新的一年又该有新的规划了，沉思良久之后决定就是它啦~~&lt;/p&gt;
 &lt;p&gt;今年的发力点就是从零打造渲染引擎。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; 中的多线程的使用和线程池建设</title>
+      <link>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-multi-thread/</link>
+      <pubDate>Tue, 09 Feb 2021 16:38:48 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-multi-thread/</guid>
+      <description>&lt;p&gt;C++ 11 引入了 std::thread 标准库，方便了多线程相关的开发工作。&lt;/p&gt;
+&lt;p&gt;说到多线程开发，可不仅仅是创建一个新线程就好了，不可避免的要涉及到线程同步的问题。&lt;/p&gt;
+&lt;p&gt;而保证线程同步，实现线程安全，就要用到相关的工具了，比如信号量、互斥量、条件变量、原子变量等等。&lt;/p&gt;
+&lt;p&gt;这些名词概念都是来操作系统里面引申来的，并不是属于哪一种编程语言所特有的，在不同语言上的表现形式不一样，但其背后的原理是一致的。&lt;/p&gt;
+&lt;p&gt;C++ 11 同样引入了 mutex、condition_variable、future 等实现线程安全的类，下面就来一一了解它们。&lt;/p&gt;</description>
     </item>
     
     <item>

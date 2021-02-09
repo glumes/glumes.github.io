@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>C&#43;&#43; 中的多线程的使用和线程池建设</title>
+  <meta property="og:title" content="C&#43;&#43; 中的多线程的使用和线程池建设" />
+  <meta name="twitter:title" content="C&#43;&#43; 中的多线程的使用和线程池建设" />
+
+  <meta name="description" content="C&#43;&#43; 11 引入了 std::thread 标准库，方便了多线程相关的开发工作。
+说到多线程开发，可不仅仅是创建一个新线程就好了，不可避免的要涉及到线程同步的问题。
+而保证线程同步，实现线程安全，就要用到相关的工具了，比如信号量、互斥量、条件变量、原子变量等等。
+这些名词概念都是来操作系统里面引申来的，并不是属于哪一种编程语言所特有的，在不同语言上的表现形式不一样，但其背后的原理是一致的。
+C&#43;&#43; 11 同样引入了 mutex、condition_variable、future 等实现线程安全的类，下面就来一一了解它们。">
+  <meta property="og:description" content="C&#43;&#43; 11 引入了 std::thread 标准库，方便了多线程相关的开发工作。
+说到多线程开发，可不仅仅是创建一个新线程就好了，不可避免的要涉及到线程同步的问题。
+而保证线程同步，实现线程安全，就要用到相关的工具了，比如信号量、互斥量、条件变量、原子变量等等。
+这些名词概念都是来操作系统里面引申来的，并不是属于哪一种编程语言所特有的，在不同语言上的表现形式不一样，但其背后的原理是一致的。
+C&#43;&#43; 11 同样引入了 mutex、condition_variable、future 等实现线程安全的类，下面就来一一了解它们。">
+  <meta name="twitter:description" content="C&#43;&#43; 11 引入了 std::thread 标准库，方便了多线程相关的开发工作。
+说到多线程开发，可不仅仅是创建一个新线程就好了，不可避免的要涉及到线程同步的问题。
+而保证线程同步，实现线程安全，就要用到相关的工具了，比如信号量、互斥量、条件变量、原子变量等等。
+这些名词概念都是来操作系统里面引申来的，并不是属于哪一种编程语言所特有的，在不同语言上的表现形式不一样，但其背后的原理是一致的。 …">
+  <meta name="author" content=""/>
+  <link href="https://image.glumes.com/video-favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="https://image.glumes.com/video-favicon.png"/>
+  <meta property="og:image" content="https://image.glumes.com/video-favicon.png" />
+  <meta name="twitter:image" content="https://image.glumes.com/video-favicon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-multi-thread/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="音视频开发进阶" />
+
+  <meta name="generator" content="Hugo 0.80.0" />
+  <link rel="canonical" href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-multi-thread/" />
+  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="音视频开发进阶">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/reward.css" />
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/search.css" />
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/main.css" />
+
+
+  
+  
+  
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+
+
+
+
+
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TRLK1SYTZ1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TRLK1SYTZ1');
+</script>
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/" title="音视频开发进阶">
+        
+        音视频开发进阶
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">音视频开发</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://glumes.com/categories/opengl">OpenGL </a>
+                
+                  <a href="https://glumes.com/categories/ffmpeg">FFmpeg</a>
+                
+                  <a href="https://glumes.com/categories/vulkan">Vulkan </a>
+                
+                  <a href="https://glumes.com/categories/webrtc">WebRTC </a>
+                
+                  <a href="https://glumes.com/categories/opencv">opencv </a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">移动开发</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://glumes.com/categories/android">Android</a>
+                
+                  <a href="https://glumes.com/categories/ios">ios</a>
+                
+                  <a href="https://glumes.com/categories/c&#43;&#43;">C&#43;&#43;</a>
+                
+                  <a href="https://glumes.com/categories/python">Python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="程序人生" href="https://glumes.com/categories/life">程序人生</a>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">我的视频教学</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://space.bilibili.com/105478237">B 站视频</a>
+                
+                  <a href="http://www.imooc.com/learn/1212">慕课网视频</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="小专栏" href="https://xiaozhuanlan.com/glumes">小专栏</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="https://glumes.com/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="所有文章" href="https://glumes.com/post/">所有文章</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+
+        
+
+          
+
+
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="https://glumes.com/js/algoliasearch.min.js"></script>
+<script src="https://glumes.com/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "true");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="https://glumes.com/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/blog_image/610391b1gy1gmhbipn8w5j208x0sgtk7.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-md-offset-0">
+              <div class="post-heading">
+                <h1>C&#43;&#43; 中的多线程的使用和线程池建设</h1>
+                  
+                  
+                    <span class="post-meta">
+  
+    
+  
+  
+</span>
+
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+              <h1>C&#43;&#43; 中的多线程的使用和线程池建设</h1>
+                
+                
+                  <span class="post-meta">
+  
+    
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://glumes.com/tags/c&#43;&#43;/">C&#43;&#43;</a> &nbsp;
+              
+                  <a href="https://glumes.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mutex">mutex</a></li>
+    <li><a href="#condition_variable">condition_variable</a>
+      <ul>
+        <li><a href="#condiation_variable-实现生产消费者模式">condiation_variable 实现生产消费者模式</a></li>
+      </ul>
+    </li>
+    <li><a href="#future--promise">future &amp; promise</a>
+      <ul>
+        <li><a href="#stdpromise">std::promise</a></li>
+        <li><a href="#stdpackaged_task">std::packaged_task</a></li>
+        <li><a href="#stdasync">std::async</a></li>
+      </ul>
+    </li>
+    <li><a href="#线程池的建设">线程池的建设</a>
+      <ul>
+        <li><a href="#任务类型">任务类型</a></li>
+        <li><a href="#线程数量">线程数量</a></li>
+        <li><a href="#任务缓存">任务缓存</a></li>
+        <li><a href="#缓存队列">缓存队列</a></li>
+        <li><a href="#线程调度">线程调度</a></li>
+      </ul>
+    </li>
+    <li><a href="#小结">小结</a></li>
+  </ul>
+</nav>
+</aside>
+
+          
+  
+
+          
+
+
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>C++ 11 引入了 std::thread 标准库，方便了多线程相关的开发工作。</p>
+<p>说到多线程开发，可不仅仅是创建一个新线程就好了，不可避免的要涉及到线程同步的问题。</p>
+<p>而保证线程同步，实现线程安全，就要用到相关的工具了，比如信号量、互斥量、条件变量、原子变量等等。</p>
+<p>这些名词概念都是来操作系统里面引申来的，并不是属于哪一种编程语言所特有的，在不同语言上的表现形式不一样，但其背后的原理是一致的。</p>
+<p>C++ 11 同样引入了 mutex、condition_variable、future 等实现线程安全的类，下面就来一一了解它们。</p>
+<h2 id="mutex">mutex</h2>
+<p>mutex 作为互斥量，提供了独占所有权的特性。</p>
+<p>一个线程将互斥量锁住，直到调用 unlock 之前，该线程都是拥有该锁的，而其他线程访问被锁住的互斥量，则会被阻塞住。</p>
+<p>使用示例：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;thread&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;iostream&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">num</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
+<span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span> <span style="color:#268bd2">mutex</span>;
+
+<span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">plus</span>(){
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">lock_guard</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span>&gt; <span style="color:#268bd2">guard</span>(<span style="color:#268bd2">mutex</span>);
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#268bd2">num</span>++ &lt;&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">endl</span>;
+}
+
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">main</span>(){
+    <span style="color:#268bd2">std</span>::<span style="color:#859900">thread</span> <span style="color:#268bd2">threads</span>[<span style="color:#2aa198;font-weight:bold">10</span>];
+    <span style="color:#859900">for</span> (<span style="color:#859900">auto</span> &amp; <span style="color:#268bd2">i</span> : <span style="color:#268bd2">threads</span>) {
+        <span style="color:#268bd2">i</span> = <span style="color:#268bd2">std</span>::<span style="color:#859900">thread</span>(<span style="color:#268bd2">plus</span>);
+    }
+    <span style="color:#859900">for</span> (<span style="color:#859900">auto</span> &amp; <span style="color:#859900">thread</span> : <span style="color:#268bd2">threads</span>) {
+        <span style="color:#859900">thread</span>.<span style="color:#268bd2">join</span>();
+    }
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
+}
+</code></pre></div><p>如上代码，创建了 10 个线程，每个线程都会先打印 num 的值，然后再将 num 变量加一，依次打印 0 到 9 。</p>
+<p>众所周知，+1 的操作不是线程安全的，实际包含了三步，先读取，再加一，最后赋值。但是因为使用了互斥量 mutex ，保证独占性，所以结果都是按照顺序递增打印的。</p>
+<p>如果不使用互斥量，那么可能前一个线程还没有赋值完，后一个线程就进行了读取，最后的结果就是随机不可预料的。</p>
+<h2 id="condition_variable">condition_variable</h2>
+<p>condition_variable 作为条件变量，它会调用 wait 函数等待某个条件满足，如果不满足的话，就通过 unique_lock 来锁住当前线程，当前线程就处于阻塞状态，直到其他线程调用了条件变量的 nofity 函数来唤醒。</p>
+<p>使用示例：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;iostream&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;thread&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">num</span> = <span style="color:#2aa198;font-weight:bold">0</span>;
+<span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span> <span style="color:#268bd2">mutex</span>;
+<span style="color:#268bd2">std</span>::<span style="color:#268bd2">condition_variable</span> <span style="color:#268bd2">cv</span>;
+
+<span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">plus</span>(<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">target</span>){
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">unique_lock</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span>&gt; <span style="color:#268bd2">lock</span>(<span style="color:#268bd2">mutex</span>);
+    <span style="color:#268bd2">cv</span>.<span style="color:#268bd2">wait</span>(<span style="color:#268bd2">lock</span>,[<span style="color:#268bd2">target</span>]{<span style="color:#859900">return</span> <span style="color:#268bd2">num</span> == <span style="color:#268bd2">target</span>;});
+    <span style="color:#268bd2">num</span>++;
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#268bd2">target</span> &lt;&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">endl</span>;
+    <span style="color:#268bd2">cv</span>.<span style="color:#268bd2">notify_all</span>();
+}
+
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">main</span>(){
+    <span style="color:#268bd2">std</span>::<span style="color:#859900">thread</span> <span style="color:#268bd2">threads</span>[<span style="color:#2aa198;font-weight:bold">10</span>];
+    <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#2aa198;font-weight:bold">10</span>; ++<span style="color:#268bd2">i</span>) {
+        <span style="color:#268bd2">threads</span>[<span style="color:#268bd2">i</span>] = <span style="color:#268bd2">std</span>::<span style="color:#859900">thread</span>(<span style="color:#268bd2">plus</span>,<span style="color:#2aa198;font-weight:bold">9</span>-<span style="color:#268bd2">i</span>);
+    }
+    <span style="color:#859900">for</span> (<span style="color:#859900">auto</span> &amp; <span style="color:#859900">thread</span> : <span style="color:#268bd2">threads</span>) {
+        <span style="color:#859900">thread</span>.<span style="color:#268bd2">join</span>();
+    }
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
+}
+</code></pre></div><p>同样是创建了 10 个线程，每个线程都会有一个 target 参数，代表该线程要打印的数值，按照 9 -&gt; 0 顺序创建线程，最后运行结果是依次打印 0 -&gt; 9 。</p>
+<p>每个线程运行时都会先调用 wait 函数等待 num == target 这一条件满足，一旦满足就会将 num 加一，并打印 target 值，然后唤醒下一个满足条件的值。</p>
+<p>通过改变条件变量的 wait 函数唤醒条件，就可以实现不同的多线程模式，比如常见的生产者-消费者模型。</p>
+<h3 id="condiation_variable-实现生产消费者模式">condiation_variable 实现生产消费者模式</h3>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;iostream&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;thread&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;queue&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">main</span>(){
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">queue</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt; <span style="color:#268bd2">products</span>;
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">condition_variable</span> <span style="color:#268bd2">cv_pro</span>,<span style="color:#268bd2">cv_con</span>;
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span> <span style="color:#268bd2">mtx</span>;
+
+    <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">end</span> = <span style="color:#cb4b16">false</span>;
+    <span style="color:#268bd2">std</span>::<span style="color:#859900">thread</span> <span style="color:#268bd2">producer</span>([&amp;]{
+        <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#2aa198;font-weight:bold">10</span>; ++<span style="color:#268bd2">i</span>) {
+            <span style="color:#268bd2">std</span>::<span style="color:#268bd2">unique_lock</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span>&gt; <span style="color:#268bd2">lock</span>(<span style="color:#268bd2">mtx</span>);
+            <span style="color:#268bd2">cv_pro</span>.<span style="color:#268bd2">wait</span>(<span style="color:#268bd2">lock</span>,[&amp;]{<span style="color:#859900">return</span> <span style="color:#268bd2">products</span>.<span style="color:#268bd2">empty</span>();});
+            <span style="color:#268bd2">products</span>.<span style="color:#268bd2">push</span>(<span style="color:#268bd2">i</span>);
+            <span style="color:#268bd2">cv_con</span>.<span style="color:#268bd2">notify_all</span>();
+        }
+        <span style="color:#268bd2">cv_con</span>.<span style="color:#268bd2">notify_all</span>();
+        <span style="color:#268bd2">end</span> = <span style="color:#cb4b16">true</span>;
+    });
+
+    <span style="color:#268bd2">std</span>::<span style="color:#859900">thread</span> <span style="color:#268bd2">consumer</span>([&amp;]{
+        <span style="color:#859900">while</span> (!<span style="color:#268bd2">end</span>){
+            <span style="color:#268bd2">std</span>::<span style="color:#268bd2">unique_lock</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span>&gt; <span style="color:#268bd2">lock</span>(<span style="color:#268bd2">mtx</span>);
+            <span style="color:#268bd2">cv_con</span>.<span style="color:#268bd2">wait</span>(<span style="color:#268bd2">lock</span>,[&amp;]{<span style="color:#859900">return</span> !<span style="color:#268bd2">products</span>.<span style="color:#268bd2">empty</span>();});
+            <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">d</span> = <span style="color:#268bd2">products</span>.<span style="color:#268bd2">front</span>();
+            <span style="color:#268bd2">products</span>.<span style="color:#268bd2">pop</span>();
+            <span style="color:#268bd2">std</span>::<span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#268bd2">d</span> &lt;&lt; <span style="color:#268bd2">std</span>::<span style="color:#268bd2">endl</span>;
+            <span style="color:#268bd2">cv_pro</span>.<span style="color:#268bd2">notify_all</span>();
+        }
+    });
+
+    <span style="color:#268bd2">producer</span>.<span style="color:#268bd2">join</span>();
+    <span style="color:#268bd2">consumer</span>.<span style="color:#268bd2">join</span>();
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
+}
+</code></pre></div><h2 id="future--promise">future &amp; promise</h2>
+<p>future 这一特性在日常开发中用的比较少，它可以用来获取异步任务的结果，也可以当做一种线程间同步的手段。</p>
+<p>假设现在程序要创建一个线程去执行耗时操作，并且等耗时操作结束了之后要拿到返回值，那么可以通过 condiation_variable 来实现，在异步线程执行完了之后调用 notify 方法来唤醒主线程，同样也可以通过 future 来实现。</p>
+<p>当程序通过特定方法创建了一个异步操作之后会返回一个 future ，该 future 可以访问到异步线程的状态。</p>
+<p>在异步线程里面设置某个共享状态的值，与该共享状态相关联的 future 就可以通过 get 方法来获取结果，get() 方法会阻塞调用线程，从而等待异步线程完成设置。</p>
+<p>future 的 get 方法其实就相当于 condiation_variable 的 wait 方法，而异步线程设置共享状态的值的方法就相当于 condiation_variable 的 notify 方法。</p>
+<p>future 的创建有如下三种方式：</p>
+<h3 id="stdpromise">std::promise</h3>
+<p>promise 就像它的字面意思一样，代表承诺，说明它一定会在异步线程设置共享状态的，而 future 就耐心等待好了。</p>
+<p>promise 和 future 的调用流程如下图所示：</p>
+<p><img src="https://image.glumes.com/blog_image/20210209164838.png" alt=""></p>
+<p>代码示例如下：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;iostream&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;thread&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;chrono&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;future&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">task</span>(<span style="color:#268bd2">std</span>::<span style="color:#268bd2">promise</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt;&amp; <span style="color:#268bd2">promise</span>){
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">this_thread</span>::<span style="color:#268bd2">sleep_for</span>(<span style="color:#268bd2">std</span>::<span style="color:#268bd2">chrono</span>::<span style="color:#268bd2">seconds</span>(<span style="color:#2aa198;font-weight:bold">1</span>));
+    <span style="color:#268bd2">promise</span>.<span style="color:#268bd2">set_value</span>(<span style="color:#2aa198;font-weight:bold">10</span>);
+}
+
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">main</span>(){
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">promise</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt; <span style="color:#268bd2">promise</span>;
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">future</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt; <span style="color:#268bd2">future</span> = <span style="color:#268bd2">promise</span>.<span style="color:#268bd2">get_future</span>();
+    <span style="color:#268bd2">std</span>::<span style="color:#859900">thread</span> <span style="color:#268bd2">t</span>(<span style="color:#268bd2">task</span>,<span style="color:#268bd2">std</span>::<span style="color:#268bd2">ref</span>(<span style="color:#268bd2">promise</span>));
+    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">result</span> = <span style="color:#268bd2">future</span>.<span style="color:#268bd2">get</span>();
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#2aa198">&#34;thread result is &#34;</span> &lt;&lt; <span style="color:#268bd2">result</span> &lt;&lt; <span style="color:#268bd2">std</span>::<span style="color:#268bd2">endl</span>;
+    <span style="color:#268bd2">t</span>.<span style="color:#268bd2">join</span>();
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
+}
+</code></pre></div><p>promise 通过 get_future 方法获取与该 promise 关联的 future 对象，并且通过 set_value 方法设置共享状态的值。</p>
+<h3 id="stdpackaged_task">std::packaged_task</h3>
+<p>packaged_task 可以用来包装一个可调用的对象 ，并且能作为线程的运行函数，有点类似于 std::function 。</p>
+<p>但不同的是，它将其包装的可调用对象的执行结果传递一个相关联的 future ，从而实现状态的共享，future 通过 get 方法来等待可调用对象执行结束。</p>
+<p>如下代码所示：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;iostream&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;thread&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;chrono&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;future&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">task</span>(){
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">this_thread</span>::<span style="color:#268bd2">sleep_for</span>(<span style="color:#268bd2">std</span>::<span style="color:#268bd2">chrono</span>::<span style="color:#268bd2">seconds</span>(<span style="color:#2aa198;font-weight:bold">1</span>));
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">10</span>;
+}
+
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">main</span>(){
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">packaged_task</span>&lt;<span style="color:#859900;font-weight:bold">int</span>(<span style="color:#859900;font-weight:bold">void</span>)&gt; <span style="color:#268bd2">packaged_task</span>(<span style="color:#268bd2">task</span>);
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">future</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt; <span style="color:#268bd2">future</span> = <span style="color:#268bd2">packaged_task</span>.<span style="color:#268bd2">get_future</span>();
+    <span style="color:#268bd2">std</span>::<span style="color:#859900">thread</span> <span style="color:#859900">thread</span>(<span style="color:#268bd2">std</span>::<span style="color:#268bd2">move</span>(<span style="color:#268bd2">packaged_task</span>));
+    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">result</span> = <span style="color:#268bd2">future</span>.<span style="color:#268bd2">get</span>();
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#2aa198">&#34;thread result is &#34;</span> &lt;&lt; <span style="color:#268bd2">result</span> &lt;&lt; <span style="color:#268bd2">std</span>::<span style="color:#268bd2">endl</span>;
+    <span style="color:#859900">thread</span>.<span style="color:#268bd2">join</span>();
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
+}
+</code></pre></div><p>packaged_task 通过 get_future 方法来获得相关联的 future 对象。</p>
+<h3 id="stdasync">std::async</h3>
+<p>async 也能创建 future ，并且它更像是对 std::thread，std::packaged_task，std::promise 的封装。</p>
+<p>如下代码所示：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;iostream&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;thread&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;chrono&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;future&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">task</span>(){
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">this_thread</span>::<span style="color:#268bd2">sleep_for</span>(<span style="color:#268bd2">std</span>::<span style="color:#268bd2">chrono</span>::<span style="color:#268bd2">seconds</span>(<span style="color:#2aa198;font-weight:bold">1</span>));
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">10</span>;
+}
+
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">main</span>(){
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">future</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt; <span style="color:#268bd2">future</span> = <span style="color:#268bd2">std</span>::<span style="color:#268bd2">async</span>(<span style="color:#268bd2">std</span>::<span style="color:#268bd2">launch</span>::<span style="color:#268bd2">async</span>,<span style="color:#268bd2">task</span>);
+    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">result</span> = <span style="color:#268bd2">future</span>.<span style="color:#268bd2">get</span>();
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">cout</span> &lt;&lt; <span style="color:#2aa198">&#34;thread result is &#34;</span> &lt;&lt; <span style="color:#268bd2">result</span> &lt;&lt; <span style="color:#268bd2">std</span>::<span style="color:#268bd2">endl</span>;
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
+}
+</code></pre></div><p>通过 async 直接创建异步线程并且获取相关联的 future 对象，连 thread 创建线程的操作都省了。</p>
+<p>async 有两种执行策略，launch::async 和 launch::deferred 。其中前者是立即执行，后者是等调用 future.get() 方法时才会创建线程执行任务。</p>
+<h2 id="线程池的建设">线程池的建设</h2>
+<p>了解了以上的线程相关操作类，就可以进一步进阶，通过它们来打造一个线程池了。</p>
+<p>关于线程池建设，根据具体业务和使用场景，会有很多不同支持，但有些本质内容还是不会变的。</p>
+<p>线程池的出发点当然是为了减少在频繁创建和销毁线程上所花的时间和系统资源的开销，表现形式上就是有一池子的线程，向线程池提交任务，最终分配到某个线程上去执行。</p>
+<p>如下图所示，就是一个简易线程池的雏形，有任务 Task，有 Thread Pool 来分发任务，也有 Worker Thread 来最终执行任务，麻雀虽小五脏俱全。</p>
+<p><img src="https://image.glumes.com/blog_image/20210209164921.png" alt=""></p>
+<p>接下来就详细拆解以上部分内容。</p>
+<h3 id="任务类型">任务类型</h3>
+<p>任务 Task 的类型根据业务需求可以有多种定义，主要差别在于任务需要的参数类型以及返回值类型。</p>
+<p>另外，任务本身也可以有一些属性来标识该属性的类型，应该放到什么样的线程去执行等等。</p>
+<p>简单起见，定义一个简单的 Task 类型，无需参数，也不需要返回值类型。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">using</span> <span style="color:#268bd2">task</span> = <span style="color:#268bd2">std</span>::<span style="color:#268bd2">function</span>&lt;<span style="color:#859900;font-weight:bold">void</span>()&gt;;
+</code></pre></div><h3 id="线程数量">线程数量</h3>
+<p>一个线程池该有多少线程呢？如果数量太多，会导致资源浪费，有些线程不一定能充分使用。如果太少就会导致频繁创建新线程。</p>
+<p>一个灵活的线程池应该是可以动态改变线程数量的，参考 <a href="https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html">Java线程池实现原理及其在美团业务中的实践</a>。</p>
+<p>在 Java 的 ThreadPoolExecutor 中通过 corePoolSize 和 maximumPoolSize 来限制线程的数量，线程数量会在 <code>[0 ~ corePoolSize]</code> 和 <code>[corePoolSize ~ maximumPoolSize] </code>之间波动。</p>
+<p>当任务吃紧，线程和缓存都满了，就会申请线程，数量达到 <code>[corePoolSize ~ maximumPoolSize]</code> 范围，一旦任务松懈，就会释放一些空闲线程，数量回落到 <code>[0 ~ corePoolSize]</code> 范围，如果任务持续吃紧，那么就会拒绝任务了。</p>
+<p>当然，也有其他确定线程数量的策略，根据具体的业务需求来核定，比如根据 CPU 多核来决定线程数量多少。</p>
+<p>简单起见，这里就以固定线程数量作为演示了。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">size_t</span> <span style="color:#268bd2">N</span> = <span style="color:#268bd2">std</span>::<span style="color:#859900">thread</span>::<span style="color:#268bd2">hardware_concurrency</span>();
+</code></pre></div><h3 id="任务缓存">任务缓存</h3>
+<p>假设现在已经固定了 N 个线程，并且每个线程都有任务在执行，这时有来了一个新任务，那么该怎么处理呢？ 这时候就需要任务缓存机制了（当然也可以直接拒绝该任务）。</p>
+<p>任务缓存也分多种形式：</p>
+<ol>
+<li>全局缓存</li>
+<li>线程缓存</li>
+<li>全局缓存 + 线程缓存</li>
+</ol>
+<h4 id="全局缓存">全局缓存</h4>
+<p>全局缓存，顾名思义就是在线程池有一个全局的缓存队列，凡是进入到线程池的任务都会先进到全局缓存中，然后由全局缓存进行任务的分发，最后由不同的工作线程去执行任务。</p>
+<h4 id="线程缓存">线程缓存</h4>
+<p>线程缓存，顾名思义就是在每个工作线程都有一个缓存队列，然后线程不断循环处理自己缓存队列上的任务。凡是进入到线程池的任务，都会由线程池进到调度和分发，然后进入到工作线程对应的缓存队列中，最终被执行结束</p>
+<h4 id="全局缓存--线程缓存">全局缓存 + 线程缓存</h4>
+<p>全局缓存 + 线程缓存 就是将上面两者结合起来了，用如下图来汇总演示：</p>
+<p><img src="https://image.glumes.com/blog_image/20210209164953.png" alt=""></p>
+<p>这种缓存方式算是比较复杂的情形了，适用于那种计算量大且快速执行的情形，一般来说还是全局缓存用的比较普遍。</p>
+<h3 id="缓存队列">缓存队列</h3>
+<p>有了任务缓存，那么还应该定义一下缓存队列。毫无疑问，缓存队列必须是线程安全的，因为它要在多个工作线程之间共享任务。</p>
+<p>缓存队列的形式有很多，比如阻塞队列，双向链表的阻塞队列等等，这里定义一个简单的队列，把 std::queue 做一下线程安全的封装。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">#pragma once
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;mutex&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;queue&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#93a1a1;font-style:italic">// Thread safe implementation of a Queue using an std::queue
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">template</span> &lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>&gt;
+<span style="color:#859900">class</span> <span style="color:#cb4b16">SafeQueue</span> {
+<span style="color:#859900">private</span>:
+  <span style="color:#268bd2">std</span>::<span style="color:#268bd2">queue</span>&lt;<span style="color:#268bd2">T</span>&gt; <span style="color:#268bd2">m_queue</span>;
+  <span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span> <span style="color:#268bd2">m_mutex</span>;
+<span style="color:#859900">public</span>:
+  <span style="color:#268bd2">SafeQueue</span>() {
+
+  }
+
+  <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">empty</span>() {
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">unique_lock</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span>&gt; <span style="color:#268bd2">lock</span>(<span style="color:#268bd2">m_mutex</span>);
+    <span style="color:#859900">return</span> <span style="color:#268bd2">m_queue</span>.<span style="color:#268bd2">empty</span>();
+  }
+  
+  <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">size</span>() {
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">unique_lock</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span>&gt; <span style="color:#268bd2">lock</span>(<span style="color:#268bd2">m_mutex</span>);
+    <span style="color:#859900">return</span> <span style="color:#268bd2">m_queue</span>.<span style="color:#268bd2">size</span>();
+  }
+
+  <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">enqueue</span>(<span style="color:#268bd2">T</span>&amp; <span style="color:#268bd2">t</span>) {
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">unique_lock</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span>&gt; <span style="color:#268bd2">lock</span>(<span style="color:#268bd2">m_mutex</span>);
+    <span style="color:#268bd2">m_queue</span>.<span style="color:#268bd2">push</span>(<span style="color:#268bd2">t</span>);
+  }
+  
+  <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">dequeue</span>(<span style="color:#268bd2">T</span>&amp; <span style="color:#268bd2">t</span>) {
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">unique_lock</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span>&gt; <span style="color:#268bd2">lock</span>(<span style="color:#268bd2">m_mutex</span>);
+
+    <span style="color:#859900">if</span> (<span style="color:#268bd2">m_queue</span>.<span style="color:#268bd2">empty</span>()) {
+      <span style="color:#859900">return</span> <span style="color:#cb4b16">false</span>;
+    }
+    <span style="color:#268bd2">t</span> = <span style="color:#268bd2">std</span>::<span style="color:#268bd2">move</span>(<span style="color:#268bd2">m_queue</span>.<span style="color:#268bd2">front</span>());
+    
+    <span style="color:#268bd2">m_queue</span>.<span style="color:#268bd2">pop</span>();
+    <span style="color:#859900">return</span> <span style="color:#cb4b16">true</span>;
+  }
+};
+</code></pre></div><p>定义了 enqueue 和 dequeue 方法向队列中塞任务和取任务，通过加锁来保证线程安全。</p>
+<h3 id="线程调度">线程调度</h3>
+<p>线程池最核心的部分也就是线程调度了，假设使用了全局缓存的形式，那么如何把全局缓存中的任务分发给空闲线程呢？</p>
+<p>实际上从某种角度来说，全局缓存的线程池也可以认为是一个单生产者-多消费者模式，全局缓存就是生产者，而多个线程就是多个消费者了。</p>
+<p>在前面的代码实践中已经写了一个单生产者-单消费者模式，当生产者生产了 Task 之后，就通过 notify 方法来唤醒消费者，从而将 Task 分配到消费者去执行。由于只有一个消费者，那唤醒的就是唯一的那个了。</p>
+<p>那假若有多个消费者，唤醒的又是哪一个呢？答案是随机的。调用 notify_one 方法会随机唤醒一个线程，调用 notify_all 则会唤醒全部线程。</p>
+<p>但是唤醒并不代表线程就会消费 Task，一个 Task 对应多个线程，线程唤醒之后会去全局缓存抢夺 Task 任务，一旦得手就执行，而其他没有抢到的线程则继续挂起，等待下一次的唤醒。</p>
+<p>线程池中线程的运行状态如下图所示：</p>
+<p><img src="https://image.glumes.com/blog_image/20210209165012.png" alt=""></p>
+<p>本质上，线程池还是通过 notify 方法来唤醒线程，从而实现任务分发和调度的。</p>
+<p>这种方式具有一定的随机性，不能确保到底唤醒了哪个线程，可以根据业务需要定制相关的调度逻辑，比如只唤醒某些具有共同属性的线程，或者根据 Task 任务的要求来唤醒指定线程，更可以不通过 notify 的方式，直接把任务派发给对应的线程去执行。</p>
+<p>根据上述流程图就可以给出工作线程运行的代码了：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">class</span> <span style="color:#cb4b16">WorkerThread</span> {
+<span style="color:#859900">private</span>:
+    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">m_id</span>;
+    <span style="color:#268bd2">ThreadPool</span> *<span style="color:#268bd2">m_pool</span>;
+<span style="color:#859900">public</span>:
+    <span style="color:#268bd2">WorkerThread</span>(<span style="color:#268bd2">ThreadPool</span> *<span style="color:#268bd2">pool</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">id</span>) : <span style="color:#268bd2">m_pool</span>(<span style="color:#268bd2">pool</span>), <span style="color:#268bd2">m_id</span>(<span style="color:#268bd2">id</span>) {
+
+    }
+
+    <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">operator</span>()() {
+        <span style="color:#268bd2">task</span> <span style="color:#268bd2">func</span>;
+        <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">dequeued</span>;
+        <span style="color:#859900">while</span> (!<span style="color:#268bd2">m_pool</span>-&gt;<span style="color:#268bd2">m_shutdown</span>) {
+            <span style="color:#268bd2">std</span>::<span style="color:#268bd2">unique_lock</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span>&gt; <span style="color:#268bd2">lock</span>(<span style="color:#268bd2">m_pool</span>-&gt;<span style="color:#268bd2">m_mutex</span>);
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">m_pool</span>-&gt;<span style="color:#268bd2">m_queue</span>.<span style="color:#268bd2">empty</span>()){
+                <span style="color:#268bd2">m_pool</span>-&gt;<span style="color:#268bd2">m_condition_variable</span>.<span style="color:#268bd2">wait</span>(<span style="color:#268bd2">lock</span>);
+            }
+            <span style="color:#268bd2">dequeued</span> = <span style="color:#268bd2">m_pool</span>-&gt;<span style="color:#268bd2">m_queue</span>.<span style="color:#268bd2">dequeue</span>(<span style="color:#268bd2">func</span>);
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">dequeued</span>) {
+                <span style="color:#268bd2">func</span>();
+            }
+        }
+    }
+};
+</code></pre></div><p>下面就是一个简单的线程池代码实践：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">
+<span style="color:#93a1a1;font-style:italic">#ifndef THREAD_POOL_THREADPOOL_H
+</span><span style="color:#93a1a1;font-style:italic">#define THREAD_POOL_THREADPOOL_H
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;functional&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;future&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;mutex&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;condition_variable&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;thread&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&lt;queue&gt;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic">#include</span> <span style="color:#93a1a1;font-style:italic">&#34;SafeQueue.h&#34;</span><span style="color:#93a1a1;font-style:italic">
+</span><span style="color:#93a1a1;font-style:italic"></span>
+<span style="color:#859900">using</span> <span style="color:#268bd2">task</span> = <span style="color:#268bd2">std</span>::<span style="color:#268bd2">function</span>&lt;<span style="color:#859900;font-weight:bold">void</span>()&gt;;
+
+<span style="color:#859900">class</span> <span style="color:#cb4b16">ThreadPool</span> {
+<span style="color:#859900">public</span>:
+    <span style="color:#268bd2">ThreadPool</span>(<span style="color:#268bd2">size_t</span> <span style="color:#268bd2">thread_num</span> = <span style="color:#268bd2">std</span>::<span style="color:#859900">thread</span>::<span style="color:#268bd2">hardware_concurrency</span>()) : <span style="color:#268bd2">m_threads</span>(
+            <span style="color:#268bd2">std</span>::<span style="color:#268bd2">vector</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#859900">thread</span>&gt;(<span style="color:#268bd2">thread_num</span>)), <span style="color:#268bd2">m_shutdown</span>(<span style="color:#cb4b16">false</span>) {
+    }
+
+    <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">init</span>() {
+        <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#268bd2">m_threads</span>.<span style="color:#268bd2">size</span>(); ++<span style="color:#268bd2">i</span>) {
+            <span style="color:#268bd2">m_threads</span>[<span style="color:#268bd2">i</span>] = <span style="color:#268bd2">std</span>::<span style="color:#859900">thread</span>(<span style="color:#268bd2">WorkerThread</span>(<span style="color:#859900">this</span>, <span style="color:#268bd2">i</span>));
+        }
+    }
+
+    <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">shutdown</span>() {
+        <span style="color:#268bd2">m_shutdown</span> = <span style="color:#cb4b16">true</span>;
+        <span style="color:#268bd2">m_condition_variable</span>.<span style="color:#268bd2">notify_all</span>();
+        <span style="color:#859900">for</span> (<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span> = <span style="color:#2aa198;font-weight:bold">0</span>; <span style="color:#268bd2">i</span> &lt; <span style="color:#268bd2">m_threads</span>.<span style="color:#268bd2">size</span>(); ++<span style="color:#268bd2">i</span>) {
+            <span style="color:#859900">if</span> (<span style="color:#268bd2">m_threads</span>[<span style="color:#268bd2">i</span>].<span style="color:#268bd2">joinable</span>()) {
+                <span style="color:#268bd2">m_threads</span>[<span style="color:#268bd2">i</span>].<span style="color:#268bd2">join</span>();
+            }
+        }
+    }
+
+
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">future</span>&lt;<span style="color:#859900;font-weight:bold">void</span>&gt; <span style="color:#268bd2">submit</span>(<span style="color:#268bd2">task</span> <span style="color:#268bd2">t</span>){
+        <span style="color:#859900">auto</span> <span style="color:#268bd2">p_task</span> = <span style="color:#268bd2">std</span>::<span style="color:#268bd2">make_shared</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">packaged_task</span>&lt;<span style="color:#859900;font-weight:bold">void</span>()&gt;&gt;(<span style="color:#268bd2">t</span>);
+        <span style="color:#268bd2">task</span> <span style="color:#268bd2">wrapper_task</span> = [<span style="color:#268bd2">p_task</span>](){
+             (*<span style="color:#268bd2">p_task</span>)();
+        };
+        <span style="color:#268bd2">m_queue</span>.<span style="color:#268bd2">enqueue</span>(<span style="color:#268bd2">wrapper_task</span>);
+        <span style="color:#268bd2">m_condition_variable</span>.<span style="color:#268bd2">notify_one</span>();
+        <span style="color:#859900">return</span> <span style="color:#268bd2">p_task</span>-&gt;<span style="color:#268bd2">get_future</span>();
+    }
+
+<span style="color:#859900">private</span>:
+    <span style="color:#859900">class</span> <span style="color:#cb4b16">WorkerThread</span> {
+    <span style="color:#859900">private</span>:
+        <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">m_id</span>;
+        <span style="color:#268bd2">ThreadPool</span> *<span style="color:#268bd2">m_pool</span>;
+    <span style="color:#859900">public</span>:
+        <span style="color:#268bd2">WorkerThread</span>(<span style="color:#268bd2">ThreadPool</span> *<span style="color:#268bd2">pool</span>, <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">id</span>) : <span style="color:#268bd2">m_pool</span>(<span style="color:#268bd2">pool</span>), <span style="color:#268bd2">m_id</span>(<span style="color:#268bd2">id</span>) {
+
+        }
+
+        <span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">operator</span>()() {
+            <span style="color:#268bd2">task</span> <span style="color:#268bd2">func</span>;
+            <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">dequeued</span>;
+            <span style="color:#859900">while</span> (!<span style="color:#268bd2">m_pool</span>-&gt;<span style="color:#268bd2">m_shutdown</span>) {
+                <span style="color:#268bd2">std</span>::<span style="color:#268bd2">unique_lock</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span>&gt; <span style="color:#268bd2">lock</span>(<span style="color:#268bd2">m_pool</span>-&gt;<span style="color:#268bd2">m_mutex</span>);
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">m_pool</span>-&gt;<span style="color:#268bd2">m_queue</span>.<span style="color:#268bd2">empty</span>()){
+                    <span style="color:#268bd2">m_pool</span>-&gt;<span style="color:#268bd2">m_condition_variable</span>.<span style="color:#268bd2">wait</span>(<span style="color:#268bd2">lock</span>);
+                }
+                <span style="color:#268bd2">dequeued</span> = <span style="color:#268bd2">m_pool</span>-&gt;<span style="color:#268bd2">m_queue</span>.<span style="color:#268bd2">dequeue</span>(<span style="color:#268bd2">func</span>);
+                <span style="color:#859900">if</span> (<span style="color:#268bd2">dequeued</span>) {
+                    <span style="color:#268bd2">func</span>();
+                }
+            }
+        }
+    };
+
+    <span style="color:#859900;font-weight:bold">bool</span> <span style="color:#268bd2">m_shutdown</span>;
+    <span style="color:#268bd2">SafeQueue</span>&lt;<span style="color:#268bd2">task</span>&gt; <span style="color:#268bd2">m_queue</span>;
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">vector</span>&lt;<span style="color:#268bd2">std</span>::<span style="color:#859900">thread</span>&gt; <span style="color:#268bd2">m_threads</span>;
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">mutex</span> <span style="color:#268bd2">m_mutex</span>;
+    <span style="color:#268bd2">std</span>::<span style="color:#268bd2">condition_variable</span> <span style="color:#268bd2">m_condition_variable</span>;
+
+};
+
+<span style="color:#93a1a1;font-style:italic">#endif </span><span style="color:#93a1a1;font-style:italic">//THREAD_POOL_THREADPOOL_H
+</span></code></pre></div><p>通过 submit  方法提交任务到全局缓存队列中，然后唤醒线程去消费任务执行。</p>
+<h2 id="小结">小结</h2>
+<p>关于 C++ 多线程的使用还有很多知识点，以上只是介绍了部分内容，还有很多不足之处，后续再补充了。</p>
+
+
+          <h2>知识星球与微信公众号</h2>
+
+<p>扫描下面的二维码关注我的微信公众号《音视频开发进阶》，推送更多精彩内容！</p>
+
+<p>欢迎加入 <a link="https://wx.zsxq.com/dweb2/index/group/28514145855111?type=group"> 知识星球《音视频与图形图像的那些事》</a>，还有更多的互动回答和知识分享再等你！</p>
+
+<p>添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+
+
+
+<img src="https://image.glumes.com/wechat-planet.png" alt="wechat-account-qrcode">
+
+
+  
+
+
+                    <p>
+                      原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-multi-thread/">C&#43;&#43; 中的多线程的使用和线程池建设</a>
+                    </p>
+
+
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="https://glumes.com/img/avatar.jpeg"/>Glumes</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？加微信好友 ezglumes </span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="https://glumes.com/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="https://glumes.com/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-5/">C&#43;&#43; 模板系列小结05-模板类型作为模板参数</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-4/">C&#43;&#43; 模板系列小结04-类模板中的成员模板</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-3/">C&#43;&#43; 模板系列小结03-在模板中指定变量类型</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-2/">C&#43;&#43; 模板系列小结02-非类型模板参数</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-1/">C&#43;&#43; 模板系列小结01-函数模板和类模板</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/">C&#43;&#43; 标准容器库小结</a></li>
+    
+    <li><a href="https://glumes.com/post/engine/01-what-is-render-engine/">从零打造渲染引擎系列01-什么是渲染引擎</a></li>
+    
+    <li><a href="https://glumes.com/post/ios/swift-call-c-function/">iOS开发 - 在 Swift 中去调用 C/C&#43;&#43; 代码</a></li>
+    
+    <li><a href="https://glumes.com/post/life/2020-review/">不一样的年终总结，2020 年吃过的那些药</a></li>
+    
+    <li><a href="https://glumes.com/post/engine/2021-render-engine/">2021 技术新番 - 从零打造渲染引擎系列</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-5/" data-toggle="tooltip" data-placement="top" title="C&#43;&#43; 模板系列小结05-模板类型作为模板参数">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://glumes.com/post/engine/2021-render-engine/" data-toggle="tooltip" data-placement="top" title="2021 技术新番 - 从零打造渲染引擎系列">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        
+        
+        
+
+
+        
+
+        
+  
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          
+          
+              <li>
+                <a href="mailto:zhaoying9402@outlook.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/u/3157458295" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="https://glumes.com/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">音视频开发进阶</a>
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/sitemap.xml">网站地图</a>
+          
+             &nbsp;&bull;&nbsp;
+                      <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+        </p>
+
+
+
+
+
+
+                <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+          &nbsp;&bull;&nbsp;
+                 <span id="busuanzi_container_page_pv" style="display:none">
+            阅读量<span id="busuanzi_value_page_pv"></span>人次
+          </span>
+        </p>
+
+<p>
+<a target="_blank"; href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral";>
+<img style="height:20px;width:auto;"; src="https://www.upyun.com/static/img/%E6%A0%B7%E5%BC%8F%E5%9B%BE.7cf927c.png"; />
+</a>
+</P>
+        
+        <p class="credits theme-by text-muted">
+          由 <a href="http://gohugo.io">Hugo v0.80.0</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a> 移植自 <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://glumes.com/js/bootstrap.min.js"></script>
+<script src="https://glumes.com/js/main.min.js"></script>
+<script src="https://glumes.com/js/reward.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+<script>
+  (function() {
+    var cx = 'true';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+  
+
+
+
+
+
+
+<script src='https://glumes.com/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+
