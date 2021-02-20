@@ -6,7 +6,7 @@
     <description>Recent content in Posts on 音视频开发进阶</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 Feb 2021 16:38:48 +0800</lastBuildDate><atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 Feb 2021 21:04:42 +0800</lastBuildDate><atom:link href="https://glumes.com/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2021 技术新番 - 从零打造渲染引擎系列</title>
       <link>https://glumes.com/post/engine/2021-render-engine/</link>
@@ -16,6 +16,47 @@
       <description>&lt;p&gt;2021 年的第一次公众号文章推送，它会迟到，但绝不缺席！！&lt;/p&gt;
 &lt;p&gt;2020 年已经成为过去，新的一年又该有新的规划了，沉思良久之后决定就是它啦~~&lt;/p&gt;
 &lt;p&gt;今年的发力点就是从零打造渲染引擎。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; 模板系列小结07-尾置返回类型</title>
+      <link>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-7/</link>
+      <pubDate>Sat, 20 Feb 2021 21:04:42 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-7/</guid>
+      <description>&lt;p&gt;在使用模板时可以显示指定模板类型，尤其是针对有返回类型的模板，显示指定可以避免类型转换带来的困扰。&lt;/p&gt;
+&lt;p&gt;但有时候显示指定模板实参类型会给用户增添额外负担，而且不会带来什么好处。&lt;/p&gt;
+&lt;p&gt;比如如下代码，接受表示序列的一对迭代器和返回序列中的一个元素的引用：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#859900&#34;&gt;template&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#859900&#34;&gt;typename&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;It&lt;/span&gt;&amp;gt;
+??? &amp;amp;&lt;span style=&#34;color:#268bd2&#34;&gt;fcn&lt;/span&gt;(&lt;span style=&#34;color:#268bd2&#34;&gt;It&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;beg&lt;/span&gt;,&lt;span style=&#34;color:#268bd2&#34;&gt;It&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;end&lt;/span&gt;){
+    &lt;span style=&#34;color:#859900&#34;&gt;return&lt;/span&gt; *&lt;span style=&#34;color:#268bd2&#34;&gt;beg&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们并不知道返回结果的准确类型，但知道所需类型是所处理的序列的元素类型。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;vector&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;int&lt;/span&gt;&amp;gt; &lt;span style=&#34;color:#268bd2&#34;&gt;vi&lt;/span&gt; = {&lt;span style=&#34;color:#2aa198;font-weight:bold&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#2aa198;font-weight:bold&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#2aa198;font-weight:bold&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#2aa198;font-weight:bold&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#2aa198;font-weight:bold&#34;&gt;5&lt;/span&gt;};
+&lt;span style=&#34;color:#859900&#34;&gt;auto&lt;/span&gt; &amp;amp;&lt;span style=&#34;color:#268bd2&#34;&gt;i&lt;/span&gt; =&lt;span style=&#34;color:#268bd2&#34;&gt;fcn&lt;/span&gt;(&lt;span style=&#34;color:#268bd2&#34;&gt;vi&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;begin&lt;/span&gt;,&lt;span style=&#34;color:#268bd2&#34;&gt;vi&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;end&lt;/span&gt;());
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如上代码，知道函数应该返回 *beg，而且知道我们可以用 decltype(*beg) 来获取此表达式的类型。&lt;/p&gt;
+&lt;p&gt;但是，在编译器遇到函数的参数列表之前，beg 都是不存在的。为此，我们需要使用&lt;strong&gt;尾置返回类型&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; 模板系列小结06-可变参数模板特性</title>
+      <link>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-6/</link>
+      <pubDate>Sat, 20 Feb 2021 21:03:04 +0800</pubDate>
+      
+      <guid>https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-6/</guid>
+      <description>&lt;p&gt;C++11 中引入了可变参数模板的特性，可变参数模板就是一个接受可变数目参数的模板函数或者模板类。&lt;/p&gt;
+&lt;p&gt;可变数目的参数被称为参数包，存在如下两种参数包：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;模板参数包：表示零个或多个模板参数&lt;/li&gt;
+&lt;li&gt;函数参数包：表示零个或多个函数参数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;具体如下所示，声明了一个可变参数函数模板。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// Args 是一个模板参数包；rest 是一个函数参数包
+&lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// Args 表示零个或多个模板类型参数
+&lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;// rest 表示零个或多个函数参数
+&lt;/span&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#859900&#34;&gt;template&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#859900&#34;&gt;typename&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;T&lt;/span&gt;,&lt;span style=&#34;color:#859900&#34;&gt;typename&lt;/span&gt;... &lt;span style=&#34;color:#268bd2&#34;&gt;Args&lt;/span&gt;&amp;gt;
+&lt;span style=&#34;color:#859900;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;foo&lt;/span&gt;(&lt;span style=&#34;color:#859900&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;T&lt;/span&gt; &amp;amp;&lt;span style=&#34;color:#268bd2&#34;&gt;t&lt;/span&gt;, &lt;span style=&#34;color:#859900&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;Args&lt;/span&gt;&amp;amp;... &lt;span style=&#34;color:#268bd2&#34;&gt;rest&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>

@@ -263,6 +263,87 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-7/">
+                <h2 class="post-title">C&#43;&#43; 模板系列小结07-尾置返回类型</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                
+              </p>
+              <div class="post-entry">
+                
+                  <p>在使用模板时可以显示指定模板类型，尤其是针对有返回类型的模板，显示指定可以避免类型转换带来的困扰。</p>
+<p>但有时候显示指定模板实参类型会给用户增添额外负担，而且不会带来什么好处。</p>
+<p>比如如下代码，接受表示序列的一对迭代器和返回序列中的一个元素的引用：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">It</span>&gt;
+??? &amp;<span style="color:#268bd2">fcn</span>(<span style="color:#268bd2">It</span> <span style="color:#268bd2">beg</span>,<span style="color:#268bd2">It</span> <span style="color:#268bd2">end</span>){
+    <span style="color:#859900">return</span> *<span style="color:#268bd2">beg</span>;
+}
+</code></pre></div><p>我们并不知道返回结果的准确类型，但知道所需类型是所处理的序列的元素类型。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">vector</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt; <span style="color:#268bd2">vi</span> = {<span style="color:#2aa198;font-weight:bold">1</span>,<span style="color:#2aa198;font-weight:bold">2</span>,<span style="color:#2aa198;font-weight:bold">3</span>,<span style="color:#2aa198;font-weight:bold">4</span>,<span style="color:#2aa198;font-weight:bold">5</span>};
+<span style="color:#859900">auto</span> &amp;<span style="color:#268bd2">i</span> =<span style="color:#268bd2">fcn</span>(<span style="color:#268bd2">vi</span>.<span style="color:#268bd2">begin</span>,<span style="color:#268bd2">vi</span>.<span style="color:#268bd2">end</span>());
+</code></pre></div><p>如上代码，知道函数应该返回 *beg，而且知道我们可以用 decltype(*beg) 来获取此表达式的类型。</p>
+<p>但是，在编译器遇到函数的参数列表之前，beg 都是不存在的。为此，我们需要使用<strong>尾置返回类型</strong>。</p>
+                  <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-7/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/c&#43;&#43;/">C&#43;&#43;</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/template/">Template</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-6/">
+                <h2 class="post-title">C&#43;&#43; 模板系列小结06-可变参数模板特性</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                
+              </p>
+              <div class="post-entry">
+                
+                  <p>C++11 中引入了可变参数模板的特性，可变参数模板就是一个接受可变数目参数的模板函数或者模板类。</p>
+<p>可变数目的参数被称为参数包，存在如下两种参数包：</p>
+<ol>
+<li>模板参数包：表示零个或多个模板参数</li>
+<li>函数参数包：表示零个或多个函数参数</li>
+</ol>
+<p>具体如下所示，声明了一个可变参数函数模板。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// Args 是一个模板参数包；rest 是一个函数参数包
+</span><span style="color:#93a1a1;font-style:italic">// Args 表示零个或多个模板类型参数
+</span><span style="color:#93a1a1;font-style:italic">// rest 表示零个或多个函数参数
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">template</span> &lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">T</span>,<span style="color:#859900">typename</span>... <span style="color:#268bd2">Args</span>&gt;
+<span style="color:#859900;font-weight:bold">void</span> <span style="color:#268bd2">foo</span>(<span style="color:#859900">const</span> <span style="color:#268bd2">T</span> &amp;<span style="color:#268bd2">t</span>, <span style="color:#859900">const</span> <span style="color:#268bd2">Args</span>&amp;... <span style="color:#268bd2">rest</span>);
+</code></pre></div>
+                  <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-6/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="https://glumes.com/tags/c&#43;&#43;/">C&#43;&#43;</a>&nbsp;
+                  
+                    #<a href="https://glumes.com/tags/template/">Template</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-multi-thread/">
                 <h2 class="post-title">C&#43;&#43; 中的多线程的使用和线程池建设</h2>
 

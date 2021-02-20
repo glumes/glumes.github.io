@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>C&#43;&#43; 模板系列小结07-尾置返回类型</title>
+  <meta property="og:title" content="C&#43;&#43; 模板系列小结07-尾置返回类型" />
+  <meta name="twitter:title" content="C&#43;&#43; 模板系列小结07-尾置返回类型" />
+
+  <meta name="description" content="在使用模板时可以显示指定模板类型，尤其是针对有返回类型的模板，显示指定可以避免类型转换带来的困扰。
+但有时候显示指定模板实参类型会给用户增添额外负担，而且不会带来什么好处。
+比如如下代码，接受表示序列的一对迭代器和返回序列中的一个元素的引用：
+template&lt;typename It&gt;
+??? &amp;fcn(It beg,It end){
+    return *beg;
+}
+我们并不知道返回结果的准确类型，但知道所需类型是所处理的序列的元素类型。
+vector&lt;int&gt; vi = {1,2,3,4,5};
+auto &amp;i =fcn(vi.begin,vi.end());
+如上代码，知道函数应该返回 *beg，而且知道我们可以用 decltype(*beg) 来获取此表达式的类型。
+但是，在编译器遇到函数的参数列表之前，beg 都是不存在的。为此，我们需要使用尾置返回类型。">
+  <meta property="og:description" content="在使用模板时可以显示指定模板类型，尤其是针对有返回类型的模板，显示指定可以避免类型转换带来的困扰。
+但有时候显示指定模板实参类型会给用户增添额外负担，而且不会带来什么好处。
+比如如下代码，接受表示序列的一对迭代器和返回序列中的一个元素的引用：
+template&lt;typename It&gt;
+??? &amp;fcn(It beg,It end){
+    return *beg;
+}
+我们并不知道返回结果的准确类型，但知道所需类型是所处理的序列的元素类型。
+vector&lt;int&gt; vi = {1,2,3,4,5};
+auto &amp;i =fcn(vi.begin,vi.end());
+如上代码，知道函数应该返回 *beg，而且知道我们可以用 decltype(*beg) 来获取此表达式的类型。
+但是，在编译器遇到函数的参数列表之前，beg 都是不存在的。为此，我们需要使用尾置返回类型。">
+  <meta name="twitter:description" content="在使用模板时可以显示指定模板类型，尤其是针对有返回类型的模板，显示指定可以避免类型转换带来的困扰。
+但有时候显示指定模板实参类型会给用户增添额外负担，而且不会带来什么好处。
+比如如下代码，接受表示序列的一对迭代器和返回序列中的一个元素的引用：
+template&lt;typename It&gt;
+??? &amp;fcn(It beg,It end){
+    return *beg;
+}
+我们 …">
+  <meta name="author" content=""/>
+  <link href="https://image.glumes.com/video-favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="https://image.glumes.com/video-favicon.png"/>
+  <meta property="og:image" content="https://image.glumes.com/video-favicon.png" />
+  <meta name="twitter:image" content="https://image.glumes.com/video-favicon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-7/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="音视频开发进阶" />
+
+  <meta name="generator" content="Hugo 0.80.0" />
+  <link rel="canonical" href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-7/" />
+  <link rel="alternate" href="https://glumes.com/index.xml" type="application/rss+xml" title="音视频开发进阶">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/reward.css" />
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/search.css" />
+  <link rel="stylesheet" href="https://image.glumes.com/blog_source/assets/css/main.css" />
+
+
+  
+  
+  
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+
+<link rel="stylesheet" href="https://res.cloudinary.com/glumes-com/raw/upload/v1516330613/website/css/prism.css" />
+
+
+
+
+
+
+
+
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?9276c0ce2d3c49b591323abab4a32e1e";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TRLK1SYTZ1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TRLK1SYTZ1');
+</script>
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://glumes.com/" title="音视频开发进阶">
+        
+        音视频开发进阶
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">音视频开发</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://glumes.com/categories/opengl">OpenGL </a>
+                
+                  <a href="https://glumes.com/categories/ffmpeg">FFmpeg</a>
+                
+                  <a href="https://glumes.com/categories/vulkan">Vulkan </a>
+                
+                  <a href="https://glumes.com/categories/webrtc">WebRTC </a>
+                
+                  <a href="https://glumes.com/categories/opencv">opencv </a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">移动开发</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://glumes.com/categories/android">Android</a>
+                
+                  <a href="https://glumes.com/categories/ios">ios</a>
+                
+                  <a href="https://glumes.com/categories/c&#43;&#43;">C&#43;&#43;</a>
+                
+                  <a href="https://glumes.com/categories/python">Python</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="程序人生" href="https://glumes.com/categories/life">程序人生</a>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">我的视频教学</a>
+              <div class="navlinks-children">
+                
+                  <a href="https://space.bilibili.com/105478237">B 站视频</a>
+                
+                  <a href="http://www.imooc.com/learn/1212">慕课网视频</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="小专栏" href="https://xiaozhuanlan.com/glumes">小专栏</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="https://glumes.com/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="所有文章" href="https://glumes.com/post/">所有文章</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+
+        
+
+          
+
+
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="https://glumes.com/js/algoliasearch.min.js"></script>
+<script src="https://glumes.com/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "true");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="https://glumes.com/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://image.glumes.com/blog_image/610391b1gy1gmhbipn8w5j208x0sgtk7.jpg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-md-offset-0">
+              <div class="post-heading">
+                <h1>C&#43;&#43; 模板系列小结07-尾置返回类型</h1>
+                  
+                  
+                    <span class="post-meta">
+  
+    
+  
+  
+</span>
+
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-0">
+            <div class="post-heading">
+              <h1>C&#43;&#43; 模板系列小结07-尾置返回类型</h1>
+                
+                
+                  <span class="post-meta">
+  
+    
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="https://glumes.com/tags/c&#43;&#43;/">C&#43;&#43;</a> &nbsp;
+              
+                  <a href="https://glumes.com/tags/template/">Template</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+
+          
+
+
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <p>在使用模板时可以显示指定模板类型，尤其是针对有返回类型的模板，显示指定可以避免类型转换带来的困扰。</p>
+<p>但有时候显示指定模板实参类型会给用户增添额外负担，而且不会带来什么好处。</p>
+<p>比如如下代码，接受表示序列的一对迭代器和返回序列中的一个元素的引用：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">It</span>&gt;
+??? &amp;<span style="color:#268bd2">fcn</span>(<span style="color:#268bd2">It</span> <span style="color:#268bd2">beg</span>,<span style="color:#268bd2">It</span> <span style="color:#268bd2">end</span>){
+    <span style="color:#859900">return</span> *<span style="color:#268bd2">beg</span>;
+}
+</code></pre></div><p>我们并不知道返回结果的准确类型，但知道所需类型是所处理的序列的元素类型。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">vector</span>&lt;<span style="color:#859900;font-weight:bold">int</span>&gt; <span style="color:#268bd2">vi</span> = {<span style="color:#2aa198;font-weight:bold">1</span>,<span style="color:#2aa198;font-weight:bold">2</span>,<span style="color:#2aa198;font-weight:bold">3</span>,<span style="color:#2aa198;font-weight:bold">4</span>,<span style="color:#2aa198;font-weight:bold">5</span>};
+<span style="color:#859900">auto</span> &amp;<span style="color:#268bd2">i</span> =<span style="color:#268bd2">fcn</span>(<span style="color:#268bd2">vi</span>.<span style="color:#268bd2">begin</span>,<span style="color:#268bd2">vi</span>.<span style="color:#268bd2">end</span>());
+</code></pre></div><p>如上代码，知道函数应该返回 *beg，而且知道我们可以用 decltype(*beg) 来获取此表达式的类型。</p>
+<p>但是，在编译器遇到函数的参数列表之前，beg 都是不存在的。为此，我们需要使用<strong>尾置返回类型</strong>。</p>
+<p>由于尾置返回出现在参数列表之后，它可以使用函数的参数：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#93a1a1;font-style:italic">// 尾置返回允许在参数列表之后声明返回类型
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">It</span>&gt;
+<span style="color:#859900">auto</span> <span style="color:#268bd2">fcn</span>(<span style="color:#268bd2">It</span> <span style="color:#268bd2">beg</span>,<span style="color:#268bd2">It</span> <span style="color:#268bd2">end</span>) -&gt; <span style="color:#859900">decltype</span>(*<span style="color:#268bd2">beg</span>){
+    <span style="color:#859900">return</span> *<span style="color:#268bd2">beg</span>;
+}
+</code></pre></div><p>在上面的例子中，fcn 的返回类型和解引用 beg 参数的结果类型相同。</p>
+<p>解引用运算符返回一个左值，因此通过 decltype 推断的类型为 beg 表示的元素的类型的引用。</p>
+<p>比如，如果对一个 string 序列调用 fcn，返回类型是 string&amp; ，如果是 int 序列，返回类型是 int&amp; 。</p>
+<p>关于为何返回的类型是引用类型，可以回顾一下 decltype 的使用：</p>
+<h2 id="decltype-的使用">decltype 的使用</h2>
+<p>当希望从表达式的类型推断出要定义的变量的类型，但是不想用该表达式的值初始化变量。为了满足这一要求，C++11 新标准引入了类型说明符 decltype ，它的作用是选择并返回操作数的数据类型。</p>
+<p>在此过程中，编译器分析表达式并得到它的类型，却不实际计算表达式的值。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">f</span>(){
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">1</span>;
+}
+
+<span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">main</span>(){
+    <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">x</span> = <span style="color:#2aa198;font-weight:bold">2</span>;
+    <span style="color:#859900">decltype</span>(<span style="color:#268bd2">f</span>()) <span style="color:#268bd2">sum</span> = <span style="color:#268bd2">x</span>;
+    <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>;
+}
+</code></pre></div><p>如上代码所示，编译器并不实际调用函数 f ，而是使用当调用发生时 f 的返回值类型作为 sum 的类型。换句话说，编译器为 sum 指定的类型就是 f 被调用时返回的那个类型。</p>
+<p>如果 decltype 使用的表达式是一个变量，则 decltype 返回该变量的类型（包括顶层 const 和引用在内）。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">const</span> <span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">ci</span> = <span style="color:#2aa198;font-weight:bold">0</span>, &amp;<span style="color:#268bd2">cj</span> = <span style="color:#268bd2">ci</span>;
+<span style="color:#859900">decltype</span>(<span style="color:#268bd2">ci</span>) <span style="color:#268bd2">x</span> = <span style="color:#2aa198;font-weight:bold">0</span>;         <span style="color:#93a1a1;font-style:italic">// x 的类型是 const int
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">decltype</span>(<span style="color:#268bd2">cj</span>) <span style="color:#268bd2">y</span> = <span style="color:#268bd2">x</span>;         <span style="color:#93a1a1;font-style:italic">// y 的类型是 const int &amp; ,y 绑定到变量 x
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">decltype</span>(<span style="color:#268bd2">cj</span>) <span style="color:#268bd2">z</span>;             <span style="color:#93a1a1;font-style:italic">// z 是一个引用，必须初始化
+</span></code></pre></div><p>如果 decltype 返回的变量类型是一个引用，那么对应的变量就必须初始化才行。</p>
+<p>另外，如果 decltype 使用的表达式不是一个变量，则 decltype 返回表达式结果对应的类型。</p>
+<p>有的表达式将向 decltype 返回一个引用类型。一般来说当这种情况发生时，意味着该表达式的结果对象能作为一条赋值语句的左值。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900;font-weight:bold">int</span> <span style="color:#268bd2">i</span> = <span style="color:#2aa198;font-weight:bold">42</span>,*<span style="color:#268bd2">p</span> = &amp;<span style="color:#268bd2">i</span>, &amp;<span style="color:#268bd2">r</span> = <span style="color:#268bd2">i</span>;
+<span style="color:#859900">decltype</span>(<span style="color:#268bd2">r</span> + <span style="color:#2aa198;font-weight:bold">0</span>) <span style="color:#268bd2">b</span>;      <span style="color:#93a1a1;font-style:italic">//正确：加法的结果是 int，因此 b 是一个未初始化的 int
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">decltype</span>(*<span style="color:#268bd2">p</span>) <span style="color:#268bd2">c</span>;         <span style="color:#93a1a1;font-style:italic">//错误：c 是 int&amp;,必须初始化
+</span></code></pre></div><p>因为 r 是一个引用，因此 decltype(r) 必然是引用类型。如果想让结果是 r 所指的类型，可以把 r 作为表达式的一部分，如 r+0 ，显然这个表达式的结果将是一个具体指而非一个引用。</p>
+<p>另外，如果一个表达式的内容是解引用操作，则 decltype 将得到引用类型。因为，解引用指针可以得到指针所指的对象，而且还能给这个对象赋值。因此，decltype(*p) 的结果就是 int&amp; ,而非 int 。</p>
+<p>另外，对于 decltype 所用的表达式来说，如果变量名加上了一对括号，则得到的类型与不加括号时会有不同。</p>
+<p>如果 decltype 使用的是一个不加括号的变量，则得到的结果就是该变量的类型。如果给变量加上了一层或多层括号，编译器会把它当成一个表达式，而变量是一种可以作为赋值语句左值的特殊表达式，这是 decltype 就会得到引用类型。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">decltype</span>((<span style="color:#268bd2">i</span>)) <span style="color:#268bd2">d</span>;  <span style="color:#93a1a1;font-style:italic">// 错误，d 是引用类型， int&amp; ,必须要初始化
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">decltype</span>(<span style="color:#268bd2">i</span>) <span style="color:#268bd2">e</span>;      <span style="color:#93a1a1;font-style:italic">//正确，e 是未初始化的 int 
+</span></code></pre></div><h2 id="尾置返回元素为值而非引用">尾置返回元素为值而非引用</h2>
+<p>在前面的例子中，返回的是引用类型，但是有时候希望返回一个元素的值，而非引用。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">It</span>&gt;
+<span style="color:#859900">auto</span> <span style="color:#268bd2">fcn</span>(<span style="color:#268bd2">It</span> <span style="color:#268bd2">beg</span>,<span style="color:#268bd2">It</span> <span style="color:#268bd2">end</span>) -&gt; <span style="color:#859900">decltype</span>(*<span style="color:#268bd2">beg</span>){
+    <span style="color:#859900">return</span> *<span style="color:#268bd2">beg</span>;
+}
+</code></pre></div><p>但问题在于，无法知道传递的参数类型，唯一可以使用的操作是迭代器操作，而所有迭代器操作都不会生成元素，只能生成元素的引用。</p>
+<p>为了获得元素类型，要使用标准库的<code>类型转换模板</code>。</p>
+<p>这些模板定义在头文件 type_traits 中，主要是用于模板元编程设计的，这次主要用到 remove_reference 模板，它的源码如下：</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">template</span> &lt;<span style="color:#859900">class</span> <span style="color:#cb4b16">_Tp</span>&gt; <span style="color:#859900">struct</span> <span style="color:#cb4b16">_LIBCPP_TEMPLATE_VIS</span> <span style="color:#268bd2">remove_reference</span>        {<span style="color:#859900">typedef</span> <span style="color:#268bd2">_LIBCPP_NODEBUG_TYPE</span> <span style="color:#268bd2">_Tp</span> <span style="color:#268bd2">type</span>;};
+</code></pre></div><p>如同它的名字一样，就是移除引用，可以通过它来获得元素类型。remove_reference 模板有一个模板类型参数和一个名为 type 的类型成员。</p>
+<blockquote>
+<p>如果用一个引用类型实例化 remove_reference，则 type 将表示被引用的类型。</p>
+</blockquote>
+<p>例如，实例化 remove_reference&lt;int&amp;&gt; ，则 type 成员将是 int 。类似，如果实例化 remove_reference&lt;string&amp;&gt; ，则 type 成员将是 string 。</p>
+<p>如果给定一个迭代器 beg:</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#268bd2">remove_reference</span>&lt;<span style="color:#859900">decltype</span>(*<span style="color:#268bd2">beg</span>)&gt;::<span style="color:#268bd2">type</span>
+</code></pre></div><p>将获得 beg 引用的元素的类型：decltype(*beg) 返回元素类型的引用类型，remove_reference::type 脱去引用，剩下元素类型本身。</p>
+<p>组合使用 remove_reference、尾置返回以及 decltype ，就可以在函数中返回元素值的拷贝。</p>
+<div class="highlight"><pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#859900">template</span>&lt;<span style="color:#859900">typename</span> <span style="color:#268bd2">It</span>&gt;
+<span style="color:#859900">auto</span> <span style="color:#268bd2">fcn2</span>(<span style="color:#268bd2">It</span> <span style="color:#268bd2">beg</span>,<span style="color:#268bd2">It</span> <span style="color:#268bd2">end</span>) -&gt; <span style="color:#859900">typename</span> <span style="color:#268bd2">remove_reference</span>&lt;<span style="color:#859900">decltype</span>(*<span style="color:#268bd2">beg</span>)&gt;::<span style="color:#268bd2">type</span>{
+    <span style="color:#859900">return</span> *<span style="color:#268bd2">beg</span>; <span style="color:#93a1a1;font-style:italic">// 返回序列中一个元素的拷贝
+</span><span style="color:#93a1a1;font-style:italic"></span>}
+</code></pre></div><p>要注意的是，type 是一个类的成员，而该类依赖于一个模板参数。因此，要在返回类型的声明中使用 typename 来告知编译器，type 表示一个类型，关于这个知识点在之前的文章中提到过了，参见：<a href="https://glumes.com/post/c++/c++-template-3/">C++ 模板系列小结03-在模板中指定变量类型</a> 。</p>
+<h2 id="小结">小结</h2>
+<p>尾置返回类型主要还是 decltype 的使用了，而 decltype 要注意的是返回的类型是元素的类型，还是引用类型了，在不同场景下注意区分。</p>
+
+
+          <h2>知识星球与微信公众号</h2>
+
+<p>扫描下面的二维码关注我的微信公众号《音视频开发进阶》，推送更多精彩内容！</p>
+
+<p>欢迎加入 <a link="https://wx.zsxq.com/dweb2/index/group/28514145855111?type=group"> 知识星球《音视频与图形图像的那些事》</a>，还有更多的互动回答和知识分享再等你！</p>
+
+<p>添加我的微信 ezglumes 拉你入群一起交流学习~</p>
+
+
+
+<img src="https://image.glumes.com/wechat-planet.png" alt="wechat-account-qrcode">
+
+
+  
+
+
+                    <p>
+                      原创文章，转载请注明来源: &nbsp;&nbsp; <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-7/">C&#43;&#43; 模板系列小结07-尾置返回类型</a>
+                    </p>
+
+
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="https://glumes.com/img/avatar.jpeg"/>Glumes</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？加微信好友 ezglumes </span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="https://glumes.com/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="https://glumes.com/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-6/">C&#43;&#43; 模板系列小结06-可变参数模板特性</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-5/">C&#43;&#43; 模板系列小结05-模板类型作为模板参数</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-4/">C&#43;&#43; 模板系列小结04-类模板中的成员模板</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-3/">C&#43;&#43; 模板系列小结03-在模板中指定变量类型</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-2/">C&#43;&#43; 模板系列小结02-非类型模板参数</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-1/">C&#43;&#43; 模板系列小结01-函数模板和类模板</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-multi-thread/">C&#43;&#43; 中的多线程的使用和线程池建设</a></li>
+    
+    <li><a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-stl-container-overview/">C&#43;&#43; 标准容器库小结</a></li>
+    
+    <li><a href="https://glumes.com/post/engine/01-what-is-render-engine/">从零打造渲染引擎系列01-什么是渲染引擎</a></li>
+    
+    <li><a href="https://glumes.com/post/ios/swift-call-c-function/">iOS开发 - 在 Swift 中去调用 C/C&#43;&#43; 代码</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://glumes.com/post/c&#43;&#43;/c&#43;&#43;-template-6/" data-toggle="tooltip" data-placement="top" title="C&#43;&#43; 模板系列小结06-可变参数模板特性">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://glumes.com/post/engine/2021-render-engine/" data-toggle="tooltip" data-placement="top" title="2021 技术新番 - 从零打造渲染引擎系列">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        
+        
+        
+
+
+        
+
+        
+  
+    <div class="comments">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "glumes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          
+          
+              <li>
+                <a href="mailto:zhaoying9402@outlook.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/glumes" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/u/3157458295" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="https://glumes.com/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/">音视频开发进阶</a>
+            &nbsp;&bull;&nbsp;
+            <a href="https://glumes.com/sitemap.xml">网站地图</a>
+          
+             &nbsp;&bull;&nbsp;
+                      <a href="http://beian.miit.gov.cn">粤ICP备20067247号</a>
+        </p>
+
+
+
+
+
+
+                <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+          &nbsp;&bull;&nbsp;
+                 <span id="busuanzi_container_page_pv" style="display:none">
+            阅读量<span id="busuanzi_value_page_pv"></span>人次
+          </span>
+        </p>
+
+<p>
+<a target="_blank"; href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral";>
+<img style="height:20px;width:auto;"; src="https://www.upyun.com/static/img/%E6%A0%B7%E5%BC%8F%E5%9B%BE.7cf927c.png"; />
+</a>
+</P>
+        
+        <p class="credits theme-by text-muted">
+          由 <a href="http://gohugo.io">Hugo v0.80.0</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a> 移植自 <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://glumes.com/js/jquery-1.11.2.min.js"></script>
+<script src="https://glumes.com/js/bootstrap.min.js"></script>
+<script src="https://glumes.com/js/main.min.js"></script>
+<script src="https://glumes.com/js/reward.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+<script>
+  (function() {
+    var cx = 'true';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+  
+
+
+
+
+
+
+<script src='https://glumes.com/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+
