@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg data-name="Layer 1" viewBox="0 0 1228.78 246.72" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style>.cls-1{fill:url(#d);}.cls-2{fill:#fff;}.cls-2,.cls-3,.cls-4{stroke:#000;stroke-miterlimit:10;}.cls-3{fill:url(#a);}.cls-4{fill:url(#e);}</style>
+  <linearGradient id="d" x1="245.23" x2="1026.2" y1="407.59" y2="407.59" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#0e0d58" offset="0"/>
+   <stop stop-color="#221da3" offset=".26"/>
+   <stop stop-color="#221da3" offset=".52"/>
+   <stop stop-color="#221da3" offset=".78"/>
+   <stop stop-color="#171473" offset="1"/>
+  </linearGradient>
+  <linearGradient id="a" x1="1004.1" x2="1227.9" y1="127.41" y2="127.41" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#0b0943" offset="0"/>
+   <stop stop-color="#0e0d58" offset=".07"/>
+   <stop stop-color="#1f1b8b" offset="1"/>
+  </linearGradient>
+  <linearGradient id="e" x1="872.41" x2="1096.1" y1="387.67" y2="387.67" gradientTransform="translate(1097.1 515.79) rotate(180)" xlink:href="#a"/>
+ </defs>
+ <path class="cls-1" transform="translate(-21.2 -284.23)" d="M635.74,530.45c-129.76,0-261.14-5.16-390.51-15.32V300.06C374.6,289.89,506,284.73,635.74,284.73s261.14,5.16,390.51,15.33V515.12C896.88,525.29,765.5,530.45,635.74,530.45Z"/>
+ <path transform="translate(-21.2 -284.23)" d="M635.74,285.23c129.59,0,260.81,5.14,390,15.29V514.66c-129.2,10.14-260.42,15.29-390,15.29s-260.81-5.14-390-15.29V300.52c129.2-10.14,260.42-15.29,390-15.29m0-1q-195.65,0-391,15.36v216q195.2,15.36,391,15.36,195.65,0,391-15.36v-216q-195.2-15.36-391-15.36Z"/>
+ <path class="cls-2" transform="translate(-21.2 -284.23)" d="m65.55 411.33"/>
+ <polygon class="cls-3" points="1227.9 217.27 1004.4 217.27 1004.1 37.55 1227.3 38.3 1170 127.82"/>
+ <polygon class="cls-4" points="0.92 38.27 224.35 38.27 224.64 217.99 1.48 217.24 58.79 127.72"/>
+</svg>
